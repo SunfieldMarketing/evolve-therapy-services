@@ -31,30 +31,41 @@ export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-32 bg-white relative">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-32 bg-background relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2" />
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-20">
-            <span className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Knowledge Center</span>
-            <h2 className="text-4xl md:text-6xl font-serif text-secondary mb-6">Common Inquiries</h2>
-            <p className="text-lg text-slate-500">Everything you need to know about the Evolve therapy management model.</p>
+            <div className="inline-flex items-center gap-4 mb-6">
+               <div className="w-12 h-[1px] bg-primary" />
+               <span className="text-primary font-bold tracking-[0.2em] uppercase text-xs">Knowledge Center</span>
+               <div className="w-12 h-[1px] bg-primary" />
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-secondary tracking-tight mb-6">
+              Common <span className="text-gradient hover:animate-pulse">Inquiries.</span>
+            </h2>
+            <p className="text-xl text-slate-500 font-medium">Everything you need to know about the Evolve therapy management model.</p>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-4">
             {faqs.map((faq, i) => (
               <div 
                 key={i} 
-                className={`group rounded-[2rem] transition-all duration-500 overflow-hidden ${activeIndex === i ? 'bg-secondary text-white shadow-2xl' : 'bg-slate-50 border border-slate-100'}`}
+                className={`group rounded-[2rem] transition-all duration-500 overflow-hidden relative ${activeIndex === i ? 'bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] border-transparent' : 'bg-transparent border border-slate-200/60 hover:bg-white hover:border-slate-300'}`}
               >
+                {activeIndex === i && <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-primary to-accent" />}
+                
                 <button
                   className="w-full flex items-center justify-between p-8 md:p-10 text-left"
                   onClick={() => setActiveIndex(activeIndex === i ? null : i)}
                 >
-                  <span className={`text-xl md:text-2xl font-bold ${activeIndex === i ? 'text-white' : 'text-secondary'}`}>
+                  <span className={`text-xl md:text-2xl font-bold font-heading pr-8 ${activeIndex === i ? 'text-secondary' : 'text-slate-600 group-hover:text-secondary transition-colors'}`}>
                     {faq.q}
                   </span>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 ${activeIndex === i ? 'bg-primary text-white rotate-0' : 'bg-white text-slate-400 rotate-90'}`}>
-                    {activeIndex === i ? <Minus size={18} /> : <Plus size={18} />}
+                  <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center transition-all duration-500 shadow-sm ${activeIndex === i ? 'bg-primary text-white rotate-180' : 'bg-slate-100 text-slate-500 group-hover:bg-primary/10 group-hover:text-primary rotate-0'}`}>
+                    {activeIndex === i ? <Minus size={20} /> : <Plus size={20} />}
                   </div>
                 </button>
                 <AnimatePresence>
@@ -63,9 +74,9 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <div className="p-10 pt-0 text-white/70 text-lg leading-relaxed max-w-3xl">
+                      <div className="p-8 pt-0 md:px-10 pb-10 text-slate-500 font-medium text-lg leading-relaxed max-w-3xl">
                         {faq.a}
                       </div>
                     </motion.div>

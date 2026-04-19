@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Outfit, Playfair_Display } from "next/font/google";
+import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-jakarta",
 });
 
-const playfair = Playfair_Display({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-syne",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth h-full`}>
-      <body className={`${outfit.variable} ${playfair.variable} antialiased font-sans min-h-full flex flex-col`}>
+      <body className={`${jakarta.variable} ${syne.variable} antialiased font-sans min-h-full flex flex-col`}>
         {children}
       </body>
     </html>

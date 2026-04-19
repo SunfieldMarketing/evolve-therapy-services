@@ -22,15 +22,6 @@ const Popup = dynamic(
 );
 
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-
-// Fix leaflet icon issue
-const icon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
 
 const cities = [
   { name: 'Avon Lake', zip: '44012' },
@@ -50,6 +41,20 @@ const cities = [
 export default function ServiceArea() {
   const position: [number, number] = [41.5034, -82.0224]; // Avon Lake, OH
 
+  // Create icon inside component or use a safer method
+  const getIcon = () => {
+    if (typeof window === 'undefined') return null;
+    const L = require('leaflet');
+    return L.icon({
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+    });
+  };
+
+  const icon = getIcon();
+
   return (
     <section id="locations" className="py-24 bg-white">
       <div className="container mx-auto px-4 md:px-6">
@@ -63,7 +68,7 @@ export default function ServiceArea() {
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Map Section */}
           <div className="lg:col-span-8 bg-slate-100 rounded-3xl overflow-hidden min-h-[400px] border border-slate-200">
-            {typeof window !== 'undefined' && (
+            {typeof window !== 'undefined' && icon && (
               <MapContainer 
                 center={position} 
                 zoom={11} 

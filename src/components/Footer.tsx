@@ -1,7 +1,25 @@
 'use client';
 
 import Link from 'next/link';
-import { Linkedin, Mail, Phone } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
+
+const LinkedInIcon = ({ size = 20 }: { size?: number }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect width="4" height="12" x="2" y="9"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+  </svg>
+);
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -20,7 +38,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               <a href="https://linkedin.com" className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all">
-                <Linkedin size={20} />
+                <LinkedInIcon size={20} />
               </a>
               <a href="mailto:info@evolvetherapyservices.com" className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all">
                 <Mail size={20} />

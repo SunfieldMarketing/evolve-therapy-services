@@ -6,10 +6,10 @@ import { Menu, X, Phone, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const links = [
-  { name: 'Home', href: '#' },
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Locations', href: '#locations' },
+  { name: 'Home', href: '/' },
+  { name: 'About Us', href: '/about' },
+  { name: 'Services', href: '/services' },
+  { name: 'Locations', href: '/locations' },
 ];
 
 export default function Navbar() {

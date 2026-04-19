@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, Globe } from 'lucide-react';
 
 // Dynamically import map to avoid SSR errors
 const MapContainer = dynamic(
@@ -41,7 +41,6 @@ const cities = [
 export default function ServiceArea() {
   const position: [number, number] = [41.5034, -82.0224]; // Avon Lake, OH
 
-  // Create icon inside component or use a safer method
   const getIcon = () => {
     if (typeof window === 'undefined') return null;
     const L = require('leaflet');
@@ -56,34 +55,52 @@ export default function ServiceArea() {
   const icon = getIcon();
 
   return (
-    <section id="locations" className="py-24 bg-white">
+    <section id="locations" className="py-32 bg-slate-50 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-secondary mb-4">Service Area & Locations</h2>
-          <p className="text-lg text-slate-500 max-w-2xl">
-            Headquartered in Avon Lake, Ohio, we provide therapy management consulting services to SNF and LTC facilities throughout the region and beyond.
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20">
+          <div className="max-w-2xl">
+            <span className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Our Presence</span>
+            <h2 className="text-4xl md:text-6xl font-serif text-secondary">
+              Strategic Service <br />
+              <span className="text-primary italic">Locations</span>
+            </h2>
+          </div>
+          <p className="text-lg text-slate-500 max-w-md leading-relaxed">
+            Headquartered in Avon Lake, Ohio, we provide therapy management consulting services to SNF and LTC facilities throughout the region.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-12">
+        <div className="grid lg:grid-cols-12 gap-8">
           {/* Map Section */}
-          <div className="lg:col-span-8 bg-slate-100 rounded-3xl overflow-hidden min-h-[400px] border border-slate-200">
+          <div className="lg:col-span-12 xl:col-span-8 h-[600px] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white group relative">
+            <div className="absolute top-6 left-6 z-[1000] bg-white p-5 rounded-2xl shadow-xl border border-slate-100 hidden md:block">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                  <Globe size={16} />
+                </div>
+                <div className="font-bold text-secondary">Regional Operations</div>
+              </div>
+              <p className="text-xs text-slate-500">Actively managing sites across Ohio.</p>
+            </div>
+            
             {typeof window !== 'undefined' && icon && (
               <MapContainer 
                 center={position} 
                 zoom={11} 
                 scrollWheelZoom={false}
-                style={{ height: '500px', width: '100%' }}
+                style={{ height: '600px', width: '100%' }}
+                className="z-10"
               >
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={position} icon={icon}>
-                  <Popup>
-                    <strong>Evolve Therapy Services</strong><br />
-                    31641 Compass Cove<br />
-                    Avon Lake, OH 44012
+                  <Popup className="premium-popup">
+                    <div className="p-2">
+                      <strong className="text-secondary">Evolve Therapy Services</strong><br />
+                      <span className="text-slate-500">Avon Lake, OH 44012</span>
+                    </div>
                   </Popup>
                 </Marker>
               </MapContainer>
@@ -91,29 +108,40 @@ export default function ServiceArea() {
           </div>
 
           {/* City List Section */}
-          <div className="lg:col-span-4">
-            <div className="bg-secondary p-8 rounded-3xl text-white h-full">
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <MapPin className="text-primary" /> Serving Nearby Cities
+          <div className="lg:col-span-12 xl:col-span-4">
+            <div className="bg-secondary p-12 rounded-[3rem] h-full shadow-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-8 text-white/5 group-hover:text-primary/10 transition-colors">
+                 <MapPin size={200} />
+              </div>
+              
+              <h3 className="text-3xl font-serif text-white mb-10 flex items-center gap-4">
+                <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
+                  <MapPin size={24} className="text-white" />
+                </div>
+                Serving Cities
               </h3>
               
-              <div className="grid grid-cols-2 gap-y-4 gap-x-6">
+              <div className="grid grid-cols-2 gap-y-6 gap-x-8 relative z-10">
                 {cities.map((city) => (
-                  <div key={city.zip} className="flex flex-col">
-                    <span className="font-bold text-slate-100">{city.name}</span>
-                    <span className="text-xs text-primary font-medium tracking-widest">{city.zip}</span>
+                  <div key={city.zip} className="flex flex-col border-l-2 border-primary/20 pl-4 hover:border-primary transition-colors cursor-default">
+                    <span className="font-bold text-white text-lg">{city.name}</span>
+                    <span className="text-xs text-primary font-bold tracking-[0.2em]">{city.zip}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-12 pt-8 border-t border-slate-700 space-y-4">
-                <div className="flex items-center gap-4">
-                  <Phone className="text-primary" size={20} />
-                  <span>(888) 386-5820</span>
+              <div className="mt-16 pt-10 border-t border-white/10 space-y-6">
+                <div className="flex items-center gap-4 text-white hover:text-primary transition-colors">
+                  <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center">
+                    <Phone size={18} />
+                  </div>
+                  <span className="font-bold">(888) 386-5820</span>
                 </div>
-                <div className="flex items-center gap-4">
-                  <Mail className="text-primary" size={20} />
-                  <span>info@evolvetherapyservices.com</span>
+                <div className="flex items-center gap-4 text-white hover:text-primary transition-colors">
+                  <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center">
+                    <Mail size={18} />
+                  </div>
+                  <span className="font-bold text-sm">info@evolvetherapyservices.com</span>
                 </div>
               </div>
             </div>

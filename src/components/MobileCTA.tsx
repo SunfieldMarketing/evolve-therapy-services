@@ -1,38 +1,46 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Phone, MessageSquare } from 'lucide-react';
+import { Phone, MessageSquare, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MobileCTA() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling 300px
-      setIsVisible(window.scrollY > 300);
+      setIsVisible(window.scrollY > 400);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!isVisible) return null;
-
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[60] p-4 bg-transparent sticky-mobile-nav">
-      <div className="flex gap-4 p-2 bg-white/80 backdrop-blur-lg border border-slate-100 rounded-2xl shadow-2xl">
-        <a 
-          href="tel:8883865820"
-          className="flex-1 bg-secondary text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold shadow-lg shadow-secondary/20"
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="md:hidden fixed bottom-6 left-6 right-6 z-[60]"
         >
-          <Phone size={20} /> Call Now
-        </a>
-        <a 
-          href="sms:8883865820"
-          className="flex-1 bg-primary text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold shadow-lg shadow-primary/20"
-        >
-          <MessageSquare size={20} /> Text Now
-        </a>
-      </div>
-    </div>
+          <div className="flex gap-4 p-2 bg-secondary rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10">
+            <a 
+              href="tel:8883865820"
+              className="flex-1 bg-primary text-white py-4 rounded-3xl flex items-center justify-center gap-2 font-black text-sm uppercase tracking-widest shadow-lg shadow-primary/20"
+            >
+              <Phone size={18} /> Call
+            </a>
+            <a 
+              href="#contact"
+              className="flex-1 bg-white text-secondary py-4 rounded-3xl flex items-center justify-center gap-2 font-black text-sm uppercase tracking-widest"
+            >
+              Analysis <ArrowRight size={18} />
+            </a>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

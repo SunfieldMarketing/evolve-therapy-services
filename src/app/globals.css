@@ -2,16 +2,18 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0f172a;
-  --primary: #0d9488; /* Teal 600 */
+  --foreground: #020617;
+  --primary: #065a82;
   --primary-foreground: #ffffff;
-  --secondary: #1e293b; /* Slate 800 */
-  --secondary-foreground: #ffffff;
-  --accent: #f59e0b; /* Amber 500 */
-  --accent-foreground: #0f172a;
-  --muted: #f1f5f9;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --accent: #b45309; /* Deep Gold/Amber */
+  --accent-foreground: #ffffff;
+  --muted: #f8fafc;
   --muted-foreground: #64748b;
   --border: #e2e8f0;
+  --card: #ffffff;
+  --card-foreground: #020617;
 }
 
 @theme inline {
@@ -26,12 +28,16 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', serif;
   
-  --radius-lg: 0.75rem;
-  --radius-md: 0.5rem;
-  --radius-sm: 0.25rem;
+  --radius-xl: 1.5rem;
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
 }
 
 body {

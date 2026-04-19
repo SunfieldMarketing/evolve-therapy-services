@@ -12,10 +12,7 @@ const stats = [
 
 export default function SocialProof() {
   return (
-    <section className="bg-secondary relative py-20 overflow-hidden border-y border-white/5">
-      {/* Abstract glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[200px] bg-primary/20 blur-[120px] mix-blend-screen" />
-      
+    <section className="bg-white relative py-20 border-b border-slate-100">
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {stats.map((stat, i) => (
@@ -27,13 +24,13 @@ export default function SocialProof() {
               transition={{ delay: i * 0.1, duration: 0.6 }}
               className="text-center group"
             >
-              <div className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white mb-3 tracking-tighter">
+              <div className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-secondary mb-3">
                 {stat.value}
               </div>
-              <div className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.2em] text-xs mb-2">
+              <div className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs mb-2">
                 <stat.icon size={14} /> {stat.label}
               </div>
-              <div className="text-white/40 text-sm font-medium">
+              <div className="text-slate-500 text-sm font-medium">
                 {stat.desc}
               </div>
             </motion.div>

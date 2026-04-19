@@ -25,16 +25,16 @@ export default function MobileCTA() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="md:hidden fixed bottom-6 left-6 right-6 z-[60]"
         >
-          <div className="flex gap-3 p-2 dark-glass rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.3)]">
+          <div className="flex gap-3 p-2 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-slate-200">
             <a 
               href="tel:8883865820"
-              className="flex-1 bg-primary text-white py-4 rounded-[1.5rem] flex items-center justify-center gap-2 font-black text-xs uppercase tracking-widest shadow-[0_10px_20px_rgba(67,56,202,0.4)]"
+              className="flex-1 bg-primary text-white py-3.5 rounded-xl flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-widest shadow-sm"
             >
               <Phone size={16} /> Call
             </a>
             <a 
               href="/contact"
-              className="flex-1 bg-white text-secondary py-4 rounded-[1.5rem] flex items-center justify-center gap-2 font-black text-xs uppercase tracking-widest"
+              className="flex-1 bg-slate-50 text-slate-600 border border-slate-200 py-3.5 rounded-xl flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-widest"
             >
               Analysis <ArrowRight size={16} />
             </a>

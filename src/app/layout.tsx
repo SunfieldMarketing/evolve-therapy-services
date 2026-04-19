@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Syne } from "next/font/google";
+import { Outfit, Lora } from "next/font/google";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-outfit",
 });
 
-const syne = Syne({
+const lora = Lora({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-lora",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth h-full`}>
-      <body className={`${jakarta.variable} ${syne.variable} antialiased font-sans min-h-full flex flex-col`}>
+      <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col`}>
         {children}
       </body>
     </html>

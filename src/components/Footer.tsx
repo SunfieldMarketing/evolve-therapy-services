@@ -25,17 +25,15 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-secondary text-white pt-24 pb-12 overflow-hidden relative border-t border-white/5">
-      <div className="absolute top-0 right-0 w-[800px] h-full bg-primary/5 -skew-x-12 translate-x-1/2 z-0 blur-[100px]" />
-      
+    <footer className="bg-white text-secondary pt-24 pb-12 overflow-hidden relative border-t border-slate-200">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-12 gap-16 mb-20">
           <div className="lg:col-span-5">
             <Link href="/" className="flex items-center gap-2 mb-8 group w-max">
-              <span className="text-3xl font-black font-heading tracking-tighter group-hover:text-white transition-colors text-white">EVOLVE</span>
-              <span className="text-3xl font-sans font-medium opacity-80 text-primary">Therapy</span>
+              <span className="text-3xl font-serif font-black tracking-tight text-secondary">Evolve</span>
+              <span className="text-2xl font-sans font-medium text-primary">Therapy</span>
             </Link>
-            <p className="text-white/50 text-lg leading-relaxed mb-10 max-w-md font-medium">
+            <p className="text-slate-500 text-lg leading-relaxed mb-10 max-w-md">
               Customized therapy management solutions designed specifically for Long Term Care providers. We help you evolve your clinical and financial operations.
             </p>
             <div className="flex gap-4">
@@ -47,7 +45,7 @@ export default function Footer() {
                 <a 
                   key={i}
                   href={social.href} 
-                  className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-primary hover:bg-primary transition-all duration-500"
+                  className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-white hover:border-primary hover:bg-primary transition-all duration-300"
                 >
                   <social.icon size={20} />
                 </a>
@@ -56,49 +54,49 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="font-bold text-xs uppercase tracking-[0.2em] text-white/30 mb-8 font-sans">Navigation</h4>
-            <ul className="space-y-4 text-white/60 font-bold font-heading text-lg">
-              <li><Link href="/" className="hover:text-primary hover:translate-x-1 inline-block transition-all">Home</Link></li>
-              <li><Link href="/about" className="hover:text-primary hover:translate-x-1 inline-block transition-all">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-primary hover:translate-x-1 inline-block transition-all">Services</Link></li>
-              <li><Link href="/locations" className="hover:text-primary hover:translate-x-1 inline-block transition-all">Locations</Link></li>
-              <li><Link href="/contact" className="hover:text-primary hover:translate-x-1 inline-block transition-all">Contact Us</Link></li>
+            <h4 className="font-bold text-xs uppercase tracking-widest text-slate-400 mb-8">Navigation</h4>
+            <ul className="space-y-4 text-secondary font-medium font-serif text-lg">
+              <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
+              <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link href="/services" className="hover:text-primary transition-colors">Services</Link></li>
+              <li><Link href="/locations" className="hover:text-primary transition-colors">Locations</Link></li>
+              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="font-bold text-xs uppercase tracking-[0.2em] text-white/30 mb-8 font-sans">Specialties</h4>
-            <ul className="space-y-4 text-white/60 font-bold font-heading text-lg">
-              <li className="hover:text-primary hover:translate-x-1 inline-block transition-all cursor-default">Management</li>
-              <li className="hover:text-primary hover:translate-x-1 inline-block transition-all cursor-default">Education</li>
-              <li className="hover:text-primary hover:translate-x-1 inline-block transition-all cursor-default">Medicaid Analysis</li>
-              <li className="hover:text-primary hover:translate-x-1 inline-block transition-all cursor-default">Recruiting</li>
+            <h4 className="font-bold text-xs uppercase tracking-widest text-slate-400 mb-8">Specialties</h4>
+            <ul className="space-y-4 text-secondary font-medium font-serif text-lg">
+              <li className="hover:text-primary transition-colors cursor-default">Management</li>
+              <li className="hover:text-primary transition-colors cursor-default">Education</li>
+              <li className="hover:text-primary transition-colors cursor-default">Medicaid Analysis</li>
+              <li className="hover:text-primary transition-colors cursor-default">Recruiting</li>
             </ul>
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="font-bold text-xs uppercase tracking-[0.2em] text-white/30 mb-8 font-sans">Newsletter</h4>
-            <p className="text-sm font-medium text-white/50 mb-6">Stay updated with the latest in LTC therapy management.</p>
+            <h4 className="font-bold text-xs uppercase tracking-widest text-slate-400 mb-8">Newsletter</h4>
+            <p className="text-sm font-medium text-slate-500 mb-6">Stay updated with the latest in LTC therapy management.</p>
             <div className="relative">
               <input 
                 type="email" 
                 placeholder="Corporate email address" 
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 font-medium focus:outline-none focus:border-primary transition-all pr-14 text-white placeholder:text-white/30 focus:bg-white/10"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-6 py-4 focus:outline-none focus:border-primary transition-all pr-14 text-secondary placeholder:text-slate-400 text-[15px]"
               />
-              <button className="absolute right-2 top-2 bottom-2 w-10 bg-primary rounded-xl flex items-center justify-center hover:bg-white hover:text-secondary transition-all">
+              <button className="absolute right-2 top-2 bottom-2 w-10 bg-primary rounded-lg flex items-center justify-center hover:bg-secondary text-white transition-all shadow-sm">
                 <ArrowRight size={18} />
               </button>
             </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-white/30 text-xticks font-bold uppercase tracking-widest text-[10px]">
+        <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">
             © {currentYear} Evolve Therapy Services.
           </div>
-          <div className="flex gap-10 text-[10px] font-bold uppercase tracking-widest text-white/30">
-            <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms</Link>
+          <div className="flex gap-10 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+             <Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
+             <Link href="#" className="hover:text-primary transition-colors">Terms</Link>
           </div>
         </div>
       </div>

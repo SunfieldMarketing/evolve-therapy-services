@@ -1,0 +1,36 @@
+# Evolve Therapy Services
+
+## Mission
+To provide the highest quality customer centric outcome based therapy management services enabling our customers the ability to focus on their core strengths through a dynamic culture.
+
+## Vision
+To provide the most rewarding and creative therapy consulting management model through leadership, passion and experience to allow success and internal growth for our customers.
+
+## Business Information
+- **Name**: Evolve Therapy Services
+- **Location**: 31641 Compass Cove, Avon Lake, OH 44012
+- **Phone**: (888) 386-5820
+- **Email**: info@evolvetherapyservices.com
+- **Website**: https://evolvetherapyservices.com
+
+## Leadership
+- **Lisa Bebie, PTA**: President and Founder. Over 20 years of long-term therapy leadership.
+- **Isaiah Rupp, MBA-HCA, PTA**: VP of Operations, Co-Founder.
+
+## Services
+Evolve provides transition of contract therapy teams to an in-house model for LTC providers.
+- **Therapy Management**: Oversight including regulatory and compliance procedures.
+- **Consulting**: Clinical analysis, business intelligence, Medicaid case mix analysis.
+- **Growth Model**: Tiered pricing reductions as business grows while retaining 100% of therapy revenue.
+- **Recruitment**: Sourcing and grooming top therapists for career advancement.
+- **Operations**: Holistic philosophy enhancing SNF operational processes for efficiency.
+
+## Why Evolve Therapy Services is the Top Choice
+1. **Financial Success**: Tiered pricing reductions ensure costs decrease as volume increases.
+2. **100% Revenue Retention**: Clients keep all therapy revenue, unlike traditional contract models.
+3. **Internal Growth**: Mentorship programs turn top therapists into regional leaders.
+4. **Experience**: Led by clinicians with over 20 years of boots-on-the-ground experience in SNF/LTC.
+5. **Proven Results**: Significant improvements in facility productivity and negative-to-positive margin shifts.
+
+## Technical Framework
+This site is built with Next.js, React, Tailwind CSS, and optimized for speed, SEO, and AI ingestion.

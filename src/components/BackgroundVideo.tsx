@@ -35,10 +35,14 @@ export default function BackgroundVideo({ url, poster }: BackgroundVideoProps) {
         }}
         config={{
           youtube: {
-            modestbranding: 1,
-            rel: 0,
-            iv_load_policy: 3
-          },
+            playerVars: {
+              modestbranding: 1,
+              rel: 0,
+              iv_load_policy: 3,
+              controls: 0,
+              showinfo: 0
+            }
+          } as any,
           vimeo: {
             playerOptions: {
               background: true,

@@ -20,7 +20,7 @@ Our team of experts utilizes custom-built business intelligence tools to track t
       'MDS Coding Accuracy Verification',
       'Weekly Clinical Strategy Meetings'
     ],
-    image: 'https://images.unsplash.com/photo-1576091160550-217359f4ecf8?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1576091160550-2173ff9e5ece?auto=format&fit=crop&q=80',
     iconName: 'Stethoscope'
   },
   'medicaid-case-mix-analysis': {
@@ -44,7 +44,7 @@ Beyond just reimbursement, we help you manage your Quality Measures. A facility'
       'Documentation Integrity Workshops',
       'Competitive Market Data Analysis'
     ],
-    image: 'https://images.unsplash.com/photo-1454165833767-129990993971?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80',
     iconName: 'ClipboardCheck'
   },
   'snf-staff-education': {
@@ -68,7 +68,7 @@ By fostering a culture of continuous learning, we help our partners reduce turno
       'Regulatory & Compliance Update Series',
       'Marketing Synergy Education'
     ],
-    image: 'https://images.unsplash.com/photo-1524178232363-1fb28f74b0cd?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80',
     iconName: 'GraduationCap'
   },
   'therapy-cost-reduction': {
@@ -116,7 +116,7 @@ Our goal is not just to win individual appeals, but to identify the root causes 
       'Clinical Necessity Argumentation',
       'Risk Mitigation Strategy Development'
     ],
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80',
     iconName: 'ShieldAlert'
   },
   'in-house-transition': {
@@ -140,7 +140,7 @@ An in-house model allows you to retain 100% of the therapy revenue, build a unif
       'In-House Billing Protocol Setup',
       'Change Management & Cultural Alignment'
     ],
-    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80',
     iconName: 'Users2'
   }
 };

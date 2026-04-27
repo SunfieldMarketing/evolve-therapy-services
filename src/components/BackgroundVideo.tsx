@@ -3,8 +3,8 @@
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 
-// Use dynamic import for ReactPlayer to avoid SSR/Type issues
-const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
+// Force cast the dynamic component to any to bypass the broken type checking
+const Player = dynamic(() => import('react-player'), { ssr: false }) as any;
 
 interface BackgroundVideoProps {
   url: string;
@@ -22,7 +22,7 @@ export default function BackgroundVideo({ url, poster }: BackgroundVideoProps) {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-secondary pointer-events-none">
-      <ReactPlayer
+      <Player
         url={url}
         playing={true}
         loop={true}
@@ -55,7 +55,7 @@ export default function BackgroundVideo({ url, poster }: BackgroundVideoProps) {
               controls: false
             }
           }
-        } as any}
+        }}
       />
       {/* Fallback Poster */}
       {!url && poster && (

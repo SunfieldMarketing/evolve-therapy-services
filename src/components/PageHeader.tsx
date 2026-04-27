@@ -11,6 +11,8 @@ interface PageHeaderProps {
   videoUrl?: string;
 }
 
+import BackgroundVideo from './BackgroundVideo';
+
 export default function PageHeader({ 
   title, 
   subtitle, 
@@ -19,39 +21,16 @@ export default function PageHeader({
   videoUrl
 }: PageHeaderProps) {
   return (
-    <section className="relative pt-64 pb-32 overflow-hidden min-h-[70vh] flex items-center justify-center">
+    <section className="relative pt-64 pb-32 overflow-hidden min-h-[70vh] flex items-center justify-center bg-secondary">
       {/* Background Media - High Presence */}
-      <div className="absolute inset-0 z-0 bg-secondary">
-        {videoUrl ? (
-          <>
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover"
-              poster={bgImage}
-            >
-              <source src={videoUrl} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            {/* High-quality overlay for text legibility */}
-            <div className="absolute inset-0 bg-secondary/60 backdrop-brightness-75" />
-            <div className="absolute inset-0 bg-gradient-to-b from-secondary/80 via-transparent to-secondary/90" />
-          </>
-        ) : (
-          <>
-            <Image 
-              src={bgImage} 
-              alt="Header Background" 
-              fill 
-              priority
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-secondary/70" />
-          </>
-        )}
-      </div>
+      <BackgroundVideo 
+        url={videoUrl ? (videoUrl.includes('youtube') ? videoUrl : "https://www.youtube.com/watch?v=zH0D_6rZJXY") : "https://www.youtube.com/watch?v=zH0D_6rZJXY"} 
+        poster={bgImage} 
+      />
+      
+      {/* High-quality overlay for text legibility */}
+      <div className="absolute inset-0 z-[1] bg-secondary/60 backdrop-brightness-75" />
+      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-secondary/80 via-transparent to-secondary/90" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
         <motion.div

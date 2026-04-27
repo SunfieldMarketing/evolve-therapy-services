@@ -40,8 +40,8 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
       {/* Top Bar - Hidden on scroll for sleekness */}
       <div className={cn(
-        "bg-secondary text-white/80 py-2 border-b border-white/5 transition-all duration-500 overflow-hidden",
-        scrolled ? "h-0 opacity-0" : "h-[40px] opacity-100"
+        "text-white/80 py-2 border-b border-white/5 transition-all duration-500 overflow-hidden",
+        scrolled ? "h-0 opacity-0 bg-secondary" : "h-[40px] opacity-100 bg-transparent"
       )}>
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center text-[10px] uppercase tracking-widest font-black">
           <div className="flex gap-6">

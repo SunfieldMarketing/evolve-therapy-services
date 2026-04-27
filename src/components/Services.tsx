@@ -66,13 +66,13 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-40 bg-white relative overflow-hidden">
+    <section id="services" className="py-20 md:py-32 bg-white relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-slate-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 -z-10" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3 -z-10" />
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-24">
+      <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 md:gap-12 mb-14 md:mb-20">
           <div className="max-w-3xl">
             <motion.div 
                initial={{ opacity: 0, x: -20 }}
@@ -93,7 +93,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 lg:gap-10">
           {services.map((service, i) => (
             <motion.div
               key={i}
@@ -101,7 +101,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-slate-50 p-12 rounded-[3.5rem] border border-slate-100 hover:bg-white hover:border-primary/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 group relative flex flex-col justify-between overflow-hidden"
+              className="bg-slate-50 p-7 sm:p-10 md:p-12 rounded-3xl md:rounded-[3.5rem] border border-slate-100 hover:bg-white hover:border-primary/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 group relative flex flex-col justify-between overflow-hidden"
             >
               <Link href={service.href} className="absolute inset-0 z-10" aria-label={`Learn more about ${service.title}`} />
               
@@ -132,10 +132,10 @@ export default function Services() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-32 bg-secondary rounded-[4rem] overflow-hidden shadow-2xl relative border border-white/5"
+          className="mt-16 md:mt-28 bg-secondary rounded-3xl md:rounded-[4rem] overflow-hidden shadow-2xl relative border border-white/5"
         >
           <div className="grid lg:grid-cols-2">
-            <div className="p-16 lg:p-24 flex flex-col justify-center relative z-10">
+            <div className="p-8 md:p-14 lg:p-24 flex flex-col justify-center relative z-10">
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}

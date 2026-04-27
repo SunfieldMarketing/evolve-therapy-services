@@ -29,8 +29,8 @@ const features = [
 
 export default function WhyEvolve() {
   return (
-    <section id="about" className="py-24 md:py-48 bg-white overflow-hidden relative">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="about" className="py-20 md:py-32 bg-white overflow-hidden relative">
+      <div className="container mx-auto px-5 sm:px-6 md:px-12">
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
           {/* Content side */}
           <motion.div

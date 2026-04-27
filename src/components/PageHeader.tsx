@@ -19,49 +19,56 @@ export default function PageHeader({
   videoUrl
 }: PageHeaderProps) {
   return (
-    <section className="relative pt-64 pb-32 overflow-hidden bg-secondary">
-      {/* Background Layer with improved opacity */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative pt-64 pb-32 overflow-hidden min-h-[70vh] flex items-center justify-center">
+      {/* Background Media - High Presence */}
+      <div className="absolute inset-0 z-0 bg-secondary">
         {videoUrl ? (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover opacity-50"
-            poster={bgImage}
-          >
-            <source src={videoUrl} type="video/mp4" />
-          </video>
+          <>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+              poster={bgImage}
+            >
+              <source src={videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            {/* High-quality overlay for text legibility */}
+            <div className="absolute inset-0 bg-secondary/60 backdrop-brightness-75" />
+            <div className="absolute inset-0 bg-gradient-to-b from-secondary/80 via-transparent to-secondary/90" />
+          </>
         ) : (
-          <Image 
-            src={bgImage} 
-            alt="Header Background" 
-            fill 
-            priority
-            className="object-cover opacity-50"
-          />
+          <>
+            <Image 
+              src={bgImage} 
+              alt="Header Background" 
+              fill 
+              priority
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-secondary/70" />
+          </>
         )}
-        {/* Refined gradient for better visibility of background media */}
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/60 via-secondary/40 to-secondary/80" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-5xl mx-auto"
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-6xl mx-auto"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mb-8"
+            transition={{ delay: 0.2, duration: 1 }}
+            className="mb-10"
           >
-            <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-serif font-black text-white leading-[0.85] tracking-tighter drop-shadow-2xl">
+            <h1 className="text-6xl md:text-8xl lg:text-[11rem] font-serif font-black text-white leading-[0.8] tracking-tighter drop-shadow-[0_10px_50px_rgba(0,0,0,0.5)]">
               {title} <br />
-              {italicWord && <span className="text-primary italic font-medium drop-shadow-[0_0_30px_rgba(2,132,199,0.5)]">{italicWord}</span>}
+              {italicWord && <span className="text-primary italic font-medium drop-shadow-[0_0_40px_rgba(2,132,199,0.6)]">{italicWord}</span>}
             </h1>
           </motion.div>
           
@@ -69,8 +76,8 @@ export default function PageHeader({
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-xl md:text-3xl text-white font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-lg backdrop-blur-[2px] py-4 rounded-3xl"
+              transition={{ delay: 0.5 }}
+              className="text-xl md:text-3xl text-white/90 font-medium max-w-4xl mx-auto leading-relaxed drop-shadow-lg"
             >
               {subtitle}
             </motion.p>
@@ -78,8 +85,9 @@ export default function PageHeader({
         </motion.div>
       </div>
 
-      {/* Decorative Blur */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
+      {/* Decorative Glow elements to fill empty space and emphasize quality */}
+      <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-full h-64 bg-gradient-to-t from-white to-transparent transform z-10" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[180px] -translate-y-1/2 translate-x-1/2" />
     </section>
   );
 }

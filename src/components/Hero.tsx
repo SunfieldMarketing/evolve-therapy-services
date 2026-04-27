@@ -7,14 +7,14 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-secondary">
-      {/* Background Video/Image Layer with increased presence */}
-      <div className="absolute inset-0 z-0">
+      {/* Background Video/Image Layer with full presence */}
+      <div className="absolute inset-0 z-0 bg-secondary">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover"
           poster="https://images.unsplash.com/photo-1576091160550-2173ff9e5ece?auto=format&fit=crop&q=80"
         >
           <source 
@@ -22,8 +22,9 @@ export default function Hero() {
             type="video/mp4" 
           />
         </video>
-        {/* Balanced overlay for visibility + contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 via-secondary/40 to-transparent" />
+        {/* Superior overlay for visibility + contrast */}
+        <div className="absolute inset-0 bg-secondary/60 backdrop-brightness-75" />
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/40 to-transparent" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 py-20">
@@ -49,10 +50,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-6xl sm:text-7xl lg:text-[6.5rem] font-serif font-black text-white leading-[0.9] mb-10 tracking-tight drop-shadow-2xl"
+              className="text-6xl sm:text-7xl lg:text-[11.5rem] font-serif font-black text-white leading-[0.8] mb-10 tracking-tighter drop-shadow-[0_10px_50px_rgba(0,0,0,0.5)]"
             >
               Changing How <br />
-              <span className="text-primary italic font-medium drop-shadow-[0_0_30px_rgba(2,132,199,0.5)]">Therapy Functions</span>
+              <span className="text-primary italic font-medium drop-shadow-[0_0_40px_rgba(2,132,199,0.6)]">Therapy Functions</span>
             </motion.h1>
             
             <motion.p 

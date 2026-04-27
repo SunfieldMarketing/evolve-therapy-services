@@ -67,10 +67,10 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <h4 className="font-bold text-xs uppercase tracking-widest text-slate-400 mb-8">Specialties</h4>
             <ul className="space-y-4 text-secondary font-medium font-serif text-lg">
-              <li className="hover:text-primary transition-colors cursor-default">Management</li>
-              <li className="hover:text-primary transition-colors cursor-default">Education</li>
-              <li className="hover:text-primary transition-colors cursor-default">Medicaid Analysis</li>
-              <li className="hover:text-primary transition-colors cursor-default">Recruiting</li>
+              <li><Link href="/services/optimal-therapy-outcomes" className="hover:text-primary transition-colors">Management</Link></li>
+              <li><Link href="/services/snf-staff-education" className="hover:text-primary transition-colors">Education</Link></li>
+              <li><Link href="/services/medicaid-case-mix-analysis" className="hover:text-primary transition-colors">Medicaid Analysis</Link></li>
+              <li><Link href="/services/in-house-transition" className="hover:text-primary transition-colors">In-House Transition</Link></li>
             </ul>
           </div>
 

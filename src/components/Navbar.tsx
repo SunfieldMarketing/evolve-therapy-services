@@ -2,19 +2,31 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone, ArrowUpRight } from 'lucide-react';
+import { Menu, X, Phone, ArrowUpRight, ChevronDown, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const links = [
   { name: 'Home', href: '/' },
   { name: 'About Us', href: '/about' },
-  { name: 'Services', href: '/services' },
+  { 
+    name: 'Services', 
+    href: '/services',
+    dropdown: [
+      { name: 'Therapy Outcomes & PDPM', href: '/services/optimal-therapy-outcomes' },
+      { name: 'Medicaid Case Mix', href: '/services/medicaid-case-mix-analysis' },
+      { name: 'SNF Staff Education', href: '/services/snf-staff-education' },
+      { name: 'Therapy Cost Reduction', href: '/services/therapy-cost-reduction' },
+      { name: 'Denial Management', href: '/services/denial-management' },
+      { name: 'In-House Transition', href: '/services/in-house-transition' }
+    ]
+  },
   { name: 'Locations', href: '/locations' },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,23 +37,44 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-4 border-b border-slate-100' : 'bg-transparent py-6'
-      )}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+      {/* Top Bar - Hidden on scroll for sleekness */}
+      <div className={cn(
+        "bg-secondary text-white/80 py-2 border-b border-white/5 transition-all duration-500 overflow-hidden",
+        scrolled ? "h-0 opacity-0" : "h-[40px] opacity-100"
+      )}>
+        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center text-[10px] uppercase tracking-widest font-black">
+          <div className="flex gap-6">
+            <a href="tel:8883865820" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <Phone size={12} className="text-primary" /> (888) 386-5820
+            </a>
+            <a href="mailto:info@evolvetherapyservices.com" className="flex items-center gap-2 hover:text-primary transition-colors lowercase tracking-normal font-bold">
+              <Mail size={12} className="text-primary" /> info@evolvetherapyservices.com
+            </a>
+          </div>
+          <div className="hidden sm:block">
+            Avon Lake, OH · Serving LTC Communities
+          </div>
+        </div>
+      </div>
+
+      <nav
+        className={cn(
+          'transition-all duration-500',
+          scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-4 border-b border-slate-100' : 'bg-transparent py-6'
+        )}
+      >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group z-50">
             <span className={cn(
-              "text-3xl font-serif font-black tracking-tight transition-colors",
+              "text-2xl md:text-3xl font-serif font-black tracking-tight transition-colors",
               scrolled ? "text-secondary" : "text-secondary"
             )}>
               Evolve
             </span>
             <span className={cn(
-              "text-2xl font-sans font-medium transition-colors",
+              "text-xl md:text-2xl font-sans font-medium transition-colors",
               scrolled ? "text-primary" : "text-primary"
             )}>
               Therapy
@@ -49,24 +82,50 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium transition-colors border-b-2 border-transparent hover:border-primary",
-                  scrolled ? "text-slate-600 hover:text-secondary" : "text-secondary/80 hover:text-secondary"
-                )}
+              <div 
+                key={link.name} 
+                className="relative group/nav"
+                onMouseEnter={() => link.dropdown && setDropdownOpen(true)}
+                onMouseLeave={() => link.dropdown && setDropdownOpen(false)}
               >
-                {link.name}
-              </Link>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    "text-[13px] uppercase tracking-widest font-black transition-all flex items-center gap-1 py-2",
+                    scrolled ? "text-slate-500 hover:text-primary" : "text-secondary hover:text-primary"
+                  )}
+                >
+                  {link.name}
+                  {link.dropdown && <ChevronDown size={14} className={cn("transition-transform", dropdownOpen && "rotate-180")} />}
+                </Link>
+
+                {link.dropdown && (
+                  <div className={cn(
+                    "absolute top-full left-0 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 p-4 transition-all duration-300 origin-top overflow-hidden",
+                    dropdownOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+                  )}>
+                    <div className="flex flex-col gap-1">
+                      {link.dropdown.map((subItem) => (
+                        <Link
+                          key={subItem.name}
+                          href={subItem.href}
+                          className="px-4 py-3 text-xs font-bold text-slate-500 hover:text-primary hover:bg-slate-50 rounded-xl transition-all"
+                        >
+                          {subItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
             <Link
               href="/contact"
-              className="px-8 py-3 rounded-xl bg-primary text-white text-sm font-semibold flex items-center gap-2 transition-all hover:bg-primary/90 hover:shadow-md"
+              className="px-6 py-3 rounded-xl bg-primary text-white text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all hover:bg-secondary hover:shadow-lg hover:-translate-y-0.5 active:scale-95"
             >
-              Contact Us <ArrowUpRight size={16} />
+              Contact Us <ArrowUpRight size={14} />
             </Link>
           </div>
 
@@ -120,7 +179,8 @@ export default function Navbar() {
             (888) 386-5820
           </Link>
         </div>
-      </div>
-    </nav>
+        </div>
+      </nav>
+    </header>
   );
 }

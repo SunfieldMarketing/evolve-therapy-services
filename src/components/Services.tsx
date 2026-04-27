@@ -11,6 +11,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const services = [
   {
@@ -18,42 +19,48 @@ const services = [
     desc: 'Clinical Analysis for PDPM case mix efficiency-opportunity and customized business intelligence.',
     icon: Stethoscope,
     color: 'text-blue-600',
-    bg: 'bg-blue-50'
+    bg: 'bg-blue-50',
+    href: '/services/optimal-therapy-outcomes'
   },
   {
     title: 'Medicaid Case Mix Analysis',
     desc: 'Education and analysis of your site’s Quality Measures and case mix efficiency.',
     icon: ClipboardCheck,
     color: 'text-indigo-600',
-    bg: 'bg-indigo-50'
+    bg: 'bg-indigo-50',
+    href: '/services/medicaid-case-mix-analysis'
   },
   {
     title: 'SNF Staff Education',
     desc: 'Expert training for your SNF staff, marketing team, and administration for better collaboration.',
     icon: GraduationCap,
     color: 'text-primary',
-    bg: 'bg-primary/10'
+    bg: 'bg-primary/10',
+    href: '/services/snf-staff-education'
   },
   {
     title: 'Therapy Cost Reduction',
     desc: 'Optimizing staffing models and clinical discharge planning for operational success.',
     icon: LineChart,
     color: 'text-emerald-600',
-    bg: 'bg-emerald-50'
+    bg: 'bg-emerald-50',
+    href: '/services/therapy-cost-reduction'
   },
   {
     title: 'In-House Transition',
     desc: 'Easily transition your third-party contract therapy team to an efficient in-house model.',
     icon: Users2,
     color: 'text-slate-600',
-    bg: 'bg-slate-100'
+    bg: 'bg-slate-100',
+    href: '/services/in-house-transition'
   },
   {
     title: 'Denial Management',
     desc: 'Expert support in recruitment, data analysis, and managing therapy denials effectively.',
     icon: BarChart3,
     color: 'text-accent',
-    bg: 'bg-accent/10'
+    bg: 'bg-accent/10',
+    href: '/services/denial-management'
   }
 ];
 
@@ -87,6 +94,7 @@ export default function Services() {
               transition={{ delay: i * 0.1, duration: 0.6, ease: "easeOut" }}
               className="bg-white p-10 rounded-[2rem] border border-slate-200 hover:border-primary/20 shadow-sm hover:shadow-lg transition-all duration-500 group relative flex flex-col justify-between"
             >
+              <Link href={service.href} className="absolute inset-0 z-10" aria-label={`Learn more about ${service.title}`} />
               <div>
                 <div className={`w-14 h-14 ${service.bg} ${service.color} rounded-2xl flex items-center justify-center mb-8 border border-white`}>
                   <service.icon size={26} strokeWidth={1.5} />
@@ -98,9 +106,9 @@ export default function Services() {
                 </p>
               </div>
               
-              <button className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
+              <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
                 Learn More <ArrowUpRight size={16} />
-              </button>
+              </div>
             </motion.div>
           ))}
         </div>

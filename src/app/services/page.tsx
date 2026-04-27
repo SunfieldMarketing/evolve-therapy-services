@@ -16,44 +16,50 @@ import {
   CheckCircle,
   FileText
 } from 'lucide-react';
-import Image from 'next/image';
+import Link from 'next/link';
 
 const detailedServices = [
   {
     title: 'Optimal Therapy Outcomes',
     desc: 'Clinical analysis for PDPM case mix efficiency-opportunity and comprehensive business intelligence customized to your market market dynamics.',
     icon: Stethoscope,
-    tags: ['PDPM Efficiency', 'Clinical Strategy']
+    tags: ['PDPM Efficiency', 'Clinical Strategy'],
+    href: '/services/optimal-therapy-outcomes'
   },
   {
     title: 'Medicaid Case Mix Analysis',
     desc: 'Deep education and analysis of your site’s Quality Measures and case mix efficiency ensuring peak performance in reimbursement.',
     icon: ClipboardCheck,
-    tags: ['Quality Measures', 'Compliance']
+    tags: ['Quality Measures', 'Compliance'],
+    href: '/services/medicaid-case-mix-analysis'
   },
   {
     title: 'SNF Staff Education',
     desc: 'Professional training for your SNF staff, marketing team, and administration to foster seamless collaboration and operational excellence.',
     icon: GraduationCap,
-    tags: ['Workforce Training', 'LTC Education']
+    tags: ['Workforce Training', 'LTC Education'],
+    href: '/services/snf-staff-education'
   },
   {
     title: 'Therapy Cost Reduction',
     desc: 'Optimizing staffing models and clinical discharge planning processes for long-term operational success and stability.',
     icon: LineChart,
-    tags: ['Operational Success', 'Fiscally Responsible']
+    tags: ['Operational Success', 'Fiscally Responsible'],
+    href: '/services/therapy-cost-reduction'
   },
   {
     title: 'Denial Management',
     desc: 'Expert resource in recruitment, denial management, unlimited therapy education, and real-time clinical data analysis.',
     icon: ShieldAlert,
-    tags: ['Risk Mitigation', 'Data Analysis']
+    tags: ['Risk Mitigation', 'Data Analysis'],
+    href: '/services/denial-management'
   },
   {
     title: 'In-House Transition',
     desc: 'Easily transition your third-party contract therapy team to an efficient in-house model while maximizing your goals and retaining all revenue.',
     icon: Users2,
-    tags: ['Direct Hire', 'Culture Building']
+    tags: ['Direct Hire', 'Culture Building'],
+    href: '/services/in-house-transition'
   }
 ];
 
@@ -70,37 +76,42 @@ export default function ServicesPage() {
       <section className="py-24">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl font-serif text-secondary mb-6">Expert Solutions for LTC Operators</h2>
-            <p className="text-lg text-slate-500">
+            <h2 className="text-4xl font-serif text-secondary mb-6 italic">Expert Solutions for LTC Operators</h2>
+            <p className="text-xl text-slate-400 font-light max-w-2xl mx-auto">
               At Evolve we provide all of the services that you require to provide your patients with the highest possible level of care and service.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
             {detailedServices.map((service, i) => (
-              <motion.div
+              <Link
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group flex flex-col md:flex-row gap-8 p-10 rounded-[3rem] bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl transition-all duration-500"
+                href={service.href}
+                className="group block"
               >
-                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary shrink-0 shadow-lg group-hover:bg-primary group-hover:text-white transition-all">
-                  <service.icon size={32} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-secondary mb-4">{service.title}</h3>
-                  <p className="text-slate-500 leading-relaxed mb-6 italic">{service.desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {service.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider rounded-lg border border-primary/10">
-                        {tag}
-                      </span>
-                    ))}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex flex-col md:flex-row gap-8 p-10 rounded-[3rem] bg-slate-50 border border-slate-100 group-hover:bg-white group-hover:shadow-2xl group-hover:border-primary/20 transition-all duration-500 h-full"
+                >
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary shrink-0 shadow-lg group-hover:bg-primary group-hover:text-white transition-all">
+                    <service.icon size={32} />
                   </div>
-                </div>
-              </motion.div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-secondary mb-4 group-hover:text-primary transition-colors">{service.title}</h3>
+                    <p className="text-slate-500 leading-relaxed mb-6 italic">{service.desc}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {service.tags.map(tag => (
+                        <span key={tag} className="px-3 py-1 bg-white text-primary text-[10px] font-black uppercase tracking-widest rounded-lg border border-slate-200 group-hover:border-primary/20">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>

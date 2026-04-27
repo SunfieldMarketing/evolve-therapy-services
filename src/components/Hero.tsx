@@ -21,13 +21,13 @@ export default function Hero() {
               Compassionate Therapy Management
             </div>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-serif font-black text-secondary leading-[1.1] mb-8">
-              Transforming <br />
-              <span className="text-primary font-serif font-medium italic">Clinical Care</span>
+            <h1 className="text-5xl sm:text-6xl lg:text-[5rem] font-serif font-black text-secondary leading-[1.05] mb-8">
+              Changing How <br />
+              <span className="text-primary font-serif font-medium italic">Therapy Functions</span>
             </h1>
             
-            <p className="text-lg text-slate-500 mb-10 leading-relaxed max-w-xl font-medium">
-              We provide the framework for clinicians to thrive. Maintain 100% of your revenue while we elevate your therapy department through expert management and operational oversight.
+            <p className="text-xl text-slate-500 mb-10 leading-relaxed max-w-xl font-light">
+              Our unique therapy management model <span className="text-secondary font-bold italic">evolves</span> with your business. Retain 100% of your revenue while we drive clinical and financial success.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-14">

@@ -69,7 +69,7 @@ const detailedServices = [
         title="Our" 
         italicWord="Services" 
         subtitle="Bridging the gap for operators who want to truly EVOLVE their therapy programs to the next level."
-        videoUrl="https://player.vimeo.com/external/441221776.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761"
+        videoUrl="https://player.vimeo.com/external/432014945.sd.mp4?s=6c6695333f276cd83428d0859585e488d0859585e&profile_id=165&oauth2_token_id=57447761"
       />
 
       <section className="py-24 md:py-48 relative overflow-hidden">

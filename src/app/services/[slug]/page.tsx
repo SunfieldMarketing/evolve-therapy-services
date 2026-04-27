@@ -49,7 +49,7 @@ export default function ServiceDetailPage() {
         title={service.title.includes(' & ') ? service.title.split(' & ')[0] : service.title}
         italicWord={service.title.includes(' & ') ? service.title.split(' & ')[1] : ''}
         subtitle={service.shortDesc}
-        videoUrl="https://player.vimeo.com/external/434045526.sd.mp4?s=c27df34a234b6ad388b02e754a106a77d7042578&profile_id=165&oauth2_token_id=57447761"
+        videoUrl={(service as any).videoUrl}
       />
 
       {/* Main Content */}

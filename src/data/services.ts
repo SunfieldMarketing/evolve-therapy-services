@@ -21,7 +21,8 @@ Our team of experts utilizes custom-built business intelligence tools to track t
       'Weekly Clinical Strategy Meetings'
     ],
     image: 'https://images.unsplash.com/photo-1576091160550-2173ff9e5ece?auto=format&fit=crop&q=80',
-    iconName: 'Stethoscope'
+    iconName: 'Stethoscope',
+    videoUrl: 'https://player.vimeo.com/external/432014945.sd.mp4?s=6c6695333f276cd83428d0859585e488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
   'medicaid-case-mix-analysis': {
     title: 'Medicaid Case Mix & QM Optimization',
@@ -45,7 +46,8 @@ Beyond just reimbursement, we help you manage your Quality Measures. A facility'
       'Competitive Market Data Analysis'
     ],
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80',
-    iconName: 'ClipboardCheck'
+    iconName: 'ClipboardCheck',
+    videoUrl: 'https://player.vimeo.com/external/441221776.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
   'snf-staff-education': {
     title: 'SNF Workforce Education & Development',
@@ -69,7 +71,8 @@ By fostering a culture of continuous learning, we help our partners reduce turno
       'Marketing Synergy Education'
     ],
     image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80',
-    iconName: 'GraduationCap'
+    iconName: 'GraduationCap',
+    videoUrl: 'https://player.vimeo.com/external/441220473.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
   'therapy-cost-reduction': {
     title: 'Strategic Therapy Cost Reduction',
@@ -93,7 +96,8 @@ We provide our partners with a roadmap to improve their EBITDA (Earnings Before 
       'Benchmarking Against Industry Peers'
     ],
     image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80',
-    iconName: 'LineChart'
+    iconName: 'LineChart',
+    videoUrl: 'https://player.vimeo.com/external/494635105.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
   'denial-management': {
     title: 'Comprehensive Denial Management & Appeals',
@@ -117,7 +121,8 @@ Our goal is not just to win individual appeals, but to identify the root causes 
       'Risk Mitigation Strategy Development'
     ],
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80',
-    iconName: 'ShieldAlert'
+    iconName: 'ShieldAlert',
+    videoUrl: 'https://player.vimeo.com/external/371849187.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
   'in-house-transition': {
     title: 'Seamless In-House Transition Model',
@@ -141,6 +146,7 @@ An in-house model allows you to retain 100% of the therapy revenue, build a unif
       'Change Management & Cultural Alignment'
     ],
     image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80',
-    iconName: 'Users2'
+    iconName: 'Users2',
+    videoUrl: 'https://player.vimeo.com/external/432014945.sd.mp4?s=6c6695333f276cd83428d0859585e488d0859585e&profile_id=165&oauth2_token_id=57447761'
   }
 };

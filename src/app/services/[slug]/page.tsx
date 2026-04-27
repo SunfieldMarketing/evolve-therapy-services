@@ -49,7 +49,7 @@ export default function ServiceDetailPage() {
         title={service.title.includes(' & ') ? service.title.split(' & ')[0] : service.title}
         italicWord={service.title.includes(' & ') ? service.title.split(' & ')[1] : ''}
         subtitle={service.shortDesc}
-        videoUrl={(service as any).videoUrl}
+        videoKey="services"
       />
 
       {/* Main Content */}

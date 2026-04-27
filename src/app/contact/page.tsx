@@ -15,7 +15,7 @@ export default function ContactPage() {
         title="Contact" 
         italicWord="Us" 
         subtitle="Ready to evolve your clinical and financial potential? We would love to discuss how to grow with you."
-        videoUrl="https://player.vimeo.com/external/494635105.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761"
+        videoKey="contact"
       />
 
       <section className="py-32 md:py-56 relative overflow-hidden">

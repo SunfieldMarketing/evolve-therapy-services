@@ -15,7 +15,7 @@ export default function LocationsPage() {
         title="Our" 
         italicWord="Locations" 
         subtitle="Serving facilities across Ohio and the surrounding regions from our headquarters in Avon Lake."
-        videoUrl="https://player.vimeo.com/external/371849187.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761"
+        videoKey="locations"
       />
 
       <section className="py-32 md:py-56 relative overflow-hidden">

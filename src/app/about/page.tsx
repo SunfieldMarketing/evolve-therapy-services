@@ -15,7 +15,7 @@ export default function AboutPage() {
         title="Our" 
         italicWord="Leadership" 
         subtitle="Meet the visionaries behind Evolve Therapy Services and our commitment to clinical excellence."
-        videoUrl="https://player.vimeo.com/external/441221776.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761"
+        videoKey="about"
       />
 
       {/* Intro Section */}

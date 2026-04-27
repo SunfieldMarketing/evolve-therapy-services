@@ -5,13 +5,13 @@ import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import WhyEvolve from '@/components/WhyEvolve';
 import USAMap from '@/components/USAMap';
+import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import MobileCTA from '@/components/MobileCTA';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 import { 
   ArrowRight, Phone, Microscope, HeartPulse, ShieldCheck, 
   TrendingUp, Users, Clock, CheckCircle2, BarChart3, Award
@@ -261,6 +261,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── Testimonials ── */}
+      <Testimonials />
 
       {/* ── USA Coverage Map ── */}
       <USAMap />

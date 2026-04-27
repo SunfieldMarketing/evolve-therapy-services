@@ -1,102 +1,218 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail, Phone, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const LinkedInIcon = ({ size = 20 }: { size?: number }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width={size} 
-    height={size} 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-    <rect width="4" height="12" x="2" y="9"></rect>
-    <circle cx="4" cy="4" r="2"></circle>
-  </svg>
-);
+const navLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Locations', href: '/locations' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const serviceLinks = [
+  { label: 'Therapy Outcomes & PDPM', href: '/services/optimal-therapy-outcomes' },
+  { label: 'Medicaid Case Mix', href: '/services/medicaid-case-mix-analysis' },
+  { label: 'SNF Staff Education', href: '/services/snf-staff-education' },
+  { label: 'Therapy Cost Reduction', href: '/services/therapy-cost-reduction' },
+  { label: 'Denial Management', href: '/services/denial-management' },
+  { label: 'In-House Transition', href: '/services/in-house-transition' },
+];
+
+function LinkedInIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect width="4" height="12" x="2" y="9" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white text-secondary pt-24 pb-12 overflow-hidden relative border-t border-slate-200">
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-16 mb-20">
-          <div className="lg:col-span-5">
-            <Link href="/" className="flex items-center gap-2 mb-8 group w-max">
-              <span className="text-3xl font-serif font-black tracking-tight text-secondary">Evolve</span>
-              <span className="text-2xl font-sans font-medium text-primary">Therapy</span>
+    <footer className="bg-[#0f172a] text-white relative overflow-hidden" role="contentinfo">
+      {/* Subtle background glow */}
+      <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-[#0284c7]/5 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
+
+      {/* ── Pre-footer CTA banner — v0.dev "Dark Agency" pattern ── */}
+      <div className="border-b border-white/10">
+        <div className="container mx-auto px-5 sm:px-6 md:px-12 py-14 md:py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8"
+          >
+            <div className="max-w-xl">
+              <div className="text-[#0284c7] text-xs font-black uppercase tracking-[0.3em] mb-3">Ready to Evolve?</div>
+              <h3 className="text-3xl md:text-4xl font-serif font-black tracking-tighter leading-[0.95] text-white">
+                Start with a free facility cost analysis — no commitment required.
+              </h3>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-[#0369a1] text-white px-7 py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all duration-200 shadow-[0_0_30px_rgba(2,132,199,0.3)]"
+              >
+                Get Free Analysis <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+              <a
+                href="tel:8883865820"
+                className="inline-flex items-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/30 px-7 py-4 rounded-xl font-bold text-sm transition-all duration-200"
+              >
+                <Phone size={14} aria-hidden="true" /> (888) 386-5820
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ── Main footer grid ── */}
+      <div className="container mx-auto px-5 sm:px-6 md:px-12 py-16 md:py-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12 mb-14 md:mb-16">
+
+          {/* Brand column */}
+          <div className="lg:col-span-4">
+            <Link href="/" className="flex items-center gap-2 mb-6 w-fit" aria-label="Evolve Therapy Services Home">
+              <div className="w-8 h-8 rounded-lg bg-[#0284c7] flex items-center justify-center text-white text-xs font-black" aria-hidden="true">E</div>
+              <span className="font-serif font-black text-xl text-white">Evolve</span>
+              <span className="font-sans font-light text-xl text-white/60">Therapy</span>
             </Link>
-            <p className="text-slate-500 text-lg leading-relaxed mb-10 max-w-md">
-              Customized therapy management solutions designed specifically for Long Term Care providers. We help you evolve your clinical and financial operations.
+            <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs">
+              Customized therapy management solutions for Long Term Care providers. Retain 100% of revenue while we drive clinical and operational excellence.
             </p>
-            <div className="flex gap-4">
+
+            {/* Contact details */}
+            <div className="space-y-3 mb-8">
               {[
-                { icon: LinkedInIcon, href: "https://linkedin.com" },
-                { icon: Mail, href: "mailto:info@evolvetherapyservices.com" },
-                { icon: Phone, href: "tel:8883865820" }
-              ].map((social, i) => (
-                <a 
-                  key={i}
-                  href={social.href} 
-                  className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-white hover:border-primary hover:bg-primary transition-all duration-300"
-                >
-                  <social.icon size={20} />
-                </a>
+                { Icon: MapPin, text: '31641 Compass Cove, Avon Lake, OH 44012', href: undefined },
+                { Icon: Phone, text: '(888) 386-5820', href: 'tel:8883865820' },
+                { Icon: Mail, text: 'info@evolvetherapyservices.com', href: 'mailto:info@evolvetherapyservices.com' },
+              ].map(({ Icon, text, href }) => (
+                <div key={text} className="flex items-start gap-3 text-white/40 text-sm">
+                  <Icon size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
+                  {href ? (
+                    <a href={href} className="hover:text-white transition-colors duration-200">{text}</a>
+                  ) : (
+                    <span>{text}</span>
+                  )}
+                </div>
               ))}
             </div>
-          </div>
 
-          <div className="lg:col-span-2">
-            <h4 className="font-bold text-xs uppercase tracking-widest text-slate-400 mb-8">Navigation</h4>
-            <ul className="space-y-4 text-secondary font-medium font-serif text-lg">
-              <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-primary transition-colors">Services</Link></li>
-              <li><Link href="/locations" className="hover:text-primary transition-colors">Locations</Link></li>
-              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h4 className="font-bold text-xs uppercase tracking-widest text-slate-400 mb-8">Specialties</h4>
-            <ul className="space-y-4 text-secondary font-medium font-serif text-lg">
-              <li><Link href="/services/optimal-therapy-outcomes" className="hover:text-primary transition-colors">Management</Link></li>
-              <li><Link href="/services/snf-staff-education" className="hover:text-primary transition-colors">Education</Link></li>
-              <li><Link href="/services/medicaid-case-mix-analysis" className="hover:text-primary transition-colors">Medicaid Analysis</Link></li>
-              <li><Link href="/services/in-house-transition" className="hover:text-primary transition-colors">In-House Transition</Link></li>
-            </ul>
-          </div>
-
-          <div className="lg:col-span-3">
-            <h4 className="font-bold text-xs uppercase tracking-widest text-slate-400 mb-8">Newsletter</h4>
-            <p className="text-sm font-medium text-slate-500 mb-6">Stay updated with the latest in LTC therapy management.</p>
-            <div className="relative">
-              <input 
-                type="email" 
-                placeholder="Corporate email address" 
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-6 py-4 focus:outline-none focus:border-primary transition-all pr-14 text-secondary placeholder:text-slate-400 text-[15px]"
-              />
-              <button className="absolute right-2 top-2 bottom-2 w-10 bg-primary rounded-lg flex items-center justify-center hover:bg-secondary text-white transition-all shadow-sm">
-                <ArrowRight size={18} />
-              </button>
+            {/* Social icons */}
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/company/evolvetherapyservices"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Evolve Therapy Services on LinkedIn"
+                className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
+              >
+                <LinkedInIcon size={15} />
+              </a>
+              <a
+                href="mailto:info@evolvetherapyservices.com"
+                aria-label="Email Evolve Therapy Services"
+                className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
+              >
+                <Mail size={15} aria-hidden="true" />
+              </a>
             </div>
+          </div>
+
+          {/* Nav column */}
+          <div className="lg:col-span-2">
+            <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Navigation</h4>
+            <ul className="space-y-3" role="list">
+              {navLinks.map(({ label, href }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services column */}
+          <div className="lg:col-span-3">
+            <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Services</h4>
+            <ul className="space-y-3" role="list">
+              {serviceLinks.map(({ label, href }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Newsletter column */}
+          <div className="lg:col-span-3 md:col-span-2">
+            <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Stay Informed</h4>
+            <p className="text-sm text-white/40 leading-relaxed mb-5">
+              Get the latest updates on LTC therapy management, regulatory changes, and Evolve news.
+            </p>
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="space-y-3"
+              aria-label="Newsletter signup"
+            >
+              <div className="relative">
+                <input
+                  id="footer-email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="your@email.com"
+                  aria-label="Email address for newsletter"
+                  className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/25 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0284c7]/50 focus:bg-white/8 transition-all duration-200 pr-12"
+                />
+                <button
+                  type="submit"
+                  aria-label="Subscribe to newsletter"
+                  className="absolute right-2 top-2 bottom-2 w-9 bg-[#0284c7] rounded-lg flex items-center justify-center text-white hover:bg-[#0369a1] transition-colors duration-200"
+                >
+                  <ArrowRight size={14} aria-hidden="true" />
+                </button>
+              </div>
+              <p className="text-[11px] text-white/20 leading-relaxed">
+                No spam. Unsubscribe anytime. By subscribing you agree to our privacy policy.
+              </p>
+            </form>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">
-            © {currentYear} Evolve Therapy Services.
-          </div>
-          <div className="flex gap-10 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-             <Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
-             <Link href="#" className="hover:text-primary transition-colors">Terms</Link>
+        {/* ── Bottom bar ── */}
+        <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-white/25 text-xs">
+            © {year} Evolve Therapy Services. All rights reserved. Avon Lake, OH.
+          </p>
+          <div className="flex items-center gap-6">
+            {[
+              { label: 'Privacy Policy', href: '#' },
+              { label: 'Terms of Service', href: '#' },
+            ].map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="text-white/25 hover:text-white/60 text-xs transition-colors duration-150"
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

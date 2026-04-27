@@ -1,24 +1,25 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone, ArrowUpRight, ChevronDown, Mail } from 'lucide-react';
+import { Menu, X, Phone, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const links = [
   { name: 'Home', href: '/' },
-  { name: 'About Us', href: '/about' },
-  { 
-    name: 'Services', 
+  { name: 'About', href: '/about' },
+  {
+    name: 'Services',
     href: '/services',
     dropdown: [
-      { name: 'Therapy Outcomes & PDPM', href: '/services/optimal-therapy-outcomes' },
-      { name: 'Medicaid Case Mix', href: '/services/medicaid-case-mix-analysis' },
-      { name: 'SNF Staff Education', href: '/services/snf-staff-education' },
-      { name: 'Therapy Cost Reduction', href: '/services/therapy-cost-reduction' },
-      { name: 'Denial Management', href: '/services/denial-management' },
-      { name: 'In-House Transition', href: '/services/in-house-transition' }
-    ]
+      { name: 'Therapy Outcomes & PDPM', href: '/services/optimal-therapy-outcomes', desc: 'PDPM case mix optimization' },
+      { name: 'Medicaid Case Mix', href: '/services/medicaid-case-mix-analysis', desc: 'Quality measure analysis' },
+      { name: 'SNF Staff Education', href: '/services/snf-staff-education', desc: 'CEU & clinical training' },
+      { name: 'Therapy Cost Reduction', href: '/services/therapy-cost-reduction', desc: 'Tiered cost savings' },
+      { name: 'Denial Management', href: '/services/denial-management', desc: 'Audit & appeals support' },
+      { name: 'In-House Transition', href: '/services/in-house-transition', desc: 'Seamless model migration' },
+    ],
   },
   { name: 'Locations', href: '/locations' },
 ];
@@ -27,160 +28,265 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-      {/* Top Bar - Hidden on scroll for sleekness */}
-      <div className={cn(
-        "text-white/80 py-2 border-b border-white/5 transition-all duration-500 overflow-hidden",
-        scrolled ? "h-0 opacity-0 bg-secondary" : "h-[40px] opacity-100 bg-transparent"
-      )}>
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center text-[10px] uppercase tracking-widest font-black">
-          <div className="flex gap-6">
-            <a href="tel:8883865820" className="flex items-center gap-2 hover:text-primary transition-colors">
-              <Phone size={12} className="text-primary" /> (888) 386-5820
-            </a>
-            <a href="mailto:info@evolvetherapyservices.com" className="flex items-center gap-2 hover:text-primary transition-colors lowercase tracking-normal font-bold">
-              <Mail size={12} className="text-primary" /> info@evolvetherapyservices.com
-            </a>
-          </div>
-          <div className="hidden sm:block">
-            Avon Lake, OH · Serving LTC Communities
-          </div>
-        </div>
-      </div>
+  // Close mobile menu on route change
+  useEffect(() => {
+    const close = () => setIsOpen(false);
+    window.addEventListener('popstate', close);
+    return () => window.removeEventListener('popstate', close);
+  }, []);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50">
+      {/* ── Liquid glass nav bar — v0.dev "Modern Agency" pattern ── */}
       <nav
         className={cn(
-          'transition-all duration-500',
-          scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-4 border-b border-slate-100' : 'bg-transparent py-6'
+          'transition-all duration-300 ease-out',
+          scrolled
+            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_24px_rgba(0,0,0,0.06)] py-3'
+            : 'bg-transparent py-5'
         )}
+        aria-label="Main navigation"
       >
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group z-50">
-            <span className={cn(
-              "text-2xl md:text-3xl font-serif font-black tracking-tight transition-colors",
-              scrolled ? "text-secondary" : "text-white"
-            )}>
-              Evolve
-            </span>
-            <span className={cn(
-              "text-xl md:text-2xl font-sans font-medium transition-colors",
-              scrolled ? "text-primary" : "text-primary"
-            )}>
-              Therapy
-            </span>
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {links.map((link) => (
-              <div 
-                key={link.name} 
-                className="relative group/nav"
-                onMouseEnter={() => link.dropdown && setDropdownOpen(true)}
-                onMouseLeave={() => link.dropdown && setDropdownOpen(false)}
-              >
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "text-[13px] uppercase tracking-widest font-black transition-all flex items-center gap-1 py-2",
-                    scrolled ? "text-slate-500 hover:text-primary" : "text-white/80 hover:text-white"
-                  )}
-                >
-                  {link.name}
-                  {link.dropdown && <ChevronDown size={14} className={cn("transition-transform", dropdownOpen && "rotate-180")} />}
-                </Link>
-
-                {link.dropdown && (
-                  <div className={cn(
-                    "absolute top-full left-0 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 p-4 transition-all duration-300 origin-top overflow-hidden",
-                    dropdownOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                  )}>
-                    <div className="flex flex-col gap-1">
-                      {link.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          href={subItem.href}
-                          className="px-4 py-3 text-xs font-bold text-slate-500 hover:text-primary hover:bg-slate-50 rounded-xl transition-all"
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
+        <div className="container mx-auto px-5 sm:px-6 md:px-12">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 group z-50 shrink-0"
+              aria-label="Evolve Therapy Services — Home"
+            >
+              {/* Logomark */}
+              <div className={cn(
+                'w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-black transition-all duration-300',
+                scrolled ? 'bg-[#0284c7]' : 'bg-[#0284c7]/90 backdrop-blur-sm'
+              )}>
+                E
               </div>
-            ))}
-            <Link
-              href="/contact"
-              className="px-6 py-3 rounded-xl bg-primary text-white text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all hover:bg-white hover:text-secondary hover:shadow-lg hover:-translate-y-0.5 active:scale-95"
-            >
-              Contact Us <ArrowUpRight size={14} />
+              <span className={cn(
+                'text-xl font-serif font-black tracking-tight transition-colors duration-300',
+                scrolled ? 'text-[#0f172a]' : 'text-white'
+              )}>
+                Evolve
+              </span>
+              <span className={cn(
+                'text-xl font-sans font-light tracking-wide transition-colors duration-300',
+                scrolled ? 'text-[#0284c7]' : 'text-white/80'
+              )}>
+                Therapy
+              </span>
             </Link>
+
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-1" role="menubar">
+              {links.map((link) => (
+                <div
+                  key={link.name}
+                  className="relative"
+                  onMouseEnter={() => link.dropdown && setDropdownOpen(true)}
+                  onMouseLeave={() => link.dropdown && setDropdownOpen(false)}
+                  ref={link.dropdown ? dropdownRef : undefined}
+                  role="none"
+                >
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      'flex items-center gap-1 px-4 py-2 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200',
+                      scrolled
+                        ? 'text-slate-600 hover:text-[#0f172a] hover:bg-slate-100'
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                    )}
+                    role="menuitem"
+                  >
+                    {link.name}
+                    {link.dropdown && (
+                      <ChevronDown
+                        size={13}
+                        className={cn('transition-transform duration-200 opacity-60', dropdownOpen && 'rotate-180')}
+                        aria-hidden="true"
+                      />
+                    )}
+                  </Link>
+
+                  {/* Dropdown — v0.dev card-centric pattern */}
+                  {link.dropdown && (
+                    <AnimatePresence>
+                      {dropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 4, scale: 0.97 }}
+                          transition={{ duration: 0.18, ease: 'easeOut' }}
+                          className="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-slate-200/60 p-2 overflow-hidden"
+                          role="menu"
+                        >
+                          {link.dropdown.map((item) => (
+                            <Link
+                              key={item.name}
+                              href={item.href}
+                              onClick={() => setDropdownOpen(false)}
+                              className="flex flex-col px-4 py-3 rounded-xl hover:bg-[#0284c7]/8 group/item transition-all duration-150"
+                              role="menuitem"
+                            >
+                              <span className="text-sm font-semibold text-[#0f172a] group-hover/item:text-[#0284c7] transition-colors duration-150">
+                                {item.name}
+                              </span>
+                              <span className="text-xs text-slate-400 mt-0.5">{item.desc}</span>
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
+                </div>
+              ))}
+
+              {/* CTA button */}
+              <Link
+                href="/contact"
+                className={cn(
+                  'ml-3 flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all duration-200',
+                  scrolled
+                    ? 'bg-[#0284c7] text-white hover:bg-[#0369a1] shadow-[0_2px_12px_rgba(2,132,199,0.3)]'
+                    : 'bg-white/15 backdrop-blur-sm text-white border border-white/25 hover:bg-white/25'
+                )}
+              >
+                Contact Us <ArrowUpRight size={14} aria-hidden="true" />
+              </Link>
+            </div>
+
+            {/* Mobile Hamburger */}
+            <button
+              className={cn(
+                'md:hidden w-11 h-11 flex items-center justify-center rounded-xl z-50 transition-all duration-200 border',
+                isOpen
+                  ? 'bg-white text-[#0f172a] border-slate-200'
+                  : scrolled
+                    ? 'bg-slate-100 text-[#0f172a] border-slate-200'
+                    : 'bg-white/10 backdrop-blur-sm text-white border-white/20',
+              )}
+              onClick={() => setIsOpen((v) => !v)}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+            >
+              {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+            </button>
           </div>
-
-          {/* Mobile Toggle */}
-          <button
-            className={cn(
-              "md:hidden w-12 h-12 flex items-center justify-center rounded-xl z-50 transition-colors border",
-              scrolled ? "bg-white text-secondary border-slate-200" : "bg-white/10 text-white border-white/20 backdrop-blur-md",
-              isOpen && "bg-slate-100 border-slate-200 text-secondary"
-            )}
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <div className={cn(
-        "md:hidden fixed inset-0 z-40 bg-white transition-all duration-500 ease-in-out p-8 pt-32 flex flex-col",
-        isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-      )}>
-        <div className="flex flex-col gap-6">
-          {links.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-3xl font-serif font-bold text-slate-800 hover:text-primary transition-colors border-b border-slate-100 pb-4"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="text-3xl font-serif font-bold text-primary transition-colors pb-4 mt-4"
-            onClick={() => setIsOpen(false)}
-          >
-            Contact
-          </Link>
-        </div>
-        
-        <div className="mt-auto mb-8">
-          <div className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-4">Urgent Care Line</div>
-          <Link
-            href="tel:8883865820"
-            className="flex items-center gap-4 text-2xl font-bold text-secondary hover:text-primary transition-colors"
-            onClick={() => setIsOpen(false)}
-          >
-            <Phone size={24} className="text-primary" />
-            (888) 386-5820
-          </Link>
-        </div>
         </div>
       </nav>
+
+      {/* ── Mobile Drawer — editorial dark overlay style ── */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden fixed inset-0 z-40 bg-[#0f172a]/60 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
+              aria-hidden="true"
+            />
+
+            {/* Drawer panel */}
+            <motion.div
+              id="mobile-menu"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="md:hidden fixed top-0 right-0 bottom-0 z-50 w-[85vw] max-w-sm bg-[#0f172a] flex flex-col overflow-y-auto"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
+            >
+              {/* Drawer header */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
+                <Link
+                  href="/"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2"
+                  aria-label="Home"
+                >
+                  <div className="w-7 h-7 rounded-lg bg-[#0284c7] flex items-center justify-center text-white text-xs font-black">E</div>
+                  <span className="text-white font-serif font-black text-lg">Evolve Therapy</span>
+                </Link>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X size={18} aria-hidden="true" />
+                </button>
+              </div>
+
+              {/* Links */}
+              <nav className="flex flex-col px-4 py-6 gap-1 flex-1" aria-label="Mobile links">
+                {links.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="px-4 py-3.5 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                {/* Services sub-links on mobile */}
+                <div className="mt-2 px-4 py-2">
+                  <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-3">Our Services</div>
+                  <div className="flex flex-col gap-1">
+                    {links.find(l => l.dropdown)?.dropdown?.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className="py-2 text-sm text-white/50 hover:text-[#0284c7] transition-colors font-medium"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </nav>
+
+              {/* Bottom CTA */}
+              <div className="px-6 py-6 border-t border-white/10 space-y-3">
+                <Link
+                  href="/contact"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#0284c7] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#0369a1] transition-colors"
+                >
+                  Contact Us <ArrowUpRight size={14} aria-hidden="true" />
+                </Link>
+                <a
+                  href="tel:8883865820"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-3.5 border border-white/15 text-white/70 rounded-xl font-medium text-sm transition-colors hover:border-white/30 hover:text-white"
+                >
+                  <Phone size={14} aria-hidden="true" /> (888) 386-5820
+                </a>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

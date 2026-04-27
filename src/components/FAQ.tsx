@@ -1,86 +1,130 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Plus } from 'lucide-react';
+import Link from 'next/link';
 
 const faqs = [
   {
-    q: "How does the pricing model work?",
-    a: "We use a unique three-tiered approach that customizes to your business size. As your volume grows internally, our management pricing structure reduces, allowing you to scale profitably while rewarding your growth."
+    q: 'How does the pricing model work?',
+    a: 'We use a unique three-tiered approach that customizes to your business size. As your volume grows internally, our management pricing structure reduces, allowing you to scale profitably while rewarding your growth.',
   },
   {
-    q: "Do I retain 100% of my therapy revenue?",
-    a: "Yes. Unlike traditional contract therapy companies that take a portion of your reimbursement, our management model allows the operator to retain 100% of all therapy revenue. We are paid for our management expertise, not a cut of your earnings."
+    q: 'Do I retain 100% of my therapy revenue?',
+    a: 'Yes. Unlike traditional contract therapy companies that take a portion of your reimbursement, our management model allows the operator to retain 100% of all therapy revenue. We are paid for our management expertise, not a cut of your earnings.',
   },
   {
-    q: "Can you help transition a third-party contract team to in-house?",
-    a: "Absolutely. We specialize in providing all aspects of transitioning contract therapy teams to an in-house model for LTC providers, handling everything from recruitment and employee engagement to regulatory compliance and operational setup."
+    q: 'Can you help transition a third-party contract team to in-house?',
+    a: 'Absolutely. We specialize in providing all aspects of transitioning contract therapy teams to an in-house model for LTC providers — handling everything from recruitment and employee engagement to regulatory compliance and operational setup.',
   },
   {
-    q: "What if my program is already in-house?",
-    a: "Evolve acts as your expert elite resource. We provide specialized help with recruitment, denial management, clinical education, and real-time data analysis so you can focus on broader facility goals while we optimize the therapy department."
+    q: 'What if my program is already in-house?',
+    a: 'Evolve acts as your expert elite resource. We provide specialized help with recruitment, denial management, clinical education, and real-time data analysis so you can focus on broader facility goals while we optimize the therapy department.',
   },
   {
-    q: "What clinical support do you provide?",
-    a: "We provide comprehensive clinical analysis for PDPM case mix efficiency, education on Quality Measures, customized business intelligence, and discharge planning optimization to ensure peak facility performance."
-  }
+    q: 'What clinical support do you provide?',
+    a: 'We provide comprehensive clinical analysis for PDPM case mix efficiency, education on Quality Measures, customized business intelligence, and discharge planning optimization to ensure peak facility performance.',
+  },
 ];
 
 export default function FAQ() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [active, setActive] = useState<number | null>(0);
 
   return (
-    <section className="py-24 md:py-32 bg-white relative border-b border-slate-100">
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 mb-6">
-               <div className="w-10 h-[1px] bg-primary" />
-               <span className="text-secondary font-bold tracking-[0.2em] uppercase text-xs">Knowledge Center</span>
-               <div className="w-10 h-[1px] bg-primary" />
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-secondary tracking-tight mb-6">
-              Common <span className="text-primary italic font-medium">Inquiries</span>
-            </h2>
-            <p className="text-lg text-slate-500">Everything you need to know about the Evolve therapy management model.</p>
-          </div>
-          
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <div 
-                key={i} 
-                className={`group rounded-[1.5rem] transition-all duration-300 overflow-hidden relative ${activeIndex === i ? 'bg-slate-50 shadow-sm border border-slate-200' : 'bg-white border border-slate-200 hover:border-slate-300'}`}
-              >
-                {activeIndex === i && <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />}
-                
-                <button
-                  className="w-full flex items-center justify-between p-6 md:p-8 text-left"
-                  onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-                >
-                  <span className={`text-xl md:text-2xl font-bold font-serif pr-8 ${activeIndex === i ? 'text-primary' : 'text-slate-700 group-hover:text-secondary transition-colors'}`}>
-                    {faq.q}
-                  </span>
-                  <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center transition-all duration-300 border ${activeIndex === i ? 'bg-primary border-primary text-white rotate-180' : 'bg-white border-slate-200 text-slate-400 group-hover:border-primary/50 group-hover:text-primary rotate-0'}`}>
-                    {activeIndex === i ? <Minus size={20} /> : <Plus size={20} />}
-                  </div>
-                </button>
-                <AnimatePresence>
-                  {activeIndex === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                    >
-                      <div className="p-6 pt-0 md:px-8 pb-8 text-slate-600 text-lg leading-relaxed max-w-3xl">
-                        {faq.a}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+    <section className="py-20 md:py-32 bg-slate-50 border-t border-slate-100 relative" id="faq">
+      <div className="container mx-auto px-5 sm:px-6 md:px-12">
+        {/* Two col layout — v0.dev "Editorial Split" pattern */}
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-20">
+
+          {/* Left sticky header */}
+          <div className="lg:col-span-2 lg:sticky lg:top-28 h-fit">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/10 border border-[#0284c7]/20 text-[#0284c7] text-xs font-black uppercase tracking-[0.3em] mb-6">
+                FAQ
               </div>
-            ))}
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.95] mb-6">
+                Common<br />
+                <span className="text-[#0284c7] italic font-medium">Inquiries</span>
+              </h2>
+              <p className="text-slate-500 text-lg leading-relaxed font-light mb-8">
+                Everything you need to know about the Evolve therapy management model.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-[#0f172a] text-white px-6 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#0284c7] transition-all duration-200"
+              >
+                Ask a Question
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right accordion list */}
+          <div className="lg:col-span-3 space-y-3">
+            {faqs.map((faq, i) => {
+              const isOpen = active === i;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                >
+                  <div
+                    className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+                      isOpen
+                        ? 'bg-white border-[#0284c7]/20 shadow-[0_4px_24px_rgba(2,132,199,0.08)]'
+                        : 'bg-white border-slate-200 hover:border-slate-300'
+                    }`}
+                  >
+                    <button
+                      className="w-full flex items-center justify-between px-6 py-5 text-left gap-4 cursor-pointer"
+                      onClick={() => setActive(isOpen ? null : i)}
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-answer-${i}`}
+                      id={`faq-question-${i}`}
+                    >
+                      <span className={`text-base md:text-lg font-bold font-serif leading-snug ${isOpen ? 'text-[#0284c7]' : 'text-[#0f172a]'}`}>
+                        {faq.q}
+                      </span>
+                      <div
+                        className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center border transition-all duration-200 ${
+                          isOpen
+                            ? 'bg-[#0284c7] border-[#0284c7] text-white rotate-45'
+                            : 'bg-white border-slate-200 text-slate-400'
+                        }`}
+                        aria-hidden="true"
+                      >
+                        <Plus size={16} />
+                      </div>
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          id={`faq-answer-${i}`}
+                          role="region"
+                          aria-labelledby={`faq-question-${i}`}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                        >
+                          <div className="px-6 pb-6 text-slate-600 text-base leading-relaxed font-light border-t border-slate-100 pt-4">
+                            {faq.a}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

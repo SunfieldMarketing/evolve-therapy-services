@@ -1,3 +1,9 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Activity, ArrowRight, Users } from 'lucide-react';
+import Image from 'next/image';
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-secondary">
@@ -46,7 +52,7 @@ export default function Hero() {
             >
               Changing How <br />
               <span className="text-primary italic font-medium">Therapy Functions</span>
-            </h1>
+            </motion.h1>
             
             <motion.p 
               initial={{ opacity: 0, y: 30 }}

@@ -1,7 +1,10 @@
 'use client';
 
-import ReactPlayer from 'react-player';
+import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
+
+// Use dynamic import for ReactPlayer to avoid SSR/Type issues
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 interface BackgroundVideoProps {
   url: string;
@@ -9,21 +12,21 @@ interface BackgroundVideoProps {
 }
 
 export default function BackgroundVideo({ url, poster }: BackgroundVideoProps) {
-  const [isClient, setIsClient] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
+    setMounted(true);
   }, []);
 
-  if (!isClient) return <div className="absolute inset-0 bg-secondary" />;
+  if (!mounted) return <div className="absolute inset-0 bg-secondary" />;
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-secondary pointer-events-none">
       <ReactPlayer
         url={url}
-        playing
-        loop
-        muted
+        playing={true}
+        loop={true}
+        muted={true}
         width="100%"
         height="100%"
         style={{

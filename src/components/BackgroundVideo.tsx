@@ -42,7 +42,7 @@ export default function BackgroundVideo({ url, poster }: BackgroundVideoProps) {
               controls: 0,
               showinfo: 0
             }
-          } as any,
+          },
           vimeo: {
             playerOptions: {
               background: true,
@@ -52,7 +52,7 @@ export default function BackgroundVideo({ url, poster }: BackgroundVideoProps) {
               controls: false
             }
           }
-        }}
+        } as any}
       />
       {/* Fallback Poster */}
       {!url && poster && (

@@ -7,14 +7,14 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-secondary">
-      {/* Background Video/Image Layer */}
+      {/* Background Video/Image Layer with increased presence */}
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-30"
+          className="w-full h-full object-cover opacity-60"
           poster="https://images.unsplash.com/photo-1576091160550-2173ff9e5ece?auto=format&fit=crop&q=80"
         >
           <source 
@@ -22,7 +22,8 @@ export default function Hero() {
             type="video/mp4" 
           />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-transparent" />
+        {/* Balanced overlay for visibility + contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 via-secondary/40 to-transparent" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 py-20">
@@ -48,19 +49,19 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-6xl sm:text-7xl lg:text-[6.5rem] font-serif font-black text-white leading-[0.9] mb-10 tracking-tight"
+              className="text-6xl sm:text-7xl lg:text-[6.5rem] font-serif font-black text-white leading-[0.9] mb-10 tracking-tight drop-shadow-2xl"
             >
               Changing How <br />
-              <span className="text-primary italic font-medium">Therapy Functions</span>
+              <span className="text-primary italic font-medium drop-shadow-[0_0_30px_rgba(2,132,199,0.5)]">Therapy Functions</span>
             </motion.h1>
             
             <motion.p 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-xl md:text-2xl text-white/60 mb-12 leading-relaxed max-w-2xl font-light"
+              className="text-xl md:text-2xl text-white font-medium mb-12 leading-relaxed max-w-2xl drop-shadow-lg"
             >
-              Our unique therapy management model <span className="text-white font-bold italic">evolves</span> with your business. Retain 100% of your revenue while we drive clinical and financial success.
+              Our unique therapy management model <span className="text-white font-black italic">evolves</span> with your business. Retain 100% of your revenue while we drive clinical and financial success.
             </motion.p>
 
             <motion.div 

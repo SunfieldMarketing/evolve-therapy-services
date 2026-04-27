@@ -33,7 +33,7 @@ export default function ContactPage() {
                >
                   <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-slate-50 border border-slate-100 text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-12">
                     Get in touch
-                  </motion.div>
+                  </div>
                   <h2 className="text-5xl md:text-7xl font-serif font-black text-secondary mb-16 tracking-tighter leading-[0.95]">
                     Direct <br />
                     <span className="text-primary italic font-medium uppercase text-6xl">Communication</span>

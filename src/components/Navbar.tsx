@@ -69,7 +69,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 group z-50">
             <span className={cn(
               "text-2xl md:text-3xl font-serif font-black tracking-tight transition-colors",
-              scrolled ? "text-secondary" : "text-secondary"
+              scrolled ? "text-secondary" : "text-white"
             )}>
               Evolve
             </span>
@@ -94,7 +94,7 @@ export default function Navbar() {
                   href={link.href}
                   className={cn(
                     "text-[13px] uppercase tracking-widest font-black transition-all flex items-center gap-1 py-2",
-                    scrolled ? "text-slate-500 hover:text-primary" : "text-secondary hover:text-primary"
+                    scrolled ? "text-slate-500 hover:text-primary" : "text-white/80 hover:text-white"
                   )}
                 >
                   {link.name}
@@ -123,7 +123,7 @@ export default function Navbar() {
             ))}
             <Link
               href="/contact"
-              className="px-6 py-3 rounded-xl bg-primary text-white text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all hover:bg-secondary hover:shadow-lg hover:-translate-y-0.5 active:scale-95"
+              className="px-6 py-3 rounded-xl bg-primary text-white text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all hover:bg-white hover:text-secondary hover:shadow-lg hover:-translate-y-0.5 active:scale-95"
             >
               Contact Us <ArrowUpRight size={14} />
             </Link>
@@ -133,8 +133,8 @@ export default function Navbar() {
           <button
             className={cn(
               "md:hidden w-12 h-12 flex items-center justify-center rounded-xl z-50 transition-colors border",
-              scrolled ? "bg-white text-secondary border-slate-200" : "bg-white/50 text-secondary border-transparent",
-              isOpen && "bg-slate-100 border-slate-200"
+              scrolled ? "bg-white text-secondary border-slate-200" : "bg-white/10 text-white border-white/20 backdrop-blur-md",
+              isOpen && "bg-slate-100 border-slate-200 text-secondary"
             )}
             onClick={() => setIsOpen(!isOpen)}
           >

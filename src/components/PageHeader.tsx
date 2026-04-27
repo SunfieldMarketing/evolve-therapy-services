@@ -31,7 +31,7 @@ export default function PageHeader({
   const videoId = videoMap[videoKey] ?? videoMap.default;
 
   return (
-    <section className="relative w-full overflow-hidden flex items-center justify-center" style={{ minHeight: '70vh' }}>
+    <section className="relative w-full overflow-hidden flex items-center justify-center" style={{ minHeight: '65vh' }}>
       {/* ── YouTube iframe background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a]">
         <iframe
@@ -54,7 +54,7 @@ export default function PageHeader({
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 container mx-auto px-6 md:px-12 text-center py-40">
+      <div className="relative z-10 container mx-auto px-5 sm:px-6 md:px-12 text-center py-28 sm:py-36 md:py-44">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

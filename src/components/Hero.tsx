@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen overflow-hidden flex items-center">
+    <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center">
       {/* ── YouTube iframe background ── */}
       <div className="absolute inset-0 z-0">
         <iframe
@@ -22,7 +22,7 @@ export default function Hero() {
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 w-full container mx-auto px-6 md:px-12 pt-40 pb-24">
+      <div className="relative z-10 w-full container mx-auto px-5 sm:px-6 md:px-12 pt-32 sm:pt-36 md:pt-40 pb-16 md:pb-24">
         <div className="max-w-4xl">
 
           {/* Eyebrow */}
@@ -45,7 +45,7 @@ export default function Hero() {
           >
             Changing How<br />
             <span className="text-[#0284c7] italic">Therapy Functions</span><br />
-            <span className="text-white/60 font-medium text-4xl sm:text-5xl lg:text-6xl">for LTC Operators.</span>
+            <span className="text-white/60 font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl">for LTC Operators.</span>
           </motion.h1>
 
           {/* Subtext */}
@@ -63,7 +63,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-4 mb-20"
+            className="flex flex-col sm:flex-row gap-3 mb-14 md:mb-20"
           >
             <Link
               href="/contact"
@@ -85,7 +85,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-wrap gap-10 pt-10 border-t border-white/10"
+            className="flex flex-wrap gap-8 pt-8 md:pt-10 border-t border-white/10"
           >
             {[
               { value: '100%', label: 'Revenue Retained' },
@@ -102,7 +102,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2">
         <div className="text-white/30 text-[10px] uppercase tracking-[0.3em]">Scroll</div>
         <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />
       </div>

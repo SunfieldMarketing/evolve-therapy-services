@@ -12,7 +12,7 @@ const leaders = [
   {
     name: 'Lisa Bebie, PTA',
     title: 'President & Founder',
-    photo: 'https://evolvetherapyservices.com/wp-content/uploads/2022/03/Lisa-Bebie.png',
+    photo: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png',
     fallback: 'https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80',
     quote: '"As a clinician, I know how difficult it was to meet the goals of my employer as well as try to meet the goals of my customer. We know that a model that brings your therapy teams in-house allows great employee engagement, which then in turn, allows exceptional therapy outcomes to the residents we all serve."',
     bio: [
@@ -25,7 +25,7 @@ const leaders = [
   {
     name: 'Isaiah Rupp, MBA-HCA, PTA',
     title: 'VP of Operations & Co-Founder',
-    photo: 'https://evolvetherapyservices.com/about/',
+    photo: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1777331091/07de3a3b-7cf1-4a15-9ec4-28fdf603ac74.png',
     fallback: 'https://images.unsplash.com/photo-1622253692010-333f2da60c8d?auto=format&fit=crop&q=80',
     quote: '"It\'s amazing what you can accomplish if you don\'t care who gets the credit." — Harry Truman',
     bio: [

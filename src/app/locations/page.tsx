@@ -3,7 +3,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageHeader from '@/components/PageHeader';
-import ServiceArea from '@/components/ServiceArea';
+import USAMap from '@/components/USAMap';
 import { MapPin, Phone, Mail, ArrowRight, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -116,15 +116,8 @@ export default function LocationsPage() {
         </div>
       </section>
 
-      {/* Main Map Section */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5 }}
-      >
-        <ServiceArea />
-      </motion.section>
+      {/* Interactive USA Coverage Map */}
+      <USAMap />
 
       <Footer />
     </main>

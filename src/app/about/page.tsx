@@ -137,8 +137,8 @@ export default function AboutPage() {
                      {/* Background decorative ring */}
                      <div className="absolute inset-0 rounded-full border border-slate-200 scale-105 group-hover:scale-110 transition-transform duration-700" />
                      
-                     {/* Circular Profile Picture */}
-                     <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-2xl border-[6px] border-white bg-white z-10">
+                     {/* Square/widget style Profile Picture */}
+                     <div className="relative w-full aspect-square md:aspect-[4/5] lg:aspect-square rounded-[3rem] overflow-hidden shadow-2xl border-[6px] border-white bg-white z-10 box-border">
                        <Image
                          src={leader.photo}
                          alt={leader.name}

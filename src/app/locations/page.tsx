@@ -19,7 +19,10 @@ export default function LocationsPage() {
         videoKey="locations"
       />
 
-      <section className="py-20 md:py-32 relative overflow-hidden bg-white">
+      {/* Interactive USA Coverage Map - Moved to top focus */}
+      <USAMap />
+
+      <section className="py-20 md:py-32 relative overflow-hidden bg-slate-50 border-t border-slate-100">
         {/* Background Decorative Blob */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#0284c7]/5 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
         
@@ -72,9 +75,9 @@ export default function LocationsPage() {
              <div className="lg:col-span-7 flex flex-col justify-center gap-8">
                 <BlurFade 
                    delay={0.2}
-                   className="p-10 lg:p-16 rounded-[3rem] bg-slate-50 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+                   className="p-10 lg:p-16 rounded-[3rem] bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl transition-all duration-500 group"
                 >
-                   <h3 className="text-3xl lg:text-4xl font-serif font-black text-[#0f172a] mb-6 tracking-tighter leading-tight flex items-center gap-4">
+                   <h3 className="text-3xl lg:text-4xl font-serif font-black text-[#0f172a] mb-6 tracking-tighter leading-tight flex items-center gap-4 group-hover:text-[#0284c7] transition-colors">
                      <TrendingUp className="text-[#0284c7]" size={36} />
                      Regional Strategy
                    </h3>
@@ -90,11 +93,11 @@ export default function LocationsPage() {
                    delay={0.3}
                    className="relative overflow-hidden group p-10 lg:p-14 rounded-[3rem] bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl transition-all duration-500"
                 >
-                   <div className="absolute top-1/2 right-0 w-64 h-64 bg-[#0284c7]/5 rounded-full blur-[60px] translate-x-1/3 -translate-y-1/2 pointer-events-none" />
+                   <div className="absolute top-1/2 right-0 w-64 h-64 bg-[#0284c7]/5 rounded-full blur-[60px] translate-x-1/3 -translate-y-1/2 pointer-events-none group-hover:bg-[#0f172a]/5 transition-colors" />
                    
                    <div className="relative z-10">
                      <div className="inline-flex px-3 py-1 bg-[#0284c7]/10 text-[#0284c7] text-[10px] uppercase font-black tracking-widest rounded-full mb-6">Site Coordination</div>
-                     <h4 className="text-2xl md:text-3xl font-serif font-black text-[#0f172a] mb-4 tracking-tight leading-tight">Your Local Clinical Partner</h4>
+                     <h4 className="text-2xl md:text-3xl font-serif font-black text-[#0f172a] mb-4 tracking-tight leading-tight group-hover:text-[#0f172a] transition-colors">Your Local Clinical Partner</h4>
                      <p className="text-slate-500 leading-relaxed text-base md:text-lg font-light">
                        Whether you are already in-house or using a third-party company, Evolve acts as your local clinical partner. We maintain a presence that feels like we are part of your team, because we are. Our site coordinators provide face-to-face mentorship and operations strategy directly at your facility.
                      </p>
@@ -104,9 +107,6 @@ export default function LocationsPage() {
           </div>
         </div>
       </section>
-
-      {/* Interactive USA Coverage Map */}
-      <USAMap />
 
       <Footer />
     </main>

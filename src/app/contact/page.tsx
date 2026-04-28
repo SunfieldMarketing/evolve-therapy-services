@@ -18,65 +18,88 @@ export default function ContactPage() {
         videoKey="contact"
       />
 
-      <section className="py-32 md:py-56 relative overflow-hidden">
+      <section className="py-24 md:py-32 relative overflow-hidden bg-slate-50">
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#0284c7]/5 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#0f172a]/5 rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3" />
         
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-20 lg:gap-32 items-start">
-            <div className="lg:col-span-5">
-               <motion.div
-                 initial={{ opacity: 0, x: -30 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 1 }}
-               >
-                  <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-slate-50 border border-slate-100 text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-12">
-                    Get in touch
-                  </div>
-                  <h2 className="text-5xl md:text-7xl font-serif font-black text-secondary mb-16 tracking-tighter leading-[0.95]">
-                    Direct <br />
-                    <span className="text-primary italic font-medium uppercase text-6xl">Communication</span>
-                  </h2>
-                  
-                  <div className="space-y-12">
-                    {[
-                      { icon: Phone, label: 'Call Us Today', value: '(888) 386-5820', desc: 'Direct regional support' },
-                      { icon: Mail, label: 'Email Inquiry', value: 'info@evolve.com', desc: 'Partnership & general info' },
-                      { icon: Clock, label: 'Business Hours', value: 'Mon - Fri: 8am - 6pm EST', desc: 'Clinical support hours' }
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-8 group">
-                         <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center text-secondary shrink-0 shadow-xl border border-slate-50 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                            <item.icon size={28} strokeWidth={1.5} />
-                         </div>
-                         <div>
-                            <p className="font-black text-secondary uppercase tracking-[0.3em] text-[10px] mb-3">{item.label}</p>
-                            <p className="text-2xl font-serif font-black text-secondary group-hover:text-primary transition-colors duration-500">{item.value}</p>
-                            <p className="text-slate-400 text-sm mt-1 font-medium">{item.desc}</p>
-                         </div>
-                      </div>
-                    ))}
-                  </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+          <div className="bg-white rounded-[3rem] shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+            <div className="grid lg:grid-cols-12 gap-0 items-stretch">
+              
+              {/* Left Panel - Dark Themed Info */}
+              <div className="lg:col-span-5 bg-[#0f172a] relative overflow-hidden text-white flex flex-col justify-between p-10 md:p-14 lg:p-16">
+                 {/* Internal blob */}
+                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#0284c7]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                 
+                 <motion.div
+                   initial={{ opacity: 0, scale: 0.95 }}
+                   whileInView={{ opacity: 1, scale: 1 }}
+                   viewport={{ once: true }}
+                   transition={{ duration: 0.8 }}
+                   className="relative z-10"
+                 >
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-white/70 font-black text-[9px] uppercase tracking-[0.3em] mb-10">
+                      Reach Out
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-serif font-black mb-8 tracking-tighter leading-[1.05]">
+                      Connect with our <br />
+                      <span className="text-[#38bdf8] italic font-medium">Leadership</span>
+                    </h2>
+                    <p className="text-white/60 text-base md:text-lg leading-relaxed font-light mb-12 max-w-sm">
+                      Call us today and tell us about your current status. Discover how we can provide an immediate impact on your facility's operational outcomes.
+                    </p>
+                    
+                    <div className="space-y-8">
+                      {[
+                        { icon: Phone, label: 'Secure Line', value: '(888) 386-5820', desc: 'Direct regional support' },
+                        { icon: Mail, label: 'Email Inquiry', value: 'info@evolvetherapyservices.com', desc: 'Partnership & general info' },
+                        { icon: Clock, label: 'Support Hours', value: 'Mon - Fri: 8am - 6pm EST', desc: 'Dedicated clinical hours' }
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-start gap-5 group">
+                           <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-[#38bdf8] shrink-0 border border-white/10 group-hover:bg-[#38bdf8] group-hover:text-[#0f172a] transition-all duration-300">
+                              <item.icon size={20} strokeWidth={2} />
+                           </div>
+                           <div>
+                              <p className="font-bold text-white/30 uppercase tracking-[0.2em] text-[10px] mb-1">{item.label}</p>
+                              <p className="text-lg font-serif font-medium text-white group-hover:text-[#38bdf8] transition-colors duration-300">{item.value}</p>
+                              <p className="text-white/40 text-xs mt-1">{item.desc}</p>
+                           </div>
+                        </div>
+                      ))}
+                    </div>
+                 </motion.div>
 
-                  <div className="mt-20 p-12 lg:p-16 rounded-[4rem] bg-secondary text-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] relative overflow-hidden group">
-                     <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000" />
-                     <h4 className="text-3xl font-serif font-black mb-8 relative z-10 leading-tight">Expert Analysis</h4>
-                     <p className="text-white/40 mb-0 leading-relaxed italic text-lg font-light relative z-10">
-                       "Interested in more information or a free cost savings analysis? Our objective is to help improve our clients' financial, operations, and clinical performance."
-                     </p>
-                  </div>
-               </motion.div>
-            </div>
+                 {/* Decorative End Quote */}
+                 <div className="relative z-10 mt-20 pt-10 border-t border-white/10">
+                    <p className="text-white/30 italic font-serif text-sm">
+                      "Empowering local care through national expertise."
+                    </p>
+                 </div>
+              </div>
 
-            <div className="lg:col-span-7">
-               <motion.div
-                 initial={{ opacity: 0, x: 30 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 1 }}
-               >
-                 <Contact />
-               </motion.div>
+              {/* Right Panel - Form */}
+              <div className="lg:col-span-7 flex items-center justify-center p-10 md:p-14 lg:p-20 relative">
+                 <div className="w-full max-w-2xl mx-auto">
+                   <motion.div
+                     initial={{ opacity: 0, y: 20 }}
+                     whileInView={{ opacity: 1, y: 0 }}
+                     viewport={{ once: true }}
+                     transition={{ duration: 0.8, delay: 0.2 }}
+                   >
+                     <div className="mb-10 text-center lg:text-left">
+                       <h3 className="text-2xl md:text-3xl font-serif font-black text-[#0f172a] mb-4">Request a Cost Analysis</h3>
+                       <p className="text-slate-500 font-light text-sm md:text-base">
+                         Fill out the form below. We respond strictly confidentially and never sell your data to third parties.
+                       </p>
+                     </div>
+                     <Contact />
+                   </motion.div>
+                 </div>
+                 
+                 {/* Internal decorative lines */}
+                 <div className="absolute top-0 left-0 w-px h-full bg-slate-100 hidden lg:block" />
+              </div>
             </div>
           </div>
         </div>

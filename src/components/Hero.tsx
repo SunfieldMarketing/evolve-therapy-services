@@ -16,9 +16,9 @@ export default function Hero() {
       />
 
       {/* ── YouTube iframe background ── */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-[#0f172a]">
         <iframe
-          src="https://www.youtube.com/embed/PMj9gCBQK9Y?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=PMj9gCBQK9Y&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0"
+          src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=4&end=25"
           title="Background Video — Evolve Therapy Services facility"
           allow="autoplay; encrypted-media"
           className="absolute w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0"
@@ -33,15 +33,16 @@ export default function Hero() {
 
       {/* ── Content ── */}
       <div className="relative z-10 w-full px-6 sm:px-12 md:px-20 lg:px-32 pt-32 sm:pt-36 md:pt-40 pb-16 md:pb-24">
+        {/* Stretches across the left-to-center span natively allowing text to breathe */}
         <div className="w-full">
           {/* Eyebrow — Magic UI AnimatedGradientText (dark variant) */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            <AnimatedGradientTextDark>
+            <AnimatedGradientTextDark className="justify-start">
               <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse inline-block mr-2" aria-hidden="true" />
               LTC Therapy Management & Consulting
             </AnimatedGradientTextDark>
@@ -49,62 +50,58 @@ export default function Hero() {
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[0.9] tracking-tighter mb-8 max-w-full"
+            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[0.9] tracking-tighter mb-8 max-w-[1400px] text-left"
           >
-            Changing How<br />
-            <span className="text-[#0284c7] italic pr-4">Therapy Functions</span><br />
-            <span className="text-white/55 font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl">for LTC Operators.</span>
+            Changing How<br className="hidden sm:block" />
+            <span className="text-[#0284c7] italic pr-4">Therapy Functions</span><br className="hidden lg:block" />
+            <span className="text-white/80 font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl align-top">for LTC Operators.</span>
           </motion.h1>
 
           {/* Subtext */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-xl md:text-2xl lg:text-3xl text-white/65 max-w-3xl leading-relaxed mb-14 font-light"
+            className="text-xl md:text-2xl lg:text-3xl text-white/65 max-w-4xl leading-relaxed mb-14 font-light text-left"
           >
             Our unique model lets your facility retain{' '}
             <span className="text-white font-semibold">100% of therapy revenue</span>{' '}
             while Evolve drives clinical outcomes, compliance, and operational excellence.
           </motion.p>
 
-          {/* CTAs — Magic UI ShimmerButton style applied inline */}
+          {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-4 mb-16 md:mb-24"
+            className="flex flex-col sm:flex-row gap-4 mb-16 md:mb-24 justify-start max-w-4xl"
           >
             <Link
               href="/contact"
-              className="group relative inline-flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5 animate-pulse-glow hover:[animation-play-state:paused] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
+              className="group relative flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5 animate-pulse-glow hover:[animation-play-state:paused] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 flex-grow sm:flex-grow-0"
             >
-              {/* Shimmer sweep — Magic UI ShimmerButton pattern */}
-              <span
-                className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
-                aria-hidden="true"
-              />
+              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" aria-hidden="true" />
               <span className="relative">Schedule a Free Consultation</span>
               <ArrowRight size={18} className="relative group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
             </Link>
 
             <Link
               href="/services"
-              className="inline-flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/30 px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
+              className="flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/30 px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 flex-grow sm:flex-grow-0"
             >
               Explore Our Services
             </Link>
           </motion.div>
 
-          {/* Stats strip — animated with blur-fade */}
+          {/* Stats strip */}
           <motion.div
             initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ delay: 0.7, duration: 0.7 }}
-            className="flex flex-wrap gap-10 md:gap-16 pt-10 md:pt-14 border-t border-white/10"
+            className="flex flex-wrap gap-8 md:gap-16 pt-10 md:pt-14 border-t border-white/10 justify-start"
           >
             {[
               { value: '100%', label: 'Revenue Retained' },
@@ -123,9 +120,9 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 right-12 z-10 hidden lg:flex flex-col items-center gap-3" aria-hidden="true">
-        <div className="text-white/30 text-xs font-bold uppercase tracking-[0.3em]" style={{ writingMode: 'vertical-rl' }}>Scroll</div>
+      {/* Scroll indicator - Moved to bottom center to get out of the way of the left-aligned span */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden lg:flex flex-col items-center gap-3" aria-hidden="true">
+        <div className="text-white/30 text-xs font-bold uppercase tracking-[0.3em]">Scroll</div>
         <div className="w-px h-16 bg-gradient-to-b from-white/30 to-transparent" />
       </div>
     </section>

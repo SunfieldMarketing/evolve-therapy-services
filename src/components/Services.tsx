@@ -125,43 +125,43 @@ export default function Services() {
         {/* Featured Service Card - Now with BorderBeamAlways */}
         <BlurFade 
           delay={0.4}
-          className="mt-16 md:mt-24 bg-[#0f172a] rounded-3xl md:rounded-[3rem] overflow-hidden shadow-2xl relative border border-white/5 group"
+          className="mt-16 md:mt-24 bg-white rounded-3xl md:rounded-[3rem] overflow-hidden shadow-2xl relative border border-slate-200 group"
         >
           {/* BorderBeam always visible around the hero-style featured card */}
           <BorderBeamAlways colorFrom="#38bdf8" colorTo="#0284c7" borderWidth={2} />
           
           <div className="grid lg:grid-cols-2 relative z-10">
-            <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10 bg-[#0f172a]/90 lg:bg-transparent">
+            <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10 bg-white/90 lg:bg-transparent">
               <BlurFade delay={0.5} className="mb-8">
                 <AnimatedGradientText>Featured Discovery</AnimatedGradientText>
               </BlurFade>
               
-              <h3 className="text-3xl lg:text-5xl font-serif font-black text-white mb-6 leading-[0.9] tracking-tighter">
+              <h3 className="text-3xl lg:text-5xl font-serif font-black text-[#0f172a] mb-6 leading-[0.9] tracking-tighter">
                 Clinical Cost & <br />
-                <span className="text-[#38bdf8] italic font-medium">Success Analysis</span>
+                <span className="text-[#0284c7] italic font-medium">Success Analysis</span>
               </h3>
-              <p className="text-slate-300 md:text-white/90 mb-10 text-sm md:text-base leading-relaxed font-normal shadow-sm">
+              <p className="text-black mb-10 text-sm md:text-base leading-relaxed font-semibold">
                 Receive a comprehensive, data-driven overview of your facility's current therapy health. Strategic insights with no legacy strings attached.
               </p>
               <div>
                 <Link href="/contact" className="focus-visible:outline-none">
-                  <ShimmerButton background="#fff" shimmerColor="rgba(0,0,0,0.1)" borderRadius="1rem" className="group/btn inline-flex text-[#0f172a] hover:bg-[#0284c7] hover:text-white transition-colors duration-500">
-                    <span className="font-black text-[10px] uppercase tracking-[0.2em]">Request Free Analysis</span>
+                  <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn inline-flex text-white hover:bg-[#0284c7] transition-colors duration-500">
+                    <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white">Request Free Analysis</span>
                     <ArrowUpRight className="ml-2 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                   </ShimmerButton>
                 </Link>
               </div>
             </div>
             
-            <div className="relative min-h-[400px] overflow-hidden lg:h-auto z-0 mix-blend-luminosity opacity-80 group-hover:mix-blend-normal group-hover:opacity-100 transition-all duration-700">
+            <div className="relative min-h-[400px] overflow-hidden lg:h-auto z-0 mix-blend-multiply opacity-90 group-hover:mix-blend-normal transition-all duration-700">
                <Image 
                 src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80" 
                 alt="Clinical Success Data Review" 
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-[#0f172a]/80 to-transparent lg:w-[80%]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/60 to-transparent lg:hidden" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent lg:w-[80%]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent lg:hidden" />
               
               {/* Decorative data points overlay strictly for aesthetics */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/5 rounded-full animate-ping opacity-20 pointer-events-none" />

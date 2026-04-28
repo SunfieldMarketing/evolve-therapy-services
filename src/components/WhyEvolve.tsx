@@ -86,7 +86,7 @@ export default function WhyEvolve() {
               <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] bg-white border border-slate-100 p-4">
                  <div className="relative rounded-[3rem] overflow-hidden w-full h-[750px] group">
                    <Image 
-                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80" 
+                    src="https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?auto=format&fit=crop&q=80" 
                     alt="Professional Therapy Management Team" 
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
@@ -103,7 +103,7 @@ export default function WhyEvolve() {
                          </p>
                          <div className="flex items-center gap-5 pt-8 border-t border-slate-100">
                             <Image 
-                              src="https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80" 
+                              src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png" 
                               width={56} 
                               height={56} 
                               className="rounded-[1.25rem] object-cover border border-slate-100 shadow-md" 

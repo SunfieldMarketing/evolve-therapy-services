@@ -121,24 +121,47 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Service Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16">
+          {/* Service Grid - Unique Bento Box Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-16">
             {clinicalServices.map((item, i) => (
               <BlurFade
                 delay={0.1 + i * 0.08}
                 key={i}
-                className="relative overflow-hidden group p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-slate-100 hover:border-[#0284c7]/30 hover:shadow-xl transition-all duration-500"
+                className={`relative overflow-hidden group p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-slate-100 hover:border-[#0284c7]/30 hover:shadow-[0_20px_40px_-15px_rgba(2,132,199,0.15)] transition-all duration-500 ${
+                  i === 0 ? 'md:col-span-2 bg-gradient-to-br from-[#0f172a] to-[#1e293b]' :
+                  i === 3 ? 'md:col-span-2' : ''
+                }`}
               >
-                {/* BorderBeam on hover only, for inner services grid */}
-                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity" duration={6} colorFrom="#38bdf8" colorTo="#0284c7" />
-                <div className="flex items-center justify-between mb-5 relative z-10">
-                  <div className="w-12 h-12 bg-[#0284c7]/5 text-[#0284c7] rounded-xl flex items-center justify-center group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-400">
-                    <item.icon size={20} strokeWidth={2} />
+                {/* BorderBeam on hover only */}
+                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity" duration={6} colorFrom={i===0?"#38bdf8":"#38bdf8"} colorTo={i===0?"#0284c7":"#0284c7"} />
+                
+                <div className={`flex items-center justify-between mb-8 relative z-10 ${i === 0 ? 'text-white' : ''}`}>
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-400 border ${
+                    i === 0 
+                    ? 'bg-white/10 text-white border-white/20 group-hover:bg-[#0284c7] group-hover:border-[#0284c7]' 
+                    : 'bg-slate-50 text-[#0284c7] border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white'
+                  }`}>
+                    <item.icon size={24} strokeWidth={1.5} />
                   </div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-[#0284c7] bg-[#0284c7]/5 px-3 py-1.5 rounded-full">{item.tag}</span>
+                  <span className={`text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full ${
+                    i === 0 ? 'text-white/80 bg-white/10' : 'text-[#0284c7] bg-[#0284c7]/5'
+                  }`}>{item.tag}</span>
                 </div>
-                <h4 className="font-black text-[#0f172a] font-serif text-lg md:text-xl tracking-tight mb-2 relative z-10">{item.title}</h4>
-                <p className="text-sm text-slate-500 leading-relaxed font-normal relative z-10">{item.desc}</p>
+                
+                <h4 className={`font-black font-serif text-2xl tracking-tight mb-3 relative z-10 ${
+                  i === 0 ? 'text-white' : 'text-[#0f172a]'
+                }`}>{item.title}</h4>
+                
+                <p className={`text-sm md:text-base leading-relaxed font-medium relative z-10 max-w-sm ${
+                  i === 0 ? 'text-white/60' : 'text-slate-500'
+                }`}>{item.desc}</p>
+                
+                {/* Decorative background shape for large cards */}
+                {(i === 0 || i === 3) && (
+                   <div className={`absolute -bottom-20 -right-20 w-64 h-64 rounded-full blur-[80px] pointer-events-none ${
+                     i === 0 ? 'bg-[#38bdf8]/20' : 'bg-[#0284c7]/5'
+                   }`} />
+                )}
               </BlurFade>
             ))}
           </div>
@@ -154,9 +177,6 @@ export default function Home() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 {processSteps.map((step, i) => (
                   <BlurFade delay={0.3 + i * 0.12} key={i} className="relative group">
-                    {i < processSteps.length - 1 && (
-                      <div className="hidden lg:block absolute top-4 left-full w-full h-px border-t border-dashed border-white/10 -translate-x-4" />
-                    )}
                     <div className="text-5xl md:text-6xl font-serif font-black text-[#0284c7]/20 group-hover:text-[#0284c7]/40 mb-4 leading-none transition-colors duration-300">{step.num}</div>
                     <h4 className="font-black text-white text-base md:text-lg mb-2">{step.title}</h4>
                     <p className="text-white/40 text-sm leading-relaxed">{step.desc}</p>

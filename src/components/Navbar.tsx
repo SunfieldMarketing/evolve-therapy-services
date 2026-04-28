@@ -125,22 +125,22 @@ export default function Navbar() {
                   {link.dropdown && (
                     <AnimatePresence>
                       {dropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 8, scale: 0.97 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 4, scale: 0.97 }}
-                          transition={{ duration: 0.18, ease: 'easeOut' }}
-                          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-slate-200/60 p-2 overflow-hidden"
-                          role="menu"
-                        >
-                          {link.dropdown.map((item) => (
-                            <Link
-                              key={item.name}
-                              href={item.href}
-                              onClick={() => setDropdownOpen(false)}
-                              className="flex flex-col px-4 py-3 rounded-xl hover:bg-[#0284c7]/8 group/item transition-all duration-150"
-                              role="menuitem"
-                            >
+                          <motion.div
+                            initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 4, scale: 0.97 }}
+                            transition={{ duration: 0.18, ease: 'easeOut' }}
+                            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-slate-200/60 p-2 overflow-hidden flex flex-col gap-1"
+                            role="menu"
+                          >
+                            {link.dropdown.map((item) => (
+                              <Link
+                                key={item.name}
+                                href={item.href}
+                                onClick={() => setDropdownOpen(false)}
+                                className="flex flex-col px-4 py-3 rounded-xl hover:bg-[#0284c7]/8 group/item transition-all duration-150"
+                                role="menuitem"
+                              >
                               <span className="text-sm font-semibold text-[#0f172a] group-hover/item:text-[#0284c7] transition-colors duration-150 whitespace-normal">
                                 {item.name}
                               </span>

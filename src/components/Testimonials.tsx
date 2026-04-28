@@ -1,12 +1,24 @@
 'use client';
 
-import { Star, Quote } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Marquee } from '@/components/magicui/marquee';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
+import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { cn } from '@/lib/utils';
+
+function StarRow({ count }: { count: number }) {
+  return (
+    <div className="flex gap-1" aria-label={`${count} stars`}>
+      {Array.from({ length: count }).map((_, i) => (
+        <Star key={i} size={14} className="fill-amber-400 text-amber-400" aria-hidden="true" />
+      ))}
+    </div>
+  );
+}
 
 const testimonials = [
   {
@@ -56,103 +68,134 @@ const testimonials = [
   },
 ];
 
-function StarRow({ count }: { count: number }) {
-  return (
-    <div className="flex gap-0.5" aria-label={`${count} stars`}>
-      {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} size={12} className="fill-amber-400 text-amber-400" aria-hidden="true" />
-      ))}
-    </div>
-  );
-}
-
-function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
-  return (
-    <figure
-      className={cn(
-        'relative flex flex-col justify-between w-full h-full cursor-default',
-        'rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6',
-        'hover:bg-white/8 hover:border-white/20 transition-all duration-200',
-        'select-none',
-      )}
-    >
-      {/* Quote icon */}
-      <Quote size={24} className="text-[#0284c7]/30 absolute top-5 right-5" aria-hidden="true" />
-
-      {/* Stars */}
-      <StarRow count={t.stars} />
-
-      {/* Content */}
-      <blockquote className="mt-3 text-white/70 text-sm leading-relaxed font-light flex-1">
-        &ldquo;{t.content}&rdquo;
-      </blockquote>
-
-      {/* Author */}
-      <div className="flex items-center gap-3 mt-5 pt-4 border-t border-white/10">
-        <div className="w-9 h-9 rounded-full bg-[#0284c7]/20 border border-[#0284c7]/30 flex items-center justify-center text-[#0284c7] font-black text-sm shrink-0">
-          {t.initials}
-        </div>
-        <div>
-          <figcaption className="text-white font-bold text-sm">{t.name}</figcaption>
-          <p className="text-white/35 text-[10px] mt-0.5">
-            {t.role} · {t.facility}
-          </p>
-        </div>
-      </div>
-    </figure>
-  );
-}
 
 export default function Testimonials() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+      const progress = (scrollLeft / (scrollWidth - clientWidth)) * 100;
+      setScrollProgress(progress);
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (!containerRef.current) return;
+    const { clientWidth } = containerRef.current;
+    const scrollAmount = direction === 'left' ? -clientWidth : clientWidth;
+    containerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
+
   return (
-    <section className="relative py-20 md:py-24 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
+    <section className="relative py-24 md:py-44 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(ellipse at 60% 50%, rgba(2,132,199,0.10) 0%, transparent 60%)' }}
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #0284c7 0%, transparent 60%)' }}
         aria-hidden="true"
       />
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
         {/* Section header */}
-        <BlurFade className="text-center mb-10 md:mb-14">
-          <div className="flex justify-center mb-5">
+        <BlurFade className="text-center mb-20 md:mb-32">
+          <div className="flex justify-center mb-8">
             <AnimatedGradientTextDark>Client Voices</AnimatedGradientTextDark>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-white tracking-tighter leading-[0.95]">
-            Real Results,{' '}
+          <h2 className="text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-[0.9] mb-8">
+            Real Results, <br />
             <span className="text-[#0284c7] italic font-medium">Trusted Partners.</span>
           </h2>
-          <p className="text-white/45 text-base max-w-xl mx-auto font-light mt-4">
+          <p className="text-white/40 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
             Hear from LTC professionals who have transformed their therapy programs with Evolve.
           </p>
         </BlurFade>
-      </div>
 
-      {/* ── 3-Column Snap Carousel ── */}
-      <div className="relative mt-12 max-w-7xl mx-auto px-4">
-        {/* Scrollable Container */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 hide-scrollbar">
-          {testimonials.map((t, i) => (
-             <div key={i} className="snap-center shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex">
-               <TestimonialCard t={t} />
+        {/* Carousel Container */}
+        <div className="relative group">
+          <div 
+            ref={containerRef}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-16 hide-scrollbar cursor-grab active:cursor-grabbing"
+          >
+            {testimonials.map((t, i) => (
+              <div 
+                key={i} 
+                className="snap-center shrink-0 w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)]"
+              >
+                <div className="h-full rounded-[3rem] border border-white/5 bg-white/[0.03] backdrop-blur-3xl p-10 md:p-14 flex flex-col justify-between transition-all duration-500 hover:bg-white/[0.05] hover:border-white/10 group/card">
+                  <div className="mb-10">
+                    <div className="flex justify-between items-start mb-8">
+                      <StarRow count={t.stars} />
+                      <Quote size={32} className="text-[#0284c7]/20 group-hover/card:text-[#0284c7]/40 transition-colors" />
+                    </div>
+                    <blockquote className="text-xl md:text-2xl text-white/80 font-serif italic font-medium leading-relaxed">
+                      &ldquo;{t.content}&rdquo;
+                    </blockquote>
+                  </div>
+
+                  <div className="flex items-center gap-5 pt-10 border-t border-white/5">
+                    <div className="w-14 h-14 rounded-2xl bg-[#0284c7] flex items-center justify-center text-white font-black text-lg shadow-xl shadow-blue-500/20">
+                      {t.initials}
+                    </div>
+                    <div>
+                      <div className="text-lg font-black text-white tracking-tight">{t.name}</div>
+                      <div className="text-[#0284c7] text-[10px] font-black uppercase tracking-[0.2em] mt-1">
+                        {t.role} · {t.facility}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation & Progress Bar (Matching Screenshot 2 style) */}
+          <div className="mt-12 flex items-center gap-8 px-4">
+             <button 
+               onClick={() => scroll('left')}
+               className="text-white/20 hover:text-white transition-colors"
+               aria-label="Previous testimonial"
+             >
+               <ChevronLeft size={32} strokeWidth={1} />
+             </button>
+             
+             {/* Custom Progress Bar */}
+             <div className="flex-1 h-1.5 bg-white/5 rounded-full overflow-hidden relative">
+                <motion.div 
+                  className="absolute top-0 left-0 h-full bg-white/40"
+                  style={{ width: `${scrollProgress}%` }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                />
              </div>
-          ))}
+
+             <button 
+               onClick={() => scroll('right')}
+               className="text-white/20 hover:text-white transition-colors"
+               aria-label="Next testimonial"
+             >
+               <ChevronRight size={32} strokeWidth={1} />
+             </button>
+          </div>
         </div>
 
-        {/* Edge fade masks */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 lg:w-24 bg-gradient-to-r from-[#0f172a] to-transparent z-10" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 lg:w-24 bg-gradient-to-l from-[#0f172a] to-transparent z-10" aria-hidden="true" />
+        {/* CTA */}
+        <BlurFade className="text-center mt-24" delay={0.2}>
+          <Link
+            href="/contact"
+          >
+            <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
+              <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Partner With Evolve</span>
+            </ShimmerButton>
+          </Link>
+        </BlurFade>
       </div>
-
-      {/* CTA */}
-      <BlurFade className="text-center mt-6" delay={0.2}>
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 bg-[#0284c7] text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-[#0f172a] transition-all duration-200 shadow-[0_0_32px_rgba(2,132,199,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
-        >
-          Partner With Evolve
-        </Link>
-      </BlurFade>
     </section>
   );
 }

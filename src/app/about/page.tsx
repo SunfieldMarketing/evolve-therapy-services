@@ -3,12 +3,13 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageHeader from '@/components/PageHeader';
+import USAMap from '@/components/USAMap';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Shield, Target, Eye, ArrowRight, HeartPulse, Building2, TrendingUp } from 'lucide-react';
+import { Shield, Target, Eye, ArrowRight, HeartPulse, Building2, TrendingUp, Users, GraduationCap } from 'lucide-react';
 
 const leaders = [
   {
@@ -213,6 +214,67 @@ export default function AboutPage() {
                </div>
             </BlurFade>
           </div>
+        </div>
+      </section>
+ 
+      {/* Strategic Partnership Section */}
+      <section className="py-24 md:py-40 bg-slate-50 relative overflow-hidden">
+        <div className="absolute top-1/2 left-0 w-full h-full opacity-10 pointer-events-none -translate-y-1/2">
+           <USAMap />
+        </div>
+        <div className="container mx-auto px-6 relative z-10">
+          <BlurFade delay={0.1}>
+            <div className="bg-[#0f172a] rounded-[4rem] p-12 md:p-24 overflow-hidden relative shadow-2xl">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-[#0284c7]/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                <div className="max-w-3xl">
+                  <h3 className="text-4xl md:text-6xl font-serif font-black text-white mb-8 leading-tight tracking-tighter">
+                    A National Network <br />
+                    <span className="text-[#38bdf8] italic font-medium">Primed for Growth</span>
+                  </h3>
+                  <p className="text-white/40 text-lg md:text-xl font-light mb-12 leading-relaxed">
+                    Our regional directors are strategically deployed across the United States to ensure that every facility under our oversight carries the same "Evolve Standard." Whether you operate a single SNF or a national portfolio, our infrastructure scales with you.
+                  </p>
+                  <div className="grid sm:grid-cols-2 gap-8 text-white/60 text-sm font-medium">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8]"><Shield size={18} /></div>
+                      Expert Regulatory Alignment
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8]"><Eye size={18} /></div>
+                      Real-Time Clinical Dashboards
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8]"><Target size={18} /></div>
+                      Tailored Financial Strategies
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8]"><HeartPulse size={18} /></div>
+                      DOR Leadership Development
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </BlurFade>
+        </div>
+      </section>
+
+      {/* Final Conversion CTA */}
+      <section className="py-24 md:py-48 bg-white text-center">
+        <div className="container mx-auto px-6">
+          <BlurFade delay={0.2}>
+            <h2 className="text-5xl md:text-8xl font-serif font-black text-[#0f172a] tracking-tighter leading-none mb-12">
+              Discover the <br />
+              <span className="text-[#0284c7] italic">Evolve Advantage</span>
+            </h2>
+            <p className="text-xl text-slate-400 max-w-xl mx-auto font-light leading-relaxed mb-16">
+              Connect with our leadership team today to learn how our clínica oversight model can secure your facility’s future.
+            </p>
+            <Link href="/contact">
+              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
+                <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Start Your Journey</span>
+              </ShimmerButton>
+            </Link>
+          </BlurFade>
         </div>
       </section>
 

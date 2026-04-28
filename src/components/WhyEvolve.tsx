@@ -83,8 +83,8 @@ export default function WhyEvolve() {
               <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] bg-white border border-slate-100 p-4">
                  <div className="relative rounded-[3rem] overflow-hidden w-full h-[750px] group">
                    <Image 
-                    src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?auto=format&fit=crop&q=80" 
-                    alt="Professional Therapy Management Team" 
+                    src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80" 
+                    alt="Professional Clinical Leadership Team" 
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-[4000ms]"
                    />

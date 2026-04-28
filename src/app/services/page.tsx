@@ -17,7 +17,9 @@ import {
   ShieldAlert,
   Zap,
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  TrendingUp,
+  Phone
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -238,7 +240,61 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Why Direct-Hire Section — Cleaned up */}
+      {/* ── Section 4: Clinical Impact Metrics ── */}
+      <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+             <BlurFade delay={0.1}>
+                <h3 className="text-4xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.9] mb-8">
+                  Measuring the <br />
+                  <span className="text-[#0284c7] italic font-medium">Evolution of Success</span>
+                </h3>
+                <p className="text-xl text-slate-500 font-light leading-relaxed mb-10 max-w-xl">
+                  We don't just consult; we deliver measurable clinical and financial transformations. Every partnership begins with a baseline data audit followed by continuous metric tracking.
+                </p>
+                <div className="space-y-6">
+                  {[
+                    { label: 'EBITDA Improvement', val: '12-18%', desc: 'Average increase in facility operational profit within 12 months.' },
+                    { label: 'Denial Reversal Rate', val: '94%', desc: 'Success rate across Medicare and Managed Care clinical audits.' },
+                    { label: 'Staff Retention', val: '+40%', desc: 'Average increase in therapy staff tenure through in-house models.' }
+                  ].map((stat, i) => (
+                    <div key={i} className="flex items-center gap-6 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-[#0284c7]/20 transition-all group">
+                      <div className="text-3xl font-serif font-black text-[#0284c7] group-hover:scale-110 transition-transform">{stat.val}</div>
+                      <div>
+                        <div className="font-black text-[#0f172a] uppercase text-[10px] tracking-widest">{stat.label}</div>
+                        <div className="text-xs text-slate-400 mt-1">{stat.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+             </BlurFade>
+             <BlurFade delay={0.3} className="relative">
+                <div className="aspect-square rounded-[4rem] bg-slate-900 overflow-hidden shadow-2xl relative group">
+                   <div className="absolute inset-0 bg-gradient-to-br from-[#0284c7]/20 to-transparent" />
+                   <div className="p-16 h-full flex flex-col justify-between relative z-10">
+                      <div className="flex justify-between items-start">
+                         <div className="w-16 h-16 bg-white/10 rounded-2xl backdrop-blur-xl flex items-center justify-center text-[#38bdf8] border border-white/10 group-hover:bg-[#0284c7] group-hover:text-white transition-all">
+                            <TrendingUp size={28} />
+                         </div>
+                         <div className="text-xs font-black uppercase tracking-[0.4em] text-white/30">Analytics Oversight</div>
+                      </div>
+                      <div>
+                        <h4 className="text-4xl font-serif font-black text-white mb-6 leading-tight">Data-Driven <br /> Clinical Intelligence</h4>
+                        <p className="text-white/50 text-lg font-light leading-relaxed mb-8">
+                          Custom real-time dashboards that show your PDPM trends, CMI efficiency, and labor distribution across every facility in your portfolio.
+                        </p>
+                        <Link href="/contact" className="inline-flex items-center gap-3 text-white font-black uppercase text-[10px] tracking-[0.2em] border-b border-white/20 hover:border-white transition-all">Request Demo <ArrowRight size={14} /></Link>
+                      </div>
+                   </div>
+                   {/* Background Grid Pattern */}
+                   <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+                </div>
+             </BlurFade>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 5: Why Direct-Hire Section ── */}
       <section className="py-24 md:py-44 bg-slate-50 overflow-hidden relative">
         <div className="container mx-auto px-6 md:px-12">
           <BlurFade delay={0.2} className="max-w-6xl mx-auto">
@@ -294,6 +350,30 @@ export default function ServicesPage() {
                </div>
             </div>
           </BlurFade>
+        </div>
+      </section>
+
+      {/* ── Section 6: Final Conversion CTA ── */}
+      <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 100% 100%, #0284c7 0%, transparent 50%)' }} />
+        <div className="container mx-auto px-6 relative z-10 text-center">
+            <h2 className="text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-none mb-12">
+              Ready to <br />
+              <span className="text-[#0284c7] italic">Evolve With Us?</span>
+            </h2>
+            <p className="text-xl text-white/40 max-w-xl mx-auto font-light leading-relaxed mb-16">
+              Let our directors perform a free analysis of your therapy department and identify immediate financial opportunity.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Link href="/contact">
+                <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
+                  <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Contact Our Team</span>
+                </ShimmerButton>
+              </Link>
+              <a href="tel:8883865820" className="text-white font-black uppercase text-[11px] tracking-[0.3em] hover:text-[#0284c7] transition-colors flex items-center gap-2">
+                <Phone size={14} /> (888) 386-5820
+              </a>
+            </div>
         </div>
       </section>
 

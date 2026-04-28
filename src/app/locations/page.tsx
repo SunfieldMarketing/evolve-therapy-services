@@ -5,8 +5,10 @@ import Footer from '@/components/Footer';
 import PageHeader from '@/components/PageHeader';
 import USAMap from '@/components/USAMap';
 import { BlurFade } from '@/components/magicui/blur-fade';
-import { MapPin, Phone, Mail, ArrowRight, TrendingUp } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowRight, TrendingUp, GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ShimmerButton } from '@/components/magicui/shimmer-button';
 
 export default function LocationsPage() {
   return (
@@ -105,6 +107,68 @@ export default function LocationsPage() {
                 </BlurFade>
              </div>
           </div>
+        </div>
+      </section>
+
+      {/* Strategic Regional Grid */}
+      <section className="py-24 md:py-40 bg-white">
+        <div className="container mx-auto px-6 lg:px-12">
+           <div className="text-center mb-20 text-[#0f172a]">
+              <h3 className="text-4xl md:text-6xl font-serif font-black tracking-tighter leading-[0.9] mb-8">
+                Reach Throughout <br />
+                <span className="text-[#0284c7] italic font-medium">The Heartland</span>
+              </h3>
+              <p className="text-lg text-slate-400 max-w-2xl mx-auto font-light">With current active operations focusing across Ohio and expanding through key regional hubs, Evolve provides direct, high-touch support.</p>
+           </div>
+           
+           <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { title: 'Recruitment Hubs', desc: 'Active candidate pipelines for Physical, Occupational, and Speech Therapists across the Midwest.', icon: TrendingUp },
+                { title: 'Clinical Training', icon: GraduationCap, desc: 'On-site mentorship sites where regional directors educate your in-house teams in real-time.' },
+                { title: 'Operational Oversight', icon: MapPin, desc: 'Rapid-response audit and denial defense managed directly from our Avon Lake headquarters.' }
+              ].map((item, i) => (
+                <div key={i} className="p-12 rounded-[3.5rem] bg-slate-50 border border-slate-100 hover:scale-[1.05] transition-all duration-500">
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-[#0284c7] shadow-lg mb-10 border border-slate-100">
+                    <item.icon size={26} />
+                  </div>
+                  <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-6 tracking-tight">{item.title}</h4>
+                  <p className="text-slate-500 text-sm font-light leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+           </div>
+        </div>
+      </section>
+
+      {/* Final Conversion CTA */}
+      <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 0% 100%, #0284c7 0%, transparent 50%)' }} />
+        <div className="container mx-auto px-6 relative z-10 text-center">
+            <h2 className="text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-none mb-12">
+              Secure Your <br />
+              <span className="text-[#0284c7] italic">Region’s Future</span>
+            </h2>
+            <p className="text-xl text-white/40 max-w-xl mx-auto font-light leading-relaxed mb-16">
+              Our regional clinical directors are ready to assist. Secure yours today and discover the Evolve difference for your facility.
+            </p>
+            <Link href="/contact" className="inline-flex">
+              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
+                <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Find Your Director</span>
+              </ShimmerButton>
+            </Link>
+        </div>
+      </section>
+
+      {/* Corporate Commitment */}
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="container mx-auto px-6 text-center">
+           <div className="flex flex-col items-center gap-6">
+              <div className="flex gap-2 text-[#0284c7]/20">
+                <ArrowRight size={24} /> <ArrowRight size={24} /> <ArrowRight size={24} />
+              </div>
+              <p className="text-slate-400 font-serif italic text-xl max-w-2xl">
+                "Scaling with integrity means ensuring that every facility we touch, regardless of location, receives the same premier clinical oversight."
+              </p>
+           </div>
         </div>
       </section>
 

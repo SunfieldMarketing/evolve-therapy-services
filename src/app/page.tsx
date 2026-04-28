@@ -160,51 +160,55 @@ export default function Home() {
               <h3 className="text-4xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.9]">Why Operators <br /> <span className="text-[#0284c7] italic font-medium">Choose Evolve</span></h3>
             </div>
             
-            <div className="grid md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-[250px]">
-              {[
-                { 
-                  title: 'Regulatory Defense', 
-                  desc: 'Proactive audit defense and denial management from clinical experts who know the appeals process inside and out.',
-                  icon: ShieldCheck, 
-                  span: 'col-span-12 md:col-span-3 lg:col-span-4 lg:row-span-2',
-                  bg: 'bg-[#0f172a] text-white',
-                  iconBg: 'bg-white/10 text-[#38bdf8]'
-                },
-                { 
-                  title: '100% Revenue Retention', 
-                  desc: 'We are your management partner, not your revenue sharer. Retain full billing control.',
-                  icon: TrendingUp, 
-                  span: 'col-span-12 md:col-span-3 lg:col-span-4',
-                  bg: 'bg-white text-[#0f172a]',
-                  iconBg: 'bg-[#0284c7]/5 text-[#0284c7]'
-                },
-                { 
-                  title: 'Tiered Management Fees', 
-                  desc: 'As your business matures and internal autonomy grows, our management fees scale down.',
-                  icon: BarChart3, 
-                  span: 'col-span-12 md:col-span-3 lg:col-span-4',
-                  bg: 'bg-[#0284c7] text-white',
-                  iconBg: 'bg-white/10 text-white'
-                },
-                { 
-                  title: 'On-Demand Recruitment', 
-                  desc: 'Never worry about staffing shortages. We handle the direct-hire pipeline for you.',
-                  icon: Users, 
-                  span: 'col-span-12 md:col-span-3 lg:col-span-8',
-                  bg: 'bg-slate-100 text-[#0f172a]',
-                  iconBg: 'bg-white text-[#0284c7]'
-                }
-              ].map((pill, i) => (
-                <BlurFade delay={0.2 + i * 0.1} key={pill.title} className={cn("rounded-[3rem] p-10 flex flex-col justify-between border border-slate-100 hover:scale-[1.02] transition-all duration-500", pill.span, pill.bg)}>
-                  <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center mb-6", pill.iconBg)}>
-                    <pill.icon size={24} />
+            <div className="grid md:grid-cols-12 gap-6 auto-rows-[300px]">
+              {/* Card 1: Regulatory Defense (Tall, Left) */}
+              <BlurFade delay={0.2} className="col-span-12 md:col-span-4 md:row-span-2 rounded-[3rem] p-10 flex flex-col justify-between bg-[#0f172a] text-white border border-white/5 hover:scale-[1.02] transition-all duration-500 shadow-2xl">
+                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-[#38bdf8]">
+                  <ShieldCheck size={26} />
+                </div>
+                <div>
+                  <h4 className="text-3xl font-serif font-black mb-4 tracking-tighter leading-tight">Regulatory <br /> Defense</h4>
+                  <p className="text-sm leading-relaxed font-light text-white/50">Proactive audit defense and denial management from clinical experts who know the appeals process inside and out.</p>
+                </div>
+              </BlurFade>
+
+              {/* Card 2: 100% Revenue Retention (Middle Top) */}
+              <BlurFade delay={0.3} className="col-span-12 md:col-span-4 rounded-[3rem] p-10 flex flex-col justify-start bg-white border border-slate-100 hover:scale-[1.02] transition-all duration-500 shadow-xl shadow-slate-200/50">
+                <div className="w-12 h-12 rounded-2xl bg-[#0284c7]/5 flex items-center justify-center text-[#0284c7] mb-8">
+                  <TrendingUp size={24} />
+                </div>
+                <div>
+                  <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-3 tracking-tighter">100% Revenue Retention</h4>
+                  <p className="text-sm leading-relaxed font-light text-slate-500">We are your management partner, not your revenue sharer. Retain full billing control.</p>
+                </div>
+              </BlurFade>
+
+              {/* Card 3: Tiered Management Fees (Right Top) */}
+              <BlurFade delay={0.4} className="col-span-12 md:col-span-4 rounded-[3rem] p-10 flex flex-col justify-start bg-[#0284c7] text-white hover:scale-[1.02] transition-all duration-500 shadow-xl shadow-blue-900/20">
+                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-8">
+                  <BarChart3 size={24} />
+                </div>
+                <div>
+                  <h4 className="text-2xl font-serif font-black mb-3 tracking-tighter">Tiered Management Fees</h4>
+                  <p className="text-sm leading-relaxed font-light text-white/70">As your business matures and internal autonomy grows, our management fees scale down.</p>
+                </div>
+              </BlurFade>
+
+              {/* Card 4: On-Demand Recruitment (Bottom Middle-Right) */}
+              <BlurFade delay={0.5} className="col-span-12 md:col-span-8 rounded-[3rem] p-10 flex flex-col justify-between bg-slate-50 border border-slate-200 hover:scale-[1.02] transition-all duration-500 group">
+                <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-[#0284c7] shadow-sm">
+                  <Users size={24} />
+                </div>
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                  <div className="max-w-md">
+                    <h4 className="text-3xl font-serif font-black text-[#0f172a] mb-3 tracking-tighter">On-Demand Recruitment</h4>
+                    <p className="text-sm leading-relaxed font-light text-slate-500">Never worry about staffing shortages. We handle the direct-hire pipeline for you, ensuring your team is built with the clinical excellence your facility deserves.</p>
                   </div>
-                  <div>
-                    <h4 className="text-xl md:text-2xl font-serif font-black mb-3">{pill.title}</h4>
-                    <p className={cn("text-sm leading-relaxed font-light opacity-60")}>{pill.desc}</p>
+                  <div className="shrink-0 text-[#0284c7] group-hover:translate-x-2 transition-transform hidden md:block">
+                    <ArrowRight size={32} strokeWidth={1} />
                   </div>
-                </BlurFade>
-              ))}
+                </div>
+              </BlurFade>
             </div>
           </div>
 

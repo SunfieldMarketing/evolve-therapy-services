@@ -41,7 +41,6 @@ export default function Footer() {
 
       {/* ── Expanded Pre-footer CTA banner ── */}
       <div className="relative border-b border-white/10 overflow-hidden bg-[#0f172a]">
-        <div className="absolute inset-0 dot-pattern-dark opacity-30 pointer-events-none" aria-hidden="true" />
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0284c7]/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3" aria-hidden="true" />
 
         <div className="container mx-auto px-5 sm:px-6 md:px-12 py-24 md:py-32 relative z-10 text-center">
@@ -54,12 +53,13 @@ export default function Footer() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
                Ready to Evolve?
             </div>
-            <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black tracking-tighter leading-[0.95] text-white mb-8">
-              Transform your facility's therapy operations <br />
-              <span className="text-[#38bdf8] italic font-medium">with zero legacy string attached.</span>
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[0.9] text-white mb-8">
+              Transform your facility's <br className="hidden md:block" />
+              therapy operations <br />
+              <span className="text-[#38bdf8] italic font-medium">with zero legacy strings attached.</span>
             </h3>
-            <p className="text-xl text-white/60 mb-12 font-light leading-relaxed max-w-2xl mx-auto">
-              Retain 100% of all therapy revenue instead of paying shares to third-parties. Start with a comprehensive, data-driven overview of your facility's current therapy health.
+            <p className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed max-w-4xl mx-auto">
+              Our unique business model allows long-term care operators to retain <span className="text-white font-bold">100% of therapy revenue</span>. We bridge the gap between clinical excellence and financial sustainability, empowering your clinicians while protecting your bottom line.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
               <Link
@@ -86,9 +86,11 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-2 mb-6 w-fit" aria-label="Evolve Therapy Services Home">
-              <div className="w-8 h-8 rounded-lg bg-[#0284c7] flex items-center justify-center text-white text-xs font-black" aria-hidden="true">E</div>
-              <span className="font-serif font-black text-xl text-white">Evolve</span>
-              <span className="font-sans font-light text-xl text-white/60">Therapy</span>
+              <img 
+                src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png" 
+                alt="Evolve Therapy Services"
+                className="h-14 brightness-0 invert" 
+              />
             </Link>
             <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs">
               Customized therapy management solutions for Long Term Care providers. Retain 100% of revenue while we drive clinical and operational excellence.

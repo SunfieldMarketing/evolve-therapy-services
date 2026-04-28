@@ -4,7 +4,15 @@ import { Mail, MapPin, Phone, Send, ArrowRight } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 md:py-32 bg-slate-50 relative border-t border-slate-200">
+    <section id="contact" className="py-24 md:py-32 bg-slate-50 relative border-t border-slate-200 overflow-hidden">
+      {/* Bento Grid Background Effect */}
+      <div className="absolute inset-0 grid-pattern opacity-40 pointer-events-none" aria-hidden="true" />
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{ backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(2,132,199,0.08) 0%, transparent 50%)' }} 
+        aria-hidden="true" 
+      />
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Text Content */}
@@ -17,13 +25,13 @@ export default function Contact() {
               Let's Evolve <br />
               <span className="text-primary italic font-medium">Together</span>
             </h2>
-            <p className="text-lg text-slate-600 mb-12 leading-relaxed">
+            <p className="text-lg text-slate-600 mb-12 leading-relaxed font-light">
               Ready to maximize your clinical and financial potential? Contact us for a free clinical and financial cost savings analysis with zero obligation.
             </p>
 
             <div className="space-y-8 lg:space-y-10">
-              <div className="flex items-start gap-6 group cursor-default">
-                <div className="w-14 h-14 bg-white border border-slate-200 text-primary rounded-full flex items-center justify-center shadow-sm shrink-0">
+              <div className="flex items-start gap-6 group cursor-default p-4 -ml-4 rounded-3xl hover:bg-white/50 transition-colors duration-300">
+                <div className="w-14 h-14 bg-white border border-slate-200 text-primary rounded-2xl flex items-center justify-center shadow-lg shrink-0 group-hover:bg-primary group-hover:text-white group-hover:scale-110 transition-all duration-300">
                   <Phone size={24} strokeWidth={1.5} />
                 </div>
                 <div>
@@ -32,8 +40,8 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-6 group cursor-default">
-                <div className="w-14 h-14 bg-white border border-slate-200 text-primary rounded-full flex items-center justify-center shadow-sm shrink-0">
+              <div className="flex items-start gap-6 group cursor-default p-4 -ml-4 rounded-3xl hover:bg-white/50 transition-colors duration-300">
+                <div className="w-14 h-14 bg-white border border-slate-200 text-primary rounded-2xl flex items-center justify-center shadow-lg shrink-0 group-hover:bg-primary group-hover:text-white group-hover:scale-110 transition-all duration-300">
                   <Mail size={24} strokeWidth={1.5} />
                 </div>
                 <div>
@@ -42,8 +50,8 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-6 group cursor-default">
-                <div className="w-14 h-14 bg-white border border-slate-200 text-primary rounded-full flex items-center justify-center shadow-sm shrink-0">
+              <div className="flex items-start gap-6 group cursor-default p-4 -ml-4 rounded-3xl hover:bg-white/50 transition-colors duration-300">
+                <div className="w-14 h-14 bg-white border border-slate-200 text-primary rounded-2xl flex items-center justify-center shadow-lg shrink-0 group-hover:bg-primary group-hover:text-white group-hover:scale-110 transition-all duration-300">
                   <MapPin size={24} strokeWidth={1.5} />
                 </div>
                 <div>

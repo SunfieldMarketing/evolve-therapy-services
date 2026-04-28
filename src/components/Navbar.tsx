@@ -66,28 +66,17 @@ export default function Navbar() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-1.5 group z-50 shrink-0"
-              aria-label="Evolve Therapy Services — Home"
+              className="flex items-center gap-2 group z-[100] shrink-0"
+              aria-label="Evolve Therapy Services - Home"
             >
-              {/* Logomark */}
-              <div className={cn(
-                'w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-black transition-all duration-300',
-                scrolled ? 'bg-[#0284c7]' : 'bg-[#0284c7]/90 backdrop-blur-sm'
-              )}>
-                E
-              </div>
-              <span className={cn(
-                'text-xl font-serif font-black tracking-tight transition-colors duration-300',
-                scrolled ? 'text-[#0f172a]' : 'text-white'
-              )}>
-                Evolve
-              </span>
-              <span className={cn(
-                'text-xl font-sans font-light tracking-wide transition-colors duration-300',
-                scrolled ? 'text-[#0284c7]' : 'text-white/80'
-              )}>
-                Therapy
-              </span>
+              <img 
+                src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png" 
+                alt="Evolve Therapy Services"
+                className={cn(
+                  "w-auto transition-all duration-300",
+                  scrolled ? "h-12 brightness-0" : "h-12 brightness-0 invert" 
+                )}
+              />
             </Link>
 
             {/* Desktop Nav */}
@@ -104,7 +93,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     className={cn(
-                      'flex items-center gap-1 px-4 py-2 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200',
+                      'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none',
                       scrolled
                         ? 'text-slate-600 hover:text-[#0f172a] hover:bg-slate-100'
                         : 'text-white/80 hover:text-white hover:bg-white/10'
@@ -141,10 +130,10 @@ export default function Navbar() {
                                 className="flex flex-col px-4 py-3 rounded-xl hover:bg-[#0284c7]/8 group/item transition-all duration-150"
                                 role="menuitem"
                               >
-                              <span className="text-sm font-semibold text-[#0f172a] group-hover/item:text-[#0284c7] transition-colors duration-150 whitespace-normal">
+                              <span className="text-sm font-bold text-[#0f172a] group-hover/item:text-[#0284c7] transition-colors duration-150 whitespace-normal leading-tight">
                                 {item.name}
                               </span>
-                              <span className="text-xs text-slate-400 mt-1 whitespace-normal leading-relaxed">{item.desc}</span>
+                              <span className="text-[11px] text-slate-500 mt-1 whitespace-normal leading-relaxed">{item.desc}</span>
                             </Link>
                           ))}
                         </motion.div>
@@ -170,10 +159,11 @@ export default function Navbar() {
 
             {/* Mobile Hamburger */}
             <button
+              type="button"
               className={cn(
-                'md:hidden w-11 h-11 flex items-center justify-center rounded-xl z-50 transition-all duration-200 border',
+                'md:hidden w-11 h-11 flex items-center justify-center rounded-xl z-[100] transition-all duration-200 border relative',
                 isOpen
-                  ? 'bg-white text-[#0f172a] border-slate-200'
+                  ? 'bg-[#0f172a] text-white border-white/20'
                   : scrolled
                     ? 'bg-slate-100 text-[#0f172a] border-slate-200'
                     : 'bg-white/10 backdrop-blur-sm text-white border-white/20',
@@ -216,24 +206,8 @@ export default function Navbar() {
               aria-modal="true"
               aria-label="Mobile navigation"
             >
-              {/* Drawer header */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-                <Link
-                  href="/"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-2"
-                  aria-label="Home"
-                >
-                  <div className="w-7 h-7 rounded-lg bg-[#0284c7] flex items-center justify-center text-white text-xs font-black">E</div>
-                  <span className="text-white font-serif font-black text-lg">Evolve Therapy</span>
-                </Link>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
-                  aria-label="Close menu"
-                >
-                  <X size={18} aria-hidden="true" />
-                </button>
+              {/* Drawer header space to account for fixed toggle */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 min-h-[80px]">
               </div>
 
               {/* Links */}
@@ -250,16 +224,17 @@ export default function Navbar() {
                 ))}
                 {/* Services sub-links on mobile */}
                 <div className="mt-2 px-4 py-2">
-                  <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-3">Our Services</div>
-                  <div className="flex flex-col gap-1">
+                  <div className="text-[10px] font-black text-[#38bdf8] uppercase tracking-widest mb-3">Our Services</div>
+                  <div className="flex flex-col gap-3">
                     {links.find(l => l.dropdown)?.dropdown?.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="py-2 text-sm text-white/50 hover:text-[#0284c7] transition-colors font-medium"
+                        className="py-1 flex flex-col group/mob text-white"
                       >
-                        {item.name}
+                        <span className="text-sm font-semibold group-hover/mob:text-[#38bdf8] transition-colors">{item.name}</span>
+                        <span className="text-[11px] text-white/40 mt-0.5">{item.desc}</span>
                       </Link>
                     ))}
                   </div>

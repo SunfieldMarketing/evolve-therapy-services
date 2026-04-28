@@ -97,7 +97,7 @@ export default function Services() {
             <BlurFade
               key={i}
               delay={0.1 + i * 0.1}
-              className="bg-slate-50 p-6 sm:p-8 md:p-10 rounded-3xl md:rounded-[2.5rem] border border-slate-100 hover:bg-white hover:border-[#0284c7]/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 group relative flex flex-col justify-between overflow-hidden"
+              className="bg-slate-50 p-6 sm:p-8 md:p-10 rounded-3xl md:rounded-[2.5rem] border border-slate-100 hover:bg-white hover:border-[#0284c7]/20 hover:scale-[1.02] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-500 group relative flex flex-col justify-between overflow-hidden"
             >
               <Link href={service.href} className="absolute inset-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] focus-visible:ring-offset-2 rounded-3xl md:rounded-[2.5rem]" aria-label={`Learn more about ${service.title}`} />
               
@@ -140,7 +140,7 @@ export default function Services() {
                 Clinical Cost & <br />
                 <span className="text-[#0284c7] italic font-medium">Success Analysis</span>
               </h3>
-              <p className="text-black mb-10 text-sm md:text-base leading-relaxed font-semibold">
+              <p className="text-slate-800 mb-10 text-sm md:text-base leading-relaxed font-semibold">
                 Receive a comprehensive, data-driven overview of your facility's current therapy health. Strategic insights with no legacy strings attached.
               </p>
               <div>

@@ -22,7 +22,7 @@ import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 
 const clinicalStats = [
-  { value: 100, suffix: '%', label: 'Revenue Retained', icon: TrendingUp, desc: 'Your facility keeps every dollar of therapy revenue — zero shared with us.' },
+  { value: 100, suffix: '%', label: 'Revenue Retained', icon: TrendingUp, desc: 'Your facility keeps every dollar of therapy revenue - zero shared with us.' },
   { value: 20, suffix: '+', label: 'Years Experience', icon: Award, desc: 'Two decades of LTC clinical and operational leadership expertise.' },
   { value: 24, suffix: '/7', label: 'Clinical Support', icon: Clock, desc: 'Round-the-clock access to your dedicated regional director.' },
   { value: 15, suffix: '+', label: 'States Served', icon: Users, desc: 'Active management across major U.S. markets and growing.' },
@@ -44,7 +44,7 @@ const clinicalServices = [
   {
     icon: ShieldCheck,
     title: 'Compliance Management',
-    desc: 'Full denial management, regulatory audit support, and proactive SNF compliance oversight — so you focus on care, not paperwork.',
+    desc: 'Full denial management, regulatory audit support, and proactive SNF compliance oversight - so you focus on care, not paperwork.',
     tag: 'Regulatory',
   },
   {
@@ -70,7 +70,7 @@ const clinicalServices = [
 const processSteps = [
   { num: '01', title: 'Free Analysis', desc: 'We perform a complimentary cost savings analysis and identify clinical and financial opportunity.' },
   { num: '02', title: 'Custom Strategy', desc: 'A tailored therapy management plan is developed for your census size, payer mix, and staffing model.' },
-  { num: '03', title: 'Seamless Launch', desc: 'Your regional director is embedded with your team — minimal disruption, maximum momentum.' },
+  { num: '03', title: 'Seamless Launch', desc: 'Your regional director is embedded with your team - minimal disruption, maximum momentum.' },
   { num: '04', title: 'Continuous Evolution', desc: 'Ongoing audits, education, and operational refinement keep you ahead of regulatory and clinical changes.' },
 ];
 
@@ -121,47 +121,34 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Service Grid - Unique Bento Box Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-16">
+          {/* Service Grid - Clean Equal Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
             {clinicalServices.map((item, i) => (
               <BlurFade
                 delay={0.1 + i * 0.08}
                 key={i}
-                className={`relative overflow-hidden group p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-slate-100 hover:border-[#0284c7]/30 hover:shadow-[0_20px_40px_-15px_rgba(2,132,199,0.15)] transition-all duration-500 ${
-                  i === 0 ? 'md:col-span-2 bg-gradient-to-br from-[#0f172a] to-[#1e293b]' :
-                  i === 3 ? 'md:col-span-2' : ''
-                }`}
+                className="relative overflow-hidden group p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-slate-100 hover:border-[#0284c7]/30 hover:shadow-[0_20px_40px_-15px_rgba(2,132,199,0.15)] transition-all duration-500"
               >
                 {/* BorderBeam on hover only */}
-                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity" duration={6} colorFrom={i===0?"#38bdf8":"#38bdf8"} colorTo={i===0?"#0284c7":"#0284c7"} />
+                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity" duration={6} colorFrom="#38bdf8" colorTo="#0284c7" />
                 
-                <div className={`flex items-center justify-between mb-8 relative z-10 ${i === 0 ? 'text-white' : ''}`}>
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-400 border ${
-                    i === 0 
-                    ? 'bg-white/10 text-white border-white/20 group-hover:bg-[#0284c7] group-hover:border-[#0284c7]' 
-                    : 'bg-slate-50 text-[#0284c7] border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white'
-                  }`}>
+                <div className="flex items-center justify-between mb-8 relative z-10">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-400 border bg-slate-50 text-[#0284c7] border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white">
                     <item.icon size={24} strokeWidth={1.5} />
                   </div>
-                  <span className={`text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full ${
-                    i === 0 ? 'text-white/80 bg-white/10' : 'text-[#0284c7] bg-[#0284c7]/5'
-                  }`}>{item.tag}</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full text-[#0284c7] bg-[#0284c7]/5">
+                    {item.tag}
+                  </span>
                 </div>
                 
-                <h4 className={`font-black font-serif text-2xl tracking-tight mb-3 relative z-10 ${
-                  i === 0 ? 'text-white' : 'text-[#0f172a]'
-                }`}>{item.title}</h4>
+                <h4 className="font-black font-serif text-2xl tracking-tight mb-3 relative z-10 text-[#0f172a]">
+                  {item.title}
+                </h4>
                 
-                <p className={`text-sm md:text-base leading-relaxed font-medium relative z-10 max-w-sm ${
-                  i === 0 ? 'text-white/60' : 'text-slate-500'
-                }`}>{item.desc}</p>
+                <p className="text-sm md:text-base leading-relaxed font-medium relative z-10 max-w-sm text-slate-500">
+                  {item.desc}
+                </p>
                 
-                {/* Decorative background shape for large cards */}
-                {(i === 0 || i === 3) && (
-                   <div className={`absolute -bottom-20 -right-20 w-64 h-64 rounded-full blur-[80px] pointer-events-none ${
-                     i === 0 ? 'bg-[#38bdf8]/20' : 'bg-[#0284c7]/5'
-                   }`} />
-                )}
               </BlurFade>
             ))}
           </div>
@@ -204,12 +191,10 @@ export default function Home() {
         </div>
       </section>
 
-      <WhyEvolve />
       <Services />
 
-      {/* ── Philosophy / CTA Dark Section ── */}
+      {/* Philosophy / CTA Dark Section (Empower your therapy team...) */}
       <section className="py-20 md:py-36 bg-[#0f172a] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30 pointer-events-none grid-pattern" />
         <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />
         <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -227,7 +212,7 @@ export default function Home() {
                   'Retain 100% of therapy revenue',
                   'Customized CEU education for staff',
                   'Regional director embedded on-site',
-                  'Tiered pricing — costs drop as you scale',
+                  'Tiered pricing - costs drop as you scale',
                   'Denial management & audit support',
                   'In-house to contracted, or reverse',
                 ].map((item, i) => (
@@ -256,6 +241,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <WhyEvolve />
 
       {/* ── Testimonials ── */}
       <Testimonials />

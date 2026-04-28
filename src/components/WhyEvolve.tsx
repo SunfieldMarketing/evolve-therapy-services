@@ -33,9 +33,6 @@ const features = [
 export default function WhyEvolve() {
   return (
     <section id="about" className="py-20 md:py-32 bg-white overflow-hidden relative">
-      {/* Background Decorative Pattern */}
-      <div className="absolute inset-0 dot-pattern opacity-50 mix-blend-multiply pointer-events-none" aria-hidden="true" />
-      
       <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
           
@@ -61,7 +58,7 @@ export default function WhyEvolve() {
             <div className="grid sm:grid-cols-2 gap-x-12 gap-y-12">
               {features.map((item, i) => (
                 <BlurFade delay={0.3 + i * 0.1} key={i} className="group cursor-default">
-                  <div className="w-16 h-16 bg-slate-50 text-[#0f172a] rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500 border border-slate-100 shadow-xl shadow-black/5 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_-10px_rgba(2,132,199,0.3)]">
+                  <div className="w-16 h-16 bg-slate-50 text-[#0f172a] rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500 border border-slate-100 shadow-xl shadow-black/5 group-hover:-translate-y-2 group-hover:scale-110 group-hover:shadow-[0_20px_40px_-10px_rgba(2,132,199,0.3)]">
                     <item.icon size={26} strokeWidth={1.5} />
                   </div>
                   <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-4 tracking-tight group-hover:text-[#0284c7] transition-colors duration-500">{item.title}</h4>
@@ -86,10 +83,10 @@ export default function WhyEvolve() {
               <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] bg-white border border-slate-100 p-4">
                  <div className="relative rounded-[3rem] overflow-hidden w-full h-[750px] group">
                    <Image 
-                    src="https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?auto=format&fit=crop&q=80" 
+                    src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?auto=format&fit=crop&q=80" 
                     alt="Professional Therapy Management Team" 
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
+                    className="object-cover group-hover:scale-110 transition-transform duration-[4000ms]"
                    />
                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/20 to-transparent opacity-80" />
                    
@@ -106,7 +103,7 @@ export default function WhyEvolve() {
                               src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png" 
                               width={56} 
                               height={56} 
-                              className="rounded-[1.25rem] object-cover border border-slate-100 shadow-md" 
+                              className="rounded-[1.25rem] object-cover border border-slate-100 shadow-md group-hover:scale-110 transition-transform duration-500" 
                               alt="Lisa Bebie" 
                             />
                             <div>

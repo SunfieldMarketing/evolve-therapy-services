@@ -19,7 +19,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 bg-[#0f172a]">
         <iframe
           src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=4&end=20"
-          title="Background Video — Evolve Therapy Services facility"
+          title="Background Video - Evolve Therapy Services facility"
           allow="autoplay; encrypted-media"
           className="absolute w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0"
           style={{ filter: 'brightness(0.35) saturate(0.7)' }}
@@ -27,22 +27,20 @@ export default function Hero() {
         {/* Dark gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/70 to-[#0f172a]/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-transparent to-[#0f172a]/20" />
-        {/* Dot pattern texture — Magic UI */}
-        <div className="absolute inset-0 dot-pattern-dark opacity-40" aria-hidden="true" />
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 w-full px-4 sm:px-6 md:px-10 lg:px-12 pt-32 sm:pt-36 md:pt-40 pb-16 md:pb-24">
+      <div className="relative z-10 w-full px-4 sm:px-6 md:px-10 lg:px-12 pt-32 sm:pt-36 md:pt-40 pb-24 md:pb-32 flex flex-col items-center text-center">
         {/* Stretches completely across the available viewport */}
-        <div className="w-full">
+        <div className="w-full flex flex-col items-center">
           {/* Eyebrow — Magic UI AnimatedGradientText (dark variant) */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            <AnimatedGradientTextDark className="justify-start">
+            <AnimatedGradientTextDark className="justify-center">
               <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse inline-block mr-2" aria-hidden="true" />
               LTC Therapy Management & Consulting
             </AnimatedGradientTextDark>
@@ -50,10 +48,10 @@ export default function Hero() {
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[0.9] tracking-tighter mb-8 w-full text-left"
+            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[0.9] tracking-tighter mb-8 w-full text-center"
           >
             Changing How{' '}
             <span className="text-[#0284c7] italic">Therapy Functions</span><br className="hidden lg:block" />
@@ -62,10 +60,10 @@ export default function Hero() {
 
           {/* Subtext */}
           <motion.p
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-xl md:text-2xl lg:text-3xl text-white/65 w-full leading-relaxed mb-14 font-light text-left"
+            className="text-xl md:text-2xl lg:text-3xl text-white/65 w-full leading-relaxed mb-14 font-light text-center max-w-5xl mx-auto"
           >
             Our unique model lets your facility retain{' '}
             <span className="text-white font-semibold">100% of therapy revenue</span>{' '}
@@ -74,10 +72,10 @@ export default function Hero() {
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-4 mb-16 md:mb-24 justify-start w-full"
+            className="flex flex-col sm:flex-row gap-4 mb-16 md:mb-24 justify-center w-full"
           >
             <Link
               href="/contact"
@@ -101,7 +99,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ delay: 0.7, duration: 0.7 }}
-            className="flex flex-wrap gap-8 md:gap-16 pt-10 md:pt-14 border-t border-white/10 w-full justify-between lg:justify-start"
+            className="flex flex-wrap gap-8 md:gap-16 pt-10 md:pt-14 border-t border-white/10 w-full justify-center max-w-5xl mx-auto"
           >
             {[
               { value: '100%', label: 'Revenue Retained' },
@@ -121,10 +119,13 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator - Moved to bottom center to get out of the way of the left-aligned span */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden lg:flex flex-col items-center gap-3" aria-hidden="true">
-        <div className="text-white/30 text-xs font-bold uppercase tracking-[0.3em]">Scroll</div>
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 hidden lg:flex flex-col items-center gap-3" aria-hidden="true">
+        <div className="text-white/40 text-xs font-bold uppercase tracking-[0.3em]">Scroll</div>
         <div className="w-px h-16 bg-gradient-to-b from-white/30 to-transparent" />
       </div>
+
+      {/* Transitional fading gradient bridging into next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none" aria-hidden="true" />
     </section>
   );
 }

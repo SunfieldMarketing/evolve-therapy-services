@@ -70,7 +70,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
   return (
     <figure
       className={cn(
-        'relative flex flex-col justify-between w-72 sm:w-80 shrink-0 cursor-default',
+        'relative flex flex-col justify-between w-full h-full cursor-default',
         'rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6',
         'hover:bg-white/8 hover:border-white/20 transition-all duration-200',
         'select-none',
@@ -106,8 +106,6 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
 export default function Testimonials() {
   return (
     <section className="relative py-20 md:py-24 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
-      {/* Background — Magic UI DotPattern dark */}
-      <div className="absolute inset-0 dot-pattern-dark opacity-30 pointer-events-none" aria-hidden="true" />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(ellipse at 60% 50%, rgba(2,132,199,0.10) 0%, transparent 60%)' }}
@@ -130,21 +128,24 @@ export default function Testimonials() {
         </BlurFade>
       </div>
 
-      {/* ── Magic UI Marquee — single row ── */}
-      <div className="relative">
-        <Marquee pauseOnHover className="py-3 [--duration:50s] [--gap:1.5rem]">
+      {/* ── 3-Column Snap Carousel ── */}
+      <div className="relative mt-12 max-w-7xl mx-auto px-4">
+        {/* Scrollable Container */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 hide-scrollbar">
           {testimonials.map((t, i) => (
-            <TestimonialCard key={i} t={t} />
+             <div key={i} className="snap-center shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex">
+               <TestimonialCard t={t} />
+             </div>
           ))}
-        </Marquee>
+        </div>
 
         {/* Edge fade masks */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0f172a] to-transparent z-10" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0f172a] to-transparent z-10" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 lg:w-24 bg-gradient-to-r from-[#0f172a] to-transparent z-10" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 lg:w-24 bg-gradient-to-l from-[#0f172a] to-transparent z-10" aria-hidden="true" />
       </div>
 
       {/* CTA */}
-      <BlurFade className="text-center mt-10 md:mt-12" delay={0.2}>
+      <BlurFade className="text-center mt-6" delay={0.2}>
         <Link
           href="/contact"
           className="inline-flex items-center gap-2 bg-[#0284c7] text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-[#0f172a] transition-all duration-200 shadow-[0_0_32px_rgba(2,132,199,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"

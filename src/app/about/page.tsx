@@ -86,7 +86,7 @@ export default function AboutPage() {
                   <p className="font-serif font-medium text-white/90 italic text-lg lg:text-xl leading-relaxed">
                     "We bridge the gap between clinical quality and financial performance, enabling operators to truly evolve to the next level."
                   </p>
-                  <footer className="mt-4 text-[#38bdf8] text-xs font-bold uppercase tracking-widest">— Lisa Bebie, PTA · President & Founder</footer>
+                  <footer className="mt-4 text-[#38bdf8] text-xs font-bold uppercase tracking-widest">- Lisa Bebie, PTA · President & Founder</footer>
                 </blockquote>
               </BlurFade>
             </div>
@@ -143,14 +143,15 @@ export default function AboutPage() {
                          src={leader.photo}
                          alt={leader.name}
                          fill
-                         className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                         priority={i === 0}
+                         className="object-cover object-top group-hover:scale-110 transition-transform duration-1000"
                          onError={(e) => { (e.target as HTMLImageElement).src = leader.fallback; }}
                        />
                      </div>
                      
                      {/* Name badge */}
                      <div 
-                       className="absolute -bottom-4 left-1/2 -translate-x-1/2 p-4 px-6 rounded-2xl shadow-xl text-white text-center whitespace-nowrap z-20 min-w-48"
+                       className="absolute -bottom-4 left-1/2 -translate-x-1/2 p-4 px-6 rounded-2xl shadow-2xl text-white text-center whitespace-nowrap z-20 min-w-48 group-hover:scale-105 transition-transform duration-500"
                        style={{ background: leader.accentColor }}
                      >
                        <div className="font-black font-serif text-base tracking-tight">{leader.name}</div>

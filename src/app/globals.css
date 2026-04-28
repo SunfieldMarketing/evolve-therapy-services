@@ -1,5 +1,99 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════
+   Magic UI + Aceternity UI Keyframes & Utilities
+   ═══════════════════════════════════════════ */
+
+/* Marquee (Magic UI) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% - var(--gap))); }
+}
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to   { transform: translateY(calc(-100% - var(--gap))); }
+}
+
+/* Border Beam (Magic UI) */
+@keyframes border-beam {
+  100% { offset-distance: 100%; }
+}
+
+/* Shimmer (Magic UI ShimmerButton) */
+@keyframes shimmer-slide {
+  to { transform: translate(calc(100cqw - 100%), 0); }
+}
+@keyframes spin-around {
+  0%   { transform: translateZ(0) rotate(0); }
+  15%, 35% { transform: translateZ(0) rotate(90deg); }
+  65%, 85% { transform: translateZ(0) rotate(270deg); }
+  100% { transform: translateZ(0) rotate(360deg); }
+}
+
+/* Spotlight (Aceternity UI) */
+@keyframes spotlight {
+  0%   { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
+  100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
+}
+
+/* Animated Gradient Text (Magic UI) */
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* Blur Fade (Magic UI) */
+@keyframes blur-fade-in {
+  from { opacity: 0; filter: blur(8px); transform: translateY(12px); }
+  to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
+}
+
+/* Pulse glow for CTA buttons */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.4); }
+  50%       { box-shadow: 0 0 0 12px rgba(2,132,199,0); }
+}
+
+/* ── Tailwind v4 utility classes ── */
+.animate-marquee {
+  animation: marquee var(--duration) linear infinite;
+}
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+.animate-spotlight {
+  animation: spotlight 2s ease 0.75s forwards;
+}
+.animate-gradient-x {
+  animation: gradient-x 4s ease infinite;
+  background-size: 200% 200%;
+}
+.animate-blur-fade {
+  animation: blur-fade-in 0.6s ease-out forwards;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+/* Dot Pattern background (Magic UI DotPattern) */
+.dot-pattern {
+  background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.dot-pattern-dark {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Grid Pattern background (Magic UI GridPattern) */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(2,132,199,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(2,132,199,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+
 :root {
   --background: #fdfdfd;
   --foreground: #334155;

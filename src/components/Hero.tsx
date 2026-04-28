@@ -18,7 +18,7 @@ export default function Hero() {
       {/* ── YouTube iframe background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a]">
         <iframe
-          src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=4&end=25"
+          src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=4&end=20"
           title="Background Video — Evolve Therapy Services facility"
           allow="autoplay; encrypted-media"
           className="absolute w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0"
@@ -32,8 +32,8 @@ export default function Hero() {
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 w-full px-6 sm:px-12 md:px-20 lg:px-32 pt-32 sm:pt-36 md:pt-40 pb-16 md:pb-24">
-        {/* Stretches across the left-to-center span natively allowing text to breathe */}
+      <div className="relative z-10 w-full px-4 sm:px-6 md:px-10 lg:px-12 pt-32 sm:pt-36 md:pt-40 pb-16 md:pb-24">
+        {/* Stretches completely across the available viewport */}
         <div className="w-full">
           {/* Eyebrow — Magic UI AnimatedGradientText (dark variant) */}
           <motion.div
@@ -53,10 +53,10 @@ export default function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[0.9] tracking-tighter mb-8 max-w-[1400px] text-left"
+            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[0.9] tracking-tighter mb-8 w-full text-left"
           >
-            Changing How<br className="hidden sm:block" />
-            <span className="text-[#0284c7] italic pr-4">Therapy Functions</span><br className="hidden lg:block" />
+            Changing How{' '}
+            <span className="text-[#0284c7] italic">Therapy Functions</span><br className="hidden lg:block" />
             <span className="text-white/80 font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl align-top">for LTC Operators.</span>
           </motion.h1>
 
@@ -65,7 +65,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-xl md:text-2xl lg:text-3xl text-white/65 max-w-4xl leading-relaxed mb-14 font-light text-left"
+            className="text-xl md:text-2xl lg:text-3xl text-white/65 w-full leading-relaxed mb-14 font-light text-left"
           >
             Our unique model lets your facility retain{' '}
             <span className="text-white font-semibold">100% of therapy revenue</span>{' '}
@@ -77,7 +77,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-4 mb-16 md:mb-24 justify-start max-w-4xl"
+            className="flex flex-col sm:flex-row gap-4 mb-16 md:mb-24 justify-start w-full"
           >
             <Link
               href="/contact"
@@ -101,7 +101,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ delay: 0.7, duration: 0.7 }}
-            className="flex flex-wrap gap-8 md:gap-16 pt-10 md:pt-14 border-t border-white/10 justify-start"
+            className="flex flex-wrap gap-8 md:gap-16 pt-10 md:pt-14 border-t border-white/10 w-full justify-between lg:justify-start"
           >
             {[
               { value: '100%', label: 'Revenue Retained' },

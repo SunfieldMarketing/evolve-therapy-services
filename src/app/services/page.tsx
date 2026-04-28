@@ -6,6 +6,7 @@ import PageHeader from '@/components/PageHeader';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
+import { cn } from '@/lib/utils';
 import { 
   Stethoscope, 
   BarChart3, 

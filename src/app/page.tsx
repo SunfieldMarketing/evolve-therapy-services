@@ -11,6 +11,7 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import MobileCTA from '@/components/MobileCTA';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import { 
   ArrowRight, Phone, Microscope, HeartPulse, ShieldCheck, 
   TrendingUp, Users, Clock, CheckCircle2, BarChart3, Award

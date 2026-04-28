@@ -70,16 +70,16 @@ export default function Hero() {
             while Evolve drives clinical outcomes, compliance, and operational excellence.
           </motion.p>
 
-          {/* CTAs */}
+      {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-4 mb-16 md:mb-24 justify-center w-full"
+            className="flex flex-col sm:flex-row gap-5 mb-16 md:mb-24 justify-center w-full"
           >
             <Link
               href="/contact"
-              className="group relative flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5 animate-pulse-glow hover:[animation-play-state:paused] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 flex-grow sm:flex-grow-0"
+              className="group relative flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(2,132,199,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 flex-grow sm:flex-grow-0"
             >
               <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" aria-hidden="true" />
               <span className="relative">Schedule a Free Consultation</span>
@@ -88,18 +88,18 @@ export default function Hero() {
 
             <Link
               href="/services"
-              className="flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/30 px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 flex-grow sm:flex-grow-0"
+              className="group flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 flex-grow sm:flex-grow-0"
             >
               Explore Our Services
             </Link>
           </motion.div>
 
-          {/* Stats strip */}
+          {/* Stats strip — Glassmorphism fix */}
           <motion.div
-            initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ delay: 0.7, duration: 0.7 }}
-            className="flex flex-wrap gap-8 md:gap-16 pt-10 md:pt-14 border-t border-white/10 w-full justify-center max-w-5xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 w-full justify-center max-w-6xl mx-auto p-8 rounded-[2rem] bg-white/5 backdrop-blur-sm border border-white/10"
           >
             {[
               { value: '100%', label: 'Revenue Retained' },
@@ -107,25 +107,22 @@ export default function Hero() {
               { value: '20+', label: 'Years of Expertise' },
               { value: '15+', label: 'States Served' },
             ].map((stat) => (
-              <div key={stat.label} className="group">
-                <div className="text-4xl md:text-5xl font-serif font-black text-white mb-2 group-hover:text-[#38bdf8] transition-colors duration-200">
+              <div key={stat.label} className="group text-center">
+                <div className="text-3xl md:text-5xl font-serif font-black text-white mb-2 group-hover:text-[#38bdf8] group-hover:scale-110 transition-all duration-300">
                   {stat.value}
                 </div>
-                <div className="text-xs md:text-sm text-white/40 font-bold uppercase tracking-[0.25em]">{stat.label}</div>
+                <div className="text-[10px] md:text-xs text-white/40 font-bold uppercase tracking-[0.3em] font-sans">{stat.label}</div>
               </div>
             ))}
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator - Moved to bottom center to get out of the way of the left-aligned span */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 hidden lg:flex flex-col items-center gap-3" aria-hidden="true">
-        <div className="text-white/40 text-xs font-bold uppercase tracking-[0.3em]">Scroll</div>
-        <div className="w-px h-16 bg-gradient-to-b from-white/30 to-transparent" />
+      {/* Scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden lg:flex flex-col items-center gap-3" aria-hidden="true">
+        <div className="text-white/30 text-[10px] font-black uppercase tracking-[0.4em]">Scroll</div>
+        <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />
       </div>
-
-      {/* Transitional fading gradient bridging into next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none" aria-hidden="true" />
     </section>
   );
 }

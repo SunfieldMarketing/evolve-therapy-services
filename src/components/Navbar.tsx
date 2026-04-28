@@ -80,7 +80,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-1" role="menubar">
+            <div className="hidden lg:flex items-center gap-1" role="menubar">
               {links.map((link) => (
                 <div
                   key={link.name}
@@ -92,6 +92,12 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
+                    onClick={(e) => {
+                      if (link.dropdown) {
+                        e.preventDefault();
+                        setDropdownOpen(!dropdownOpen);
+                      }
+                    }}
                     className={cn(
                       'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none',
                       scrolled
@@ -101,13 +107,6 @@ export default function Navbar() {
                     role="menuitem"
                   >
                     {link.name}
-                    {link.dropdown && (
-                      <ChevronDown
-                        size={13}
-                        className={cn('transition-transform duration-200 opacity-60', dropdownOpen && 'rotate-180')}
-                        aria-hidden="true"
-                      />
-                    )}
                   </Link>
 
                   {/* Dropdown — v0.dev card-centric pattern */}
@@ -161,7 +160,7 @@ export default function Navbar() {
             <button
               type="button"
               className={cn(
-                'md:hidden w-11 h-11 flex items-center justify-center rounded-xl z-[100] transition-all duration-200 border relative',
+                'lg:hidden w-11 h-11 flex items-center justify-center rounded-xl z-[100] transition-all duration-200 border relative',
                 isOpen
                   ? 'bg-[#0f172a] text-white border-white/20'
                   : scrolled

@@ -37,13 +37,13 @@ export default function PageHeader({
             src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5"
             title={`${title} background cover`}
             allow="autoplay; encrypted-media"
-            className="absolute inset-0 w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0 opacity-40 filter blur-[2px]"
+            className="absolute inset-0 w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0 opacity-50"
           />
         ) : (
           <img
             src={imageUrl}
             alt={`${title} background cover`}
-            className="absolute inset-0 w-full h-full object-cover opacity-35 filter blur-[2px]"
+            className="absolute inset-0 w-full h-full object-cover opacity-40"
           />
         )}
         
@@ -87,8 +87,7 @@ export default function PageHeader({
         </motion.div>
       </div>
 
-      {/* Bottom fade to page background */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 z-10 bg-gradient-to-t from-white to-transparent" />
+
     </section>
   );
 }

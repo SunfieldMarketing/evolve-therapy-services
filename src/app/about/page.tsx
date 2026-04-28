@@ -134,11 +134,12 @@ export default function AboutPage() {
                   className={`w-full md:w-5/12 flex justify-center shrink-0 ${i % 2 === 1 ? 'md:order-2' : ''}`}
                 >
                   <div className="relative group">
-                     {/* Background decorative ring */}
-                     <div className="absolute inset-0 rounded-full border border-slate-200 scale-105 group-hover:scale-110 transition-transform duration-700" />
+                     {/* Background decorative circles */}
+                     <div className="absolute inset-0 rounded-full border-2 border-slate-200 group-hover:scale-110 group-hover:border-[#0284c7]/30 transition-all duration-1000" />
+                     <div className="absolute inset-2 rounded-full border border-slate-100 group-hover:scale-105 transition-all duration-700" />
                      
-                     {/* Square/widget style Profile Picture */}
-                     <div className="relative w-full aspect-square md:aspect-[4/5] lg:aspect-square rounded-[3rem] overflow-hidden shadow-2xl border-[6px] border-white bg-white z-10 box-border">
+                     {/* Circular Profile Picture */}
+                     <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-full md:max-w-[400px] aspect-square rounded-full overflow-hidden shadow-2xl border-8 border-white bg-white z-10 box-border">
                        <Image
                          src={leader.photo}
                          alt={leader.name}
@@ -149,13 +150,13 @@ export default function AboutPage() {
                        />
                      </div>
                      
-                     {/* Name badge */}
+                     {/* Name badge — floating style */}
                      <div 
-                       className="absolute -bottom-4 left-1/2 -translate-x-1/2 p-4 px-6 rounded-2xl shadow-2xl text-white text-center whitespace-nowrap z-20 min-w-48 group-hover:scale-105 transition-transform duration-500"
+                       className="absolute -bottom-6 left-1/2 -translate-x-1/2 p-5 px-8 rounded-[2rem] shadow-2xl text-white text-center whitespace-nowrap z-20 min-w-[240px] group-hover:scale-110 transition-all duration-500 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)]"
                        style={{ background: leader.accentColor }}
                      >
-                       <div className="font-black font-serif text-base tracking-tight">{leader.name}</div>
-                       <div className="text-[9px] uppercase tracking-[0.2em] font-bold mt-1 opacity-80">{leader.title}</div>
+                       <div className="font-black font-serif text-lg tracking-tight">{leader.name}</div>
+                       <div className="text-[10px] uppercase tracking-[0.25em] font-bold mt-1 opacity-80">{leader.title}</div>
                      </div>
                   </div>
                 </BlurFade>

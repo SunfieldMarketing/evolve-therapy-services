@@ -130,118 +130,162 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* The Evolution Section */}
-      <section className="py-24 md:py-36 bg-[#0f172a] text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-2/3 h-full bg-[#0284c7]/10 -skew-x-12 translate-x-1/2 blur-[80px]" />
-        <div className="container mx-auto px-6 md:px-12 relative z-10 text-center lg:text-left">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <div>
-              <BlurFade delay={0.1} className="mb-10">
-                 <AnimatedGradientText>The Evolution</AnimatedGradientText>
-              </BlurFade>
-              <BlurFade delay={0.2}>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-8 leading-[0.95] tracking-tighter">
-                  Our Three-Tiered <br />
-                  <span className="text-[#38bdf8] italic font-medium uppercase text-3xl md:text-5xl">Pricing Model</span>
-                </h2>
-              </BlurFade>
-              <BlurFade delay={0.3}>
-                <p className="text-lg md:text-xl text-white/60 mb-12 leading-relaxed font-light">
-                  Our unique approach customizes to your size of business and Evolves as you do. Our models allow price reduction as your business grows internally.
-                </p>
-              </BlurFade>
-              
-              <div className="space-y-6">
-                {[
-                  { id: '1', label: 'Starter Tier for New Programs', color: 'bg-white/10', text: 'text-white/60' },
-                  { id: '2', label: 'Intermediate Growth Scaling', color: 'bg-[#0284c7] shadow-[0_0_30px_rgba(2,132,199,0.3)]', text: 'text-white' },
-                  { id: '3', label: 'Enterprise Peak Operations', color: 'bg-white/5', text: 'text-white/40' }
-                ].map((tier, i) => (
-                  <BlurFade 
-                    delay={0.4 + i * 0.1}
-                    key={tier.id}
-                    className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-5 p-5 rounded-3xl border border-white/5 transition-all hover:bg-white/5 group"
-                  >
-                    <div className={`w-12 h-12 ${tier.color} rounded-xl flex items-center justify-center font-black text-lg shrink-0`}>
-                      {tier.id}
-                    </div>
-                    <span className={`text-lg font-bold font-serif ${tier.text} self-center`}>{tier.label}</span>
-                  </BlurFade>
-                ))}
-              </div>
-            </div>
+      {/* The Evolution Section — Redesigned as a Tiered Journey */}
+      <section className="py-24 md:py-40 bg-[#0f172a] text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#0284c7] blur-[120px]" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#38bdf8] blur-[120px]" />
+        </div>
 
-            <BlurFade delay={0.5} className="relative">
-               <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-12 lg:p-16 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] text-center relative z-10 flex flex-col items-center">
-                  <div className="w-20 h-20 bg-[#0284c7] text-white rounded-[1.5rem] flex items-center justify-center mb-8 shadow-2xl mx-auto border-2 border-[#38bdf8]/50">
-                    <Zap size={32} />
-                  </div>
-                  <h4 className="text-3xl md:text-4xl font-serif font-black text-white mb-6 leading-tight">
-                    Already In-House?
-                  </h4>
-                  <p className="text-white/50 mb-10 leading-relaxed text-base font-light italic">
-                    "Let Evolve be your needed resource in recruitment, denial management, and data analysis. We can be your expert so you don’t have to be."
-                  </p>
-                  <Link href="/contact" className="w-full">
-                    <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="w-full justify-center group/btn">
-                      <span className="font-black uppercase tracking-[0.2em] text-[10px] text-white">Get an Expert Analysis</span>
-                    </ShimmerButton>
-                  </Link>
-               </div>
-               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#0284c7]/20 rounded-full blur-[100px] pointer-events-none" />
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <div className="text-center max-w-4xl mx-auto mb-20 md:mb-32">
+            <BlurFade delay={0.1} className="mb-8">
+               <AnimatedGradientText>Adaptive Growth</AnimatedGradientText>
+            </BlurFade>
+            <BlurFade delay={0.2}>
+              <h2 className="text-5xl md:text-7xl font-serif font-black mb-8 leading-[0.9] tracking-tighter">
+                Our Three-Tiered <br />
+                <span className="text-[#38bdf8] italic font-medium">Evolution Model</span>
+              </h2>
+            </BlurFade>
+            <BlurFade delay={0.3}>
+              <p className="text-xl md:text-2xl text-white/60 font-light leading-relaxed">
+                Our management approach scales with your facility, reducing costs and increasing internal autonomy as your programs mature.
+              </p>
             </BlurFade>
           </div>
+
+          <div className="grid lg:grid-cols-3 gap-8 md:gap-10">
+            {[
+              {
+                id: '01',
+                name: 'Starter Tier',
+                title: 'Program Inception',
+                desc: 'Focused on recruitment, initial compliance setup, and establishing core clinical benchmarks for new in-house teams.',
+                features: ['Baseline Compliance Review', 'Full Recruitment Support', 'Core PDPM Education'],
+                color: 'border-white/10 bg-white/5',
+                accent: '#ffffff'
+              },
+              {
+                id: '02',
+                name: 'Intermediate Tier',
+                title: 'Growth & Scaling',
+                desc: 'Advanced operational oversight, deep data analysis, and regional leadership development to drive sustainable profitability.',
+                features: ['Bi-Weekly Cost Analysis', 'Leadership Mentorship', 'Customized Clinical QA'],
+                color: 'border-[#0284c7]/50 bg-[#0284c7]/10 shadow-[0_30px_60px_-15px_rgba(2,132,199,0.3)] scale-105 z-20',
+                accent: '#38bdf8'
+              },
+              {
+                id: '03',
+                name: 'Enterprise Tier',
+                title: 'Peak Operations',
+                desc: 'Full clinical excellence oversight with lowest-cost management fees, designed for stable, high-volume healthcare portfolios.',
+                features: ['Unlimited Audit Defense', 'Custom Business Intelligence', 'Priority Resource Allocation'],
+                color: 'border-white/10 bg-white/5',
+                accent: '#ffffff'
+              }
+            ].map((tier, i) => (
+              <BlurFade delay={0.4 + i * 0.15} key={tier.id} className="h-full">
+                <div className={cn(
+                  "p-10 md:p-12 rounded-[3rem] border h-full transition-all duration-500 hover:-translate-y-4 group",
+                  tier.color
+                )}>
+                  <div className="text-5xl font-black font-serif italic mb-6 opacity-20 group-hover:opacity-100 transition-opacity duration-500" style={{ color: tier.accent }}>{tier.id}</div>
+                  <div className="text-[10px] font-black uppercase tracking-[0.4em] mb-3" style={{ color: tier.accent }}>{tier.name}</div>
+                  <h4 className="text-3xl font-serif font-black text-white mb-6 leading-tight">{tier.title}</h4>
+                  <p className="text-white/50 mb-10 leading-relaxed text-[15px] font-light">{tier.desc}</p>
+                  
+                  <ul className="space-y-4 mb-12">
+                    {tier.features.map(f => (
+                      <li key={f} className="flex items-center gap-3 text-sm text-white/80 font-medium">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#0284c7]" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link href="/contact" className="block mt-auto">
+                    <button className="w-full py-4 rounded-2xl border border-white/20 text-white font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-[#0f172a] transition-all duration-300">
+                      Learn More
+                    </button>
+                  </Link>
+                </div>
+              </BlurFade>
+            ))}
+          </div>
+
+          {/* Special Resource Box — Glassmorphism */}
+          <BlurFade delay={0.8} className="mt-24 md:mt-32 max-w-5xl mx-auto">
+             <div className="relative p-12 md:p-20 rounded-[4rem] bg-white/5 backdrop-blur-2xl border border-white/10 overflow-hidden text-center flex flex-col items-center">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#0284c7]/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+                <div className="w-20 h-20 bg-[#0284c7] text-white rounded-[2rem] flex items-center justify-center mb-10 shadow-2xl border-2 border-[#38bdf8]/50">
+                  <Zap size={36} />
+                </div>
+                <h4 className="text-4xl md:text-6xl font-serif font-black text-white mb-8 leading-[0.9] tracking-tighter max-w-2xl">
+                  Already In-House? <br />
+                  <span className="text-[#38bdf8] italic font-medium">Let us be your expert.</span>
+                </h4>
+                <p className="text-white/50 mb-12 leading-relaxed text-lg md:text-xl font-light italic max-w-3xl">
+                  "Let Evolve be your needed resource in recruitment, denial management, and data analysis. We can be your clinical partner so you don’t have to be the expert in everything."
+                </p>
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6 group/btn">
+                    <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Get a Resource Consultation</span>
+                  </ShimmerButton>
+                </Link>
+             </div>
+          </BlurFade>
         </div>
       </section>
 
-      {/* Feature Compare */}
-      <section className="py-24 md:py-40 bg-slate-50 overflow-hidden relative">
+      {/* Why Direct-Hire Section — Cleaned up */}
+      <section className="py-24 md:py-44 bg-slate-50 overflow-hidden relative">
         <div className="container mx-auto px-6 md:px-12">
-          <BlurFade delay={0.2} className="max-w-5xl mx-auto">
-            <div className="bg-white border border-slate-100 rounded-[3rem] md:rounded-[4rem] overflow-hidden relative shadow-sm">
-               {/* Decorative line */}
-               <div className="absolute top-0 bottom-0 left-1/2 w-px bg-slate-100 hidden lg:block" />
-               
-               <div className="p-12 lg:p-20">
-                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#0f172a] text-center mb-16 md:mb-20 font-black tracking-tighter">Why Direct-Hire <br /> <span className="text-[#0284c7] italic font-medium">In-House?</span></h3>
-                  <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-                     <div className="space-y-12">
-                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group">
-                          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-300 shrink-0">
-                            <CheckCircle size={24} />
+          <BlurFade delay={0.2} className="max-w-6xl mx-auto">
+            <div className="bg-white border border-slate-200 rounded-[4rem] md:rounded-[5rem] overflow-hidden relative shadow-2xl shadow-black/5">
+               <div className="p-12 md:p-24 lg:p-32">
+                  <div className="text-center mb-20 md:mb-28">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-6">Comparison</div>
+                    <h3 className="text-5xl md:text-7xl font-serif text-[#0f172a] font-black tracking-tighter leading-[0.9]">Why Direct-Hire <br /> <span className="text-[#0284c7] italic font-medium">In-House?</span></h3>
+                  </div>
+                  
+                  <div className="grid lg:grid-cols-2 gap-16 md:gap-24">
+                     <div className="space-y-16">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 group">
+                          <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center shadow-lg border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500 shrink-0">
+                            <CheckCircle size={32} strokeWidth={1.5} />
                           </div>
                           <div>
-                            <div className="font-black text-[#0f172a] tracking-[0.2em] uppercase text-[10px] mb-3">Revenue Retention</div>
-                            <p className="text-base text-slate-500 font-light leading-relaxed">Retain 100% of all therapy revenue instead of paying shares to third-parties.</p>
+                            <div className="font-black text-[#0f172a] tracking-[0.3em] uppercase text-[11px] mb-4">Revenue Retention</div>
+                            <p className="text-lg text-slate-500 font-light leading-relaxed">Retain 100% of all therapy revenue instead of paying shares to third-parties. Our models ensure your bottom line is protected while patient care remains the priority.</p>
                           </div>
                         </div>
-                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group">
-                          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-300 shrink-0">
-                            <CheckCircle size={24} />
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 group">
+                          <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center shadow-lg border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500 shrink-0">
+                            <CheckCircle size={32} strokeWidth={1.5} />
                           </div>
                           <div>
-                            <div className="font-black text-[#0f172a] tracking-[0.2em] uppercase text-[10px] mb-3">Culture Continuity</div>
-                            <p className="text-base text-slate-500 font-light leading-relaxed">Your staff grows internally towards regional positions and remains as YOUR team.</p>
+                            <div className="font-black text-[#0f172a] tracking-[0.3em] uppercase text-[11px] mb-4">Culture Continuity</div>
+                            <p className="text-lg text-slate-500 font-light leading-relaxed">Your staff grows internally towards regional positions and remains as YOUR team. No more high turnover from disconnected third-party vendors.</p>
                           </div>
                         </div>
                      </div>
-                     <div className="space-y-12">
-                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group">
-                          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-300 shrink-0">
-                            <CheckCircle size={24} />
+                     <div className="space-y-16">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 group">
+                          <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center shadow-lg border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500 shrink-0">
+                            <CheckCircle size={32} strokeWidth={1.5} />
                           </div>
                           <div>
-                            <div className="font-black text-[#0f172a] tracking-[0.2em] uppercase text-[10px] mb-3">Operational Growth</div>
-                            <p className="text-base text-slate-500 font-light leading-relaxed">Employee engagement facilitates exceptional outcomes for residents.</p>
+                            <div className="font-black text-[#0f172a] tracking-[0.3em] uppercase text-[11px] mb-4">Operational Growth</div>
+                            <p className="text-lg text-slate-500 font-light leading-relaxed">Employee engagement facilitates exceptional outcomes for residents. When your team is invested, your facility thrives clinically and operationally.</p>
                           </div>
                         </div>
-                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group">
-                          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-300 shrink-0">
-                            <CheckCircle size={24} />
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 group">
+                          <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center shadow-lg border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500 shrink-0">
+                            <CheckCircle size={32} strokeWidth={1.5} />
                           </div>
                           <div>
-                            <div className="font-black text-[#0f172a] tracking-[0.2em] uppercase text-[10px] mb-3">Clinical Education</div>
-                            <p className="text-base text-slate-500 font-light leading-relaxed">Customized CEU/education for therapists and LTC staff as a premium service.</p>
+                            <div className="font-black text-[#0f172a] tracking-[0.3em] uppercase text-[11px] mb-4">Clinical Education</div>
+                            <p className="text-lg text-slate-500 font-light leading-relaxed">Customized CEU/education for therapists and LTC staff as a premium service. We provide the expertise that keeps your clinical team at the top of their field.</p>
                           </div>
                         </div>
                      </div>

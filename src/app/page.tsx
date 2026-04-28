@@ -122,35 +122,89 @@ export default function Home() {
           </div>
 
           {/* Service Grid - Clean Equal Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-24 md:mb-32">
             {clinicalServices.map((item, i) => (
               <BlurFade
                 delay={0.1 + i * 0.08}
                 key={i}
-                className="relative overflow-hidden group p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-slate-100 hover:border-[#0284c7]/30 hover:shadow-[0_20px_40px_-15px_rgba(2,132,199,0.15)] transition-all duration-500"
+                className="relative overflow-hidden group p-8 md:p-10 rounded-[2.5rem] bg-white border border-slate-100 hover:border-[#0284c7]/30 hover:shadow-[0_40px_80px_-20px_rgba(2,132,199,0.12)] transition-all duration-500"
               >
                 {/* BorderBeam on hover only */}
                 <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity" duration={6} colorFrom="#38bdf8" colorTo="#0284c7" />
                 
                 <div className="flex items-center justify-between mb-8 relative z-10">
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-400 border bg-slate-50 text-[#0284c7] border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white">
-                    <item.icon size={24} strokeWidth={1.5} />
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-slate-50 text-[#0284c7] border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white">
+                    <item.icon size={28} strokeWidth={1.5} />
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full text-[#0284c7] bg-[#0284c7]/5">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full text-[#0284c7] bg-[#0284c7]/5">
                     {item.tag}
                   </span>
                 </div>
                 
-                <h4 className="font-black font-serif text-2xl tracking-tight mb-3 relative z-10 text-[#0f172a]">
+                <h4 className="font-black font-serif text-2xl lg:text-3xl tracking-tight mb-4 relative z-10 text-[#0f172a]">
                   {item.title}
                 </h4>
                 
-                <p className="text-sm md:text-base leading-relaxed font-medium relative z-10 max-w-sm text-slate-500">
+                <p className="text-[15px] md:text-base leading-relaxed font-light relative z-10 max-w-sm text-slate-500">
                   {item.desc}
                 </p>
-                
               </BlurFade>
             ))}
+          </div>
+
+          {/* 🔍 New Section: Our Core Capabilities Bento */}
+          <div className="mb-24 md:mb-32">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-6">Expertise Oversight</div>
+              <h3 className="text-4xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.9]">Why Operators <br /> <span className="text-[#0284c7] italic font-medium">Choose Evolve</span></h3>
+            </div>
+            
+            <div className="grid md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-[250px]">
+              {[
+                { 
+                  title: 'Regulatory Defense', 
+                  desc: 'Proactive audit defense and denial management from clinical experts who know the appeals process inside and out.',
+                  icon: ShieldCheck, 
+                  span: 'col-span-12 md:col-span-3 lg:col-span-4 lg:row-span-2',
+                  bg: 'bg-[#0f172a] text-white',
+                  iconBg: 'bg-white/10 text-[#38bdf8]'
+                },
+                { 
+                  title: '100% Revenue Retention', 
+                  desc: 'We are your management partner, not your revenue sharer. Retain full billing control.',
+                  icon: TrendingUp, 
+                  span: 'col-span-12 md:col-span-3 lg:col-span-4',
+                  bg: 'bg-white text-[#0f172a]',
+                  iconBg: 'bg-[#0284c7]/5 text-[#0284c7]'
+                },
+                { 
+                  title: 'Tiered Management Fees', 
+                  desc: 'As your business matures and internal autonomy grows, our management fees scale down.',
+                  icon: BarChart3, 
+                  span: 'col-span-12 md:col-span-3 lg:col-span-4',
+                  bg: 'bg-[#0284c7] text-white',
+                  iconBg: 'bg-white/10 text-white'
+                },
+                { 
+                  title: 'On-Demand Recruitment', 
+                  desc: 'Never worry about staffing shortages. We handle the direct-hire pipeline for you.',
+                  icon: Users, 
+                  span: 'col-span-12 md:col-span-3 lg:col-span-8',
+                  bg: 'bg-slate-100 text-[#0f172a]',
+                  iconBg: 'bg-white text-[#0284c7]'
+                }
+              ].map((pill, i) => (
+                <BlurFade delay={0.2 + i * 0.1} key={pill.title} className={cn("rounded-[3rem] p-10 flex flex-col justify-between border border-slate-100 hover:scale-[1.02] transition-all duration-500", pill.span, pill.bg)}>
+                  <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center mb-6", pill.iconBg)}>
+                    <pill.icon size={24} />
+                  </div>
+                  <div>
+                    <h4 className="text-xl md:text-2xl font-serif font-black mb-3">{pill.title}</h4>
+                    <p className={cn("text-sm leading-relaxed font-light opacity-60")}>{pill.desc}</p>
+                  </div>
+                </BlurFade>
+              ))}
+            </div>
           </div>
 
           {/* Process Timeline */}

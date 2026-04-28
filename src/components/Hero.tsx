@@ -33,14 +33,13 @@ export default function Hero() {
 
       {/* ── Content ── */}
       <div className="relative z-10 w-full px-6 sm:px-12 md:px-20 lg:px-32 pt-32 sm:pt-36 md:pt-40 pb-16 md:pb-24">
-        <div className="max-w-5xl">
-
+        <div className="w-full">
           {/* Eyebrow — Magic UI AnimatedGradientText (dark variant) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-6 lg:mb-8"
+            className="mb-8"
           >
             <AnimatedGradientTextDark>
               <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse inline-block mr-2" aria-hidden="true" />
@@ -53,11 +52,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-black text-white leading-[0.92] tracking-tighter mb-6 lg:mb-8"
+            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[0.9] tracking-tighter mb-8 max-w-full"
           >
             Changing How<br />
-            <span className="text-[#0284c7] italic">Therapy Functions</span><br />
-            <span className="text-white/55 font-medium text-2xl sm:text-3xl md:text-4xl lg:text-5xl">for LTC Operators.</span>
+            <span className="text-[#0284c7] italic pr-4">Therapy Functions</span><br />
+            <span className="text-white/55 font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl">for LTC Operators.</span>
           </motion.h1>
 
           {/* Subtext */}
@@ -65,7 +64,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg md:text-xl text-white/65 max-w-2xl leading-relaxed mb-12 font-light"
+            className="text-xl md:text-2xl lg:text-3xl text-white/65 max-w-3xl leading-relaxed mb-14 font-light"
           >
             Our unique model lets your facility retain{' '}
             <span className="text-white font-semibold">100% of therapy revenue</span>{' '}
@@ -77,11 +76,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-3 mb-14 md:mb-20"
+            className="flex flex-col sm:flex-row gap-4 mb-16 md:mb-24"
           >
             <Link
               href="/contact"
-              className="group relative inline-flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5 animate-pulse-glow hover:[animation-play-state:paused] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
+              className="group relative inline-flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5 animate-pulse-glow hover:[animation-play-state:paused] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
             >
               {/* Shimmer sweep — Magic UI ShimmerButton pattern */}
               <span
@@ -89,12 +88,12 @@ export default function Hero() {
                 aria-hidden="true"
               />
               <span className="relative">Schedule a Free Consultation</span>
-              <ArrowRight size={16} className="relative group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
+              <ArrowRight size={18} className="relative group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
             </Link>
 
             <Link
               href="/services"
-              className="inline-flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/30 px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
+              className="inline-flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/30 px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
             >
               Explore Our Services
             </Link>
@@ -105,7 +104,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ delay: 0.7, duration: 0.7 }}
-            className="flex flex-wrap gap-8 pt-8 md:pt-10 border-t border-white/10"
+            className="flex flex-wrap gap-10 md:gap-16 pt-10 md:pt-14 border-t border-white/10"
           >
             {[
               { value: '100%', label: 'Revenue Retained' },
@@ -114,10 +113,10 @@ export default function Hero() {
               { value: '15+', label: 'States Served' },
             ].map((stat) => (
               <div key={stat.label} className="group">
-                <div className="text-3xl font-serif font-black text-white mb-1 group-hover:text-[#38bdf8] transition-colors duration-200">
+                <div className="text-4xl md:text-5xl font-serif font-black text-white mb-2 group-hover:text-[#38bdf8] transition-colors duration-200">
                   {stat.value}
                 </div>
-                <div className="text-[10px] text-white/40 font-bold uppercase tracking-[0.25em]">{stat.label}</div>
+                <div className="text-xs md:text-sm text-white/40 font-bold uppercase tracking-[0.25em]">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -125,9 +124,9 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2" aria-hidden="true">
-        <div className="text-white/30 text-[10px] uppercase tracking-[0.3em]">Scroll</div>
-        <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />
+      <div className="absolute bottom-8 right-12 z-10 hidden lg:flex flex-col items-center gap-3" aria-hidden="true">
+        <div className="text-white/30 text-xs font-bold uppercase tracking-[0.3em]" style={{ writingMode: 'vertical-rl' }}>Scroll</div>
+        <div className="w-px h-16 bg-gradient-to-b from-white/30 to-transparent" />
       </div>
     </section>
   );

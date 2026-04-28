@@ -2,23 +2,21 @@
 
 import { motion } from 'framer-motion';
 
-// Map of page-specific YouTube video IDs  
-const videoMap: Record<string, string> = {
-  // Physical therapy / rehabilitation
-  default:   'PMj9gCBQK9Y',
-  services:  'z_CgxsBP5rQ',
-  about:     'PMj9gCBQK9Y',
-  contact:   'z_CgxsBP5rQ',
-  locations: 'PMj9gCBQK9Y',
+// Map of page-specific background abstract/medical images  
+const imageMap: Record<string, string> = {
+  default:   'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80',
+  services:  'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80',
+  about:     'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80',
+  contact:   'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80',
+  locations: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80',
 };
 
 interface PageHeaderProps {
   title: string;
   subtitle?: string;
   italicWord?: string;
-  videoKey?: keyof typeof videoMap;
+  videoKey?: keyof typeof imageMap;
   bgImage?: string;
-  videoUrl?: string;
 }
 
 export default function PageHeader({
@@ -26,35 +24,26 @@ export default function PageHeader({
   subtitle,
   italicWord,
   videoKey = 'default',
-  bgImage = 'https://images.unsplash.com/photo-1519494026892-80ba3f6247fb?auto=format&fit=crop&q=80',
+  bgImage,
 }: PageHeaderProps) {
-  const videoId = videoMap[videoKey] ?? videoMap.default;
+  const imageUrl = bgImage || imageMap[videoKey] || imageMap.default;
 
   return (
     <section className="relative w-full overflow-hidden flex items-center justify-center" style={{ minHeight: '65vh' }}>
-      {/* ── YouTube iframe background ── */}
+      {/* ── Photographic Image background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a]">
-        <iframe
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=${videoId}&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0`}
-          title="Background Video"
-          allow="autoplay; encrypted-media"
-          className="absolute border-0 pointer-events-none"
-          style={{
-            width: '300%',
-            height: '300%',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            filter: 'brightness(0.35) saturate(0.7)',
-          }}
+        <img
+          src={imageUrl}
+          alt={`${title} background cover`}
+          className="absolute inset-0 w-full h-full object-cover opacity-35 filter blur-[2px]"
         />
         {/* Multi-layer gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/80 via-[#0f172a]/40 to-[#0f172a]/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/60 to-[#0f172a]/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/80 via-transparent to-[#0f172a]/80" />
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 container mx-auto px-5 sm:px-6 md:px-12 text-center py-28 sm:py-36 md:py-44">
+      <div className="relative z-10 w-full px-6 sm:px-12 md:px-20 lg:px-32 text-center py-24 sm:py-32 md:py-40">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

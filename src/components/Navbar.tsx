@@ -130,7 +130,7 @@ export default function Navbar() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 4, scale: 0.97 }}
                           transition={{ duration: 0.18, ease: 'easeOut' }}
-                          className="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-slate-200/60 p-2 overflow-hidden"
+                          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-slate-200/60 p-2 overflow-hidden"
                           role="menu"
                         >
                           {link.dropdown.map((item) => (
@@ -141,10 +141,10 @@ export default function Navbar() {
                               className="flex flex-col px-4 py-3 rounded-xl hover:bg-[#0284c7]/8 group/item transition-all duration-150"
                               role="menuitem"
                             >
-                              <span className="text-sm font-semibold text-[#0f172a] group-hover/item:text-[#0284c7] transition-colors duration-150">
+                              <span className="text-sm font-semibold text-[#0f172a] group-hover/item:text-[#0284c7] transition-colors duration-150 whitespace-normal">
                                 {item.name}
                               </span>
-                              <span className="text-xs text-slate-400 mt-0.5">{item.desc}</span>
+                              <span className="text-xs text-slate-400 mt-1 whitespace-normal leading-relaxed">{item.desc}</span>
                             </Link>
                           ))}
                         </motion.div>
@@ -158,7 +158,7 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 className={cn(
-                  'ml-3 flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all duration-200',
+                  'ml-3 flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all duration-200 flex-shrink-0',
                   scrolled
                     ? 'bg-[#0284c7] text-white hover:bg-[#0369a1] shadow-[0_2px_12px_rgba(2,132,199,0.3)]'
                     : 'bg-white/15 backdrop-blur-sm text-white border border-white/25 hover:bg-white/25'

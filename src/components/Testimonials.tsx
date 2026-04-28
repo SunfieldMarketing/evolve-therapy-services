@@ -104,11 +104,8 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
 }
 
 export default function Testimonials() {
-  const row1 = testimonials.slice(0, 3);
-  const row2 = testimonials.slice(2);
-
   return (
-    <section className="relative py-20 md:py-32 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
+    <section className="relative py-20 md:py-24 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
       {/* Background — Magic UI DotPattern dark */}
       <div className="absolute inset-0 dot-pattern-dark opacity-30 pointer-events-none" aria-hidden="true" />
       <div
@@ -117,44 +114,37 @@ export default function Testimonials() {
         aria-hidden="true"
       />
 
-      <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
         {/* Section header */}
-        <BlurFade className="text-center mb-12 md:mb-16">
-          <div className="flex justify-center mb-6">
+        <BlurFade className="text-center mb-10 md:mb-14">
+          <div className="flex justify-center mb-5">
             <AnimatedGradientTextDark>Client Voices</AnimatedGradientTextDark>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-black text-white tracking-tighter leading-[0.95]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-white tracking-tighter leading-[0.95]">
             Real Results,{' '}
             <span className="text-[#0284c7] italic font-medium">Trusted Partners.</span>
           </h2>
-          <p className="text-white/45 text-base md:text-lg max-w-xl mx-auto font-light mt-4">
+          <p className="text-white/45 text-base max-w-xl mx-auto font-light mt-4">
             Hear from LTC professionals who have transformed their therapy programs with Evolve.
           </p>
         </BlurFade>
       </div>
 
-      {/* ── Magic UI Marquee — row 1 ── */}
+      {/* ── Magic UI Marquee — single row ── */}
       <div className="relative">
-        <Marquee pauseOnHover className="py-3 [--duration:35s] [--gap:1rem]">
-          {row1.map((t, i) => (
-            <TestimonialCard key={i} t={t} />
-          ))}
-        </Marquee>
-
-        {/* ── Row 2 reversed ── */}
-        <Marquee pauseOnHover reverse className="py-3 [--duration:40s] [--gap:1rem]">
-          {row2.map((t, i) => (
+        <Marquee pauseOnHover className="py-3 [--duration:50s] [--gap:1.5rem]">
+          {testimonials.map((t, i) => (
             <TestimonialCard key={i} t={t} />
           ))}
         </Marquee>
 
         {/* Edge fade masks */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0f172a] to-transparent z-10" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0f172a] to-transparent z-10" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0f172a] to-transparent z-10" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0f172a] to-transparent z-10" aria-hidden="true" />
       </div>
 
       {/* CTA */}
-      <BlurFade className="text-center mt-12 md:mt-16" delay={0.2}>
+      <BlurFade className="text-center mt-10 md:mt-12" delay={0.2}>
         <Link
           href="/contact"
           className="inline-flex items-center gap-2 bg-[#0284c7] text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-[#0f172a] transition-all duration-200 shadow-[0_0_32px_rgba(2,132,199,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"

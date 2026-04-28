@@ -3,7 +3,9 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageHeader from '@/components/PageHeader';
-import { motion } from 'framer-motion';
+import { BlurFade } from '@/components/magicui/blur-fade';
+import { ShimmerButton } from '@/components/magicui/shimmer-button';
+import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import { 
   Stethoscope, 
   BarChart3, 
@@ -14,7 +16,7 @@ import {
   ShieldAlert,
   Zap,
   CheckCircle,
-  FileText
+  ArrowRight
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -61,7 +63,9 @@ const detailedServices = [
     tags: ['Direct Hire', 'Culture Building'],
     href: '/services/in-house-transition'
   }
-];export default function ServicesPage() {
+];
+
+export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
@@ -72,198 +76,179 @@ const detailedServices = [
         videoKey="services"
       />
 
-      <section className="py-24 md:py-48 relative overflow-hidden">
+      <section className="py-20 md:py-32 relative overflow-hidden">
         {/* Abstract Background Decoration */}
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/3" />
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#0284c7]/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/3" />
         
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="text-center max-w-4xl mx-auto mb-32">
-            <motion.div 
-               initial={{ opacity: 0, y: 10 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-slate-50 border border-slate-100 text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-12"
-            >
-               Tailored Expertise
-            </motion.div>
-            <h2 className="text-5xl md:text-7xl font-serif text-secondary font-black tracking-tighter mb-10 leading-[0.95]">
-              Expert Solutions for <br />
-              <span className="text-primary italic font-medium">LTC Operators</span>
-            </h2>
-            <p className="text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
-              At Evolve, we provide the full spectrum of resources required to deliver the highest possible level of patient care while maximizing operational efficiency.
-            </p>
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="text-center max-w-4xl mx-auto mb-20">
+            <BlurFade delay={0.1}>
+              <div className="mb-6 flex justify-center">
+                 <AnimatedGradientText>Tailored Expertise</AnimatedGradientText>
+              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#0f172a] font-black tracking-tighter mb-8 leading-[0.95]">
+                Expert Solutions for <br />
+                <span className="text-[#0284c7] italic font-medium">LTC Operators</span>
+              </h2>
+            </BlurFade>
+            <BlurFade delay={0.2}>
+              <p className="text-lg md:text-xl text-slate-500 font-light max-w-2xl mx-auto leading-relaxed">
+                At Evolve, we provide the full spectrum of resources required to deliver the highest possible level of patient care while maximizing operational efficiency.
+              </p>
+            </BlurFade>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {detailedServices.map((service, i) => (
-              <Link
-                key={i}
-                href={service.href}
-                className="group block"
-              >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col md:flex-row gap-10 p-12 lg:p-16 rounded-[4rem] bg-slate-50 border border-slate-100 group-hover:bg-white group-hover:shadow-[0_80px_100px_-20px_rgba(0,0,0,0.1)] group-hover:border-primary/20 transition-all duration-700 h-full relative overflow-hidden"
+              <BlurFade delay={0.1 + i * 0.1} key={i}>
+                <Link
+                  href={service.href}
+                  className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] focus-visible:ring-offset-2 rounded-3xl"
                 >
-                  <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />
-                  
-                  <div className="w-16 h-16 bg-white rounded-[1.5rem] flex items-center justify-center text-secondary shrink-0 shadow-2xl border border-slate-50 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                    <service.icon size={32} strokeWidth={1.5} />
-                  </div>
-                  <div className="relative z-10">
-                    <h3 className="text-3xl font-serif font-black text-secondary mb-6 tracking-tight group-hover:text-primary transition-colors duration-500">{service.title}</h3>
-                    <p className="text-slate-500 leading-relaxed mb-10 text-lg font-light">{service.desc}</p>
-                    <div className="flex flex-wrap gap-3">
-                      {service.tags.map(tag => (
-                        <span key={tag} className="px-4 py-1.5 bg-white text-secondary text-[10px] font-black uppercase tracking-[0.2em] rounded-xl border border-slate-200 group-hover:border-primary/20 group-hover:text-primary transition-all">
-                          {tag}
-                        </span>
-                      ))}
+                  <div className="flex flex-col md:flex-row gap-8 p-8 md:p-12 rounded-3xl bg-slate-50 border border-slate-100 group-hover:bg-white group-hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] group-hover:border-[#0284c7]/20 transition-all duration-500 h-full relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#0284c7]/5 rounded-full blur-3xl group-hover:bg-[#0284c7]/10 transition-colors" />
+                    
+                    <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#0f172a] shrink-0 shadow-lg border border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500 z-10">
+                      <service.icon size={26} strokeWidth={1.5} />
+                    </div>
+                    <div className="relative z-10">
+                      <h3 className="text-2xl lg:text-3xl font-serif font-black text-[#0f172a] mb-4 tracking-tight group-hover:text-[#0284c7] transition-colors duration-500">{service.title}</h3>
+                      <p className="text-slate-500 leading-relaxed mb-8 text-sm md:text-base font-light">{service.desc}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {service.tags.map(tag => (
+                          <span key={tag} className="px-3 py-1.5 bg-white text-[#0f172a] text-[9px] font-black uppercase tracking-[0.2em] rounded-lg border border-slate-200 group-hover:border-[#0284c7]/20 group-hover:text-[#0284c7] transition-all">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </motion.div>
-              </Link>
+                </Link>
+              </BlurFade>
             ))}
           </div>
         </div>
       </section>
 
       {/* The Evolution Section */}
-      <section className="py-32 md:py-48 bg-secondary text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-2/3 h-full bg-primary/10 -skew-x-12 translate-x-1/2 blur-[100px]" />
-        <div className="container mx-auto px-4 md:px-6 relative z-10 text-center lg:text-left">
-          <div className="grid lg:grid-cols-2 gap-20 lg:gap-32 items-center">
+      <section className="py-24 md:py-36 bg-[#0f172a] text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-2/3 h-full bg-[#0284c7]/10 -skew-x-12 translate-x-1/2 blur-[80px]" />
+        <div className="container mx-auto px-6 md:px-12 relative z-10 text-center lg:text-left">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div>
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/50 font-black text-[10px] uppercase tracking-[0.4em] mb-12"
-              >
-                The Evolution
-              </motion.div>
-              <h2 className="text-5xl md:text-7xl font-serif font-black mb-12 leading-[0.95] tracking-tighter">
-                Our Three-Tiered <br />
-                <span className="text-primary italic font-medium uppercase text-6xl">Pricing Model</span>
-              </h2>
-              <p className="text-2xl text-white/40 mb-16 leading-relaxed font-light">
-                Our unique approach customizes to your size of business and Evolves as you do. Our models allow price reduction as your business grows internally.
-              </p>
+              <BlurFade delay={0.1} className="mb-10">
+                 <AnimatedGradientText>The Evolution</AnimatedGradientText>
+              </BlurFade>
+              <BlurFade delay={0.2}>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-8 leading-[0.95] tracking-tighter">
+                  Our Three-Tiered <br />
+                  <span className="text-[#38bdf8] italic font-medium uppercase text-3xl md:text-5xl">Pricing Model</span>
+                </h2>
+              </BlurFade>
+              <BlurFade delay={0.3}>
+                <p className="text-lg md:text-xl text-white/60 mb-12 leading-relaxed font-light">
+                  Our unique approach customizes to your size of business and Evolves as you do. Our models allow price reduction as your business grows internally.
+                </p>
+              </BlurFade>
               
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {[
                   { id: '1', label: 'Starter Tier for New Programs', color: 'bg-white/10', text: 'text-white/60' },
-                  { id: '2', label: 'Intermediate Growth Scaling', color: 'bg-primary shadow-[0_0_50px_rgba(14,165,233,0.3)]', text: 'text-white' },
+                  { id: '2', label: 'Intermediate Growth Scaling', color: 'bg-[#0284c7] shadow-[0_0_30px_rgba(2,132,199,0.3)]', text: 'text-white' },
                   { id: '3', label: 'Enterprise Peak Operations', color: 'bg-white/5', text: 'text-white/40' }
-                ].map((tier) => (
-                  <motion.div 
+                ].map((tier, i) => (
+                  <BlurFade 
+                    delay={0.4 + i * 0.1}
                     key={tier.id}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className={`flex items-center gap-6 p-6 rounded-[2.5rem] border border-white/5 transition-all hover:bg-white/5 group`}
+                    className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-5 p-5 rounded-3xl border border-white/5 transition-all hover:bg-white/5 group"
                   >
-                    <div className={`w-14 h-14 ${tier.color} rounded-2xl flex items-center justify-center font-black text-xl`}>
+                    <div className={`w-12 h-12 ${tier.color} rounded-xl flex items-center justify-center font-black text-lg shrink-0`}>
                       {tier.id}
                     </div>
-                    <span className={`text-xl font-bold font-serif ${tier.text}`}>{tier.label}</span>
-                  </motion.div>
+                    <span className={`text-lg font-bold font-serif ${tier.text} self-center`}>{tier.label}</span>
+                  </BlurFade>
                 ))}
               </div>
             </div>
 
-            <div className="relative">
-               <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1 }}
-                  className="bg-white/95 backdrop-blur-3xl border border-white p-16 lg:p-20 rounded-[4rem] shadow-[0_100px_150px_-50px_rgba(0,0,0,0.5)] text-center relative z-10"
-               >
-                  <div className="w-24 h-24 bg-primary text-white rounded-[2rem] flex items-center justify-center mb-10 shadow-2xl mx-auto border-4 border-white">
-                    <Zap size={40} />
+            <BlurFade delay={0.5} className="relative">
+               <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-12 lg:p-16 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] text-center relative z-10 flex flex-col items-center">
+                  <div className="w-20 h-20 bg-[#0284c7] text-white rounded-[1.5rem] flex items-center justify-center mb-8 shadow-2xl mx-auto border-2 border-[#38bdf8]/50">
+                    <Zap size={32} />
                   </div>
-                  <h4 className="text-4xl font-serif font-black text-secondary mb-8 leading-tight">
+                  <h4 className="text-3xl md:text-4xl font-serif font-black text-white mb-6 leading-tight">
                     Already In-House?
                   </h4>
-                  <p className="text-slate-500 mb-12 leading-relaxed text-xl font-light italic">
+                  <p className="text-white/50 mb-10 leading-relaxed text-base font-light italic">
                     "Let Evolve be your needed resource in recruitment, denial management, and data analysis. We can be your expert so you don’t have to be."
                   </p>
-                  <a href="/contact" className="inline-flex w-full bg-secondary hover:bg-primary py-6 rounded-[2rem] justify-center font-black uppercase tracking-[0.2em] text-[10px] text-white transition-all shadow-2xl shadow-black/20">
-                    Get an Expert Analysis
-                  </a>
-               </motion.div>
-               {/* Decorative glow */}
-               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
-            </div>
+                  <Link href="/contact" className="w-full">
+                    <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="w-full justify-center group/btn">
+                      <span className="font-black uppercase tracking-[0.2em] text-[10px] text-white">Get an Expert Analysis</span>
+                    </ShimmerButton>
+                  </Link>
+               </div>
+               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#0284c7]/20 rounded-full blur-[100px] pointer-events-none" />
+            </BlurFade>
           </div>
         </div>
       </section>
 
       {/* Feature Compare */}
-      <section className="py-32 md:py-56 bg-white overflow-hidden relative">
-        <div className="container mx-auto px-4 md:px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-6xl mx-auto"
-          >
-            <div className="bg-slate-50 border border-slate-100 rounded-[5rem] overflow-hidden relative">
+      <section className="py-24 md:py-40 bg-slate-50 overflow-hidden relative">
+        <div className="container mx-auto px-6 md:px-12">
+          <BlurFade delay={0.2} className="max-w-5xl mx-auto">
+            <div className="bg-white border border-slate-100 rounded-[3rem] md:rounded-[4rem] overflow-hidden relative shadow-sm">
                {/* Decorative line */}
-               <div className="absolute top-0 bottom-0 left-1/2 w-px bg-slate-200 hidden lg:block" />
+               <div className="absolute top-0 bottom-0 left-1/2 w-px bg-slate-100 hidden lg:block" />
                
-               <div className="p-16 lg:p-32">
-                  <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif text-secondary text-center mb-24 font-black tracking-tighter">Why Direct-Hire <br /> <span className="text-primary italic font-medium">In-House?</span></h3>
-                  <div className="grid lg:grid-cols-2 gap-20 lg:gap-32">
-                     <div className="space-y-16">
-                        <div className="flex items-start gap-8 group">
-                          <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center shadow-xl border border-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shrink-0">
-                            <CheckCircle size={32} />
+               <div className="p-12 lg:p-20">
+                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#0f172a] text-center mb-16 md:mb-20 font-black tracking-tighter">Why Direct-Hire <br /> <span className="text-[#0284c7] italic font-medium">In-House?</span></h3>
+                  <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+                     <div className="space-y-12">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group">
+                          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-300 shrink-0">
+                            <CheckCircle size={24} />
                           </div>
                           <div>
-                            <div className="font-black text-secondary tracking-[0.3em] uppercase text-[10px] mb-4">Revenue Retention</div>
-                            <p className="text-xl text-slate-500 font-light leading-relaxed">Retain 100% of all therapy revenue instead of paying shares to third-parties.</p>
+                            <div className="font-black text-[#0f172a] tracking-[0.2em] uppercase text-[10px] mb-3">Revenue Retention</div>
+                            <p className="text-base text-slate-500 font-light leading-relaxed">Retain 100% of all therapy revenue instead of paying shares to third-parties.</p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-8 group">
-                          <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center shadow-xl border border-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shrink-0">
-                            <CheckCircle size={32} />
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group">
+                          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-300 shrink-0">
+                            <CheckCircle size={24} />
                           </div>
                           <div>
-                            <div className="font-black text-secondary tracking-[0.3em] uppercase text-[10px] mb-4">Culture Continuity</div>
-                            <p className="text-xl text-slate-500 font-light leading-relaxed">Your staff grows internally towards regional positions and remains as YOUR team.</p>
+                            <div className="font-black text-[#0f172a] tracking-[0.2em] uppercase text-[10px] mb-3">Culture Continuity</div>
+                            <p className="text-base text-slate-500 font-light leading-relaxed">Your staff grows internally towards regional positions and remains as YOUR team.</p>
                           </div>
                         </div>
                      </div>
-                     <div className="space-y-16">
-                        <div className="flex items-start gap-8 group">
-                          <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center shadow-xl border border-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shrink-0">
-                            <CheckCircle size={32} />
+                     <div className="space-y-12">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group">
+                          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-300 shrink-0">
+                            <CheckCircle size={24} />
                           </div>
                           <div>
-                            <div className="font-black text-secondary tracking-[0.3em] uppercase text-[10px] mb-4">Operational Growth</div>
-                            <p className="text-xl text-slate-500 font-light leading-relaxed">Employee engagement facilitates exceptional outcomes for residents.</p>
+                            <div className="font-black text-[#0f172a] tracking-[0.2em] uppercase text-[10px] mb-3">Operational Growth</div>
+                            <p className="text-base text-slate-500 font-light leading-relaxed">Employee engagement facilitates exceptional outcomes for residents.</p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-8 group">
-                          <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center shadow-xl border border-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shrink-0">
-                            <CheckCircle size={32} />
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group">
+                          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-300 shrink-0">
+                            <CheckCircle size={24} />
                           </div>
                           <div>
-                            <div className="font-black text-secondary tracking-[0.3em] uppercase text-[10px] mb-4">Clinical Education</div>
-                            <p className="text-xl text-slate-500 font-light leading-relaxed">Customized CEU/education for therapists and LTC staff as a premium service.</p>
+                            <div className="font-black text-[#0f172a] tracking-[0.2em] uppercase text-[10px] mb-3">Clinical Education</div>
+                            <p className="text-base text-slate-500 font-light leading-relaxed">Customized CEU/education for therapists and LTC staff as a premium service.</p>
                           </div>
                         </div>
                      </div>
                   </div>
                </div>
             </div>
-          </motion.div>
+          </BlurFade>
         </div>
       </section>
 

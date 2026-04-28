@@ -61,7 +61,7 @@ export default function Navbar() {
         )}
         aria-label="Main navigation"
       >
-        <div className="container mx-auto px-5 sm:px-6 md:px-12">
+        <div className="w-full mx-auto px-6 sm:px-12 md:px-20 lg:px-32">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link

@@ -32,15 +32,15 @@ export default function Hero() {
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 w-full container mx-auto px-5 sm:px-6 md:px-12 pt-32 sm:pt-36 md:pt-40 pb-16 md:pb-24">
-        <div className="max-w-4xl">
+      <div className="relative z-10 w-full px-6 sm:px-12 md:px-20 lg:px-32 pt-32 sm:pt-36 md:pt-40 pb-16 md:pb-24">
+        <div className="max-w-5xl">
 
           {/* Eyebrow — Magic UI AnimatedGradientText (dark variant) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8"
+            className="mb-6 lg:mb-8"
           >
             <AnimatedGradientTextDark>
               <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse inline-block mr-2" aria-hidden="true" />
@@ -50,14 +50,14 @@ export default function Hero() {
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-serif text-5xl sm:text-7xl lg:text-[88px] font-black text-white leading-[0.92] tracking-tighter mb-8"
+            className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-black text-white leading-[0.92] tracking-tighter mb-6 lg:mb-8"
           >
             Changing How<br />
             <span className="text-[#0284c7] italic">Therapy Functions</span><br />
-            <span className="text-white/55 font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl">for LTC Operators.</span>
+            <span className="text-white/55 font-medium text-2xl sm:text-3xl md:text-4xl lg:text-5xl">for LTC Operators.</span>
           </motion.h1>
 
           {/* Subtext */}

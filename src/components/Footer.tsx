@@ -39,33 +39,40 @@ export default function Footer() {
       {/* Subtle background glow */}
       <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-[#0284c7]/5 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
 
-      {/* ── Pre-footer CTA banner — v0.dev "Dark Agency" pattern ── */}
-      <div className="border-b border-white/10">
-        <div className="container mx-auto px-5 sm:px-6 md:px-12 py-14 md:py-20">
+      {/* ── Expanded Pre-footer CTA banner ── */}
+      <div className="relative border-b border-white/10 overflow-hidden bg-[#0f172a]">
+        <div className="absolute inset-0 dot-pattern-dark opacity-30 pointer-events-none" aria-hidden="true" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0284c7]/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3" aria-hidden="true" />
+
+        <div className="container mx-auto px-5 sm:px-6 md:px-12 py-24 md:py-32 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8"
+            className="max-w-4xl mx-auto"
           >
-            <div className="max-w-xl">
-              <div className="text-[#0284c7] text-xs font-black uppercase tracking-[0.3em] mb-3">Ready to Evolve?</div>
-              <h3 className="text-3xl md:text-4xl font-serif font-black tracking-tighter leading-[0.95] text-white">
-                Start with a free facility cost analysis — no commitment required.
-              </h3>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+               Ready to Evolve?
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black tracking-tighter leading-[0.95] text-white mb-8">
+              Transform your facility's therapy operations <br />
+              <span className="text-[#38bdf8] italic font-medium">with zero legacy string attached.</span>
+            </h3>
+            <p className="text-xl text-white/60 mb-12 font-light leading-relaxed max-w-2xl mx-auto">
+              Retain 100% of all therapy revenue instead of paying shares to third-parties. Start with a comprehensive, data-driven overview of your facility's current therapy health.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-[#0369a1] text-white px-7 py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all duration-200 shadow-[0_0_30px_rgba(2,132,199,0.3)]"
+                className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-white hover:text-[#0f172a] text-white px-8 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_40px_rgba(2,132,199,0.4)]"
               >
-                Get Free Analysis <ArrowRight size={15} aria-hidden="true" />
+                Request Free Analysis <ArrowRight size={16} aria-hidden="true" className="ml-2" />
               </Link>
               <a
                 href="tel:8883865820"
-                className="inline-flex items-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/30 px-7 py-4 rounded-xl font-bold text-sm transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/40 px-8 py-5 rounded-full font-bold text-xs uppercase transition-all duration-300"
               >
-                <Phone size={14} aria-hidden="true" /> (888) 386-5820
+                <Phone size={15} aria-hidden="true" /> (888) 386-5820
               </a>
             </div>
           </motion.div>

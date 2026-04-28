@@ -81,18 +81,18 @@ export default function Home() {
       <Hero />
 
       {/* ── Clinical Excellence ── */}
-      <section className="py-20 md:py-36 bg-white border-b border-slate-100 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-72 h-72 md:w-[400px] md:h-[400px] bg-[#0284c7]/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-72 h-72 md:w-[500px] md:h-[500px] bg-[#0284c7]/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
 
           {/* Section Header */}
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 md:mb-20">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 md:mb-16">
             <BlurFade delay={0.1}>
               <div className="mb-5">
                 <AnimatedGradientText>Clinical Excellence</AnimatedGradientText>
               </div>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-black text-[#0f172a] leading-[0.95] tracking-tighter">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-[#0f172a] leading-[0.95] tracking-tighter">
                 Modern Therapy<br />
                 <span className="text-[#0284c7] italic font-medium">Managed with Care</span>
               </h2>
@@ -103,43 +103,42 @@ export default function Home() {
           </div>
 
           {/* Stats Row */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-24">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-16">
             {clinicalStats.map((stat, i) => (
               <BlurFade
                 delay={0.1 + i * 0.1}
                 key={i}
-                className="group relative p-5 md:p-8 rounded-2xl md:rounded-3xl bg-[#0f172a] text-white flex flex-col justify-between min-h-[140px] md:min-h-[180px] overflow-hidden"
+                className="group relative p-5 md:p-6 rounded-2xl md:rounded-3xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col justify-between min-h-[140px] md:min-h-[160px] overflow-hidden"
               >
-                <BorderBeam duration={8} delay={i * 2} />
-                <stat.icon size={20} className="relative z-10 text-[#0284c7] mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300" />
+                <stat.icon size={20} className="relative z-10 text-[#0284c7] mb-3 group-hover:-translate-y-1 transition-transform duration-300" />
                 <div className="relative z-10">
-                  <div className="text-3xl md:text-4xl font-serif font-black text-white mb-1">
+                  <div className="text-3xl md:text-4xl font-serif font-black text-[#0f172a] mb-1">
                     <NumberTicker value={stat.value} suffix={stat.suffix} delay={0.5 + i * 0.1} />
                   </div>
-                  <div className="text-[10px] md:text-xs font-black text-white/40 uppercase tracking-widest">{stat.label}</div>
+                  <div className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest">{stat.label}</div>
                 </div>
               </BlurFade>
             ))}
           </div>
 
           {/* Service Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-16 md:mb-24">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16">
             {clinicalServices.map((item, i) => (
               <BlurFade
                 delay={0.1 + i * 0.08}
                 key={i}
-                className="relative overflow-hidden group p-6 md:p-8 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 hover:border-[#0284c7]/30 hover:shadow-xl hover:bg-white transition-all duration-500"
+                className="relative overflow-hidden group p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-slate-100 hover:border-[#0284c7]/30 hover:shadow-xl transition-all duration-500"
               >
                 {/* BorderBeam on hover only, for inner services grid */}
                 <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity" duration={6} colorFrom="#38bdf8" colorTo="#0284c7" />
                 <div className="flex items-center justify-between mb-5 relative z-10">
-                  <div className="w-12 h-12 bg-[#0284c7]/10 text-[#0284c7] rounded-xl flex items-center justify-center group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-400">
-                    <item.icon size={22} strokeWidth={1.5} />
+                  <div className="w-12 h-12 bg-[#0284c7]/5 text-[#0284c7] rounded-xl flex items-center justify-center group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-400">
+                    <item.icon size={20} strokeWidth={2} />
                   </div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-[#0284c7] bg-[#0284c7]/10 px-3 py-1.5 rounded-full">{item.tag}</span>
+                  <span className="text-[9px] font-black uppercase tracking-widest text-[#0284c7] bg-[#0284c7]/5 px-3 py-1.5 rounded-full">{item.tag}</span>
                 </div>
-                <h4 className="font-black text-[#0f172a] font-serif text-lg md:text-xl tracking-tight mb-3 relative z-10">{item.title}</h4>
-                <p className="text-sm text-slate-400 leading-relaxed font-medium relative z-10">{item.desc}</p>
+                <h4 className="font-black text-[#0f172a] font-serif text-lg md:text-xl tracking-tight mb-2 relative z-10">{item.title}</h4>
+                <p className="text-sm text-slate-500 leading-relaxed font-normal relative z-10">{item.desc}</p>
               </BlurFade>
             ))}
           </div>

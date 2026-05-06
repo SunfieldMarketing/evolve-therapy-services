@@ -127,8 +127,8 @@ export default function ServicesPage() {
       
       {/* ── Premium Editorial Hero ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
-        {/* Background Layer */}
-        <div className="absolute inset-0 z-0">
+        {/* Background Layer (Z-10) */}
+        <div className="absolute inset-0 z-10">
            <div className={cn(
              "absolute inset-0 z-10 transition-opacity duration-[2s] ease-in-out bg-[#0f172a]",
              videoStarted ? "opacity-100" : "opacity-0"
@@ -150,12 +150,20 @@ export default function ServicesPage() {
            <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80" />
            <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
            <div className="absolute inset-0 z-35 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
+
+           {/* EVOLVE Watermark (Placed behind content in the background stack) */}
+           <div className="absolute right-[-10vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex z-20">
+              <span className="text-white/[0.03] text-[30vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap h-full flex items-center justify-center text-center">
+                 EVOLVE
+              </span>
+           </div>
         </div>
 
-        {/* Content Area */}
+        {/* Content Area (Z-40) - Now explicitly in front of the watermark */}
         <div className="relative z-40 container mx-auto px-6 lg:px-12 -mt-24">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-32">
             
+            {/* Left Hub */}
             <div className="w-full lg:w-[65%]">
                <BlurFade delay={0.2}>
                   <div className="flex items-center gap-8 mb-16">
@@ -183,14 +191,15 @@ export default function ServicesPage() {
                </BlurFade>
             </div>
 
-            <div className="w-full lg:w-[30%]">
+            {/* Right Cards (Explicitly in front of Watermark) */}
+            <div className="w-full lg:w-[30%] relative">
                <BlurFade delay={0.4}>
                   <div className="space-y-16">
                      {[
                         { title: 'Visionary Hub', desc: 'Creative therapy consulting model built for modern long-term care leadership.', icon: Sparkles },
                         { title: 'Compassion', desc: 'Clinical passion that drives functional results and facility operational health.', icon: Heart }
                      ].map((pill, i) => (
-                        <div key={i} className="p-12 rounded-[4rem] bg-white/[0.01] border border-white/5 backdrop-blur-[120px] hover:bg-white/[0.05] transition-all duration-1000 group">
+                        <div key={i} className="p-12 rounded-[4rem] bg-white/[0.01] border border-white/5 backdrop-blur-[120px] hover:bg-white/[0.05] transition-all duration-1000 group shadow-2xl relative z-50">
                            <div className="flex items-center gap-10 mb-8">
                               <div className="w-16 h-16 rounded-3xl bg-[#0284c7] flex items-center justify-center text-white shadow-[0_15px_40px_rgba(2,132,199,0.3)] group-hover:scale-110 group-hover:rotate-6 transition-all duration-700">
                                  <pill.icon size={28} />
@@ -206,15 +215,8 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Section-Filling Watermark: EVOLVE (Calibrated to Fill Height) */}
-        <div className="absolute right-[-8vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
-           <span className="text-white/[0.03] text-[22vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap h-full flex items-center justify-center text-center">
-              EVOLVE
-           </span>
-        </div>
-
         {/* Bottom Fade Mask */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0f172a] to-transparent z-40" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0f172a] to-transparent z-50" />
       </section>
 
       {/* ── Services Showcase ── */}

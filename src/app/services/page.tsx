@@ -117,7 +117,8 @@ export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVideoStarted(true), 3500);
+    // Increased timeout to ensure video is fully playing and buffered past the initial UI flash
+    const timer = setTimeout(() => setVideoStarted(true), 4500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -125,79 +126,84 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Redesigned Editorial Hero (Widescreen Optimized) ── */}
+      {/* ── Editorial Hero (Aggressive Video Masking) ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
-        {/* Background Layer: Ultra-Wide Optimized Video Container */}
+        {/* Background Layer: Ultra-Scaled Video to hide ALL YouTube UI */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
              "absolute inset-0 z-10 transition-opacity duration-[3s] ease-in-out bg-[#0f172a]",
-             videoStarted ? "opacity-100" : "opacity-100"
+             videoStarted ? "opacity-100" : "opacity-0"
            )}>
-             {/* 200% Scale to guarantee no black bars on ultra-widescreens and hide all UI */}
-             <div className="absolute inset-0 w-[200vw] h-[200vh] -top-[50vh] -left-[50vw] pointer-events-none select-none">
+             {/* 
+                Aggressive 250% Scale and precise cropping to move all UI elements (Title, Logos, Controls) 
+                completely out of the viewport. This is the only way to guarantee a "clean" loop.
+             */}
+             <div className="absolute inset-0 w-[250vw] h-[250vh] -top-[75vh] -left-[75vw] pointer-events-none select-none">
                 <iframe
-                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5&enablejsapi=1"
+                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=10&enablejsapi=1"
                   title="Services cinematic"
                   allow="autoplay; encrypted-media"
-                  className="w-full h-full border-0 opacity-40 contrast-[1.1] saturate-[0.8]"
-                  onLoad={() => setTimeout(() => setVideoStarted(true), 1500)}
+                  className="w-full h-full border-0 opacity-40 contrast-[1.2] saturate-[0.7]"
                 />
              </div>
+             {/* Interaction Blocker */}
              <div className="absolute inset-0 z-20 bg-transparent cursor-default" />
            </div>
 
-           {/* Editorial Gradient Overlays (Synchronized with Homepage) */}
-           <div className="absolute inset-0 z-30 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />
-           <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/60" />
-           <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/90 via-transparent to-[#0f172a]/20" />
-           
-           {/* Animated Atmospheric Elements */}
-           <div className="absolute top-1/4 right-0 w-[40vw] h-[40vw] bg-[#0284c7]/5 rounded-full blur-[120px] animate-pulse" />
+           {/* Gradient Effects & Overlays */}
+           <div className="absolute inset-0 z-30 opacity-50 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 60%)' }} />
+           <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/70" />
+           <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a] via-transparent to-[#0f172a]/30" />
         </div>
 
-        {/* Content Area: Pushed Up via justify-center and negative margin */}
-        <div className="relative z-40 container mx-auto px-6 lg:px-12 -mt-16">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+        {/* Content Area: Enhanced Spacing & Visual Hierarchy */}
+        <div className="relative z-40 container mx-auto px-6 lg:px-12 -mt-20">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
             
-            {/* Left Column: Strategic Statement */}
+            {/* Left Column: Strategic Hub */}
             <div className="w-full lg:w-[60%]">
                <BlurFade delay={0.2}>
-                  <div className="flex items-center gap-4 mb-8">
-                     <div className="w-12 h-[1px] bg-[#0284c7]" />
-                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.5em]">Strategic Partnership</span>
+                  <div className="flex items-center gap-6 mb-12">
+                     <div className="w-16 h-[1px] bg-[#0284c7]" />
+                     <span className="text-[#38bdf8] font-black uppercase text-[11px] tracking-[0.6em]">Clinical Partnership Model</span>
                   </div>
-                  <h1 className="text-5xl md:text-[6vw] lg:text-[5.5vw] font-serif font-black text-white leading-[0.85] tracking-tighter mb-10 drop-shadow-2xl">
-                     <span className="block">CLINICAL</span>
+                  
+                  <h1 className="text-6xl md:text-[7vw] lg:text-[6vw] font-serif font-black text-white leading-[0.85] tracking-tighter mb-16 drop-shadow-2xl">
+                     <span className="block mb-4">CLINICAL</span>
                      <span className="text-[#0284c7] italic block ml-[0.1em]">STRATEGY.</span>
                   </h1>
-                  <div className="max-w-xl">
-                     <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed mb-10 border-l-2 border-[#0284c7]/30 pl-8 italic">
+
+                  <div className="max-w-2xl">
+                     <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed mb-20 border-l-4 border-[#0284c7] pl-10 italic">
                         "Empowering operators to take their therapy teams in-house with clinically proven education and compliance oversight."
                      </p>
+                     
                      <Link href="/contact" className="inline-flex group">
-                        <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.5rem" className="px-10 py-5">
-                           <span className="font-black uppercase tracking-[0.2em] text-[11px] text-white">Start Your Evolution</span>
-                           <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                        <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-12 py-6">
+                           <span className="font-black uppercase tracking-[0.3em] text-[13px] text-white">Start Your Evolution</span>
+                           <ArrowRight size={18} className="ml-4 group-hover:translate-x-3 transition-transform" />
                         </ShimmerButton>
                      </Link>
                   </div>
                </BlurFade>
             </div>
 
-            {/* Right Column: Floating Pillars */}
-            <div className="w-full lg:w-[30%]">
+            {/* Right Column: High-Impact Visual Pills */}
+            <div className="w-full lg:w-[32%]">
                <BlurFade delay={0.4}>
-                  <div className="space-y-6">
+                  <div className="space-y-10">
                      {[
-                        { title: 'Vision', desc: 'Creative therapy consulting model.', icon: Sparkles },
-                        { title: 'Compassion', desc: 'Leadership driven by clinical passion.', icon: Heart }
+                        { title: 'Visionary Strategy', desc: 'Creative therapy consulting through leadership.', icon: Sparkles },
+                        { title: 'Compassion First', desc: 'Leadership driven by clinical passion and results.', icon: Heart }
                      ].map((pill, i) => (
-                        <div key={i} className="p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/5 backdrop-blur-3xl hover:bg-white/[0.07] transition-all duration-700">
-                           <div className="flex items-center gap-6 mb-4">
-                              <pill.icon size={18} className="text-[#0284c7]" />
-                              <h4 className="text-[10px] font-black text-white uppercase tracking-widest">{pill.title}</h4>
+                        <div key={i} className="p-10 rounded-[2.5rem] bg-white/[0.04] border border-white/10 backdrop-blur-3xl hover:bg-white/[0.08] transition-all duration-700 group">
+                           <div className="flex items-center gap-8 mb-6">
+                              <div className="w-14 h-14 rounded-2xl bg-[#0284c7] flex items-center justify-center text-white shadow-[0_0_30px_rgba(2,132,199,0.3)] group-hover:scale-110 transition-transform">
+                                 <pill.icon size={24} />
+                              </div>
+                              <h4 className="text-[12px] font-black text-white uppercase tracking-[0.3em]">{pill.title}</h4>
                            </div>
-                           <p className="text-white/30 text-xs font-light leading-relaxed italic">"{pill.desc}"</p>
+                           <p className="text-white/30 text-sm font-light leading-relaxed italic pl-22">"{pill.desc}"</p>
                         </div>
                      ))}
                   </div>
@@ -206,17 +212,15 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Short Watermark */}
-        <div className="absolute right-[-2vw] top-1/2 -translate-y-1/2 rotate-90 pointer-events-none hidden xl:block">
-           <span className="text-white/[0.03] text-[18vw] font-serif font-black tracking-tighter leading-none select-none uppercase">
-              EVOLVE
+        {/* Section-Filling Vertical Watermark */}
+        <div className="absolute right-[-4vw] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
+           <span className="text-white/[0.03] text-[22vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap">
+              EVOLVE LEADERSHIP
            </span>
         </div>
 
-        {/* Subtle Scroll Down */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3 animate-bounce">
-           <ChevronDown size={14} className="text-[#0284c7]" />
-        </div>
+        {/* Subtle Bottom Glow */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0f172a] to-transparent z-40" />
       </section>
 
       {/* ── Services Showcase ── */}

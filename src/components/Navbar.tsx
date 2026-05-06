@@ -15,10 +15,10 @@ const links = [
     dropdown: [
       { name: 'Therapy Outcomes & PDPM', href: '/services/optimal-therapy-outcomes', desc: 'PDPM case mix optimization' },
       { name: 'Medicaid Case Mix', href: '/services/medicaid-case-mix-analysis', desc: 'Quality measure analysis' },
-      { name: 'SNF Staff Education', href: '/services/snf-staff-education', desc: 'CEU & clinical training' },
+      { name: 'Reimbursement Optimization', href: '/services/reimbursement-optimization', desc: 'MPPR & financial success' },
       { name: 'Therapy Cost Reduction', href: '/services/therapy-cost-reduction', desc: 'Tiered cost savings' },
-      { name: 'Denial Management', href: '/services/denial-management', desc: 'Audit & appeals support' },
       { name: 'In-House Transition', href: '/services/in-house-transition', desc: 'Seamless model migration' },
+      { name: 'In-House Resource Hub', href: '/services/in-house-resource-hub', desc: 'Support for existing programs' },
     ],
   },
   { name: 'Locations', href: '/locations' },
@@ -28,19 +28,13 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    const close = () => setIsOpen(false);
-    window.addEventListener('popstate', close);
-    return () => window.removeEventListener('popstate', close);
   }, []);
 
   // Prevent body scroll when mobile menu is open
@@ -51,7 +45,6 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* ── Liquid glass nav bar — v0.dev "Modern Agency" pattern ── */}
       <nav
         className={cn(
           'transition-all duration-300 ease-out',
@@ -84,7 +77,7 @@ export default function Navbar() {
               {links.map((link) => (
                 <div
                   key={link.name}
-                  className="relative"
+                  className="relative flex items-center"
                   onMouseEnter={() => link.dropdown && setDropdownOpen(true)}
                   onMouseLeave={() => link.dropdown && setDropdownOpen(false)}
                   ref={link.dropdown ? dropdownRef : undefined}
@@ -92,12 +85,6 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    onClick={(e) => {
-                      if (link.dropdown) {
-                        e.preventDefault();
-                        setDropdownOpen(!dropdownOpen);
-                      }
-                    }}
                     className={cn(
                       'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none',
                       scrolled
@@ -107,9 +94,10 @@ export default function Navbar() {
                     role="menuitem"
                   >
                     {link.name}
+                    {link.dropdown && <ChevronDown size={14} className={cn("transition-transform duration-200", dropdownOpen && "rotate-180")} />}
                   </Link>
 
-                  {/* Dropdown — v0.dev card-centric pattern */}
+                  {/* Dropdown */}
                   {link.dropdown && (
                     <AnimatePresence>
                       {dropdownOpen && (
@@ -129,12 +117,12 @@ export default function Navbar() {
                                 className="flex flex-col px-4 py-3 rounded-xl hover:bg-[#0284c7]/8 group/item transition-all duration-150"
                                 role="menuitem"
                               >
-                              <span className="text-sm font-bold text-[#0f172a] group-hover/item:text-[#0284c7] transition-colors duration-150 whitespace-normal leading-tight">
-                                {item.name}
-                              </span>
-                              <span className="text-[11px] text-slate-500 mt-1 whitespace-normal leading-relaxed">{item.desc}</span>
-                            </Link>
-                          ))}
+                                <span className="text-sm font-bold text-[#0f172a] group-hover/item:text-[#0284c7] transition-colors duration-150 whitespace-normal leading-tight">
+                                  {item.name}
+                                </span>
+                                <span className="text-[11px] text-slate-500 mt-1 whitespace-normal leading-relaxed">{item.desc}</span>
+                              </Link>
+                            ))}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -178,83 +166,85 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ── Mobile Drawer — editorial dark overlay style ── */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden fixed inset-0 z-40 bg-[#0f172a]/60 backdrop-blur-sm"
+              className="lg:hidden fixed inset-0 z-40 bg-[#0f172a]/60 backdrop-blur-sm"
               onClick={() => setIsOpen(false)}
-              aria-hidden="true"
             />
 
-            {/* Drawer panel */}
             <motion.div
               id="mobile-menu"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="md:hidden fixed top-0 right-0 bottom-0 z-50 w-[85vw] max-w-sm bg-[#0f172a] flex flex-col overflow-y-auto"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation"
+              className="lg:hidden fixed top-0 right-0 bottom-0 z-50 w-[85vw] max-w-sm bg-[#0f172a] flex flex-col overflow-y-auto"
             >
-              {/* Drawer header space to account for fixed toggle */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 min-h-[80px]">
-              </div>
+              <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 min-h-[80px]" />
 
-              {/* Links */}
-              <nav className="flex flex-col px-4 py-6 gap-1 flex-1" aria-label="Mobile links">
+              <nav className="flex flex-col px-4 py-6 gap-1 flex-1">
                 {links.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="px-4 py-3.5 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                {/* Services sub-links on mobile */}
-                <div className="mt-2 px-4 py-2">
-                  <div className="text-[10px] font-black text-[#38bdf8] uppercase tracking-widest mb-3">Our Services</div>
-                  <div className="flex flex-col gap-3">
-                    {links.find(l => l.dropdown)?.dropdown?.map((item) => (
+                  <div key={link.name} className="flex flex-col">
+                    <div className="flex items-center justify-between">
                       <Link
-                        key={item.name}
-                        href={item.href}
+                        href={link.href}
                         onClick={() => setIsOpen(false)}
-                        className="py-1 flex flex-col group/mob text-white"
+                        className="px-4 py-3.5 flex-1 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150"
                       >
-                        <span className="text-sm font-semibold group-hover/mob:text-[#38bdf8] transition-colors">{item.name}</span>
-                        <span className="text-[11px] text-white/40 mt-0.5">{item.desc}</span>
+                        {link.name}
                       </Link>
-                    ))}
+                      {link.dropdown && (
+                        <button 
+                          onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                          className="p-4 text-white/40 hover:text-white"
+                        >
+                          <ChevronDown size={20} className={cn("transition-transform", mobileDropdownOpen && "rotate-180")} />
+                        </button>
+                      )}
+                    </div>
+
+                    {link.dropdown && mobileDropdownOpen && (
+                      <motion.div 
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="flex flex-col pl-4 gap-2 mb-4"
+                      >
+                        {link.dropdown.map((item) => (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className="px-4 py-2 flex flex-col group/mob"
+                          >
+                            <span className="text-sm font-semibold text-white group-hover/mob:text-[#38bdf8] transition-colors">{item.name}</span>
+                            <span className="text-[11px] text-white/40 mt-0.5">{item.desc}</span>
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
                   </div>
-                </div>
+                ))}
               </nav>
 
-              {/* Bottom CTA */}
               <div className="px-6 py-6 border-t border-white/10 space-y-3">
                 <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#0284c7] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#0369a1] transition-colors"
                 >
-                  Contact Us <ArrowUpRight size={14} aria-hidden="true" />
+                  Contact Us <ArrowUpRight size={14} />
                 </Link>
                 <a
                   href="tel:8883865820"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 border border-white/15 text-white/70 rounded-xl font-medium text-sm transition-colors hover:border-white/30 hover:text-white"
+                  className="flex items-center justify-center gap-2 w-full py-3.5 border border-white/15 text-white/70 rounded-xl font-medium text-sm"
                 >
-                  <Phone size={14} aria-hidden="true" /> (888) 386-5820
+                  <Phone size={14} /> (888) 386-5820
                 </a>
               </div>
             </motion.div>

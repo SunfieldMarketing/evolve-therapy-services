@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import WhyEvolve from '@/components/WhyEvolve';
-import Pricing from '@/components/Pricing';
 import USAMap from '@/components/USAMap';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
@@ -195,8 +194,6 @@ export default function Home() {
       <WhyEvolve />
 
       <Services />
-
-      <Pricing />
 
       {/* ── Testimonials ── */}
       <Testimonials />

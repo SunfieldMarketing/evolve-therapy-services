@@ -3,6 +3,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageHeader from '@/components/PageHeader';
+import Pricing from '@/components/Pricing';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
@@ -14,50 +15,43 @@ import {
   LineChart, 
   Users2, 
   ClipboardCheck,
-  ShieldAlert,
   Zap,
   CheckCircle,
   ArrowRight,
   TrendingUp,
-  Phone
+  Phone,
+  Target
 } from 'lucide-react';
 import Link from 'next/link';
 
 const detailedServices = [
   {
     title: 'Optimal Therapy Outcomes',
-    desc: 'Clinical analysis for PDPM case mix efficiency-opportunity and comprehensive business intelligence customized to your market market dynamics.',
+    desc: 'Clinical Analysis for PDPM case mix efficiency-opportunity and comprehensive business intelligence customized to your market market dynamics.',
     icon: Stethoscope,
     tags: ['PDPM Efficiency', 'Clinical Strategy'],
     href: '/services/optimal-therapy-outcomes'
   },
   {
-    title: 'Medicaid Case Mix Analysis',
+    title: 'Case Mix & Quality Measures',
     desc: 'Deep education and analysis of your site’s Quality Measures and case mix efficiency ensuring peak performance in reimbursement.',
     icon: ClipboardCheck,
     tags: ['Quality Measures', 'Compliance'],
     href: '/services/medicaid-case-mix-analysis'
   },
   {
-    title: 'SNF Staff Education',
-    desc: 'Professional training for your SNF staff, marketing team, and administration to foster seamless collaboration and operational excellence.',
-    icon: GraduationCap,
-    tags: ['Workforce Training', 'LTC Education'],
-    href: '/services/snf-staff-education'
+    title: 'Reimbursement Optimization',
+    desc: 'Progressive programs focused on MPPR effects and optimizing therapy service reimbursement across LTC and Outpatient environments.',
+    icon: Target,
+    tags: ['MPPR Strategy', 'Financial Success'],
+    href: '/services/reimbursement-optimization'
   },
   {
     title: 'Therapy Cost Reduction',
-    desc: 'Optimizing staffing models and clinical discharge planning processes for long-term operational success and stability.',
+    desc: 'Optimizing staffing models and clinical discharge planning processes for long-term operational success and fiscal stability.',
     icon: LineChart,
     tags: ['Operational Success', 'Fiscally Responsible'],
     href: '/services/therapy-cost-reduction'
-  },
-  {
-    title: 'Denial Management',
-    desc: 'Expert resource in recruitment, denial management, unlimited therapy education, and real-time clinical data analysis.',
-    icon: ShieldAlert,
-    tags: ['Risk Mitigation', 'Data Analysis'],
-    href: '/services/denial-management'
   },
   {
     title: 'In-House Transition',
@@ -65,6 +59,13 @@ const detailedServices = [
     icon: Users2,
     tags: ['Direct Hire', 'Culture Building'],
     href: '/services/in-house-transition'
+  },
+  {
+    title: 'In-House Resource Hub',
+    desc: 'Expert clinical resource in recruitment, denial management, unlimited therapy education, and real-time data analysis for in-house teams.',
+    icon: GraduationCap,
+    tags: ['Risk Mitigation', 'Data Analysis'],
+    href: '/services/in-house-resource-hub'
   }
 ];
 
@@ -75,28 +76,23 @@ export default function ServicesPage() {
       <PageHeader 
         title="Our" 
         italicWord="Services" 
-        subtitle="Bridging the gap for operators who want to truly EVOLVE their therapy programs to the next level."
+        subtitle="At Evolve we provide all of the services that you require to provide your patients with the highest possible level of care and service."
         videoKey="services"
       />
 
-      <section className="py-20 md:py-32 relative overflow-hidden">
-        {/* Abstract Background Decoration */}
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#0284c7]/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/3" />
-        
+      {/* Intro Section */}
+      <section className="py-20 md:py-32 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="text-center max-w-4xl mx-auto mb-20">
+          <div className="max-w-4xl mx-auto text-center mb-24">
             <BlurFade delay={0.1}>
-              <div className="mb-6 flex justify-center">
-                 <AnimatedGradientText>Tailored Expertise</AnimatedGradientText>
-              </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#0f172a] font-black tracking-tighter mb-8 leading-[0.95]">
-                Expert Solutions for <br />
-                <span className="text-[#0284c7] italic font-medium">LTC Operators</span>
+              <h2 className="text-4xl md:text-6xl font-serif text-[#0f172a] font-black tracking-tighter mb-8 leading-[0.95]">
+                Bridging the Gap to <br />
+                <span className="text-[#0284c7] italic font-medium">Exceptional Operations</span>
               </h2>
             </BlurFade>
             <BlurFade delay={0.2}>
-              <p className="text-lg md:text-xl text-slate-500 font-light max-w-2xl mx-auto leading-relaxed">
-                At Evolve, we provide the full spectrum of resources required to deliver the highest possible level of patient care while maximizing operational efficiency.
+              <p className="text-xl text-slate-500 font-light leading-relaxed">
+                It is our vision to assist operators who want to take their therapy teams in-house by choosing our management model; and to assist in-house programs with clinical proven education, operational analysis, and compliance oversight to allow LTC operators to truly EVOLVE to the next level.
               </p>
             </BlurFade>
           </div>
@@ -133,175 +129,17 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* The Evolution Section — Redesigned as a Tiered Journey */}
-      <section className="py-24 md:py-40 bg-[#0f172a] text-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#0284c7] blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#38bdf8] blur-[120px]" />
-        </div>
+      {/* Dynamic Pricing Model Section */}
+      <Pricing />
 
-        <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <div className="text-center max-w-4xl mx-auto mb-20 md:mb-32">
-            <BlurFade delay={0.1} className="mb-8">
-               <AnimatedGradientText>Adaptive Growth</AnimatedGradientText>
-            </BlurFade>
-            <BlurFade delay={0.2}>
-              <h2 className="text-5xl md:text-7xl font-serif font-black mb-8 leading-[0.9] tracking-tighter">
-                Our Three-Tiered <br />
-                <span className="text-[#38bdf8] italic font-medium">Evolution Model</span>
-              </h2>
-            </BlurFade>
-            <BlurFade delay={0.3}>
-              <p className="text-xl md:text-2xl text-white/60 font-light leading-relaxed">
-                Our management approach scales with your facility, reducing costs and increasing internal autonomy as your programs mature.
-              </p>
-            </BlurFade>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8 md:gap-10">
-            {[
-              {
-                id: '01',
-                name: 'Starter Tier',
-                title: 'Program Inception',
-                desc: 'Focused on recruitment, initial compliance setup, and establishing core clinical benchmarks for new in-house teams.',
-                features: ['Baseline Compliance Review', 'Full Recruitment Support', 'Core PDPM Education'],
-                color: 'border-white/10 bg-white/5',
-                accent: '#ffffff'
-              },
-              {
-                id: '02',
-                name: 'Intermediate Tier',
-                title: 'Growth & Scaling',
-                desc: 'Advanced operational oversight, deep data analysis, and regional leadership development to drive sustainable profitability.',
-                features: ['Bi-Weekly Cost Analysis', 'Leadership Mentorship', 'Customized Clinical QA'],
-                color: 'border-[#0284c7]/50 bg-[#0284c7]/10 shadow-[0_30px_60px_-15px_rgba(2,132,199,0.3)] scale-105 z-20',
-                accent: '#38bdf8'
-              },
-              {
-                id: '03',
-                name: 'Enterprise Tier',
-                title: 'Peak Operations',
-                desc: 'Full clinical excellence oversight with lowest-cost management fees, designed for stable, high-volume healthcare portfolios.',
-                features: ['Unlimited Audit Defense', 'Custom Business Intelligence', 'Priority Resource Allocation'],
-                color: 'border-white/10 bg-white/5',
-                accent: '#ffffff'
-              }
-            ].map((tier, i) => (
-              <BlurFade delay={0.4 + i * 0.15} key={tier.id} className="h-full">
-                <div className={cn(
-                  "p-10 md:p-12 rounded-[3rem] border h-full transition-all duration-500 hover:-translate-y-4 group",
-                  tier.color
-                )}>
-                  <div className="text-5xl font-black font-serif italic mb-6 opacity-20 group-hover:opacity-100 transition-opacity duration-500" style={{ color: tier.accent }}>{tier.id}</div>
-                  <div className="text-[10px] font-black uppercase tracking-[0.4em] mb-3" style={{ color: tier.accent }}>{tier.name}</div>
-                  <h4 className="text-3xl font-serif font-black text-white mb-6 leading-tight">{tier.title}</h4>
-                  <p className="text-white/50 mb-10 leading-relaxed text-[15px] font-light">{tier.desc}</p>
-                  
-                  <ul className="space-y-4 mb-12">
-                    {tier.features.map(f => (
-                      <li key={f} className="flex items-center gap-3 text-sm text-white/80 font-medium">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#0284c7]" /> {f}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link href="/contact" className="block mt-auto">
-                    <button className="w-full py-4 rounded-2xl border border-white/20 text-white font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-[#0f172a] transition-all duration-300">
-                      Learn More
-                    </button>
-                  </Link>
-                </div>
-              </BlurFade>
-            ))}
-          </div>
-
-          {/* Special Resource Box — Glassmorphism */}
-          <BlurFade delay={0.8} className="mt-24 md:mt-32 max-w-5xl mx-auto">
-             <div className="relative p-12 md:p-20 rounded-[4rem] bg-white/5 backdrop-blur-2xl border border-white/10 overflow-hidden text-center flex flex-col items-center">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#0284c7]/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-                <div className="w-20 h-20 bg-[#0284c7] text-white rounded-[2rem] flex items-center justify-center mb-10 shadow-2xl border-2 border-[#38bdf8]/50">
-                  <Zap size={36} />
-                </div>
-                <h4 className="text-4xl md:text-6xl font-serif font-black text-white mb-8 leading-[0.9] tracking-tighter max-w-2xl">
-                  Already In-House? <br />
-                  <span className="text-[#38bdf8] italic font-medium">Let us be your expert.</span>
-                </h4>
-                <p className="text-white/50 mb-12 leading-relaxed text-lg md:text-xl font-light italic max-w-3xl">
-                  "Let Evolve be your needed resource in recruitment, denial management, and data analysis. We can be your clinical partner so you don’t have to be the expert in everything."
-                </p>
-                <Link href="/contact" className="w-full sm:w-auto">
-                  <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6 group/btn">
-                    <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Get a Resource Consultation</span>
-                  </ShimmerButton>
-                </Link>
-             </div>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* ── Section 4: Clinical Impact Metrics ── */}
-      <section className="py-24 md:py-32 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-             <BlurFade delay={0.1}>
-                <h3 className="text-4xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.9] mb-8">
-                  Measuring the <br />
-                  <span className="text-[#0284c7] italic font-medium">Evolution of Success</span>
-                </h3>
-                <p className="text-xl text-slate-500 font-light leading-relaxed mb-10 max-w-xl">
-                  We don't just consult; we deliver measurable clinical and financial transformations. Every partnership begins with a baseline data audit followed by continuous metric tracking.
-                </p>
-                <div className="space-y-6">
-                  {[
-                    { label: 'EBITDA Improvement', val: '12-18%', desc: 'Average increase in facility operational profit within 12 months.' },
-                    { label: 'Denial Reversal Rate', val: '94%', desc: 'Success rate across Medicare and Managed Care clinical audits.' },
-                    { label: 'Staff Retention', val: '+40%', desc: 'Average increase in therapy staff tenure through in-house models.' }
-                  ].map((stat, i) => (
-                    <div key={i} className="flex items-center gap-6 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-[#0284c7]/20 transition-all group">
-                      <div className="text-3xl font-serif font-black text-[#0284c7] group-hover:scale-110 transition-transform">{stat.val}</div>
-                      <div>
-                        <div className="font-black text-[#0f172a] uppercase text-[10px] tracking-widest">{stat.label}</div>
-                        <div className="text-xs text-slate-400 mt-1">{stat.desc}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-             </BlurFade>
-             <BlurFade delay={0.3} className="relative">
-                <div className="aspect-square rounded-[4rem] bg-slate-900 overflow-hidden shadow-2xl relative group">
-                   <div className="absolute inset-0 bg-gradient-to-br from-[#0284c7]/20 to-transparent" />
-                   <div className="p-16 h-full flex flex-col justify-between relative z-10">
-                      <div className="flex justify-between items-start">
-                         <div className="w-16 h-16 bg-white/10 rounded-2xl backdrop-blur-xl flex items-center justify-center text-[#38bdf8] border border-white/10 group-hover:bg-[#0284c7] group-hover:text-white transition-all">
-                            <TrendingUp size={28} />
-                         </div>
-                         <div className="text-xs font-black uppercase tracking-[0.4em] text-white/30">Analytics Oversight</div>
-                      </div>
-                      <div>
-                        <h4 className="text-4xl font-serif font-black text-white mb-6 leading-tight">Data-Driven <br /> Clinical Intelligence</h4>
-                        <p className="text-white/50 text-lg font-light leading-relaxed mb-8">
-                          Custom real-time dashboards that show your PDPM trends, CMI efficiency, and labor distribution across every facility in your portfolio.
-                        </p>
-                        <Link href="/contact" className="inline-flex items-center gap-3 text-white font-black uppercase text-[10px] tracking-[0.2em] border-b border-white/20 hover:border-white transition-all">Request Demo <ArrowRight size={14} /></Link>
-                      </div>
-                   </div>
-                   {/* Background Grid Pattern */}
-                   <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-                </div>
-             </BlurFade>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Section 5: Why Direct-Hire Section ── */}
+      {/* ── Why In-House? Comparison ── */}
       <section className="py-24 md:py-44 bg-slate-50 overflow-hidden relative">
         <div className="container mx-auto px-6 md:px-12">
           <BlurFade delay={0.2} className="max-w-6xl mx-auto">
             <div className="bg-white border border-slate-200 rounded-[4rem] md:rounded-[5rem] overflow-hidden relative shadow-2xl shadow-black/5">
                <div className="p-12 md:p-24 lg:p-32">
                   <div className="text-center mb-20 md:mb-28">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-6">Comparison</div>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-6">The Evolve Difference</div>
                     <h3 className="text-5xl md:text-7xl font-serif text-[#0f172a] font-black tracking-tighter leading-[0.9]">Why Direct-Hire <br /> <span className="text-[#0284c7] italic font-medium">In-House?</span></h3>
                   </div>
                   
@@ -353,8 +191,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── Section 6: Final Conversion CTA ── */}
-      <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden">
+      {/* ── Final Conversion CTA ── */}
+      <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden text-white">
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 100% 100%, #0284c7 0%, transparent 50%)' }} />
         <div className="container mx-auto px-6 relative z-10 text-center">
             <h2 className="text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-none mb-12">
@@ -362,7 +200,7 @@ export default function ServicesPage() {
               <span className="text-[#0284c7] italic">Evolve With Us?</span>
             </h2>
             <p className="text-xl text-white/40 max-w-xl mx-auto font-light leading-relaxed mb-16">
-              Let our directors perform a free analysis of your therapy department and identify immediate financial opportunity.
+              Let our directors perform a free analysis of your therapy department and identify immediate clinical and financial opportunity.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link href="/contact">

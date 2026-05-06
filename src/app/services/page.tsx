@@ -117,7 +117,8 @@ export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVideoStarted(true), 4500);
+    // Reduced timeout for snappier start while still masking the player init
+    const timer = setTimeout(() => setVideoStarted(true), 1200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -125,20 +126,17 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Premium Editorial Hero (Ultimate Masking & Aesthetic) ── */}
+      {/* ── Premium Editorial Hero ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
         {/* Background Layer: High-End Cinematic Coverage */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
-             "absolute inset-0 z-10 transition-opacity duration-[3s] ease-in-out bg-[#0f172a]",
+             "absolute inset-0 z-10 transition-opacity duration-[2s] ease-in-out bg-[#0f172a]",
              videoStarted ? "opacity-100" : "opacity-0"
            )}>
              {/* 
-                Deep Masking Strategy (v2.0):
-                To permanently hide 'Play/Pause' buttons that flash during loop restarts, 
-                we scale the video to 320% and shift its center (the UI anchor) completely off-screen.
-                The video is moved so its center is 50vw to the left, ensuring buttons never appear 
-                within the visible viewport.
+                Deep Masking Strategy:
+                Scale set to 320% and shifted left to hide player controls anchored at center.
              */}
              <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none select-none">
                 <iframe
@@ -146,14 +144,15 @@ export default function ServicesPage() {
                   title="Services cinematic"
                   allow="autoplay; encrypted-media"
                   className="w-full h-full border-0 opacity-40 contrast-[1.2] saturate-[0.6] grayscale-[0.1]"
+                  onLoad={() => setTimeout(() => setVideoStarted(true), 800)}
                 />
              </div>
              
-             {/* Interaction Blocker: Prevents hover states and UI activation */}
+             {/* Interaction Blocker */}
              <div className="absolute inset-0 z-20 bg-transparent pointer-events-auto cursor-default" />
            </div>
 
-           {/* Premium Visual Overlays: Mesh & Grain */}
+           {/* Premium Visual Overlays */}
            <div className="absolute inset-0 z-30 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
            <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80" />
            <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
@@ -216,9 +215,9 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Section-Spanning Watermark: EVOLVE (Top-to-Bottom Coverage) */}
-        <div className="absolute right-[-18vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
-           <span className="text-white/[0.03] text-[55vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap h-full flex items-center">
+        {/* Section-Spanning Watermark: EVOLVE (Refined Size) */}
+        <div className="absolute right-[-14vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
+           <span className="text-white/[0.03] text-[35vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap h-full flex items-center">
               EVOLVE
            </span>
         </div>
@@ -265,7 +264,7 @@ export default function ServicesPage() {
                   <div className="w-full lg:w-1/2">
                     <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] mb-10">
                        <service.icon size={12} className="text-[#0284c7]" />
-                       Vertical: {i + 1}
+                       CORE SOLUTION {i + 1}
                     </div>
                     <h3 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 leading-[0.9] tracking-tighter group-hover:text-[#0284c7] transition-colors duration-500">
                       {service.title}

@@ -10,17 +10,17 @@ import { ShimmerButton } from '@/components/magicui/shimmer-button';
 
 const features = [
   {
-    title: 'Regulatory',
-    subtitle: 'Defense',
-    desc: 'Proactive audit defense and denial management from clinical experts who know the appeals process inside and out.',
+    title: 'Optimal Therapy',
+    subtitle: 'Outcomes',
+    desc: 'Clinical Analysis for PDPM case mix efficiency-opportunity and customized business intelligence for your market.',
     icon: ShieldCheck,
     color: '#f59e0b',
-    href: '/services/denial-management'
+    href: '/services/optimal-therapy-outcomes'
   },
   {
-    title: 'Tiered Pricing',
-    subtitle: 'Scales With You',
-    desc: 'Our unique approach customizes to your size of business and Evolves as you do, reducing pricing as you grow.',
+    title: 'Three-Tiered',
+    subtitle: 'Pricing Approach',
+    desc: 'Our unique approach customizes to your size of business and Evolves as you do, with reduction as you grow.',
     icon: Zap,
     color: '#38bdf8',
     href: '/services/therapy-cost-reduction'
@@ -28,26 +28,26 @@ const features = [
   {
     title: '100% Revenue',
     subtitle: 'Retention',
-    desc: 'You retain all therapy revenue while we provide the expert management and operational oversight.',
+    desc: 'Maximize clinical and financial goals while you retain all therapy revenue under our management model.',
     icon: Award,
     color: '#10b981',
-    href: '/services/optimal-therapy-outcomes'
+    href: '/services/in-house-transition'
   },
   {
     title: 'In-House',
-    subtitle: 'Employment',
-    desc: 'Empower your therapy team with in-house employment and career advancement through internal mentorship.',
+    subtitle: 'Transition',
+    desc: 'Easily transition your third-party contract therapy team to an efficient in-house model with our expert guidance.',
     icon: Briefcase,
     color: '#8b5cf6',
     href: '/services/in-house-transition'
   },
   {
-    title: 'Holistic',
-    subtitle: 'Philosophy',
-    desc: 'We set our customers apart through exceptional clinical programming and a holistic approach to care.',
+    title: 'Clinical Case Mix',
+    subtitle: 'Analysis',
+    desc: 'Expert education and analysis of your site’s Quality Measures and case mix efficiency for next-level evolution.',
     icon: Heart,
     color: '#f43f5e',
-    href: '/services/snf-staff-education'
+    href: '/services/medicaid-case-mix-analysis'
   },
 ];
 
@@ -60,7 +60,10 @@ export default function WhyEvolve() {
     offset: ["start start", "end end"]
   });
 
-  // Calculate discrete index based on scroll
+  // Smooth the scroll progress for animations
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
+  // Discrete index calculation
   useEffect(() => {
     return scrollYProgress.onChange((v) => {
       if (v < 0.15) {
@@ -129,7 +132,7 @@ export default function WhyEvolve() {
                       <circle cx="50" cy="50" r="48" fill="none" stroke="white" strokeWidth="0.5" strokeDasharray="1 3" />
                       <motion.circle 
                         cx="50" cy="50" r="48" fill="none" stroke="#38bdf8" strokeWidth="1" 
-                        style={{ pathLength: useSpring(scrollYProgress, { stiffness: 100, damping: 30 }) }}
+                        style={{ pathLength: smoothProgress }}
                       />
                     </svg>
                   </div>

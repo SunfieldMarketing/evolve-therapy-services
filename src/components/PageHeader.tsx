@@ -80,6 +80,8 @@ export default function PageHeader({
             {/* Interaction Blocker */}
             <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
           </div>
+        ) : bgImage === 'none' ? (
+          <div className="absolute inset-0 bg-[#0f172a]" />
         ) : (
           <div className="absolute inset-0">
             <img

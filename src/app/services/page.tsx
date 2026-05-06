@@ -26,7 +26,10 @@ import {
   Briefcase,
   Heart,
   Award,
-  Check
+  Check,
+  Layers,
+  Activity,
+  UserCheck
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -42,7 +45,7 @@ const detailedServices = [
       'Functional outcome maximization'
     ],
     icon: Stethoscope,
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80', // Switched to a professional clinical one
     href: '/services/optimal-therapy-outcomes'
   },
   {
@@ -55,7 +58,7 @@ const detailedServices = [
       'Regulatory compliance mapping'
     ],
     icon: ClipboardCheck,
-    image: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce2?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093734/5ea74f03-cbbc-4e88-9423-3c63c1c255bd.png',
     href: '/services/medicaid-case-mix-analysis'
   },
   {
@@ -68,7 +71,7 @@ const detailedServices = [
       'Long-term reimbursement stability'
     ],
     icon: Target,
-    image: 'https://images.unsplash.com/photo-1454165833767-027eeed15c3e?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093795/42b46240-f14c-44d5-b1e5-dc4d831cb2d6.png',
     href: '/services/reimbursement-optimization'
   },
   {
@@ -81,7 +84,7 @@ const detailedServices = [
       'Resource allocation strategy'
     ],
     icon: LineChart,
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093466/02f4b4ce-49f8-49e5-84b8-9e94ed79b059.png',
     href: '/services/therapy-cost-reduction'
   },
   {
@@ -94,7 +97,7 @@ const detailedServices = [
       'Management model implementation'
     ],
     icon: Users2,
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2959443?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093385/d20f225b-69e1-4deb-ae8e-b7979f30546c.png',
     href: '/services/in-house-transition'
   },
   {
@@ -107,7 +110,7 @@ const detailedServices = [
       'Operational health auditing'
     ],
     icon: GraduationCap,
-    image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80', // Moved from Optimal Outcomes
     href: '/services/in-house-resource-hub'
   }
 ];
@@ -308,77 +311,65 @@ export default function ServicesPage() {
       {/* ── Dynamic Pricing Model Section ── */}
       <Pricing />
 
-      {/* ── The Evolve Advantage: Redone as Editorial Timeline / List ── */}
-      <section className="py-24 md:py-44 bg-[#0f172a] overflow-hidden relative">
-         <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-            <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:60px_60px]" />
-         </div>
-         
+      {/* ── The Evolve Advantage: Redone as 4-Card Professional Layout ── */}
+      <section className="py-24 md:py-44 bg-slate-50 overflow-hidden relative">
          <div className="container mx-auto px-6 md:px-12 relative z-10">
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-24 md:mb-32">
-               <BlurFade delay={0.1} className="max-w-2xl">
-                  <div className="inline-flex items-center gap-2 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-8">
-                     <Sparkles size={14} />
-                     The Evolution Advantage
-                  </div>
-                  <h2 className="text-5xl md:text-8xl font-serif text-white font-black tracking-tighter leading-[0.85]">
-                     Why We Are <br />
-                     <span className="text-[#38bdf8] italic font-medium text-4xl md:text-7xl">Truly Different.</span>
+            <div className="text-center max-w-3xl mx-auto mb-20 md:mb-32">
+               <BlurFade delay={0.1}>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8 shadow-sm">The Evolution Advantage</div>
+                  <h2 className="text-5xl md:text-7xl font-serif text-[#0f172a] font-black tracking-tighter leading-[0.9]">
+                     The Evolve <br />
+                     <span className="text-[#0284c7] italic font-medium">Difference.</span>
                   </h2>
-               </BlurFade>
-               <BlurFade delay={0.2} className="max-w-sm">
-                  <p className="text-white/40 text-lg font-light leading-relaxed">
-                     A boutique management model that prioritizes your facility's long-term health over third-party profit margins.
-                  </p>
                </BlurFade>
             </div>
 
-            <div className="space-y-px border-t border-white/5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
                {[
                  { 
-                   title: '100% Revenue Retention', 
-                   desc: 'Retain all therapy revenue. We are consultants, not partners in your profit.',
-                   icon: Award,
-                   stat: '100%'
+                   title: 'Revenue Retention', 
+                   desc: 'Retain 100% of all therapy revenue instead of paying shared percentages to vendors.',
+                   icon: Activity,
+                   color: 'from-blue-600/10 to-blue-600/5',
+                   border: 'hover:border-blue-600/30'
                  },
                  { 
                    title: 'Culture Continuity', 
-                   desc: 'Your staff remains YOUR team. We help you groom internal talent for leadership.',
-                   icon: Users2,
-                   stat: 'In-House'
+                   desc: 'Your staff remains your team. Groom internal talent for leadership within your own walls.',
+                   icon: UserCheck,
+                   color: 'from-indigo-600/10 to-indigo-600/5',
+                   border: 'hover:border-indigo-600/30'
                  },
                  { 
                    title: 'Operational Stability', 
-                   desc: 'Employee engagement facilitates exceptional outcomes and higher functional independence.',
-                   icon: Heart,
-                   stat: '5-Star'
+                   desc: 'Employee engagement facilitates exceptional outcomes and long-term facility stability.',
+                   icon: Layers,
+                   color: 'from-emerald-600/10 to-emerald-600/5',
+                   border: 'hover:border-emerald-600/30'
                  },
                  { 
                    title: 'Clinical Education', 
-                   desc: 'Customized CEU education for therapists and staff as a premium management service.',
+                   desc: 'Customized CEU education for therapists and LTC staff as a premium management service.',
                    icon: GraduationCap,
-                   stat: 'Expert'
+                   color: 'from-slate-600/10 to-slate-600/5',
+                   border: 'hover:border-slate-600/30'
                  }
                ].map((item, i) => (
-                 <BlurFade key={i} delay={0.3 + i * 0.1}>
-                    <div className="group py-12 md:py-16 border-b border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 hover:bg-white/[0.02] transition-colors px-4 rounded-xl">
-                       <div className="flex items-center gap-8 md:gap-12 flex-1">
-                          <div className="text-4xl md:text-6xl font-serif font-black text-white/10 group-hover:text-[#38bdf8]/40 transition-colors duration-500 min-w-[100px]">
-                             {i + 1 < 10 ? `0${i + 1}` : i + 1}
+                 <BlurFade key={i} delay={0.2 + i * 0.1}>
+                    <div className={cn(
+                      "group p-10 rounded-[2.5rem] bg-white border border-slate-100 transition-all duration-500 h-full flex flex-col justify-between relative overflow-hidden",
+                      item.border
+                    )}>
+                       <div className={cn("absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500", item.color)} />
+                       <div className="relative z-10">
+                          <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-[#0f172a] mb-10 group-hover:bg-white transition-all duration-500 shadow-sm">
+                             <item.icon size={28} strokeWidth={1.5} className="group-hover:text-[#0284c7] transition-colors" />
                           </div>
-                          <div>
-                             <h4 className="text-2xl md:text-4xl font-serif font-black text-white mb-3 group-hover:text-[#38bdf8] transition-colors">{item.title}</h4>
-                             <p className="text-white/40 text-sm md:text-lg font-light max-w-xl">{item.desc}</p>
-                          </div>
+                          <h4 className="text-xl md:text-2xl font-serif font-black text-[#0f172a] mb-6 tracking-tight group-hover:text-[#0284c7] transition-colors">{item.title}</h4>
+                          <p className="text-slate-500 text-sm leading-relaxed font-light">{item.desc}</p>
                        </div>
-                       <div className="flex items-center gap-6 md:gap-10 shrink-0">
-                          <div className="text-right hidden sm:block">
-                             <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Focus Area</div>
-                             <div className="text-lg font-black text-white italic">{item.stat}</div>
-                          </div>
-                          <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-white/40 group-hover:bg-[#38bdf8] group-hover:text-[#0f172a] transition-all duration-500">
-                             <item.icon size={24} />
-                          </div>
+                       <div className="relative z-10 mt-10 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-500">
+                          <div className="w-8 h-1 bg-[#0284c7] rounded-full" />
                        </div>
                     </div>
                  </BlurFade>
@@ -387,7 +378,7 @@ export default function ServicesPage() {
 
             <BlurFade delay={0.8} className="mt-24 text-center">
                <Link href="/contact" className="focus-visible:outline-none">
-                  <ShimmerButton background="#38bdf8" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="px-12 py-6">
+                  <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="9999px" className="px-12 py-6">
                      <span className="font-black uppercase tracking-[0.25em] text-[12px] text-white">Experience the Difference — Contact Us</span>
                   </ShimmerButton>
                </Link>

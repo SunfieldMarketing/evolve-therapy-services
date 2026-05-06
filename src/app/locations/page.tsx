@@ -17,7 +17,7 @@ export default function LocationsPage() {
       <PageHeader 
         title="Our" 
         italicWord="Locations" 
-        subtitle="Serving facilities across Ohio and the surrounding regions from our headquarters in Avon Lake."
+        subtitle="Strategically serving facilities across the United States, we provide localized clinical management and regional leadership that ensures every site under our oversight maintains the highest Evolve Standard of excellence."
         videoKey="locations"
       />
 

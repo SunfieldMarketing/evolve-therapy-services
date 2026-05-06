@@ -20,7 +20,7 @@ Our team of experts utilizes custom-built business intelligence tools to track t
       'MDS Coding Accuracy Verification',
       'Weekly Clinical Strategy Meetings'
     ],
-    image: 'https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095358/199776c9-037b-44b0-bd72-274885e0b165.png',
     iconName: 'Stethoscope',
     videoUrl: 'https://player.vimeo.com/external/432014945.sd.mp4?s=6c6695333f276cd83428d0859585e488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
@@ -45,7 +45,7 @@ Beyond just reimbursement, we help you manage your Quality Measures. A facility'
       'Documentation Integrity Workshops',
       'Competitive Market Data Analysis'
     ],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778092798/d9b89396-c963-4b64-a929-b0ce959244cd.png',
     iconName: 'ClipboardCheck',
     videoUrl: 'https://player.vimeo.com/external/441221776.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
@@ -95,7 +95,7 @@ We provide our partners with a roadmap to improve their EBITDA (Earnings Before 
       'Revenue Cycle Optimization',
       'Benchmarking Against Industry Peers'
     ],
-    image: 'https://images.unsplash.com/photo-1554224154-26032ffc0d04?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095199/d4b294cb-7d97-4dd6-857b-eee76e1777a5.png',
     iconName: 'LineChart',
     videoUrl: 'https://player.vimeo.com/external/494635105.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
@@ -145,7 +145,7 @@ An in-house model allows you to retain 100% of the therapy revenue, build a unif
       'In-House Billing Protocol Setup',
       'Change Management & Cultural Alignment'
     ],
-    image: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095821/9c7538a6-3e33-4a50-a1d5-dbd97914fa26.png',
     iconName: 'Users2',
     videoUrl: 'https://player.vimeo.com/external/432014945.sd.mp4?s=6c6695333f276cd83428d0859585e488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
@@ -170,7 +170,7 @@ By implementing proactive strategies and providing ongoing education to your bil
       'Revenue Cycle Management Support',
       'Payer Contract Optimization Insights'
     ],
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093795/42b46240-f14c-44d5-b1e5-dc4d831cb2d6.png',
     iconName: 'Target',
     videoUrl: 'https://player.vimeo.com/external/494635105.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
   },
@@ -195,7 +195,7 @@ Whether you need help sourcing high-quality therapists, defending against a comp
       'Continuing Education (CEU) Access',
       'Interim Management Support'
     ],
-    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095465/fe87049e-5e24-4b1e-bc2a-b265ebd01ddf.png',
     iconName: 'GraduationCap',
     videoUrl: 'https://player.vimeo.com/external/441220473.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
   }

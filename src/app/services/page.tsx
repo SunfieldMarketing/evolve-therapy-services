@@ -120,7 +120,7 @@ export default function ServicesPage() {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVideoLoaded(true), 2500);
+    const timer = setTimeout(() => setVideoLoaded(true), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -128,46 +128,30 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Services Hero ── */}
-      <section className="relative w-full overflow-hidden flex flex-col justify-center bg-[#0f172a] min-h-[85vh] pt-20">
+      {/* ── Services Hero (Video-Only Background) ── */}
+      <section className="relative w-full overflow-hidden flex flex-col justify-center bg-[#0f172a] h-screen pt-20">
         {/* Background Layer */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          {/* Subtle Static Backup */}
-          <div className="absolute inset-0 z-10 bg-[#0f172a]">
-             <Image 
-                src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80" 
-                alt="Background"
-                fill
-                className={cn(
-                   "object-cover transition-opacity duration-[3s] ease-in-out",
-                   videoLoaded ? "opacity-20" : "opacity-40"
-                )}
-                priority
-             />
-          </div>
-
-          {/* Video Layer - Over-scaled to hide YouTube UI */}
+          {/* Video Layer - Over-scaled (130%) to hide YouTube UI completely */}
           <div className={cn(
-             "absolute inset-0 z-20 pointer-events-none transition-opacity duration-[3s] ease-in-out overflow-hidden",
-             videoLoaded ? "opacity-40" : "opacity-0"
+             "absolute inset-0 z-10 pointer-events-none transition-opacity duration-[2s] ease-in-out overflow-hidden bg-[#0f172a]",
+             videoLoaded ? "opacity-100" : "opacity-100"
           )}>
-            <div className="absolute inset-0 w-[120%] h-[120%] -top-[10%] -left-[10%]">
+            <div className="absolute inset-0 w-[130%] h-[130%] -top-[15%] -left-[15%]">
               <iframe
                 src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5&enablejsapi=1"
                 title="Services background"
                 allow="autoplay; encrypted-media"
-                className="w-full h-full border-0 pointer-events-none"
+                className="w-full h-full border-0 pointer-events-none opacity-40"
               />
             </div>
-            {/* Click/Touch blocker */}
-            <div className="absolute inset-0 bg-transparent z-10" />
+            {/* Click/Touch blocker to ensure no interaction with video */}
+            <div className="absolute inset-0 bg-transparent z-20" />
           </div>
 
           {/* Overlays */}
           <div className="absolute inset-0 z-30 bg-[#0f172a]/70" />
           <div className="absolute inset-0 z-30 bg-gradient-to-b from-[#0f172a]/95 via-transparent to-[#0f172a]/95" />
-          
-          <div className="absolute top-1/4 left-10 w-[40vw] h-[40vw] bg-[#0284c7]/5 rounded-full blur-[150px] animate-pulse" />
         </div>
 
         {/* Scaled Content Container */}
@@ -224,7 +208,7 @@ export default function ServicesPage() {
         
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-3">
            <div className="w-px h-8 bg-gradient-to-b from-[#0284c7] to-transparent" />
-           <div className="text-[9px] font-black text-white/10 uppercase tracking-[0.4em]">Scroll</div>
+           <div className="text-[9px] font-black text-white/10 uppercase tracking-[0.4em]">Explore Services</div>
         </div>
       </section>
 

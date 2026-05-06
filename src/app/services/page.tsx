@@ -119,7 +119,6 @@ const detailedServices = [
 export default function ServicesPage() {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
-  // Auto-reveal video after a safety timeout or if we could detect load
   useEffect(() => {
     const timer = setTimeout(() => setVideoLoaded(true), 2500);
     return () => clearTimeout(timer);
@@ -129,37 +128,38 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Enhanced Full-Width Services Hero ── */}
-      <section className="relative w-full overflow-hidden flex flex-col justify-center bg-[#0f172a] min-h-screen pt-20">
+      {/* ── Services Hero ── */}
+      <section className="relative w-full overflow-hidden flex flex-col justify-center bg-[#0f172a] min-h-[85vh] pt-20">
         {/* Background Layer */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          {/* Static High-Res Poster (Always present until video fades in) */}
+          {/* Subtle Static Backup */}
           <div className="absolute inset-0 z-10 bg-[#0f172a]">
              <Image 
                 src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80" 
-                alt="Background Poster"
+                alt="Background"
                 fill
                 className={cn(
-                   "object-cover transition-opacity duration-[2s] ease-in-out",
-                   videoLoaded ? "opacity-30" : "opacity-60"
+                   "object-cover transition-opacity duration-[3s] ease-in-out",
+                   videoLoaded ? "opacity-20" : "opacity-40"
                 )}
                 priority
              />
           </div>
 
-          {/* Video Layer */}
+          {/* Video Layer - Over-scaled to hide YouTube UI */}
           <div className={cn(
-             "absolute inset-0 z-20 pointer-events-none transition-opacity duration-[3s] ease-in-out",
+             "absolute inset-0 z-20 pointer-events-none transition-opacity duration-[3s] ease-in-out overflow-hidden",
              videoLoaded ? "opacity-40" : "opacity-0"
           )}>
-            <iframe
-              src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=10&enablejsapi=1"
-              title="Services background cover"
-              allow="autoplay; encrypted-media"
-              className="absolute inset-0 w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-0"
-              onLoad={() => setVideoLoaded(true)}
-            />
-            {/* Click/Touch blocker over the video */}
+            <div className="absolute inset-0 w-[120%] h-[120%] -top-[10%] -left-[10%]">
+              <iframe
+                src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5&enablejsapi=1"
+                title="Services background"
+                allow="autoplay; encrypted-media"
+                className="w-full h-full border-0 pointer-events-none"
+              />
+            </div>
+            {/* Click/Touch blocker */}
             <div className="absolute inset-0 bg-transparent z-10" />
           </div>
 
@@ -167,54 +167,51 @@ export default function ServicesPage() {
           <div className="absolute inset-0 z-30 bg-[#0f172a]/70" />
           <div className="absolute inset-0 z-30 bg-gradient-to-b from-[#0f172a]/95 via-transparent to-[#0f172a]/95" />
           
-          {/* Animated Background Elements */}
-          <div className="absolute top-1/4 left-10 w-[40vw] h-[40vw] bg-[#0284c7]/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-1/4 right-10 w-[30vw] h-[30vw] bg-[#0284c7]/5 rounded-full blur-[100px] animate-pulse [animation-delay:2s]" />
+          <div className="absolute top-1/4 left-10 w-[40vw] h-[40vw] bg-[#0284c7]/5 rounded-full blur-[150px] animate-pulse" />
         </div>
 
-        {/* Full-Width Content Container */}
-        <div className="relative z-40 w-full px-6 sm:px-12 md:px-20 lg:px-32 xl:px-48">
+        {/* Scaled Content Container */}
+        <div className="relative z-40 w-full px-6 sm:px-12 md:px-20 lg:px-32 xl:px-48 py-20">
           <BlurFade delay={0.1}>
-            <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-               <div className="w-full lg:w-2/3 text-left">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-10 shadow-2xl backdrop-blur-md">
-                    <Sparkles size={14} /> The Evolution Advantage
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+               <div className="w-full lg:w-3/5 text-left">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[9px] font-black uppercase tracking-[0.4em] mb-8 shadow-2xl backdrop-blur-md">
+                    <Sparkles size={12} /> The Evolution Advantage
                   </div>
-                  <h1 className="text-6xl md:text-8xl lg:text-[10vw] font-serif font-black text-white tracking-tighter leading-[0.82] mb-12 drop-shadow-2xl">
+                  <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-black text-white tracking-tighter leading-[0.85] mb-10 drop-shadow-2xl">
                     Our <br />
                     <span className="text-[#0284c7] italic">Services.</span>
                   </h1>
-                  <p className="text-xl md:text-3xl text-white/50 font-light leading-tight max-w-4xl mb-16">
-                    It is our vision to assist operators who want to take their therapy teams in-house by choosing our management model; and to assist in-house programs with clinical proven education, operational analysis, and compliance oversight to allow LTC operators to truly EVOLVE to the next level.
+                  <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed max-w-3xl mb-12">
+                    Assist operators who want to take their therapy teams in-house by choosing our management model; and assist in-house programs with clinical proven education, operational analysis, and compliance oversight to allow LTC operators to truly EVOLVE.
                   </p>
                   
                   <div className="flex flex-col sm:flex-row gap-6">
                      <Link href="/contact">
-                        <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="1rem" className="px-12 py-6">
-                           <span className="font-black uppercase tracking-[0.25em] text-[12px] text-white">Contact Our Team</span>
+                        <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-10 py-5">
+                           <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Contact Our Team</span>
                         </ShimmerButton>
                      </Link>
-                     <div className="flex items-center gap-4 text-white/40 font-black uppercase text-[10px] tracking-[0.3em] hover:text-white transition-colors cursor-default">
-                        <Phone size={14} className="text-[#38bdf8]" /> (888) 386-5820
+                     <div className="flex items-center gap-4 text-white/30 font-black uppercase text-[9px] tracking-[0.3em] hover:text-white transition-colors">
+                        <Phone size={12} className="text-[#38bdf8]" /> (888) 386-5820
                      </div>
                   </div>
                </div>
 
-               <div className="w-full lg:w-1/3">
-                  <div className="space-y-12">
+               <div className="w-full lg:w-2/5">
+                  <div className="grid gap-6">
                      {[
-                        { title: 'Visionary Strategy', desc: 'Creative therapy consulting through compassionate leadership.', icon: Target },
-                        { title: 'Clinical Passion', desc: 'Evidence-based results that drive bottom line success.', icon: Heart }
+                        { title: 'Visionary Strategy', desc: 'Creative consulting through compassionate leadership.', icon: Target },
+                        { title: 'Clinical Passion', desc: 'Results that drive bottom line success.', icon: Heart }
                      ].map((pill, i) => (
-                        <div key={i} className="group relative p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-500 overflow-hidden">
-                           <div className="absolute top-0 right-0 w-24 h-24 bg-[#0284c7]/10 rounded-full blur-2xl group-hover:bg-[#0284c7]/20 transition-colors" />
-                           <div className="flex gap-6 items-start relative z-10">
-                              <div className="w-12 h-12 rounded-xl bg-[#0284c7] flex items-center justify-center text-white shadow-lg">
-                                 <pill.icon size={20} />
+                        <div key={i} className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/5 backdrop-blur-xl hover:bg-white/10 transition-all duration-500 overflow-hidden">
+                           <div className="flex gap-5 items-start relative z-10">
+                              <div className="w-10 h-10 rounded-xl bg-[#0284c7] flex items-center justify-center text-white shadow-lg shrink-0">
+                                 <pill.icon size={18} />
                               </div>
                               <div>
-                                 <h4 className="text-lg font-black text-white tracking-widest uppercase mb-2 text-[11px]">{pill.title}</h4>
-                                 <p className="text-white/40 text-sm font-light leading-relaxed italic">"{pill.desc}"</p>
+                                 <h4 className="text-[10px] font-black text-white tracking-widest uppercase mb-1">{pill.title}</h4>
+                                 <p className="text-white/30 text-xs font-light leading-relaxed italic">"{pill.desc}"</p>
                               </div>
                            </div>
                         </div>
@@ -225,10 +222,9 @@ export default function ServicesPage() {
           </BlurFade>
         </div>
         
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-4 animate-bounce">
-           <div className="w-px h-12 bg-gradient-to-b from-[#0284c7] to-transparent" />
-           <div className="text-[10px] font-black text-white/20 uppercase tracking-[0.4em]">Scroll to Explore</div>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-3">
+           <div className="w-px h-8 bg-gradient-to-b from-[#0284c7] to-transparent" />
+           <div className="text-[9px] font-black text-white/10 uppercase tracking-[0.4em]">Scroll</div>
         </div>
       </section>
 

@@ -32,6 +32,13 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Force scroll to top on mount/refresh to solve the middle-page landing issue
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+      // Secondary backup for browsers with aggressive scroll restoration
+      setTimeout(() => window.scrollTo(0, 0), 0);
+    }
+    
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -44,7 +51,7 @@ export default function Navbar() {
   }, [isOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-[9999]">
       <nav
         className={cn(
           'transition-all duration-300 ease-out',
@@ -106,7 +113,7 @@ export default function Navbar() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 4, scale: 0.97 }}
                             transition={{ duration: 0.18, ease: 'easeOut' }}
-                            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-slate-200/60 p-2 overflow-hidden flex flex-col gap-1"
+                            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.2)] border border-slate-200/60 p-2 overflow-hidden flex flex-col gap-1 z-[10000]"
                             role="menu"
                           >
                             {link.dropdown.map((item) => (

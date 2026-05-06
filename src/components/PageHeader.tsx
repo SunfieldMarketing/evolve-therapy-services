@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { BlurFade } from '@/components/magicui/blur-fade';
-import { Target, ArrowRight, Sparkles, Heart } from 'lucide-react';
+import { Target, ArrowRight, Sparkles, Heart, LucideIcon } from 'lucide-react';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
 
@@ -22,6 +22,12 @@ const videoMap: Record<string, string> = {
   about: 'bsTbwMlTyjg',
 };
 
+interface ValueBox {
+  icon: LucideIcon;
+  label: string;
+  sublabel: string;
+}
+
 interface PageHeaderProps {
   title: string;
   subtitle?: string;
@@ -31,6 +37,8 @@ interface PageHeaderProps {
   ctaText?: string;
   ctaLink?: string;
   badgeText?: string;
+  valueBoxes?: ValueBox[];
+  useVideo?: boolean;
 }
 
 export default function PageHeader({
@@ -42,17 +50,22 @@ export default function PageHeader({
   ctaText = 'Start Your Evolution',
   ctaLink = '/contact',
   badgeText = 'Professional Integrity',
+  valueBoxes = [
+    { icon: Sparkles, label: 'Visionary Hub', sublabel: 'Creative Consulting' },
+    { icon: Heart, label: 'Compassion', sublabel: 'Results Driven' }
+  ],
+  useVideo = true,
 }: PageHeaderProps) {
   const imageUrl = bgImage || imageMap[videoKey] || imageMap.default;
   const videoId = videoMap[videoKey as string];
+  const finalUseVideo = useVideo && !!videoId;
 
   return (
     <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
       {/* ── Background Layer ── */}
       <div className="absolute inset-0 z-0">
-        {videoId ? (
+        {finalUseVideo ? (
           <div className="absolute inset-0 pointer-events-none select-none">
-            {/* Shifted video focal point way left by using -100vw instead of -160vw */}
             <div className={cn(
               "absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none",
               videoKey === 'about' && "left-[-100vw] top-[-40vh]"
@@ -68,11 +81,15 @@ export default function PageHeader({
             <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
           </div>
         ) : (
-          <img
-            src={imageUrl}
-            alt={`${title} background cover`}
-            className="absolute inset-0 w-full h-full object-cover opacity-40"
-          />
+          <div className="absolute inset-0">
+            <img
+              src={imageUrl}
+              alt={`${title} background cover`}
+              className="absolute inset-0 w-full h-full object-cover opacity-60 contrast-[1.1] saturate-[1.2]"
+            />
+            {/* Additional image-specific overlay for better text contrast */}
+            <div className="absolute inset-0 bg-[#0f172a]/40 mix-blend-multiply" />
+          </div>
         )}
         
         {/* Multi-layer gradient overlay (Matched to Services Hero) */}
@@ -117,24 +134,17 @@ export default function PageHeader({
 
                 {/* Values Integration: Matched to Services Hero */}
                 <div className="flex flex-col sm:flex-row gap-12">
-                   <div className="flex items-center gap-6 group">
-                      <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
-                         <Sparkles size={24} />
+                   {valueBoxes.map((box, i) => (
+                      <div key={i} className="flex items-center gap-6 group">
+                         <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
+                            <box.icon size={24} />
+                         </div>
+                         <div className="flex flex-col">
+                            <span className="text-white font-black uppercase text-[11px] tracking-widest mb-1">{box.label}</span>
+                            <span className="text-white/20 text-[13px] font-light italic whitespace-nowrap">"{box.sublabel}"</span>
+                         </div>
                       </div>
-                      <div className="flex flex-col">
-                         <span className="text-white font-black uppercase text-[11px] tracking-widest mb-1">Visionary Hub</span>
-                         <span className="text-white/20 text-[13px] font-light italic whitespace-nowrap">"Creative Consulting"</span>
-                      </div>
-                   </div>
-                   <div className="flex items-center gap-6 group">
-                      <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
-                         <Heart size={24} />
-                      </div>
-                      <div className="flex flex-col">
-                         <span className="text-white font-black uppercase text-[11px] tracking-widest mb-1">Compassion</span>
-                         <span className="text-white/20 text-[13px] font-light italic whitespace-nowrap">"Results Driven"</span>
-                      </div>
-                   </div>
+                   ))}
                 </div>
              </div>
           </BlurFade>

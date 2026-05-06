@@ -24,7 +24,9 @@ import {
   ShieldCheck,
   Star,
   UserCheck,
-  Activity
+  Activity,
+  Award,
+  Zap
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -71,8 +73,13 @@ export default function AboutPage() {
         title="Our" 
         italicWord="Leadership" 
         subtitle="Meet the clinicians and operational leaders behind Evolve Therapy Services."
-        videoKey="about"
+        bgImage="https://res.cloudinary.com/dai2pg27n/image/upload/v1778105493/9888c51b-097f-46b4-907c-1280f458806b.png"
+        useVideo={false}
         badgeText="Executive Hub"
+        valueBoxes={[
+          { icon: Award, label: 'Clinical Integrity', sublabel: 'Uncompromised Care' },
+          { icon: Zap, label: 'Strategic Vision', sublabel: 'Growth Logic' }
+        ]}
       />
 
       {/* ── Social Proof Trust Section (Matched to Services Page) ── */}

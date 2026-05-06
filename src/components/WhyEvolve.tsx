@@ -1,6 +1,6 @@
 'use client';
 
-import { Award, Briefcase, Zap, Heart, ArrowRight, Sparkles } from 'lucide-react';
+import { Award, Briefcase, Zap, Heart, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BlurFade } from '@/components/magicui/blur-fade';
@@ -9,11 +9,20 @@ import { ShimmerButton } from '@/components/magicui/shimmer-button';
 
 const features = [
   {
+    title: 'Regulatory',
+    subtitle: 'Defense',
+    desc: 'Proactive audit defense and denial management from clinical experts who know the appeals process inside and out.',
+    icon: ShieldCheck,
+    num: '01',
+    accent: 'from-amber-400 to-orange-600',
+    accentBg: 'bg-amber-500',
+  },
+  {
     title: 'Tiered Pricing',
     subtitle: 'Scales With You',
     desc: 'Our unique approach customizes to your size of business and Evolves as you do, reducing pricing as you grow.',
     icon: Zap,
-    num: '01',
+    num: '02',
     accent: 'from-sky-400 to-blue-600',
     accentBg: 'bg-sky-500',
   },
@@ -22,7 +31,7 @@ const features = [
     subtitle: 'Retention',
     desc: 'You retain all therapy revenue while we provide the expert management and operational oversight.',
     icon: Award,
-    num: '02',
+    num: '03',
     accent: 'from-emerald-400 to-teal-600',
     accentBg: 'bg-emerald-500',
   },
@@ -31,7 +40,7 @@ const features = [
     subtitle: 'Employment',
     desc: 'Empower your therapy team with in-house employment and career advancement through internal mentorship.',
     icon: Briefcase,
-    num: '03',
+    num: '04',
     accent: 'from-violet-400 to-purple-600',
     accentBg: 'bg-violet-500',
   },
@@ -40,7 +49,7 @@ const features = [
     subtitle: 'Philosophy',
     desc: 'We set our customers apart through exceptional clinical programming and a holistic approach to care.',
     icon: Heart,
-    num: '04',
+    num: '05',
     accent: 'from-rose-400 to-pink-600',
     accentBg: 'bg-rose-500',
   },
@@ -80,7 +89,7 @@ export default function WhyEvolve() {
         {/* Feature cards — stacked offset cards with left accent bar */}
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto mb-20">
           {features.map((item, i) => (
-            <BlurFade delay={0.2 + i * 0.1} key={i}>
+            <BlurFade delay={0.2 + i * 0.1} key={i} className={i === features.length - 1 ? 'md:col-span-2' : ''}>
               <div className="group relative rounded-[2rem] bg-white/[0.03] border border-white/[0.06] p-8 md:p-10 hover:bg-white/[0.07] hover:border-white/[0.12] transition-all duration-500 overflow-hidden">
                 {/* Left accent strip */}
                 <div className={`absolute left-0 top-8 bottom-8 w-1 rounded-full bg-gradient-to-b ${item.accent} opacity-40 group-hover:opacity-100 transition-opacity duration-500`} />
@@ -106,7 +115,7 @@ export default function WhyEvolve() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-[15px] text-white/40 leading-relaxed font-light group-hover:text-white/60 transition-colors duration-500 max-w-sm">
+                  <p className={`text-[15px] text-white/40 leading-relaxed font-light group-hover:text-white/60 transition-colors duration-500 ${i === features.length - 1 ? 'max-w-2xl' : 'max-w-sm'}`}>
                     {item.desc}
                   </p>
 

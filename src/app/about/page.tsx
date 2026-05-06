@@ -210,13 +210,15 @@ export default function AboutPage() {
       <section className="py-24 md:py-48 bg-white relative overflow-hidden flex flex-col items-center">
         <div className="container mx-auto px-6 relative z-10 text-center">
           <BlurFade delay={0.1}>
-            <div className="mb-16">
-              <AnimatedGradientText>National Presence</AnimatedGradientText>
+            <div className="flex flex-col items-center mb-16">
+              <div className="mb-8">
+                <AnimatedGradientText>National Presence</AnimatedGradientText>
+              </div>
+              <h3 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[0.85] tracking-tighter uppercase">
+                A National Network <br />
+                <span className="text-[#0284c7] italic font-medium lowercase">Primed for Growth.</span>
+              </h3>
             </div>
-            <h3 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 leading-[0.85] tracking-tighter uppercase">
-              A National Network <br />
-              <span className="text-[#0284c7] italic font-medium lowercase">Primed for Growth.</span>
-            </h3>
             <p className="text-slate-400 text-xl md:text-2xl font-light mb-20 leading-relaxed max-w-4xl mx-auto italic">
                "Our regional directors are strategically deployed across the United States to ensure that every facility under our oversight carries the same Evolve Standard."
             </p>

@@ -135,20 +135,20 @@ export default function Services() {
           <div className="grid lg:grid-cols-2 relative z-10">
             <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10 bg-white/90 lg:bg-transparent">
               <BlurFade delay={0.5} className="mb-8">
-                <AnimatedGradientText>Clinical Education</AnimatedGradientText>
+                <AnimatedGradientText>Featured Discovery</AnimatedGradientText>
               </BlurFade>
               
               <h3 className="text-3xl lg:text-5xl font-serif font-black text-[#0f172a] mb-6 leading-[0.9] tracking-tighter">
-                Customized CEU & <br />
-                <span className="text-[#0284c7] italic font-medium">Staff Education</span>
+                Clinical Cost & <br />
+                <span className="text-[#0284c7] italic font-medium">Success Analysis</span>
               </h3>
               <p className="text-slate-800 mb-10 text-sm md:text-base leading-relaxed font-semibold">
-                Expert training for your therapists and LTC staff as an added service. Bridge the gap between clinical quality and financial strength.
+                Receive a comprehensive, data-driven overview of your facility's current therapy health. Strategic insights with no legacy strings attached.
               </p>
               <div>
                 <Link href="/contact" className="focus-visible:outline-none">
                   <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn inline-flex text-white hover:bg-[#0284c7] transition-colors duration-500">
-                    <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white">Inquire About Education</span>
+                    <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white">Request Free Analysis</span>
                     <ArrowUpRight className="ml-2 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                   </ShimmerButton>
                 </Link>
@@ -157,12 +157,16 @@ export default function Services() {
             
             <div className="relative min-h-[400px] overflow-hidden lg:h-auto z-0 mix-blend-multiply opacity-90 group-hover:mix-blend-normal transition-all duration-700">
                <Image 
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80" 
-                alt="Therapy Education" 
+                src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80" 
+                alt="Clinical Success Data Review" 
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent lg:w-[80%]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent lg:hidden" />
+              
+              {/* Decorative data points overlay strictly for aesthetics */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/5 rounded-full animate-ping opacity-20 pointer-events-none" />
             </div>
           </div>
         </BlurFade>

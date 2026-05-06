@@ -117,8 +117,7 @@ export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
 
   useEffect(() => {
-    // Reveal video after a longer buffer to ensure all initial UI elements have passed
-    const timer = setTimeout(() => setVideoStarted(true), 4000);
+    const timer = setTimeout(() => setVideoStarted(true), 4500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -126,93 +125,89 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Editorial Hero (Programmatic UI Blocking) ── */}
+      {/* ── Premium Editorial Hero (Ultimate Masking & Aesthetic) ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
-        {/* Background Layer: Total UI Isolation */}
+        {/* Background Layer: High-End Cinematic Coverage */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
              "absolute inset-0 z-10 transition-opacity duration-[3s] ease-in-out bg-[#0f172a]",
              videoStarted ? "opacity-100" : "opacity-0"
            )}>
              {/* 
-                Programmatic Blocking Strategy:
-                1. We use a 140% scale to move the YouTube logo and 'Watch on YT' buttons completely off-canvas.
-                2. pointer-events-none on the iframe itself prevents it from detecting hover.
-                3. A separate 'Touch Blocker' div (z-20) sits OVER the iframe with pointer-events-auto to 
-                   absorb all mouse events before they ever reach the YouTube player.
+                Deep Masking Strategy (v2.0):
+                To permanently hide 'Play/Pause' buttons that flash during loop restarts, 
+                we scale the video to 320% and shift its center (the UI anchor) completely off-screen.
+                The video is moved so its center is 50vw to the left, ensuring buttons never appear 
+                within the visible viewport.
              */}
-             <div className="absolute w-[140vw] h-[140vh] top-[-20vh] left-[-20vw] pointer-events-none select-none">
+             <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none select-none">
                 <iframe
                   src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1"
                   title="Services cinematic"
                   allow="autoplay; encrypted-media"
-                  className="w-full h-full border-0 opacity-40 contrast-[1.1] saturate-[0.8]"
+                  className="w-full h-full border-0 opacity-40 contrast-[1.2] saturate-[0.6] grayscale-[0.1]"
                 />
              </div>
              
-             {/* 
-                THE TOUCH BLOCKER: 
-                This layer sits between the content and the video. 
-                It prevents the video from ever seeing a cursor, which stops the 'Play/Pause' 
-                overlay from appearing during the loop.
-             */}
+             {/* Interaction Blocker: Prevents hover states and UI activation */}
              <div className="absolute inset-0 z-20 bg-transparent pointer-events-auto cursor-default" />
            </div>
 
-           {/* Editorial Visual Overlays */}
-           <div className="absolute inset-0 z-30 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 60%)' }} />
-           <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/70" />
+           {/* Premium Visual Overlays: Mesh & Grain */}
+           <div className="absolute inset-0 z-30 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
+           <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80" />
            <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
+           <div className="absolute inset-0 z-35 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
         </div>
 
-        {/* Content Area: Strategical Layout */}
+        {/* Content Area: Premium Strategical Layout */}
         <div className="relative z-40 container mx-auto px-6 lg:px-12 -mt-24">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-32">
             
             {/* Left Column: Strategic Hub */}
             <div className="w-full lg:w-[65%]">
                <BlurFade delay={0.2}>
-                  <div className="flex items-center gap-6 mb-12">
-                     <div className="w-16 h-[1px] bg-[#0284c7]" />
-                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.7em]">Clinical Partnership</span>
+                  <div className="flex items-center gap-8 mb-16">
+                     <div className="w-20 h-[1px] bg-[#0284c7]" />
+                     <span className="text-[#38bdf8] font-black uppercase text-[11px] tracking-[0.8em]">Strategic Clinical Excellence</span>
                   </div>
                   
-                  <h1 className="text-6xl md:text-[6vw] lg:text-[5vw] font-serif font-black text-white leading-[0.82] tracking-tighter mb-16 drop-shadow-2xl">
-                     <span className="block mb-6 uppercase tracking-tighter">STRATEGICAL</span>
+                  <h1 className="text-6xl md:text-[6.5vw] lg:text-[5.5vw] font-serif font-black text-white leading-[0.8] tracking-tighter mb-20 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                     <span className="block mb-8 uppercase tracking-tighter">STRATEGICAL</span>
                      <span className="text-[#0284c7] italic block ml-[0.1em] uppercase tracking-tighter">SERVICES.</span>
                   </h1>
 
                   <div className="max-w-2xl">
-                     <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed mb-20 border-l-4 border-[#0284c7] pl-12 italic">
+                     <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed mb-24 border-l-4 border-[#0284c7] pl-14 italic">
                         "Empowering operators to take their therapy teams in-house with clinically proven education and compliance oversight."
                      </p>
                      
                      <Link href="/contact" className="inline-flex group">
-                        <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-12 py-6">
-                           <span className="font-black uppercase tracking-[0.3em] text-[13px] text-white">Start Your Evolution</span>
-                           <ArrowRight size={18} className="ml-4 group-hover:translate-x-3 transition-transform" />
+                        <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-16 py-7 shadow-[0_30px_60px_rgba(2,132,199,0.2)]">
+                           <span className="font-black uppercase tracking-[0.4em] text-[14px] text-white">Start Your Evolution</span>
+                           <ArrowRight size={20} className="ml-5 group-hover:translate-x-4 transition-transform" />
                         </ShimmerButton>
                      </Link>
                   </div>
                </BlurFade>
             </div>
 
-            {/* Right Column: Vision Cards */}
-            <div className="w-full lg:w-[32%]">
+            {/* Right Column: Premium Glass Cards */}
+            <div className="w-full lg:w-[30%]">
                <BlurFade delay={0.4}>
-                  <div className="space-y-12">
+                  <div className="space-y-16">
                      {[
-                        { title: 'Visionary Hub', desc: 'Creative therapy consulting model.', icon: Sparkles },
-                        { title: 'Compassion', desc: 'Leadership driven by clinical results.', icon: Heart }
+                        { title: 'Visionary Hub', desc: 'Creative therapy consulting model built for modern long-term care leadership.', icon: Sparkles },
+                        { title: 'Compassion', desc: 'Clinical passion that drives functional results and facility operational health.', icon: Heart }
                      ].map((pill, i) => (
-                        <div key={i} className="p-10 rounded-[3rem] bg-white/[0.02] border border-white/5 backdrop-blur-[80px] hover:bg-white/[0.06] transition-all duration-1000 group">
-                           <div className="flex items-center gap-8 mb-6">
-                              <div className="w-14 h-14 rounded-2xl bg-[#0284c7] flex items-center justify-center text-white shadow-[0_10px_30px_rgba(2,132,199,0.4)] group-hover:scale-110 transition-all duration-700">
-                                 <pill.icon size={24} />
+                        <div key={i} className="p-12 rounded-[4rem] bg-white/[0.01] border border-white/5 backdrop-blur-[120px] hover:bg-white/[0.05] transition-all duration-1000 group">
+                           <div className="flex items-center gap-10 mb-8">
+                              <div className="w-16 h-16 rounded-3xl bg-[#0284c7] flex items-center justify-center text-white shadow-[0_15px_40px_rgba(2,132,199,0.3)] group-hover:scale-110 group-hover:rotate-6 transition-all duration-700">
+                                 <pill.icon size={28} />
                               </div>
-                              <h4 className="text-[11px] font-black text-white uppercase tracking-[0.4em]">{pill.title}</h4>
+                              <h4 className="text-[12px] font-black text-white uppercase tracking-[0.5em]">{pill.title}</h4>
                            </div>
-                           <p className="text-white/20 text-sm font-light leading-relaxed italic">"{pill.desc}"</p>
+                           <p className="text-white/20 text-base font-light leading-relaxed italic">"{pill.desc}"</p>
                         </div>
                      ))}
                   </div>
@@ -221,14 +216,14 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Vision Watermark: EVOLVE (Refined Size) */}
-        <div className="absolute right-[-8vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
-           <span className="text-white/[0.03] text-[20vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap">
+        {/* Section-Spanning Watermark: EVOLVE (Top-to-Bottom Coverage) */}
+        <div className="absolute right-[-18vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
+           <span className="text-white/[0.03] text-[55vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap h-full flex items-center">
               EVOLVE
            </span>
         </div>
 
-        {/* Bottom Mask */}
+        {/* Bottom Fade Mask */}
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0f172a] to-transparent z-40" />
       </section>
 

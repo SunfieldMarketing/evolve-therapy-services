@@ -117,7 +117,6 @@ export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
 
   useEffect(() => {
-    // Safety reveal to ensure page doesn't stay black
     const timer = setTimeout(() => setVideoStarted(true), 3500);
     return () => clearTimeout(timer);
   }, []);
@@ -126,24 +125,24 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Redesigned Editorial Hero ── */}
+      {/* ── Redesigned Editorial Hero (Widescreen Optimized) ── */}
       <section className="relative w-full h-screen flex flex-col justify-end bg-black overflow-hidden">
-        {/* Background Layer: Absolute Video with Heavy Cropping */}
+        {/* Background Layer: Ultra-Wide Optimized Video Container */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
              "absolute inset-0 z-10 transition-opacity duration-[3s] ease-in-out bg-black",
              videoStarted ? "opacity-100" : "opacity-100"
            )}>
-             <div className="absolute inset-0 w-[140%] h-[140%] -top-[20%] -left-[20%] pointer-events-none select-none">
+             {/* 200% Scale to guarantee no black bars on ultra-widescreens and hide all UI */}
+             <div className="absolute inset-0 w-[200vw] h-[200vh] -top-[50vh] -left-[50vw] pointer-events-none select-none">
                 <iframe
                   src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5&enablejsapi=1"
                   title="Services cinematic"
                   allow="autoplay; encrypted-media"
                   className="w-full h-full border-0 opacity-50 contrast-[1.1] saturate-[0.8]"
-                  onLoad={() => setTimeout(() => setVideoStarted(true), 1000)}
+                  onLoad={() => setTimeout(() => setVideoStarted(true), 1500)}
                 />
              </div>
-             {/* Invisible blocking layer to prevent any hover-state UI on video */}
              <div className="absolute inset-0 z-20 bg-transparent cursor-default" />
            </div>
 
@@ -156,25 +155,25 @@ export default function ServicesPage() {
         <div className="relative z-40 container mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
           <div className="flex flex-col lg:flex-row items-end justify-between gap-12 lg:gap-20">
             
-            {/* Left Column: Big Statement */}
+            {/* Left Column: Strategic Statement */}
             <div className="w-full lg:w-[60%]">
                <BlurFade delay={0.2}>
                   <div className="flex items-center gap-4 mb-8">
                      <div className="w-12 h-[1px] bg-[#0284c7]" />
-                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.5em]">The Clinical Standard</span>
+                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.5em]">Clinical Partnership</span>
                   </div>
-                  <h1 className="text-7xl md:text-[12vw] lg:text-[10vw] font-serif font-black text-white leading-[0.82] tracking-tighter mb-12">
-                     <span className="block">EVOLVE</span>
-                     <span className="text-[#0284c7] italic block ml-[0.1em]">SERVICES.</span>
+                  <h1 className="text-5xl md:text-[7vw] lg:text-[6vw] font-serif font-black text-white leading-[0.85] tracking-tighter mb-12 drop-shadow-2xl">
+                     <span className="block">STRATEGIC</span>
+                     <span className="text-[#0284c7] italic block ml-[0.1em]">SOLUTIONS.</span>
                   </h1>
                   <div className="max-w-2xl">
-                     <p className="text-xl md:text-2xl text-white/50 font-light leading-relaxed mb-12 border-l-2 border-[#0284c7]/30 pl-8">
+                     <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed mb-12 border-l-2 border-[#0284c7]/30 pl-8">
                         Assisting operators who want to take their therapy teams in-house by choosing our management model; and assisting in-house programs with clinical proven education and compliance oversight.
                      </p>
                      <Link href="/contact" className="inline-flex group">
-                        <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.5rem" className="px-12 py-6">
-                           <span className="font-black uppercase tracking-[0.2em] text-[12px] text-white">Partner with Evolve</span>
-                           <ArrowRight size={16} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                        <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.5rem" className="px-10 py-5">
+                           <span className="font-black uppercase tracking-[0.2em] text-[11px] text-white">Partner with Evolve</span>
+                           <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
                         </ShimmerButton>
                      </Link>
                   </div>
@@ -189,12 +188,12 @@ export default function ServicesPage() {
                         { title: 'Compassion', desc: 'Creative therapy consulting through leadership.', icon: Heart },
                         { title: 'Excellence', desc: 'Evidence-based results for your bottom line.', icon: Award }
                      ].map((pill, i) => (
-                        <div key={i} className="p-8 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-3xl hover:bg-white/[0.07] transition-all duration-700">
+                        <div key={i} className="p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-3xl hover:bg-white/[0.07] transition-all duration-700">
                            <div className="flex items-center gap-6 mb-4">
-                              <pill.icon size={20} className="text-[#0284c7]" />
-                              <h4 className="text-[11px] font-black text-white uppercase tracking-widest">{pill.title}</h4>
+                              <pill.icon size={18} className="text-[#0284c7]" />
+                              <h4 className="text-[10px] font-black text-white uppercase tracking-widest">{pill.title}</h4>
                            </div>
-                           <p className="text-white/30 text-sm font-light leading-relaxed italic">"{pill.desc}"</p>
+                           <p className="text-white/30 text-xs font-light leading-relaxed italic">"{pill.desc}"</p>
                         </div>
                      ))}
                   </div>
@@ -203,16 +202,16 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Vertical Watermark */}
-        <div className="absolute right-[-5vw] top-1/2 -translate-y-1/2 rotate-90 pointer-events-none hidden xl:block">
-           <span className="text-white/[0.03] text-[20vw] font-serif font-black tracking-tighter leading-none select-none">
-              EST. 2024
+        {/* Dynamic Watermark */}
+        <div className="absolute right-[-8vw] top-1/2 -translate-y-1/2 rotate-90 pointer-events-none hidden xl:block">
+           <span className="text-white/[0.03] text-[15vw] font-serif font-black tracking-tighter leading-none select-none uppercase">
+              Clinical Hub
            </span>
         </div>
 
         {/* Subtle Scroll Down */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3 animate-bounce">
-           <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.4em]">Explore Deeply</span>
+           <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.4em]">Explore Hub</span>
            <ChevronDown size={14} className="text-[#0284c7]" />
         </div>
       </section>

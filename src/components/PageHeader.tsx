@@ -126,7 +126,7 @@ export default function PageHeader({
                 </div>
              )}
 
-             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+             <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-24">
                 <Link href={ctaLink} className="inline-flex group shrink-0">
                    <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-16 py-7 shadow-[0_30px_60px_rgba(2,132,199,0.3)]">
                       <span className="font-black uppercase tracking-[0.4em] text-[14px] text-white">{ctaText}</span>

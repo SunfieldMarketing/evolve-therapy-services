@@ -139,8 +139,8 @@ export default function WhyEvolve() {
                 </div>
 
                 {/* Content Reveal (Right) */}
-                <div className="w-full lg:w-1/2 text-left">
-                  <div className="max-w-xl h-96 relative">
+                <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+                  <div className="max-w-xl h-96 relative w-full">
                     <AnimatePresence mode="wait">
                       {activeIndex === -1 ? (
                         <motion.div
@@ -148,9 +148,9 @@ export default function WhyEvolve() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -20 }}
-                          className="absolute inset-0"
+                          className="absolute inset-0 flex flex-col items-center lg:items-start"
                         >
-                          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/20 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-12">
+                          <div className="inline-flex items-center justify-center gap-3 px-4 py-2 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/20 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-12">
                             <Sparkles size={12} />
                             The Evolve Advantage
                           </div>
@@ -169,10 +169,10 @@ export default function WhyEvolve() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -20 }}
                           transition={{ duration: 0.5, ease: "easeOut" }}
-                          className="absolute inset-0"
+                          className="absolute inset-0 flex flex-col items-center lg:items-start"
                         >
-                          <div className="inline-flex items-center gap-2 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-10">
-                             <div className="w-8 h-px bg-[#38bdf8]/30" />
+                          <div className="inline-flex items-center justify-center gap-2 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-10">
+                             <div className="w-8 h-px bg-[#38bdf8]/30 hidden lg:block" />
                              Clinical Advantage
                           </div>
                           <h3 className="text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-none mb-6">
@@ -182,7 +182,7 @@ export default function WhyEvolve() {
                           <p className="text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-8">
                             {features[activeIndex].desc}
                           </p>
-                          <Link href={features[activeIndex].href} className="group inline-flex items-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
+                          <Link href={features[activeIndex].href} className="group inline-flex items-center justify-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
                              Learn More About This Service
                              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                           </Link>
@@ -192,7 +192,7 @@ export default function WhyEvolve() {
                           key="end"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="absolute inset-0 flex flex-col justify-center"
+                          className="absolute inset-0 flex flex-col justify-center items-center lg:items-start"
                         >
                           <h3 className="text-4xl md:text-6xl font-serif font-black text-white tracking-tighter mb-8">
                             Ready to <span className="text-[#38bdf8] italic font-medium">Evolve?</span>

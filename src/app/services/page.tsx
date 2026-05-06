@@ -165,9 +165,9 @@ export default function ServicesPage() {
                   <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]">Partnership Hub</span>
                </div>
                
-               <h1 className="text-5xl md:text-[5vw] lg:text-[4.5vw] font-serif font-black text-white leading-[1] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] whitespace-nowrap overflow-visible">
-                  <span className="uppercase tracking-tighter">STRATEGICAL</span>
-                  <span className="text-[#0284c7] italic ml-[0.15em] uppercase tracking-tighter">SERVICES.</span>
+               <h1 className="text-5xl md:text-[5vw] lg:text-[4.5vw] font-serif font-black text-white leading-[1] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] break-words">
+                  <span className="uppercase tracking-tighter block md:inline">STRATEGICAL</span>
+                  <span className="text-[#0284c7] italic md:ml-[0.15em] uppercase tracking-tighter block md:inline">SERVICES.</span>
                </h1>
 
                <div className="mb-20 w-full">
@@ -176,7 +176,7 @@ export default function ServicesPage() {
                   </p>
                </div>
                
-               <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+               <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-24">
                   <Link href="/contact" className="inline-flex group shrink-0">
                      <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-16 py-7 shadow-[0_30px_60px_rgba(2,132,199,0.3)]">
                         <span className="font-black uppercase tracking-[0.4em] text-[14px] text-white">Start Your Evolution</span>

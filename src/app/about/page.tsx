@@ -9,7 +9,7 @@ import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Shield, Target, Eye, ArrowRight, HeartPulse, Building2, TrendingUp, Users, GraduationCap, CheckCircle2 } from 'lucide-react';
+import { Shield, Target, Eye, ArrowRight, HeartPulse, Building2, TrendingUp, Users, GraduationCap, CheckCircle2, Quote } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const leaders = [
@@ -18,7 +18,7 @@ const leaders = [
     title: 'President & Founder',
     photo: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png',
     fallback: 'https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80',
-    quote: '"As a clinician, I know how difficult it was to meet the goals of my employer as well as try to meet the goals of my customer. We know that a model that brings your therapy teams in-house allows great employee engagement, which then in turn, allows exceptional therapy outcomes to the residents we all serve."',
+    quote: 'As a clinician, I know how difficult it was to meet the goals of my employer as well as try to meet the goals of my customer. We know that a model that brings your therapy teams in-house allows great employee engagement, which then in turn, allows exceptional therapy outcomes to the residents we all serve.',
     bio: [
       'Over 20 years of long-term therapy leadership with a passionate commitment to evolve the functionality of therapy services for the aging population.',
       'Operational and clinical expertise in leadership and marketing models created by exceptional clinical programming—setting customers apart through a holistic philosophy.',
@@ -31,7 +31,7 @@ const leaders = [
     title: 'VP of Operations & Co-Founder',
     photo: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1777331091/07de3a3b-7cf1-4a15-9ec4-28fdf603ac74.png',
     fallback: 'https://images.unsplash.com/photo-1622253692010-333f2da60c8d?auto=format&fit=crop&q=80',
-    quote: '"As Director of Operations my passion is in building the best clinical outcomes and operations success in the most fiscally responsible manner. My vision is to promote/build a place of stability where clinicians can thrive in doing what they have a passion to do."',
+    quote: 'As Director of Operations my passion is in building the best clinical outcomes and operations success in the most fiscally responsible manner. My vision is to promote/build a place of stability where clinicians can thrive in doing what they have a passion to do.',
     bio: [
       'With an MBA in Healthcare Administration from South University and as a licensed Physical Therapist Assistant, Isaiah serves as Evolve\'s Director of Operations.',
       'He oversees all therapy operations, working to build strong clinical, operational, and business strategies—progressing quickly due to his ability to teach, train, and build up those around him.',
@@ -115,7 +115,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership Bios (Founders) - Scaled to match text box */}
+      {/* Leadership Bios (Founders) - Balanced & Professional Redesign */}
       <section className="py-24 md:py-48 bg-slate-50 border-y border-slate-100 relative overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 relative z-10">
            <BlurFade className="text-center mb-24 md:mb-36">
@@ -127,43 +127,45 @@ export default function AboutPage() {
             </h2>
           </BlurFade>
 
-          <div className="space-y-32 md:space-y-48 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-16 max-w-7xl mx-auto">
             {leaders.map((leader, i) => (
-              <BlurFade key={i} delay={0.2} className="group">
-                <div className={cn(
-                  "flex flex-col lg:flex-row gap-12 lg:gap-0 bg-white rounded-[3rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.05)] border border-slate-100 items-stretch",
-                  i % 2 === 1 && "lg:flex-row-reverse"
-                )}>
-                  {/* Photo Column - Scaled to match height of content */}
-                  <div className="w-full lg:w-5/12 relative min-h-[400px] lg:min-h-full overflow-hidden">
-                     <Image
-                       src={leader.photo}
-                       alt={leader.name}
-                       fill
-                       priority={i === 0}
-                       className="object-cover object-top group-hover:scale-105 transition-transform duration-[4s]"
-                       onError={(e) => { (e.target as HTMLImageElement).src = leader.fallback; }}
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                     
-                     {/* Floating Name Badge */}
-                     <div className="absolute bottom-10 left-10 right-10 p-8 rounded-3xl backdrop-blur-2xl bg-white/10 border border-white/20 text-white shadow-2xl">
-                        <div className="font-black font-serif text-2xl tracking-tight">{leader.name}</div>
-                        <div className="text-[10px] uppercase tracking-[0.4em] font-black mt-2 text-[#38bdf8]">{leader.title}</div>
-                     </div>
-                  </div>
+              <BlurFade key={i} delay={0.2} className="group flex h-full">
+                <div className="relative flex flex-col bg-white rounded-[3rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.04)] border border-slate-100 w-full group-hover:shadow-2xl transition-all duration-700">
+                   {/* Top Visual Section */}
+                   <div className="relative w-full aspect-[4/3] overflow-hidden">
+                      <Image
+                        src={leader.photo}
+                        alt={leader.name}
+                        fill
+                        className="object-cover object-top group-hover:scale-105 transition-transform duration-[4s]"
+                        onError={(e) => { (e.target as HTMLImageElement).src = leader.fallback; }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/60 via-transparent to-transparent" />
+                      
+                      {/* Integrated Name & Title */}
+                      <div className="absolute bottom-8 left-8 right-8">
+                         <div className="text-white font-black font-serif text-3xl md:text-4xl tracking-tight mb-2 drop-shadow-lg">{leader.name}</div>
+                         <div className="text-[#38bdf8] text-[11px] font-black uppercase tracking-[0.4em]">{leader.title}</div>
+                      </div>
+                   </div>
 
-                  {/* Content Column */}
-                  <div className="w-full lg:w-7/12 p-12 md:p-20 flex flex-col justify-center">
-                    <blockquote className="text-2xl md:text-3xl font-serif text-[#0f172a] italic leading-tight font-black mb-12 border-l-4 border-[#0284c7] pl-8">
-                      {leader.quote}
-                    </blockquote>
-                    <div className="space-y-6 text-lg text-slate-500 leading-relaxed font-light">
-                      {leader.bio.map((para, j) => (
-                        <p key={j}>{para}</p>
-                      ))}
-                    </div>
-                  </div>
+                   {/* Content Section */}
+                   <div className="p-10 md:p-14 flex flex-col flex-1">
+                      {/* Professional Quote Display */}
+                      <div className="relative mb-12">
+                         <Quote className="absolute -top-6 -left-6 text-[#0284c7]/10 w-20 h-20" />
+                         <p className="relative z-10 text-xl font-serif text-[#0f172a] italic leading-relaxed font-bold border-l-4 border-[#0284c7] pl-8">
+                            "{leader.quote}"
+                         </p>
+                      </div>
+
+                      {/* Bio Detail */}
+                      <div className="space-y-6 text-[15px] md:text-base text-slate-500 leading-relaxed font-light mt-auto">
+                        {leader.bio.map((para, j) => (
+                          <p key={j}>{para}</p>
+                        ))}
+                      </div>
+                   </div>
                 </div>
               </BlurFade>
             ))}
@@ -202,35 +204,36 @@ export default function AboutPage() {
         </div>
       </section>
  
-      {/* Strategic Partnership Section (National Network) - Enhanced for Fill Width */}
-      <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden">
-        {/* USA Map as Background */}
-        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none grayscale brightness-50 scale-110">
+      {/* Strategic Partnership Section (National Network) - Pure Dimmed Map Background */}
+      <section className="py-32 md:py-64 bg-[#0f172a] relative overflow-hidden">
+        {/* Only the American map as a dimmed background image */}
+        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none grayscale brightness-75">
            <USAMap />
         </div>
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#0f172a] via-transparent to-[#0f172a]" />
         
         <div className="container mx-auto px-6 relative z-20">
           <BlurFade delay={0.1}>
             <div className="w-full flex flex-col items-center text-center">
                 <div className="max-w-none w-full">
-                  <h3 className="text-5xl md:text-[6vw] font-serif font-black text-white mb-10 leading-[0.8] tracking-tighter uppercase whitespace-nowrap">
-                    A National Network <span className="text-[#38bdf8] italic block mt-2">Primed for Growth</span>
+                  <h3 className="text-5xl md:text-[6.5vw] font-serif font-black text-white mb-12 leading-[0.8] tracking-tighter uppercase whitespace-nowrap drop-shadow-2xl">
+                    A National Network <span className="text-[#38bdf8] italic block mt-4">Primed for Growth</span>
                   </h3>
-                  <p className="text-white/40 text-xl md:text-2xl font-light mb-20 leading-relaxed max-w-5xl mx-auto italic">
+                  <p className="text-white/40 text-xl md:text-3xl font-light mb-24 leading-relaxed max-w-6xl mx-auto italic">
                     "Our regional directors are strategically deployed across the United States to ensure that every facility under our oversight carries the same Evolve Standard."
                   </p>
                   
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl mx-auto">
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl mx-auto">
                     {[
                       { icon: Shield, text: 'Expert Regulatory Alignment' },
                       { icon: Eye, text: 'Real-Time Clinical Dashboards' },
                       { icon: Target, text: 'Tailored Financial Strategies' },
-                      { icon: HeartPulse, text: 'DOR Leadership Development' }
+                      { icon: Users, text: 'Leadership Development' }
                     ].map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-center gap-4 p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl group hover:bg-white/10 transition-all">
-                        <item.icon className="text-[#38bdf8] group-hover:scale-110 transition-transform" size={24} />
-                        <span className="text-white font-black uppercase text-[10px] tracking-[0.4em]">{item.text}</span>
+                      <div key={idx} className="flex flex-col items-center gap-6 p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl group hover:bg-white/[0.07] transition-all duration-500">
+                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8] group-hover:bg-[#38bdf8] group-hover:text-white transition-all">
+                           <item.icon size={28} strokeWidth={1.5} />
+                        </div>
+                        <span className="text-white font-black uppercase text-[11px] tracking-[0.4em] text-center">{item.text}</span>
                       </div>
                     ))}
                   </div>
@@ -249,7 +252,7 @@ export default function AboutPage() {
               <span className="text-[#0284c7] italic">Advantage.</span>
             </h2>
             <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed mb-20">
-              Connect with our leadership team today to learn how our clínica oversight model can secure your facility’s future.
+              Connect with our leadership team today to learn how our clinical oversight model can secure your facility’s future.
             </p>
             <Link href="/contact">
               <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-16 py-8 shadow-2xl">

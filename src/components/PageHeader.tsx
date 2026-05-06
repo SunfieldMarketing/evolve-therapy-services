@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { BlurFade } from '@/components/magicui/blur-fade';
+import { Target } from 'lucide-react';
 
 // Map of page-specific background abstract/medical images  
 const imageMap: Record<string, string> = {
@@ -37,12 +39,13 @@ export default function PageHeader({
   const videoId = videoMap[videoKey as string];
 
   return (
-    <section className="relative w-full overflow-hidden flex items-center justify-center min-h-[75vh] md:min-h-[85vh]">
+    <section className="relative w-full overflow-hidden flex items-center justify-center min-h-screen bg-[#0f172a]">
       {/* ── Background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a]">
         {videoId ? (
           <div className="absolute inset-0 pointer-events-none select-none">
-            <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none">
+            {/* Shifted video up significantly by using a smaller negative top offset */}
+            <div className="absolute w-[320vw] h-[320vh] top-[-80vh] left-[-160vw] pointer-events-none">
               <iframe
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=${videoId}&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1`}
                 title={`${title} background cover`}
@@ -61,45 +64,47 @@ export default function PageHeader({
           />
         )}
         
-        {/* Multi-layer gradient overlay */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/40 to-[#0f172a]/95" />
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/90 via-transparent to-[#0f172a]/90" />
+        {/* Multi-layer gradient overlay (Matched to Services Hero) */}
+        <div className="absolute inset-0 z-20 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
+        <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#0f172a] via-transparent to-[#0f172a]" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
         <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
       </div>
 
-      {/* ── Content ── */}
-      <div className="relative z-30 w-full px-6 sm:px-12 md:px-20 lg:px-32 text-center py-24 sm:py-32 md:py-48">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {/* Decorative line */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-20 h-1 bg-[#0284c7] mx-auto mb-10"
-          />
+      {/* ── Content (Restructured to match Services/Home Hero Style) ── */}
+      <div className="relative z-30 container mx-auto px-6 lg:px-12 -mt-12">
+        <BlurFade delay={0.2}>
+           {/* Subtitle Badge */}
+           <div className="flex items-center gap-6 mb-12">
+              <div className="w-12 h-[1px] bg-[#0284c7]" />
+              <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]">Professional Integrity</span>
+           </div>
+           
+           <h1 className="text-6xl md:text-[8vw] lg:text-[7vw] font-serif font-black text-white leading-[0.8] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] whitespace-nowrap overflow-visible">
+              <span className="uppercase tracking-tighter">{title}</span>
+              {italicWord && (
+                <span className="text-[#0284c7] italic ml-[0.15em] uppercase tracking-tighter">{italicWord}.</span>
+              )}
+           </h1>
 
-          <h1 className="font-serif font-black text-white tracking-tighter leading-[0.8] mb-10 uppercase" style={{ fontSize: 'clamp(3rem, 10vw, 7.5rem)' }}>
-            {title}{' '}
-            {italicWord && (
-              <span className="text-[#0284c7] italic block mt-2">{italicWord}</span>
-            )}
-          </h1>
+           {subtitle && (
+              <div className="mb-20 w-full">
+                 <p className="text-xl md:text-3xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic max-w-5xl">
+                    "{subtitle}"
+                 </p>
+              </div>
+           )}
 
-          {subtitle && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 1 }}
-              className="text-xl md:text-3xl text-white/50 max-w-4xl mx-auto leading-relaxed font-light italic"
-            >
-              {subtitle}
-            </motion.p>
-          )}
-        </motion.div>
+           <div className="flex items-center gap-8">
+              <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl">
+                 <Target size={20} />
+              </div>
+              <div className="flex flex-col">
+                 <span className="text-white font-black uppercase text-[11px] tracking-widest">Core Philosophy</span>
+                 <span className="text-white/20 text-[12px] font-light italic">"Results Driven Leadership"</span>
+              </div>
+           </div>
+        </BlurFade>
       </div>
     </section>
   );

@@ -58,7 +58,7 @@ const detailedServices = [
       'Regulatory compliance mapping'
     ],
     icon: ClipboardCheck,
-    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093734/5ea74f03-cbbc-4e88-9423-3c63c1c255bd.png',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778092798/d9b89396-c963-4b64-a929-b0ce959244cd.png',
     href: '/services/medicaid-case-mix-analysis'
   },
   {
@@ -126,49 +126,40 @@ export default function ServicesPage() {
         videoKey="services"
       />
 
-      {/* ── Intro: What We Do ── */}
-      <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+      {/* ── Intro: What We Do (Photo Removed) ── */}
+      <section className="py-24 md:py-48 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
-            <div className="w-full lg:w-1/2 flex flex-col justify-center">
-              <BlurFade delay={0.1}>
-                <div className="mb-6">
-                  <AnimatedGradientText>The Evolve Mission</AnimatedGradientText>
-                </div>
-                <h2 className="text-4xl md:text-6xl font-serif text-[#0f172a] font-black tracking-tighter mb-8 leading-[0.95]">
-                  Bridging Gaps, <br />
-                  <span className="text-[#0284c7] italic font-medium">Elevating Care.</span>
-                </h2>
-                <p className="text-lg text-slate-500 font-light leading-relaxed mb-8 max-w-xl">
-                  It is our vision to assist operators who want to take their therapy teams in-house by choosing our management model; and to assist in-house programs with clinical proven education, operational analysis, and compliance oversight to allow LTC operators to truly EVOLVE to the next level.
-                </p>
-                <div className="grid sm:grid-cols-2 gap-6">
-                   <div className="space-y-2">
-                      <div className="font-black text-[#0f172a] uppercase text-[10px] tracking-widest">Our Vision</div>
-                      <p className="text-xs text-slate-400 leading-relaxed">To provide the most creative therapy consulting model through compassionate leadership and clinical passion.</p>
-                   </div>
-                   <div className="space-y-2">
-                      <div className="font-black text-[#0f172a] uppercase text-[10px] tracking-widest">Our Approach</div>
-                      <p className="text-xs text-slate-400 leading-relaxed">Evidence-based experience that drives measurable results for your bottom line and your residents.</p>
-                   </div>
-                </div>
-              </BlurFade>
-            </div>
-            <div className="w-full lg:w-1/2">
-               <BlurFade delay={0.3} className="h-full">
-                  <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden shadow-2xl group">
-                     <Image 
-                        src="https://res.cloudinary.com/dai2pg27n/image/upload/v1778093795/42b46240-f14c-44d5-b1e5-dc4d831cb2d6.png" 
-                        alt="Medicaid & Reimbursement Focus" 
-                        fill 
-                        className="object-cover group-hover:scale-105 transition-transform duration-[2s]" 
-                      />
-                     <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/40 via-transparent to-transparent" />
-                  </div>
-               </BlurFade>
-            </div>
+          <div className="max-w-4xl mx-auto text-center">
+            <BlurFade delay={0.1}>
+              <div className="mb-8 flex justify-center">
+                <AnimatedGradientText>The Evolve Mission</AnimatedGradientText>
+              </div>
+              <h2 className="text-5xl md:text-8xl font-serif text-[#0f172a] font-black tracking-tighter mb-12 leading-[0.9] md:leading-[0.85]">
+                Bridging Gaps, <br />
+                <span className="text-[#0284c7] italic font-medium text-4xl md:text-7xl">Elevating Care Standards.</span>
+              </h2>
+              <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed mb-16 max-w-3xl mx-auto">
+                It is our vision to assist operators who want to take their therapy teams in-house by choosing our management model; and to assist in-house programs with clinical proven education, operational analysis, and compliance oversight to allow LTC operators to truly EVOLVE to the next level.
+              </p>
+              <div className="grid md:grid-cols-2 gap-12 max-w-3xl mx-auto text-left border-t border-slate-100 pt-16">
+                 <div className="space-y-4">
+                    <div className="font-black text-[#0f172a] uppercase text-[11px] tracking-[0.3em] flex items-center gap-2">
+                       <div className="w-6 h-px bg-[#0284c7]" /> Our Vision
+                    </div>
+                    <p className="text-sm text-slate-400 leading-relaxed font-light italic">"To provide the most creative therapy consulting model through compassionate leadership and clinical passion."</p>
+                 </div>
+                 <div className="space-y-4">
+                    <div className="font-black text-[#0f172a] uppercase text-[11px] tracking-[0.3em] flex items-center gap-2">
+                       <div className="w-6 h-px bg-[#0284c7]" /> Our Approach
+                    </div>
+                    <p className="text-sm text-slate-400 leading-relaxed font-light italic">"Evidence-based experience that drives measurable results for your bottom line and your residents."</p>
+                 </div>
+              </div>
+            </BlurFade>
           </div>
         </div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0284c7]/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#0284c7]/5 rounded-full blur-[120px] -z-10 -translate-x-1/2 translate-y-1/2" />
       </section>
 
       {/* ── Services Showcase: Alternating High-Light Sections ── */}
@@ -194,14 +185,15 @@ export default function ServicesPage() {
                   i % 2 !== 0 && "lg:flex-row-reverse"
                 )}>
                   <div className="w-full lg:w-[45%]">
-                    <div className="relative aspect-video lg:aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl">
+                    <div className="relative aspect-video lg:aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl bg-slate-200">
                        <Image 
                         src={service.image} 
                         alt={service.title} 
                         fill 
-                        className="object-cover group-hover:scale-110 transition-transform duration-[2s]" 
+                        className="object-cover group-hover:scale-105 transition-transform duration-[2s] brightness-[1.05] contrast-[1.02]" 
+                        priority={i < 2}
                        />
-                       <div className="absolute inset-0 bg-[#0284c7]/10 mix-blend-overlay" />
+                       <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     </div>
                   </div>
                   <div className="w-full lg:w-[55%]">

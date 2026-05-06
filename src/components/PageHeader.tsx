@@ -31,14 +31,18 @@ export default function PageHeader({
   return (
     <section className="relative w-full overflow-hidden flex items-center justify-center" style={{ minHeight: '65vh' }}>
       {/* ── Background ── */}
-      <div className="absolute inset-0 z-0 bg-[#0f172a]">
+      <div className="absolute inset-0 z-0 bg-[#0f172a] pointer-events-none">
         {videoKey === 'services' ? (
-          <iframe
-            src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5"
-            title={`${title} background cover`}
-            allow="autoplay; encrypted-media"
-            className="absolute inset-0 w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0 opacity-50"
-          />
+          <div className="absolute inset-0 pointer-events-none select-none">
+            <iframe
+              src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5"
+              title={`${title} background cover`}
+              allow="autoplay; encrypted-media"
+              className="absolute inset-0 w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-0 opacity-50"
+            />
+            {/* Hard blocking layer to catch any stray interactions */}
+            <div className="absolute inset-0 z-10 bg-transparent" />
+          </div>
         ) : (
           <img
             src={imageUrl}
@@ -48,8 +52,8 @@ export default function PageHeader({
         )}
         
         {/* Multi-layer gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/60 to-[#0f172a]/95" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/80 via-transparent to-[#0f172a]/80" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/60 to-[#0f172a]/95" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/80 via-transparent to-[#0f172a]/80" />
       </div>
 
       {/* ── Content ── */}

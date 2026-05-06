@@ -86,51 +86,45 @@ export default function WhyEvolve() {
           </BlurFade>
         </div>
 
-        {/* Feature cards — Premium Glass Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 lg:gap-8 mb-20">
-          {features.map((item, i) => {
-            // Define span logic for a dynamic grid feel
-            const spans = [
-              'md:col-span-3 lg:col-span-4', // 1
-              'md:col-span-3 lg:col-span-4', // 2
-              'md:col-span-6 lg:col-span-4', // 3
-              'md:col-span-3 lg:col-span-6', // 4
-              'md:col-span-3 lg:col-span-6', // 5
-            ];
-            return (
-              <BlurFade delay={0.2 + i * 0.1} key={i} className={spans[i]}>
-                <div className="group relative h-full rounded-[2.5rem] bg-white/[0.02] border border-white/[0.05] p-8 md:p-10 hover:bg-white/[0.04] hover:border-[#0284c7]/30 transition-all duration-700 flex flex-col justify-between overflow-hidden">
-                  {/* Subtle hover gradient */}
-                  <div className={`absolute -inset-20 bg-gradient-to-br ${item.accent} opacity-0 group-hover:opacity-[0.03] blur-[60px] transition-opacity duration-700 pointer-events-none`} />
-                  
-                  <div>
-                    {/* Icon Container */}
-                    <div className="relative mb-8">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${item.accent} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
-                      <div className={`relative w-16 h-16 rounded-2xl bg-slate-900 border border-white/10 flex items-center justify-center text-white group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500`}>
-                        <item.icon size={28} strokeWidth={1.5} className="text-[#38bdf8]" />
-                      </div>
-                    </div>
-
-                    <h4 className="text-2xl md:text-3xl font-serif font-black text-white tracking-tight mb-4 group-hover:text-[#38bdf8] transition-colors duration-500">
-                      {item.title} <span className="text-white/40 italic font-medium">{item.subtitle}</span>
-                    </h4>
-                    
-                    <p className="text-base text-white/40 leading-relaxed font-light group-hover:text-white/60 transition-colors duration-500">
-                      {item.desc}
-                    </p>
-                  </div>
-
-                  <div className="mt-10 flex items-center justify-between">
-                    <span className="text-[40px] font-serif font-black text-white/[0.03] group-hover:text-[#0284c7]/10 transition-colors duration-500">
-                      {item.num}
-                    </span>
-                    <div className={`w-8 h-px bg-white/10 group-hover:w-16 group-hover:bg-[#0284c7]/50 transition-all duration-700`} />
+        {/* Feature List — Editorial Impact Layout (Not Cards) */}
+        <div className="max-w-5xl mx-auto mb-28">
+          {features.map((item, i) => (
+            <BlurFade delay={0.2 + i * 0.1} key={i}>
+              <div className="group relative py-12 md:py-16 border-b border-white/5 last:border-0 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-16 transition-all duration-500">
+                
+                {/* Large Number / Watermark */}
+                <div className="shrink-0 w-24 md:w-32">
+                  <div className="text-6xl md:text-8xl font-serif font-black text-white/[0.03] group-hover:text-[#0284c7]/20 transition-colors duration-700 leading-none select-none pointer-events-none">
+                    {item.num}
                   </div>
                 </div>
-              </BlurFade>
-            );
-          })}
+
+                {/* Content */}
+                <div className="flex-1">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${item.accent} opacity-20 flex items-center justify-center text-white group-hover:opacity-100 transition-all duration-500`}>
+                      <item.icon size={20} strokeWidth={1.5} className={item.accent === 'from-amber-400 to-orange-600' ? 'text-amber-500' : 'text-[#38bdf8]'} />
+                    </div>
+                    <h4 className="text-2xl md:text-4xl font-serif font-black text-white tracking-tight group-hover:text-[#38bdf8] transition-colors duration-500">
+                      {item.title} <span className="text-white/40 italic font-medium">{item.subtitle}</span>
+                    </h4>
+                  </div>
+                  <p className="text-lg md:text-xl text-white/40 leading-relaxed font-light group-hover:text-white/70 transition-all duration-500 max-w-3xl">
+                    {item.desc}
+                  </p>
+                </div>
+
+                {/* Indicator / Decoration */}
+                <div className="hidden md:flex shrink-0 items-center gap-4 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-700">
+                   <div className={`h-px w-24 bg-gradient-to-r ${item.accent} to-transparent`} />
+                   <ArrowRight size={20} className="text-[#38bdf8]" />
+                </div>
+
+                {/* Hover Background Accent */}
+                <div className="absolute inset-x-0 -inset-y-4 bg-white/[0.01] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[3rem] -z-10" />
+              </div>
+            </BlurFade>
+          ))}
         </div>
 
         {/* Bottom CTA row */}

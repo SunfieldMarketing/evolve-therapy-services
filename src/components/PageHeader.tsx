@@ -63,6 +63,7 @@ export default function PageHeader({
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const playerRef = useRef<any>(null);
+  const loopIntervalRef = useRef<any>(null);
 
   useEffect(() => {
     if (!finalUseVideo || !videoId) return;
@@ -97,6 +98,21 @@ export default function PageHeader({
             // @ts-ignore
             if (event.data === window.YT.PlayerState.PLAYING) {
               setTimeout(() => setIsVideoPlaying(true), 1500);
+
+              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
+              loopIntervalRef.current = setInterval(() => {
+                if (playerRef.current && playerRef.current.getCurrentTime) {
+                  const duration = playerRef.current.getDuration();
+                  const currentTime = playerRef.current.getCurrentTime();
+                  const endTime = duration > 5 ? duration - 5 : duration;
+                  
+                  if (currentTime >= endTime) {
+                    playerRef.current.seekTo(0);
+                  }
+                }
+              }, 500);
+            } else {
+              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
             }
           }
         }
@@ -112,6 +128,7 @@ export default function PageHeader({
     }
 
     return () => {
+      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
       if (playerRef.current && playerRef.current.destroy) {
         playerRef.current.destroy();
       }

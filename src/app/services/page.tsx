@@ -118,6 +118,7 @@ const detailedServices = [
 export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
   const playerRef = useRef<any>(null);
+  const loopIntervalRef = useRef<any>(null);
 
   useEffect(() => {
     // @ts-ignore
@@ -150,6 +151,21 @@ export default function ServicesPage() {
             // @ts-ignore
             if (event.data === window.YT.PlayerState.PLAYING) {
               setTimeout(() => setVideoStarted(true), 1500);
+
+              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
+              loopIntervalRef.current = setInterval(() => {
+                if (playerRef.current && playerRef.current.getCurrentTime) {
+                  const duration = playerRef.current.getDuration();
+                  const currentTime = playerRef.current.getCurrentTime();
+                  const endTime = duration > 5 ? duration - 5 : duration;
+                  
+                  if (currentTime >= endTime) {
+                    playerRef.current.seekTo(0);
+                  }
+                }
+              }, 500);
+            } else {
+              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
             }
           }
         }
@@ -165,6 +181,7 @@ export default function ServicesPage() {
     }
 
     return () => {
+      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
       if (playerRef.current && playerRef.current.destroy) {
         playerRef.current.destroy();
       }

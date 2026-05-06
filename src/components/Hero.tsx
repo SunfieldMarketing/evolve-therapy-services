@@ -10,6 +10,7 @@ import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient
 export default function Hero() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const playerRef = useRef<any>(null);
+  const loopIntervalRef = useRef<any>(null);
 
   useEffect(() => {
     // Check if API is already loaded
@@ -44,6 +45,22 @@ export default function Hero() {
             if (event.data === window.YT.PlayerState.PLAYING) {
               // Wait 1.5s for YouTube's native title bar to fade out before revealing
               setTimeout(() => setIsVideoPlaying(true), 1500);
+
+              // Custom Loop: Cut out the last 5 seconds and prevent YouTube 'End' UI from ever showing
+              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
+              loopIntervalRef.current = setInterval(() => {
+                if (playerRef.current && playerRef.current.getCurrentTime) {
+                  const duration = playerRef.current.getDuration();
+                  const currentTime = playerRef.current.getCurrentTime();
+                  const endTime = duration > 5 ? duration - 5 : duration; // Safely cut last 5 seconds
+                  
+                  if (currentTime >= endTime) {
+                    playerRef.current.seekTo(4); // Seek back to start (4s as previously requested)
+                  }
+                }
+              }, 500);
+            } else {
+              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
             }
           }
         }
@@ -59,6 +76,7 @@ export default function Hero() {
     }
 
     return () => {
+      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
       if (playerRef.current && playerRef.current.destroy) {
         playerRef.current.destroy();
       }

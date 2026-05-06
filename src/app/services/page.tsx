@@ -127,8 +127,8 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Editorial Hero (Full Width Mastery) ── */}
-      <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
+      {/* ── Editorial Hero ── */}
+      <section className="relative w-full h-[90vh] flex flex-col justify-center bg-[#0f172a] overflow-hidden">
         
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
@@ -155,7 +155,7 @@ export default function ServicesPage() {
            <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
         </div>
 
-        {/* Content Area: Optimized for Full Width Presence */}
+        {/* Content Area */}
         <div className="relative z-50 container mx-auto px-6 lg:px-12 -mt-12">
           <div className="w-full">
             <BlurFade delay={0.2}>
@@ -177,7 +177,7 @@ export default function ServicesPage() {
                      </p>
                   </div>
                   
-                  {/* Values Sidebar: Refined Pacing */}
+                  {/* Values Sidebar */}
                   <div className="flex flex-col sm:flex-row lg:flex-col gap-10 shrink-0">
                      <div className="flex items-center gap-5 group">
                         <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl">
@@ -209,31 +209,30 @@ export default function ServicesPage() {
             </BlurFade>
           </div>
         </div>
+      </section>
 
-        {/* Bottom Clinical Trust Bar */}
-        <div className="absolute bottom-12 left-0 right-0 z-50 overflow-hidden py-8 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent border-y border-white/[0.05] backdrop-blur-md">
-           <div className="container mx-auto px-12 flex flex-wrap items-center justify-between gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
-              <div className="flex items-center gap-4">
-                 <ShieldCheck className="text-[#0284c7]" size={20} />
+      {/* ── Social Proof Trust Section (Separate Section Under Hero) ── */}
+      <section className="relative z-50 py-12 bg-[#0f172a] border-y border-white/[0.05]">
+        <div className="container mx-auto px-12">
+           <div className="flex flex-wrap items-center justify-between gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
+              <div className="flex items-center gap-4 group cursor-default">
+                 <ShieldCheck className="text-[#0284c7] group-hover:scale-110 transition-transform" size={20} />
                  <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">100% Revenue Retention</span>
               </div>
-              <div className="flex items-center gap-4">
-                 <Star className="text-yellow-500" size={20} />
+              <div className="flex items-center gap-4 group cursor-default">
+                 <Star className="text-yellow-500 group-hover:scale-110 transition-transform" size={20} />
                  <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">Clinically Proven Models</span>
               </div>
-              <div className="flex items-center gap-4">
-                 <UserCheck className="text-[#0284c7]" size={20} />
+              <div className="flex items-center gap-4 group cursor-default">
+                 <UserCheck className="text-[#0284c7] group-hover:scale-110 transition-transform" size={20} />
                  <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">Leadership Excellence</span>
               </div>
-              <div className="flex items-center gap-4">
-                 <Activity className="text-emerald-500" size={20} />
+              <div className="flex items-center gap-4 group cursor-default">
+                 <Activity className="text-emerald-500 group-hover:scale-110 transition-transform" size={20} />
                  <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">Operational Stability</span>
               </div>
            </div>
         </div>
-
-        {/* Bottom Fade Mask */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0f172a] to-transparent z-40" />
       </section>
 
       {/* ── Services Showcase ── */}

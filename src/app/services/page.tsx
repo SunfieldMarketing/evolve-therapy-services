@@ -117,7 +117,6 @@ export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
 
   useEffect(() => {
-    // Reduced timeout for snappier start while still masking the player init
     const timer = setTimeout(() => setVideoStarted(true), 1200);
     return () => clearTimeout(timer);
   }, []);
@@ -128,16 +127,12 @@ export default function ServicesPage() {
       
       {/* ── Premium Editorial Hero ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
-        {/* Background Layer: High-End Cinematic Coverage */}
+        {/* Background Layer */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
              "absolute inset-0 z-10 transition-opacity duration-[2s] ease-in-out bg-[#0f172a]",
              videoStarted ? "opacity-100" : "opacity-0"
            )}>
-             {/* 
-                Deep Masking Strategy:
-                Scale set to 320% and shifted left to hide player controls anchored at center.
-             */}
              <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none select-none">
                 <iframe
                   src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1"
@@ -147,23 +142,20 @@ export default function ServicesPage() {
                   onLoad={() => setTimeout(() => setVideoStarted(true), 800)}
                 />
              </div>
-             
-             {/* Interaction Blocker */}
              <div className="absolute inset-0 z-20 bg-transparent pointer-events-auto cursor-default" />
            </div>
 
-           {/* Premium Visual Overlays */}
+           {/* Editorial Visual Overlays */}
            <div className="absolute inset-0 z-30 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
            <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80" />
            <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
            <div className="absolute inset-0 z-35 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
         </div>
 
-        {/* Content Area: Premium Strategical Layout */}
+        {/* Content Area */}
         <div className="relative z-40 container mx-auto px-6 lg:px-12 -mt-24">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-32">
             
-            {/* Left Column: Strategic Hub */}
             <div className="w-full lg:w-[65%]">
                <BlurFade delay={0.2}>
                   <div className="flex items-center gap-8 mb-16">
@@ -171,7 +163,7 @@ export default function ServicesPage() {
                      <span className="text-[#38bdf8] font-black uppercase text-[11px] tracking-[0.8em]">Strategic Clinical Excellence</span>
                   </div>
                   
-                  <h1 className="text-6xl md:text-[6.5vw] lg:text-[5.5vw] font-serif font-black text-white leading-[0.8] tracking-tighter mb-20 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                  <h1 className="text-6xl md:text-[6.5vw] lg:text-[5vw] font-serif font-black text-white leading-[0.8] tracking-tighter mb-20 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                      <span className="block mb-8 uppercase tracking-tighter">STRATEGICAL</span>
                      <span className="text-[#0284c7] italic block ml-[0.1em] uppercase tracking-tighter">SERVICES.</span>
                   </h1>
@@ -191,7 +183,6 @@ export default function ServicesPage() {
                </BlurFade>
             </div>
 
-            {/* Right Column: Premium Glass Cards */}
             <div className="w-full lg:w-[30%]">
                <BlurFade delay={0.4}>
                   <div className="space-y-16">
@@ -215,9 +206,9 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Section-Spanning Watermark: EVOLVE (Refined Size) */}
-        <div className="absolute right-[-14vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
-           <span className="text-white/[0.03] text-[35vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap h-full flex items-center">
+        {/* Section-Filling Watermark: EVOLVE (Calibrated to Fill Height) */}
+        <div className="absolute right-[-8vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
+           <span className="text-white/[0.03] text-[22vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap h-full flex items-center justify-center text-center">
               EVOLVE
            </span>
         </div>

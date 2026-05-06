@@ -45,7 +45,7 @@ const detailedServices = [
       'Functional outcome maximization'
     ],
     icon: Stethoscope,
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80', // Switched to a professional clinical one
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778094229/1ffcc43c-6031-47fb-abc4-cde40d4b2bec.png',
     href: '/services/optimal-therapy-outcomes'
   },
   {
@@ -84,7 +84,7 @@ const detailedServices = [
       'Resource allocation strategy'
     ],
     icon: LineChart,
-    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093466/02f4b4ce-49f8-49e5-84b8-9e94ed79b059.png',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778094169/940a0009-bf00-4939-ba87-70e8186f76fd.png',
     href: '/services/therapy-cost-reduction'
   },
   {
@@ -97,7 +97,7 @@ const detailedServices = [
       'Management model implementation'
     ],
     icon: Users2,
-    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093385/d20f225b-69e1-4deb-ae8e-b7979f30546c.png',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778094083/5f6673de-a2fe-499d-975d-5b03d897a4cc.png',
     href: '/services/in-house-transition'
   },
   {
@@ -110,7 +110,7 @@ const detailedServices = [
       'Operational health auditing'
     ],
     icon: GraduationCap,
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80', // Moved from Optimal Outcomes
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80',
     href: '/services/in-house-resource-hub'
   }
 ];
@@ -158,8 +158,8 @@ export default function ServicesPage() {
                <BlurFade delay={0.3} className="h-full">
                   <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden shadow-2xl group">
                      <Image 
-                        src="https://res.cloudinary.com/dai2pg27n/image/upload/v1778092798/d9b89396-c963-4b64-a929-b0ce959244cd.png" 
-                        alt="Clinical Success" 
+                        src="https://res.cloudinary.com/dai2pg27n/image/upload/v1778093795/42b46240-f14c-44d5-b1e5-dc4d831cb2d6.png" 
+                        alt="Medicaid & Reimbursement Focus" 
                         fill 
                         className="object-cover group-hover:scale-105 transition-transform duration-[2s]" 
                       />
@@ -311,7 +311,7 @@ export default function ServicesPage() {
       {/* ── Dynamic Pricing Model Section ── */}
       <Pricing />
 
-      {/* ── The Evolve Advantage: Redone as 4-Card Professional Layout ── */}
+      {/* ── The Evolve Advantage: 4-Card Professional Layout ── */}
       <section className="py-24 md:py-44 bg-slate-50 overflow-hidden relative">
          <div className="container mx-auto px-6 md:px-12 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-20 md:mb-32">

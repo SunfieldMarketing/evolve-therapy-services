@@ -1,9 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { Marquee } from '@/components/magicui/marquee';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
@@ -68,44 +66,49 @@ const testimonials = [
   },
 ];
 
+function TestimonialCard({ t }: { t: typeof testimonials[number] }) {
+  return (
+    <div className="w-[380px] md:w-[440px] shrink-0">
+      <div className="h-full rounded-[2.5rem] border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-9 md:p-11 flex flex-col justify-between transition-all duration-500 hover:bg-white/[0.06] hover:border-white/[0.12] hover:-translate-y-1 group">
+        <div className="mb-8">
+          <div className="flex justify-between items-start mb-6">
+            <StarRow count={t.stars} />
+            <Quote size={28} className="text-[#0284c7]/15 group-hover:text-[#0284c7]/30 transition-colors duration-500" />
+          </div>
+          <blockquote className="text-lg md:text-xl text-white/75 font-serif italic font-medium leading-relaxed group-hover:text-white/90 transition-colors duration-500">
+            &ldquo;{t.content}&rdquo;
+          </blockquote>
+        </div>
+
+        <div className="flex items-center gap-4 pt-8 border-t border-white/[0.06]">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0284c7] to-[#0369a1] flex items-center justify-center text-white font-black text-sm shadow-lg shadow-blue-500/20 shrink-0 group-hover:scale-110 transition-transform duration-500">
+            {t.initials}
+          </div>
+          <div>
+            <div className="text-base font-black text-white tracking-tight">{t.name}</div>
+            <div className="text-[#38bdf8] text-[10px] font-bold uppercase tracking-[0.15em] mt-0.5">
+              {t.role} · {t.facility}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 export default function Testimonials() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-      const progress = (scrollLeft / (scrollWidth - clientWidth)) * 100;
-      setScrollProgress(progress);
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('scroll', handleScroll);
-      return () => container.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (!containerRef.current) return;
-    const { clientWidth } = containerRef.current;
-    const scrollAmount = direction === 'left' ? -clientWidth : clientWidth;
-    containerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  };
-
   return (
-    <section className="relative py-24 md:py-44 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
+    <section className="relative py-24 md:py-40 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
       <div
-        className="absolute inset-0 pointer-events-none opacity-30"
+        className="absolute inset-0 pointer-events-none opacity-20"
         style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #0284c7 0%, transparent 60%)' }}
         aria-hidden="true"
       />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         {/* Section header */}
-        <BlurFade className="text-center mb-20 md:mb-32">
+        <BlurFade className="text-center mb-16 md:mb-24">
           <div className="flex justify-center mb-8">
             <AnimatedGradientTextDark>Client Voices</AnimatedGradientTextDark>
           </div>
@@ -117,79 +120,37 @@ export default function Testimonials() {
             Hear from LTC professionals who have transformed their therapy programs with Evolve.
           </p>
         </BlurFade>
+      </div>
 
-        {/* Carousel Container */}
-        <div className="relative group">
-          <div 
-            ref={containerRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-16 hide-scrollbar cursor-grab active:cursor-grabbing"
-          >
-            {testimonials.map((t, i) => (
-              <div 
-                key={i} 
-                className="snap-center shrink-0 w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)]"
-              >
-                <div className="h-full rounded-[3rem] border border-white/5 bg-white/[0.03] backdrop-blur-3xl p-10 md:p-14 flex flex-col justify-between transition-all duration-500 hover:bg-white/[0.05] hover:border-white/10 group/card">
-                  <div className="mb-10">
-                    <div className="flex justify-between items-start mb-8">
-                      <StarRow count={t.stars} />
-                      <Quote size={32} className="text-[#0284c7]/20 group-hover/card:text-[#0284c7]/40 transition-colors" />
-                    </div>
-                    <blockquote className="text-xl md:text-2xl text-white/80 font-serif italic font-medium leading-relaxed">
-                      &ldquo;{t.content}&rdquo;
-                    </blockquote>
-                  </div>
+      {/* Auto-scrolling carousel — row 1 */}
+      <div className="mb-6">
+        <Marquee
+          pauseOnHover
+          className="[--duration:50s] [--gap:1.5rem]"
+        >
+          {testimonials.map((t, i) => (
+            <TestimonialCard key={i} t={t} />
+          ))}
+        </Marquee>
+      </div>
 
-                  <div className="flex items-center gap-5 pt-10 border-t border-white/5">
-                    <div className="w-14 h-14 rounded-2xl bg-[#0284c7] flex items-center justify-center text-white font-black text-lg shadow-xl shadow-blue-500/20">
-                      {t.initials}
-                    </div>
-                    <div>
-                      <div className="text-lg font-black text-white tracking-tight">{t.name}</div>
-                      <div className="text-[#0284c7] text-[10px] font-black uppercase tracking-[0.2em] mt-1">
-                        {t.role} · {t.facility}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* Auto-scrolling carousel — row 2 (reverse direction) */}
+      <div className="mb-16">
+        <Marquee
+          reverse
+          pauseOnHover
+          className="[--duration:55s] [--gap:1.5rem]"
+        >
+          {[...testimonials].reverse().map((t, i) => (
+            <TestimonialCard key={i} t={t} />
+          ))}
+        </Marquee>
+      </div>
 
-          {/* Navigation & Progress Bar (Matching Screenshot 2 style) */}
-          <div className="mt-12 flex items-center gap-8 px-4">
-             <button 
-               onClick={() => scroll('left')}
-               className="text-white/20 hover:text-white transition-colors"
-               aria-label="Previous testimonial"
-             >
-               <ChevronLeft size={32} strokeWidth={1} />
-             </button>
-             
-             {/* Custom Progress Bar */}
-             <div className="flex-1 h-1.5 bg-white/5 rounded-full overflow-hidden relative">
-                <motion.div 
-                  className="absolute top-0 left-0 h-full bg-white/40"
-                  style={{ width: `${scrollProgress}%` }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                />
-             </div>
-
-             <button 
-               onClick={() => scroll('right')}
-               className="text-white/20 hover:text-white transition-colors"
-               aria-label="Next testimonial"
-             >
-               <ChevronRight size={32} strokeWidth={1} />
-             </button>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <BlurFade className="text-center mt-24" delay={0.2}>
-          <Link
-            href="/contact"
-          >
+      {/* CTA */}
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <BlurFade className="text-center mt-8" delay={0.2}>
+          <Link href="/contact">
             <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
               <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Partner With Evolve</span>
             </ShimmerButton>

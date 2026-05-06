@@ -191,7 +191,17 @@ export default function Home() {
         </div>
       </section>
 
+      <WhyEvolve />
+
       <Services />
+
+      {/* ── Testimonials ── */}
+      <Testimonials />
+
+      {/* ── USA Coverage Map ── */}
+      <USAMap />
+
+      <FAQ />
 
       {/* Philosophy / CTA Dark Section (Empower your therapy team...) */}
       <section className="py-20 md:py-36 bg-[#0f172a] relative overflow-hidden">
@@ -242,15 +252,6 @@ export default function Home() {
         </div>
       </section>
 
-      <WhyEvolve />
-
-      {/* ── Testimonials ── */}
-      <Testimonials />
-
-      {/* ── USA Coverage Map ── */}
-      <USAMap />
-
-      <FAQ />
       <Contact />
       <Footer />
       <MobileCTA />

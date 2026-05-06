@@ -48,7 +48,7 @@ export default function Footer() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
+            className="max-w-6xl mx-auto"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
                Ready to Evolve?
@@ -58,7 +58,7 @@ export default function Footer() {
               therapy operations <br />
               <span className="text-[#38bdf8] italic font-medium">with zero legacy strings attached.</span>
             </h3>
-            <p className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed">
               Our unique business model allows long-term care operators to retain <span className="text-white font-bold">100% of therapy revenue</span>. We bridge the gap between clinical excellence and financial sustainability, empowering your clinicians while protecting your bottom line.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">

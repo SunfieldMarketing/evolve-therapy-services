@@ -17,12 +17,12 @@ export default function Hero() {
 
       {/* ── YouTube iframe background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a]">
-        <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none select-none">
+        <div className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
           <iframe
             src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=4&end=20"
             title="Background Video - Evolve Therapy Services facility"
             allow="autoplay; encrypted-media"
-            className="w-full h-full border-0 opacity-100 transition-opacity duration-[3s]"
+            className="w-full h-full border-0 opacity-100 transition-opacity duration-[3s] scale-[1.05]"
             style={{ filter: 'brightness(0.35) saturate(0.7)' }}
           />
         </div>

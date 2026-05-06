@@ -117,7 +117,8 @@ export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVideoStarted(true), 4000);
+    // Longer buffer to ensure video is fully active and "clean"
+    const timer = setTimeout(() => setVideoStarted(true), 5000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -125,36 +126,38 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Editorial Hero (Widescreen Optimized) ── */}
+      {/* ── Editorial Hero (Ultimate UI Exclusion Logic) ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
-        {/* Background Layer: Widescreen Video Coverage */}
+        {/* Background Layer: Asymmetric Video Positioning to hide Play Buttons */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
              "absolute inset-0 z-10 transition-opacity duration-[3s] ease-in-out bg-[#0f172a]",
              videoStarted ? "opacity-100" : "opacity-100"
            )}>
              {/* 
-                Ensuring full coverage on widescreens:
-                We use 180vw to handle ultra-wide displays and 180vh to cover vertical space.
-                Centered with -40vw and -40vh offsets to maintain focus while hiding most of the UI.
+                Asymmetric Masking Strategy:
+                YouTube centers its play/pause buttons in the middle of the iframe.
+                By using a 300vw width and a -20vw offset, the center of the iframe is at 130vw.
+                This pushes the interactive controls completely off-screen to the right while
+                guaranteeing full coverage on widescreen monitors.
              */}
-             <div className="absolute w-[180vw] h-[180vh] top-[-40vh] left-[-40vw] pointer-events-none select-none">
+             <div className="absolute w-[300vw] h-[300vh] top-[-100vh] left-[-20vw] pointer-events-none select-none">
                 <iframe
-                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=20&enablejsapi=1"
+                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=25&enablejsapi=1"
                   title="Services cinematic"
                   allow="autoplay; encrypted-media"
-                  className="w-full h-full border-0 opacity-40 contrast-[1.1] saturate-[0.8]"
-                  onLoad={() => setTimeout(() => setVideoStarted(true), 2000)}
+                  className="w-full h-full border-0 opacity-40 contrast-[1.15] saturate-[0.7]"
+                  onLoad={() => setTimeout(() => setVideoStarted(true), 2500)}
                 />
              </div>
-             {/* Interaction Blocker Layer */}
+             {/* Total Interaction Blocking Layer */}
              <div className="absolute inset-0 z-20 bg-transparent cursor-default pointer-events-none" />
            </div>
 
-           {/* Visual Overlays & Gradients (Synced with Home) */}
+           {/* Editorial Visual Overlays (Home Sync) */}
            <div className="absolute inset-0 z-30 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 60%)' }} />
-           <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/70" />
-           <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/90 via-transparent to-transparent" />
+           <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/75" />
+           <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
         </div>
 
         {/* Content Area: Strategical Layout */}
@@ -166,7 +169,7 @@ export default function ServicesPage() {
                <BlurFade delay={0.2}>
                   <div className="flex items-center gap-6 mb-12">
                      <div className="w-16 h-[1px] bg-[#0284c7]" />
-                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.7em]">Clinical Partnership</span>
+                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.7em]">Clinical Partnership Hub</span>
                   </div>
                   
                   <h1 className="text-6xl md:text-[6vw] lg:text-[5vw] font-serif font-black text-white leading-[0.82] tracking-tighter mb-16 drop-shadow-2xl">
@@ -213,9 +216,9 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Vision Watermark: EVOLVE */}
+        {/* Vision Watermark: EVOLVE (Resized for Visibility) */}
         <div className="absolute right-[-10vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
-           <span className="text-white/[0.03] text-[35vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap">
+           <span className="text-white/[0.03] text-[25vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap">
               EVOLVE
            </span>
         </div>

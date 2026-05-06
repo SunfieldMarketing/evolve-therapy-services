@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { BlurFade } from '@/components/magicui/blur-fade';
-import { Target, ArrowRight } from 'lucide-react';
+import { Target, ArrowRight, Sparkles, Heart } from 'lucide-react';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
 
@@ -30,6 +30,7 @@ interface PageHeaderProps {
   bgImage?: string;
   ctaText?: string;
   ctaLink?: string;
+  badgeText?: string;
 }
 
 export default function PageHeader({
@@ -40,23 +41,27 @@ export default function PageHeader({
   bgImage,
   ctaText = 'Start Your Evolution',
   ctaLink = '/contact',
+  badgeText = 'Professional Integrity',
 }: PageHeaderProps) {
   const imageUrl = bgImage || imageMap[videoKey] || imageMap.default;
   const videoId = videoMap[videoKey as string];
 
   return (
-    <section className="relative w-full overflow-hidden flex items-center justify-center min-screen bg-[#0f172a]" style={{ minHeight: '100vh' }}>
-      {/* ── Background ── */}
-      <div className="absolute inset-0 z-0 bg-[#0f172a]">
+    <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
+      {/* ── Background Layer ── */}
+      <div className="absolute inset-0 z-0">
         {videoId ? (
           <div className="absolute inset-0 pointer-events-none select-none">
-            {/* Shifted video focal point way up by using -40vh top offset */}
-            <div className="absolute w-[320vw] h-[320vh] top-[-40vh] left-[-160vw] pointer-events-none">
+            {/* Shifted video focal point way left by using -100vw instead of -160vw */}
+            <div className={cn(
+              "absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none",
+              videoKey === 'about' && "left-[-100vw] top-[-40vh]"
+            )}>
               <iframe
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=${videoId}&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1`}
                 title={`${title} background cover`}
                 allow="autoplay; encrypted-media"
-                className="w-full h-full border-0 opacity-40 contrast-[1.1] saturate-[0.8]"
+                className="w-full h-full border-0 opacity-40 contrast-[1.2] saturate-[0.6] grayscale-[0.1]"
               />
             </div>
             {/* Interaction Blocker */}
@@ -72,54 +77,68 @@ export default function PageHeader({
         
         {/* Multi-layer gradient overlay (Matched to Services Hero) */}
         <div className="absolute inset-0 z-20 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
-        <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#0f172a] via-transparent to-[#0f172a]" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80" />
         <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
         <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
       </div>
 
-      {/* ── Content (Restructured to match Services/Home Hero Style) ── */}
-      <div className="relative z-30 container mx-auto px-6 lg:px-12 pt-20">
-        <BlurFade delay={0.2}>
-           {/* Subtitle Badge */}
-           <div className="flex items-center gap-6 mb-12">
-              <div className="w-12 h-[1px] bg-[#0284c7]" />
-              <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]">Professional Integrity</span>
-           </div>
-           
-           <h1 className="text-6xl md:text-[8vw] lg:text-[7vw] font-serif font-black text-white leading-[0.8] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] whitespace-nowrap overflow-visible">
-              <span className="uppercase tracking-tighter">{title}</span>
-              {italicWord && (
-                <span className="text-[#0284c7] italic ml-[0.15em] uppercase tracking-tighter">{italicWord}.</span>
-              )}
-           </h1>
+      {/* ── Content (Matched to Services Hero Style) ── */}
+      <div className="relative z-50 container mx-auto px-6 lg:px-12 -mt-12">
+        <div className="w-full">
+          <BlurFade delay={0.2}>
+             {/* Subtitle Badge */}
+             <div className="flex items-center gap-6 mb-12">
+                <div className="w-12 h-[1px] bg-[#0284c7]" />
+                <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]">{badgeText}</span>
+             </div>
+             
+             <h1 className="text-5xl md:text-[5vw] lg:text-[4.5vw] font-serif font-black text-white leading-[1] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] whitespace-nowrap overflow-visible uppercase">
+                {title}
+                {italicWord && (
+                  <span className="text-[#0284c7] italic ml-[0.15em] uppercase tracking-tighter">{italicWord}.</span>
+                )}
+             </h1>
 
-           {subtitle && (
-              <div className="mb-16 w-full">
-                 <p className="text-xl md:text-3xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic max-w-5xl">
-                    "{subtitle}"
-                 </p>
-              </div>
-           )}
+             {subtitle && (
+                <div className="mb-20 w-full">
+                   <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic max-w-5xl">
+                      "{subtitle}"
+                   </p>
+                </div>
+             )}
 
-           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-10">
-              <Link href={ctaLink}>
-                 <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.6)" borderRadius="9999px" className="group shadow-2xl">
-                    <span className="text-xs font-black uppercase tracking-[0.25em] text-white pr-2">{ctaText}</span>
-                    <ArrowRight size={16} className="text-white group-hover:translate-x-1 transition-transform" />
-                 </ShimmerButton>
-              </Link>
+             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+                <Link href={ctaLink} className="inline-flex group shrink-0">
+                   <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-16 py-7 shadow-[0_30px_60px_rgba(2,132,199,0.3)]">
+                      <span className="font-black uppercase tracking-[0.4em] text-[14px] text-white">{ctaText}</span>
+                      <ArrowRight size={20} className="ml-5 group-hover:translate-x-3 transition-transform" />
+                   </ShimmerButton>
+                </Link>
 
-              <div className="flex items-center gap-6">
-                 <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl shrink-0">
-                    <Target size={20} />
-                 </div>
-                 <div className="flex flex-col">
-                    <span className="text-white font-black uppercase text-[11px] tracking-widest">Core Philosophy</span>
-                    <span className="text-white/20 text-[12px] font-light italic whitespace-nowrap">"Results Driven Leadership"</span>
-                 </div>
-              </div>
-           </div>
-        </BlurFade>
+                {/* Values Integration: Matched to Services Hero */}
+                <div className="flex flex-col sm:flex-row gap-12">
+                   <div className="flex items-center gap-6 group">
+                      <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
+                         <Sparkles size={24} />
+                      </div>
+                      <div className="flex flex-col">
+                         <span className="text-white font-black uppercase text-[11px] tracking-widest mb-1">Visionary Hub</span>
+                         <span className="text-white/20 text-[13px] font-light italic whitespace-nowrap">"Creative Consulting"</span>
+                      </div>
+                   </div>
+                   <div className="flex items-center gap-6 group">
+                      <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
+                         <Heart size={24} />
+                      </div>
+                      <div className="flex flex-col">
+                         <span className="text-white font-black uppercase text-[11px] tracking-widest mb-1">Compassion</span>
+                         <span className="text-white/20 text-[13px] font-light italic whitespace-nowrap">"Results Driven"</span>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </BlurFade>
+        </div>
       </div>
     </section>
   );

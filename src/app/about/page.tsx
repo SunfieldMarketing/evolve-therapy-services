@@ -9,7 +9,23 @@ import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Shield, Target, Eye, ArrowRight, HeartPulse, Building2, TrendingUp, Users, GraduationCap, CheckCircle2, Quote } from 'lucide-react';
+import { 
+  Shield, 
+  Target, 
+  Eye, 
+  ArrowRight, 
+  HeartPulse, 
+  Building2, 
+  TrendingUp, 
+  Users, 
+  GraduationCap, 
+  CheckCircle2, 
+  Quote,
+  ShieldCheck,
+  Star,
+  UserCheck,
+  Activity
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const leaders = [
@@ -56,7 +72,32 @@ export default function AboutPage() {
         italicWord="Leadership" 
         subtitle="Meet the clinicians and operational leaders behind Evolve Therapy Services."
         videoKey="about"
+        badgeText="Executive Hub"
       />
+
+      {/* ── Social Proof Trust Section (Matched to Services Page) ── */}
+      <section className="relative z-50 pt-16 pb-32 bg-[#0f172a] border-y border-white/[0.05]">
+        <div className="container mx-auto px-12">
+           <div className="flex flex-wrap items-center justify-between gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
+              <div className="flex items-center gap-4 group cursor-default">
+                 <ShieldCheck className="text-[#0284c7] group-hover:scale-110 transition-transform" size={20} />
+                 <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">100% Revenue Retention</span>
+              </div>
+              <div className="flex items-center gap-4 group cursor-default">
+                 <Star className="text-yellow-500 group-hover:scale-110 transition-transform" size={20} />
+                 <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">Clinically Proven Models</span>
+              </div>
+              <div className="flex items-center gap-4 group cursor-default">
+                 <UserCheck className="text-[#0284c7] group-hover:scale-110 transition-transform" size={20} />
+                 <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">Leadership Excellence</span>
+              </div>
+              <div className="flex items-center gap-4 group cursor-default">
+                 <Activity className="text-emerald-500 group-hover:scale-110 transition-transform" size={20} />
+                 <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">Operational Stability</span>
+              </div>
+           </div>
+        </div>
+      </section>
 
       {/* Intro / Company Overview */}
       <section className="py-24 md:py-48 overflow-hidden relative bg-white">

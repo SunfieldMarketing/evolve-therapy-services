@@ -6,6 +6,7 @@ import { BlurFade } from '@/components/magicui/blur-fade';
 import { Target, ArrowRight, Sparkles, Heart, LucideIcon } from 'lucide-react';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
+import { useState, useEffect, useRef } from 'react';
 
 // Map of page-specific background abstract/medical images  
 const imageMap: Record<string, string> = {
@@ -60,6 +61,63 @@ export default function PageHeader({
   const videoId = videoMap[videoKey as string];
   const finalUseVideo = useVideo && !!videoId;
 
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const playerRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (!finalUseVideo || !videoId) return;
+
+    // @ts-ignore
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    const initPlayer = () => {
+      // @ts-ignore
+      playerRef.current = new window.YT.Player('page-header-youtube-player', {
+        videoId: videoId,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          loop: 1,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          mute: 1,
+          playsinline: 1,
+          playlist: videoId
+        },
+        events: {
+          onStateChange: (event: any) => {
+            // @ts-ignore
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              setTimeout(() => setIsVideoPlaying(true), 1500);
+            }
+          }
+        }
+      });
+    };
+
+    // @ts-ignore
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      // @ts-ignore
+      window.onYouTubeIframeAPIReady = initPlayer;
+    }
+
+    return () => {
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy();
+      }
+    };
+  }, [finalUseVideo, videoId]);
+
   return (
     <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
       {/* ── Background Layer ── */}
@@ -67,14 +125,14 @@ export default function PageHeader({
         {finalUseVideo ? (
           <div className="absolute inset-0 pointer-events-none select-none">
             <div className={cn(
-              "absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none",
-              videoKey === 'about' && "left-[-100vw] top-[-40vh]"
+              "absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none transition-opacity duration-[2000ms] ease-in-out",
+              videoKey === 'about' && "left-[-100vw] top-[-40vh]",
+              isVideoPlaying ? "opacity-100" : "opacity-0"
             )}>
-              <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=${videoId}&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1&playsinline=1`}
-                title={`${title} background cover`}
-                allow="autoplay; encrypted-media"
-                className="w-full h-full border-0 opacity-40 contrast-[1.2] saturate-[0.6] grayscale-[0.1]"
+              <div
+                id="page-header-youtube-player"
+                className="w-full h-full border-0 opacity-40"
+                style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
               />
             </div>
             {/* Interaction Blocker */}

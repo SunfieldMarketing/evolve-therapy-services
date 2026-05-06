@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Pricing from '@/components/Pricing';
@@ -117,10 +117,58 @@ const detailedServices = [
 
 export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
+  const playerRef = useRef<any>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVideoStarted(true), 1200);
-    return () => clearTimeout(timer);
+    // @ts-ignore
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    const initPlayer = () => {
+      // @ts-ignore
+      playerRef.current = new window.YT.Player('services-youtube-player', {
+        videoId: '8_nVbI7NcOw',
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          loop: 1,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          mute: 1,
+          playsinline: 1,
+          playlist: '8_nVbI7NcOw'
+        },
+        events: {
+          onStateChange: (event: any) => {
+            // @ts-ignore
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              setTimeout(() => setVideoStarted(true), 1500);
+            }
+          }
+        }
+      });
+    };
+
+    // @ts-ignore
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      // @ts-ignore
+      window.onYouTubeIframeAPIReady = initPlayer;
+    }
+
+    return () => {
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy();
+      }
+    };
   }, []);
 
   return (
@@ -137,12 +185,10 @@ export default function ServicesPage() {
              videoStarted ? "opacity-100" : "opacity-0"
            )}>
              <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none select-none">
-                <iframe
-                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1&playsinline=1"
-                  title="Services cinematic"
-                  allow="autoplay; encrypted-media"
-                  className="w-full h-full border-0 opacity-40 contrast-[1.2] saturate-[0.6] grayscale-[0.1]"
-                  onLoad={() => setTimeout(() => setVideoStarted(true), 800)}
+                <div
+                  id="services-youtube-player"
+                  className="w-full h-full border-0 opacity-40"
+                  style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
                 />
              </div>
              <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />

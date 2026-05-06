@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Phone } from 'lucide-react';
 import Link from 'next/link';
@@ -7,6 +8,62 @@ import { Spotlight } from '@/components/aceternity/spotlight';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
 
 export default function Hero() {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const playerRef = useRef<any>(null);
+
+  useEffect(() => {
+    // Check if API is already loaded
+    // @ts-ignore
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    const initPlayer = () => {
+      // @ts-ignore
+      playerRef.current = new window.YT.Player('hero-youtube-player', {
+        videoId: 'W5Dm2WCk8jg',
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          loop: 1,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          mute: 1,
+          playsinline: 1,
+          playlist: 'W5Dm2WCk8jg'
+        },
+        events: {
+          onStateChange: (event: any) => {
+            // @ts-ignore
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              // Wait 1.5s for YouTube's native title bar to fade out before revealing
+              setTimeout(() => setIsVideoPlaying(true), 1500);
+            }
+          }
+        }
+      });
+    };
+
+    // @ts-ignore
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      // @ts-ignore
+      window.onYouTubeIframeAPIReady = initPlayer;
+    }
+
+    return () => {
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy();
+      }
+    };
+  }, []);
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center">
       {/* ── Aceternity Spotlight overlay ── */}
@@ -18,11 +75,9 @@ export default function Hero() {
       {/* ── YouTube iframe background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a]">
         <div className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
-          <iframe
-            src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&playsinline=1"
-            title="Background Video - Evolve Therapy Services facility"
-            allow="autoplay; encrypted-media"
-            className="w-full h-full border-0 opacity-100 transition-opacity duration-[3s] scale-[1.05]"
+          <div 
+            id="hero-youtube-player" 
+            className="w-full h-full border-0 opacity-100 scale-[1.05]"
             style={{ filter: 'brightness(0.35) saturate(0.7)' }}
           />
         </div>
@@ -30,10 +85,9 @@ export default function Hero() {
         {/* Interaction Blocker - ensures no YT UI appears on hover */}
         <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
 
-        {/* Solid cover that hides YouTube UI during load, then fades out */}
+        {/* Solid cover that hides YouTube UI during load, fades out only when API confirms video is playing */}
         <div
-          className="absolute inset-0 bg-[#0f172a] pointer-events-none z-20"
-          style={{ animation: 'ytFadeOut 2.8s ease-in forwards' }}
+          className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-20 transition-opacity duration-[2000ms] ease-in-out ${isVideoPlaying ? 'opacity-0' : 'opacity-100'}`}
         />
         {/* Dark gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/70 to-[#0f172a]/30" />

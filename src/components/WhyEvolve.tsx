@@ -14,7 +14,6 @@ const features = [
     subtitle: 'Defense',
     desc: 'Proactive audit defense and denial management from clinical experts who know the appeals process inside and out.',
     icon: ShieldCheck,
-    num: '01',
     color: '#f59e0b',
   },
   {
@@ -22,7 +21,6 @@ const features = [
     subtitle: 'Scales With You',
     desc: 'Our unique approach customizes to your size of business and Evolves as you do, reducing pricing as you grow.',
     icon: Zap,
-    num: '02',
     color: '#38bdf8',
   },
   {
@@ -30,7 +28,6 @@ const features = [
     subtitle: 'Retention',
     desc: 'You retain all therapy revenue while we provide the expert management and operational oversight.',
     icon: Award,
-    num: '03',
     color: '#10b981',
   },
   {
@@ -38,7 +35,6 @@ const features = [
     subtitle: 'Employment',
     desc: 'Empower your therapy team with in-house employment and career advancement through internal mentorship.',
     icon: Briefcase,
-    num: '04',
     color: '#8b5cf6',
   },
   {
@@ -46,7 +42,6 @@ const features = [
     subtitle: 'Philosophy',
     desc: 'We set our customers apart through exceptional clinical programming and a holistic approach to care.',
     icon: Heart,
-    num: '05',
     color: '#f43f5e',
   },
 ];
@@ -60,7 +55,7 @@ export default function WhyEvolve() {
     offset: ["start start", "end end"]
   });
 
-  // Calculate discrete index based on scroll (using 0.1 to 0.8 range for reasons)
+  // Calculate discrete index based on scroll
   useEffect(() => {
     return scrollYProgress.onChange((v) => {
       if (v < 0.15) {
@@ -70,14 +65,14 @@ export default function WhyEvolve() {
         const index = Math.floor((v - 0.15) / step);
         setActiveIndex(Math.min(index, features.length - 1));
       } else {
-        setActiveIndex(features.length); // End state/padding
+        setActiveIndex(features.length);
       }
     });
   }, [scrollYProgress]);
 
   return (
     <section id="about" ref={containerRef} className="bg-[#0f172a] relative">
-      <div className="h-[800vh] relative"> {/* Extra height for "extra scrolls" */}
+      <div className="h-[800vh] relative">
         {/* Sticky Container */}
         <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
           
@@ -119,7 +114,6 @@ export default function WhyEvolve() {
                                  })()}
                                </motion.div>
                             </div>
-                            <span className="absolute -bottom-8 -right-8 text-8xl md:text-9xl font-serif font-black text-white/5">{features[activeIndex].num}</span>
                           </div>
                         </motion.div>
                       )}
@@ -171,15 +165,19 @@ export default function WhyEvolve() {
                         >
                           <div className="inline-flex items-center gap-2 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-10">
                              <div className="w-8 h-px bg-[#38bdf8]/30" />
-                             Clinical Pillar {features[activeIndex].num}
+                             Clinical Advantage
                           </div>
-                          <h3 className="text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-none mb-8">
+                          <h3 className="text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-none mb-6">
                             {features[activeIndex].title} <br />
                             <span className="text-[#38bdf8] italic font-medium">{features[activeIndex].subtitle}</span>
                           </h3>
-                          <p className="text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg">
+                          <p className="text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-8">
                             {features[activeIndex].desc}
                           </p>
+                          <Link href="/contact" className="group inline-flex items-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
+                             Learn More About This
+                             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                          </Link>
                         </motion.div>
                       ) : (
                         <motion.div
@@ -212,14 +210,14 @@ export default function WhyEvolve() {
              <div className="container mx-auto px-5">
                 <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
                    <p className="text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center md:text-left">
-                      &ldquo;Evolve was founded on the principle that therapy departments should be <span className="text-[#38bdf8] font-bold not-italic">centers of excellence</span> and financial strength.&rdquo;
+                      &ldquo;Evolve was founded on the principle that therapy departments should be <span className="text-[#38bdf8] font-bold not-italic">centers of excellence</span> &nbsp;and financial strength.&rdquo;
                    </p>
                    <div className="flex items-center gap-4 border-l border-white/10 pl-6 shrink-0">
                       <Image
                         src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png"
                         width={40}
                         height={40}
-                        className="rounded-full object-cover grayscale"
+                        className="rounded-full object-cover"
                         alt="Lisa Bebie"
                       />
                       <div className="text-left">

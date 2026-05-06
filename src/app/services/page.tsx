@@ -117,8 +117,8 @@ export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
 
   useEffect(() => {
-    // Longer buffer to ensure video is fully active and "clean"
-    const timer = setTimeout(() => setVideoStarted(true), 5000);
+    // Faster reveal to fix "not visible" issue
+    const timer = setTimeout(() => setVideoStarted(true), 2500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -126,42 +126,40 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Editorial Hero (Ultimate UI Exclusion Logic) ── */}
+      {/* ── Editorial Hero (Reliable Widescreen Logic) ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
-        {/* Background Layer: Asymmetric Video Positioning to hide Play Buttons */}
+        {/* Background Layer: Reliable Video Delivery */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
-             "absolute inset-0 z-10 transition-opacity duration-[3s] ease-in-out bg-[#0f172a]",
+             "absolute inset-0 z-10 transition-opacity duration-[2s] ease-in-out bg-[#0f172a]",
              videoStarted ? "opacity-100" : "opacity-100"
            )}>
              {/* 
-                Asymmetric Masking Strategy:
-                YouTube centers its play/pause buttons in the middle of the iframe.
-                By using a 300vw width and a -20vw offset, the center of the iframe is at 130vw.
-                This pushes the interactive controls completely off-screen to the right while
-                guaranteeing full coverage on widescreen monitors.
+                Reverting to a more stable 115% scale that ensures horizontal and vertical coverage 
+                on almost all monitors without pushing the content into "black space".
+                Offsets are balanced to keep the video visible while minimizing UI bleed.
              */}
-             <div className="absolute w-[300vw] h-[300vh] top-[-100vh] left-[-20vw] pointer-events-none select-none">
+             <div className="absolute w-[115vw] h-[115vh] top-[-7.5vh] left-[-7.5vw] pointer-events-none select-none">
                 <iframe
-                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=25&enablejsapi=1"
+                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1"
                   title="Services cinematic"
                   allow="autoplay; encrypted-media"
-                  className="w-full h-full border-0 opacity-40 contrast-[1.15] saturate-[0.7]"
-                  onLoad={() => setTimeout(() => setVideoStarted(true), 2500)}
+                  className="w-full h-full border-0 opacity-50 contrast-[1.1] saturate-[0.8]"
+                  onLoad={() => setTimeout(() => setVideoStarted(true), 1500)}
                 />
              </div>
-             {/* Total Interaction Blocking Layer */}
+             {/* Absolute blocking layer to prevent any hover-UI activation */}
              <div className="absolute inset-0 z-20 bg-transparent cursor-default pointer-events-none" />
            </div>
 
            {/* Editorial Visual Overlays (Home Sync) */}
-           <div className="absolute inset-0 z-30 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 60%)' }} />
-           <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/75" />
+           <div className="absolute inset-0 z-30 opacity-50 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 60%)' }} />
+           <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/70" />
            <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
         </div>
 
         {/* Content Area: Strategical Layout */}
-        <div className="relative z-40 container mx-auto px-6 lg:px-12 -mt-20">
+        <div className="relative z-40 container mx-auto px-6 lg:px-12 -mt-24">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
             
             {/* Left Column: Strategic Hub */}
@@ -169,7 +167,7 @@ export default function ServicesPage() {
                <BlurFade delay={0.2}>
                   <div className="flex items-center gap-6 mb-12">
                      <div className="w-16 h-[1px] bg-[#0284c7]" />
-                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.7em]">Clinical Partnership Hub</span>
+                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.7em]">Clinical Partnership</span>
                   </div>
                   
                   <h1 className="text-6xl md:text-[6vw] lg:text-[5vw] font-serif font-black text-white leading-[0.82] tracking-tighter mb-16 drop-shadow-2xl">
@@ -216,9 +214,9 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Vision Watermark: EVOLVE (Resized for Visibility) */}
-        <div className="absolute right-[-10vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
-           <span className="text-white/[0.03] text-[25vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap">
+        {/* Vision Watermark: EVOLVE (Refined Size) */}
+        <div className="absolute right-[-8vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex">
+           <span className="text-white/[0.03] text-[20vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap">
               EVOLVE
            </span>
         </div>

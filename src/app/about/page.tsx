@@ -72,7 +72,7 @@ export default function AboutPage() {
       <PageHeader 
         title="Our" 
         italicWord="Leadership" 
-        subtitle="Meet the clinicians and operational leaders behind Evolve Therapy Services."
+        subtitle="Our leadership team bridges the gap between clinical excellence and sustainable operational growth, empowering facility owners to reclaim their therapy departments through proven in-house transition models."
         bgImage="https://res.cloudinary.com/dai2pg27n/image/upload/v1778105493/9888c51b-097f-46b4-907c-1280f458806b.png"
         useVideo={false}
         badgeText="Executive Hub"

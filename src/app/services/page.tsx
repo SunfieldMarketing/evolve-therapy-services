@@ -172,7 +172,7 @@ export default function ServicesPage() {
 
                <div className="mb-20 w-full">
                   <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic max-w-5xl">
-                     "Empowering operators to take their therapy teams in-house with clinically proven education and compliance oversight."
+                     Empowering operators to take their therapy teams in-house with clinically proven education and compliance oversight.
                   </p>
                </div>
                

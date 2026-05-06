@@ -119,7 +119,7 @@ export default function PageHeader({
              {subtitle && (
                 <div className="mb-20 w-full">
                    <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic max-w-5xl">
-                      "{subtitle}"
+                      {subtitle}
                    </p>
                 </div>
              )}

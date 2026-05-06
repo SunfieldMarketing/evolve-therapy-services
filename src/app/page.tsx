@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
@@ -76,6 +77,12 @@ const processSteps = [
 ];
 
 export default function Home() {
+  // Force scroll to top on mount to fix refresh behavior
+  useEffect(() => {
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
@@ -83,6 +90,13 @@ export default function Home() {
 
       {/* ── Clinical Excellence ── */}
       <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+        {/* Bento Grid Subtitle Background Pattern */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+             style={{ 
+               backgroundImage: `radial-gradient(#0284c7 0.5px, transparent 0.5px)`, 
+               backgroundSize: '24px 24px' 
+             }} 
+        />
         <div className="absolute top-0 right-0 w-72 h-72 md:w-[500px] md:h-[500px] bg-[#0284c7]/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">

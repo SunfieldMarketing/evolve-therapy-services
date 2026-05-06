@@ -115,10 +115,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership Bios (Founders) - Balanced & Professional Redesign */}
+      {/* Leadership Bios (Founders) - Redesigned for Proportional Balance */}
       <section className="py-24 md:py-48 bg-slate-50 border-y border-slate-100 relative overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-           <BlurFade className="text-center mb-24 md:mb-36">
+           <BlurFade className="text-center mb-24 md:mb-32">
             <div className="flex justify-center mb-8">
               <AnimatedGradientText>The Founders</AnimatedGradientText>
             </div>
@@ -127,45 +127,47 @@ export default function AboutPage() {
             </h2>
           </BlurFade>
 
-          <div className="grid lg:grid-cols-2 gap-10 md:gap-16 max-w-7xl mx-auto">
+          <div className="space-y-24 md:space-y-40 max-w-6xl mx-auto">
             {leaders.map((leader, i) => (
-              <BlurFade key={i} delay={0.2} className="group flex h-full">
-                <div className="relative flex flex-col bg-white rounded-[3rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.04)] border border-slate-100 w-full group-hover:shadow-2xl transition-all duration-700">
-                   {/* Top Visual Section */}
-                   <div className="relative w-full aspect-[4/3] overflow-hidden">
-                      <Image
-                        src={leader.photo}
-                        alt={leader.name}
-                        fill
-                        className="object-cover object-top group-hover:scale-105 transition-transform duration-[4s]"
-                        onError={(e) => { (e.target as HTMLImageElement).src = leader.fallback; }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/60 via-transparent to-transparent" />
-                      
-                      {/* Integrated Name & Title */}
-                      <div className="absolute bottom-8 left-8 right-8">
-                         <div className="text-white font-black font-serif text-3xl md:text-4xl tracking-tight mb-2 drop-shadow-lg">{leader.name}</div>
-                         <div className="text-[#38bdf8] text-[11px] font-black uppercase tracking-[0.4em]">{leader.title}</div>
-                      </div>
-                   </div>
+              <BlurFade key={i} delay={0.2} className="group">
+                <div className={cn(
+                  "flex flex-col lg:flex-row gap-12 lg:gap-20 items-center",
+                  i % 2 === 1 && "lg:flex-row-reverse"
+                )}>
+                  {/* Photo Column - Balanced Circular Frame */}
+                  <div className="w-full lg:w-5/12 flex justify-center shrink-0">
+                     <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl group-hover:scale-105 transition-transform duration-700">
+                        <Image
+                          src={leader.photo}
+                          alt={leader.name}
+                          fill
+                          className="object-cover object-top"
+                          onError={(e) => { (e.target as HTMLImageElement).src = leader.fallback; }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/20 via-transparent to-transparent" />
+                     </div>
+                  </div>
 
-                   {/* Content Section */}
-                   <div className="p-10 md:p-14 flex flex-col flex-1">
-                      {/* Professional Quote Display */}
-                      <div className="relative mb-12">
-                         <Quote className="absolute -top-6 -left-6 text-[#0284c7]/10 w-20 h-20" />
-                         <p className="relative z-10 text-xl font-serif text-[#0f172a] italic leading-relaxed font-bold border-l-4 border-[#0284c7] pl-8">
-                            "{leader.quote}"
-                         </p>
-                      </div>
+                  {/* Content Column */}
+                  <div className="w-full lg:w-7/12">
+                    <div className="mb-8">
+                       <h3 className="text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight">{leader.name}</h3>
+                       <div className="text-[#0284c7] text-xs font-black uppercase tracking-[0.4em] mt-2">{leader.title}</div>
+                    </div>
+                    
+                    <div className="relative mb-12">
+                       <Quote className="absolute -top-4 -left-6 text-[#0284c7]/5 w-16 h-16" />
+                       <p className="relative z-10 text-xl font-serif text-[#0f172a] italic leading-relaxed font-bold border-l-4 border-[#0284c7] pl-8">
+                          "{leader.quote}"
+                       </p>
+                    </div>
 
-                      {/* Bio Detail */}
-                      <div className="space-y-6 text-[15px] md:text-base text-slate-500 leading-relaxed font-light mt-auto">
-                        {leader.bio.map((para, j) => (
-                          <p key={j}>{para}</p>
-                        ))}
-                      </div>
-                   </div>
+                    <div className="space-y-6 text-base lg:text-lg text-slate-500 leading-relaxed font-light">
+                      {leader.bio.map((para, j) => (
+                        <p key={j}>{para}</p>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </BlurFade>
             ))}
@@ -204,42 +206,47 @@ export default function AboutPage() {
         </div>
       </section>
  
-      {/* Strategic Partnership Section (National Network) - Pure Dimmed Map Background */}
-      <section className="py-32 md:py-64 bg-[#0f172a] relative overflow-hidden">
-        {/* Only the American map as a dimmed background image */}
-        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none grayscale brightness-75">
-           <USAMap />
-        </div>
-        
-        <div className="container mx-auto px-6 relative z-20">
+      {/* Strategic Partnership Section (National Network) - Centered USAMap focus */}
+      <section className="py-24 md:py-48 bg-white relative overflow-hidden flex flex-col items-center">
+        <div className="container mx-auto px-6 relative z-10 text-center">
           <BlurFade delay={0.1}>
-            <div className="w-full flex flex-col items-center text-center">
-                <div className="max-w-none w-full">
-                  <h3 className="text-5xl md:text-[6.5vw] font-serif font-black text-white mb-12 leading-[0.8] tracking-tighter uppercase whitespace-nowrap drop-shadow-2xl">
-                    A National Network <span className="text-[#38bdf8] italic block mt-4">Primed for Growth</span>
-                  </h3>
-                  <p className="text-white/40 text-xl md:text-3xl font-light mb-24 leading-relaxed max-w-6xl mx-auto italic">
-                    "Our regional directors are strategically deployed across the United States to ensure that every facility under our oversight carries the same Evolve Standard."
-                  </p>
-                  
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl mx-auto">
+            <div className="mb-16">
+              <AnimatedGradientText>National Presence</AnimatedGradientText>
+            </div>
+            <h3 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 leading-[0.85] tracking-tighter uppercase">
+              A National Network <br />
+              <span className="text-[#0284c7] italic font-medium lowercase">Primed for Growth.</span>
+            </h3>
+            <p className="text-slate-400 text-xl md:text-2xl font-light mb-20 leading-relaxed max-w-4xl mx-auto italic">
+               "Our regional directors are strategically deployed across the United States to ensure that every facility under our oversight carries the same Evolve Standard."
+            </p>
+          </BlurFade>
+        </div>
+
+        {/* The USAMap component - Centered and Balanced */}
+        <div className="w-full max-w-7xl mx-auto px-6">
+           <BlurFade delay={0.3}>
+              <div className="rounded-[3rem] overflow-hidden bg-slate-50 border border-slate-100 p-8 md:p-16 shadow-2xl relative">
+                 <div className="relative z-10 min-h-[400px] md:min-h-[600px]">
+                    <USAMap />
+                 </div>
+                 
+                 {/* Legend / Stats integrated into the map area */}
+                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 relative z-20">
                     {[
                       { icon: Shield, text: 'Expert Regulatory Alignment' },
                       { icon: Eye, text: 'Real-Time Clinical Dashboards' },
                       { icon: Target, text: 'Tailored Financial Strategies' },
                       { icon: Users, text: 'Leadership Development' }
                     ].map((item, idx) => (
-                      <div key={idx} className="flex flex-col items-center gap-6 p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl group hover:bg-white/[0.07] transition-all duration-500">
-                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8] group-hover:bg-[#38bdf8] group-hover:text-white transition-all">
-                           <item.icon size={28} strokeWidth={1.5} />
-                        </div>
-                        <span className="text-white font-black uppercase text-[11px] tracking-[0.4em] text-center">{item.text}</span>
+                      <div key={idx} className="flex items-center gap-4 p-5 rounded-2xl bg-white shadow-sm border border-slate-100">
+                        <item.icon className="text-[#0284c7]" size={20} />
+                        <span className="text-[#0f172a] font-black uppercase text-[9px] tracking-widest">{item.text}</span>
                       </div>
                     ))}
                   </div>
-                </div>
-            </div>
-          </BlurFade>
+              </div>
+           </BlurFade>
         </div>
       </section>
 

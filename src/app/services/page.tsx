@@ -29,10 +29,14 @@ import {
   Check,
   Layers,
   Activity,
-  UserCheck
+  UserCheck,
+  Building2,
+  Globe2,
+  Users
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const detailedServices = [
   {
@@ -97,7 +101,7 @@ const detailedServices = [
       'Management model implementation'
     ],
     icon: Users2,
-    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093385/d20f225b-69e1-4deb-ae8e-b7979f30546c.png',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095821/9c7538a6-3e33-4a50-a1d5-dbd97914fa26.png',
     href: '/services/in-house-transition'
   },
   {
@@ -119,53 +123,82 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      <PageHeader 
-        title="Our" 
-        italicWord="Services" 
-        subtitle="At Evolve we provide all of the services that you require to provide your patients with the highest possible level of care and service."
-        videoKey="services"
-      />
-
-      {/* ── Intro: What We Do (Photo Removed) ── */}
-      <section className="py-24 md:py-48 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <BlurFade delay={0.1}>
-              <div className="mb-8 flex justify-center">
-                <AnimatedGradientText>The Evolve Mission</AnimatedGradientText>
-              </div>
-              <h2 className="text-5xl md:text-8xl font-serif text-[#0f172a] font-black tracking-tighter mb-12 leading-[0.9] md:leading-[0.85]">
-                Bridging Gaps, <br />
-                <span className="text-[#0284c7] italic font-medium text-4xl md:text-7xl">Elevating Care Standards.</span>
-              </h2>
-              <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed mb-16 max-w-3xl mx-auto">
-                It is our vision to assist operators who want to take their therapy teams in-house by choosing our management model; and to assist in-house programs with clinical proven education, operational analysis, and compliance oversight to allow LTC operators to truly EVOLVE to the next level.
-              </p>
-              <div className="grid md:grid-cols-2 gap-12 max-w-3xl mx-auto text-left border-t border-slate-100 pt-16">
-                 <div className="space-y-4">
-                    <div className="font-black text-[#0f172a] uppercase text-[11px] tracking-[0.3em] flex items-center gap-2">
-                       <div className="w-6 h-px bg-[#0284c7]" /> Our Vision
-                    </div>
-                    <p className="text-sm text-slate-400 leading-relaxed font-light italic">"To provide the most creative therapy consulting model through compassionate leadership and clinical passion."</p>
-                 </div>
-                 <div className="space-y-4">
-                    <div className="font-black text-[#0f172a] uppercase text-[11px] tracking-[0.3em] flex items-center gap-2">
-                       <div className="w-6 h-px bg-[#0284c7]" /> Our Approach
-                    </div>
-                    <p className="text-sm text-slate-400 leading-relaxed font-light italic">"Evidence-based experience that drives measurable results for your bottom line and your residents."</p>
-                 </div>
-              </div>
-            </BlurFade>
+      
+      {/* ── Bespoke Services Hero (Combines Mission Ideas) ── */}
+      <section className="relative w-full overflow-hidden flex items-center justify-center bg-[#0f172a]" style={{ minHeight: '85vh' }}>
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 pointer-events-none select-none">
+            <iframe
+              src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5"
+              title="Services background cover"
+              allow="autoplay; encrypted-media"
+              className="absolute inset-0 w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-0 opacity-40"
+            />
+            <div className="absolute inset-0 z-10 bg-transparent" />
           </div>
+          <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/70 to-white" />
         </div>
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0284c7]/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#0284c7]/5 rounded-full blur-[120px] -z-10 -translate-x-1/2 translate-y-1/2" />
+
+        <div className="relative z-30 container mx-auto px-6 lg:px-12 text-center pt-32 pb-20">
+          <BlurFade delay={0.1}>
+            <div className="flex justify-center mb-8">
+               <AnimatedGradientText className="bg-white/10 text-[#38bdf8] border-white/20">The Evolve Mission</AnimatedGradientText>
+            </div>
+            <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif font-black text-white tracking-tighter leading-[0.85] mb-12">
+              Our <span className="text-[#0284c7] italic">Services</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/60 font-light leading-relaxed max-w-4xl mx-auto mb-16">
+              It is our vision to assist operators who want to take their therapy teams in-house by choosing our management model; and to assist in-house programs with clinical proven education, operational analysis, and compliance oversight to allow LTC operators to truly EVOLVE to the next level.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto pt-12 border-t border-white/10">
+               <div className="text-left space-y-4">
+                  <div className="flex items-center gap-3 font-black text-[#38bdf8] uppercase text-[10px] tracking-[0.4em]">
+                     <div className="w-10 h-px bg-[#38bdf8]" /> Our Vision
+                  </div>
+                  <p className="text-white/40 text-sm md:text-base font-light italic leading-relaxed">"To provide the most creative therapy consulting model through compassionate leadership and clinical passion."</p>
+               </div>
+               <div className="text-left space-y-4">
+                  <div className="flex items-center gap-3 font-black text-[#38bdf8] uppercase text-[10px] tracking-[0.4em]">
+                     <div className="w-10 h-px bg-[#38bdf8]" /> Our Approach
+                  </div>
+                  <p className="text-white/40 text-sm md:text-base font-light italic leading-relaxed">"Evidence-based experience that drives measurable results for your bottom line and your residents."</p>
+               </div>
+            </div>
+          </BlurFade>
+        </div>
+      </section>
+
+      {/* ── Transitionary Social Proof Section ── */}
+      <section className="bg-white py-12 relative z-40 -mt-10">
+         <div className="container mx-auto px-6 lg:px-12">
+            <div className="bg-white rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-slate-100 p-8 md:p-12">
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 items-center">
+                  {[
+                    { label: 'Facilities Optimized', value: '50+', icon: Building2 },
+                    { label: 'States Represented', value: '12+', icon: Globe2 },
+                    { label: 'Therapists Trained', value: '500+', icon: Users },
+                    { label: 'Clinical Excellence', value: '100%', icon: Award }
+                  ].map((stat, i) => (
+                    <BlurFade key={i} delay={0.2 + i * 0.1}>
+                       <div className="text-center group">
+                          <div className="text-[#0284c7] mb-3 flex justify-center group-hover:scale-110 transition-transform">
+                             <stat.icon size={24} strokeWidth={1.5} />
+                          </div>
+                          <div className="text-3xl font-serif font-black text-[#0f172a] mb-1">{stat.value}</div>
+                          <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</div>
+                       </div>
+                    </BlurFade>
+                  ))}
+               </div>
+            </div>
+         </div>
       </section>
 
       {/* ── Services Showcase: Alternating High-Light Sections ── */}
-      <section className="py-12 md:py-20 bg-slate-50 relative overflow-hidden">
+      <section className="py-24 md:py-40 bg-slate-50 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="text-center max-w-4xl mx-auto mb-20">
+          <div className="text-center max-w-4xl mx-auto mb-24">
             <BlurFade delay={0.1}>
               <div className="mb-6 flex justify-center">
                  <AnimatedGradientText>Strategic Solutions</AnimatedGradientText>

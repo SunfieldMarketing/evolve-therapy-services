@@ -127,10 +127,10 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Editorial Hero (Refined Social Proof Architecture) ── */}
+      {/* ── Editorial Hero (Full Width Mastery) ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
         
-        {/* Deep Background Stack */}
+        {/* Background Layer */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
              "absolute inset-0 transition-opacity duration-[2s] ease-in-out bg-[#0f172a]",
@@ -155,9 +155,9 @@ export default function ServicesPage() {
            <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
         </div>
 
-        {/* Content Area: Centered Editorial Power */}
+        {/* Content Area: Optimized for Full Width Presence */}
         <div className="relative z-50 container mx-auto px-6 lg:px-12 -mt-12">
-          <div className="max-w-6xl">
+          <div className="w-full">
             <BlurFade delay={0.2}>
                {/* Subtitle Badge */}
                <div className="flex items-center gap-6 mb-12">
@@ -165,52 +165,52 @@ export default function ServicesPage() {
                   <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]">Partnership Hub</span>
                </div>
                
-               <h1 className="text-6xl md:text-[7vw] lg:text-[6vw] font-serif font-black text-white leading-[0.85] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+               <h1 className="text-6xl md:text-[8vw] lg:text-[7vw] font-serif font-black text-white leading-[0.8] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] whitespace-nowrap">
                   <span className="block mb-4 uppercase tracking-tighter">STRATEGICAL</span>
                   <span className="text-[#0284c7] italic block ml-[0.1em] uppercase tracking-tighter">SERVICES.</span>
                </h1>
 
-               <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-24 mb-20">
-                  <div className="max-w-xl">
-                     <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic">
+               <div className="flex flex-col lg:flex-row items-end justify-between gap-16 lg:gap-24 mb-20 w-full">
+                  <div className="flex-1">
+                     <p className="text-xl md:text-3xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic w-full">
                         "Empowering operators to take their therapy teams in-house with clinically proven education and compliance oversight."
                      </p>
                   </div>
                   
-                  {/* Subtle Social Proof/Values Ticker implemented as an editorial block */}
-                  <div className="flex flex-col gap-8">
-                     <div className="flex items-center gap-4 group">
-                        <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#0284c7]">
-                           <Sparkles size={18} />
+                  {/* Values Sidebar: Refined Pacing */}
+                  <div className="flex flex-col sm:flex-row lg:flex-col gap-10 shrink-0">
+                     <div className="flex items-center gap-5 group">
+                        <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl">
+                           <Sparkles size={20} />
                         </div>
                         <div className="flex flex-col">
-                           <span className="text-white font-black uppercase text-[10px] tracking-widest">Visionary Hub</span>
-                           <span className="text-white/20 text-[11px] font-light">"Creative Therapy Consulting"</span>
+                           <span className="text-white font-black uppercase text-[11px] tracking-widest">Visionary Hub</span>
+                           <span className="text-white/20 text-[12px] font-light italic">"Creative Consulting"</span>
                         </div>
                      </div>
-                     <div className="flex items-center gap-4 group">
-                        <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#0284c7]">
-                           <Heart size={18} />
+                     <div className="flex items-center gap-5 group">
+                        <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl">
+                           <Heart size={20} />
                         </div>
                         <div className="flex flex-col">
-                           <span className="text-white font-black uppercase text-[10px] tracking-widest">Compassion</span>
-                           <span className="text-white/20 text-[11px] font-light">"Results-Driven Leadership"</span>
+                           <span className="text-white font-black uppercase text-[11px] tracking-widest">Compassion</span>
+                           <span className="text-white/20 text-[12px] font-light italic">"Results Driven"</span>
                         </div>
                      </div>
                   </div>
                </div>
                
                <Link href="/contact" className="inline-flex group">
-                  <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-12 py-6">
-                     <span className="font-black uppercase tracking-[0.3em] text-[13px] text-white">Start Your Evolution</span>
-                     <ArrowRight size={18} className="ml-4 group-hover:translate-x-3 transition-transform" />
+                  <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-16 py-7 shadow-[0_30px_60px_rgba(2,132,199,0.3)]">
+                     <span className="font-black uppercase tracking-[0.4em] text-[14px] text-white">Start Your Evolution</span>
+                     <ArrowRight size={20} className="ml-5 group-hover:translate-x-4 transition-transform" />
                   </ShimmerButton>
                </Link>
             </BlurFade>
           </div>
         </div>
 
-        {/* Bottom Social Proof Ticker: Premium Clinical Trust Bar */}
+        {/* Bottom Clinical Trust Bar */}
         <div className="absolute bottom-12 left-0 right-0 z-50 overflow-hidden py-8 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent border-y border-white/[0.05] backdrop-blur-md">
            <div className="container mx-auto px-12 flex flex-wrap items-center justify-between gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
               <div className="flex items-center gap-4">

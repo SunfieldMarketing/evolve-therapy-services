@@ -126,11 +126,11 @@ export default function ServicesPage() {
       <Navbar />
       
       {/* ── Redesigned Editorial Hero (Widescreen Optimized) ── */}
-      <section className="relative w-full h-screen flex flex-col justify-end bg-black overflow-hidden">
+      <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
         {/* Background Layer: Ultra-Wide Optimized Video Container */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
-             "absolute inset-0 z-10 transition-opacity duration-[3s] ease-in-out bg-black",
+             "absolute inset-0 z-10 transition-opacity duration-[3s] ease-in-out bg-[#0f172a]",
              videoStarted ? "opacity-100" : "opacity-100"
            )}>
              {/* 200% Scale to guarantee no black bars on ultra-widescreens and hide all UI */}
@@ -139,40 +139,44 @@ export default function ServicesPage() {
                   src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5&enablejsapi=1"
                   title="Services cinematic"
                   allow="autoplay; encrypted-media"
-                  className="w-full h-full border-0 opacity-50 contrast-[1.1] saturate-[0.8]"
+                  className="w-full h-full border-0 opacity-40 contrast-[1.1] saturate-[0.8]"
                   onLoad={() => setTimeout(() => setVideoStarted(true), 1500)}
                 />
              </div>
              <div className="absolute inset-0 z-20 bg-transparent cursor-default" />
            </div>
 
-           {/* Editorial Gradient Overlays */}
-           <div className="absolute inset-0 z-30 bg-gradient-to-t from-black via-black/40 to-transparent" />
-           <div className="absolute inset-0 z-30 bg-gradient-to-r from-black/80 via-transparent to-black/20" />
+           {/* Editorial Gradient Overlays (Synchronized with Homepage) */}
+           <div className="absolute inset-0 z-30 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />
+           <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/60" />
+           <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/90 via-transparent to-[#0f172a]/20" />
+           
+           {/* Animated Atmospheric Elements */}
+           <div className="absolute top-1/4 right-0 w-[40vw] h-[40vw] bg-[#0284c7]/5 rounded-full blur-[120px] animate-pulse" />
         </div>
 
-        {/* Content Area: Editorial Split Layout */}
-        <div className="relative z-40 container mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
-          <div className="flex flex-col lg:flex-row items-end justify-between gap-12 lg:gap-20">
+        {/* Content Area: Pushed Up via justify-center and negative margin */}
+        <div className="relative z-40 container mx-auto px-6 lg:px-12 -mt-16">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
             
             {/* Left Column: Strategic Statement */}
             <div className="w-full lg:w-[60%]">
                <BlurFade delay={0.2}>
                   <div className="flex items-center gap-4 mb-8">
                      <div className="w-12 h-[1px] bg-[#0284c7]" />
-                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.5em]">Clinical Partnership</span>
+                     <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.5em]">Strategic Partnership</span>
                   </div>
-                  <h1 className="text-5xl md:text-[7vw] lg:text-[6vw] font-serif font-black text-white leading-[0.85] tracking-tighter mb-12 drop-shadow-2xl">
-                     <span className="block">STRATEGIC</span>
-                     <span className="text-[#0284c7] italic block ml-[0.1em]">SOLUTIONS.</span>
+                  <h1 className="text-5xl md:text-[6vw] lg:text-[5.5vw] font-serif font-black text-white leading-[0.85] tracking-tighter mb-10 drop-shadow-2xl">
+                     <span className="block">CLINICAL</span>
+                     <span className="text-[#0284c7] italic block ml-[0.1em]">STRATEGY.</span>
                   </h1>
-                  <div className="max-w-2xl">
-                     <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed mb-12 border-l-2 border-[#0284c7]/30 pl-8">
-                        Assisting operators who want to take their therapy teams in-house by choosing our management model; and assisting in-house programs with clinical proven education and compliance oversight.
+                  <div className="max-w-xl">
+                     <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed mb-10 border-l-2 border-[#0284c7]/30 pl-8 italic">
+                        "Empowering operators to take their therapy teams in-house with clinically proven education and compliance oversight."
                      </p>
                      <Link href="/contact" className="inline-flex group">
                         <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.5rem" className="px-10 py-5">
-                           <span className="font-black uppercase tracking-[0.2em] text-[11px] text-white">Partner with Evolve</span>
+                           <span className="font-black uppercase tracking-[0.2em] text-[11px] text-white">Start Your Evolution</span>
                            <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
                         </ShimmerButton>
                      </Link>
@@ -180,15 +184,15 @@ export default function ServicesPage() {
                </BlurFade>
             </div>
 
-            {/* Right Column: Floating Vision Pillars */}
+            {/* Right Column: Floating Pillars */}
             <div className="w-full lg:w-[30%]">
                <BlurFade delay={0.4}>
                   <div className="space-y-6">
                      {[
-                        { title: 'Compassion', desc: 'Creative therapy consulting through leadership.', icon: Heart },
-                        { title: 'Excellence', desc: 'Evidence-based results for your bottom line.', icon: Award }
+                        { title: 'Vision', desc: 'Creative therapy consulting model.', icon: Sparkles },
+                        { title: 'Compassion', desc: 'Leadership driven by clinical passion.', icon: Heart }
                      ].map((pill, i) => (
-                        <div key={i} className="p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-3xl hover:bg-white/[0.07] transition-all duration-700">
+                        <div key={i} className="p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/5 backdrop-blur-3xl hover:bg-white/[0.07] transition-all duration-700">
                            <div className="flex items-center gap-6 mb-4">
                               <pill.icon size={18} className="text-[#0284c7]" />
                               <h4 className="text-[10px] font-black text-white uppercase tracking-widest">{pill.title}</h4>
@@ -202,16 +206,15 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Dynamic Watermark */}
-        <div className="absolute right-[-8vw] top-1/2 -translate-y-1/2 rotate-90 pointer-events-none hidden xl:block">
-           <span className="text-white/[0.03] text-[15vw] font-serif font-black tracking-tighter leading-none select-none uppercase">
-              Clinical Hub
+        {/* Short Watermark */}
+        <div className="absolute right-[-2vw] top-1/2 -translate-y-1/2 rotate-90 pointer-events-none hidden xl:block">
+           <span className="text-white/[0.03] text-[18vw] font-serif font-black tracking-tighter leading-none select-none uppercase">
+              EVOLVE
            </span>
         </div>
 
         {/* Subtle Scroll Down */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3 animate-bounce">
-           <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.4em]">Explore Hub</span>
            <ChevronDown size={14} className="text-[#0284c7]" />
         </div>
       </section>

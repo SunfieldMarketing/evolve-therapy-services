@@ -148,5 +148,55 @@ An in-house model allows you to retain 100% of the therapy revenue, build a unif
     image: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80',
     iconName: 'Users2',
     videoUrl: 'https://player.vimeo.com/external/432014945.sd.mp4?s=6c6695333f276cd83428d0859585e488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  },
+  'reimbursement-optimization': {
+    title: 'Reimbursement Optimization',
+    shortDesc: 'Comprehensive programs focused on Multiple Procedure Payment Reduction (MPPR) effects and optimizing therapy service reimbursement.',
+    fullDesc: 'Navigating the intricate landscape of healthcare reimbursement requires specialized knowledge and constant vigilance. Evolve Therapy Services provides dedicated reimbursement optimization programs to ensure your facility maximizes its financial potential across both Long-Term Care (LTC) and Outpatient settings.',
+    longContent: `We dive deep into the specific mechanics of your billing processes, analyzing the impact of Multiple Procedure Payment Reduction (MPPR) and other complex coding rules. Our team ensures that every service provided is accurately documented, coded, and billed to prevent revenue leakage and protect your bottom line.
+
+By implementing proactive strategies and providing ongoing education to your billing and therapy teams, we help you secure the highest legitimate reimbursement rates while strictly adhering to all Medicare and commercial insurance guidelines.`,
+    benefits: [
+      'Maximized legitimate reimbursement for services rendered',
+      'Mitigation of MPPR revenue impacts',
+      'Reduced claim denials and faster payment cycles',
+      'Enhanced alignment between clinical documentation and billing',
+      'Improved financial predictability and cash flow'
+    ],
+    features: [
+      'MPPR Impact Analysis & Strategy',
+      'Outpatient Therapy Billing Review',
+      'CPT Coding Accuracy Audits',
+      'Revenue Cycle Management Support',
+      'Payer Contract Optimization Insights'
+    ],
+    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80',
+    iconName: 'Target',
+    videoUrl: 'https://player.vimeo.com/external/494635105.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  },
+  'in-house-resource-hub': {
+    title: 'In-House Resource Hub',
+    shortDesc: 'Expert, on-demand support for your existing in-house therapy programs, including recruitment, denial management, and data analysis.',
+    fullDesc: 'Running an in-house therapy department comes with significant rewards but also requires specialized ongoing support. The Evolve In-House Resource Hub is designed to empower facilities that already operate their own therapy teams by providing expert infrastructure and strategic backup.',
+    longContent: `Even the most successful in-house therapy programs encounter challenges with recruitment, regulatory changes, and complex denial management. Our Resource Hub acts as an extension of your team, stepping in precisely where and when you need specialized expertise without requiring you to outsource your entire department.
+
+Whether you need help sourcing high-quality therapists, defending against a complex audit, or analyzing your PDPM performance data, our hub provides the specialized tools and executive oversight necessary to keep your in-house program thriving.`,
+    benefits: [
+      'Access to specialized corporate-level therapy expertise',
+      'Improved recruitment and retention of top therapy talent',
+      'Robust defense against ADRs and payer audits',
+      'Data-driven insights to refine program performance',
+      'Continuous education (CEUs) for your existing staff'
+    ],
+    features: [
+      'Targeted Therapy Recruitment Services',
+      'On-Demand Denial Management Support',
+      'Clinical Data Analytics & Benchmarking',
+      'Continuing Education (CEU) Access',
+      'Interim Management Support'
+    ],
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80',
+    iconName: 'GraduationCap',
+    videoUrl: 'https://player.vimeo.com/external/441220473.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
   }
 };

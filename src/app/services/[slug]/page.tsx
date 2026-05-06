@@ -49,7 +49,9 @@ export default function ServiceDetailPage() {
         title={service.title.includes(' & ') ? service.title.split(' & ')[0] : service.title}
         italicWord={service.title.includes(' & ') ? service.title.split(' & ')[1] : ''}
         subtitle={service.shortDesc}
-        videoKey="services"
+        useVideo={false}
+        bgImage="none"
+        badgeText="Service Detail"
       />
 
       {/* Main Content */}
@@ -72,10 +74,10 @@ export default function ServiceDetailPage() {
                 <ul className="space-y-6">
                   {service.benefits.map((benefit, i) => (
                     <li key={i} className="flex items-start gap-4 group">
-                      <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary transition-colors">
-                        <CheckCircle2 size={12} className="text-primary group-hover:text-white" />
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary transition-colors">
+                        <CheckCircle2 size={16} className="text-primary group-hover:text-white" />
                       </div>
-                      <span className="text-slate-500 text-sm font-bold leading-relaxed">{benefit}</span>
+                      <span className="text-slate-600 text-sm md:text-base font-medium leading-relaxed flex-1">{benefit}</span>
                     </li>
                   ))}
                 </ul>
@@ -145,8 +147,8 @@ export default function ServiceDetailPage() {
                   <div className="grid md:grid-cols-2 gap-6 not-prose">
                     {service.features.map((feature, i) => (
                       <div key={i} className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-primary/20 hover:bg-white hover:shadow-xl transition-all duration-500">
-                        <div className="w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/20" />
-                        <span className="text-secondary font-black text-[13px] uppercase tracking-[0.1em]">{feature}</span>
+                        <div className="w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/20 shrink-0" />
+                        <span className="text-secondary font-black text-sm uppercase tracking-[0.1em] leading-snug">{feature}</span>
                       </div>
                     ))}
                   </div>

@@ -111,7 +111,7 @@ export default function PageHeader({
                 <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]">{badgeText}</span>
              </div>
              
-             <h1 className="text-5xl md:text-[5vw] lg:text-[4.5vw] font-serif font-black text-white leading-[1] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] whitespace-nowrap overflow-visible uppercase">
+             <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-black text-white leading-[1] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words">
                 {title}
                 {italicWord && (
                   <span className="text-[#0284c7] italic ml-[0.15em] uppercase tracking-tighter">{italicWord}.</span>

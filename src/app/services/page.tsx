@@ -1,8 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import PageHeader from '@/components/PageHeader';
 import Pricing from '@/components/Pricing';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
@@ -29,14 +29,11 @@ import {
   Check,
   Layers,
   Activity,
-  UserCheck,
-  Building2,
-  Globe2,
-  Users
+  UserCheck
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const detailedServices = [
   {
@@ -120,54 +117,118 @@ const detailedServices = [
 ];
 
 export default function ServicesPage() {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  // Auto-reveal video after a safety timeout or if we could detect load
+  useEffect(() => {
+    const timer = setTimeout(() => setVideoLoaded(true), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Services Hero ── */}
-      <section className="relative w-full overflow-hidden flex items-center justify-center bg-[#0f172a]" style={{ minHeight: '85vh' }}>
+      {/* ── Enhanced Full-Width Services Hero ── */}
+      <section className="relative w-full overflow-hidden flex flex-col justify-center bg-[#0f172a] min-h-screen pt-20">
+        {/* Background Layer */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 pointer-events-none select-none">
+          {/* Static High-Res Poster (Always present until video fades in) */}
+          <div className="absolute inset-0 z-10 bg-[#0f172a]">
+             <Image 
+                src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80" 
+                alt="Background Poster"
+                fill
+                className={cn(
+                   "object-cover transition-opacity duration-[2s] ease-in-out",
+                   videoLoaded ? "opacity-30" : "opacity-60"
+                )}
+                priority
+             />
+          </div>
+
+          {/* Video Layer */}
+          <div className={cn(
+             "absolute inset-0 z-20 pointer-events-none transition-opacity duration-[3s] ease-in-out",
+             videoLoaded ? "opacity-40" : "opacity-0"
+          )}>
             <iframe
-              src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=5"
+              src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=10&enablejsapi=1"
               title="Services background cover"
               allow="autoplay; encrypted-media"
-              className="absolute inset-0 w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-0 opacity-40"
+              className="absolute inset-0 w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-0"
+              onLoad={() => setVideoLoaded(true)}
             />
-            <div className="absolute inset-0 z-10 bg-transparent" />
+            {/* Click/Touch blocker over the video */}
+            <div className="absolute inset-0 bg-transparent z-10" />
           </div>
-          {/* Simple discrete gradient overlay, no "to-white" transition */}
-          <div className="absolute inset-0 z-20 bg-[#0f172a]/70" />
-          <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#0f172a]/95 via-transparent to-[#0f172a]/95" />
+
+          {/* Overlays */}
+          <div className="absolute inset-0 z-30 bg-[#0f172a]/70" />
+          <div className="absolute inset-0 z-30 bg-gradient-to-b from-[#0f172a]/95 via-transparent to-[#0f172a]/95" />
+          
+          {/* Animated Background Elements */}
+          <div className="absolute top-1/4 left-10 w-[40vw] h-[40vw] bg-[#0284c7]/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-1/4 right-10 w-[30vw] h-[30vw] bg-[#0284c7]/5 rounded-full blur-[100px] animate-pulse [animation-delay:2s]" />
         </div>
 
-        <div className="relative z-30 container mx-auto px-6 lg:px-12 text-center pt-32 pb-24">
+        {/* Full-Width Content Container */}
+        <div className="relative z-40 w-full px-6 sm:px-12 md:px-20 lg:px-32 xl:px-48">
           <BlurFade delay={0.1}>
-            <div className="flex justify-center mb-8">
-               <AnimatedGradientText className="bg-white/10 text-[#38bdf8] border-white/20">The Evolve Mission</AnimatedGradientText>
-            </div>
-            <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif font-black text-white tracking-tighter leading-[0.85] mb-12">
-              Our <span className="text-[#0284c7] italic">Services</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/60 font-light leading-relaxed max-w-4xl mx-auto mb-16">
-              It is our vision to assist operators who want to take their therapy teams in-house by choosing our management model; and to assist in-house programs with clinical proven education, operational analysis, and compliance oversight to allow LTC operators to truly EVOLVE to the next level.
-            </p>
-            
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto pt-12 border-t border-white/10">
-               <div className="text-left space-y-4">
-                  <div className="flex items-center gap-3 font-black text-[#38bdf8] uppercase text-[10px] tracking-[0.4em]">
-                     <div className="w-10 h-px bg-[#38bdf8]" /> Our Vision
+            <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+               <div className="w-full lg:w-2/3 text-left">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-10 shadow-2xl backdrop-blur-md">
+                    <Sparkles size={14} /> The Evolution Advantage
                   </div>
-                  <p className="text-white/40 text-sm md:text-base font-light italic leading-relaxed">"To provide the most creative therapy consulting model through compassionate leadership and clinical passion."</p>
+                  <h1 className="text-6xl md:text-8xl lg:text-[10vw] font-serif font-black text-white tracking-tighter leading-[0.82] mb-12 drop-shadow-2xl">
+                    Our <br />
+                    <span className="text-[#0284c7] italic">Services.</span>
+                  </h1>
+                  <p className="text-xl md:text-3xl text-white/50 font-light leading-tight max-w-4xl mb-16">
+                    It is our vision to assist operators who want to take their therapy teams in-house by choosing our management model; and to assist in-house programs with clinical proven education, operational analysis, and compliance oversight to allow LTC operators to truly EVOLVE to the next level.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-6">
+                     <Link href="/contact">
+                        <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="1rem" className="px-12 py-6">
+                           <span className="font-black uppercase tracking-[0.25em] text-[12px] text-white">Contact Our Team</span>
+                        </ShimmerButton>
+                     </Link>
+                     <div className="flex items-center gap-4 text-white/40 font-black uppercase text-[10px] tracking-[0.3em] hover:text-white transition-colors cursor-default">
+                        <Phone size={14} className="text-[#38bdf8]" /> (888) 386-5820
+                     </div>
+                  </div>
                </div>
-               <div className="text-left space-y-4">
-                  <div className="flex items-center gap-3 font-black text-[#38bdf8] uppercase text-[10px] tracking-[0.4em]">
-                     <div className="w-10 h-px bg-[#38bdf8]" /> Our Approach
+
+               <div className="w-full lg:w-1/3">
+                  <div className="space-y-12">
+                     {[
+                        { title: 'Visionary Strategy', desc: 'Creative therapy consulting through compassionate leadership.', icon: Target },
+                        { title: 'Clinical Passion', desc: 'Evidence-based results that drive bottom line success.', icon: Heart }
+                     ].map((pill, i) => (
+                        <div key={i} className="group relative p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-500 overflow-hidden">
+                           <div className="absolute top-0 right-0 w-24 h-24 bg-[#0284c7]/10 rounded-full blur-2xl group-hover:bg-[#0284c7]/20 transition-colors" />
+                           <div className="flex gap-6 items-start relative z-10">
+                              <div className="w-12 h-12 rounded-xl bg-[#0284c7] flex items-center justify-center text-white shadow-lg">
+                                 <pill.icon size={20} />
+                              </div>
+                              <div>
+                                 <h4 className="text-lg font-black text-white tracking-widest uppercase mb-2 text-[11px]">{pill.title}</h4>
+                                 <p className="text-white/40 text-sm font-light leading-relaxed italic">"{pill.desc}"</p>
+                              </div>
+                           </div>
+                        </div>
+                     ))}
                   </div>
-                  <p className="text-white/40 text-sm md:text-base font-light italic leading-relaxed">"Evidence-based experience that drives measurable results for your bottom line and your residents."</p>
                </div>
             </div>
           </BlurFade>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-4 animate-bounce">
+           <div className="w-px h-12 bg-gradient-to-b from-[#0284c7] to-transparent" />
+           <div className="text-[10px] font-black text-white/20 uppercase tracking-[0.4em]">Scroll to Explore</div>
         </div>
       </section>
 
@@ -240,7 +301,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── Methodology: How We Help Your Business ── */}
+      {/* ── Methodology ── */}
       <section className="py-24 md:py-40 bg-white overflow-hidden relative">
          <div className="container mx-auto px-6 md:px-12">
             <div className="max-w-4xl mb-24">
@@ -256,21 +317,9 @@ export default function ServicesPage() {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-stretch">
                <div className="space-y-12 flex flex-col justify-center">
                   {[
-                    { 
-                      title: 'Identify Financial Opportunity', 
-                      icon: TrendingUp,
-                      desc: 'Every partnership starts with a data audit. We identify where your facility is losing revenue due to inefficient PDPM coding or staffing misalignment.' 
-                    },
-                    { 
-                      title: 'Streamline Clinical Operations', 
-                      icon: Sparkles,
-                      desc: 'We implement evidence-based workflows that ensure clinical documentation accurately reflects the high-level care your team is providing.' 
-                    },
-                    { 
-                      title: 'Strategic Staff Growth', 
-                      icon: Briefcase,
-                      desc: 'By moving to an in-house model, we help you groom internal talent for regional positions, reducing turnover and building a sustainable culture.' 
-                    }
+                    { title: 'Identify Financial Opportunity', icon: TrendingUp, desc: 'Every partnership starts with a data audit.' },
+                    { title: 'Streamline Clinical Operations', icon: Sparkles, desc: 'Evidence-based workflows that ensure documentation accuracy.' },
+                    { title: 'Strategic Staff Growth', icon: Briefcase, desc: 'Groom internal talent for regional positions.' }
                   ].map((item, i) => (
                     <BlurFade key={i} delay={0.2 + i * 0.1}>
                        <div className="flex gap-8 group">
@@ -309,10 +358,10 @@ export default function ServicesPage() {
          </div>
       </section>
 
-      {/* ── Dynamic Pricing Model Section ── */}
+      {/* ── Dynamic Pricing ── */}
       <Pricing />
 
-      {/* ── The Evolve Advantage: 4-Card Professional Layout ── */}
+      {/* ── Evolution Advantage ── */}
       <section className="py-24 md:py-44 bg-slate-50 overflow-hidden relative">
          <div className="container mx-auto px-6 md:px-12 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-20 md:mb-32">
@@ -327,63 +376,25 @@ export default function ServicesPage() {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
                {[
-                 { 
-                   title: 'Revenue Retention', 
-                   desc: 'Retain 100% of all therapy revenue instead of paying shared percentages to vendors.',
-                   icon: Activity,
-                   color: 'from-blue-600/10 to-blue-600/5',
-                   border: 'hover:border-blue-600/30'
-                 },
-                 { 
-                   title: 'Culture Continuity', 
-                   desc: 'Your staff remains your team. Groom internal talent for leadership within your own walls.',
-                   icon: UserCheck,
-                   color: 'from-indigo-600/10 to-indigo-600/5',
-                   border: 'hover:border-indigo-600/30'
-                 },
-                 { 
-                   title: 'Operational Stability', 
-                   desc: 'Employee engagement facilitates exceptional outcomes and long-term facility stability.',
-                   icon: Layers,
-                   color: 'from-emerald-600/10 to-emerald-600/5',
-                   border: 'hover:border-emerald-600/30'
-                 },
-                 { 
-                   title: 'Clinical Education', 
-                   desc: 'Customized CEU education for therapists and LTC staff as a premium management service.',
-                   icon: GraduationCap,
-                   color: 'from-slate-600/10 to-slate-600/5',
-                   border: 'hover:border-slate-600/30'
-                 }
+                 { title: 'Revenue Retention', icon: Activity, color: 'from-blue-600/10 to-blue-600/5', border: 'hover:border-blue-600/30' },
+                 { title: 'Culture Continuity', icon: UserCheck, color: 'from-indigo-600/10 to-indigo-600/5', border: 'hover:border-indigo-600/30' },
+                 { title: 'Operational Stability', icon: Layers, color: 'from-emerald-600/10 to-emerald-600/5', border: 'hover:border-emerald-600/30' },
+                 { title: 'Clinical Education', icon: GraduationCap, color: 'from-slate-600/10 to-slate-600/5', border: 'hover:border-slate-600/30' }
                ].map((item, i) => (
                  <BlurFade key={i} delay={0.2 + i * 0.1}>
-                    <div className={cn(
-                      "group p-10 rounded-[2.5rem] bg-white border border-slate-100 transition-all duration-500 h-full flex flex-col justify-between relative overflow-hidden",
-                      item.border
-                    )}>
+                    <div className={cn("group p-10 rounded-[2.5rem] bg-white border border-slate-100 transition-all duration-500 h-full flex flex-col justify-between relative overflow-hidden", item.border)}>
                        <div className={cn("absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500", item.color)} />
                        <div className="relative z-10">
                           <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-[#0f172a] mb-10 group-hover:bg-white transition-all duration-500 shadow-sm">
                              <item.icon size={28} strokeWidth={1.5} className="group-hover:text-[#0284c7] transition-colors" />
                           </div>
                           <h4 className="text-xl md:text-2xl font-serif font-black text-[#0f172a] mb-6 tracking-tight group-hover:text-[#0284c7] transition-colors">{item.title}</h4>
-                          <p className="text-slate-500 text-sm leading-relaxed font-light">{item.desc}</p>
-                       </div>
-                       <div className="relative z-10 mt-10 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-500">
-                          <div className="w-8 h-1 bg-[#0284c7] rounded-full" />
+                          <p className="text-slate-500 text-sm leading-relaxed font-light">Retain 100% of revenue and groom internal talent for leadership.</p>
                        </div>
                     </div>
                  </BlurFade>
                ))}
             </div>
-
-            <BlurFade delay={0.8} className="mt-24 text-center">
-               <Link href="/contact" className="focus-visible:outline-none">
-                  <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="9999px" className="px-12 py-6">
-                     <span className="font-black uppercase tracking-[0.25em] text-[12px] text-white">Experience the Difference — Contact Us</span>
-                  </ShimmerButton>
-               </Link>
-            </BlurFade>
          </div>
       </section>
 

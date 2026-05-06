@@ -124,7 +124,7 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Bespoke Services Hero (Combines Mission Ideas) ── */}
+      {/* ── Services Hero ── */}
       <section className="relative w-full overflow-hidden flex items-center justify-center bg-[#0f172a]" style={{ minHeight: '85vh' }}>
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute inset-0 pointer-events-none select-none">
@@ -136,10 +136,12 @@ export default function ServicesPage() {
             />
             <div className="absolute inset-0 z-10 bg-transparent" />
           </div>
-          <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/70 to-white" />
+          {/* Simple discrete gradient overlay, no "to-white" transition */}
+          <div className="absolute inset-0 z-20 bg-[#0f172a]/70" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#0f172a]/95 via-transparent to-[#0f172a]/95" />
         </div>
 
-        <div className="relative z-30 container mx-auto px-6 lg:px-12 text-center pt-32 pb-20">
+        <div className="relative z-30 container mx-auto px-6 lg:px-12 text-center pt-32 pb-24">
           <BlurFade delay={0.1}>
             <div className="flex justify-center mb-8">
                <AnimatedGradientText className="bg-white/10 text-[#38bdf8] border-white/20">The Evolve Mission</AnimatedGradientText>
@@ -169,33 +171,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── Transitionary Social Proof Section ── */}
-      <section className="bg-white py-12 relative z-40 -mt-10">
-         <div className="container mx-auto px-6 lg:px-12">
-            <div className="bg-white rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-slate-100 p-8 md:p-12">
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 items-center">
-                  {[
-                    { label: 'Facilities Optimized', value: '50+', icon: Building2 },
-                    { label: 'States Represented', value: '12+', icon: Globe2 },
-                    { label: 'Therapists Trained', value: '500+', icon: Users },
-                    { label: 'Clinical Excellence', value: '100%', icon: Award }
-                  ].map((stat, i) => (
-                    <BlurFade key={i} delay={0.2 + i * 0.1}>
-                       <div className="text-center group">
-                          <div className="text-[#0284c7] mb-3 flex justify-center group-hover:scale-110 transition-transform">
-                             <stat.icon size={24} strokeWidth={1.5} />
-                          </div>
-                          <div className="text-3xl font-serif font-black text-[#0f172a] mb-1">{stat.value}</div>
-                          <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</div>
-                       </div>
-                    </BlurFade>
-                  ))}
-               </div>
-            </div>
-         </div>
-      </section>
-
-      {/* ── Services Showcase: Alternating High-Light Sections ── */}
+      {/* ── Services Showcase ── */}
       <section className="py-24 md:py-40 bg-slate-50 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="text-center max-w-4xl mx-auto mb-24">

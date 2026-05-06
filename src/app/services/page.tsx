@@ -117,8 +117,8 @@ export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
 
   useEffect(() => {
-    // Faster reveal to fix "not visible" issue
-    const timer = setTimeout(() => setVideoStarted(true), 2500);
+    // Reveal video after a longer buffer to ensure all initial UI elements have passed
+    const timer = setTimeout(() => setVideoStarted(true), 4000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -126,34 +126,41 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Editorial Hero (Reliable Widescreen Logic) ── */}
+      {/* ── Editorial Hero (Programmatic UI Blocking) ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
-        {/* Background Layer: Reliable Video Delivery */}
+        {/* Background Layer: Total UI Isolation */}
         <div className="absolute inset-0 z-0">
            <div className={cn(
-             "absolute inset-0 z-10 transition-opacity duration-[2s] ease-in-out bg-[#0f172a]",
-             videoStarted ? "opacity-100" : "opacity-100"
+             "absolute inset-0 z-10 transition-opacity duration-[3s] ease-in-out bg-[#0f172a]",
+             videoStarted ? "opacity-100" : "opacity-0"
            )}>
              {/* 
-                Reverting to a more stable 115% scale that ensures horizontal and vertical coverage 
-                on almost all monitors without pushing the content into "black space".
-                Offsets are balanced to keep the video visible while minimizing UI bleed.
+                Programmatic Blocking Strategy:
+                1. We use a 140% scale to move the YouTube logo and 'Watch on YT' buttons completely off-canvas.
+                2. pointer-events-none on the iframe itself prevents it from detecting hover.
+                3. A separate 'Touch Blocker' div (z-20) sits OVER the iframe with pointer-events-auto to 
+                   absorb all mouse events before they ever reach the YouTube player.
              */}
-             <div className="absolute w-[115vw] h-[115vh] top-[-7.5vh] left-[-7.5vw] pointer-events-none select-none">
+             <div className="absolute w-[140vw] h-[140vh] top-[-20vh] left-[-20vw] pointer-events-none select-none">
                 <iframe
                   src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1"
                   title="Services cinematic"
                   allow="autoplay; encrypted-media"
-                  className="w-full h-full border-0 opacity-50 contrast-[1.1] saturate-[0.8]"
-                  onLoad={() => setTimeout(() => setVideoStarted(true), 1500)}
+                  className="w-full h-full border-0 opacity-40 contrast-[1.1] saturate-[0.8]"
                 />
              </div>
-             {/* Absolute blocking layer to prevent any hover-UI activation */}
-             <div className="absolute inset-0 z-20 bg-transparent cursor-default pointer-events-none" />
+             
+             {/* 
+                THE TOUCH BLOCKER: 
+                This layer sits between the content and the video. 
+                It prevents the video from ever seeing a cursor, which stops the 'Play/Pause' 
+                overlay from appearing during the loop.
+             */}
+             <div className="absolute inset-0 z-20 bg-transparent pointer-events-auto cursor-default" />
            </div>
 
-           {/* Editorial Visual Overlays (Home Sync) */}
-           <div className="absolute inset-0 z-30 opacity-50 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 60%)' }} />
+           {/* Editorial Visual Overlays */}
+           <div className="absolute inset-0 z-30 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 60%)' }} />
            <div className="absolute inset-0 z-30 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/70" />
            <div className="absolute inset-0 z-30 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
         </div>

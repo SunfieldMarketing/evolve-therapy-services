@@ -17,16 +17,22 @@ export default function Hero() {
 
       {/* ── YouTube iframe background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a]">
-        <iframe
-          src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=4&end=20"
-          title="Background Video - Evolve Therapy Services facility"
-          allow="autoplay; encrypted-media"
-          className="absolute w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0"
-          style={{ filter: 'brightness(0.35) saturate(0.7)' }}
-        />
+        <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none select-none">
+          <iframe
+            src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&start=4&end=20"
+            title="Background Video - Evolve Therapy Services facility"
+            allow="autoplay; encrypted-media"
+            className="w-full h-full border-0 opacity-100 transition-opacity duration-[3s]"
+            style={{ filter: 'brightness(0.35) saturate(0.7)' }}
+          />
+        </div>
+        
+        {/* Interaction Blocker - ensures no YT UI appears on hover */}
+        <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
+
         {/* Solid cover that hides YouTube UI during load, then fades out */}
         <div
-          className="absolute inset-0 bg-[#0f172a] pointer-events-none"
+          className="absolute inset-0 bg-[#0f172a] pointer-events-none z-20"
           style={{ animation: 'ytFadeOut 2.8s ease-in forwards' }}
         />
         {/* Dark gradient overlays */}

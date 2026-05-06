@@ -16,7 +16,7 @@ export default function ContactPage() {
       <PageHeader 
         title="Connect With" 
         italicWord="Leadership" 
-        subtitle="Our regional directors are ready to provide a complimentary clinical and financial analysis of your therapy department."
+        subtitle="Our regional directors are ready to provide a complimentary clinical and financial analysis of your therapy department. Connect with our executive team today to discover how Evolve can optimize your operations, ensure regulatory compliance, and drive sustainable revenue retention."
         videoKey="contact"
         bgImage="none"
         useVideo={false}

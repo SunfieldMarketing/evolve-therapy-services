@@ -53,119 +53,97 @@ export default function WhyEvolve() {
   return (
     <section id="about" className="py-24 md:py-36 bg-[#0f172a] overflow-hidden relative">
       <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
-        {/* Section Header — Minimalist */}
-        <div className="mb-32 md:mb-48">
-          <BlurFade delay={0.1}>
-            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-8 backdrop-blur-sm">
-              <Sparkles size={12} />
-              The Evolve Advantage
-            </div>
-          </BlurFade>
-          <BlurFade delay={0.2}>
-            <h2 className="text-6xl md:text-8xl font-serif font-black text-white leading-[0.92] tracking-tighter mb-8">
-              Why Choose <br />
-              <span className="bg-gradient-to-r from-[#38bdf8] to-[#0284c7] bg-clip-text text-transparent italic font-medium">
-                Evolve
-              </span>
-            </h2>
-          </BlurFade>
-        </div>
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+          
+          {/* Left Side — Section Header (Sticky-ish) */}
+          <div className="lg:w-1/3 lg:sticky lg:top-36 h-fit">
+            <BlurFade delay={0.1}>
+              <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-8 backdrop-blur-sm">
+                <Sparkles size={12} />
+                The Evolve Advantage
+              </div>
+            </BlurFade>
+            <BlurFade delay={0.2}>
+              <h2 className="text-5xl md:text-6xl font-serif font-black text-white leading-[1.1] tracking-tighter mb-8">
+                Why Choose <br />
+                <span className="bg-gradient-to-r from-[#38bdf8] to-[#0284c7] bg-clip-text text-transparent italic font-medium">
+                  Evolve
+                </span>
+              </h2>
+            </BlurFade>
+            <BlurFade delay={0.3}>
+              <p className="text-lg text-white/40 leading-relaxed font-light mb-12">
+                We provide the framework for clinicians to thrive doing what they have a passion to do, all while maintaining the most fiscally responsible operations.
+              </p>
+              
+              <div className="flex flex-col gap-4">
+                <Link href="/about" className="focus-visible:outline-none">
+                  <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-8 py-4 w-fit">
+                    <span className="text-white font-black text-[10px] uppercase tracking-[0.2em]">Our Mission</span>
+                    <ArrowRight size={16} className="text-white ml-3 group-hover:translate-x-1 transition-transform" />
+                  </ShimmerButton>
+                </Link>
+                <div className="text-white/20 text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-3">
+                  <div className="w-8 h-px bg-white/10" />
+                  Founded on Excellence
+                </div>
+              </div>
+            </BlurFade>
+          </div>
 
-        {/* Feature Story — Typographic Editorial Layout (No Cards) */}
-        <div className="max-w-6xl mx-auto space-y-48 md:space-y-64 mb-32">
-          {features.map((item, i) => {
-            const isEven = i % 2 === 0;
-            return (
-              <BlurFade delay={0.2 + i * 0.1} key={i}>
-                <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:md:flex-row-reverse'} items-start gap-8 md:gap-24 relative`}>
-                  
-                  {/* Large Vertical Number Anchor */}
-                  <div className="shrink-0 relative">
-                    <div className="text-[120px] md:text-[220px] font-serif font-black text-[#0284c7]/5 leading-none select-none pointer-events-none">
-                      {item.num}
-                    </div>
-                    {/* Floating Icon */}
-                    <div className={`absolute top-1/2 -translate-y-1/2 ${isEven ? '-right-8' : '-left-8'} w-16 h-16 rounded-2xl bg-[#0f172a] border border-white/10 flex items-center justify-center text-[#38bdf8] shadow-2xl`}>
-                      <item.icon size={28} strokeWidth={1.5} />
-                    </div>
-                  </div>
-
-                  {/* Content Block */}
-                  <div className="flex-1 pt-4 md:pt-16">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className={`h-px w-12 bg-gradient-to-r ${item.accent} to-transparent`} />
-                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#38bdf8]">Clinical Strategy</span>
+          {/* Right Side — Features Grid */}
+          <div className="lg:w-2/3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+              {features.map((item, i) => (
+                <BlurFade delay={0.2 + i * 0.1} key={i}>
+                  <div className="group relative">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="text-4xl font-serif font-black text-white/5 group-hover:text-[#0284c7]/20 transition-colors">
+                        {item.num}
+                      </div>
+                      <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-[#38bdf8] group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                        <item.icon size={20} strokeWidth={1.5} />
+                      </div>
                     </div>
                     
-                    <h3 className="text-4xl md:text-7xl font-serif font-black text-white tracking-tighter leading-[0.9] mb-8">
-                      {item.title} <br />
-                      <span className="text-white/40 italic font-medium">{item.subtitle}</span>
-                    </h3>
+                    <h4 className="text-2xl font-serif font-black text-white tracking-tight mb-4 group-hover:text-[#38bdf8] transition-colors">
+                      {item.title} <span className="text-white/30 italic font-medium">{item.subtitle}</span>
+                    </h4>
                     
-                    <p className="text-xl md:text-3xl text-white/50 leading-relaxed font-light max-w-2xl">
+                    <p className="text-base text-white/40 leading-relaxed font-light group-hover:text-white/60 transition-colors">
                       {item.desc}
                     </p>
 
-                    <div className="mt-12 group flex items-center gap-4 cursor-pointer">
-                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/20 group-hover:text-[#38bdf8] transition-colors">Learn More</span>
-                      <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/20 group-hover:text-[#38bdf8] group-hover:border-[#38bdf8] transition-all">
-                        <ArrowRight size={14} />
-                      </div>
-                    </div>
+                    {/* Subtle Divider */}
+                    <div className="mt-8 h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
                   </div>
-
-                  {/* Subtle Background Glow */}
-                  <div className={`absolute -inset-20 bg-gradient-to-br ${item.accent} opacity-[0.03] blur-[100px] pointer-events-none`} />
-                </div>
-              </BlurFade>
-            );
-          })}
-        </div>
-
-        {/* Bottom CTA — Borderless & Airy */}
-        <BlurFade delay={0.7}>
-          <div className="py-24 border-t border-white/5 flex flex-col items-center text-center">
-            <h4 className="text-4xl md:text-6xl font-serif font-black text-white tracking-tighter mb-12">
-              Ready to <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
-            </h4>
-            <div className="flex flex-col sm:flex-row items-center gap-8">
-              <Link href="/about" className="focus-visible:outline-none">
-                <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-14 py-6">
-                  <span className="text-white font-black text-xs uppercase tracking-[0.3em]">Discover Our Leadership</span>
-                  <ArrowRight size={20} className="text-white ml-4 group-hover:translate-x-2 transition-transform duration-300" />
-                </ShimmerButton>
-              </Link>
-              <Link
-                href="/contact"
-                className="text-white/40 hover:text-[#38bdf8] font-black text-xs uppercase tracking-[0.3em] transition-colors"
-              >
-                Schedule a Consultation
-              </Link>
+                </BlurFade>
+              ))}
             </div>
           </div>
-        </BlurFade>
+        </div>
 
-        {/* Founder quote strip — Centered & Airy */}
+        {/* Founder quote strip — Centered original style */}
         <BlurFade delay={0.8}>
-          <div className="max-w-4xl mx-auto text-center relative py-20 border-t border-white/5">
-            <Quote size={80} className="text-[#0284c7]/10 absolute -top-8 left-1/2 -translate-x-1/2 pointer-events-none" />
-            <p className="text-2xl md:text-4xl font-serif italic text-white/70 leading-relaxed mb-12 pt-10">
+          <div className="max-w-4xl mx-auto text-center relative py-20 mt-20 border-t border-white/5">
+            <Quote size={60} className="text-[#0284c7]/10 absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none" />
+            <p className="text-xl md:text-3xl font-serif italic text-white/70 leading-relaxed mb-10 pt-8">
               Evolve was founded on the principle that therapy departments should be <span className="text-[#38bdf8] font-bold not-italic">centers of excellence</span> and financial strength.
             </p>
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex items-center justify-center gap-5">
               <div className="relative">
-                <div className="absolute inset-0 bg-[#0284c7]/20 blur-xl rounded-full" />
+                <div className="absolute inset-0 bg-[#0284c7]/20 blur-lg rounded-full" />
                 <Image
                   src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png"
-                  width={80}
-                  height={80}
-                  className="relative rounded-full object-cover border-2 border-white/10 shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000"
+                  width={56}
+                  height={56}
+                  className="relative rounded-full object-cover border-2 border-white/20 shadow-2xl"
                   alt="Lisa Bebie"
                 />
               </div>
-              <div>
-                <div className="font-black text-white text-xl tracking-tight leading-none mb-1">Lisa Bebie</div>
-                <div className="text-[#38bdf8] text-xs font-black uppercase tracking-[0.4em]">President &amp; Founder</div>
+              <div className="text-left">
+                <div className="font-black text-white text-base tracking-tight leading-none mb-1">Lisa Bebie</div>
+                <div className="text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em]">President &amp; Founder</div>
               </div>
             </div>
           </div>

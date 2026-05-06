@@ -128,7 +128,7 @@ export default function ServicesPage() {
       {/* ── Premium Editorial Hero ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
         
-        {/* Deep Background Stack (Lowest Z) */}
+        {/* Deep Background Stack */}
         <div className="absolute inset-0 z-0">
            {/* Cinematic Video Layer */}
            <div className={cn(
@@ -144,7 +144,6 @@ export default function ServicesPage() {
                   onLoad={() => setTimeout(() => setVideoStarted(true), 800)}
                 />
              </div>
-             {/* Total Interaction Blocker */}
              <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
            </div>
 
@@ -153,16 +152,9 @@ export default function ServicesPage() {
            <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80" />
            <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
            <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
-
-           {/* EVOLVE Watermark Layer (Deep in background, explicitly below content) */}
-           <div className="absolute right-[-10vh] top-0 bottom-0 flex items-center justify-center pointer-events-none hidden xl:flex z-10">
-              <span className="text-white/[0.03] text-[28vh] font-serif font-black tracking-tighter leading-none select-none uppercase rotate-90 whitespace-nowrap h-full flex items-center justify-center text-center">
-                 EVOLVE
-              </span>
-           </div>
         </div>
 
-        {/* Content Area (High Z) - Guaranteed to be on top of the watermark */}
+        {/* Content Area */}
         <div className="relative z-50 container mx-auto px-6 lg:px-12 -mt-24">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-32">
             
@@ -194,7 +186,7 @@ export default function ServicesPage() {
                </BlurFade>
             </div>
 
-            {/* Right Cards (Explicitly on Top) */}
+            {/* Right Cards */}
             <div className="w-full lg:w-[30%]">
                <BlurFade delay={0.4}>
                   <div className="space-y-16">

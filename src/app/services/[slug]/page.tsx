@@ -181,12 +181,12 @@ export default function ServiceDetailPage() {
                     viewport={{ once: true }}
                     className="h-full"
                   >
-                    <Link href={`/services/${key}`} className="group bg-white p-12 rounded-[3.5rem] border border-slate-200 hover:border-primary/20 shadow-xl shadow-black/[0.02] hover:shadow-2xl transition-all duration-700 block h-full">
-                      <div className="w-16 h-16 bg-slate-50 rounded-[1.5rem] flex items-center justify-center text-secondary mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-500 border border-slate-100 shadow-inner">
+                    <Link href={`/services/${key}`} className="group bg-white p-10 md:p-14 rounded-[3.5rem] border border-slate-200 hover:border-primary/20 shadow-xl shadow-black/[0.02] hover:shadow-2xl transition-all duration-700 flex flex-col h-full">
+                      <div className="w-16 h-16 bg-slate-50 rounded-[1.5rem] flex items-center justify-center text-secondary mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-500 border border-slate-100 shadow-inner shrink-0">
                         <ItemIcon size={28} />
                       </div>
-                      <h3 className="text-2xl font-serif font-black text-secondary mb-6 group-hover:text-primary transition-colors duration-500 tracking-tight">{item.title}</h3>
-                      <p className="text-slate-500 text-sm font-medium leading-relaxed line-clamp-2">{item.shortDesc}</p>
+                      <h3 className="text-2xl font-serif font-black text-secondary mb-6 group-hover:text-primary transition-colors duration-500 tracking-tight leading-snug">{item.title}</h3>
+                      <p className="text-slate-500 text-sm font-medium leading-relaxed flex-1">{item.shortDesc}</p>
                     </Link>
                   </motion.div>
                 );

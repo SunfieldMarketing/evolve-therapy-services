@@ -45,7 +45,7 @@ const detailedServices = [
       'Functional outcome maximization'
     ],
     icon: Stethoscope,
-    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778094229/1ffcc43c-6031-47fb-abc4-cde40d4b2bec.png',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095358/199776c9-037b-44b0-bd72-274885e0b165.png',
     href: '/services/optimal-therapy-outcomes'
   },
   {
@@ -84,7 +84,7 @@ const detailedServices = [
       'Resource allocation strategy'
     ],
     icon: LineChart,
-    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778094169/940a0009-bf00-4939-ba87-70e8186f76fd.png',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095199/d4b294cb-7d97-4dd6-857b-eee76e1777a5.png',
     href: '/services/therapy-cost-reduction'
   },
   {
@@ -97,7 +97,7 @@ const detailedServices = [
       'Management model implementation'
     ],
     icon: Users2,
-    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778094083/5f6673de-a2fe-499d-975d-5b03d897a4cc.png',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093385/d20f225b-69e1-4deb-ae8e-b7979f30546c.png',
     href: '/services/in-house-transition'
   },
   {
@@ -110,7 +110,7 @@ const detailedServices = [
       'Operational health auditing'
     ],
     icon: GraduationCap,
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80',
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095465/fe87049e-5e24-4b1e-bc2a-b265ebd01ddf.png',
     href: '/services/in-house-resource-hub'
   }
 ];

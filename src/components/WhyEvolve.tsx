@@ -79,13 +79,13 @@ export default function WhyEvolve() {
               <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
                 <div className="relative w-64 h-64 md:w-96 md:h-96">
                    {features.map((item, i) => {
-                      // Calculate active state based on scroll progress
-                      const start = i / features.length;
-                      const end = (i + 1) / features.length;
+                      // Calculate active state based on scroll progress (shifted for intro)
+                      const start = 0.1 + (i * 0.9) / features.length;
+                      const end = 0.1 + ((i + 1) * 0.9) / features.length;
                       
                       // Opacity transform
-                      const opacity = useTransform(smoothProgress, [start, start + 0.1, end - 0.1, end], [0, 1, 1, 0]);
-                      const scale = useTransform(smoothProgress, [start, start + 0.1, end - 0.1, end], [0.8, 1, 1, 0.8]);
+                      const opacity = useTransform(smoothProgress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
+                      const scale = useTransform(smoothProgress, [start, start + 0.05, end - 0.05, end], [0.8, 1, 1, 0.8]);
                       const rotate = useTransform(smoothProgress, [start, end], [i * 10, (i + 1) * -10]);
 
                       return (
@@ -125,11 +125,29 @@ export default function WhyEvolve() {
                     </BlurFade>
 
                     <div className="relative h-64 md:h-80">
+                      {/* Initial Title State */}
+                      <motion.div
+                        style={{ 
+                          opacity: useTransform(smoothProgress, [0, 0.1], [1, 0]),
+                          y: useTransform(smoothProgress, [0, 0.1], [0, -30])
+                        }}
+                        className="absolute inset-0"
+                      >
+                        <h3 className="text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-none mb-8">
+                          Why Choose <br />
+                          <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
+                        </h3>
+                        <p className="text-xl md:text-2xl text-white/30 font-light max-w-lg">
+                          Scroll to discover the clinical advantages of our management model.
+                        </p>
+                      </motion.div>
+
                       {features.map((item, i) => {
-                         const start = i / features.length;
-                         const end = (i + 1) / features.length;
-                         const opacity = useTransform(smoothProgress, [start, start + 0.1, end - 0.1, end], [0, 1, 1, 0]);
-                         const y = useTransform(smoothProgress, [start, start + 0.1, end - 0.1, end], [30, 0, 0, -30]);
+                         // Shift the range to start after the intro (0.1 - 1.0)
+                         const start = 0.1 + (i * 0.9) / features.length;
+                         const end = 0.1 + ((i + 1) * 0.9) / features.length;
+                         const opacity = useTransform(smoothProgress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
+                         const y = useTransform(smoothProgress, [start, start + 0.05, end - 0.05, end], [30, 0, 0, -30]);
 
                          return (
                            <motion.div

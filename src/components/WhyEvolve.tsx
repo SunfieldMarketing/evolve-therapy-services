@@ -15,6 +15,7 @@ const features = [
     desc: 'Proactive audit defense and denial management from clinical experts who know the appeals process inside and out.',
     icon: ShieldCheck,
     color: '#f59e0b',
+    href: '/services/denial-management'
   },
   {
     title: 'Tiered Pricing',
@@ -22,6 +23,7 @@ const features = [
     desc: 'Our unique approach customizes to your size of business and Evolves as you do, reducing pricing as you grow.',
     icon: Zap,
     color: '#38bdf8',
+    href: '/services/therapy-cost-reduction'
   },
   {
     title: '100% Revenue',
@@ -29,6 +31,7 @@ const features = [
     desc: 'You retain all therapy revenue while we provide the expert management and operational oversight.',
     icon: Award,
     color: '#10b981',
+    href: '/services/optimal-therapy-outcomes'
   },
   {
     title: 'In-House',
@@ -36,6 +39,7 @@ const features = [
     desc: 'Empower your therapy team with in-house employment and career advancement through internal mentorship.',
     icon: Briefcase,
     color: '#8b5cf6',
+    href: '/services/in-house-transition'
   },
   {
     title: 'Holistic',
@@ -43,6 +47,7 @@ const features = [
     desc: 'We set our customers apart through exceptional clinical programming and a holistic approach to care.',
     icon: Heart,
     color: '#f43f5e',
+    href: '/services/snf-staff-education'
   },
 ];
 
@@ -174,8 +179,8 @@ export default function WhyEvolve() {
                           <p className="text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-8">
                             {features[activeIndex].desc}
                           </p>
-                          <Link href="/contact" className="group inline-flex items-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
-                             Learn More About This
+                          <Link href={features[activeIndex].href} className="group inline-flex items-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
+                             Learn More About This Service
                              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                           </Link>
                         </motion.div>

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Phone } from 'lucide-react';
 import Link from 'next/link';
@@ -8,80 +7,6 @@ import { Spotlight } from '@/components/aceternity/spotlight';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
 
 export default function Hero() {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const playerRef = useRef<any>(null);
-  const loopIntervalRef = useRef<any>(null);
-
-  useEffect(() => {
-    // Check if API is already loaded
-    // @ts-ignore
-    if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
-    }
-
-    const initPlayer = () => {
-      // @ts-ignore
-      playerRef.current = new window.YT.Player('hero-youtube-player', {
-        videoId: 'W5Dm2WCk8jg',
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          loop: 1,
-          modestbranding: 1,
-          rel: 0,
-          showinfo: 0,
-          mute: 1,
-          playsinline: 1,
-          playlist: 'W5Dm2WCk8jg'
-        },
-        events: {
-          onStateChange: (event: any) => {
-            // @ts-ignore
-            if (event.data === window.YT.PlayerState.PLAYING) {
-              // Wait 1.5s for YouTube's native title bar to fade out before revealing
-              setTimeout(() => setIsVideoPlaying(true), 1500);
-
-              // Custom Loop: Cut out the last 5 seconds and prevent YouTube 'End' UI from ever showing
-              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-              loopIntervalRef.current = setInterval(() => {
-                if (playerRef.current && playerRef.current.getCurrentTime) {
-                  const duration = playerRef.current.getDuration();
-                  const currentTime = playerRef.current.getCurrentTime();
-                  const endTime = duration > 5 ? duration - 5 : duration; // Safely cut last 5 seconds
-                  
-                  if (currentTime >= endTime) {
-                    playerRef.current.seekTo(4); // Seek back to start (4s as previously requested)
-                  }
-                }
-              }, 500);
-            } else {
-              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-            }
-          }
-        }
-      });
-    };
-
-    // @ts-ignore
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      // @ts-ignore
-      window.onYouTubeIframeAPIReady = initPlayer;
-    }
-
-    return () => {
-      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-      if (playerRef.current && playerRef.current.destroy) {
-        playerRef.current.destroy();
-      }
-    };
-  }, []);
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center">
       {/* ── Aceternity Spotlight overlay ── */}
@@ -90,23 +15,21 @@ export default function Hero() {
         fill="rgba(56,189,248,0.6)"
       />
 
-      {/* ── YouTube iframe background ── */}
+      {/* ── Native HTML5 Video Background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a]">
         <div className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
-          <div 
-            id="hero-youtube-player" 
-            className="w-full h-full border-0 opacity-100 scale-[1.05]"
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover scale-[1.05]"
             style={{ filter: 'brightness(0.35) saturate(0.7)' }}
-          />
+          >
+            <source src="https://player.vimeo.com/external/494635105.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761" type="video/mp4" />
+          </video>
         </div>
         
-        {/* Interaction Blocker - ensures no YT UI appears on hover */}
-        <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
-
-        {/* Solid cover that hides YouTube UI during load, fades out only when API confirms video is playing */}
-        <div
-          className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-20 transition-opacity duration-[2000ms] ease-in-out ${isVideoPlaying ? 'opacity-0' : 'opacity-100'}`}
-        />
         {/* Dark gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/70 to-[#0f172a]/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-transparent to-[#0f172a]/20" />

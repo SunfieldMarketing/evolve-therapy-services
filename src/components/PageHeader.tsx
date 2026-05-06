@@ -6,7 +6,7 @@ import { BlurFade } from '@/components/magicui/blur-fade';
 import { Target, ArrowRight, Sparkles, Heart, LucideIcon } from 'lucide-react';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 // Map of page-specific background abstract/medical images  
 const imageMap: Record<string, string> = {
@@ -17,10 +17,10 @@ const imageMap: Record<string, string> = {
   locations: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80',
 };
 
-// Map of page-specific background videos
+// Map of page-specific background videos (Direct MP4 links)
 const videoMap: Record<string, string> = {
-  services: '8_nVbI7NcOw',
-  about: 'bsTbwMlTyjg',
+  services: 'https://player.vimeo.com/external/441221776.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761',
+  about: 'https://player.vimeo.com/external/371849187.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761',
 };
 
 interface ValueBox {
@@ -58,82 +58,16 @@ export default function PageHeader({
   useVideo = true,
 }: PageHeaderProps) {
   const imageUrl = bgImage || imageMap[videoKey] || imageMap.default;
-  const videoId = videoMap[videoKey as string];
-  const finalUseVideo = useVideo && !!videoId;
+  const videoUrl = videoMap[videoKey as string];
+  const finalUseVideo = useVideo && !!videoUrl;
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const playerRef = useRef<any>(null);
-  const loopIntervalRef = useRef<any>(null);
 
   useEffect(() => {
-    if (!finalUseVideo || !videoId) return;
-
-    // @ts-ignore
-    if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
-    }
-
-    const initPlayer = () => {
-      // @ts-ignore
-      playerRef.current = new window.YT.Player('page-header-youtube-player', {
-        videoId: videoId,
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          loop: 1,
-          modestbranding: 1,
-          rel: 0,
-          showinfo: 0,
-          mute: 1,
-          playsinline: 1,
-          playlist: videoId
-        },
-        events: {
-          onStateChange: (event: any) => {
-            // @ts-ignore
-            if (event.data === window.YT.PlayerState.PLAYING) {
-              setTimeout(() => setIsVideoPlaying(true), 1500);
-
-              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-              loopIntervalRef.current = setInterval(() => {
-                if (playerRef.current && playerRef.current.getCurrentTime) {
-                  const duration = playerRef.current.getDuration();
-                  const currentTime = playerRef.current.getCurrentTime();
-                  const endTime = duration > 5 ? duration - 5 : duration;
-                  
-                  if (currentTime >= endTime) {
-                    playerRef.current.seekTo(0);
-                  }
-                }
-              }, 500);
-            } else {
-              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-            }
-          }
-        }
-      });
-    };
-
-    // @ts-ignore
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      // @ts-ignore
-      window.onYouTubeIframeAPIReady = initPlayer;
-    }
-
-    return () => {
-      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-      if (playerRef.current && playerRef.current.destroy) {
-        playerRef.current.destroy();
-      }
-    };
-  }, [finalUseVideo, videoId]);
+    if (!finalUseVideo) return;
+    const timer = setTimeout(() => setIsVideoPlaying(true), 800);
+    return () => clearTimeout(timer);
+  }, [finalUseVideo]);
 
   return (
     <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
@@ -146,11 +80,17 @@ export default function PageHeader({
               videoKey === 'about' && "left-[-100vw] top-[-40vh]",
               isVideoPlaying ? "opacity-100" : "opacity-0"
             )}>
-              <div
-                id="page-header-youtube-player"
-                className="w-full h-full border-0 opacity-40"
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover opacity-40"
                 style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
-              />
+                onCanPlay={() => setIsVideoPlaying(true)}
+              >
+                <source src={videoUrl} type="video/mp4" />
+              </video>
             </div>
             {/* Interaction Blocker */}
             <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />

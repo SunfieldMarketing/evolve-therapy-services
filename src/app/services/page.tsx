@@ -104,10 +104,10 @@ const detailedServices = [
     title: 'In-House Resource Hub',
     desc: 'Expert clinical resource in recruitment, denial management, unlimited therapy education, and real-time data analysis for in-house teams.',
     details: [
-      'Denial management expert resource',
-      'Unlimited clinical education/CEUs',
-      'Real-time data analytics',
-      'Operational health auditing'
+      'Refined clinical recruitment and retention support',
+      'Retention of 100% therapy revenue',
+      'Strategic clinical education and CEU oversight',
+      'Audit management and compliance'
     ],
     icon: GraduationCap,
     image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095465/fe87049e-5e24-4b1e-bc2a-b265ebd01ddf.png',
@@ -127,8 +127,8 @@ export default function ServicesPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* ── Editorial Hero (Tuned Spacing) ── */}
-      <section className="relative w-full h-[85vh] flex flex-col justify-center bg-[#0f172a] overflow-hidden">
+      {/* ── Editorial Hero (Restored Spacing & Screen Presence) ── */}
+      <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
         
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
@@ -155,37 +155,37 @@ export default function ServicesPage() {
            <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
         </div>
 
-        {/* Content Area */}
-        <div className="relative z-50 container mx-auto px-6 lg:px-12">
+        {/* Content Area: Restored Pacing */}
+        <div className="relative z-50 container mx-auto px-6 lg:px-12 -mt-12">
           <div className="w-full">
             <BlurFade delay={0.2}>
                {/* Subtitle Badge */}
-               <div className="flex items-center gap-6 mb-6">
+               <div className="flex items-center gap-6 mb-12">
                   <div className="w-12 h-[1px] bg-[#0284c7]" />
                   <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]">Partnership Hub</span>
                </div>
                
-               <h1 className="text-5xl md:text-[5vw] lg:text-[4.5vw] font-serif font-black text-white leading-[1] tracking-tighter mb-8 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] whitespace-nowrap overflow-visible">
+               <h1 className="text-5xl md:text-[5vw] lg:text-[4.5vw] font-serif font-black text-white leading-[1] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] whitespace-nowrap overflow-visible">
                   <span className="uppercase tracking-tighter">STRATEGICAL</span>
                   <span className="text-[#0284c7] italic ml-[0.15em] uppercase tracking-tighter">SERVICES.</span>
                </h1>
 
-               <div className="mb-10 w-full">
+               <div className="mb-20 w-full">
                   <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic max-w-5xl">
                      "Empowering operators to take their therapy teams in-house with clinically proven education and compliance oversight."
                   </p>
                </div>
                
-               <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+               <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
                   <Link href="/contact" className="inline-flex group shrink-0">
-                     <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-14 py-7 shadow-[0_30px_60px_rgba(2,132,199,0.3)]">
-                        <span className="font-black uppercase tracking-[0.3em] text-[14px] text-white">Start Your Evolution</span>
+                     <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-16 py-7 shadow-[0_30px_60px_rgba(2,132,199,0.3)]">
+                        <span className="font-black uppercase tracking-[0.4em] text-[14px] text-white">Start Your Evolution</span>
                         <ArrowRight size={20} className="ml-5 group-hover:translate-x-3 transition-transform" />
                      </ShimmerButton>
                   </Link>
 
-                  {/* Values Integration: Increased size for better visibility */}
-                  <div className="flex flex-col sm:flex-row gap-10">
+                  {/* Values Integration: Maintained larger presence with restored spacing */}
+                  <div className="flex flex-col sm:flex-row gap-12">
                      <div className="flex items-center gap-6 group">
                         <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
                            <Sparkles size={24} />
@@ -211,8 +211,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── Social Proof Trust Section (Enhanced Padding) ── */}
-      <section className="relative z-50 pt-12 pb-24 bg-[#0f172a] border-y border-white/[0.05]">
+      {/* ── Social Proof Trust Section ── */}
+      <section className="relative z-50 pt-16 pb-32 bg-[#0f172a] border-y border-white/[0.05]">
         <div className="container mx-auto px-12">
            <div className="flex flex-wrap items-center justify-between gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
               <div className="flex items-center gap-4 group cursor-default">

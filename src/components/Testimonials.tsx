@@ -122,26 +122,13 @@ export default function Testimonials() {
         </BlurFade>
       </div>
 
-      {/* Auto-scrolling carousel — row 1 */}
-      <div className="mb-6">
-        <Marquee
-          pauseOnHover
-          className="[--duration:50s] [--gap:1.5rem]"
-        >
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={i} t={t} />
-          ))}
-        </Marquee>
-      </div>
-
-      {/* Auto-scrolling carousel — row 2 (reverse direction) */}
+      {/* Auto-scrolling carousel — Single row for cleaner focus */}
       <div className="mb-16">
         <Marquee
-          reverse
           pauseOnHover
-          className="[--duration:55s] [--gap:1.5rem]"
+          className="[--duration:60s] [--gap:2rem]"
         >
-          {[...testimonials].reverse().map((t, i) => (
+          {testimonials.map((t, i) => (
             <TestimonialCard key={i} t={t} />
           ))}
         </Marquee>

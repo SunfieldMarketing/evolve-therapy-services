@@ -1,6 +1,6 @@
 'use client';
 
-import { Award, Briefcase, Zap, Heart, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
+import { Award, Briefcase, Zap, Heart, ShieldCheck, ArrowRight, Sparkles, Quote } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BlurFade } from '@/components/magicui/blur-fade';
@@ -86,87 +86,98 @@ export default function WhyEvolve() {
           </BlurFade>
         </div>
 
-        {/* Feature cards — stacked offset cards with left accent bar */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto mb-20">
-          {features.map((item, i) => (
-            <BlurFade delay={0.2 + i * 0.1} key={i} className={i === features.length - 1 ? 'md:col-span-2' : ''}>
-              <div className="group relative rounded-[2rem] bg-white/[0.03] border border-white/[0.06] p-8 md:p-10 hover:bg-white/[0.07] hover:border-white/[0.12] transition-all duration-500 overflow-hidden">
-                {/* Left accent strip */}
-                <div className={`absolute left-0 top-8 bottom-8 w-1 rounded-full bg-gradient-to-b ${item.accent} opacity-40 group-hover:opacity-100 transition-opacity duration-500`} />
-
-                {/* Number watermark */}
-                <div className="absolute top-6 right-8 text-[80px] md:text-[100px] font-serif font-black text-white/[0.03] group-hover:text-white/[0.06] leading-none transition-colors duration-500 select-none pointer-events-none">
-                  {item.num}
-                </div>
-
-                <div className="relative z-10 pl-6">
-                  {/* Icon + Title row */}
-                  <div className="flex items-start gap-5 mb-6">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.accent} flex items-center justify-center text-white shrink-0 shadow-lg group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500`}>
-                      <item.icon size={24} strokeWidth={1.5} />
+        {/* Feature cards — Premium Glass Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 lg:gap-8 mb-20">
+          {features.map((item, i) => {
+            // Define span logic for a dynamic grid feel
+            const spans = [
+              'md:col-span-3 lg:col-span-4', // 1
+              'md:col-span-3 lg:col-span-4', // 2
+              'md:col-span-6 lg:col-span-4', // 3
+              'md:col-span-3 lg:col-span-6', // 4
+              'md:col-span-3 lg:col-span-6', // 5
+            ];
+            return (
+              <BlurFade delay={0.2 + i * 0.1} key={i} className={spans[i]}>
+                <div className="group relative h-full rounded-[2.5rem] bg-white/[0.02] border border-white/[0.05] p-8 md:p-10 hover:bg-white/[0.04] hover:border-[#0284c7]/30 transition-all duration-700 flex flex-col justify-between overflow-hidden">
+                  {/* Subtle hover gradient */}
+                  <div className={`absolute -inset-20 bg-gradient-to-br ${item.accent} opacity-0 group-hover:opacity-[0.03] blur-[60px] transition-opacity duration-700 pointer-events-none`} />
+                  
+                  <div>
+                    {/* Icon Container */}
+                    <div className="relative mb-8">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${item.accent} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                      <div className={`relative w-16 h-16 rounded-2xl bg-slate-900 border border-white/10 flex items-center justify-center text-white group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500`}>
+                        <item.icon size={28} strokeWidth={1.5} className="text-[#38bdf8]" />
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-2xl md:text-3xl font-serif font-black text-white tracking-tight leading-[1.1] group-hover:text-[#38bdf8] transition-colors duration-500">
-                        {item.title}
-                        <br />
-                        <span className="text-white/50 group-hover:text-white/70 transition-colors duration-500">{item.subtitle}</span>
-                      </h4>
-                    </div>
+
+                    <h4 className="text-2xl md:text-3xl font-serif font-black text-white tracking-tight mb-4 group-hover:text-[#38bdf8] transition-colors duration-500">
+                      {item.title} <span className="text-white/40 italic font-medium">{item.subtitle}</span>
+                    </h4>
+                    
+                    <p className="text-base text-white/40 leading-relaxed font-light group-hover:text-white/60 transition-colors duration-500">
+                      {item.desc}
+                    </p>
                   </div>
 
-                  {/* Description */}
-                  <p className={`text-[15px] text-white/40 leading-relaxed font-light group-hover:text-white/60 transition-colors duration-500 ${i === features.length - 1 ? 'max-w-2xl' : 'max-w-sm'}`}>
-                    {item.desc}
-                  </p>
-
-                  {/* Bottom accent line — animates width on hover */}
-                  <div className="mt-8 h-px bg-gradient-to-r from-white/5 to-transparent relative overflow-hidden">
-                    <div className={`absolute inset-y-0 left-0 w-0 group-hover:w-full bg-gradient-to-r ${item.accent} opacity-30 transition-all duration-700`} />
+                  <div className="mt-10 flex items-center justify-between">
+                    <span className="text-[40px] font-serif font-black text-white/[0.03] group-hover:text-[#0284c7]/10 transition-colors duration-500">
+                      {item.num}
+                    </span>
+                    <div className={`w-8 h-px bg-white/10 group-hover:w-16 group-hover:bg-[#0284c7]/50 transition-all duration-700`} />
                   </div>
                 </div>
-              </div>
-            </BlurFade>
-          ))}
+              </BlurFade>
+            );
+          })}
         </div>
 
         {/* Bottom CTA row */}
         <BlurFade delay={0.7}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link href="/about" className="focus-visible:outline-none">
-              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group">
-                <span className="text-white font-black text-[10px] uppercase tracking-[0.2em] group-hover:text-white transition-colors duration-300">
+              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-10 py-5">
+                <span className="text-white font-black text-[11px] uppercase tracking-[0.25em] group-hover:text-white transition-colors duration-300">
                   Discover Our Leadership
                 </span>
-                <ArrowRight size={16} className="text-white ml-3 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={18} className="text-white ml-3 group-hover:translate-x-2 transition-transform duration-300" />
               </ShimmerButton>
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/30 px-8 py-[0.875rem] rounded-full font-bold text-[10px] uppercase tracking-[0.2em] transition-all duration-300 hover:bg-white/5"
+              className="inline-flex items-center justify-center gap-2 border border-white/10 text-white/60 hover:text-white hover:border-white/30 hover:bg-white/5 px-10 py-5 rounded-full font-bold text-[11px] uppercase tracking-[0.25em] transition-all duration-500"
             >
               Schedule a Consultation
             </Link>
           </div>
         </BlurFade>
 
-        {/* Founder quote strip */}
+        {/* Founder quote strip — Reimagined */}
         <BlurFade delay={0.8}>
-          <div className="mt-20 md:mt-28 max-w-3xl mx-auto text-center relative">
-            <span className="text-7xl text-[#0284c7]/15 font-serif leading-none absolute -top-4 left-1/2 -translate-x-1/2 select-none pointer-events-none" aria-hidden="true">&ldquo;</span>
-            <p className="text-xl md:text-2xl font-serif italic text-white/60 leading-relaxed mb-8 pt-8">
-              An in-house model allows 100% revenue retention and fosters a unified facility culture.
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <Image
-                src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png"
-                width={48}
-                height={48}
-                className="rounded-full object-cover border-2 border-white/10"
-                alt="Lisa Bebie"
-              />
-              <div className="text-left">
-                <div className="font-black text-white text-sm tracking-tight">Lisa Bebie</div>
-                <div className="text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.2em]">President &amp; Founder</div>
+          <div className="mt-24 md:mt-32 max-w-4xl mx-auto">
+            <div className="relative p-10 md:p-16 rounded-[3rem] bg-gradient-to-br from-white/[0.03] to-transparent border border-white/[0.05] overflow-hidden">
+              <Quote size={80} className="absolute -top-4 -left-4 text-white/[0.02] rotate-12 pointer-events-none" />
+              
+              <p className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-white/80 leading-[1.3] text-center mb-12 relative z-10">
+                &ldquo;Evolve was founded on the principle that therapy departments should be <span className="text-[#38bdf8] font-bold not-italic">centers of excellence</span> and financial strength, not just cost centers.&rdquo;
+              </p>
+              
+              <div className="flex items-center justify-center gap-5 relative z-10">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-[#0284c7]/20 blur-lg rounded-full" />
+                  <Image
+                    src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png"
+                    width={64}
+                    height={64}
+                    className="relative rounded-full object-cover border-2 border-white/20 shadow-2xl"
+                    alt="Lisa Bebie"
+                  />
+                </div>
+                <div className="text-left">
+                  <div className="font-black text-white text-lg tracking-tight leading-none mb-1">Lisa Bebie</div>
+                  <div className="text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em]">President &amp; Founder</div>
+                </div>
               </div>
             </div>
           </div>

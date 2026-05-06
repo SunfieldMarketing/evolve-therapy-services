@@ -107,22 +107,24 @@ export default function Pricing() {
 
         {/* Dynamic Scale Indicator */}
         <BlurFade delay={0.8} className="mt-20 md:mt-32">
-           <div className="bg-slate-50 rounded-[3rem] p-8 md:p-12 border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-12">
-              <div className="flex items-center gap-6">
-                 <div className="w-16 h-16 rounded-3xl bg-[#0284c7] flex items-center justify-center text-white shadow-xl shadow-blue-500/20">
-                    <TrendingDown size={32} />
-                 </div>
-                 <div>
-                    <h4 className="text-2xl font-serif font-black text-[#0f172a] tracking-tight">Scaling Benefits</h4>
-                    <p className="text-slate-500 text-sm font-medium">Management fees reduce as your internal staff grows.</p>
-                 </div>
-              </div>
-              <div className="flex items-center gap-4 text-[#0284c7] font-black text-[10px] uppercase tracking-[0.2em]">
-                 <Users size={16} />
-                 Growth Incentivized Model
-                 <ArrowRight size={16} />
-              </div>
-           </div>
+           <Link href="/contact" className="block group/scaling">
+             <div className="bg-slate-50 rounded-[3rem] p-8 md:p-12 border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-12 group-hover/scaling:bg-white group-hover/scaling:border-[#0284c7]/20 group-hover/scaling:shadow-2xl group-hover/scaling:shadow-blue-500/5 transition-all duration-500">
+                <div className="flex items-center gap-6">
+                   <div className="w-16 h-16 rounded-3xl bg-[#0284c7] flex items-center justify-center text-white shadow-xl shadow-blue-500/20 group-hover/scaling:scale-110 transition-transform duration-500">
+                      <TrendingDown size={32} />
+                   </div>
+                   <div>
+                      <h4 className="text-2xl font-serif font-black text-[#0f172a] tracking-tight">Scaling Benefits</h4>
+                      <p className="text-slate-500 text-sm font-medium">Management fees reduce as your internal staff grows.</p>
+                   </div>
+                </div>
+                <div className="flex items-center gap-4 text-[#0284c7] font-black text-[10px] uppercase tracking-[0.2em] group-hover/scaling:gap-6 transition-all duration-500">
+                   <Users size={16} />
+                   Growth Incentivized Model
+                   <ArrowRight size={16} className="group-hover/scaling:translate-x-1 transition-transform" />
+                </div>
+             </div>
+           </Link>
         </BlurFade>
       </div>
     </section>

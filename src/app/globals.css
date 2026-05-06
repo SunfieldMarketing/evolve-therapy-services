@@ -48,6 +48,13 @@
   to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
 }
 
+/* YouTube background cover – hides UI buttons during load */
+@keyframes ytFadeOut {
+  0%   { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 /* Pulse glow for CTA buttons */
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.4); }

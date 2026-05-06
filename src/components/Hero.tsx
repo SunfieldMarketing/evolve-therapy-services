@@ -24,6 +24,11 @@ export default function Hero() {
           className="absolute w-[300%] h-[300%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0"
           style={{ filter: 'brightness(0.35) saturate(0.7)' }}
         />
+        {/* Solid cover that hides YouTube UI during load, then fades out */}
+        <div
+          className="absolute inset-0 bg-[#0f172a] pointer-events-none"
+          style={{ animation: 'ytFadeOut 2.8s ease-in forwards' }}
+        />
         {/* Dark gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/70 to-[#0f172a]/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-transparent to-[#0f172a]/20" />

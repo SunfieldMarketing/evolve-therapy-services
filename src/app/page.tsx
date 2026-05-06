@@ -153,62 +153,71 @@ export default function Home() {
             ))}
           </div>
 
-          {/* 🔍 New Section: Our Core Capabilities Bento */}
+          {/* ── Why Operators Choose Evolve — Stacked Feature List ── */}
           <div className="mb-24 md:mb-32">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-6">Expertise Oversight</div>
-              <h3 className="text-4xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.9]">Why Operators <br /> <span className="text-[#0284c7] italic font-medium">Choose Evolve</span></h3>
-            </div>
+            <BlurFade delay={0.15} className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 md:mb-20">
+              <div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-6">Expertise Oversight</div>
+                <h3 className="text-4xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.9]">Why Operators <br /> <span className="text-[#0284c7] italic font-medium">Choose Evolve</span></h3>
+              </div>
+              <p className="text-lg text-slate-400 max-w-md leading-relaxed font-light shrink-0">
+                Our consulting model is purpose-built for LTC operators who want full control with expert backing.
+              </p>
+            </BlurFade>
             
-            <div className="grid md:grid-cols-12 gap-6 auto-rows-[300px]">
-              {/* Card 1: Regulatory Defense (Tall, Left) */}
-              <BlurFade delay={0.2} className="col-span-12 md:col-span-4 md:row-span-2 rounded-[3rem] p-10 flex flex-col justify-between bg-[#0f172a] text-white border border-white/5 hover:scale-[1.02] transition-all duration-500 shadow-2xl">
-                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-[#38bdf8]">
-                  <ShieldCheck size={26} />
-                </div>
-                <div>
-                  <h4 className="text-3xl font-serif font-black mb-4 tracking-tighter leading-tight">Regulatory <br /> Defense</h4>
-                  <p className="text-sm leading-relaxed font-light text-white/50">Proactive audit defense and denial management from clinical experts who know the appeals process inside and out.</p>
-                </div>
-              </BlurFade>
+            {/* Stacked feature rows */}
+            <div className="space-y-4">
+              {[
+                { icon: ShieldCheck, title: 'Regulatory Defense', desc: 'Proactive audit defense and denial management from clinical experts who know the appeals process inside and out.', highlight: true },
+                { icon: TrendingUp, title: '100% Revenue Retention', desc: 'We are your management partner, not your revenue sharer. Your facility keeps every dollar of therapy revenue.' },
+                { icon: BarChart3, title: 'Tiered Management Fees', desc: 'As your business matures and internal autonomy grows, our management fees scale down — rewarding your growth.' },
+                { icon: Users, title: 'On-Demand Recruitment', desc: 'Never worry about staffing shortages. We handle the direct-hire pipeline, building your team with clinical excellence.' },
+              ].map((item, i) => (
+                <BlurFade delay={0.2 + i * 0.08} key={i}>
+                  <div className={`group relative flex flex-col md:flex-row md:items-center gap-6 md:gap-10 p-8 md:p-10 rounded-[2rem] border transition-all duration-500 overflow-hidden ${
+                    item.highlight
+                      ? 'bg-[#0f172a] border-white/5 text-white hover:border-[#0284c7]/30'
+                      : 'bg-white border-slate-100 hover:border-[#0284c7]/20 hover:shadow-[0_20px_60px_-20px_rgba(2,132,199,0.1)]'
+                  }`}>
+                    {/* Number */}
+                    <div className={`text-[70px] md:text-[90px] font-serif font-black leading-none select-none pointer-events-none shrink-0 w-20 md:w-24 ${
+                      item.highlight ? 'text-white/[0.04]' : 'text-slate-100'
+                    } group-hover:${item.highlight ? 'text-white/[0.08]' : 'text-[#0284c7]/10'} transition-colors duration-500`}>
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
 
-              {/* Card 2: 100% Revenue Retention (Middle Top) */}
-              <BlurFade delay={0.3} className="col-span-12 md:col-span-4 rounded-[3rem] p-10 flex flex-col justify-start bg-white border border-slate-100 hover:scale-[1.02] transition-all duration-500 shadow-xl shadow-slate-200/50">
-                <div className="w-12 h-12 rounded-2xl bg-[#0284c7]/5 flex items-center justify-center text-[#0284c7] mb-8">
-                  <TrendingUp size={24} />
-                </div>
-                <div>
-                  <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-3 tracking-tighter">100% Revenue Retention</h4>
-                  <p className="text-sm leading-relaxed font-light text-slate-500">We are your management partner, not your revenue sharer. Retain full billing control.</p>
-                </div>
-              </BlurFade>
+                    {/* Icon */}
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3 ${
+                      item.highlight
+                        ? 'bg-[#0284c7] text-white shadow-lg shadow-sky-500/20'
+                        : 'bg-slate-50 text-[#0284c7] border border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white group-hover:shadow-lg group-hover:shadow-sky-500/20'
+                    }`}>
+                      <item.icon size={24} strokeWidth={1.5} />
+                    </div>
 
-              {/* Card 3: Tiered Management Fees (Right Top) */}
-              <BlurFade delay={0.4} className="col-span-12 md:col-span-4 rounded-[3rem] p-10 flex flex-col justify-start bg-[#0284c7] text-white hover:scale-[1.02] transition-all duration-500 shadow-xl shadow-blue-900/20">
-                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-8">
-                  <BarChart3 size={24} />
-                </div>
-                <div>
-                  <h4 className="text-2xl font-serif font-black mb-3 tracking-tighter">Tiered Management Fees</h4>
-                  <p className="text-sm leading-relaxed font-light text-white/70">As your business matures and internal autonomy grows, our management fees scale down.</p>
-                </div>
-              </BlurFade>
+                    {/* Text */}
+                    <div className="flex-1 min-w-0">
+                      <h4 className={`text-2xl md:text-3xl font-serif font-black tracking-tight mb-2 transition-colors duration-500 ${
+                        item.highlight ? 'text-white group-hover:text-[#38bdf8]' : 'text-[#0f172a] group-hover:text-[#0284c7]'
+                      }`}>
+                        {item.title}
+                      </h4>
+                      <p className={`text-[15px] leading-relaxed font-light max-w-xl ${
+                        item.highlight ? 'text-white/45' : 'text-slate-500'
+                      }`}>
+                        {item.desc}
+                      </p>
+                    </div>
 
-              {/* Card 4: On-Demand Recruitment (Bottom Middle-Right) */}
-              <BlurFade delay={0.5} className="col-span-12 md:col-span-8 rounded-[3rem] p-10 flex flex-col justify-between bg-slate-50 border border-slate-200 hover:scale-[1.02] transition-all duration-500 group">
-                <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-[#0284c7] shadow-sm">
-                  <Users size={24} />
-                </div>
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                  <div className="max-w-md">
-                    <h4 className="text-3xl font-serif font-black text-[#0f172a] mb-3 tracking-tighter">On-Demand Recruitment</h4>
-                    <p className="text-sm leading-relaxed font-light text-slate-500">Never worry about staffing shortages. We handle the direct-hire pipeline for you, ensuring your team is built with the clinical excellence your facility deserves.</p>
+                    {/* Arrow */}
+                    <div className={`shrink-0 hidden md:flex items-center justify-center w-12 h-12 rounded-full transition-all duration-500 group-hover:translate-x-1 ${
+                      item.highlight ? 'text-white/20 group-hover:text-[#38bdf8]' : 'text-slate-200 group-hover:text-[#0284c7]'
+                    }`}>
+                      <ArrowRight size={22} strokeWidth={1.5} />
+                    </div>
                   </div>
-                  <div className="shrink-0 text-[#0284c7] group-hover:translate-x-2 transition-transform hidden md:block">
-                    <ArrowRight size={32} strokeWidth={1} />
-                  </div>
-                </div>
-              </BlurFade>
+                </BlurFade>
+              ))}
             </div>
           </div>
 

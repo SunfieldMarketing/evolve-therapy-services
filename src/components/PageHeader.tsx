@@ -17,10 +17,10 @@ const imageMap: Record<string, string> = {
   locations: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80',
 };
 
-// Map of page-specific background videos (YouTube IDs)
+// Map of page-specific background videos (Local MP4 paths)
 const videoMap: Record<string, string> = {
-  services: '8_nVbI7NcOw',
-  about: 'bsTbwMlTyjg',
+  services: '/videos/services.mp4',
+  about: '/videos/about.mp4',
 };
 
 interface ValueBox {
@@ -58,80 +58,27 @@ export default function PageHeader({
   useVideo = true,
 }: PageHeaderProps) {
   const imageUrl = bgImage || imageMap[videoKey] || imageMap.default;
-  const videoId = videoMap[videoKey as string];
-  const finalUseVideo = useVideo && !!videoId;
+  const videoUrl = videoMap[videoKey as string];
+  const finalUseVideo = useVideo && !!videoUrl;
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const playerRef = useRef<any>(null);
-  const loopIntervalRef = useRef<any>(null);
-  const isLoopingRef = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (!finalUseVideo || !videoId) return;
+    if (!finalUseVideo || !videoUrl) return;
 
-    // @ts-ignore
-    if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
-    }
-
-    const initPlayer = () => {
-      // @ts-ignore
-      playerRef.current = new window.YT.Player('page-header-youtube-player', {
-        events: {
-          onStateChange: (event: any) => {
-            // @ts-ignore
-            if (event.data === window.YT.PlayerState.PLAYING) {
-              if (!isLoopingRef.current) {
-                setTimeout(() => setIsVideoPlaying(true), 2500);
-
-                if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-                loopIntervalRef.current = setInterval(() => {
-                  if (playerRef.current && playerRef.current.getCurrentTime && !isLoopingRef.current) {
-                    const duration = playerRef.current.getDuration();
-                    const currentTime = playerRef.current.getCurrentTime();
-                    
-                    if (duration > 0 && currentTime >= duration - 3) {
-                      isLoopingRef.current = true;
-                      setIsVideoPlaying(false);
-
-                      setTimeout(() => {
-                        if (playerRef.current && playerRef.current.seekTo) {
-                          playerRef.current.seekTo(1);
-                        }
-                        
-                        setTimeout(() => {
-                          isLoopingRef.current = false;
-                          setIsVideoPlaying(true);
-                        }, 2000);
-                      }, 1500);
-                    }
-                  }
-                }, 500);
-              }
-            }
-          }
-        }
+    if (videoRef.current) {
+      videoRef.current.play().then(() => {
+        setIsVideoPlaying(true);
+      }).catch((e) => {
+        console.error("Autoplay failed:", e);
+        setIsVideoPlaying(true);
       });
-    };
-
-    // @ts-ignore
-    if (window.YT && window.YT.Player) {
-      initPlayer();
     } else {
-      // @ts-ignore
-      window.onYouTubeIframeAPIReady = initPlayer;
+      const timer = setTimeout(() => setIsVideoPlaying(true), 800);
+      return () => clearTimeout(timer);
     }
-
-    return () => {
-      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-      if (playerRef.current && playerRef.current.destroy) {
-        playerRef.current.destroy();
-      }
-    };
-  }, [finalUseVideo, videoId]);
+  }, [finalUseVideo, videoUrl]);
 
   return (
     <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
@@ -144,12 +91,15 @@ export default function PageHeader({
               videoKey === 'about' && "left-[-100vw] top-[-40vh]",
               isVideoPlaying ? "opacity-100" : "opacity-0"
             )}>
-              <iframe
-                id="page-header-youtube-player"
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`}
-                className="w-[120%] h-[120%] -mt-[10%] -ml-[10%] border-0 opacity-40"
+              <video
+                ref={videoRef}
+                src={videoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover opacity-40 pointer-events-none select-none"
                 style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
-                allow="autoplay; encrypted-media"
               />
             </div>
             {/* Interaction Blocker */}

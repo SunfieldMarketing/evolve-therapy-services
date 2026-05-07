@@ -9,77 +9,24 @@ import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient
 
 export default function Hero() {
   const [videoStarted, setVideoStarted] = useState(false);
-  const playerRef = useRef<any>(null);
-  const loopIntervalRef = useRef<any>(null);
-  const isLoopingRef = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // @ts-ignore
-    if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
-    }
-
-    const initPlayer = () => {
-      // @ts-ignore
-      playerRef.current = new window.YT.Player('hero-youtube-player', {
-        events: {
-          onStateChange: (event: any) => {
-            // @ts-ignore
-            if (event.data === window.YT.PlayerState.PLAYING) {
-              if (!isLoopingRef.current) {
-                // Initial Load: Wait 2.5s for YouTube's native mobile UI to finish fading out before dropping our cover
-                setTimeout(() => setVideoStarted(true), 2500);
-
-                if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-                loopIntervalRef.current = setInterval(() => {
-                  if (playerRef.current && playerRef.current.getCurrentTime && !isLoopingRef.current) {
-                    const duration = playerRef.current.getDuration();
-                    const currentTime = playerRef.current.getCurrentTime();
-                    
-                    // Trigger fade to black 3 seconds before the video ends
-                    if (duration > 0 && currentTime >= duration - 3) {
-                      isLoopingRef.current = true;
-                      setVideoStarted(false); // Fade to black
-
-                      // Wait 1.5s for screen to turn completely black, then silently seek to 0
-                      setTimeout(() => {
-                        if (playerRef.current && playerRef.current.seekTo) {
-                          playerRef.current.seekTo(1); // Seek to 1s to bypass initial loading frame
-                        }
-                        
-                        // Wait another 2s for YouTube's UI to drop while screen is still black, then fade back in
-                        setTimeout(() => {
-                          isLoopingRef.current = false;
-                          setVideoStarted(true);
-                        }, 2000);
-                      }, 1500);
-                    }
-                  }
-                }, 500);
-              }
-            }
-          }
-        }
+    // When the component mounts, ensure the video starts playing and set our state
+    if (videoRef.current) {
+      videoRef.current.play().then(() => {
+        setVideoStarted(true);
+      }).catch((e) => {
+        console.error("Autoplay failed:", e);
+        // Fallback: If autoplay fails, we still want to show the video 
+        // (even if paused or if it requires user interaction later)
+        setVideoStarted(true);
       });
-    };
-
-    // @ts-ignore
-    if (window.YT && window.YT.Player) {
-      initPlayer();
     } else {
-      // @ts-ignore
-      window.onYouTubeIframeAPIReady = initPlayer;
+      // Fallback timeout
+      const timer = setTimeout(() => setVideoStarted(true), 800);
+      return () => clearTimeout(timer);
     }
-
-    return () => {
-      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-      if (playerRef.current && playerRef.current.destroy) {
-        playerRef.current.destroy();
-      }
-    };
   }, []);
 
   return (
@@ -90,23 +37,23 @@ export default function Hero() {
         fill="rgba(56,189,248,0.6)"
       />
 
-      {/* ── Overscan YouTube Background ── */}
+      {/* ── Native HTML5 Video Background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a] overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
-          {/* Overscan hides top/bottom UI. No playlist parameter guarantees no Previous/Next buttons natively. */}
-          <iframe 
-            id="hero-youtube-player"
-            src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
-            className="w-[120%] h-[120%] -mt-[10%] -ml-[10%] border-0"
-            style={{ filter: 'brightness(0.35) saturate(0.7)' }}
-            allow="autoplay; encrypted-media"
-          />
-        </div>
+        <video
+          ref={videoRef}
+          src="/videos/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none"
+          style={{ filter: 'brightness(0.35) saturate(0.7)' }}
+        />
         
         {/* Interaction Blocker */}
         <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
 
-        {/* Cinematic Fade Mask */}
+        {/* Quick Fade Cover */}
         <div
           className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[1500ms] ease-in-out ${videoStarted ? 'opacity-0' : 'opacity-100'}`}
         />

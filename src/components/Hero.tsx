@@ -10,6 +10,8 @@ import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient
 export default function Hero() {
   const [videoStarted, setVideoStarted] = useState(false);
   const playerRef = useRef<any>(null);
+  const loopIntervalRef = useRef<any>(null);
+  const isLoopingRef = useRef(false);
 
   useEffect(() => {
     // @ts-ignore
@@ -27,7 +29,37 @@ export default function Hero() {
           onStateChange: (event: any) => {
             // @ts-ignore
             if (event.data === window.YT.PlayerState.PLAYING) {
-              setVideoStarted(true);
+              if (!isLoopingRef.current) {
+                // Initial Load: Wait 2.5s for YouTube's native mobile UI to finish fading out before dropping our cover
+                setTimeout(() => setVideoStarted(true), 2500);
+
+                if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
+                loopIntervalRef.current = setInterval(() => {
+                  if (playerRef.current && playerRef.current.getCurrentTime && !isLoopingRef.current) {
+                    const duration = playerRef.current.getDuration();
+                    const currentTime = playerRef.current.getCurrentTime();
+                    
+                    // Trigger fade to black 3 seconds before the video ends
+                    if (duration > 0 && currentTime >= duration - 3) {
+                      isLoopingRef.current = true;
+                      setVideoStarted(false); // Fade to black
+
+                      // Wait 1.5s for screen to turn completely black, then silently seek to 0
+                      setTimeout(() => {
+                        if (playerRef.current && playerRef.current.seekTo) {
+                          playerRef.current.seekTo(1); // Seek to 1s to bypass initial loading frame
+                        }
+                        
+                        // Wait another 2s for YouTube's UI to drop while screen is still black, then fade back in
+                        setTimeout(() => {
+                          isLoopingRef.current = false;
+                          setVideoStarted(true);
+                        }, 2000);
+                      }, 1500);
+                    }
+                  }
+                }, 500);
+              }
             }
           }
         }
@@ -43,6 +75,7 @@ export default function Hero() {
     }
 
     return () => {
+      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
       if (playerRef.current && playerRef.current.destroy) {
         playerRef.current.destroy();
       }

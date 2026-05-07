@@ -118,6 +118,8 @@ const detailedServices = [
 export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
   const playerRef = useRef<any>(null);
+  const loopIntervalRef = useRef<any>(null);
+  const isLoopingRef = useRef(false);
 
   useEffect(() => {
     // @ts-ignore
@@ -135,7 +137,33 @@ export default function ServicesPage() {
           onStateChange: (event: any) => {
             // @ts-ignore
             if (event.data === window.YT.PlayerState.PLAYING) {
-              setVideoStarted(true);
+              if (!isLoopingRef.current) {
+                setTimeout(() => setVideoStarted(true), 2500);
+
+                if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
+                loopIntervalRef.current = setInterval(() => {
+                  if (playerRef.current && playerRef.current.getCurrentTime && !isLoopingRef.current) {
+                    const duration = playerRef.current.getDuration();
+                    const currentTime = playerRef.current.getCurrentTime();
+                    
+                    if (duration > 0 && currentTime >= duration - 3) {
+                      isLoopingRef.current = true;
+                      setVideoStarted(false);
+
+                      setTimeout(() => {
+                        if (playerRef.current && playerRef.current.seekTo) {
+                          playerRef.current.seekTo(1);
+                        }
+                        
+                        setTimeout(() => {
+                          isLoopingRef.current = false;
+                          setVideoStarted(true);
+                        }, 2000);
+                      }, 1500);
+                    }
+                  }
+                }, 500);
+              }
             }
           }
         }
@@ -151,6 +179,7 @@ export default function ServicesPage() {
     }
 
     return () => {
+      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
       if (playerRef.current && playerRef.current.destroy) {
         playerRef.current.destroy();
       }

@@ -118,7 +118,7 @@ export default function AboutPage() {
                 <div className="mb-8">
                    <AnimatedGradientText>Who We Are</AnimatedGradientText>
                 </div>
-                <h2 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-12 leading-[0.85] tracking-tighter">
+                <h2 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 sm:mb-12 leading-[1] sm:leading-[0.85] tracking-tighter">
                   Bridging the Gap in<br />
                   <span className="text-[#0284c7] italic font-medium">LTC Therapy</span>
                 </h2>
@@ -170,12 +170,12 @@ export default function AboutPage() {
             <div className="flex justify-center mb-8">
               <AnimatedGradientText>The Founders</AnimatedGradientText>
             </div>
-            <h2 className="text-6xl md:text-8xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.85]">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif font-black text-[#0f172a] tracking-tighter leading-[1] sm:leading-[0.85]">
               Visionary <span className="text-[#0284c7] italic font-medium">Leadership</span>
             </h2>
           </BlurFade>
 
-          <div className="space-y-24 md:space-y-40 max-w-6xl mx-auto">
+          <div className="space-y-16 sm:space-y-24 md:space-y-40 max-w-6xl mx-auto">
             {leaders.map((leader, i) => (
               <BlurFade key={i} delay={0.2} className="group">
                 <div className={cn(
@@ -199,7 +199,7 @@ export default function AboutPage() {
                   {/* Content Column */}
                   <div className="w-full lg:w-7/12">
                     <div className="mb-8">
-                       <h3 className="text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight">{leader.name}</h3>
+                       <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight">{leader.name}</h3>
                        <div className="text-[#0284c7] text-xs font-black uppercase tracking-[0.4em] mt-2">{leader.title}</div>
                     </div>
                     
@@ -229,10 +229,10 @@ export default function AboutPage() {
           <div className="max-w-5xl mx-auto text-center">
             <BlurFade delay={0.2} duration={0.8}>
                <Building2 size={56} strokeWidth={1} className="mx-auto text-[#0284c7] mb-12" />
-              <h3 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-10 leading-[0.9] tracking-tighter">
-                Redefining the standard of care<br/>
-                <span className="text-[#0284c7] italic font-medium">facility by facility.</span>
-              </h3>
+               <h3 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 sm:mb-10 leading-[1] sm:leading-[0.9] tracking-tighter">
+                 Redefining the standard of care<br/>
+                 <span className="text-[#0284c7] italic font-medium">facility by facility.</span>
+               </h3>
               <p className="text-slate-500 text-xl md:text-2xl font-light leading-relaxed max-w-3xl mx-auto mb-20">
                  We believe that providing your resident population with high-end, clinically proven therapy should not mean sacrificing your facility’s bottom line.
               </p>
@@ -262,10 +262,10 @@ export default function AboutPage() {
               <div className="mb-8">
                 <AnimatedGradientText>National Presence</AnimatedGradientText>
               </div>
-              <h3 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[0.85] tracking-tighter uppercase">
-                A National Network <br />
-                <span className="text-[#0284c7] italic font-medium lowercase">Primed for Growth.</span>
-              </h3>
+               <h3 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[1] sm:leading-[0.85] tracking-tighter uppercase">
+                 A National Network <br />
+                 <span className="text-[#0284c7] italic font-medium lowercase">Primed for Growth.</span>
+               </h3>
             </div>
             <p className="text-slate-400 text-xl md:text-2xl font-light mb-20 leading-relaxed max-w-4xl mx-auto italic">
                "Our regional directors are strategically deployed across the United States to ensure that every facility under our oversight carries the same Evolve Standard."
@@ -304,7 +304,7 @@ export default function AboutPage() {
       <section className="py-32 md:py-64 bg-white text-center relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <BlurFade delay={0.2}>
-            <h2 className="text-6xl md:text-9xl font-serif font-black text-[#0f172a] tracking-tighter leading-none mb-16">
+            <h2 className="text-5xl sm:text-6xl md:text-9xl font-serif font-black text-[#0f172a] tracking-tighter leading-none mb-10 sm:mb-16">
               The Evolve <br />
               <span className="text-[#0284c7] italic">Advantage.</span>
             </h2>

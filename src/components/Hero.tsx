@@ -81,7 +81,7 @@ export default function Hero() {
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 w-full px-4 sm:px-6 md:px-10 lg:px-12 pt-32 sm:pt-36 md:pt-40 pb-24 md:pb-32 flex flex-col items-center text-center">
+      <div className="relative z-10 w-full px-5 sm:px-6 md:px-10 lg:px-12 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-32 flex flex-col items-center text-center">
         {/* Stretches completely across the available viewport */}
         <div className="w-full flex flex-col items-center">
           {/* Eyebrow — Magic UI AnimatedGradientText (dark variant) */}
@@ -102,11 +102,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[0.9] tracking-tighter mb-8 w-full text-center"
+            className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-8 w-full text-center"
           >
             Changing How{' '}
             <span className="text-[#0284c7] italic">Therapy Functions</span><br className="hidden lg:block" />
-            <span className="text-white/80 font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl align-top">for LTC Operators.</span>
+            <span className="text-white/80 font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl align-top block sm:inline mt-2 sm:mt-0">for LTC Operators.</span>
           </motion.h1>
 
           {/* Subtext */}
@@ -114,23 +114,22 @@ export default function Hero() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-xl md:text-2xl lg:text-3xl text-white/65 w-full leading-relaxed mb-14 font-light text-center max-w-5xl mx-auto"
+            className="text-lg md:text-2xl lg:text-3xl text-white/65 w-full leading-relaxed mb-10 md:mb-14 font-light text-center max-w-5xl mx-auto px-4 sm:px-0"
           >
             Our unique model lets your facility retain{' '}
             <span className="text-white font-semibold">100% of therapy revenue</span>{' '}
             while Evolve drives clinical outcomes, compliance, and operational excellence.
           </motion.p>
 
-      {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-5 mb-16 md:mb-24 justify-center w-full"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-10 md:mb-24 justify-center w-full"
           >
             <Link
               href="/contact"
-              className="group relative flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(2,132,199,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 flex-grow sm:flex-grow-0"
+              className="group relative flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(2,132,199,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto"
             >
               <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" aria-hidden="true" />
               <span className="relative">Schedule a Free Consultation</span>
@@ -139,18 +138,17 @@ export default function Hero() {
 
             <Link
               href="/services"
-              className="group flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-10 py-5 rounded-full font-bold text-sm lg:text-base uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 flex-grow sm:flex-grow-0"
+              className="group flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto"
             >
               Explore Our Services
             </Link>
           </motion.div>
 
-          {/* Stats strip — Glassmorphism fix */}
           <motion.div
             initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ delay: 0.7, duration: 0.7 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 w-full justify-center max-w-6xl mx-auto p-8 rounded-[2rem] bg-white/5 backdrop-blur-sm border border-white/10"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-4 w-full justify-center max-w-6xl mx-auto px-1 py-6 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-white/5 backdrop-blur-sm border border-white/10"
           >
             {[
               { value: '100%', label: 'Revenue Retained' },
@@ -159,10 +157,10 @@ export default function Hero() {
               { value: '15+', label: 'States Served' },
             ].map((stat) => (
               <div key={stat.label} className="group text-center">
-                <div className="text-3xl md:text-5xl font-serif font-black text-white mb-2 group-hover:text-[#38bdf8] group-hover:scale-110 transition-all duration-300">
+                <div className="text-2xl sm:text-3xl md:text-5xl font-serif font-black text-white mb-1 sm:mb-2 group-hover:text-[#38bdf8] group-hover:scale-110 transition-all duration-300">
                   {stat.value}
                 </div>
-                <div className="text-[10px] md:text-xs text-white/40 font-bold uppercase tracking-[0.3em] font-sans">{stat.label}</div>
+                <div className="text-[9px] sm:text-[10px] md:text-xs text-white/40 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] font-sans">{stat.label}</div>
               </div>
             ))}
           </motion.div>

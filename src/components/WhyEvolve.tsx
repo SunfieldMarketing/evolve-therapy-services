@@ -92,12 +92,14 @@ export default function WhyEvolve() {
           {/* Main Content Area */}
           <div className="flex-1 flex items-center">
             <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-8 lg:gap-24">
                 
-                {/* Visual Display (Left) */}
-                <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
-                  <div className="relative w-64 h-64 md:w-[450px] md:h-[450px] flex items-center justify-center">
-                    
+                {/* ── Animated Circle — responsive size, always visible ── */}
+                <div className="flex-shrink-0 flex justify-center lg:justify-start">
+                  {/* Mobile: 140×140, Desktop: 450×450 */}
+                  <div className="relative w-[140px] h-[140px] sm:w-[200px] sm:h-[200px] lg:w-[450px] lg:h-[450px] flex items-center justify-center">
+
+                    {/* Icon inside the circle */}
                     <AnimatePresence mode="wait">
                       {activeIndex >= 0 && activeIndex < features.length && (
                         <motion.div
@@ -105,42 +107,43 @@ export default function WhyEvolve() {
                           initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
                           animate={{ opacity: 1, scale: 1, rotate: 0 }}
                           exit={{ opacity: 0, scale: 1.1, rotate: 10 }}
-                          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                           className="absolute inset-0 flex items-center justify-center"
                         >
-                          <div className="relative">
-                            <div className="w-64 h-64 md:w-[350px] md:h-[350px] rounded-full bg-white/[0.03] backdrop-blur-3xl border border-white/10 flex items-center justify-center shadow-2xl overflow-hidden">
-                               <div className="absolute inset-0 opacity-20" style={{ background: `radial-gradient(circle at center, ${features[activeIndex].color}, transparent 70%)` }} />
-                               <motion.div
-                                 initial={{ y: 20 }}
-                                 animate={{ y: 0 }}
-                                 transition={{ delay: 0.2 }}
-                               >
-                                 {(() => {
-                                   const Icon = features[activeIndex].icon;
-                                   return <Icon size={100} strokeWidth={1} className="relative z-10 text-white" />;
-                                 })()}
-                               </motion.div>
-                            </div>
+                          <div
+                            className="w-[110px] h-[110px] sm:w-[160px] sm:h-[160px] lg:w-[350px] lg:h-[350px] rounded-full border border-white/10 flex items-center justify-center shadow-2xl overflow-hidden"
+                            style={{ background: `radial-gradient(circle at center, ${features[activeIndex].color}33, transparent 70%)` }}
+                          >
+                            <motion.div initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15 }}>
+                              {(() => {
+                                const Icon = features[activeIndex].icon;
+                                return <Icon size={40} strokeWidth={1.5} className="relative z-10 text-white lg:hidden" />;
+                              })()}
+                              {(() => {
+                                const Icon = features[activeIndex].icon;
+                                return <Icon size={100} strokeWidth={1} className="relative z-10 text-white hidden lg:block" />;
+                              })()}
+                            </motion.div>
                           </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
 
-                    {/* Progress Circle (Always Visible) */}
-                    <svg className="absolute inset-0 w-full h-full -rotate-90 opacity-20" viewBox="0 0 100 100">
-                      <circle cx="50" cy="50" r="48" fill="none" stroke="white" strokeWidth="0.5" strokeDasharray="1 3" />
-                      <motion.circle 
-                        cx="50" cy="50" r="48" fill="none" stroke="#38bdf8" strokeWidth="1" 
+                    {/* Scroll progress ring */}
+                    <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
+                      <circle cx="50" cy="50" r="48" fill="none" stroke="white" strokeWidth="0.8" strokeDasharray="2 4" opacity="0.2" />
+                      <motion.circle
+                        cx="50" cy="50" r="48" fill="none" stroke="#38bdf8" strokeWidth="1.5"
                         style={{ pathLength: smoothProgress }}
+                        opacity="0.8"
                       />
                     </svg>
                   </div>
                 </div>
 
-                {/* Content Reveal (Right) */}
+                {/* Content Reveal */}
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-                  <div className="max-w-xl h-96 relative w-full">
+                  <div className="max-w-xl h-72 sm:h-80 md:h-96 relative w-full">
                     <AnimatePresence mode="wait">
                       {activeIndex === -1 ? (
                         <motion.div
@@ -150,15 +153,15 @@ export default function WhyEvolve() {
                           exit={{ opacity: 0, y: -20 }}
                           className="absolute inset-0 flex flex-col items-center lg:items-start"
                         >
-                          <div className="inline-flex items-center justify-center gap-3 px-4 py-2 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/20 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-12">
+                          <div className="inline-flex items-center justify-center gap-3 px-4 py-2 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/20 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-6 sm:mb-12">
                             <Sparkles size={12} />
                             The Evolve Advantage
                           </div>
-                          <h3 className="text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-none mb-8">
+                          <h3 className="text-4xl sm:text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-[1.05] sm:leading-none mb-4 sm:mb-8">
                             Why Choose <br />
                             <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
                           </h3>
-                          <p className="text-xl md:text-2xl text-white/30 font-light max-w-lg">
+                          <p className="text-base sm:text-xl md:text-2xl text-white/30 font-light max-w-lg">
                             Scroll through to discover our clinical advantages one by one.
                           </p>
                         </motion.div>
@@ -171,15 +174,15 @@ export default function WhyEvolve() {
                           transition={{ duration: 0.5, ease: "easeOut" }}
                           className="absolute inset-0 flex flex-col items-center lg:items-start"
                         >
-                          <div className="inline-flex items-center justify-center gap-2 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-10">
+                          <div className="inline-flex items-center justify-center gap-2 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-4 sm:mb-10">
                              <div className="w-8 h-px bg-[#38bdf8]/30 hidden lg:block" />
                              Clinical Advantage
                           </div>
-                          <h3 className="text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-none mb-6">
+                          <h3 className="text-3xl sm:text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-[1.1] sm:leading-none mb-3 sm:mb-6">
                             {features[activeIndex].title} <br />
                             <span className="text-[#38bdf8] italic font-medium">{features[activeIndex].subtitle}</span>
                           </h3>
-                          <p className="text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-8">
+                          <p className="text-sm sm:text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-5 sm:mb-8">
                             {features[activeIndex].desc}
                           </p>
                           <Link href={features[activeIndex].href} className="group inline-flex items-center justify-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
@@ -194,7 +197,7 @@ export default function WhyEvolve() {
                           animate={{ opacity: 1, y: 0 }}
                           className="absolute inset-0 flex flex-col justify-center items-center lg:items-start"
                         >
-                          <h3 className="text-4xl md:text-6xl font-serif font-black text-white tracking-tighter mb-8">
+                          <h3 className="text-3xl sm:text-4xl md:text-6xl font-serif font-black text-white tracking-tighter mb-6 sm:mb-8">
                             Ready to <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
                           </h3>
                           <Link href="/contact" className="focus-visible:outline-none w-fit">
@@ -214,13 +217,13 @@ export default function WhyEvolve() {
           </div>
 
           {/* Persistent Founder Quote — Always Visible at the Bottom */}
-          <div className="py-10 border-t border-white/5 bg-[#0f172a]/80 backdrop-blur-md">
-             <div className="container mx-auto px-5">
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
-                   <p className="text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center md:text-left">
+          <div className="py-5 sm:py-10 border-t border-white/5 bg-[#0f172a]/80 backdrop-blur-md">
+             <div className="container mx-auto px-5 sm:px-6">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12">
+                   <p className="text-xs sm:text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center sm:text-left">
                       &ldquo;Evolve was founded on the principle that therapy departments should be <span className="text-[#38bdf8] font-bold not-italic">centers of excellence</span> &nbsp;and financial strength.&rdquo;
                    </p>
-                   <div className="flex items-center gap-4 border-l border-white/10 pl-6 shrink-0">
+                   <div className="flex items-center gap-4 sm:border-l sm:border-white/10 sm:pl-6 shrink-0">
                       <Image
                         src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png"
                         width={40}

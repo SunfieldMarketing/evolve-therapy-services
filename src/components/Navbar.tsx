@@ -67,7 +67,7 @@ export default function Navbar() {
                 alt="Evolve Therapy Services"
                 className={cn(
                   "w-auto transition-all duration-300",
-                  scrolled ? "h-12 brightness-0" : "h-12 brightness-0 invert" 
+                  scrolled ? "h-8 sm:h-10 brightness-0" : "h-8 sm:h-10 brightness-0 invert" 
                 )}
               />
             </Link>

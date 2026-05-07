@@ -6,7 +6,7 @@ import { BlurFade } from '@/components/magicui/blur-fade';
 import { Target, ArrowRight, Sparkles, Heart, LucideIcon } from 'lucide-react';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // Map of page-specific background abstract/medical images  
 const imageMap: Record<string, string> = {
@@ -62,12 +62,46 @@ export default function PageHeader({
   const finalUseVideo = useVideo && !!videoId;
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const playerRef = useRef<any>(null);
 
   useEffect(() => {
     if (!finalUseVideo || !videoId) return;
-    // Ultra-short delay, UI is pushed out of bounds
-    const timer = setTimeout(() => setIsVideoPlaying(true), 800);
-    return () => clearTimeout(timer);
+
+    // @ts-ignore
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    const initPlayer = () => {
+      // @ts-ignore
+      playerRef.current = new window.YT.Player('page-header-youtube-player', {
+        events: {
+          onStateChange: (event: any) => {
+            // @ts-ignore
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              setIsVideoPlaying(true);
+            }
+          }
+        }
+      });
+    };
+
+    // @ts-ignore
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      // @ts-ignore
+      window.onYouTubeIframeAPIReady = initPlayer;
+    }
+
+    return () => {
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy();
+      }
+    };
   }, [finalUseVideo, videoId]);
 
   return (
@@ -82,7 +116,8 @@ export default function PageHeader({
               isVideoPlaying ? "opacity-100" : "opacity-0"
             )}>
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=${videoId}&modestbranding=1&playsinline=1`}
+                id="page-header-youtube-player"
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=${videoId}&modestbranding=1&playsinline=1&enablejsapi=1`}
                 className="w-[120%] h-[120%] -mt-[10%] -ml-[10%] border-0 opacity-40"
                 style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
                 allow="autoplay; encrypted-media"

@@ -9,11 +9,44 @@ import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient
 
 export default function Hero() {
   const [videoStarted, setVideoStarted] = useState(false);
+  const playerRef = useRef<any>(null);
 
   useEffect(() => {
-    // Ultra-short delay, since UI is pushed entirely off-screen via CSS overscan
-    const timer = setTimeout(() => setVideoStarted(true), 800);
-    return () => clearTimeout(timer);
+    // @ts-ignore
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    const initPlayer = () => {
+      // @ts-ignore
+      playerRef.current = new window.YT.Player('hero-youtube-player', {
+        events: {
+          onStateChange: (event: any) => {
+            // @ts-ignore
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              setVideoStarted(true);
+            }
+          }
+        }
+      });
+    };
+
+    // @ts-ignore
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      // @ts-ignore
+      window.onYouTubeIframeAPIReady = initPlayer;
+    }
+
+    return () => {
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy();
+      }
+    };
   }, []);
 
   return (
@@ -29,7 +62,8 @@ export default function Hero() {
         <div className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
           {/* 120% size with -10% offset pushes the Title Bar and Watermark completely off-screen natively */}
           <iframe 
-            src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&playsinline=1"
+            id="hero-youtube-player"
+            src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=W5Dm2WCk8jg&modestbranding=1&playsinline=1&enablejsapi=1"
             className="w-[120%] h-[120%] -mt-[10%] -ml-[10%] border-0"
             style={{ filter: 'brightness(0.35) saturate(0.7)' }}
             allow="autoplay; encrypted-media"
@@ -39,7 +73,7 @@ export default function Hero() {
         {/* Interaction Blocker */}
         <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
 
-        {/* Quick Fade Cover */}
+        {/* Quick Fade Cover - strictly bound to the API PLAYING state so the center Play button is never seen */}
         <div
           className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[1500ms] ease-in-out ${videoStarted ? 'opacity-0' : 'opacity-100'}`}
         />

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Pricing from '@/components/Pricing';
@@ -117,11 +117,44 @@ const detailedServices = [
 
 export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
+  const playerRef = useRef<any>(null);
 
   useEffect(() => {
-    // Ultra-short delay, UI is pushed out of bounds
-    const timer = setTimeout(() => setVideoStarted(true), 800);
-    return () => clearTimeout(timer);
+    // @ts-ignore
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    const initPlayer = () => {
+      // @ts-ignore
+      playerRef.current = new window.YT.Player('services-youtube-player', {
+        events: {
+          onStateChange: (event: any) => {
+            // @ts-ignore
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              setVideoStarted(true);
+            }
+          }
+        }
+      });
+    };
+
+    // @ts-ignore
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      // @ts-ignore
+      window.onYouTubeIframeAPIReady = initPlayer;
+    }
+
+    return () => {
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy();
+      }
+    };
   }, []);
 
   return (
@@ -139,7 +172,8 @@ export default function ServicesPage() {
            )}>
              <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none select-none overflow-hidden">
                 <iframe
-                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&playsinline=1"
+                  id="services-youtube-player"
+                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=8_nVbI7NcOw&modestbranding=1&playsinline=1&enablejsapi=1"
                   className="w-[120%] h-[120%] -mt-[10%] -ml-[10%] border-0 opacity-40"
                   style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
                   allow="autoplay; encrypted-media"

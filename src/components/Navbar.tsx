@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -25,11 +26,21 @@ const links = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to top on logo click when already on homepage
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -56,9 +67,10 @@ export default function Navbar() {
       >
         <div className="w-full mx-auto px-4 sm:px-8 md:px-20 lg:px-32">
           <div className="flex items-center justify-between">
-            {/* Logo */}
+            {/* Logo — subtle on mobile, full on desktop */}
             <Link
               href="/"
+              onClick={handleLogoClick}
               className="flex items-center gap-2 group z-[100] shrink-0"
               aria-label="Evolve Therapy Services - Home"
             >
@@ -66,8 +78,8 @@ export default function Navbar() {
                 src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png" 
                 alt="Evolve Therapy Services"
                 className={cn(
-                  "w-auto max-w-[120px] sm:max-w-none transition-all duration-300",
-                  scrolled ? "h-6 sm:h-9 brightness-0" : "h-6 sm:h-9 brightness-0 invert" 
+                  "w-auto max-w-[90px] sm:max-w-none transition-all duration-300 group-hover:opacity-70",
+                  scrolled ? "h-5 sm:h-8 brightness-0" : "h-5 sm:h-8 brightness-0 invert" 
                 )}
               />
             </Link>

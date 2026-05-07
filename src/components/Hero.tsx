@@ -22,6 +22,23 @@ export default function Hero() {
         // (even if paused or if it requires user interaction later)
         setVideoStarted(true);
       });
+
+      // Crop the last 5 seconds to skip the unwanted ending
+      const handleTimeUpdate = () => {
+        if (videoRef.current && videoRef.current.duration) {
+          if (videoRef.current.currentTime >= videoRef.current.duration - 5) {
+            videoRef.current.currentTime = 0;
+            videoRef.current.play();
+          }
+        }
+      };
+      
+      videoRef.current.addEventListener('timeupdate', handleTimeUpdate);
+      return () => {
+        if (videoRef.current) {
+          videoRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+        }
+      };
     } else {
       // Fallback timeout
       const timer = setTimeout(() => setVideoStarted(true), 800);

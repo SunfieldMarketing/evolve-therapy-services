@@ -87,8 +87,7 @@ export default function PageHeader({
         {finalUseVideo ? (
           <div className="absolute inset-0 pointer-events-none select-none">
             <div className={cn(
-              "absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none transition-opacity duration-[1500ms] ease-in-out overflow-hidden",
-              videoKey === 'about' && "left-[-100vw] top-[-40vh]",
+              "absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-[1500ms] ease-in-out overflow-hidden",
               isVideoPlaying ? "opacity-100" : "opacity-0"
             )}>
               <video
@@ -98,7 +97,7 @@ export default function PageHeader({
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover opacity-40 pointer-events-none select-none"
+                className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none select-none"
                 style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
               />
             </div>

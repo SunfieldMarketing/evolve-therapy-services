@@ -146,7 +146,7 @@ export default function ServicesPage() {
              "absolute inset-0 transition-opacity duration-[2s] ease-in-out bg-[#0f172a]",
              videoStarted ? "opacity-100" : "opacity-0"
            )}>
-             <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none select-none overflow-hidden">
+             <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
                 <video
                   ref={videoRef}
                   src="/videos/services.mp4"
@@ -154,7 +154,7 @@ export default function ServicesPage() {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover opacity-40 pointer-events-none select-none"
+                  className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none select-none"
                   style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
                 />
              </div>

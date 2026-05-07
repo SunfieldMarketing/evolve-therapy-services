@@ -68,8 +68,8 @@ export default function WhyEvolve() {
     return scrollYProgress.onChange((v) => {
       if (v < 0.15) {
         setActiveIndex(-1);
-      } else if (v >= 0.15 && v < 0.9) {
-        const step = 0.75 / features.length;
+      } else if (v >= 0.15 && v < 0.85) {
+        const step = 0.70 / features.length;
         const index = Math.floor((v - 0.15) / step);
         setActiveIndex(Math.min(index, features.length - 1));
       } else {
@@ -80,7 +80,7 @@ export default function WhyEvolve() {
 
   return (
     <section id="about" ref={containerRef} className="bg-[#0f172a] relative">
-      <div className="h-[400vh] relative">
+      <div className="h-[500vh] relative">
         {/* Sticky Container */}
         <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
           

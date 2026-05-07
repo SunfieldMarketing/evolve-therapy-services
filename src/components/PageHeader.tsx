@@ -6,7 +6,7 @@ import { BlurFade } from '@/components/magicui/blur-fade';
 import { Target, ArrowRight, Sparkles, Heart, LucideIcon } from 'lucide-react';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 // Map of page-specific background abstract/medical images  
 const imageMap: Record<string, string> = {
@@ -62,77 +62,12 @@ export default function PageHeader({
   const finalUseVideo = useVideo && !!videoId;
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const playerRef = useRef<any>(null);
-  const loopIntervalRef = useRef<any>(null);
 
   useEffect(() => {
     if (!finalUseVideo || !videoId) return;
-
-    // @ts-ignore
-    if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
-    }
-
-    const initPlayer = () => {
-      // @ts-ignore
-      playerRef.current = new window.YT.Player('page-header-youtube-player', {
-        videoId: videoId,
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          loop: 1,
-          modestbranding: 1,
-          rel: 0,
-          showinfo: 0,
-          mute: 1,
-          playsinline: 1,
-          playlist: videoId
-        },
-        events: {
-          onStateChange: (event: any) => {
-            // @ts-ignore
-            if (event.data === window.YT.PlayerState.PLAYING) {
-              setTimeout(() => setIsVideoPlaying(true), 3500);
-
-              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-              loopIntervalRef.current = setInterval(() => {
-                if (playerRef.current && playerRef.current.getCurrentTime) {
-                  const duration = playerRef.current.getDuration();
-                  const currentTime = playerRef.current.getCurrentTime();
-                  const endTime = duration > 5 ? duration - 5 : duration;
-                  
-                  if (currentTime >= endTime) {
-                    playerRef.current.seekTo(0);
-                  }
-                }
-              }, 500);
-            } else {
-              if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-            }
-          }
-        }
-      });
-    };
-
-    // @ts-ignore
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      // @ts-ignore
-      window.onYouTubeIframeAPIReady = initPlayer;
-    }
-
-    return () => {
-      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-      if (playerRef.current && playerRef.current.destroy) {
-        playerRef.current.destroy();
-      }
-    };
+    // Ultra-short delay, UI is pushed out of bounds
+    const timer = setTimeout(() => setIsVideoPlaying(true), 800);
+    return () => clearTimeout(timer);
   }, [finalUseVideo, videoId]);
 
   return (
@@ -142,19 +77,20 @@ export default function PageHeader({
         {finalUseVideo ? (
           <div className="absolute inset-0 pointer-events-none select-none">
             <div className={cn(
-              "absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none transition-opacity duration-[2000ms] ease-in-out",
+              "absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none transition-opacity duration-[1500ms] ease-in-out overflow-hidden",
               videoKey === 'about' && "left-[-100vw] top-[-40vh]",
               isVideoPlaying ? "opacity-100" : "opacity-0"
             )}>
-              <div
-                id="page-header-youtube-player"
-                className="w-full h-full border-0 opacity-40"
+              <iframe
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=${videoId}&modestbranding=1&playsinline=1`}
+                className="w-[120%] h-[120%] -mt-[10%] -ml-[10%] border-0 opacity-40"
                 style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
+                allow="autoplay; encrypted-media"
               />
             </div>
             {/* Interaction Blocker */}
             <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
-            <div className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[2000ms] ease-in-out ${isVideoPlaying ? 'opacity-0' : 'opacity-100'}`} />
+            <div className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[1500ms] ease-in-out ${isVideoPlaying ? 'opacity-0' : 'opacity-100'}`} />
           </div>
         ) : bgImage === 'none' ? (
           <div className="absolute inset-0 bg-[#0f172a]" />

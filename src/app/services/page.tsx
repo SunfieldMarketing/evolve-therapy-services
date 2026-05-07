@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Pricing from '@/components/Pricing';
@@ -117,11 +117,73 @@ const detailedServices = [
 
 export default function ServicesPage() {
   const [videoStarted, setVideoStarted] = useState(false);
+  const playerRef = useRef<any>(null);
+  const loopIntervalRef = useRef<any>(null);
+  const isLoopingRef = useRef(false);
 
   useEffect(() => {
-    // Ultra-short delay, Vimeo background=1 has zero UI natively
-    const timer = setTimeout(() => setVideoStarted(true), 800);
-    return () => clearTimeout(timer);
+    // @ts-ignore
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    const initPlayer = () => {
+      // @ts-ignore
+      playerRef.current = new window.YT.Player('services-youtube-player', {
+        events: {
+          onStateChange: (event: any) => {
+            // @ts-ignore
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              if (!isLoopingRef.current) {
+                setTimeout(() => setVideoStarted(true), 2500);
+
+                if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
+                loopIntervalRef.current = setInterval(() => {
+                  if (playerRef.current && playerRef.current.getCurrentTime && !isLoopingRef.current) {
+                    const duration = playerRef.current.getDuration();
+                    const currentTime = playerRef.current.getCurrentTime();
+                    
+                    if (duration > 0 && currentTime >= duration - 3) {
+                      isLoopingRef.current = true;
+                      setVideoStarted(false);
+
+                      setTimeout(() => {
+                        if (playerRef.current && playerRef.current.seekTo) {
+                          playerRef.current.seekTo(1);
+                        }
+                        
+                        setTimeout(() => {
+                          isLoopingRef.current = false;
+                          setVideoStarted(true);
+                        }, 2000);
+                      }, 1500);
+                    }
+                  }
+                }, 500);
+              }
+            }
+          }
+        }
+      });
+    };
+
+    // @ts-ignore
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      // @ts-ignore
+      window.onYouTubeIframeAPIReady = initPlayer;
+    }
+
+    return () => {
+      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy();
+      }
+    };
   }, []);
 
   return (
@@ -139,10 +201,11 @@ export default function ServicesPage() {
            )}>
              <div className="absolute w-[320vw] h-[320vh] top-[-110vh] left-[-160vw] pointer-events-none select-none overflow-hidden">
                 <iframe
-                  src="https://player.vimeo.com/video/441221776?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
-                  className="w-[110%] h-[110%] -mt-[5%] -ml-[5%] border-0 opacity-40"
+                  id="services-youtube-player"
+                  src="https://www.youtube.com/embed/8_nVbI7NcOw?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+                  className="w-[120%] h-[120%] -mt-[10%] -ml-[10%] border-0 opacity-40"
                   style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
-                  allow="autoplay; fullscreen; picture-in-picture"
+                  allow="autoplay; encrypted-media"
                 />
              </div>
              <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />

@@ -6,7 +6,7 @@ import { BlurFade } from '@/components/magicui/blur-fade';
 import { Target, ArrowRight, Sparkles, Heart, LucideIcon } from 'lucide-react';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 // Map of page-specific background abstract/medical images  
 const imageMap: Record<string, string> = {
@@ -17,10 +17,10 @@ const imageMap: Record<string, string> = {
   locations: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80',
 };
 
-// Map of page-specific background videos
+// Map of page-specific background videos (Vimeo IDs)
 const videoMap: Record<string, string> = {
-  services: '8_nVbI7NcOw',
-  about: 'bsTbwMlTyjg',
+  services: '441221776',
+  about: '371849187',
 };
 
 interface ValueBox {
@@ -62,75 +62,12 @@ export default function PageHeader({
   const finalUseVideo = useVideo && !!videoId;
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const playerRef = useRef<any>(null);
-  const loopIntervalRef = useRef<any>(null);
-  const isLoopingRef = useRef(false);
 
   useEffect(() => {
     if (!finalUseVideo || !videoId) return;
-
-    // @ts-ignore
-    if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
-    }
-
-    const initPlayer = () => {
-      // @ts-ignore
-      playerRef.current = new window.YT.Player('page-header-youtube-player', {
-        events: {
-          onStateChange: (event: any) => {
-            // @ts-ignore
-            if (event.data === window.YT.PlayerState.PLAYING) {
-              if (!isLoopingRef.current) {
-                setTimeout(() => setIsVideoPlaying(true), 2500);
-
-                if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-                loopIntervalRef.current = setInterval(() => {
-                  if (playerRef.current && playerRef.current.getCurrentTime && !isLoopingRef.current) {
-                    const duration = playerRef.current.getDuration();
-                    const currentTime = playerRef.current.getCurrentTime();
-                    
-                    if (duration > 0 && currentTime >= duration - 3) {
-                      isLoopingRef.current = true;
-                      setIsVideoPlaying(false);
-
-                      setTimeout(() => {
-                        if (playerRef.current && playerRef.current.seekTo) {
-                          playerRef.current.seekTo(1);
-                        }
-                        
-                        setTimeout(() => {
-                          isLoopingRef.current = false;
-                          setIsVideoPlaying(true);
-                        }, 2000);
-                      }, 1500);
-                    }
-                  }
-                }, 500);
-              }
-            }
-          }
-        }
-      });
-    };
-
-    // @ts-ignore
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      // @ts-ignore
-      window.onYouTubeIframeAPIReady = initPlayer;
-    }
-
-    return () => {
-      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-      if (playerRef.current && playerRef.current.destroy) {
-        playerRef.current.destroy();
-      }
-    };
+    // Ultra-short delay, Vimeo background=1 has zero UI natively
+    const timer = setTimeout(() => setIsVideoPlaying(true), 800);
+    return () => clearTimeout(timer);
   }, [finalUseVideo, videoId]);
 
   return (
@@ -145,11 +82,10 @@ export default function PageHeader({
               isVideoPlaying ? "opacity-100" : "opacity-0"
             )}>
               <iframe
-                id="page-header-youtube-player"
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=${videoId}&modestbranding=1&playsinline=1&enablejsapi=1`}
-                className="w-[120%] h-[120%] -mt-[10%] -ml-[10%] border-0 opacity-40"
+                src={`https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1`}
+                className="w-[110%] h-[110%] -mt-[5%] -ml-[5%] border-0 opacity-40"
                 style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
-                allow="autoplay; encrypted-media"
+                allow="autoplay; fullscreen; picture-in-picture"
               />
             </div>
             {/* Interaction Blocker */}

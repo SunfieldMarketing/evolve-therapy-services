@@ -139,24 +139,6 @@ export default function LocationsPage() {
         </div>
       </section>
 
-      {/* Final Conversion CTA */}
-      <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 0% 100%, #0284c7 0%, transparent 50%)' }} />
-        <div className="container mx-auto px-6 relative z-10 text-center">
-            <h2 className="text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-none mb-12">
-              Secure Your <br />
-              <span className="text-[#0284c7] italic">Region’s Future</span>
-            </h2>
-            <p className="text-xl text-white/40 max-w-xl mx-auto font-light leading-relaxed mb-16">
-              Our regional clinical directors are ready to assist. Secure yours today and discover the Evolve difference for your facility.
-            </p>
-            <Link href="/contact" className="inline-flex">
-              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
-                <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Find Your Director</span>
-              </ShimmerButton>
-            </Link>
-        </div>
-      </section>
 
       {/* Corporate Commitment */}
       <section className="py-24 bg-white border-t border-slate-100">

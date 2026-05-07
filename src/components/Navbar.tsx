@@ -49,12 +49,12 @@ export default function Navbar() {
         className={cn(
           'transition-all duration-300 ease-out',
           scrolled
-            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_24px_rgba(0,0,0,0.06)] py-3'
-            : 'bg-transparent py-5'
+            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_24px_rgba(0,0,0,0.06)] py-2 sm:py-3'
+            : 'bg-transparent py-3 sm:py-5'
         )}
         aria-label="Main navigation"
       >
-        <div className="w-full mx-auto px-6 sm:px-12 md:px-20 lg:px-32">
+        <div className="w-full mx-auto px-4 sm:px-8 md:px-20 lg:px-32">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link
@@ -66,8 +66,8 @@ export default function Navbar() {
                 src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png" 
                 alt="Evolve Therapy Services"
                 className={cn(
-                  "w-auto transition-all duration-300",
-                  scrolled ? "h-8 sm:h-10 brightness-0" : "h-8 sm:h-10 brightness-0 invert" 
+                  "w-auto max-w-[120px] sm:max-w-none transition-all duration-300",
+                  scrolled ? "h-6 sm:h-9 brightness-0" : "h-6 sm:h-9 brightness-0 invert" 
                 )}
               />
             </Link>

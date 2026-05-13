@@ -84,7 +84,7 @@ export default function Hero({ data }: HeroProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-transparent to-[#0f172a]/20" />
       </div>
 
-      <div className="relative z-10 w-full px-5 sm:px-6 md:px-10 lg:px-12 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-32 flex flex-col items-center text-center">
+      <div className="relative z-20 w-full px-5 sm:px-6 md:px-10 lg:px-12 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-32 flex flex-col items-center text-center">
         <div className="w-full flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: -20 }}

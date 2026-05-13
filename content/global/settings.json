@@ -8,7 +8,8 @@
     "links": [
       { "name": "Services", "href": "/services" },
       { "name": "About", "href": "/about" },
-      { "name": "Locations", "href": "/locations" }
+      { "name": "Locations", "href": "/locations" },
+      { "name": "Contact", "href": "/contact" }
     ],
     "ctaText": "Start Your Evolution"
   },
@@ -38,7 +39,7 @@
   "testimonials": {
     "title": "Clinical Partners",
     "titleItalic": "Trust Evolve.",
-    "description": "Hear from the facility operators and clinical leaders who have successfully transitioned to our high-performance in-house therapy models.",
+    "description": "Hear from LTC professionals who have transformed their therapy programs with Evolve.",
     "list": [
       {
         "name": "David Miller",
@@ -47,6 +48,30 @@
         "content": "Transitioning to Evolve's in-house model was the best financial and clinical decision we've made in a decade. Our revenue retention is up 22% and our staff morale has never been higher.",
         "stars": 5,
         "initials": "DM"
+      },
+      {
+        "name": "Isaac Cohen",
+        "role": "Operations Manager",
+        "facility": "Grandview Healthcare",
+        "content": "The clinical oversight provided by Evolve is unmatched. They don't just consult; they partner with you to ensure every patient gets the care they need while keeping the business healthy.",
+        "stars": 5,
+        "initials": "IC"
+      },
+      {
+        "name": "Jimmy Daniels, COTA/L",
+        "role": "Director of Rehab",
+        "facility": "Emerald Care Center",
+        "content": "The leadership of Evolve has made a great impact not only in my daily operations but has made it fun and exciting to work, ultimately making a positive impact in our communities.",
+        "stars": 5,
+        "initials": "JD"
+      },
+      {
+        "name": "Sarah Mitchell, OT",
+        "role": "Lead Occupational Therapist",
+        "facility": "Sunrise Senior Living",
+        "content": "Evolve completely transformed how our therapy team operates. The billing efficiency and clinical protocols they brought in have made a tangible difference for our residents.",
+        "stars": 5,
+        "initials": "SM"
       }
     ]
   },
@@ -61,6 +86,11 @@
       }
     ]
   },
+  "mapLegend": [
+    { "icon": "Users", "title": "Recruitment Hubs", "desc": "Active state-wide recruitment and retention strategies for your facility." },
+    { "icon": "GraduationCap", "title": "Clinical Training", "desc": "Continuous education for in-house teams on PDPM and MDS accuracy." },
+    { "icon": "ShieldCheck", "title": "Operational Oversight", "desc": "Regional directors providing daily clinical and financial management." }
+  ],
   "activeStates": [
     "Minnesota", "Wisconsin", "Nebraska", "Kansas", "Oklahoma",
     "Louisiana", "Mississippi", "Tennessee", "Kentucky", "Ohio",

@@ -19,8 +19,8 @@ export default function AdminGate() {
     // Check if already authenticated in this session
     const authStatus = sessionStorage.getItem('evolve_admin_auth');
     if (authStatus === 'true') {
-      // If already authenticated, redirect to the Tina dashboard
-      window.location.href = '/admin/index.html';
+      // If already authenticated, redirect to the Tina Cloud dashboard
+      window.location.href = 'https://app.tina.io/projects/50c8892e-7fda-4f20-86e1-91f546d2d97a/editor';
     } else {
       setIsLoading(false);
     }
@@ -31,8 +31,8 @@ export default function AdminGate() {
     if (password === MASTER_PASSWORD) {
       sessionStorage.setItem('evolve_admin_auth', 'true');
       setIsAuthenticated(true);
-      // Redirect to the static TinaCMS dashboard
-      window.location.href = '/admin/index.html';
+      // Redirect to Tina Cloud hosted editor
+      window.location.href = 'https://app.tina.io/projects/50c8892e-7fda-4f20-86e1-91f546d2d97a/editor';
     } else {
       setError(true);
       setTimeout(() => setError(false), 500);

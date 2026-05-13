@@ -71,7 +71,7 @@ export default function ContactPage(props: { data: any, query: string, variables
                     </p>
 
                     <div className="space-y-10">
-                      {p.sidebar.items.map((item: any, i: number) => {
+                      {(p?.sidebar?.items || contactData.sidebar.items).map((item: any, i: number) => {
                         const Icon = iconMap[item.icon as keyof typeof iconMap] || Phone;
                         return (
                           <div key={i} className="flex items-start gap-6 group">
@@ -91,7 +91,7 @@ export default function ContactPage(props: { data: any, query: string, variables
                 </div>
               </BlurFade>
 
-              {p.trustBadges?.map((badge: any, i: number) => {
+              {(p?.trustBadges || contactData.trustBadges).map((badge: any, i: number) => {
                 const Icon = iconMap[badge.icon as keyof typeof iconMap] || Clock;
                 return (
                   <BlurFade delay={0.2 + i * 0.05} key={i}>
@@ -112,14 +112,14 @@ export default function ContactPage(props: { data: any, query: string, variables
                   <div className="mb-10">
                     <div className="inline-flex items-center gap-3 mb-6">
                        <div className="w-8 h-px bg-[#0284c7]" />
-                       <span className="text-[#0284c7] font-black uppercase tracking-[0.3em] text-[10px]">{p.form.badge}</span>
+                       <span className="text-[#0284c7] font-black uppercase tracking-[0.3em] text-[10px]">{p?.form?.badge || contactData.form.badge}</span>
                     </div>
                     <h3 className="text-4xl md:text-5xl font-serif font-black text-[#0f172a] mb-4 tracking-tighter leading-tight">
-                      {p.form.title} <br />
-                      <span className="text-[#0284c7] italic font-medium">{p.form.titleItalic}</span>
+                      {p?.form?.title || contactData.form.title} <br />
+                      <span className="text-[#0284c7] italic font-medium">{p?.form?.titleItalic || contactData.form.titleItalic}</span>
                     </h3>
                     <p className="text-slate-500 text-lg font-light leading-relaxed max-w-lg">
-                      {p.form.description}
+                      {p?.form?.description || contactData.form.description}
                     </p>
                   </div>
 
@@ -147,7 +147,7 @@ export default function ContactPage(props: { data: any, query: string, variables
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Primary Inquiry Goal</label>
                       <select className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium appearance-none cursor-pointer">
-                        {p.form.inquiryGoals?.map((goal: string) => (
+                        {(p?.form?.inquiryGoals || contactData.form.inquiryGoals).map((goal: string) => (
                           <option key={goal}>{goal}</option>
                         ))}
                       </select>

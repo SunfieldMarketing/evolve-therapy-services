@@ -74,7 +74,7 @@ export default function AboutPage(props: { data: any, query: string, variables: 
   const p = data?.about || aboutData;
   
   if (!p) return null;
-  const leaders = p.leaders;
+  const leaders = p?.leaders || aboutData.leaders;
 
   return (
     <main className="min-h-screen bg-white">

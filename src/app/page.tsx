@@ -67,8 +67,8 @@ export default function Home(props: { data: any, query: string, variables: any }
       <Hero data={p.hero} />
       <SocialProof />
 
-      {/* ── Clinical Excellence ── */}
-      <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+      {/* ── Clinical Excellence (Main Services Grid) ── */}
+      <section id="services" className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
              style={{ 
                backgroundImage: `radial-gradient(#0284c7 0.5px, transparent 0.5px)`, 
@@ -81,20 +81,21 @@ export default function Home(props: { data: any, query: string, variables: any }
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 md:mb-16">
             <BlurFade delay={0.1}>
               <div className="mb-5">
-                <AnimatedGradientText>{p.clinicalExcellence.badge}</AnimatedGradientText>
+                <AnimatedGradientText>{p?.clinicalExcellence?.badge || "Clinical Excellence"}</AnimatedGradientText>
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-[#0f172a] leading-[0.95] tracking-tighter">
-                {p.clinicalExcellence.titleLine1}<br />
-                <span className="text-[#0284c7] italic font-medium">{p.clinicalExcellence.titleItalic}</span>
+                {p?.clinicalExcellence?.titleLine1 || "Modern Therapy"}<br />
+                <span className="text-[#0284c7] italic font-medium">{p?.clinicalExcellence?.titleItalic || "Managed with Care"}</span>
               </h2>
             </BlurFade>
             <BlurFade delay={0.2} className="text-lg text-slate-500 max-w-md leading-relaxed font-light shrink-0">
-              {p.clinicalExcellence.description}
+              {p?.clinicalExcellence?.description || "Our vision is to provide the most creative therapy consulting model through compassionate leadership."}
             </BlurFade>
           </div>
 
+          {/* Core Stats Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-16">
-            {p.clinicalExcellence.stats.map((stat: any, i: number) => {
+            {(p?.clinicalExcellence?.stats || homeData.clinicalExcellence.stats).map((stat: any, i: number) => {
               const Icon = iconMap[stat.label === 'Revenue Retained' ? 'TrendingUp' : stat.label === 'Years Experience' ? 'Award' : stat.label === 'Clinical Support' ? 'Clock' : 'Users'] || TrendingUp;
               return (
                 <BlurFade
@@ -114,8 +115,9 @@ export default function Home(props: { data: any, query: string, variables: any }
             })}
           </div>
 
+          {/* Main Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-24 md:mb-32">
-            {p.clinicalExcellence.services.map((item: any, i: number) => {
+            {(p?.clinicalExcellence?.services || homeData.clinicalExcellence.services).map((item: any, i: number) => {
                const Icon = iconMap[item.icon as keyof typeof iconMap] || Microscope;
                return (
                 <BlurFade
@@ -152,18 +154,18 @@ export default function Home(props: { data: any, query: string, variables: any }
             <div className="relative z-10">
               <div className="mb-12">
                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[9px] font-black uppercase tracking-[0.4em] mb-6">
-                    {p.process.badge}
+                    {p?.process?.badge || "Operational Blueprint"}
                  </div>
                  <h3 className="text-4xl md:text-5xl font-serif font-black text-white tracking-tighter mb-4">
-                    {p.process.title} <span className="text-[#0284c7] italic">{p.process.titleItalic}</span>
+                    {p?.process?.title || "The Evolve"} <span className="text-[#0284c7] italic">{p?.process?.titleItalic || "Implementation"}</span>
                  </h3>
                  <p className="text-white/40 text-lg font-light max-w-2xl leading-relaxed">
-                    {p.process.description}
+                    {p?.process?.description || "Our systematic approach ensures a seamless transition."}
                  </p>
               </div>
               
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
-                {p.process.steps.map((step: any, i: number) => {
+                {(p?.process?.steps || homeData.process.steps).map((step: any, i: number) => {
                   const Icon = iconMap[step.icon as keyof typeof iconMap] || Search;
                   return (
                     <BlurFade delay={0.3 + i * 0.12} key={i} className="relative group">
@@ -201,7 +203,6 @@ export default function Home(props: { data: any, query: string, variables: any }
       </section>
 
       <WhyEvolve />
-      <Services />
       <Testimonials />
       <FAQ />
       <USAMap />
@@ -214,15 +215,15 @@ export default function Home(props: { data: any, query: string, variables: any }
             <BlurFade delay={0.2} duration={0.8}>
               <div className="text-7xl sm:text-9xl text-[#0284c7]/20 font-serif mb-0 leading-none">"</div>
               <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-white mb-10 md:mb-16 leading-[0.9] tracking-tighter -mt-6">
-                {p.bottomCta.quote.split(' in-house')[0]}
+                {p?.bottomCta?.quote?.split(' in-house')[0] || "Empower your therapy team with"}
                 <span className="text-[#0284c7] italic"> in-house leadership</span>
-                <br />{p.bottomCta.quote.split('leadership ')[1]}
+                <br />{p?.bottomCta?.quote?.split('leadership ')[1] || "and clinical advancement."}
               </h3>
 
               {/* Checklist */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 md:mb-24 text-left max-w-4xl mx-auto">
-                {p.bottomCta.checklist.map((item: string, i: number) => (
-                  <BlurFade delay={0.4 + i * 0.05} key={item} className="flex items-center gap-4 text-white/50 text-base font-light border-b border-white/5 pb-4">
+                {(p?.bottomCta?.checklist || homeData.bottomCta.checklist).map((item: string, i: number) => (
+                  <BlurFade delay={0.4 + i * 0.05} key={i} className="flex items-center gap-4 text-white/50 text-base font-light border-b border-white/5 pb-4">
                     <CheckCircle2 size={18} className="text-[#0284c7] shrink-0" />
                     {item}
                   </BlurFade>
@@ -232,15 +233,15 @@ export default function Home(props: { data: any, query: string, variables: any }
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link href="/contact">
                   <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.6)" borderRadius="9999px" className="group px-12 py-6">
-                    <span className="text-[11px] font-black uppercase tracking-[0.3em] text-white">{p.bottomCta.primaryCta}</span>
+                    <span className="text-[11px] font-black uppercase tracking-[0.3em] text-white">{p?.bottomCta?.primaryCta || "Start Your Evolution"}</span>
                     <ArrowRight size={18} className="ml-4 group-hover:translate-x-2 transition-transform" />
                   </ShimmerButton>
                 </Link>
                 <a
-                  href={`tel:${p.bottomCta.phone.replace(/[^0-9]/g, '')}`}
+                  href={`tel:${(p?.bottomCta?.phone || homeData.bottomCta.phone).replace(/[^0-9]/g, '')}`}
                   className="inline-flex items-center justify-center gap-4 border border-white/20 bg-white/5 backdrop-blur-sm text-white px-10 py-6 rounded-full font-black text-[11px] uppercase tracking-[0.3em] hover:bg-white/10 transition-all"
                 >
-                  <Phone size={16} /> {p.bottomCta.phone}
+                  <Phone size={16} /> {p?.bottomCta?.phone || homeData.bottomCta.phone}
                 </a>
               </div>
             </BlurFade>

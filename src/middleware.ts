@@ -1,0 +1,24 @@
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Protect /admin routes
+  if (pathname.startsWith('/admin')) {
+    // Check for our custom auth cookie or just redirect to portal if not authenticated
+    // Note: sessionStorage is not accessible in middleware.
+    // We'll check for a cookie instead.
+    const authCookie = request.cookies.get('evolve_admin_auth');
+    
+    if (authCookie?.value !== 'true') {
+      return NextResponse.redirect(new URL('/portal', request.url));
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/admin/:path*'],
+};

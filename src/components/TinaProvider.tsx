@@ -4,6 +4,9 @@ import { TinaProvider, TinaCMS } from 'tinacms';
 import { useMemo, useEffect, useState } from 'react';
 
 export default function TinaProviderWrapper({ children }: { children: React.ReactNode }) {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
   // Use a stable CMS instance to prevent re-mounting the entire app tree.
   const cms = useMemo(() => new TinaCMS({
     enabled: false,
@@ -11,12 +14,14 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
   } as any), []);
 
   useEffect(() => {
-    const isAdmin = 
+    setIsClient(true);
+    const adminMode = 
       window.location.pathname.startsWith('/admin') || 
       window.location.pathname.startsWith('/portal') ||
       window.location.search.includes('tina-edit');
 
-    if (isAdmin) {
+    if (adminMode) {
+      setIsAdmin(true);
       // Enable features on the existing stable instance
       cms.enable();
       
@@ -26,8 +31,12 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
     }
   }, [cms]);
 
-  // We wrap in TinaProvider immediately. 
-  // Since cms is stable (useMemo), this won't cause a full re-mount on hydration.
+  // For normal visitors, we return children directly WITHOUT the TinaProvider wrapper.
+  // This ensures the site remains fast and 100% interactive without any Tina overhead.
+  if (!isClient || !isAdmin) {
+    return <>{children}</>;
+  }
+
   return (
     <TinaProvider cms={cms}>
       {children}

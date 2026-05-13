@@ -81,16 +81,27 @@
     "description": "Answers to the most frequent questions about our clinical oversight and in-house therapy management models.",
     "list": [
       {
+        "q": "How does the pricing model work?",
+        "a": "We use a unique three-tiered approach that customizes to your business size. As your volume grows internally, our management pricing structure reduces, allowing you to scale profitably while rewarding your growth."
+      },
+      {
+        "q": "Can you help transition a third-party contract team to in-house?",
+        "a": "Absolutely. We specialize in providing all aspects of transitioning contract therapy teams to an in-house model for LTC providers, handling everything from recruitment and employee engagement to regulatory compliance and operational setup."
+      },
+      {
+        "q": "What if my program is already in-house?",
+        "a": "Evolve acts as your expert elite resource. We provide specialized help with recruitment, denial management, clinical education, and real-time data analysis so you can focus on broader facility goals while we optimize the therapy department."
+      },
+      {
+        "q": "What clinical support do you provide?",
+        "a": "We provide comprehensive clinical analysis for PDPM case mix efficiency, education on Quality Measures, customized business intelligence, and discharge planning optimization to ensure peak facility performance."
+      },
+      {
         "q": "What is the typical timeline for an in-house transition?",
         "a": "A full transition typically takes 60-90 days, including recruitment, credentialing, and workflow implementation. We manage the entire process to ensure zero clinical disruption."
       }
     ]
   },
-  "mapLegend": [
-    { "icon": "Users", "title": "Recruitment Hubs", "desc": "Active state-wide recruitment and retention strategies for your facility." },
-    { "icon": "GraduationCap", "title": "Clinical Training", "desc": "Continuous education for in-house teams on PDPM and MDS accuracy." },
-    { "icon": "ShieldCheck", "title": "Operational Oversight", "desc": "Regional directors providing daily clinical and financial management." }
-  ],
   "activeStates": [
     "Minnesota", "Wisconsin", "Nebraska", "Kansas", "Oklahoma",
     "Louisiana", "Mississippi", "Tennessee", "Kentucky", "Ohio",
@@ -98,5 +109,10 @@
     "New Jersey", "Delaware", "Maryland", "Maine", "Vermont",
     "New Hampshire", "Massachusetts", "Rhode Island", "Connecticut",
     "Florida", "District of Columbia"
+  ],
+  "mapLegend": [
+    { "icon": "Users", "title": "Recruitment Hubs", "desc": "Active state-wide recruitment and retention strategies for your facility." },
+    { "icon": "GraduationCap", "title": "Clinical Training", "desc": "Continuous education for in-house teams on PDPM and MDS accuracy." },
+    { "icon": "ShieldCheck", "title": "Operational Oversight", "desc": "Regional directors providing daily clinical and financial management." }
   ]
 }

@@ -29,6 +29,7 @@ export default function AdminGate() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === MASTER_PASSWORD) {
+      document.cookie = "evolve_admin_auth=true; path=/; max-age=86400; SameSite=Strict";
       sessionStorage.setItem('evolve_admin_auth', 'true');
       setIsAuthenticated(true);
       // Redirect to local Tina editor SPA

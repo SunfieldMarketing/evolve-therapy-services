@@ -51,8 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth h-full`}>
-      <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col`}>
+    <html lang="en" className={`scroll-smooth h-full`} suppressHydrationWarning>
+      <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col pointer-events-auto`}>
         <TinaProviderWrapper>
           {children}
         </TinaProviderWrapper>

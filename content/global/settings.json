@@ -6,7 +6,18 @@
   "linkedin": "https://www.linkedin.com/company/evolvetherapyservices",
   "navbar": {
     "links": [
-      { "name": "Services", "href": "/services" },
+      { "name": "Home", "href": "/" },
+      { 
+        "name": "Services", 
+        "href": "/services",
+        "dropdown": [
+          { "name": "Optimal Therapy Outcomes", "href": "/services/optimal-therapy-outcomes", "desc": "Diagnostic audits for PDPM performance and clinical alignment." },
+          { "name": "Medicaid & QMs", "href": "/services/medicaid-case-mix-analysis", "desc": "Specialized CMI and Quality Measure analysis for LTC." },
+          { "name": "Reimbursement Optimization", "href": "/services/reimbursement-optimization", "desc": "Data-driven strategies to secure your clinical revenue." },
+          { "name": "Cost Reduction", "href": "/services/therapy-cost-reduction", "desc": "Maximizing efficiency in your therapy department staffing." },
+          { "name": "In-House Transition", "href": "/services/in-house-transition", "desc": "Complete roadmap from contract to in-house therapy." }
+        ]
+      },
       { "name": "About", "href": "/about" },
       { "name": "Locations", "href": "/locations" },
       { "name": "Contact", "href": "/contact" }

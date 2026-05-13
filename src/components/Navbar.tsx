@@ -43,10 +43,10 @@ export default function Navbar() {
   }, [isOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[9999]">
+    <header className="fixed top-0 left-0 right-0 z-[9999] pointer-events-none">
       <nav
         className={cn(
-          'transition-all duration-300 ease-out',
+          'transition-all duration-300 ease-out pointer-events-auto',
           scrolled
             ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_24px_rgba(0,0,0,0.06)] py-2 sm:py-3'
             : 'bg-transparent py-3 sm:py-5'

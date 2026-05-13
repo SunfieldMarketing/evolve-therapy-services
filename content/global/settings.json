@@ -1,0 +1,72 @@
+{
+  "siteName": "Evolve Therapy Services",
+  "phone": "(888) 386-5820",
+  "email": "info@evolvetherapyservices.com",
+  "address": "31641 Compass Cove, Avon Lake, OH 44012",
+  "linkedin": "https://www.linkedin.com/company/evolvetherapyservices",
+  "navbar": {
+    "links": [
+      { "name": "Services", "href": "/services" },
+      { "name": "About", "href": "/about" },
+      { "name": "Locations", "href": "/locations" }
+    ],
+    "ctaText": "Start Your Evolution"
+  },
+  "footer": {
+    "tagline": "Providing expert clinical oversight, recruitment, and revenue retention strategies for in-house therapy teams across the nation.",
+    "copyright": "© 2026 Evolve Therapy Services. All rights reserved.",
+    "links": [
+      { "name": "Home", "href": "/" },
+      { "name": "About Us", "href": "/about" },
+      { "name": "Our Services", "href": "/services" },
+      { "name": "Locations", "href": "/locations" },
+      { "name": "Contact", "href": "/contact" }
+    ],
+    "serviceLinks": [
+      { "name": "Optimal Therapy Outcomes", "href": "/services/optimal-therapy-outcomes" },
+      { "name": "Medicaid & Quality Measures", "href": "/services/medicaid-case-mix-analysis" },
+      { "name": "Reimbursement Optimization", "href": "/services/reimbursement-optimization" },
+      { "name": "Therapy Cost Reduction", "href": "/services/therapy-cost-reduction" },
+      { "name": "In-House Transition", "href": "/services/in-house-transition" }
+    ]
+  },
+  "preFooterCta": {
+    "title": "Start your clinical evolution with Evolve Therapy Services",
+    "subtitle": "Ready to take control of your therapy department's future? Let's discuss a customized management roadmap.",
+    "primaryCta": "Start Your Evolution"
+  },
+  "testimonials": {
+    "title": "Clinical Partners",
+    "titleItalic": "Trust Evolve.",
+    "description": "Hear from the facility operators and clinical leaders who have successfully transitioned to our high-performance in-house therapy models.",
+    "list": [
+      {
+        "name": "David Miller",
+        "role": "CEO",
+        "facility": "Legacy Health Centers",
+        "content": "Transitioning to Evolve's in-house model was the best financial and clinical decision we've made in a decade. Our revenue retention is up 22% and our staff morale has never been higher.",
+        "stars": 5,
+        "initials": "DM"
+      }
+    ]
+  },
+  "faq": {
+    "title": "Common",
+    "titleItalic": "Inquiries.",
+    "description": "Answers to the most frequent questions about our clinical oversight and in-house therapy management models.",
+    "list": [
+      {
+        "q": "What is the typical timeline for an in-house transition?",
+        "a": "A full transition typically takes 60-90 days, including recruitment, credentialing, and workflow implementation. We manage the entire process to ensure zero clinical disruption."
+      }
+    ]
+  },
+  "activeStates": [
+    "Minnesota", "Wisconsin", "Nebraska", "Kansas", "Oklahoma",
+    "Louisiana", "Mississippi", "Tennessee", "Kentucky", "Ohio",
+    "Indiana", "West Virginia", "Virginia", "Pennsylvania", "New York",
+    "New Jersey", "Delaware", "Maryland", "Maine", "Vermont",
+    "New Hampshire", "Massachusetts", "Rhode Island", "Connecticut",
+    "Florida", "District of Columbia"
+  ]
+}

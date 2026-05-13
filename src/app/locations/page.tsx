@@ -9,15 +9,33 @@ import { MapPin, Phone, Mail, ArrowRight, TrendingUp, GraduationCap } from 'luci
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
+import { useTina } from 'tinacms/dist/react';
+import locationsData from '../../../content/pages/locations.json';
 
-export default function LocationsPage() {
+const iconMap = {
+  MapPin,
+  Phone,
+  Mail,
+  TrendingUp,
+  GraduationCap
+};
+
+export default function LocationsPage(props: { data: any, query: string, variables: any }) {
+  const { data } = useTina({
+    query: props.query || `query { locations(relativePath: "locations.json") { hero { title titleItalic description } hq { badge title address phone email } strategy { title description subtext } partner { badge title description } reach { title titleItalic description items { title desc icon } } commitment { quote } } }`,
+    variables: props.variables || {},
+    data: props.data || { locations: locationsData },
+  });
+
+  const p = data.locations;
+
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
       <PageHeader 
-        title="Our" 
-        italicWord="Locations" 
-        subtitle="Strategically serving facilities across the United States, we provide localized clinical management and regional leadership that ensures every site under our oversight maintains the highest Evolve Standard of excellence."
+        title={p.hero.title} 
+        italicWord={p.hero.titleItalic} 
+        subtitle={p.hero.description}
         videoKey="locations"
       />
 
@@ -39,9 +57,9 @@ export default function LocationsPage() {
                      <MapPin size={240} />
                   </div>
                   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/60 font-black text-[10px] uppercase tracking-[0.3em] mb-10 w-max">
-                    Global HQ
+                    {p.hq.badge}
                   </div>
-                  <h3 className="text-4xl lg:text-5xl font-serif font-black mb-12 tracking-tighter leading-none">Headquarters</h3>
+                  <h3 className="text-4xl lg:text-5xl font-serif font-black mb-12 tracking-tighter leading-none">{p.hq.title}</h3>
                   <div className="space-y-10 relative z-10">
                     <div className="flex items-start gap-6 group">
                       <div className="w-12 h-12 bg-[#0284c7] text-white rounded-xl flex items-center justify-center shrink-0 shadow-xl group-hover:-translate-y-1 transition-transform">
@@ -49,7 +67,7 @@ export default function LocationsPage() {
                       </div>
                       <div>
                         <p className="font-black text-[#38bdf8] uppercase tracking-[0.2em] text-[9px] mb-2">Principal Office</p>
-                        <p className="text-xl font-serif font-medium text-white/90">31641 Compass Cove<br />Avon Lake, OH 44012</p>
+                        <p className="text-xl font-serif font-medium text-white/90 whitespace-pre-line">{p.hq.address}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-6 group">
@@ -58,7 +76,7 @@ export default function LocationsPage() {
                       </div>
                       <div>
                         <p className="font-black text-[#38bdf8] uppercase tracking-[0.2em] text-[9px] mb-2">Direct Support</p>
-                        <p className="text-xl font-serif font-medium text-white/90">(888) 386-5820</p>
+                        <p className="text-xl font-serif font-medium text-white/90">{p.hq.phone}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-6 group">
@@ -67,7 +85,7 @@ export default function LocationsPage() {
                       </div>
                       <div>
                         <p className="font-black text-[#38bdf8] uppercase tracking-[0.2em] text-[9px] mb-2">Digital Inquiries</p>
-                        <p className="text-xl font-serif font-medium text-white/90">info@evolvetherapyservices.com</p>
+                        <p className="text-xl font-serif font-medium text-white/90">{p.hq.email}</p>
                       </div>
                     </div>
                   </div>
@@ -81,13 +99,13 @@ export default function LocationsPage() {
                 >
                    <h3 className="text-3xl lg:text-4xl font-serif font-black text-[#0f172a] mb-6 tracking-tighter leading-tight flex items-center gap-4 group-hover:text-[#0284c7] transition-colors">
                      <TrendingUp className="text-[#0284c7]" size={36} />
-                     Regional Strategy
+                     {p.strategy.title}
                    </h3>
                    <p className="text-lg md:text-xl text-slate-500 leading-relaxed font-light mb-6">
-                     Evolve provides holistic therapy, operational oversight, and denial management for the LTC industry, enabling operators to look beyond the day-to-day and focus on long-term growth. Our regional directors are strategically placed to ensure 24/7 support.
+                     {p.strategy.description}
                    </p>
                    <p className="text-sm md:text-base text-slate-400 leading-relaxed font-normal">
-                     Through extensive state-level networks and clinical partners, we make geographic scale feel local and intimate.
+                     {p.strategy.subtext}
                    </p>
                 </BlurFade>
                 
@@ -98,10 +116,10 @@ export default function LocationsPage() {
                    <div className="absolute top-1/2 right-0 w-64 h-64 bg-[#0284c7]/5 rounded-full blur-[60px] translate-x-1/3 -translate-y-1/2 pointer-events-none group-hover:bg-[#0f172a]/5 transition-colors" />
                    
                    <div className="relative z-10">
-                     <div className="inline-flex px-3 py-1 bg-[#0284c7]/10 text-[#0284c7] text-[10px] uppercase font-black tracking-widest rounded-full mb-6">Site Coordination</div>
-                     <h4 className="text-2xl md:text-3xl font-serif font-black text-[#0f172a] mb-4 tracking-tight leading-tight group-hover:text-[#0f172a] transition-colors">Your Local Clinical Partner</h4>
+                     <div className="inline-flex px-3 py-1 bg-[#0284c7]/10 text-[#0284c7] text-[10px] uppercase font-black tracking-widest rounded-full mb-6">{p.partner.badge}</div>
+                     <h4 className="text-2xl md:text-3xl font-serif font-black text-[#0f172a] mb-4 tracking-tight leading-tight group-hover:text-[#0f172a] transition-colors">{p.partner.title}</h4>
                      <p className="text-slate-500 leading-relaxed text-base md:text-lg font-light">
-                       Whether you are already in-house or using a third-party company, Evolve acts as your local clinical partner. We maintain a presence that feels like we are part of your team, because we are. Our site coordinators provide face-to-face mentorship and operations strategy directly at your facility.
+                       {p.partner.description}
                      </p>
                    </div>
                 </BlurFade>
@@ -115,26 +133,25 @@ export default function LocationsPage() {
         <div className="container mx-auto px-6 lg:px-12">
            <div className="text-center mb-20 text-[#0f172a]">
               <h3 className="text-4xl md:text-6xl font-serif font-black tracking-tighter leading-[0.9] mb-8">
-                Reach Throughout <br />
-                <span className="text-[#0284c7] italic font-medium">The Heartland</span>
+                {p.reach.title} <br />
+                <span className="text-[#0284c7] italic font-medium">{p.reach.titleItalic}</span>
               </h3>
-              <p className="text-lg text-slate-400 max-w-2xl mx-auto font-light">With current active operations focusing across Ohio and expanding through key regional hubs, Evolve provides direct, high-touch support.</p>
+              <p className="text-lg text-slate-400 max-w-2xl mx-auto font-light">{p.reach.description}</p>
            </div>
            
            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { title: 'Recruitment Hubs', desc: 'Active candidate pipelines for Physical, Occupational, and Speech Therapists across the Midwest.', icon: TrendingUp },
-                { title: 'Clinical Training', icon: GraduationCap, desc: 'On-site mentorship sites where regional directors educate your in-house teams in real-time.' },
-                { title: 'Operational Oversight', icon: MapPin, desc: 'Rapid-response audit and denial defense managed directly from our Avon Lake headquarters.' }
-              ].map((item, i) => (
-                <div key={i} className="p-12 rounded-[3.5rem] bg-slate-50 border border-slate-100 hover:scale-[1.05] transition-all duration-500">
-                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-[#0284c7] shadow-lg mb-10 border border-slate-100">
-                    <item.icon size={26} />
+              {p.reach.items.map((item: any, i: number) => {
+                const Icon = iconMap[item.icon as keyof typeof iconMap] || MapPin;
+                return (
+                  <div key={i} className="p-12 rounded-[3.5rem] bg-slate-50 border border-slate-100 hover:scale-[1.05] transition-all duration-500">
+                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-[#0284c7] shadow-lg mb-10 border border-slate-100">
+                      <Icon size={26} />
+                    </div>
+                    <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-6 tracking-tight">{item.title}</h4>
+                    <p className="text-slate-500 text-sm font-light leading-relaxed">{item.desc}</p>
                   </div>
-                  <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-6 tracking-tight">{item.title}</h4>
-                  <p className="text-slate-500 text-sm font-light leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
+                );
+              })}
            </div>
         </div>
       </section>
@@ -148,7 +165,7 @@ export default function LocationsPage() {
                 <ArrowRight size={24} /> <ArrowRight size={24} /> <ArrowRight size={24} />
               </div>
               <p className="text-slate-400 font-serif italic text-xl max-w-2xl">
-                "Scaling with integrity means ensuring that every facility we touch, regardless of location, receives the same premier clinical oversight."
+                "{p.commitment.quote}"
               </p>
            </div>
         </div>

@@ -4,34 +4,20 @@ import { Check, ArrowRight, Zap, TrendingDown, Users } from 'lucide-react';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-
-const tiers = [
-  {
-    level: 'Tier 01',
-    title: 'Foundational',
-    desc: 'Perfect for single-facility operators starting their in-house journey.',
-    features: ['PDPM Clinical Analysis', 'Medicaid Case Mix Audit', 'Basic Denial Management'],
-  },
-  {
-    level: 'Tier 02',
-    title: 'Growth',
-    desc: 'Optimized for mid-size operators with multiple locations.',
-    features: ['Advanced Data Analysis', 'Staff Recruitment Support', 'Customized CEU Education'],
-    featured: true,
-  },
-  {
-    level: 'Tier 03',
-    title: 'Enterprise',
-    desc: 'Full-scale management for large regional LTC organizations.',
-    features: ['Strategic Growth Planning', 'Full Operational Oversight', 'Lowest Management Fee'],
-  },
-];
+import { useTina } from 'tinacms/dist/react';
+import servicesData from '../../content/pages/services.json';
 
 export default function Pricing() {
+  const { data } = useTina({
+    query: `query { services(relativePath: "services.json") { pricing { badge title titleItalic description tiers { level title desc features featured } bottomBanner { title desc cta } } } }`,
+    variables: {},
+    data: { services: servicesData },
+  });
+
+  const p = data.services.pricing;
+
   return (
     <section className="py-24 md:py-40 bg-white relative overflow-hidden">
-      {/* Background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-[0.03]">
         <div className="absolute inset-0 bg-[radial-gradient(#0284c7_1px,transparent_1px)] [background-size:40px_40px]" />
       </div>
@@ -41,25 +27,29 @@ export default function Pricing() {
           <BlurFade delay={0.1}>
              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/5 border border-[#0284c7]/10 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
                <Zap size={14} />
-               Dynamic Pricing Model
+               {p.badge}
              </div>
           </BlurFade>
           <BlurFade delay={0.2}>
             <h2 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[0.9] tracking-tighter mb-8">
-              A Model That <br />
-              <span className="text-[#0284c7] italic font-medium">Evolves With You.</span>
+              {p.title} <br />
+              <span className="text-[#0284c7] italic font-medium">{p.titleItalic}</span>
             </h2>
           </BlurFade>
           <BlurFade delay={0.3}>
             <p className="text-xl text-slate-500 font-light leading-relaxed">
-              Our unique three-tiered approach customizes to your size of business. 
-              <span className="text-[#0f172a] font-bold"> Our pricing allows for management fee reduction as your business grows.</span>
+              {p.description.split(' grown')[0]}
+              {p.description.includes('Our pricing') && (
+                <span className="text-[#0f172a] font-bold"> {p.description.split('business growing.')[0].split('business. ')[1]} business growing.</span>
+              )}
+              {/* Fallback if split fails */}
+              {!p.description.includes('Our pricing') && p.description}
             </p>
           </BlurFade>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {tiers.map((tier, i) => (
+          {p.tiers.map((tier: any, i: number) => (
             <BlurFade key={i} delay={0.4 + i * 0.1}>
               <div className={`h-full p-10 rounded-[3rem] border transition-all duration-500 flex flex-col justify-between group ${
                 tier.featured 
@@ -76,7 +66,7 @@ export default function Pricing() {
                   </p>
                   
                   <div className="space-y-4 mb-12">
-                    {tier.features.map((feature, idx) => (
+                    {tier.features.map((feature: string, idx: number) => (
                       <div key={idx} className="flex items-center gap-3">
                         <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${tier.featured ? 'bg-[#38bdf8]/20 text-[#38bdf8]' : 'bg-[#0284c7]/10 text-[#0284c7]'}`}>
                           <Check size={12} strokeWidth={3} />
@@ -114,13 +104,13 @@ export default function Pricing() {
                       <TrendingDown size={40} />
                    </div>
                    <div className="text-center md:text-left">
-                      <h4 className="text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tighter mb-2">Scaling Benefits</h4>
-                      <p className="text-slate-500 text-lg font-medium">Management fees reduce automatically as your internal staff grows.</p>
+                      <h4 className="text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tighter mb-2">{p.bottomBanner.title}</h4>
+                      <p className="text-slate-500 text-lg font-medium">{p.bottomBanner.desc}</p>
                    </div>
                 </div>
                 <div className="flex items-center gap-4 text-[#0284c7] font-black text-xs uppercase tracking-[0.3em] group-hover/scaling:gap-8 transition-all duration-500 bg-white px-8 py-4 rounded-2xl border border-slate-100 group-hover/scaling:border-[#0284c7]/30">
                    <Users size={18} />
-                   Growth Incentivized Model
+                   {p.bottomBanner.cta}
                    <ArrowRight size={18} className="group-hover/scaling:translate-x-2 transition-transform" />
                 </div>
              </div>

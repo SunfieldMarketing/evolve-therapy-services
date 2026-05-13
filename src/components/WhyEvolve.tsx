@@ -8,50 +8,28 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 
-const features = [
-  {
-    title: 'Optimal Therapy',
-    subtitle: 'Outcomes',
-    desc: 'Clinical Analysis for PDPM case mix efficiency-opportunity and customized business intelligence for your market.',
-    icon: ShieldCheck,
-    color: '#f59e0b',
-    href: '/services/optimal-therapy-outcomes'
-  },
-  {
-    title: 'Three-Tiered',
-    subtitle: 'Pricing Approach',
-    desc: 'Our unique approach customizes to your size of business and Evolves as you do, with reduction as you grow.',
-    icon: Zap,
-    color: '#38bdf8',
-    href: '/services/therapy-cost-reduction'
-  },
-  {
-    title: '100% Revenue',
-    subtitle: 'Retention',
-    desc: 'Maximize clinical and financial goals while you retain all therapy revenue under our management model.',
-    icon: Award,
-    color: '#10b981',
-    href: '/services/in-house-transition'
-  },
-  {
-    title: 'In-House',
-    subtitle: 'Transition',
-    desc: 'Easily transition your third-party contract therapy team to an efficient in-house model with our expert guidance.',
-    icon: Briefcase,
-    color: '#8b5cf6',
-    href: '/services/in-house-transition'
-  },
-  {
-    title: 'Clinical Case Mix',
-    subtitle: 'Analysis',
-    desc: 'Expert education and analysis of your site\u2019s Quality Measures and case mix efficiency for next-level evolution.',
-    icon: Heart,
-    color: '#f43f5e',
-    href: '/services/medicaid-case-mix-analysis'
-  },
-];
+import { useTina } from 'tinacms/dist/react';
+import homeData from '../../content/pages/home.json';
+
+const iconMap = {
+  Award,
+  Briefcase,
+  Zap,
+  Heart,
+  ShieldCheck,
+  Sparkles
+};
 
 export default function WhyEvolve() {
+  const { data } = useTina({
+    query: `query { home(relativePath: "home.json") { whyEvolve { title subtitle introText features { title subtitle desc icon color href } quoteStrip { text author authorTitle authorPhoto } } } }`,
+    variables: {},
+    data: { home: homeData },
+  });
+
+  const w = data.home.whyEvolve;
+  const features = w.features;
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -115,14 +93,14 @@ export default function WhyEvolve() {
                         >
                           <div className="inline-flex items-center justify-center gap-3 px-4 py-2 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/20 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-4 sm:mb-8">
                             <Sparkles size={12} />
-                            The Evolve Advantage
+                            {w.title} {w.subtitle}
                           </div>
                           <h3 className="text-3xl sm:text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-[1.05] sm:leading-none mb-3 sm:mb-8">
-                            Why Choose <br />
-                            <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
+                            {w.title} <br />
+                            <span className="text-[#38bdf8] italic font-medium">{w.subtitle}</span>
                           </h3>
                           <p className="text-sm sm:text-xl md:text-2xl text-white/30 font-light max-w-lg">
-                            Scroll through to discover our clinical advantages one by one.
+                            {w.introText}
                           </p>
                         </motion.div>
                       )}
@@ -201,12 +179,12 @@ export default function WhyEvolve() {
                             <motion.div initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15 }}>
                               {/* Mobile icon */}
                               {(() => {
-                                const Icon = features[activeIndex].icon;
+                                const Icon = iconMap[features[activeIndex].icon as keyof typeof iconMap] || ShieldCheck;
                                 return <Icon size={40} strokeWidth={1.5} className="text-white lg:hidden" />;
                               })()}
                               {/* Desktop icon */}
                               {(() => {
-                                const Icon = features[activeIndex].icon;
+                                const Icon = iconMap[features[activeIndex].icon as keyof typeof iconMap] || ShieldCheck;
                                 return <Icon size={100} strokeWidth={1} className="text-white hidden lg:block" />;
                               })()}
                             </motion.div>
@@ -234,21 +212,21 @@ export default function WhyEvolve() {
           {/* ── Founder Quote Strip ── */}
           <div className="py-5 sm:py-10 border-t border-white/5 bg-[#0f172a]/80 backdrop-blur-md">
             <div className="container mx-auto px-5 sm:px-6">
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12">
+               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12">
                 <p className="text-xs sm:text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center sm:text-left">
-                  &ldquo;Evolve was founded on the principle that therapy departments should be <span className="text-[#38bdf8] font-bold not-italic">centers of excellence</span>&nbsp;and financial strength.&rdquo;
+                  &ldquo;{w.quoteStrip.text.split('centers')[0]} <span className="text-[#38bdf8] font-bold not-italic">centers {w.quoteStrip.text.split('centers')[1].split('and')[0]}</span> and {w.quoteStrip.text.split('and')[1]}&rdquo;
                 </p>
                 <div className="flex items-center gap-4 sm:border-l sm:border-white/10 sm:pl-6 shrink-0">
                   <Image
-                    src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png"
+                    src={w.quoteStrip.authorPhoto}
                     width={40}
                     height={40}
                     className="rounded-full object-cover"
-                    alt="Lisa Bebie"
+                    alt={w.quoteStrip.author}
                   />
                   <div className="text-left">
-                    <div className="font-black text-white text-[12px] tracking-tight leading-none mb-1">Lisa Bebie</div>
-                    <div className="text-[#38bdf8] text-[8px] font-black uppercase tracking-[0.3em]">President &amp; Founder</div>
+                    <div className="font-black text-white text-[12px] tracking-tight leading-none mb-1">{w.quoteStrip.author}</div>
+                    <div className="text-[#38bdf8] text-[8px] font-black uppercase tracking-[0.3em]">{w.quoteStrip.authorTitle}</div>
                   </div>
                 </div>
               </div>

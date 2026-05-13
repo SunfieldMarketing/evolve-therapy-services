@@ -4,32 +4,18 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
-
-const faqs = [
-  {
-    q: 'How does the pricing model work?',
-    a: 'We use a unique three-tiered approach that customizes to your business size. As your volume grows internally, our management pricing structure reduces, allowing you to scale profitably while rewarding your growth.',
-  },
-  {
-    q: 'Do I retain 100% of my therapy revenue?',
-    a: 'Yes. Unlike traditional contract therapy companies that take a portion of your reimbursement, our management model allows the operator to retain 100% of all therapy revenue. We are paid for our management expertise, not a cut of your earnings.',
-  },
-  {
-    q: 'Can you help transition a third-party contract team to in-house?',
-    a: 'Absolutely. We specialize in providing all aspects of transitioning contract therapy teams to an in-house model for LTC providers — handling everything from recruitment and employee engagement to regulatory compliance and operational setup.',
-  },
-  {
-    q: 'What if my program is already in-house?',
-    a: 'Evolve acts as your expert elite resource. We provide specialized help with recruitment, denial management, clinical education, and real-time data analysis so you can focus on broader facility goals while we optimize the therapy department.',
-  },
-  {
-    q: 'What clinical support do you provide?',
-    a: 'We provide comprehensive clinical analysis for PDPM case mix efficiency, education on Quality Measures, customized business intelligence, and discharge planning optimization to ensure peak facility performance.',
-  },
-];
+import { useTina } from 'tinacms/dist/react';
+import settingsData from '../../content/global/settings.json';
 
 export default function FAQ() {
+  const { data } = useTina({
+    query: `query { settings(relativePath: "settings.json") { faq { title titleItalic description list { q a } } } }`,
+    variables: {},
+    data: { settings: settingsData },
+  });
+
   const [active, setActive] = useState<number | null>(0);
+  const f = data.settings.faq;
 
   return (
     <section className="py-20 md:py-32 bg-slate-50 border-t border-slate-100 relative" id="faq">
@@ -45,17 +31,17 @@ export default function FAQ() {
               FAQ
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.95] mb-6">
-              Common <span className="text-[#0284c7] italic font-medium">Inquiries</span>
+              {f.title} <span className="text-[#0284c7] italic font-medium">{f.titleItalic}</span>
             </h2>
             <p className="text-slate-500 text-lg leading-relaxed font-light max-w-2xl mx-auto">
-              Everything you need to know about the Evolve therapy management model.
+              {f.description}
             </p>
           </motion.div>
         </div>
 
         {/* Centered accordion list */}
         <div className="space-y-4">
-          {faqs.map((faq, i) => {
+          {f.list.map((faq: any, i: number) => {
             const isOpen = active === i;
             return (
               <motion.div

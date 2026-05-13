@@ -1,25 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail, Phone, MapPin, ArrowRight, ExternalLink } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Locations', href: '/locations' },
-  { label: 'Contact', href: '/contact' },
-];
-
-const serviceLinks = [
-  { label: 'Therapy Outcomes & PDPM', href: '/services/optimal-therapy-outcomes' },
-  { label: 'Medicaid Case Mix', href: '/services/medicaid-case-mix-analysis' },
-  { label: 'SNF Staff Education', href: '/services/snf-staff-education' },
-  { label: 'Therapy Cost Reduction', href: '/services/therapy-cost-reduction' },
-  { label: 'Denial Management', href: '/services/denial-management' },
-  { label: 'In-House Transition', href: '/services/in-house-transition' },
-];
+import { useTina } from 'tinacms/dist/react';
+import settingsData from '../../content/global/settings.json';
 
 function LinkedInIcon({ size = 16 }: { size?: number }) {
   return (
@@ -32,14 +17,21 @@ function LinkedInIcon({ size = 16 }: { size?: number }) {
 }
 
 export default function Footer() {
+  const { data } = useTina({
+    query: `query { settings(relativePath: "settings.json") { siteName phone email address linkedin navbar { links { name href } ctaText } footer { tagline copyright links { name href } serviceLinks { name href } } preFooterCta { title subtitle primaryCta } } }`,
+    variables: {},
+    data: { settings: settingsData },
+  });
+
+  const s = data.settings;
+  const navLinks = s.footer.links;
+  const serviceLinks = s.footer.serviceLinks;
   const year = new Date().getFullYear();
 
   return (
     <footer className="bg-[#0f172a] text-white relative overflow-hidden" role="contentinfo">
-      {/* Subtle background glow */}
       <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-[#0284c7]/5 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
 
-      {/* ── Expanded Pre-footer CTA banner ── */}
       <div className="relative border-b border-white/10 overflow-hidden bg-[#0f172a]">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0284c7]/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3" aria-hidden="true" />
 
@@ -54,36 +46,33 @@ export default function Footer() {
                Ready to Evolve?
             </div>
             <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[0.9] text-white mb-8">
-              Transform your facility's <br className="hidden md:block" />
-              therapy operations <br />
-              <span className="text-[#38bdf8] italic font-medium">with zero legacy strings attached.</span>
+              {s.preFooterCta.title.split('with')[0]} <br className="hidden md:block" />
+              with <span className="text-[#38bdf8] italic font-medium">{s.preFooterCta.title.split('with')[1] || "Evolve"}</span>
             </h3>
             <p className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed">
-              Our unique business model allows long-term care operators to retain <span className="text-white font-bold">100% of therapy revenue</span>. We bridge the gap between clinical excellence and financial sustainability, empowering your clinicians while protecting your bottom line.
+              {s.preFooterCta.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-white hover:text-[#0f172a] text-white px-8 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_40px_rgba(2,132,199,0.4)]"
               >
-                Request Free Analysis <ArrowRight size={16} aria-hidden="true" className="ml-2" />
+                {s.preFooterCta.primaryCta} <ArrowRight size={16} aria-hidden="true" className="ml-2" />
               </Link>
               <a
-                href="tel:8883865820"
+                href={`tel:${s.phone.replace(/[^0-9]/g, '')}`}
                 className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/40 px-8 py-5 rounded-full font-bold text-xs uppercase transition-all duration-300"
               >
-                <Phone size={15} aria-hidden="true" /> (888) 386-5820
+                <Phone size={15} aria-hidden="true" /> {s.phone}
               </a>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* ── Main footer grid ── */}
       <div className="container mx-auto px-5 sm:px-6 md:px-12 py-16 md:py-20">
         <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12 mb-14 md:mb-16">
 
-          {/* Brand column */}
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-2 mb-6 w-fit" aria-label="Evolve Therapy Services Home">
               <img 
@@ -93,40 +82,38 @@ export default function Footer() {
               />
             </Link>
             <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs">
-              Customized therapy management solutions for Long Term Care providers. Retain 100% of revenue while we drive clinical and operational excellence.
+              {s.footer.tagline}
             </p>
 
-            {/* Contact details */}
             <div className="space-y-3 mb-8">
-              {[
-                { Icon: MapPin, text: '31641 Compass Cove, Avon Lake, OH 44012', href: undefined },
-                { Icon: Phone, text: '(888) 386-5820', href: 'tel:8883865820' },
-                { Icon: Mail, text: 'info@evolvetherapyservices.com', href: 'mailto:info@evolvetherapyservices.com' },
-              ].map(({ Icon, text, href }) => (
-                <div key={text} className="flex items-start gap-3 text-white/40 text-sm">
-                  <Icon size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
-                  {href ? (
-                    <a href={href} className="hover:text-white transition-colors duration-200">{text}</a>
-                  ) : (
-                    <span>{text}</span>
-                  )}
-                </div>
-              ))}
+              <div className="flex items-start gap-3 text-white/40 text-sm">
+                <MapPin size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{s.address}</span>
+              </div>
+              <div className="flex items-start gap-3 text-white/40 text-sm">
+                <Phone size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
+                <a href={`tel:${s.phone.replace(/[^0-9]/g, '')}`} className="hover:text-white transition-colors duration-200">{s.phone}</a>
+              </div>
+              <div className="flex items-start gap-3 text-white/40 text-sm">
+                <Mail size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
+                <a href={`mailto:${s.email}`} className="hover:text-white transition-colors duration-200">{s.email}</a>
+              </div>
             </div>
 
-            {/* Social icons */}
             <div className="flex items-center gap-3">
+              {s.linkedin && (
+                <a
+                  href={s.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Evolve Therapy Services on LinkedIn"
+                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
+                >
+                  <LinkedInIcon size={15} />
+                </a>
+              )}
               <a
-                href="https://www.linkedin.com/company/evolvetherapyservices"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Evolve Therapy Services on LinkedIn"
-                className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
-              >
-                <LinkedInIcon size={15} />
-              </a>
-              <a
-                href="mailto:info@evolvetherapyservices.com"
+                href={`mailto:${s.email}`}
                 aria-label="Email Evolve Therapy Services"
                 className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
               >
@@ -135,41 +122,38 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Nav column */}
           <div className="lg:col-span-2">
             <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Navigation</h4>
             <ul className="space-y-3" role="list">
-              {navLinks.map(({ label, href }) => (
-                <li key={href}>
+              {navLinks?.map((link: any) => (
+                <li key={link.href}>
                   <Link
-                    href={href}
+                    href={link.href}
                     className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium"
                   >
-                    {label}
+                    {link.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services column */}
           <div className="lg:col-span-3">
             <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Services</h4>
             <ul className="space-y-3" role="list">
-              {serviceLinks.map(({ label, href }) => (
-                <li key={href}>
+              {serviceLinks?.map((link: any) => (
+                <li key={link.href}>
                   <Link
-                    href={href}
+                    href={link.href}
                     className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block"
                   >
-                    {label}
+                    {link.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Newsletter column */}
           <div className="lg:col-span-3 md:col-span-2">
             <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Stay Informed</h4>
             <p className="text-sm text-white/40 leading-relaxed mb-5">
@@ -197,17 +181,13 @@ export default function Footer() {
                   <ArrowRight size={14} aria-hidden="true" />
                 </button>
               </div>
-              <p className="text-[11px] text-white/20 leading-relaxed">
-                No spam. Unsubscribe anytime. By subscribing you agree to our privacy policy.
-              </p>
             </form>
           </div>
         </div>
 
-        {/* ── Bottom bar ── */}
         <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-white/25 text-xs">
-            © {year} Evolve Therapy Services. All rights reserved. Avon Lake, OH.
+            {s.footer.copyright.replace('2026', `${year}`)}
           </p>
           <div className="flex items-center gap-6">
             {[

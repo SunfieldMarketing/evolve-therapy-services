@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title": "Our",
+    "titleItalic": "Locations",
+    "description": "Strategically serving facilities across the United States, we provide localized clinical management and regional leadership that ensures every site under our oversight maintains the highest Evolve Standard of excellence."
+  },
+  "hq": {
+    "badge": "Global HQ",
+    "title": "Headquarters",
+    "address": "31641 Compass Cove\nAvon Lake, OH 44012",
+    "phone": "(888) 386-5820",
+    "email": "info@evolvetherapyservices.com"
+  },
+  "strategy": {
+    "title": "Regional Strategy",
+    "description": "Evolve provides holistic therapy, operational oversight, and denial management for the LTC industry, enabling operators to look beyond the day-to-day and focus on long-term growth. Our regional directors are strategically placed to ensure 24/7 support.",
+    "subtext": "Through extensive state-level networks and clinical partners, we make geographic scale feel local and intimate."
+  },
+  "partner": {
+    "badge": "Site Coordination",
+    "title": "Your Local Clinical Partner",
+    "description": "Whether you are already in-house or using a third-party company, Evolve acts as your local clinical partner. We maintain a presence that feels like we are part of your team, because we are. Our site coordinators provide face-to-face mentorship and operations strategy directly at your facility."
+  },
+  "reach": {
+    "title": "Reach Throughout",
+    "titleItalic": "The Heartland",
+    "description": "With current active operations focusing across Ohio and expanding through key regional hubs, Evolve provides direct, high-touch support.",
+    "items": [
+      {
+        "title": "Recruitment Hubs",
+        "desc": "Active candidate pipelines for Physical, Occupational, and Speech Therapists across the Midwest.",
+        "icon": "TrendingUp"
+      },
+      {
+        "title": "Clinical Training",
+        "desc": "On-site mentorship sites where regional directors educate your in-house teams in real-time.",
+        "icon": "GraduationCap"
+      },
+      {
+        "title": "Operational Oversight",
+        "desc": "Rapid-response audit and denial defense managed directly from our Avon Lake headquarters.",
+        "icon": "MapPin"
+      }
+    ]
+  },
+  "commitment": {
+    "quote": "Scaling with integrity means ensuring that every facility we touch, regardless of location, receives the same premier clinical oversight."
+  }
+}

@@ -2,28 +2,37 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Spotlight } from '@/components/aceternity/spotlight';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
 
-export default function Hero() {
+interface HeroProps {
+  data: {
+    eyebrow: string;
+    titleLine1: string;
+    titleItalic: string;
+    titleLine2: string;
+    subtext: string;
+    primaryCta: string;
+    secondaryCta: string;
+    stats: { value: string; label: string }[];
+  };
+}
+
+export default function Hero({ data }: HeroProps) {
   const [videoStarted, setVideoStarted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // When the component mounts, ensure the video starts playing and set our state
     if (videoRef.current) {
       videoRef.current.play().then(() => {
         setVideoStarted(true);
       }).catch((e) => {
         console.error("Autoplay failed:", e);
-        // Fallback: If autoplay fails, we still want to show the video 
-        // (even if paused or if it requires user interaction later)
         setVideoStarted(true);
       });
 
-      // Crop the last 5 seconds to skip the unwanted ending
       const handleTimeUpdate = () => {
         if (videoRef.current && videoRef.current.duration) {
           if (videoRef.current.currentTime >= videoRef.current.duration - 5) {
@@ -40,7 +49,6 @@ export default function Hero() {
         }
       };
     } else {
-      // Fallback timeout
       const timer = setTimeout(() => setVideoStarted(true), 800);
       return () => clearTimeout(timer);
     }
@@ -48,13 +56,11 @@ export default function Hero() {
 
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center">
-      {/* ── Aceternity Spotlight overlay ── */}
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="rgba(56,189,248,0.6)"
       />
 
-      {/* ── Native HTML5 Video Background ── */}
       <div className="absolute inset-0 z-0 bg-[#0f172a] overflow-hidden">
         <video
           ref={videoRef}
@@ -67,24 +73,18 @@ export default function Hero() {
           style={{ filter: 'brightness(0.35) saturate(0.7)' }}
         />
         
-        {/* Interaction Blocker */}
         <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
 
-        {/* Quick Fade Cover */}
         <div
           className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[1500ms] ease-in-out ${videoStarted ? 'opacity-0' : 'opacity-100'}`}
         />
 
-        {/* Dark gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/70 to-[#0f172a]/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-transparent to-[#0f172a]/20" />
       </div>
 
-      {/* ── Content ── */}
       <div className="relative z-10 w-full px-5 sm:px-6 md:px-10 lg:px-12 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-32 flex flex-col items-center text-center">
-        {/* Stretches completely across the available viewport */}
         <div className="w-full flex flex-col items-center">
-          {/* Eyebrow — Magic UI AnimatedGradientText (dark variant) */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -93,32 +93,28 @@ export default function Hero() {
           >
             <AnimatedGradientTextDark className="justify-center">
               <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse inline-block mr-2" aria-hidden="true" />
-              LTC Therapy Management & Consulting
+              {data.eyebrow}
             </AnimatedGradientTextDark>
           </motion.div>
 
-          {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
             className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-8 w-full text-center"
           >
-            Changing How{' '}
-            <span className="text-[#0284c7] italic">Therapy Functions</span><br className="hidden lg:block" />
-            <span className="text-white/80 font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl align-top block sm:inline mt-2 sm:mt-0">for LTC Operators.</span>
+            {data.titleLine1}{' '}
+            <span className="text-[#0284c7] italic">{data.titleItalic}</span><br className="hidden lg:block" />
+            <span className="text-white/80 font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl align-top block sm:inline mt-2 sm:mt-0">{data.titleLine2}</span>
           </motion.h1>
 
-          {/* Subtext */}
           <motion.p
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-lg md:text-2xl lg:text-3xl text-white/65 w-full leading-relaxed mb-10 md:mb-14 font-light text-center max-w-5xl mx-auto px-4 sm:px-0"
           >
-            Our unique model lets your facility retain{' '}
-            <span className="text-white font-semibold">100% of therapy revenue</span>{' '}
-            while Evolve drives clinical outcomes, compliance, and operational excellence.
+            {data.subtext}
           </motion.p>
 
           <motion.div
@@ -132,7 +128,7 @@ export default function Hero() {
               className="group relative flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(2,132,199,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto"
             >
               <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" aria-hidden="true" />
-              <span className="relative">Schedule a Free Consultation</span>
+              <span className="relative">{data.primaryCta}</span>
               <ArrowRight size={18} className="relative group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
             </Link>
 
@@ -140,7 +136,7 @@ export default function Hero() {
               href="/services"
               className="group flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto"
             >
-              Explore Our Services
+              {data.secondaryCta}
             </Link>
           </motion.div>
 
@@ -150,12 +146,7 @@ export default function Hero() {
             transition={{ delay: 0.7, duration: 0.7 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-4 w-full justify-center max-w-6xl mx-auto px-1 py-6 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-white/5 backdrop-blur-sm border border-white/10"
           >
-            {[
-              { value: '100%', label: 'Revenue Retained' },
-              { value: '24/7', label: 'Clinical Support' },
-              { value: '20+', label: 'Years of Expertise' },
-              { value: '15+', label: 'States Served' },
-            ].map((stat) => (
+            {data.stats.map((stat) => (
               <div key={stat.label} className="group text-center">
                 <div className="text-2xl sm:text-3xl md:text-5xl font-serif font-black text-white mb-1 sm:mb-2 group-hover:text-[#38bdf8] group-hover:scale-110 transition-all duration-300">
                   {stat.value}
@@ -167,7 +158,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden lg:flex flex-col items-center gap-3" aria-hidden="true">
         <div className="text-white/30 text-[10px] font-black uppercase tracking-[0.4em]">Scroll</div>
         <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />

@@ -1,0 +1,176 @@
+{
+  "hero": {
+    "badge": "Partnership Hub",
+    "titleLine1": "STRATEGICAL",
+    "titleItalic": "SERVICES.",
+    "description": "We empower facility operators to successfully transition and manage high-performance in-house therapy teams through a comprehensive clinical ecosystem of specialized education, real-time audit oversight, and revenue-optimizing data intelligence.",
+    "heroValues": [
+      {
+        "icon": "Sparkles",
+        "title": "Visionary Hub",
+        "subtitle": "Creative Consulting"
+      },
+      {
+        "icon": "Heart",
+        "title": "Compassion",
+        "subtitle": "Results Driven"
+      }
+    ]
+  },
+  "trust": [
+    { "icon": "ShieldCheck", "text": "100% Revenue Retention" },
+    { "icon": "Star", "text": "Clinically Proven Models" },
+    { "icon": "UserCheck", "text": "Leadership Excellence" },
+    { "icon": "Activity", "text": "Operational Stability" }
+  ],
+  "showcase": {
+    "badge": "Service Catalog",
+    "titleLine1": "Clinical Mastery",
+    "titleItalic": "In Every Detail.",
+    "services": [
+      {
+        "title": "Optimal Therapy Outcomes",
+        "desc": "Clinical Analysis for PDPM case mix efficiency-opportunity and comprehensive business intelligence customized to your market market dynamics.",
+        "details": [
+          "Clinical analysis for PDPM case mix efficiency",
+          "Business Intelligence customized to your market",
+          "Data-driven clinical discharge planning",
+          "Functional outcome maximization"
+        ],
+        "icon": "Stethoscope",
+        "image": "https://res.cloudinary.com/dai2pg27n/image/upload/v1778095358/199776c9-037b-44b0-bd72-274885e0b165.png",
+        "slug": "optimal-therapy-outcomes",
+        "alignment": "left"
+      },
+      {
+        "title": "Medicaid & Quality Measures",
+        "desc": "Deep education and analysis of your site’s Quality Measures and case mix efficiency ensuring peak performance in reimbursement.",
+        "details": [
+          "Education and analysis of site QMs",
+          "Case mix efficiency audits",
+          "SNF staff & administration training",
+          "Regulatory compliance mapping"
+        ],
+        "icon": "ClipboardCheck",
+        "image": "https://res.cloudinary.com/dai2pg27n/image/upload/v1778092798/d9b89396-c963-4b64-a929-b0ce959244cd.png",
+        "slug": "medicaid-case-mix-analysis",
+        "alignment": "right"
+      },
+      {
+        "title": "Reimbursement Optimization",
+        "desc": "Progressive programs focused on MPPR effects and optimizing therapy service reimbursement across LTC and Outpatient environments.",
+        "details": [
+          "MPPR optimization strategies",
+          "Payer mix analysis",
+          "Outpatient therapy growth",
+          "Long-term reimbursement stability"
+        ],
+        "icon": "Target",
+        "image": "https://res.cloudinary.com/dai2pg27n/image/upload/v1778093795/42b46240-f14c-44d5-b1e5-dc4d831cb2d6.png",
+        "slug": "reimbursement-optimization",
+        "alignment": "left"
+      },
+      {
+        "title": "Therapy Cost Reduction",
+        "desc": "Optimizing staffing models and clinical discharge planning processes for long-term operational success and fiscal stability.",
+        "details": [
+          "Staffing model optimization",
+          "Labor cost management",
+          "Efficiency benchmarking",
+          "Resource allocation strategy"
+        ],
+        "icon": "LineChart",
+        "image": "https://res.cloudinary.com/dai2pg27n/image/upload/v1778095199/d4b294cb-7d97-4dd6-857b-eee76e1777a5.png",
+        "slug": "therapy-cost-reduction",
+        "alignment": "right"
+      },
+      {
+        "title": "In-House Transition",
+        "desc": "Easily transition your third-party contract therapy team to an efficient in-house model while maximizing your goals and retaining all revenue.",
+        "details": [
+          "Full recruitment support",
+          "Retention of 100% therapy revenue",
+          "Culture and brand continuity",
+          "Management model implementation"
+        ],
+        "icon": "Users2",
+        "image": "https://res.cloudinary.com/dai2pg27n/image/upload/v1778095821/9c7538a6-3e33-4a50-a1d5-dbd97914fa26.png",
+        "slug": "in-house-transition",
+        "alignment": "left"
+      },
+      {
+        "title": "In-House Resource Hub",
+        "desc": "Expert clinical resource in recruitment, denial management, unlimited therapy education, and real-time data analysis for in-house teams.",
+        "details": [
+          "Refined clinical recruitment and retention support",
+          "Retention of 100% therapy revenue",
+          "Strategic clinical education and CEU oversight",
+          "Audit management and compliance"
+        ],
+        "icon": "GraduationCap",
+        "image": "https://res.cloudinary.com/dai2pg27n/image/upload/v1778095465/fe87049e-5e24-4b1e-bc2a-b265ebd01ddf.png",
+        "slug": "in-house-resource-hub",
+        "alignment": "right"
+      }
+    ]
+  },
+  "methodology": {
+    "badge": "Clinical Methodology",
+    "titleLine1": "Data-Driven",
+    "titleItalic": "Growth Logic.",
+    "items": [
+      { "title": "Audit Opportunity", "icon": "TrendingUp", "desc": "Every partnership starts with a detailed clinical and financial audit." },
+      { "title": "Workflow Precision", "icon": "Sparkles", "desc": "We implement evidence-based protocols that ensure compliance." },
+      { "title": "Sustainable Culture", "icon": "Briefcase", "desc": "Grooming internal talent for regional leadership roles." }
+    ],
+    "sidebarTitle": "Clinical Integrity",
+    "sidebarItalic": "Uncompromised.",
+    "sidebarQuote": "Allowing LTC operators to truly EVOLVE through clinical education and oversight.",
+    "sidebarIcon": "ShieldCheck"
+  },
+  "advantage": {
+    "badge": "Core Advantages",
+    "titleLine1": "The Evolve",
+    "titleItalic": "Mastery.",
+    "items": [
+      { "title": "Revenue Retention", "icon": "Activity", "desc": "Retain 100% of revenue and groom internal talent for facility stability." },
+      { "title": "Culture Continuity", "icon": "UserCheck", "desc": "Retain 100% of revenue and groom internal talent for facility stability." },
+      { "title": "Operational Stability", "icon": "Layers", "desc": "Retain 100% of revenue and groom internal talent for facility stability." },
+      { "title": "Clinical Education", "icon": "GraduationCap", "desc": "Retain 100% of revenue and groom internal talent for facility stability." }
+    ]
+  },
+  "pricing": {
+    "badge": "Dynamic Pricing Model",
+    "title": "A Model That",
+    "titleItalic": "Evolves With You.",
+    "description": "Our unique three-tiered approach customizes to your size of business. Our pricing allows for management fee reduction as your business grows.",
+    "tiers": [
+      {
+        "level": "Tier 01",
+        "title": "Foundational",
+        "desc": "Perfect for single-facility operators starting their in-house journey.",
+        "features": ["PDPM Clinical Analysis", "Medicaid Case Mix Audit", "Basic Denial Management"],
+        "featured": false
+      },
+      {
+        "level": "Tier 02",
+        "title": "Growth",
+        "desc": "Optimized for mid-size operators with multiple locations.",
+        "features": ["Advanced Data Analysis", "Staff Recruitment Support", "Customized CEU Education"],
+        "featured": true
+      },
+      {
+        "level": "Tier 03",
+        "title": "Enterprise",
+        "desc": "Full-scale management for large regional LTC organizations.",
+        "features": ["Strategic Growth Planning", "Full Operational Oversight", "Lowest Management Fee"],
+        "featured": false
+      }
+    ],
+    "bottomBanner": {
+      "title": "Scaling Benefits",
+      "desc": "Management fees reduce automatically as your internal staff grows.",
+      "cta": "Growth Incentivized Model"
+    }
+  }
+}

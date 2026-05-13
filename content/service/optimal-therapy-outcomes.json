@@ -1,0 +1,23 @@
+{
+  "title": "Optimal Therapy Outcomes & PDPM Strategy",
+  "shortDesc": "Comprehensive clinical analysis and strategic insights to maximize Patient-Driven Payment Model efficiency and ensure precise, outcome-based care.",
+  "fullDesc": "In the rapidly evolving landscape of Long-Term Care, the Patient-Driven Payment Model (PDPM) has redefined how therapy clinical outcomes intersect with financial reimbursement. At Evolve Therapy Services, we specialize in bridging this gap through meticulous clinical analysis and strategic case mix optimization.",
+  "longContent": "We provide a deep-dive diagnostic of your facility's PDPM performance, identifying specific areas where clinical care and documentation may not be fully aligned with resident needs and reimbursement potential. Our approach isn't just about the numbers—it's about ensuring that every resident receives the precise level of care they require while the facility maintains a sustainable financial model.\n\nOur team of experts utilizes custom-built business intelligence tools to track trends in real-time, allowing for proactive adjustments rather than reactive corrections. We analyze NTA (Non-Therapy Ancillary) categories, Nursing components, and Therapy attributes to ensure a holistic approach to your case mix.",
+  "benefits": [
+    "Identification of revenue leaks through clinical auditing",
+    "Enhanced care quality through optimized clinical pathways",
+    "Real-time data visibility via custom dashboards",
+    "Improved compliance with Medicare documentation standards",
+    "Tailored strategies for high-acuity patient management"
+  ],
+  "features": [
+    "PDPM Case Mix Integrity Audits",
+    "NTA & Nursing Component Optimization",
+    "Clinical Documentation Reviews",
+    "MDS Coding Accuracy Verification",
+    "Weekly Clinical Strategy Meetings"
+  ],
+  "image": "https://res.cloudinary.com/dai2pg27n/image/upload/v1778095358/199776c9-037b-44b0-bd72-274885e0b165.png",
+  "iconName": "Stethoscope",
+  "videoUrl": "https://player.vimeo.com/external/432014945.sd.mp4?s=6c6695333f276cd83428d0859585e488d0859585e&profile_id=165&oauth2_token_id=57447761"
+}

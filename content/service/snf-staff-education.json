@@ -1,0 +1,23 @@
+{
+  "title": "SNF Workforce Education & Development",
+  "shortDesc": "Empowering your interdisciplinary teams through customized mentorship, advanced clinical training, and targeted regulatory compliance education.",
+  "fullDesc": "Knowledge is the foundation of operational success in the Long-Term Care industry. Evolve provides comprehensive education programs designed to empower your staff, from frontline therapists to the executive suite.",
+  "longContent": "We believe that a well-educated team is a more efficient and compliant team. Our education services are not \"off-the-shelf\" webinars; they are customized training sessions tailored to your facility's unique challenges and opportunities. We mentor New Directors of Rehab (DORs), train marketing teams on the value of therapy, and educate nursing staff on clinical documentation necessity.\n\nBy fostering a culture of continuous learning, we help our partners reduce turnover, improve morale, and ensure that everyone is working toward the same clinical and financial goals. We stay on the leading edge of regulatory changes so your team is never caught off guard.",
+  "benefits": [
+    "Higher staff retention through professional development",
+    "Improved cross-departmental collaboration (Nursing/Therapy/Admin)",
+    "Reduced compliance risk through documentation mastery",
+    "More effective marketing for higher-acuity admissions",
+    "Leadership growth for facility managers"
+  ],
+  "features": [
+    "Comprehensive DOR Mentorship Programs",
+    "MDS & Clinical Documentation Training",
+    "Interdisciplinary Team (IDT) Strategy Workshops",
+    "Regulatory & Compliance Update Series",
+    "Marketing Synergy Education"
+  ],
+  "image": "https://images.unsplash.com/photo-1576091160550-2173ff9e5ece?auto=format&fit=crop&q=80",
+  "iconName": "GraduationCap",
+  "videoUrl": "https://player.vimeo.com/external/441220473.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761"
+}

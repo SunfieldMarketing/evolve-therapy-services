@@ -1,0 +1,23 @@
+{
+  "title": "In-House Resource Hub",
+  "shortDesc": "Expert, on-demand support for your existing in-house therapy programs, including recruitment, denial management, and data analysis.",
+  "fullDesc": "Running an in-house therapy department comes with significant rewards but also requires specialized ongoing support. The Evolve In-House Resource Hub is designed to empower facilities that already operate their own therapy teams by providing expert infrastructure and strategic backup.",
+  "longContent": "Even the most successful in-house therapy programs encounter challenges with recruitment, regulatory changes, and complex denial management. Our Resource Hub acts as an extension of your team, stepping in precisely where and when you need specialized expertise without requiring you to outsource your entire department.\n\nWhether you need help sourcing high-quality therapists, defending against a complex audit, or analyzing your PDPM performance data, our hub provides the specialized tools and executive oversight necessary to keep your in-house program thriving.",
+  "benefits": [
+    "Access to specialized corporate-level therapy expertise",
+    "Improved recruitment and retention of top therapy talent",
+    "Robust defense against ADRs and payer audits",
+    "Data-driven insights to refine program performance",
+    "Continuous education (CEUs) for your existing staff"
+  ],
+  "features": [
+    "Targeted Therapy Recruitment Services",
+    "On-Demand Denial Management Support",
+    "Clinical Data Analytics & Benchmarking",
+    "Continuing Education (CEU) Access",
+    "Interim Management Support"
+  ],
+  "image": "https://res.cloudinary.com/dai2pg27n/image/upload/v1778095465/fe87049e-5e24-4b1e-bc2a-b265ebd01ddf.png",
+  "iconName": "GraduationCap",
+  "videoUrl": "https://player.vimeo.com/external/441220473.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761"
+}

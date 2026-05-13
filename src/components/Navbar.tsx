@@ -6,26 +6,19 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-
-const links = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  {
-    name: 'Services',
-    href: '/services',
-    dropdown: [
-      { name: 'Therapy Outcomes & PDPM', href: '/services/optimal-therapy-outcomes', desc: 'PDPM case mix optimization' },
-      { name: 'Medicaid Case Mix', href: '/services/medicaid-case-mix-analysis', desc: 'Quality measure analysis' },
-      { name: 'Reimbursement Optimization', href: '/services/reimbursement-optimization', desc: 'MPPR & financial success' },
-      { name: 'Therapy Cost Reduction', href: '/services/therapy-cost-reduction', desc: 'Tiered cost savings' },
-      { name: 'In-House Transition', href: '/services/in-house-transition', desc: 'Seamless model migration' },
-      { name: 'In-House Resource Hub', href: '/services/in-house-resource-hub', desc: 'Support for existing programs' },
-    ],
-  },
-  { name: 'Locations', href: '/locations' },
-];
+import { useTina } from 'tinacms/dist/react';
+import settingsData from '../../content/global/settings.json';
 
 export default function Navbar() {
+  const { data } = useTina({
+    query: `query { settings(relativePath: "settings.json") { siteName phone email navbar { links { name href } ctaText } footer { tagline copyright links { name href } } } }`,
+    variables: {},
+    data: { settings: settingsData },
+  });
+
+  const s = data.settings;
+  const links = s.navbar.links;
+
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -146,13 +139,14 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 className={cn(
-                  'ml-3 flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all duration-200 flex-shrink-0',
+                  'px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center gap-2 group/btn',
                   scrolled
-                    ? 'bg-[#0284c7] text-white hover:bg-[#0369a1] shadow-[0_2px_12px_rgba(2,132,199,0.3)]'
-                    : 'bg-white/15 backdrop-blur-sm text-white border border-white/25 hover:bg-white/25'
+                    ? 'bg-[#0f172a] text-white hover:bg-[#0284c7]'
+                    : 'bg-white text-[#0f172a] hover:bg-slate-100 shadow-xl'
                 )}
               >
-                Contact Us <ArrowUpRight size={14} aria-hidden="true" />
+                {s.navbar.ctaText}
+                <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
               </Link>
             </div>
 
@@ -250,13 +244,13 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#0284c7] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#0369a1] transition-colors"
                 >
-                  Contact Us <ArrowUpRight size={14} />
+                  {s.navbar.ctaText} <ArrowUpRight size={14} />
                 </Link>
                 <a
-                  href="tel:8883865820"
+                  href={`tel:${s.phone.replace(/[^0-9]/g, '')}`}
                   className="flex items-center justify-center gap-2 w-full py-3.5 border border-white/15 text-white/70 rounded-xl font-medium text-sm"
                 >
-                  <Phone size={14} /> (888) 386-5820
+                  <Phone size={14} /> {s.phone}
                 </a>
               </div>
             </motion.div>

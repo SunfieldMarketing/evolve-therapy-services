@@ -1,0 +1,165 @@
+{
+  "hero": {
+    "eyebrow": "LTC Therapy Management & Consulting",
+    "titleLine1": "Changing How",
+    "titleItalic": "Therapy Functions",
+    "titleLine2": "for LTC Operators.",
+    "subtext": "Our unique model lets your facility retain 100% of therapy revenue while Evolve drives clinical outcomes, compliance, and operational excellence.",
+    "primaryCta": "Schedule a Free Consultation",
+    "secondaryCta": "Explore Our Services",
+    "stats": [
+      { "value": "100%", "label": "Revenue Retained" },
+      { "value": "24/7", "label": "Clinical Support" },
+      { "value": "20+", "label": "Years of Expertise" },
+      { "value": "15+", "label": "States Served" }
+    ]
+  },
+  "clinicalExcellence": {
+    "badge": "Clinical Excellence",
+    "titleLine1": "Modern Therapy",
+    "titleItalic": "Managed with Care",
+    "description": "Our vision is to provide the most creative therapy consulting model through compassionate leadership, clinical passion, and evidence-based experience.",
+    "stats": [
+      { "value": 100, "suffix": "%", "label": "Revenue Retained", "desc": "Your facility keeps every dollar of therapy revenue - zero shared with us." },
+      { "value": 20, "suffix": "+", "label": "Years Experience", "desc": "Two decades of LTC clinical and operational leadership expertise." },
+      { "value": 24, "suffix": "/7", "label": "Clinical Support", "desc": "Round-the-clock access to your dedicated regional director." },
+      { "value": 15, "suffix": "+", "label": "States Served", "desc": "Active management across major U.S. markets and growing." }
+    ],
+    "services": [
+      {
+        "title": "Evidence-Based Practice",
+        "desc": "Real-time PDPM case mix analysis, MDS accuracy reviews, and data-driven business intelligence customized to your specific market.",
+        "tag": "Analytics",
+        "icon": "Microscope"
+      },
+      {
+        "title": "Holistic Patient Outcomes",
+        "desc": "Patient-centric, outcome-based programming that drives five-star ratings and measurable improvements in functional independence.",
+        "tag": "Clinical",
+        "icon": "HeartPulse"
+      },
+      {
+        "title": "Compliance Management",
+        "desc": "Full denial management, regulatory audit support, and proactive SNF compliance oversight - so you focus on care, not paperwork.",
+        "tag": "Regulatory",
+        "icon": "ShieldCheck"
+      },
+      {
+        "title": "Medicaid Case Mix",
+        "desc": "Detailed quality measure analysis, case mix efficiency reviews, and Medicaid reimbursement optimization for your payer mix.",
+        "tag": "Reimbursement",
+        "icon": "BarChart3"
+      },
+      {
+        "title": "In-House Transition",
+        "desc": "Seamless migration from contract therapy to an in-house model with staff retention, culture building, and zero disruption to care.",
+        "tag": "Transition",
+        "icon": "Users"
+      },
+      {
+        "title": "Operational Growth",
+        "desc": "Tiered pricing reductions as your business scales, grooming internal staff for regional leadership roles within your own organization.",
+        "tag": "Growth",
+        "icon": "TrendingUp"
+      }
+    ]
+  },
+  "process": {
+    "badge": "Operational Blueprint",
+    "title": "The Evolve",
+    "titleItalic": "Implementation",
+    "description": "Our systematic approach ensures a seamless transition and sustained operational excellence for your therapy department.",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Clinical Audit",
+        "desc": "We perform a deep-dive analysis of your current clinical metrics and PDPM case mix efficiency.",
+        "icon": "Search"
+      },
+      {
+        "num": "02",
+        "title": "Strategic Roadmap",
+        "desc": "Our directors develop a customized transition plan tailored to your facility's specific goals.",
+        "icon": "Map"
+      },
+      {
+        "num": "03",
+        "title": "Active Management",
+        "desc": "Daily oversight and mentorship to ensure peak clinical and financial performance.",
+        "icon": "Zap"
+      },
+      {
+        "num": "04",
+        "title": "Ongoing Growth",
+        "desc": "Ongoing audits, education, and operational refinement keep you ahead of regulatory changes.",
+        "icon": "TrendingUp"
+      }
+    ]
+  },
+  "whyEvolve": {
+    "title": "Why Choose",
+    "subtitle": "Evolve?",
+    "introText": "Scroll through to discover our clinical advantages one by one.",
+    "features": [
+      {
+        "title": "Optimal Therapy",
+        "subtitle": "Outcomes",
+        "desc": "Clinical Analysis for PDPM case mix efficiency-opportunity and customized business intelligence for your market.",
+        "icon": "ShieldCheck",
+        "color": "#f59e0b",
+        "href": "/services/optimal-therapy-outcomes"
+      },
+      {
+        "title": "Three-Tiered",
+        "subtitle": "Pricing Approach",
+        "desc": "Our unique approach customizes to your size of business and Evolves as you do, with reduction as you grow.",
+        "icon": "Zap",
+        "color": "#38bdf8",
+        "href": "/services/therapy-cost-reduction"
+      },
+      {
+        "title": "100% Revenue",
+        "subtitle": "Retention",
+        "desc": "Maximize clinical and financial goals while you retain all therapy revenue under our management model.",
+        "icon": "Award",
+        "color": "#10b981",
+        "href": "/services/in-house-transition"
+      },
+      {
+        "title": "In-House",
+        "subtitle": "Transition",
+        "desc": "Easily transition your third-party contract therapy team to an efficient in-house model with our expert guidance.",
+        "icon": "Briefcase",
+        "color": "#8b5cf6",
+        "href": "/services/in-house-transition"
+      },
+      {
+        "title": "Clinical Case Mix",
+        "subtitle": "Analysis",
+        "desc": "Expert education and analysis of your site’s Quality Measures and case mix efficiency for next-level evolution.",
+        "icon": "Heart",
+        "color": "#f43f5e",
+        "href": "/services/medicaid-case-mix-analysis"
+      }
+    ],
+    "quoteStrip": {
+      "text": "Evolve was founded on the principle that therapy departments should be centers of excellence and financial strength.",
+      "author": "Lisa Bebie",
+      "authorTitle": "President & Founder",
+      "authorPhoto": "https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png"
+    }
+  },
+  "bottomCta": {
+    "quote": "Empower your therapy team with in-house leadership and clinical advancement.",
+    "checklist": [
+      "Retain 100% of therapy revenue",
+      "Customized CEU education for staff",
+      "Regional director embedded on-site",
+      "Tiered pricing - costs drop as you scale",
+      "Denial management & audit support",
+      "In-house to contracted, or reverse"
+    ],
+    "primaryCta": "Start Your Evolution",
+    "phone": "(888) 386-5820"
+  }
+}

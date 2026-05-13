@@ -1,23 +1,15 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Phone } from 'lucide-react';
+import { useTina } from 'tinacms/dist/react';
+import settingsData from '../../content/global/settings.json';
 
 // Public TopoJSON for US states (AlbersUSA projection)
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
-
-// Active service states from the coverage map image
-const ACTIVE_STATES = new Set([
-  'Minnesota', 'Wisconsin', 'Nebraska', 'Kansas', 'Oklahoma',
-  'Louisiana', 'Mississippi', 'Tennessee', 'Kentucky', 'Ohio',
-  'Indiana', 'West Virginia', 'Virginia', 'Pennsylvania', 'New York',
-  'New Jersey', 'Delaware', 'Maryland', 'Maine', 'Vermont',
-  'New Hampshire', 'Massachusetts', 'Rhode Island', 'Connecticut',
-  'Florida', 'District of Columbia',
-]);
 
 const STATE_ABBR: Record<string, string> = {
   Alabama: 'AL', Alaska: 'AK', Arizona: 'AZ', Arkansas: 'AR', California: 'CA',
@@ -42,6 +34,15 @@ interface TooltipState {
 }
 
 export default function InteractiveMapInner() {
+  const { data } = useTina({
+    query: `query { settings(relativePath: "settings.json") { activeStates phone address } }`,
+    variables: {},
+    data: { settings: settingsData },
+  });
+
+  const s = data.settings;
+  const activeStatesSet = useMemo(() => new Set(s.activeStates || []), [s.activeStates]);
+
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -49,11 +50,11 @@ export default function InteractiveMapInner() {
     const name = geo.properties.name as string;
     setTooltip({
       name,
-      active: ACTIVE_STATES.has(name),
+      active: activeStatesSet.has(name),
       x: evt.clientX,
       y: evt.clientY,
     });
-  }, []);
+  }, [activeStatesSet]);
 
   const handleMouseMove = useCallback((evt: React.MouseEvent) => {
     setTooltip(prev => prev ? { ...prev, x: evt.clientX, y: evt.clientY } : null);
@@ -68,8 +69,8 @@ export default function InteractiveMapInner() {
     setSelected(prev => prev === name ? null : name);
   }, []);
 
-  const activeList = [...ACTIVE_STATES].sort();
-  const selectedActive = selected ? ACTIVE_STATES.has(selected) : false;
+  const activeList = useMemo(() => [...activeStatesSet].sort(), [activeStatesSet]);
+  const selectedActive = selected ? activeStatesSet.has(selected) : false;
 
   return (
     <section className="py-16 md:py-28 bg-slate-50 border-t border-slate-100">
@@ -89,7 +90,7 @@ export default function InteractiveMapInner() {
           </h2>
           <p className="text-base md:text-lg text-slate-500 max-w-2xl mx-auto font-light">
             Actively managing LTC facilities across{' '}
-            <strong className="text-[#0f172a]">{ACTIVE_STATES.size} states</strong>.
+            <strong className="text-[#0f172a]">{activeStatesSet.size} states</strong>.
             Click any state to learn more.
           </p>
         </motion.div>
@@ -106,7 +107,7 @@ export default function InteractiveMapInner() {
             <div className="flex items-center gap-6 px-6 py-4 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-[#0284c7]" />
-                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">Active ({ACTIVE_STATES.size})</span>
+                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">Active ({activeStatesSet.size})</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-slate-200" />
@@ -134,7 +135,7 @@ export default function InteractiveMapInner() {
                     {({ geographies }: { geographies: any[] }) =>
                       geographies.map((geo) => {
                         const name = geo.properties.name as string;
-                        const isActive = ACTIVE_STATES.has(name);
+                        const isActive = activeStatesSet.has(name);
                         const isSelected = selected === name;
 
                         return (
@@ -258,17 +259,17 @@ export default function InteractiveMapInner() {
             {/* HQ Card */}
             <div className="p-6 rounded-2xl bg-slate-100 border border-slate-200">
               <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Headquarters</div>
-              <div className="font-black text-[#0f172a] font-serif text-lg mb-1">Avon Lake, Ohio</div>
-              <div className="text-slate-500 text-sm mb-4">31641 Compass Cove, OH 44012</div>
-              <a href="tel:8883865820" className="flex items-center gap-2 text-[#0284c7] font-bold text-sm hover:underline">
-                <Phone size={14} /> (888) 386-5820
+              <div className="font-black text-[#0f172a] font-serif text-lg mb-1">{s.address.split(',')[1]?.trim() || "Avon Lake, Ohio"}</div>
+              <div className="text-slate-500 text-sm mb-4">{s.address}</div>
+              <a href={`tel:${s.phone.replace(/[^0-9]/g, '')}`} className="flex items-center gap-2 text-[#0284c7] font-bold text-sm hover:underline">
+                <Phone size={14} /> {s.phone}
               </a>
             </div>
 
             {/* Active states compact list */}
             <div className="p-6 rounded-2xl bg-white border border-slate-200 flex-1">
               <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">
-                Active States ({ACTIVE_STATES.size})
+                Active States ({activeStatesSet.size})
               </div>
               <div className="flex flex-wrap gap-1.5 max-h-52 overflow-y-auto">
                 {activeList.map((name) => (

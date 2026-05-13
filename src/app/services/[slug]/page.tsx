@@ -3,7 +3,6 @@
 import { useParams, notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { services } from '@/data/services';
 import { motion } from 'framer-motion';
 import { 
   Stethoscope, 
@@ -20,6 +19,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import { useTina } from 'tinacms/dist/react';
 
 const iconMap = {
   Stethoscope,
@@ -27,16 +27,49 @@ const iconMap = {
   GraduationCap,
   LineChart,
   ShieldAlert,
-  Users2
+  Users2,
+  Target
 };
 
-export default function ServiceDetailPage() {
+export default function ServiceDetailPage(props: { data: any, query: string, variables: any }) {
   const params = useParams();
   const slug = params.slug as string;
-  const service = services[slug as keyof typeof services];
+
+  // In a real Next.js App Router setup with Tina, we might fetch this in a Server Component
+  // and pass it to this Client Component. For now, we'll use useTina with the provided props
+  // or fallback to a query if we can.
+  
+  const { data } = useTina({
+    query: props.query || `query($relativePath: String!) {
+      service(relativePath: $relativePath) {
+        title
+        shortDesc
+        fullDesc
+        longContent
+        benefits
+        features
+        image
+        iconName
+        videoUrl
+      }
+    }`,
+    variables: props.variables || { relativePath: `${slug}.json` },
+    data: props.data || {},
+  });
+
+  const service = data.service;
 
   if (!service) {
-    notFound();
+    // If we're in the editor, we might not have data yet for a new slug
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="text-center">
+          <h1 className="text-4xl font-serif font-black text-[#0f172a] mb-4">Service Not Found</h1>
+          <p className="text-slate-500 mb-8">The service you are looking for does not exist or hasn't been created yet.</p>
+          <Link href="/services" className="text-[#0284c7] font-black uppercase text-xs tracking-widest">Back to All Services</Link>
+        </div>
+      </div>
+    );
   }
 
   const Icon = iconMap[service.iconName as keyof typeof iconMap] || Stethoscope;
@@ -68,14 +101,14 @@ export default function ServiceDetailPage() {
                  transition={{ duration: 1 }}
                  className="bg-slate-50 rounded-[3rem] p-10 border border-slate-100 mb-10 shadow-xl shadow-black/[0.02]"
               >
-                <h3 className="text-2xl font-serif font-black text-secondary mb-10 flex items-center gap-3">
-                  <BarChart4 size={24} className="text-primary" /> Key Benefits
+                <h3 className="text-2xl font-serif font-black text-[#0f172a] mb-10 flex items-center gap-3">
+                  <BarChart4 size={24} className="text-[#0284c7]" /> Key Benefits
                 </h3>
                 <ul className="space-y-6">
-                  {service.benefits.map((benefit, i) => (
+                  {service.benefits?.map((benefit: string, i: number) => (
                     <li key={i} className="flex items-start gap-4 group">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary transition-colors">
-                        <CheckCircle2 size={16} className="text-primary group-hover:text-white" />
+                      <div className="w-8 h-8 rounded-full bg-[#0284c7]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#0284c7] transition-colors">
+                        <CheckCircle2 size={16} className="text-[#0284c7] group-hover:text-white" />
                       </div>
                       <span className="text-slate-600 text-sm md:text-base font-medium leading-relaxed flex-1">{benefit}</span>
                     </li>
@@ -88,16 +121,16 @@ export default function ServiceDetailPage() {
                  whileInView={{ opacity: 1, x: 0 }}
                  viewport={{ once: true }}
                  transition={{ duration: 1, delay: 0.2 }}
-                 className="bg-secondary rounded-[3.5rem] p-12 text-white relative overflow-hidden group shadow-2xl"
+                 className="bg-[#0f172a] rounded-[3.5rem] p-12 text-white relative overflow-hidden group shadow-2xl"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000" />
-                <h3 className="text-3xl font-serif font-black mb-8 relative z-10 leading-[1.1]">Ready to <span className="text-primary italic">evolve</span> your facility?</h3>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#0284c7]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000" />
+                <h3 className="text-3xl font-serif font-black mb-8 relative z-10 leading-[1.1]">Ready to <span className="text-[#0284c7] italic">evolve</span> your facility?</h3>
                 <p className="text-white/40 mb-10 leading-relaxed relative z-10 font-light">
                   Get a comprehensive data-driven analysis of your clinical and financial health.
                 </p>
                 <Link 
                   href="/contact" 
-                  className="inline-flex items-center gap-3 bg-white text-secondary px-10 py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-primary hover:text-white transition-all relative z-10 shadow-xl shadow-black/20"
+                  className="inline-flex items-center gap-3 bg-white text-[#0f172a] px-10 py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#0284c7] hover:text-white transition-all relative z-10 shadow-xl shadow-black/20"
                 >
                   Request Analysis <ArrowRight size={18} />
                 </Link>
@@ -127,11 +160,11 @@ export default function ServiceDetailPage() {
                    whileInView={{ opacity: 1, y: 0 }}
                    viewport={{ once: true }}
                 >
-                  <h2 className="text-5xl font-serif text-secondary font-black mb-10 tracking-tighter">Service Overview</h2>
+                  <h2 className="text-5xl font-serif text-[#0f172a] font-black mb-10 tracking-tighter">Service Overview</h2>
                   <p className="text-2xl leading-relaxed font-light text-slate-400 mb-12">
                     {service.fullDesc}
                   </p>
-                  <div className="text-xl text-slate-500 leading-relaxed font-medium whitespace-pre-line mb-16 px-10 border-l-4 border-primary/20">
+                  <div className="text-xl text-slate-500 leading-relaxed font-medium whitespace-pre-line mb-16 px-10 border-l-4 border-[#0284c7]/20">
                     {service.longContent}
                   </div>
                 </motion.div>
@@ -141,56 +174,20 @@ export default function ServiceDetailPage() {
                    whileInView={{ opacity: 1, y: 0 }}
                    viewport={{ once: true }}
                 >
-                  <h3 className="text-3xl font-serif text-secondary font-black mb-12 flex items-center gap-4 tracking-tight">
-                    <Target size={32} className="text-primary" /> Core Program Features
+                  <h3 className="text-3xl font-serif text-[#0f172a] font-black mb-12 flex items-center gap-4 tracking-tight">
+                    <Target size={32} className="text-[#0284c7]" /> Core Program Features
                   </h3>
                   <div className="grid md:grid-cols-2 gap-6 not-prose">
-                    {service.features.map((feature, i) => (
-                      <div key={i} className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-primary/20 hover:bg-white hover:shadow-xl transition-all duration-500">
-                        <div className="w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/20 shrink-0" />
-                        <span className="text-secondary font-black text-sm uppercase tracking-[0.1em] leading-snug">{feature}</span>
+                    {service.features?.map((feature: string, i: number) => (
+                      <div key={i} className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-[#0284c7]/20 hover:bg-white hover:shadow-xl transition-all duration-500">
+                        <div className="w-3 h-3 rounded-full bg-[#0284c7] shadow-lg shadow-[#0284c7]/20 shrink-0" />
+                        <span className="text-[#0f172a] font-black text-sm uppercase tracking-[0.1em] leading-snug">{feature}</span>
                       </div>
                     ))}
                   </div>
                 </motion.div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Other Services Grid */}
-      <section className="py-32 md:py-48 bg-slate-50 border-t border-slate-100">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex items-center justify-between mb-20 px-4">
-            <h2 className="text-4xl md:text-5xl font-serif text-secondary font-black tracking-tighter">Explore Other <span className="text-primary italic font-medium">Solutions</span></h2>
-            <Link href="/services" className="text-primary font-black uppercase text-[10px] tracking-[0.2em] border-b-2 border-primary/20 hover:border-primary transition-all">View All Services</Link>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-10">
-            {Object.entries(services)
-              .filter(([key]) => key !== slug)
-              .slice(0, 3)
-              .map(([key, item]) => {
-                const ItemIcon = iconMap[item.iconName as keyof typeof iconMap] || Stethoscope;
-                return (
-                  <motion.div
-                    key={key}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="h-full"
-                  >
-                    <Link href={`/services/${key}`} className="group bg-white p-10 md:p-14 rounded-[3.5rem] border border-slate-200 hover:border-primary/20 shadow-xl shadow-black/[0.02] hover:shadow-2xl transition-all duration-700 flex flex-col h-full">
-                      <div className="w-16 h-16 bg-slate-50 rounded-[1.5rem] flex items-center justify-center text-secondary mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-500 border border-slate-100 shadow-inner shrink-0">
-                        <ItemIcon size={28} />
-                      </div>
-                      <h3 className="text-2xl font-serif font-black text-secondary mb-6 group-hover:text-primary transition-colors duration-500 tracking-tight leading-snug">{item.title}</h3>
-                      <p className="text-slate-500 text-sm font-medium leading-relaxed flex-1">{item.shortDesc}</p>
-                    </Link>
-                  </motion.div>
-                );
-              })}
           </div>
         </div>
       </section>

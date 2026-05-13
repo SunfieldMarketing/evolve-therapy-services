@@ -1,0 +1,216 @@
+const fs = require('fs');
+const path = require('path');
+
+const services = {
+  'optimal-therapy-outcomes': {
+    title: 'Optimal Therapy Outcomes & PDPM Strategy',
+    shortDesc: 'Comprehensive clinical analysis and strategic insights to maximize Patient-Driven Payment Model efficiency and ensure precise, outcome-based care.',
+    fullDesc: 'In the rapidly evolving landscape of Long-Term Care, the Patient-Driven Payment Model (PDPM) has redefined how therapy clinical outcomes intersect with financial reimbursement. At Evolve Therapy Services, we specialize in bridging this gap through meticulous clinical analysis and strategic case mix optimization.',
+    longContent: `We provide a deep-dive diagnostic of your facility's PDPM performance, identifying specific areas where clinical care and documentation may not be fully aligned with resident needs and reimbursement potential. Our approach isn't just about the numbers—it's about ensuring that every resident receives the precise level of care they require while the facility maintains a sustainable financial model.
+
+Our team of experts utilizes custom-built business intelligence tools to track trends in real-time, allowing for proactive adjustments rather than reactive corrections. We analyze NTA (Non-Therapy Ancillary) categories, Nursing components, and Therapy attributes to ensure a holistic approach to your case mix.`,
+    benefits: [
+      'Identification of revenue leaks through clinical auditing',
+      'Enhanced care quality through optimized clinical pathways',
+      'Real-time data visibility via custom dashboards',
+      'Improved compliance with Medicare documentation standards',
+      'Tailored strategies for high-acuity patient management'
+    ],
+    features: [
+      'PDPM Case Mix Integrity Audits',
+      'NTA & Nursing Component Optimization',
+      'Clinical Documentation Reviews',
+      'MDS Coding Accuracy Verification',
+      'Weekly Clinical Strategy Meetings'
+    ],
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095358/199776c9-037b-44b0-bd72-274885e0b165.png',
+    iconName: 'Stethoscope',
+    videoUrl: 'https://player.vimeo.com/external/432014945.sd.mp4?s=6c6695333f276cd83428d0859585e488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  },
+  'medicaid-case-mix-analysis': {
+    title: 'Medicaid Case Mix & QM Optimization',
+    shortDesc: 'Expert navigation of Case Mix Index metrics and Quality Measures to secure your 5-star rating and stabilize long-term Medicaid reimbursement.',
+    fullDesc: 'Medicaid represents a significant portion of revenue for most Skilled Nursing Facilities. Understanding the nuances of state-specific Case Mix Index (CMI) and how Quality Measures (QMs) impact your 5-star rating and reimbursement is critical for long-term survival.',
+    longContent: `Evolve Therapy Services provides expert oversight of your Medicaid case mix, ensuring that your facility is accurately capturing the care provided to your long-stay residents. We focus on the intersection of clinical excellence and documentation accuracy, helping you navigate the complexities of Case Mix Index calculations and state-level incentives.
+
+Beyond just reimbursement, we help you manage your Quality Measures. A facility's 5-star rating is a primary driver for admissions and managed care contracting. We identify the specific clinical triggers that affect your QM scores and work with your interdisciplinary team to implement improvements that last.`,
+    benefits: [
+      'Accurate Case Mix Index (CMI) capture',
+      'Improved 5-star rating through QM management',
+      'Enhanced Medicaid reimbursement stability',
+      'Interdisciplinary team alignment on documentation',
+      'Reduced risk during state survey audits'
+    ],
+    features: [
+      'State-Specific CMI Analysis',
+      'Quality Measure (QM) Performance Tracking',
+      'RN AC (Assessment Coordinator) Support',
+      'Documentation Integrity Workshops',
+      'Competitive Market Data Analysis'
+    ],
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778092798/d9b89396-c963-4b64-a929-b0ce959244cd.png',
+    iconName: 'ClipboardCheck',
+    videoUrl: 'https://player.vimeo.com/external/441221776.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  },
+  'snf-staff-education': {
+    title: 'SNF Workforce Education & Development',
+    shortDesc: 'Empowering your interdisciplinary teams through customized mentorship, advanced clinical training, and targeted regulatory compliance education.',
+    fullDesc: 'Knowledge is the foundation of operational success in the Long-Term Care industry. Evolve provides comprehensive education programs designed to empower your staff, from frontline therapists to the executive suite.',
+    longContent: `We believe that a well-educated team is a more efficient and compliant team. Our education services are not "off-the-shelf" webinars; they are customized training sessions tailored to your facility's unique challenges and opportunities. We mentor New Directors of Rehab (DORs), train marketing teams on the value of therapy, and educate nursing staff on clinical documentation necessity.
+
+By fostering a culture of continuous learning, we help our partners reduce turnover, improve morale, and ensure that everyone is working toward the same clinical and financial goals. We stay on the leading edge of regulatory changes so your team is never caught off guard.`,
+    benefits: [
+      'Higher staff retention through professional development',
+      'Improved cross-departmental collaboration (Nursing/Therapy/Admin)',
+      'Reduced compliance risk through documentation mastery',
+      'More effective marketing for higher-acuity admissions',
+      'Leadership growth for facility managers'
+    ],
+    features: [
+      'Comprehensive DOR Mentorship Programs',
+      'MDS & Clinical Documentation Training',
+      'Interdisciplinary Team (IDT) Strategy Workshops',
+      'Regulatory & Compliance Update Series',
+      'Marketing Synergy Education'
+    ],
+    image: 'https://images.unsplash.com/photo-1576091160550-2173ff9e5ece?auto=format&fit=crop&q=80',
+    iconName: 'GraduationCap',
+    videoUrl: 'https://player.vimeo.com/external/441220473.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  },
+  'therapy-cost-reduction': {
+    title: 'Strategic Therapy Cost Reduction',
+    shortDesc: 'Surgical optimization of therapy labor models and operational overhead to dramatically improve facility EBITDA without compromising patient care.',
+    fullDesc: 'In an era of tightening margins and rising labor costs, LTC operators must find ways to optimize their therapy overhead without sacrificing patient outcomes. Evolve Therapy Services specializes in identifying and eliminating operational waste.',
+    longContent: `Our approach to cost reduction is surgical. We analyze your therapy spend with a focus on maximizing the clinical and financial return on every labor hour. This includes evaluating your staffing mix (full-time vs. contract vs. PRN), reviewing productivity benchmarks, and optimizing your clinical discharge planning processes to prevent unnecessary length of stay while ensuring safe transitions.
+
+We provide our partners with a roadmap to improve their EBITDA (Earnings Before Interest, Taxes, Depreciation, and Amortization) by aligning therapy expenses with actual census and acuity levels. We turn therapy from a "black box" expense into a transparent, managed asset.`,
+    benefits: [
+      'Significant improvement in facility EBITDA',
+      'Lower reliance on high-cost contract labor',
+      'Streamlined discharge planning and length-of-stay management',
+      'Transparent therapy spend reporting',
+      'Optimized therapy room utilization'
+    ],
+    features: [
+      'Labor Mix & Productivity Analysis',
+      'Contract Reconciliation & Auditing',
+      'Discharge Planning Efficiency Reviews',
+      'Revenue Cycle Optimization',
+      'Benchmarking Against Industry Peers'
+    ],
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095199/d4b294cb-7d97-4dd6-857b-eee76e1777a5.png',
+    iconName: 'LineChart',
+    videoUrl: 'https://player.vimeo.com/external/494635105.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  },
+  'denial-management': {
+    title: 'Comprehensive Denial Management & Appeals',
+    shortDesc: 'Aggressive defense of your earned revenue through expert management of ADRs, multi-level appeals, and systemic audit risk mitigation.',
+    fullDesc: 'Revenue recovery is only half the battle; revenue preservation is just as important. Denial management has become a full-time requirement for LTC operators in the face of increased Medicare and Managed Care auditing.',
+    longContent: `When you receive an Additional Development Request (ADR) or a Target Probe and Educate (TPE) notice, the clock starts ticking. Evolve Therapy Services provides the expert heavy lifting needed to protect your revenue. We manage the entire appeals process across all levels (Level 1 Redetermination through Level 5 ALJ hearings).
+
+Our goal is not just to win individual appeals, but to identify the root causes of denials. We perform "look-back" audits to find systemic weaknesses in documentation or clinical necessity and fix them at the source. We protect the money you've already earned.`,
+    benefits: [
+      'High success rate on revenue recovery and preservation',
+      'Reduced administrative burden on facility staff',
+      'Proactive identification of audit risks',
+      'Detailed tracking of appeal timelines and outcomes',
+      'Expert representation at administrative hearings'
+    ],
+    features: [
+      'ADR, TPE, & RAC Audit Responses',
+      'Multi-Level Appeals Management (1-5)',
+      'Root Cause Analysis for Technical Denials',
+      'Clinical Necessity Argumentation',
+      'Risk Mitigation Strategy Development'
+    ],
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80',
+    iconName: 'ShieldAlert',
+    videoUrl: 'https://player.vimeo.com/external/371849187.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  },
+  'in-house-transition': {
+    title: 'Seamless In-House Transition Model',
+    shortDesc: 'End-to-end infrastructure and recruitment support to migrate away from third-party contracts and retain 100% of your facility\'s therapy revenue.',
+    fullDesc: 'Transitioning to an in-house therapy model is often the most impactful financial and cultural decision a Skilled Nursing Facility can make. Evolve makes this complex process manageable, predictable, and successful.',
+    longContent: `For years, third-party therapy providers have taken a significant slice of facility revenue while maintaining control over "your" staff. Evolve helps you take that control back. We provide the infrastructure, recruitment expertise, and operational systems to transition your therapy department into a fully integrated, in-house unit.
+
+An in-house model allows you to retain 100% of the therapy revenue, build a unified facility culture, and ensure that your therapists' goals are perfectly aligned with the facility's goals. We handle the recruitment of the team, the implementation of EHR software, and the setup of billing protocols.`,
+    benefits: [
+      'Retention of 100% of therapy revenue',
+      'Unification of facility culture and team morale',
+      'Greater control over clinical outcomes and customer service',
+      'Significant long-term increase in facility profitability',
+      'Elimination of third-party management fees'
+    ],
+    features: [
+      'Recruitment & Onboarding Infrastructure',
+      'HR Policies & Benefit Design Support',
+      'Therapy Software (EHR) Implementation',
+      'In-House Billing Protocol Setup',
+      'Change Management & Cultural Alignment'
+    ],
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095821/9c7538a6-3e33-4a50-a1d5-dbd97914fa26.png',
+    iconName: 'Users2',
+    videoUrl: 'https://player.vimeo.com/external/432014945.sd.mp4?s=6c6695333f276cd83428d0859585e488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  },
+  'reimbursement-optimization': {
+    title: 'Reimbursement Optimization',
+    shortDesc: 'Comprehensive programs focused on Multiple Procedure Payment Reduction (MPPR) effects and optimizing therapy service reimbursement.',
+    fullDesc: 'Navigating the intricate landscape of healthcare reimbursement requires specialized knowledge and constant vigilance. Evolve Therapy Services provides dedicated reimbursement optimization programs to ensure your facility maximizes its financial potential across both Long-Term Care (LTC) and Outpatient settings.',
+    longContent: `We dive deep into the specific mechanics of your billing processes, analyzing the impact of Multiple Procedure Payment Reduction (MPPR) and other complex coding rules. Our team ensures that every service provided is accurately documented, coded, and billed to prevent revenue leakage and protect your bottom line.
+
+By implementing proactive strategies and providing ongoing education to your billing and therapy teams, we help you secure the highest legitimate reimbursement rates while strictly adhering to all Medicare and commercial insurance guidelines.`,
+    benefits: [
+      'Maximized legitimate reimbursement for services rendered',
+      'Mitigation of MPPR revenue impacts',
+      'Reduced claim denials and faster payment cycles',
+      'Enhanced alignment between clinical documentation and billing',
+      'Improved financial predictability and cash flow'
+    ],
+    features: [
+      'MPPR Impact Analysis & Strategy',
+      'Outpatient Therapy Billing Review',
+      'CPT Coding Accuracy Audits',
+      'Revenue Cycle Management Support',
+      'Payer Contract Optimization Insights'
+    ],
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778093795/42b46240-f14c-44d5-b1e5-dc4d831cb2d6.png',
+    iconName: 'Target',
+    videoUrl: 'https://player.vimeo.com/external/494635105.sd.mp4?s=d007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  },
+  'in-house-resource-hub': {
+    title: 'In-House Resource Hub',
+    shortDesc: 'Expert, on-demand support for your existing in-house therapy programs, including recruitment, denial management, and data analysis.',
+    fullDesc: 'Running an in-house therapy department comes with significant rewards but also requires specialized ongoing support. The Evolve In-House Resource Hub is designed to empower facilities that already operate their own therapy teams by providing expert infrastructure and strategic backup.',
+    longContent: `Even the most successful in-house therapy programs encounter challenges with recruitment, regulatory changes, and complex denial management. Our Resource Hub acts as an extension of your team, stepping in precisely where and when you need specialized expertise without requiring you to outsource your entire department.
+
+Whether you need help sourcing high-quality therapists, defending against a complex audit, or analyzing your PDPM performance data, our hub provides the specialized tools and executive oversight necessary to keep your in-house program thriving.`,
+    benefits: [
+      'Access to specialized corporate-level therapy expertise',
+      'Improved recruitment and retention of top therapy talent',
+      'Robust defense against ADRs and payer audits',
+      'Data-driven insights to refine program performance',
+      'Continuous education (CEUs) for your existing staff'
+    ],
+    features: [
+      'Targeted Therapy Recruitment Services',
+      'On-Demand Denial Management Support',
+      'Clinical Data Analytics & Benchmarking',
+      'Continuing Education (CEU) Access',
+      'Interim Management Support'
+    ],
+    image: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1778095465/fe87049e-5e24-4b1e-bc2a-b265ebd01ddf.png',
+    iconName: 'GraduationCap',
+    videoUrl: 'https://player.vimeo.com/external/441220473.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761'
+  }
+};
+
+const outputDir = path.join(__dirname, 'content', 'service');
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir, { recursive: true });
+}
+
+Object.entries(services).forEach(([slug, data]) => {
+  fs.writeFileSync(path.join(outputDir, `${slug}.json`), JSON.stringify(data, null, 2));
+});
+
+console.log('Service JSON files generated successfully.');

@@ -6,7 +6,8 @@ import { Marquee } from '@/components/magicui/marquee';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import { cn } from '@/lib/utils';
+import { useTina } from 'tinacms/dist/react';
+import settingsData from '../../content/global/settings.json';
 
 function StarRow({ count }: { count: number }) {
   return (
@@ -18,55 +19,7 @@ function StarRow({ count }: { count: number }) {
   );
 }
 
-const testimonials = [
-  {
-    name: 'Amy Tyler, PTA',
-    role: 'Director of Rehab',
-    facility: 'Crystal Health and Rehab',
-    content:
-      'The support we received from Evolve Therapy Services facilitated our shift from a negative margin to being the most profitable we have ever been as a rehab department. Lisa and Isaiah work hard to ensure that we are up to date on the latest changes.',
-    stars: 5,
-    initials: 'AT',
-  },
-  {
-    name: 'I. Chafetz',
-    role: 'Facility Administrator',
-    facility: 'LTC Operator',
-    content:
-      "Having a company that treats your facilities like it's their own is very rare. They will focus on your facilities' goals like it's their own. It's an absolute pleasure both from a customer service and productivity side.",
-    stars: 5,
-    initials: 'IC',
-  },
-  {
-    name: 'Jimmy Daniels, COTA/L',
-    role: 'Director of Rehab',
-    facility: 'Emerald Care Center',
-    content:
-      'The leadership of Evolve has made a great impact not only in my daily operations but has made it fun and exciting to work, ultimately making a positive impact in our communities. They have definitely been a blessing.',
-    stars: 5,
-    initials: 'JD',
-  },
-  {
-    name: 'Sarah Mitchell, OT',
-    role: 'Lead Occupational Therapist',
-    facility: 'Sunrise Senior Living',
-    content:
-      'Evolve completely transformed how our therapy team operates. The billing efficiency and clinical protocols they brought in have made a tangible difference for our residents and our bottom line.',
-    stars: 5,
-    initials: 'SM',
-  },
-  {
-    name: 'Robert Hartley',
-    role: 'Administrator',
-    facility: 'Hillview Care Center',
-    content:
-      'From day one, the Evolve team felt like an extension of our own staff. They understand LTC challenges deeply and their strategic guidance has been invaluable to our facility growth.',
-    stars: 5,
-    initials: 'RH',
-  },
-];
-
-function TestimonialCard({ t }: { t: typeof testimonials[number] }) {
+function TestimonialCard({ t }: { t: any }) {
   return (
     <div className="w-[380px] md:w-[440px] shrink-0">
       <div className="h-full rounded-[2.5rem] border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-9 md:p-11 flex flex-col justify-between transition-all duration-500 hover:bg-white/[0.06] hover:border-white/[0.12] hover:-translate-y-1 group">
@@ -98,6 +51,14 @@ function TestimonialCard({ t }: { t: typeof testimonials[number] }) {
 
 
 export default function Testimonials() {
+  const { data } = useTina({
+    query: `query { settings(relativePath: "settings.json") { testimonials { title titleItalic description list { name role facility content stars initials } } } }`,
+    variables: {},
+    data: { settings: settingsData },
+  });
+
+  const t = data.settings.testimonials;
+
   return (
     <section className="relative py-24 md:py-40 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
       <div
@@ -113,11 +74,11 @@ export default function Testimonials() {
             <AnimatedGradientTextDark>Client Voices</AnimatedGradientTextDark>
           </div>
           <h2 className="text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-[0.9] mb-8">
-            Real Results, <br />
-            <span className="text-[#0284c7] italic font-medium">Trusted Partners.</span>
+            {t.title} <br />
+            <span className="text-[#0284c7] italic font-medium">{t.titleItalic}</span>
           </h2>
           <p className="text-white/40 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-            Hear from LTC professionals who have transformed their therapy programs with Evolve.
+            {t.description}
           </p>
         </BlurFade>
       </div>
@@ -128,8 +89,8 @@ export default function Testimonials() {
           pauseOnHover
           className="[--duration:60s] [--gap:2rem]"
         >
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={i} t={t} />
+          {t.list.map((item: any, i: number) => (
+            <TestimonialCard key={i} t={item} />
           ))}
         </Marquee>
       </div>

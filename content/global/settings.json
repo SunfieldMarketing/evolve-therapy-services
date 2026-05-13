@@ -7,23 +7,22 @@
   "navbar": {
     "links": [
       { "name": "Home", "href": "/" },
+      { "name": "About", "href": "/about" },
       { 
         "name": "Services", 
         "href": "/services",
         "dropdown": [
-          { "name": "Optimal Therapy Outcomes", "href": "/services/optimal-therapy-outcomes", "desc": "Diagnostic audits for PDPM performance and clinical alignment." },
-          { "name": "Medicaid & QMs", "href": "/services/medicaid-case-mix-analysis", "desc": "Specialized CMI and Quality Measure analysis for LTC." },
-          { "name": "Reimbursement Optimization", "href": "/services/reimbursement-optimization", "desc": "Data-driven strategies to secure your clinical revenue." },
-          { "name": "Cost Reduction", "href": "/services/therapy-cost-reduction", "desc": "Maximizing efficiency in your therapy department staffing." },
-          { "name": "In-House Transition", "href": "/services/in-house-transition", "desc": "Complete roadmap from contract to in-house therapy." },
-          { "name": "In-House Resource Hub", "href": "/services/in-house-resource-hub", "desc": "The ultimate clinical and operational elite resource for your team." }
+          { "name": "Therapy Outcomes & PDPM", "href": "/services/optimal-therapy-outcomes", "desc": "Diagnostic audits for clinical alignment and performance." },
+          { "name": "Medicaid Case Mix", "href": "/services/medicaid-case-mix-analysis", "desc": "Specialized CMI and Quality Measure analysis for SNF." },
+          { "name": "SNF Staff Education", "href": "/services/snf-staff-education", "desc": "Continuous education for in-house therapy teams." },
+          { "name": "Therapy Cost Reduction", "href": "/services/therapy-cost-reduction", "desc": "Maximizing efficiency in therapy department staffing." },
+          { "name": "Denial Management", "href": "/services/denial-management", "desc": "Expert elite resource for source-level audit defense." },
+          { "name": "In-House Transition", "href": "/services/in-house-transition", "desc": "Complete roadmap from contract to in-house therapy." }
         ]
       },
-      { "name": "About", "href": "/about" },
-      { "name": "Locations", "href": "/locations" },
-      { "name": "Contact", "href": "/contact" }
+      { "name": "Location", "href": "/locations" }
     ],
-    "ctaText": "Start Your Evolution"
+    "ctaText": "Contact Us"
   },
   "footer": {
     "tagline": "Providing expert clinical oversight, recruitment, and revenue retention strategies for in-house therapy teams across the nation.",

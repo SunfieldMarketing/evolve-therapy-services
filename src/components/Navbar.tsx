@@ -136,13 +136,11 @@ export default function Navbar() {
                 href="/contact"
                 data-tina-field={tinaField(s?.navbar, 'ctaText')}
                 className={cn(
-                  'px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center gap-2 group/btn',
-                  scrolled
-                    ? 'bg-[#0f172a] text-white hover:bg-[#0284c7]'
-                    : 'bg-white text-[#0f172a] hover:bg-slate-100 shadow-xl'
+                  'px-7 py-3.5 rounded-full font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center gap-2 group/btn',
+                  'bg-[#0284c7] text-white hover:bg-[#0369a1] shadow-[0_10px_25px_rgba(2,132,199,0.2)]'
                 )}
               >
-                {s?.navbar?.ctaText || 'Contact'}
+                {s?.navbar?.ctaText || 'Contact Us'}
                 <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
               </Link>
             </div>

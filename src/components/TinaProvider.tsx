@@ -8,13 +8,18 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
   const [isClient, setIsClient] = useState(false);
 
   // Use a stable CMS instance to prevent re-mounting the entire app tree.
+  // We pass the config safely here to avoid runtime crashes during property injection.
   const cms = useMemo(() => new TinaCMS({
     enabled: false,
     sidebar: true,
+    clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+    branch: process.env.NEXT_PUBLIC_TINA_BRANCH || 'main',
   } as any), []);
 
   useEffect(() => {
     setIsClient(true);
+    
+    // Check if we are in an admin-related route
     const adminMode = 
       window.location.pathname.startsWith('/admin') || 
       window.location.pathname.startsWith('/portal') ||
@@ -22,17 +27,17 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
 
     if (adminMode) {
       setIsAdmin(true);
-      // Enable features on the existing stable instance
-      cms.enable();
-      
-      // Inject config properties safely
-      (cms as any).config.clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
-      (cms as any).config.branch = process.env.NEXT_PUBLIC_TINA_BRANCH || 'main';
+      // Safely enable the CMS on the existing stable instance
+      try {
+        cms.enable();
+      } catch (e) {
+        console.warn("TinaCMS enable failed:", e);
+      }
     }
   }, [cms]);
 
-  // For normal visitors, we return children directly WITHOUT the TinaProvider wrapper.
-  // This ensures the site remains fast and 100% interactive without any Tina overhead.
+  // CRITICAL: For normal visitors, we return children directly WITHOUT the TinaProvider wrapper.
+  // This ensures the site remains fast and 100% interactive by avoiding any Tina-related hydration errors.
   if (!isClient || !isAdmin) {
     return <>{children}</>;
   }

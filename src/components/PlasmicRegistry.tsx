@@ -8,8 +8,23 @@ import SocialProof from "./SocialProof";
 import Testimonials from "./Testimonials";
 import FAQ from "./FAQ";
 import Pricing from "./Pricing";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 // Register all major page sections as Code Components
+PLASMIC.registerComponent(Navbar, {
+  name: "NavbarSection",
+  displayName: "Navigation Bar",
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
+});
+
+PLASMIC.registerComponent(Footer, {
+  name: "FooterSection",
+  displayName: "Footer",
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
+});
 PLASMIC.registerComponent(Hero, {
   name: "HeroSection",
   displayName: "Hero Section",

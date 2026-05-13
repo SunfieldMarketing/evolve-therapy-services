@@ -7,8 +7,8 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
   // Use a stable CMS instance to prevent re-mounting the entire app tree.
   const cms = useMemo(() => new TinaCMS({
     enabled: false,
-    sidebar: false,
-  }), []);
+    sidebar: true,
+  } as any), []);
 
   useEffect(() => {
     const isAdmin = 
@@ -19,7 +19,6 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
     if (isAdmin) {
       // Enable features on the existing stable instance
       cms.enable();
-      cms.sidebar?.enable();
       
       // Inject config properties safely
       (cms as any).config.clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;

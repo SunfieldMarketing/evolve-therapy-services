@@ -161,5 +161,52 @@
     ],
     "primaryCta": "Start Your Evolution",
     "phone": "(888) 386-5820"
+  },
+  "ourServices": {
+    "title": "Clinical Program Excellence",
+    "theme": "light",
+    "showSection": true,
+    "items": [
+      {
+        "title": "PDPM Case Mix Analysis",
+        "desc": "Real-time analysis of your clinical data to optimize reimbursement and outcomes.",
+        "icon": "BarChart3"
+      },
+      {
+        "title": "Staff Education & CEUs",
+        "desc": "In-house training for your therapists to keep them ahead of regulatory changes.",
+        "icon": "GraduationCap"
+      },
+      {
+        "title": "Recruitment & Retention",
+        "desc": "Building your therapy team with top-tier talent that stays for the long term.",
+        "icon": "Users"
+      }
+    ]
+  },
+  "coverage": {
+    "title": "Strategic Presence Across America",
+    "legend": [
+      { "text": "Active Management", "icon": "ShieldCheck" },
+      { "text": "Strategic Growth", "icon": "TrendingUp" }
+    ]
+  },
+  "faq": {
+    "title": "Therapy Management FAQ",
+    "items": [
+      {
+        "question": "How do we retain 100% of revenue?",
+        "answer": "Our management model empowers you to keep all therapy billing while we provide the oversight and staff for a fixed management fee."
+      },
+      {
+        "question": "Can we transition from contract therapy?",
+        "answer": "Yes, we specialize in seamless transitions from third-party contracts to efficient in-house models."
+      }
+    ]
+  },
+  "partner": {
+    "title": "Join The Clinical Evolution",
+    "desc": "Ready to take control of your facility's therapy future? Let's discuss a customized roadmap.",
+    "button": "Partner With Evolve"
   }
 }

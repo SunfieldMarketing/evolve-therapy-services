@@ -24,7 +24,7 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
           sidebar: true,
           clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
           branch: process.env.NEXT_PUBLIC_TINA_BRANCH || 'main',
-        });
+        } as any);
         setCms(tinaCms);
       };
       initTina();

@@ -46,11 +46,13 @@ export default function Footer() {
                Ready to Evolve?
             </div>
             <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[0.9] text-white mb-8">
-              {s?.preFooterCta?.title?.split('with')[0] || 'Start Your Evolution'} <br className="hidden md:block" />
-              with <span className="text-[#38bdf8] italic font-medium">{s?.preFooterCta?.title?.split('with')[1] || "Evolve"}</span>
+              <span data-tina-field={tinaField(s?.preFooterCta, 'title') as any}>
+                {s?.preFooterCta?.title?.split('with')[0] || 'Start Your Evolution'} <br className="hidden md:block" />
+                with <span className="text-[#38bdf8] italic font-medium">{s?.preFooterCta?.title?.split('with')[1] || "Evolve"}</span>
+              </span>
             </h3>
-            <p className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed">
-              {s.preFooterCta.subtitle}
+            <p data-tina-field={tinaField(s?.preFooterCta, 'subtitle') as any} className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed">
+              {s?.preFooterCta?.subtitle || ''}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
               <Link
@@ -125,8 +127,8 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Navigation</h4>
             <ul className="space-y-3" role="list">
-              {navLinks?.map((link: any) => (
-                <li key={link.href}>
+              {navLinks?.map((link: any, idx: number) => (
+                <li key={link.href} data-tina-field={tinaField(link, 'name')}>
                   <Link
                     href={link.href}
                     className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium"
@@ -141,8 +143,8 @@ export default function Footer() {
           <div className="lg:col-span-3">
             <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Services</h4>
             <ul className="space-y-3" role="list">
-              {serviceLinks?.map((link: any) => (
-                <li key={link.href}>
+              {serviceLinks?.map((link: any, idx: number) => (
+                <li key={link.href} data-tina-field={tinaField(link, 'name')}>
                   <Link
                     href={link.href}
                     className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block"

@@ -57,7 +57,9 @@ export default function Testimonials() {
     data: { settings: settingsData },
   });
 
-  const t = data.settings.testimonials;
+  const t = data?.settings?.testimonials || settingsData.testimonials;
+  
+  if (!t) return null;
 
   return (
     <section className="relative py-24 md:py-40 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">

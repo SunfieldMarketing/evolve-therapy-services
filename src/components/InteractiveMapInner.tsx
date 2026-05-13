@@ -40,7 +40,9 @@ export default function InteractiveMapInner() {
     data: { settings: settingsData },
   });
 
-  const s = data.settings;
+  const s = data?.settings || settingsData;
+  
+  if (!s) return null;
   const activeStatesSet = useMemo(() => new Set(s.activeStates || []), [s.activeStates]);
 
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);

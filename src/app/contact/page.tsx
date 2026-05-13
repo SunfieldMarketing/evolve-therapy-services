@@ -26,7 +26,9 @@ export default function ContactPage(props: { data: any, query: string, variables
     data: props.data || { contact: contactData },
   });
 
-  const p = data.contact;
+  const p = data?.contact || contactData;
+  
+  if (!p) return null;
 
   return (
     <main className="min-h-screen bg-white">

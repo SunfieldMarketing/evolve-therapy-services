@@ -16,7 +16,9 @@ export default function Navbar() {
     data: { settings: settingsData },
   });
 
-  const s = data.settings;
+  const s = data?.settings || settingsData;
+  
+  if (!s) return null;
   type NavLink = { name: string; href: string; dropdown?: { name: string; href: string; desc?: string }[] };
   const links = (s.navbar.links ?? []) as NavLink[];
 

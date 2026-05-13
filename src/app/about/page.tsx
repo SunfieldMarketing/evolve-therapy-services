@@ -71,7 +71,9 @@ export default function AboutPage(props: { data: any, query: string, variables: 
     data: props.data || { about: aboutData },
   });
 
-  const p = data.about;
+  const p = data?.about || aboutData;
+  
+  if (!p) return null;
   const leaders = p.leaders;
 
   return (

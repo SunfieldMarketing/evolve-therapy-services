@@ -14,7 +14,9 @@ export default function Pricing() {
     data: { services: servicesData },
   });
 
-  const p = data.services.pricing;
+  const p = data?.services?.pricing || servicesData.pricing;
+  
+  if (!p) return null;
 
   return (
     <section className="py-24 md:py-40 bg-white relative overflow-hidden">

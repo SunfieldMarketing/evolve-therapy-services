@@ -60,7 +60,9 @@ export default function ServicesPage(props: { data: any, query: string, variable
     data: props.data || { services: servicesData },
   });
 
-  const p = data.services;
+  const p = data?.services || servicesData;
+  
+  if (!p) return null;
   const detailedServices = p.showcase.services;
 
   const [videoStarted, setVideoStarted] = useState(false);

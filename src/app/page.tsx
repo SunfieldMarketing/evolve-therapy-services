@@ -11,6 +11,7 @@ import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import MobileCTA from '@/components/MobileCTA';
+import SocialProof from '@/components/SocialProof';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { 
@@ -51,7 +52,9 @@ export default function Home(props: { data: any, query: string, variables: any }
     data: props.data || { home: homeData },
   });
 
-  const p = data.home;
+  const p = data?.home || homeData;
+  
+  if (!p) return null; // Safety bail-out if both are missing
 
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
@@ -62,6 +65,7 @@ export default function Home(props: { data: any, query: string, variables: any }
     <main className="min-h-screen bg-white">
       <Navbar />
       <Hero data={p.hero} />
+      <SocialProof />
 
       {/* ── Clinical Excellence ── */}
       <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
@@ -199,8 +203,8 @@ export default function Home(props: { data: any, query: string, variables: any }
       <WhyEvolve />
       <Services />
       <Testimonials />
-      <USAMap />
       <FAQ />
+      <USAMap />
 
       {/* Philosophy / CTA Dark Section */}
       <section className="py-24 md:py-40 bg-[#0f172a] relative overflow-hidden">

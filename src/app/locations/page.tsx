@@ -27,7 +27,9 @@ export default function LocationsPage(props: { data: any, query: string, variabl
     data: props.data || { locations: locationsData },
   });
 
-  const p = data.locations;
+  const p = data?.locations || locationsData;
+  
+  if (!p) return null;
 
   return (
     <main className="min-h-screen bg-white">

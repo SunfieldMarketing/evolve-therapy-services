@@ -16,6 +16,18 @@ import { BlurFade } from '@/components/magicui/blur-fade';
 import { BorderBeamAlways } from '@/components/magicui/border-beam';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
+import { useTina } from 'tinacms/dist/react';
+import homeData from '../../content/pages/home.json';
+import { Microscope, HeartPulse, ShieldCheck, BarChart3, Users, TrendingUp } from 'lucide-react';
+
+const iconMapLookup = {
+  Microscope,
+  HeartPulse,
+  ShieldCheck,
+  BarChart3,
+  Users,
+  TrendingUp,
+};
 
 const services = [
   {
@@ -69,6 +81,15 @@ const services = [
 ];
 
 export default function Services() {
+  const { data } = useTina({
+    query: `query { home(relativePath: "home.json") { clinicalExcellence { services { title desc tag icon } } } }`,
+    variables: {},
+    data: { home: homeData },
+  });
+
+  const p = data?.home?.clinicalExcellence || homeData.clinicalExcellence;
+  const displayServices = p.services;
+
   return (
     <section id="services" className="py-20 md:py-32 bg-white relative overflow-hidden">
       {/* Decorative Background Elements */}
@@ -94,21 +115,21 @@ export default function Services() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 lg:gap-8">
-          {services.map((service, i) => (
+          {displayServices.map((service: any, i: number) => (
             <BlurFade
               key={i}
               delay={0.1 + i * 0.1}
               className="bg-slate-50 p-6 sm:p-8 md:p-10 rounded-3xl md:rounded-[2.5rem] border border-slate-100 hover:bg-white hover:border-[#0284c7]/20 hover:scale-[1.02] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-500 group relative flex flex-col justify-between overflow-hidden"
             >
-              <Link href={service.href} className="absolute inset-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] focus-visible:ring-offset-2 rounded-3xl md:rounded-[2.5rem]" aria-label={`Learn more about ${service.title}`} />
+              <Link href={`/services/${service.title.toLowerCase().replace(/ /g, '-')}`} className="absolute inset-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] focus-visible:ring-offset-2 rounded-3xl md:rounded-[2.5rem]" aria-label={`Learn more about ${service.title}`} />
               
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#0284c7]/5 rounded-full blur-2xl group-hover:bg-[#0284c7]/10 transition-colors duration-700" />
 
               <div>
-                <div className={`w-14 h-14 ${service.bg} rounded-2xl flex items-center justify-center mb-8 border border-white shadow-xl shadow-black/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 relative z-10`}>
+                <div className={`w-14 h-14 bg-[#0284c7]/10 rounded-2xl flex items-center justify-center mb-8 border border-white shadow-xl shadow-black/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 relative z-10`}>
                   {(() => {
-                    const Icon = service.icon;
-                    return <Icon size={24} strokeWidth={1.5} className={typeof service.color === 'string' && service.color.startsWith('text-') ? service.color : ''} style={!service.color.startsWith('text-') ? { color: service.color } : {}} />;
+                    const Icon = (iconMapLookup as any)[service.icon] || Microscope;
+                    return <Icon size={24} strokeWidth={1.5} className="text-[#0284c7]" />;
                   })()}
                 </div>
                 

@@ -23,7 +23,9 @@ export default function Footer() {
     data: { settings: settingsData },
   });
 
-  const s = data.settings;
+  const s = data?.settings || settingsData;
+  
+  if (!s) return null;
   const navLinks = s.footer.links;
   const serviceLinks = s.footer.serviceLinks;
   const year = new Date().getFullYear();

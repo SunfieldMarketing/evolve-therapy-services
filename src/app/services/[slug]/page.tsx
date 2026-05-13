@@ -57,7 +57,7 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
     data: props.data || {},
   });
 
-  const service = data.service;
+  const service = data?.service;
 
   if (!service) {
     // If we're in the editor, we might not have data yet for a new slug

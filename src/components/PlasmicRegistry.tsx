@@ -13,43 +13,50 @@ import Pricing from "./Pricing";
 PLASMIC.registerComponent(Hero, {
   name: "HeroSection",
   displayName: "Hero Section",
-  props: {}
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
 });
 
 PLASMIC.registerComponent(WhyEvolve, {
   name: "WhyEvolveSection",
   displayName: "Why Evolve Section",
-  props: {}
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
 });
 
 PLASMIC.registerComponent(Services, {
   name: "ServicesSection",
   displayName: "Services Section",
-  props: {}
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
 });
 
 PLASMIC.registerComponent(SocialProof, {
   name: "SocialProofSection",
   displayName: "Social Proof Strip",
-  props: {}
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
 });
 
 PLASMIC.registerComponent(Testimonials, {
   name: "TestimonialsSection",
   displayName: "Testimonials",
-  props: {}
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
 });
 
 PLASMIC.registerComponent(FAQ, {
   name: "FAQSection",
   displayName: "FAQ Section",
-  props: {}
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
 });
 
 PLASMIC.registerComponent(Pricing, {
   name: "PricingSection",
   displayName: "Pricing Section",
-  props: {}
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
 });
 
 export function PlasmicRegistry() {

@@ -223,6 +223,53 @@ export default defineConfig({
             ],
           },
           {
+            type: "object", name: "ourServices", label: "Our Services Section",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
+              { type: "boolean", name: "showSection", label: "Show Section" },
+              { type: "object", name: "items", label: "Service Items", list: true,
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
+                  { type: "string", name: "icon", label: "Icon Name" },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object", name: "coverage", label: "Service Coverage Section",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "object", name: "legend", label: "Map Legend", list: true,
+                fields: [
+                  { type: "string", name: "text", label: "Text" },
+                  { type: "string", name: "icon", label: "Icon" },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object", name: "faq", label: "FAQ Section",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "object", name: "items", label: "Questions", list: true,
+                fields: [
+                  { type: "string", name: "question", label: "Question" },
+                  { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object", name: "partner", label: "Partner With Us Section",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
+              { type: "string", name: "button", label: "Button Text" },
+            ],
+          },
+          {
             type: "object", name: "bottomCta", label: "Bottom CTA Section",
             fields: [
               { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },

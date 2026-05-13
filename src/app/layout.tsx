@@ -52,6 +52,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth h-full`} suppressHydrationWarning>
+      <head>
+        <meta name="tina-audit-build-id" content="1.0.6-bulletproof-interactivity" />
+      </head>
       <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col`}>
         {children}
       </body>

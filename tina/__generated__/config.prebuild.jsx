@@ -3,8 +3,8 @@ import { defineConfig } from "tinacms";
 var branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 var config_default = defineConfig({
   branch,
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
-  token: process.env.TINA_TOKEN || "",
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "50c8892e-7fda-4f20-86e1-91f546d2d97a",
+  token: process.env.TINA_TOKEN || "5b6b1935560b9b806fa1ceb712713010e0e32bab",
   build: {
     outputFolder: "admin",
     publicFolder: "public"
@@ -360,6 +360,27 @@ var config_default = defineConfig({
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "icon", label: "Icon Name" },
                   { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } }
+                ]
+              }
+            ]
+          },
+          {
+            type: "object",
+            name: "journey",
+            label: "Journey Section",
+            fields: [
+              { type: "string", name: "badge", label: "Badge Text" },
+              { type: "string", name: "titleLine1", label: "Title Line 1" },
+              { type: "string", name: "titleItalic", label: "Title Italic Word" },
+              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "object",
+                name: "items",
+                label: "Items",
+                list: true,
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "text", label: "Description", ui: { component: "textarea" } }
                 ]
               }
             ]

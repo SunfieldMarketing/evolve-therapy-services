@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { PLASMIC } from '../../plasmic-init';
 import { ClientPlasmicRootProvider } from './client-provider';
 
-export default async function CatchAllPage(props: { params: Promise<{ catchall: string[] }> }) {
+export default async function CatchAllPage(props: { params: Promise<{ catchall?: string[] }> }) {
   const { catchall } = await props.params;
   const plasmicPath = "/" + (catchall ? catchall.join('/') : "");
   

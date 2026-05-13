@@ -8,7 +8,12 @@ import {
   ClipboardCheck, 
   LineChart,
   ArrowUpRight,
-  Target
+  Target,
+  Microscope,
+  HeartPulse,
+  ShieldCheck,
+  Users,
+  TrendingUp
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,7 +23,6 @@ import { AnimatedGradientText } from '@/components/magicui/animated-gradient-tex
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { useTina } from 'tinacms/dist/react';
 import homeData from '../../content/pages/home.json';
-import { Microscope, HeartPulse, ShieldCheck, BarChart3, Users, TrendingUp } from 'lucide-react';
 
 const iconMapLookup = {
   Microscope,

@@ -166,6 +166,12 @@ type SettingsFaq {
   list: [SettingsFaqList]
 }
 
+type SettingsMapLegend {
+  icon: String
+  title: String
+  desc: String
+}
+
 type Settings implements Node & Document {
   siteName: String
   phone: String
@@ -177,6 +183,7 @@ type Settings implements Node & Document {
   preFooterCta: SettingsPreFooterCta
   testimonials: SettingsTestimonials
   faq: SettingsFaq
+  mapLegend: [SettingsMapLegend]
   activeStates: [String]
   id: ID!
   _sys: SystemInfo!
@@ -261,6 +268,12 @@ input SettingsFaqFilter {
   list: SettingsFaqListFilter
 }
 
+input SettingsMapLegendFilter {
+  icon: StringFilter
+  title: StringFilter
+  desc: StringFilter
+}
+
 input SettingsFilter {
   siteName: StringFilter
   phone: StringFilter
@@ -272,6 +285,7 @@ input SettingsFilter {
   preFooterCta: SettingsPreFooterCtaFilter
   testimonials: SettingsTestimonialsFilter
   faq: SettingsFaqFilter
+  mapLegend: SettingsMapLegendFilter
   activeStates: StringFilter
 }
 
@@ -364,6 +378,25 @@ type HomeWhyEvolve {
   quoteStrip: HomeWhyEvolveQuoteStrip
 }
 
+type HomeSocialProofStats {
+  value: String
+  label: String
+  desc: String
+}
+
+type HomeSocialProof {
+  stats: [HomeSocialProofStats]
+}
+
+type HomeFeaturedDiscovery {
+  badge: String
+  title: String
+  titleItalic: String
+  description: String
+  image: String
+  cta: String
+}
+
 type HomeBottomCta {
   quote: String
   checklist: [String]
@@ -376,6 +409,8 @@ type Home implements Node & Document {
   clinicalExcellence: HomeClinicalExcellence
   process: HomeProcess
   whyEvolve: HomeWhyEvolve
+  socialProof: HomeSocialProof
+  featuredDiscovery: HomeFeaturedDiscovery
   bottomCta: HomeBottomCta
   id: ID!
   _sys: SystemInfo!
@@ -467,6 +502,25 @@ input HomeWhyEvolveFilter {
   quoteStrip: HomeWhyEvolveQuoteStripFilter
 }
 
+input HomeSocialProofStatsFilter {
+  value: StringFilter
+  label: StringFilter
+  desc: StringFilter
+}
+
+input HomeSocialProofFilter {
+  stats: HomeSocialProofStatsFilter
+}
+
+input HomeFeaturedDiscoveryFilter {
+  badge: StringFilter
+  title: StringFilter
+  titleItalic: StringFilter
+  description: StringFilter
+  image: ImageFilter
+  cta: StringFilter
+}
+
 input HomeBottomCtaFilter {
   quote: StringFilter
   checklist: StringFilter
@@ -479,6 +533,8 @@ input HomeFilter {
   clinicalExcellence: HomeClinicalExcellenceFilter
   process: HomeProcessFilter
   whyEvolve: HomeWhyEvolveFilter
+  socialProof: HomeSocialProofFilter
+  featuredDiscovery: HomeFeaturedDiscoveryFilter
   bottomCta: HomeBottomCtaFilter
 }
 
@@ -1280,6 +1336,12 @@ input SettingsFaqMutation {
   list: [SettingsFaqListMutation]
 }
 
+input SettingsMapLegendMutation {
+  icon: String
+  title: String
+  desc: String
+}
+
 input SettingsMutation {
   siteName: String
   phone: String
@@ -1291,6 +1353,7 @@ input SettingsMutation {
   preFooterCta: SettingsPreFooterCtaMutation
   testimonials: SettingsTestimonialsMutation
   faq: SettingsFaqMutation
+  mapLegend: [SettingsMapLegendMutation]
   activeStates: [String]
 }
 
@@ -1372,6 +1435,25 @@ input HomeWhyEvolveMutation {
   quoteStrip: HomeWhyEvolveQuoteStripMutation
 }
 
+input HomeSocialProofStatsMutation {
+  value: String
+  label: String
+  desc: String
+}
+
+input HomeSocialProofMutation {
+  stats: [HomeSocialProofStatsMutation]
+}
+
+input HomeFeaturedDiscoveryMutation {
+  badge: String
+  title: String
+  titleItalic: String
+  description: String
+  image: String
+  cta: String
+}
+
 input HomeBottomCtaMutation {
   quote: String
   checklist: [String]
@@ -1384,6 +1466,8 @@ input HomeMutation {
   clinicalExcellence: HomeClinicalExcellenceMutation
   process: HomeProcessMutation
   whyEvolve: HomeWhyEvolveMutation
+  socialProof: HomeSocialProofMutation
+  featuredDiscovery: HomeFeaturedDiscoveryMutation
   bottomCta: HomeBottomCtaMutation
 }
 

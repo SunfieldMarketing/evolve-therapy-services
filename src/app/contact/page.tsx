@@ -6,7 +6,7 @@ import PageHeader from '@/components/PageHeader';
 import { Mail, Phone, Clock, MapPin, ArrowRight, ShieldCheck, Globe, Lock } from 'lucide-react';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import contactData from '../../../content/pages/contact.json';
 
 const iconMap = {
@@ -63,10 +63,10 @@ export default function ContactPage(props: { data: any, query: string, variables
 
                   <div className="relative z-10">
                     <h2 className="text-4xl md:text-5xl font-serif font-black text-white mb-6 tracking-tighter leading-tight">
-                      {p.sidebar.title} <br />
-                      <span className="text-[#38bdf8] italic font-medium">{p.sidebar.titleItalic}</span>
+                      <span data-tina-field={tinaField(p.sidebar, 'title')}>{p.sidebar.title}</span> <br />
+                      <span data-tina-field={tinaField(p.sidebar, 'titleItalic')} className="text-[#38bdf8] italic font-medium">{p.sidebar.titleItalic}</span>
                     </h2>
-                    <p className="text-white/50 text-lg font-light leading-relaxed mb-12">
+                    <p data-tina-field={tinaField(p.sidebar, 'description')} className="text-white/50 text-lg font-light leading-relaxed mb-12">
                       {p.sidebar.description}
                     </p>
 
@@ -76,12 +76,12 @@ export default function ContactPage(props: { data: any, query: string, variables
                         return (
                           <div key={i} className="flex items-start gap-6 group">
                             <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8] group-hover:bg-[#38bdf8] group-hover:text-[#0f172a] shadow-xl transition-all duration-500">
-                              <Icon size={22} />
+                               <Icon size={22} />
                             </div>
                             <div>
-                              <div className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-1">{item.label}</div>
-                              <div className="text-xl font-serif font-bold text-white group-hover:text-[#38bdf8] transition-colors">{item.value}</div>
-                              <div className="text-xs text-white/40 mt-1">{item.sub}</div>
+                               <div data-tina-field={tinaField(item, 'label')} className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-1">{item.label}</div>
+                               <div data-tina-field={tinaField(item, 'value')} className="text-xl font-serif font-bold text-white group-hover:text-[#38bdf8] transition-colors">{item.value}</div>
+                               <div data-tina-field={tinaField(item, 'sub')} className="text-xs text-white/40 mt-1">{item.sub}</div>
                             </div>
                           </div>
                         );

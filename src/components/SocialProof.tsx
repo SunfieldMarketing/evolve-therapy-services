@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import homeData from '../../content/pages/home.json';
 
 export default function SocialProof() {
@@ -28,9 +28,9 @@ export default function SocialProof() {
                 transition={{ delay: i * 0.1 }}
                 className="text-center lg:text-left relative"
               >
-                <div className="text-5xl font-serif font-black text-[#0284c7] mb-2 tracking-tighter">{stat.value}</div>
-                <div className="text-white font-bold text-sm uppercase tracking-widest mb-1">{stat.label}</div>
-                <div className="text-white/40 text-xs font-medium">{stat.desc}</div>
+                <div data-tina-field={tinaField(stat, 'value')} className="text-5xl font-serif font-black text-[#0284c7] mb-2 tracking-tighter">{stat.value}</div>
+                <div data-tina-field={tinaField(stat, 'label')} className="text-white font-bold text-sm uppercase tracking-widest mb-1">{stat.label}</div>
+                <div data-tina-field={tinaField(stat, 'desc')} className="text-white/40 text-xs font-medium">{stat.desc}</div>
                 {i < stats.length - 1 && (
                   <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-white/10" />
                 )}

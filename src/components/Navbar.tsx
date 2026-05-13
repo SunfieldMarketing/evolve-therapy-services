@@ -19,6 +19,11 @@ export default function Navbar() {
   interface NavLink {
     name: string;
     href: string;
+    dropdown?: {
+      name: string;
+      href: string;
+      desc: string;
+    }[];
   }
 
   const s = data?.settings || settingsData;

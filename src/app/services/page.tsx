@@ -31,7 +31,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import servicesData from '../../../content/pages/services.json';
 
 const iconMap = {
@@ -152,8 +152,8 @@ export default function ServicesPage(props: { data: any, query: string, variable
                                <Icon size={24} />
                             </div>
                             <div className="flex flex-col">
-                               <span className="text-white font-black uppercase text-[11px] tracking-widest mb-1">{val.title}</span>
-                               <span className="text-white/20 text-[13px] font-light italic">"{val.subtitle}"</span>
+                               <span data-tina-field={tinaField(val, 'title')} className="text-white font-black uppercase text-[11px] tracking-widest mb-1">{val.title}</span>
+                               <span data-tina-field={tinaField(val, 'subtitle')} className="text-white/20 text-[13px] font-light italic">"{val.subtitle}"</span>
                             </div>
                           </div>
                         );
@@ -168,17 +168,17 @@ export default function ServicesPage(props: { data: any, query: string, variable
       {/* ── Social Proof Trust Section ── */}
       <section className="relative z-50 pt-16 pb-32 bg-[#0f172a] border-y border-white/[0.05]">
         <div className="container mx-auto px-12">
-           <div className="flex flex-wrap items-center justify-between gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
+            <div className="flex flex-wrap items-center justify-between gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
               {p.trust.map((item: any, idx: number) => (
                 <div key={idx} className="flex items-center gap-4 group cursor-default">
                    {(() => {
                      const Icon = iconMap[item.icon as keyof typeof iconMap] || ShieldCheck;
                      return <Icon className={cn("group-hover:scale-110 transition-transform", item.icon === 'Star' ? "text-yellow-500" : item.icon === 'Activity' ? "text-emerald-500" : "text-[#0284c7]")} size={20} />;
                    })()}
-                   <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">{item.text}</span>
+                   <span data-tina-field={tinaField(item, 'text')} className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">{item.text}</span>
                 </div>
               ))}
-           </div>
+            </div>
         </div>
       </section>
 
@@ -189,11 +189,11 @@ export default function ServicesPage(props: { data: any, query: string, variable
             <BlurFade delay={0.1}>
               <div className="flex items-center gap-4 mb-8">
                  <div className="w-8 h-[2px] bg-[#0284c7]" />
-                 <span className="text-[#0284c7] font-black uppercase text-[10px] tracking-[0.4em]">{p.showcase.badge}</span>
+                 <span data-tina-field={tinaField(p.showcase, 'badge')} className="text-[#0284c7] font-black uppercase text-[10px] tracking-[0.4em]">{p.showcase.badge}</span>
               </div>
               <h2 className="text-5xl md:text-8xl font-serif text-[#0f172a] font-black tracking-tighter mb-8 leading-[0.85]">
-                {p.showcase.titleLine1} <br />
-                <span className="text-[#0284c7] italic">{p.showcase.titleItalic}</span>
+                <span data-tina-field={tinaField(p.showcase, 'titleLine1')}>{p.showcase.titleLine1}</span> <br />
+                <span data-tina-field={tinaField(p.showcase, 'titleItalic')} className="text-[#0284c7] italic">{p.showcase.titleItalic}</span>
               </h2>
             </BlurFade>
           </div>
@@ -225,10 +225,10 @@ export default function ServicesPage(props: { data: any, query: string, variable
                        })()}
                        CORE SOLUTION {i + 1}
                     </div>
-                    <h3 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 leading-[0.9] tracking-tighter group-hover:text-[#0284c7] transition-colors duration-500">
+                     <h3 data-tina-field={tinaField(service, 'title')} className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 leading-[0.9] tracking-tighter group-hover:text-[#0284c7] transition-colors duration-500">
                       {service.title}
                     </h3>
-                    <p className="text-xl text-slate-500 font-light leading-relaxed mb-12">
+                    <p data-tina-field={tinaField(service, 'desc')} className="text-xl text-slate-500 font-light leading-relaxed mb-12">
                       {service.desc}
                     </p>
                     <div className="grid sm:grid-cols-2 gap-6 mb-12">
@@ -237,7 +237,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
                            <div className="w-6 h-6 rounded-lg bg-[#0284c7]/5 text-[#0284c7] flex items-center justify-center shrink-0">
                               <Check size={14} strokeWidth={3} />
                            </div>
-                           <span className="text-sm font-semibold text-[#0f172a]/70">{detail}</span>
+                           <span data-tina-field={tinaField(service, `details[${idx}]`)} className="text-sm font-semibold text-[#0f172a]/70">{detail}</span>
                         </div>
                       ))}
                     </div>

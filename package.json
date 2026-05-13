@@ -11,8 +11,6 @@
     "tina:build": "tinacms build"
   },
   "dependencies": {
-    "@plasmicapp/loader-nextjs": "^2.0.3",
-    "@plasmicapp/react-web": "^1.0.6",
     "@tinacms/cli": "^2.3.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",

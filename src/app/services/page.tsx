@@ -1,4 +1,4 @@
-import { client } from "../../tina/__generated__/client";
+import { client } from "../../../tina/__generated__/client";
 import ServicesClient from "./ServicesClient";
 import servicesData from "../../../content/pages/services.json";
 

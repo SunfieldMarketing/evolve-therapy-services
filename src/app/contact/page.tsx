@@ -1,4 +1,4 @@
-import { client } from "../../tina/__generated__/client";
+import { client } from "../../../tina/__generated__/client";
 import ContactClient from "./ContactClient";
 import contactData from "../../../content/pages/contact.json";
 

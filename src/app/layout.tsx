@@ -44,6 +44,8 @@ export const metadata: Metadata = {
   },
 };
 
+import TinaProviderWrapper from "@/components/TinaProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,7 +54,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth h-full`}>
       <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col`}>
-        {children}
+        <TinaProviderWrapper>
+          {children}
+        </TinaProviderWrapper>
       </body>
     </html>
   );

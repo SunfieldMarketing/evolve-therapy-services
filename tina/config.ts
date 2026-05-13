@@ -25,7 +25,10 @@ export default defineConfig({
         label: "⚙️ Global Settings",
         path: "content/global",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: { 
+          allowedActions: { create: false, delete: false },
+          router: () => "/" 
+        },
         fields: [
           { type: "string", name: "siteName", label: "Site Name" },
           { type: "string", name: "phone", label: "Phone Number" },
@@ -122,7 +125,10 @@ export default defineConfig({
         path: "content/pages",
         match: { include: "home" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: { 
+          allowedActions: { create: false, delete: false },
+          router: () => "/" 
+        },
         fields: [
           {
             type: "object", name: "hero", label: "Hero Section",
@@ -233,7 +239,10 @@ export default defineConfig({
         path: "content/pages",
         match: { include: "about" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: { 
+          allowedActions: { create: false, delete: false },
+          router: () => "/about"
+        },
         fields: [
           {
             type: "object", name: "header", label: "Header Section",
@@ -352,7 +361,10 @@ export default defineConfig({
         path: "content/pages",
         match: { include: "services" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: { 
+          allowedActions: { create: false, delete: false },
+          router: () => "/services"
+        },
         fields: [
           {
             type: "object", name: "hero", label: "Hero Section",
@@ -477,10 +489,8 @@ export default defineConfig({
         path: "content/pages",
         format: "json",
         ui: {
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
+          allowedActions: { create: false, delete: false },
+          router: () => "/contact",
         },
         match: {
           include: "contact",
@@ -539,10 +549,8 @@ export default defineConfig({
         path: "content/pages",
         format: "json",
         ui: {
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
+          allowedActions: { create: false, delete: false },
+          router: () => "/locations",
         },
         match: {
           include: "locations",

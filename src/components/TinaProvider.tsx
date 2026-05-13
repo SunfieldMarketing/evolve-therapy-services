@@ -6,55 +6,53 @@ import { useMemo, useEffect, useState } from 'react';
 /**
  * TinaProviderWrapper
  * 
- * Provides the TinaCMS context to the entire application.
- * This version is designed to be 100% stable:
- * 1. Always provides a valid CMS context to prevent hook crashes.
- * 2. Mocks missing methods to prevent "fetchCollections" runtime errors.
+ * This is the critical safety layer for the site.
+ * 1. For normal visitors: It returns children DIRECTLY (no wrapper). 
+ *    This ensures 100% interactivity and zero library overhead.
+ * 2. For admins: It injects the TinaProvider for visual editing.
  */
 export default function TinaProviderWrapper({ children }: { children: React.ReactNode }) {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   // Initialize a stable CMS instance.
   const cms = useMemo(() => {
-    const tina = new TinaCMS({
+    return new TinaCMS({
       enabled: false,
       sidebar: false,
       toolbar: false,
       clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || '',
       branch: process.env.NEXT_PUBLIC_TINA_BRANCH || 'main',
     } as any);
-
-    // CRITICAL MOCKING:
-    // We explicitly mock the internal API structure that Tina's React hooks expect.
-    // This prevents the "Cannot read properties of undefined (reading 'fetchCollections')" error.
-    if (!(tina as any).api) (tina as any).api = {};
-    (tina as any).api.fetchCollections = async () => ({ collections: [] });
-    (tina as any).api.request = async () => ({});
-    
-    // Also mock the client just in case
-    if (!(tina as any).client) (tina as any).client = (tina as any).api;
-
-    return tina;
   }, []);
 
   useEffect(() => {
-    // Detect if we should enable editor features
-    const isEditMode = 
-      typeof window !== 'undefined' && (
-        window.location.pathname.startsWith('/admin') || 
-        window.location.pathname.startsWith('/portal') ||
-        window.location.search.includes('tina-edit')
-      );
+    setIsClient(true);
+    
+    // Check if we should activate the CMS layer
+    // We check for /admin, /portal, or the tina-edit flag used by the visual editor
+    const editModeDetected = 
+      window.location.pathname.startsWith('/admin') || 
+      window.location.pathname.startsWith('/portal') ||
+      window.location.search.includes('tina-edit') ||
+      document.cookie.includes('evolve_admin_auth=true');
 
-    if (isEditMode) {
-      setIsAdmin(true);
+    if (editModeDetected) {
+      setIsEditMode(true);
       try {
         cms.enable();
       } catch (e) {
-        console.warn("TinaCMS editor activation failed:", e);
+        console.warn("TinaCMS activation failed:", e);
       }
     }
   }, [cms]);
+
+  // If we are not in a browser or not in edit mode, return children directly.
+  // This is the "Nuclear Option" that guarantees buttons work for visitors
+  // because it removes the entire TinaCMS context layer from the public site.
+  if (!isClient || !isEditMode) {
+    return <>{children}</>;
+  }
 
   return (
     <TinaProvider cms={cms}>

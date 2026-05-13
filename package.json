@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@plasmicapp/loader-nextjs": "^2.0.3",
+    "@plasmicapp/react-web": "^1.0.6",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "leaflet": "^1.9.4",

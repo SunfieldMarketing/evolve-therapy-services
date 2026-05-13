@@ -681,6 +681,13 @@ export default defineConfig({
           { type: "image", name: "image", label: "Hero Image" },
           { type: "string", name: "iconName", label: "Icon Name" },
           { type: "string", name: "videoUrl", label: "Video URL" },
+          {
+            type: "object", name: "cta", label: "CTA Section",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "buttonText", label: "Button Text" },
+            ],
+          },
         ],
       },
     ],

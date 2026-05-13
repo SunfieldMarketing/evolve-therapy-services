@@ -619,6 +619,11 @@ export default defineConfig({
         label: "Services Details",
         path: "content/service",
         format: "json",
+        ui: {
+          router: ({ document }) => {
+            return `/services/${document._sys.filename}`;
+          },
+        },
         fields: [
           { type: "string", name: "title", label: "Title" },
           { type: "string", name: "shortDesc", label: "Short Description", ui: { component: "textarea" } },

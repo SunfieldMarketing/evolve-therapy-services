@@ -6,16 +6,16 @@ import { useMemo, useEffect, useState } from 'react';
 /**
  * TinaProviderWrapper
  * 
- * This is the critical safety layer for the site.
- * 1. For normal visitors: It returns children DIRECTLY (no wrapper). 
- *    This ensures 100% interactivity and zero library overhead.
- * 2. For admins: It injects the TinaProvider for visual editing.
+ * This is the critical safety layer.
+ * 
+ * V3 STRATEGY:
+ * To ensure 100% interactivity for public visitors, we return children WITHOUT the TinaProvider
+ * unless we are explicitly in an editing context.
  */
 export default function TinaProviderWrapper({ children }: { children: React.ReactNode }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
-  // Initialize a stable CMS instance.
   const cms = useMemo(() => {
     return new TinaCMS({
       enabled: false,
@@ -29,15 +29,18 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
   useEffect(() => {
     setIsClient(true);
     
-    // Check if we should activate the CMS layer
-    // We check for /admin, /portal, or the tina-edit flag used by the visual editor
-    const editModeDetected = 
-      window.location.pathname.startsWith('/admin') || 
-      window.location.pathname.startsWith('/portal') ||
-      window.location.search.includes('tina-edit') ||
-      document.cookie.includes('evolve_admin_auth=true');
+    // STRICT EDIT MODE DETECTION
+    // We only enable the CMS layer if:
+    // 1. We are on the /admin route
+    // 2. We are on the /portal route
+    // 3. We are inside the Tina Visual Editor iframe (detected by 'tina-edit' query param)
+    const urlParams = new URLSearchParams(window.location.search);
+    const isEditingInIframe = urlParams.has('tina-edit');
+    const isExplicitEdit = urlParams.get('edit') === 'true';
+    const isAdminRoute = window.location.pathname.startsWith('/admin') || window.location.pathname.startsWith('/portal');
 
-    if (editModeDetected) {
+    // For public visitors on the home page (/), this will be false.
+    if (isAdminRoute || isEditingInIframe || isExplicitEdit) {
       setIsEditMode(true);
       try {
         cms.enable();
@@ -47,13 +50,14 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
     }
   }, [cms]);
 
-  // If we are not in a browser or not in edit mode, return children directly.
-  // This is the "Nuclear Option" that guarantees buttons work for visitors
-  // because it removes the entire TinaCMS context layer from the public site.
+  // PUBLIC VISITOR BRANCH
+  // If we are on the public site, we return the children directly.
+  // This removes the Tina context entirely, preventing it from swallowing clicks.
   if (!isClient || !isEditMode) {
     return <>{children}</>;
   }
 
+  // ADMIN / EDITOR BRANCH
   return (
     <TinaProvider cms={cms}>
       {children}

@@ -6,7 +6,7 @@ import { Marquee } from '@/components/magicui/marquee';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import settingsData from '../../content/global/settings.json';
 
 function StarRow({ count }: { count: number }) {
@@ -28,7 +28,7 @@ function TestimonialCard({ t }: { t: any }) {
             <StarRow count={t?.stars || 5} />
             <Quote size={28} className="text-[#0284c7]/15 group-hover:text-[#0284c7]/30 transition-colors duration-500" />
           </div>
-          <blockquote className="text-lg md:text-xl text-white/75 font-serif italic font-medium leading-relaxed group-hover:text-white/90 transition-colors duration-500">
+          <blockquote data-tina-field={tinaField(t, 'content')} className="text-lg md:text-xl text-white/75 font-serif italic font-medium leading-relaxed group-hover:text-white/90 transition-colors duration-500">
             &ldquo;{t?.content || ''}&rdquo;
           </blockquote>
         </div>
@@ -38,9 +38,9 @@ function TestimonialCard({ t }: { t: any }) {
             {t?.initials || ''}
           </div>
           <div>
-            <div className="text-base font-black text-white tracking-tight">{t?.name || 'Client'}</div>
+            <div data-tina-field={tinaField(t, 'name')} className="text-base font-black text-white tracking-tight">{t?.name || 'Client'}</div>
             <div className="text-[#38bdf8] text-[10px] font-bold uppercase tracking-[0.15em] mt-0.5">
-              {t?.role || ''} · {t?.facility || ''}
+              <span data-tina-field={tinaField(t, 'role')}>{t?.role || ''}</span> · <span data-tina-field={tinaField(t, 'facility')}>{t?.facility || ''}</span>
             </div>
           </div>
         </div>
@@ -74,10 +74,10 @@ export default function Testimonials() {
             <AnimatedGradientTextDark>Client Voices</AnimatedGradientTextDark>
           </div>
           <h2 className="text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-[0.9] mb-8">
-            {t?.title || 'Clinical Partners'} <br />
-            <span className="text-[#0284c7] italic font-medium">{t?.titleItalic || ''}</span>
+            <span data-tina-field={tinaField(t, 'title')}>{t?.title || 'Clinical Partners'}</span> <br />
+            <span data-tina-field={tinaField(t, 'titleItalic')} className="text-[#0284c7] italic font-medium">{t?.titleItalic || ''}</span>
           </h2>
-          <p className="text-white/40 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+          <p data-tina-field={tinaField(t, 'description')} className="text-white/40 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
             {t?.description || ''}
           </p>
         </BlurFade>

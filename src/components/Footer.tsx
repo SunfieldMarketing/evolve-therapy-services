@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import settingsData from '../../content/global/settings.json';
 
 function LinkedInIcon({ size = 16 }: { size?: number }) {
@@ -81,8 +81,8 @@ export default function Footer() {
                 className="h-14 brightness-0 invert" 
               />
             </Link>
-            <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs">
-              {s.footer.tagline}
+            <p data-tina-field={tinaField(s?.footer, 'tagline')} className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs">
+              {s?.footer?.tagline || ''}
             </p>
 
             <div className="space-y-3 mb-8">
@@ -186,7 +186,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-white/25 text-xs">
+          <p data-tina-field={tinaField(s?.footer, 'copyright')} className="text-white/25 text-xs">
             {s?.footer?.copyright?.replace('2026', `${year}`) || `© ${year} Evolve Therapy Services. All rights reserved.`}
           </p>
           <div className="flex items-center gap-6">

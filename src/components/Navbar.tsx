@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import settingsData from '../../content/global/settings.json';
 
 export default function Navbar() {
@@ -91,6 +91,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
+                    data-tina-field={tinaField(s?.navbar, `links[${idx}]`)}
                     className={cn(
                       'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none',
                       scrolled
@@ -139,6 +140,7 @@ export default function Navbar() {
               {/* CTA button */}
               <Link
                 href="/contact"
+                data-tina-field={tinaField(s?.navbar, 'ctaText')}
                 className={cn(
                   'px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center gap-2 group/btn',
                   scrolled

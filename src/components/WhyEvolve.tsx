@@ -8,7 +8,7 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import homeData from '../../content/pages/home.json';
 
 const iconMap = {
@@ -96,8 +96,8 @@ export default function WhyEvolve() {
                             {w?.title || ''} {w?.subtitle || ''}
                           </div>
                           <h3 className="text-3xl sm:text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-[1.05] sm:leading-none mb-3 sm:mb-8">
-                            {w?.title || ''} <br />
-                            <span className="text-[#38bdf8] italic font-medium">{w?.subtitle || ''}</span>
+                            <span data-tina-field={tinaField(w, 'title')}>{w?.title || ''}</span> <br />
+                            <span data-tina-field={tinaField(w, 'subtitle')} className="text-[#38bdf8] italic font-medium">{w?.subtitle || ''}</span>
                           </h3>
                           <p className="text-sm sm:text-xl md:text-2xl text-white/30 font-light max-w-lg">
                             {w?.introText || ''}
@@ -120,10 +120,10 @@ export default function WhyEvolve() {
                             Clinical Advantage
                           </div>
                           <h3 className="text-2xl sm:text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-[1.1] sm:leading-none mb-2 sm:mb-6">
-                            {features[activeIndex].title} <br />
-                            <span className="text-[#38bdf8] italic font-medium">{features[activeIndex].subtitle}</span>
+                            <span data-tina-field={tinaField(features[activeIndex], 'title')}>{features[activeIndex].title}</span> <br />
+                            <span data-tina-field={tinaField(features[activeIndex], 'subtitle')} className="text-[#38bdf8] italic font-medium">{features[activeIndex].subtitle}</span>
                           </h3>
-                          <p className="text-xs sm:text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-3 sm:mb-8">
+                          <p data-tina-field={tinaField(features[activeIndex], 'desc')} className="text-xs sm:text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-3 sm:mb-8">
                             {features[activeIndex].desc}
                           </p>
                           <Link href={features[activeIndex].href} className="group inline-flex items-center justify-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
@@ -213,7 +213,7 @@ export default function WhyEvolve() {
           <div className="py-5 sm:py-10 border-t border-white/5 bg-[#0f172a]/80 backdrop-blur-md">
             <div className="container mx-auto px-5 sm:px-6">
                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12">
-                <p className="text-xs sm:text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center sm:text-left">
+                <p data-tina-field={tinaField(w?.quoteStrip, 'text')} className="text-xs sm:text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center sm:text-left">
                   &ldquo;{w?.quoteStrip?.text?.includes('centers') ? w.quoteStrip.text.split('centers')[0] : (w?.quoteStrip?.text || '')} 
                   {w?.quoteStrip?.text?.includes('centers') && <span className="text-[#38bdf8] font-bold not-italic">centers {w.quoteStrip.text.split('centers')[1]?.split('and')[0] || ''}</span>} 
                   {w?.quoteStrip?.text?.includes('and') ? ` and ${w.quoteStrip.text.split('and')[1] || ''}` : ''}&rdquo;
@@ -221,6 +221,7 @@ export default function WhyEvolve() {
                 <div className="flex items-center gap-4 sm:border-l sm:border-white/10 sm:pl-6 shrink-0">
                   {w?.quoteStrip?.authorPhoto && (
                     <Image
+                      data-tina-field={tinaField(w?.quoteStrip, 'authorPhoto')}
                       src={w.quoteStrip.authorPhoto}
                       width={40}
                       height={40}
@@ -229,8 +230,8 @@ export default function WhyEvolve() {
                     />
                   )}
                   <div className="text-left">
-                    <div className="font-black text-white text-[12px] tracking-tight leading-none mb-1">{w?.quoteStrip?.author || ''}</div>
-                    <div className="text-[#38bdf8] text-[8px] font-black uppercase tracking-[0.3em]">{w?.quoteStrip?.authorTitle || ''}</div>
+                    <div data-tina-field={tinaField(w?.quoteStrip, 'author')} className="font-black text-white text-[12px] tracking-tight leading-none mb-1">{w?.quoteStrip?.author || ''}</div>
+                    <div data-tina-field={tinaField(w?.quoteStrip, 'authorTitle')} className="text-[#38bdf8] text-[8px] font-black uppercase tracking-[0.3em]">{w?.quoteStrip?.authorTitle || ''}</div>
                   </div>
                 </div>
               </div>

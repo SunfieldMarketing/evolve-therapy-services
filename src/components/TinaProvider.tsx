@@ -7,17 +7,14 @@ import { useMemo, useEffect, useState } from 'react';
  * TinaProviderWrapper
  * 
  * Provides the TinaCMS context to the entire application.
- * Optimized for performance and interactivity:
- * 1. CMS is completely inert for normal visitors.
- * 2. Only initializes full editor features when an admin route is detected.
- * 3. Prevents "fetchCollections" and "clientId" runtime crashes.
+ * This version is designed to be 100% stable:
+ * 1. Always provides context to avoid useTina crashes.
+ * 2. Mocks missing methods to prevent "fetchCollections" runtime errors.
  */
 export default function TinaProviderWrapper({ children }: { children: React.ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isClient, setIsClient] = useState(false);
 
   // Initialize a stable CMS instance.
-  // We use as any to avoid strict type issues with the internal v3 API.
   const cms = useMemo(() => {
     const tina = new TinaCMS({
       enabled: false,
@@ -27,17 +24,17 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
       branch: process.env.NEXT_PUBLIC_TINA_BRANCH || 'main',
     } as any);
 
-    // Provide dummy methods to prevent "undefined" crashes in internal Tina hooks
+    // CRITICAL: Inject missing methods to prevent internal Tina hooks from crashing the JS thread.
+    // This is the primary fix for the "unresponsive site" issue.
     if (!(tina as any).api) (tina as any).api = {};
-    if (!(tina as any).api.fetchCollections) (tina as any).api.fetchCollections = async () => [];
+    if (!(tina as any).api.fetchCollections) (tina as any).api.fetchCollections = async () => ({ collections: [] });
+    if (!(tina as any).api.request) (tina as any).api.request = async () => ({});
     
     return tina;
   }, []);
 
   useEffect(() => {
-    setIsClient(true);
-    
-    // Check if we are in an admin-related route or editing mode
+    // Check if we are in an admin-related route
     const isEditMode = 
       window.location.pathname.startsWith('/admin') || 
       window.location.pathname.startsWith('/portal') ||
@@ -45,19 +42,14 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
 
     if (isEditMode) {
       setIsAdmin(true);
-      // Enable features on the existing stable instance for admins
       try {
         cms.enable();
-        (cms as any).sidebar = true;
       } catch (e) {
         console.warn("TinaCMS editor activation failed:", e);
       }
     }
   }, [cms]);
 
-  // During SSR and initial hydration, we render the provider with the dummy CMS.
-  // This provides the context needed for useTina() calls in sub-components
-  // without triggering any network requests or blocking the main thread.
   return (
     <TinaProvider cms={cms}>
       {children}

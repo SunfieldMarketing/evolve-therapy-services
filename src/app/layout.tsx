@@ -52,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth h-full`} suppressHydrationWarning>
-      <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col pointer-events-auto`}>
+      <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col`}>
         <TinaProviderWrapper>
           {children}
         </TinaProviderWrapper>

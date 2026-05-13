@@ -10,15 +10,20 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
   useEffect(() => {
     setIsClient(true);
 
-    const isAdmin = window.location.pathname.startsWith('/admin') || window.location.search.includes('tina-edit');
+    const isAdmin = 
+      window.location.pathname.startsWith('/admin') || 
+      window.location.pathname.startsWith('/portal') ||
+      window.location.search.includes('tina-edit');
     
     if (isAdmin) {
-      // Lazy load TinaCMS only when needed to speed up the site for normal users
+      // Lazy load TinaCMS only when needed
       const initTina = async () => {
         const { TinaCMS } = await import('tinacms');
         const tinaCms = new TinaCMS({
           enabled: true,
           sidebar: true,
+          clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+          branch: process.env.NEXT_PUBLIC_TINA_BRANCH || 'main',
         });
         setCms(tinaCms);
       };

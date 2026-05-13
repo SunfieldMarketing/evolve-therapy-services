@@ -57,7 +57,7 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
     data: props.data || {},
   });
 
-  const service = data.service;
+  const service = data?.service;
 
   if (!service) {
     // If we're in the editor, we might not have data yet for a new slug
@@ -79,12 +79,16 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
       <Navbar />
       
       <PageHeader 
-        title={service.title.includes(' & ') ? service.title.split(' & ')[0] : service.title}
-        italicWord={service.title.includes(' & ') ? service.title.split(' & ')[1] : ''}
-        subtitle={service.shortDesc}
+        title={service?.title?.includes(' & ') ? service.title.split(' & ')[0] : service?.title || ''}
+        italicWord={service?.title?.includes(' & ') ? service.title.split(' & ')[1] : ''}
+        subtitle={service?.shortDesc || ''}
         useVideo={false}
         bgImage="none"
         badgeText="Service Detail"
+        tinaFields={{
+          title: tinaField(service, 'title'),
+          subtitle: tinaField(service, 'shortDesc'),
+        }}
       />
 
       {/* Main Content */}
@@ -105,8 +109,8 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
                   <BarChart4 size={24} className="text-[#0284c7]" /> Key Benefits
                 </h3>
                 <ul className="space-y-6">
-                  {service.benefits?.map((benefit: string, i: number) => (
-                    <li key={i} className="flex items-start gap-4 group">
+                  {service?.benefits?.map((benefit: string, i: number) => (
+                    <li key={i} data-tina-field={tinaField(service, `benefits[${i}]`)} className="flex items-start gap-4 group">
                       <div className="w-8 h-8 rounded-full bg-[#0284c7]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#0284c7] transition-colors">
                         <CheckCircle2 size={16} className="text-[#0284c7] group-hover:text-white" />
                       </div>
@@ -147,10 +151,11 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
                 className="relative aspect-[16/9] rounded-[4rem] overflow-hidden mb-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-slate-100"
               >
                 <Image 
-                  src={service.image} 
-                  alt={service.title} 
+                  src={service?.image || ''} 
+                  alt={service?.title || ''} 
                   fill 
                   className="object-cover"
+                  data-tina-field={tinaField(service, 'image')}
                 />
               </motion.div>
 
@@ -161,11 +166,11 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
                    viewport={{ once: true }}
                 >
                   <h2 className="text-5xl font-serif text-[#0f172a] font-black mb-10 tracking-tighter">Service Overview</h2>
-                  <p className="text-2xl leading-relaxed font-light text-slate-400 mb-12">
-                    {service.fullDesc}
+                  <p data-tina-field={tinaField(service, 'fullDesc')} className="text-2xl leading-relaxed font-light text-slate-400 mb-12">
+                    {service?.fullDesc || ''}
                   </p>
-                  <div className="text-xl text-slate-500 leading-relaxed font-medium whitespace-pre-line mb-16 px-10 border-l-4 border-[#0284c7]/20">
-                    {service.longContent}
+                  <div data-tina-field={tinaField(service, 'longContent')} className="text-xl text-slate-500 leading-relaxed font-medium whitespace-pre-line mb-16 px-10 border-l-4 border-[#0284c7]/20">
+                    {service?.longContent || ''}
                   </div>
                 </motion.div>
 
@@ -178,8 +183,8 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
                     <Target size={32} className="text-[#0284c7]" /> Core Program Features
                   </h3>
                   <div className="grid md:grid-cols-2 gap-6 not-prose">
-                    {service.features?.map((feature: string, i: number) => (
-                      <div key={i} className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-[#0284c7]/20 hover:bg-white hover:shadow-xl transition-all duration-500">
+                    {service?.features?.map((feature: string, i: number) => (
+                      <div key={i} data-tina-field={tinaField(service, `features[${i}]`)} className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-[#0284c7]/20 hover:bg-white hover:shadow-xl transition-all duration-500">
                         <div className="w-3 h-3 rounded-full bg-[#0284c7] shadow-lg shadow-[#0284c7]/20 shrink-0" />
                         <span className="text-[#0f172a] font-black text-sm uppercase tracking-[0.1em] leading-snug">{feature}</span>
                       </div>

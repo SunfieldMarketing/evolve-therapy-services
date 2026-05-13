@@ -25,22 +25,22 @@ function TestimonialCard({ t }: { t: any }) {
       <div className="h-full rounded-[2.5rem] border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-9 md:p-11 flex flex-col justify-between transition-all duration-500 hover:bg-white/[0.06] hover:border-white/[0.12] hover:-translate-y-1 group">
         <div className="mb-8">
           <div className="flex justify-between items-start mb-6">
-            <StarRow count={t.stars} />
+            <StarRow count={t?.stars || 5} />
             <Quote size={28} className="text-[#0284c7]/15 group-hover:text-[#0284c7]/30 transition-colors duration-500" />
           </div>
           <blockquote className="text-lg md:text-xl text-white/75 font-serif italic font-medium leading-relaxed group-hover:text-white/90 transition-colors duration-500">
-            &ldquo;{t.content}&rdquo;
+            &ldquo;{t?.content || ''}&rdquo;
           </blockquote>
         </div>
 
         <div className="flex items-center gap-4 pt-8 border-t border-white/[0.06]">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0284c7] to-[#0369a1] flex items-center justify-center text-white font-black text-sm shadow-lg shadow-blue-500/20 shrink-0 group-hover:scale-110 transition-transform duration-500">
-            {t.initials}
+            {t?.initials || ''}
           </div>
           <div>
-            <div className="text-base font-black text-white tracking-tight">{t.name}</div>
+            <div className="text-base font-black text-white tracking-tight">{t?.name || 'Client'}</div>
             <div className="text-[#38bdf8] text-[10px] font-bold uppercase tracking-[0.15em] mt-0.5">
-              {t.role} · {t.facility}
+              {t?.role || ''} · {t?.facility || ''}
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function Testimonials() {
     data: { settings: settingsData },
   });
 
-  const t = data.settings.testimonials;
+  const t = data?.settings?.testimonials;
 
   return (
     <section className="relative py-24 md:py-40 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
@@ -74,11 +74,11 @@ export default function Testimonials() {
             <AnimatedGradientTextDark>Client Voices</AnimatedGradientTextDark>
           </div>
           <h2 className="text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-[0.9] mb-8">
-            {t.title} <br />
-            <span className="text-[#0284c7] italic font-medium">{t.titleItalic}</span>
+            {t?.title || 'Clinical Partners'} <br />
+            <span className="text-[#0284c7] italic font-medium">{t?.titleItalic || ''}</span>
           </h2>
           <p className="text-white/40 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-            {t.description}
+            {t?.description || ''}
           </p>
         </BlurFade>
       </div>
@@ -89,7 +89,7 @@ export default function Testimonials() {
           pauseOnHover
           className="[--duration:60s] [--gap:2rem]"
         >
-          {t.list.map((item: any, i: number) => (
+          {t?.list?.map((item: any, i: number) => (
             <TestimonialCard key={i} t={item} />
           ))}
         </Marquee>

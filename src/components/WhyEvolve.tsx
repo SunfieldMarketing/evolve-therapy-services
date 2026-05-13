@@ -27,8 +27,8 @@ export default function WhyEvolve() {
     data: { home: homeData },
   });
 
-  const w = data.home.whyEvolve;
-  const features = w.features;
+  const w = data?.home?.whyEvolve;
+  const features = w?.features || [];
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -93,14 +93,14 @@ export default function WhyEvolve() {
                         >
                           <div className="inline-flex items-center justify-center gap-3 px-4 py-2 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/20 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.4em] mb-4 sm:mb-8">
                             <Sparkles size={12} />
-                            {w.title} {w.subtitle}
+                            {w?.title || ''} {w?.subtitle || ''}
                           </div>
                           <h3 className="text-3xl sm:text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-[1.05] sm:leading-none mb-3 sm:mb-8">
-                            {w.title} <br />
-                            <span className="text-[#38bdf8] italic font-medium">{w.subtitle}</span>
+                            {w?.title || ''} <br />
+                            <span className="text-[#38bdf8] italic font-medium">{w?.subtitle || ''}</span>
                           </h3>
                           <p className="text-sm sm:text-xl md:text-2xl text-white/30 font-light max-w-lg">
-                            {w.introText}
+                            {w?.introText || ''}
                           </p>
                         </motion.div>
                       )}
@@ -214,19 +214,23 @@ export default function WhyEvolve() {
             <div className="container mx-auto px-5 sm:px-6">
                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12">
                 <p className="text-xs sm:text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center sm:text-left">
-                  &ldquo;{w.quoteStrip.text.split('centers')[0]} <span className="text-[#38bdf8] font-bold not-italic">centers {w.quoteStrip.text.split('centers')[1].split('and')[0]}</span> and {w.quoteStrip.text.split('and')[1]}&rdquo;
+                  &ldquo;{w?.quoteStrip?.text?.includes('centers') ? w.quoteStrip.text.split('centers')[0] : (w?.quoteStrip?.text || '')} 
+                  {w?.quoteStrip?.text?.includes('centers') && <span className="text-[#38bdf8] font-bold not-italic">centers {w.quoteStrip.text.split('centers')[1]?.split('and')[0] || ''}</span>} 
+                  {w?.quoteStrip?.text?.includes('and') ? ` and ${w.quoteStrip.text.split('and')[1] || ''}` : ''}&rdquo;
                 </p>
                 <div className="flex items-center gap-4 sm:border-l sm:border-white/10 sm:pl-6 shrink-0">
-                  <Image
-                    src={w.quoteStrip.authorPhoto}
-                    width={40}
-                    height={40}
-                    className="rounded-full object-cover"
-                    alt={w.quoteStrip.author}
-                  />
+                  {w?.quoteStrip?.authorPhoto && (
+                    <Image
+                      src={w.quoteStrip.authorPhoto}
+                      width={40}
+                      height={40}
+                      className="rounded-full object-cover"
+                      alt={w?.quoteStrip?.author || 'Author'}
+                    />
+                  )}
                   <div className="text-left">
-                    <div className="font-black text-white text-[12px] tracking-tight leading-none mb-1">{w.quoteStrip.author}</div>
-                    <div className="text-[#38bdf8] text-[8px] font-black uppercase tracking-[0.3em]">{w.quoteStrip.authorTitle}</div>
+                    <div className="font-black text-white text-[12px] tracking-tight leading-none mb-1">{w?.quoteStrip?.author || ''}</div>
+                    <div className="text-[#38bdf8] text-[8px] font-black uppercase tracking-[0.3em]">{w?.quoteStrip?.authorTitle || ''}</div>
                   </div>
                 </div>
               </div>

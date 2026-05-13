@@ -40,6 +40,12 @@ interface PageHeaderProps {
   badgeText?: string;
   valueBoxes?: ValueBox[];
   useVideo?: boolean;
+  tinaFields?: {
+    title?: string;
+    subtitle?: string;
+    italicWord?: string;
+    badgeText?: string;
+  };
 }
 
 export default function PageHeader({
@@ -56,6 +62,7 @@ export default function PageHeader({
     { icon: Heart, label: 'Compassion', sublabel: 'Results Driven' }
   ],
   useVideo = true,
+  tinaFields,
 }: PageHeaderProps) {
   const imageUrl = bgImage || imageMap[videoKey] || imageMap.default;
   const videoUrl = videoMap[videoKey as string];
@@ -133,19 +140,19 @@ export default function PageHeader({
              {/* Subtitle Badge */}
              <div className="flex items-center gap-4 mb-6 sm:mb-12">
                 <div className="w-8 sm:w-12 h-[1px] bg-[#0284c7]" />
-                <span className="text-[#38bdf8] font-black uppercase text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em]">{badgeText}</span>
+                <span data-tina-field={tinaFields?.badgeText} className="text-[#38bdf8] font-black uppercase text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em]">{badgeText}</span>
              </div>
              
              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-black text-white leading-[1.05] sm:leading-[1] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words">
-                {title}
+                <span data-tina-field={tinaFields?.title}>{title}</span>
                 {italicWord && (
-                  <span className="text-[#0284c7] italic ml-[0.1em] sm:ml-[0.15em] uppercase tracking-tighter block sm:inline mt-1 sm:mt-0">{italicWord}.</span>
+                  <span data-tina-field={tinaFields?.italicWord} className="text-[#0284c7] italic ml-[0.1em] sm:ml-[0.15em] uppercase tracking-tighter block sm:inline mt-1 sm:mt-0">{italicWord}.</span>
                 )}
              </h1>
 
              {subtitle && (
                 <div className="mb-10 sm:mb-20 w-full">
-                   <p className="text-base sm:text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-6 sm:pl-10 italic max-w-5xl">
+                   <p data-tina-field={tinaFields?.subtitle} className="text-base sm:text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-6 sm:pl-10 italic max-w-5xl">
                       {subtitle}
                    </p>
                 </div>

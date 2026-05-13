@@ -71,25 +71,31 @@ export default function AboutPage(props: { data: any, query: string, variables: 
     data: props.data || { about: aboutData },
   });
 
-  const p = data.about;
-  const leaders = p.leaders;
+  const p = data?.about;
+  const leaders = p?.leaders || [];
 
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
       
       <PageHeader 
-        title={p.header.title} 
-        italicWord={p.header.italicWord} 
-        subtitle={p.header.subtitle}
+        title={p?.header?.title || 'About Us'} 
+        italicWord={p?.header?.italicWord || ''} 
+        subtitle={p?.header?.subtitle || ''}
         videoKey="about"
         bgImage="none"
         useVideo={false}
-        badgeText={p.header.badgeText}
-        valueBoxes={p.header.valueBoxes.map((box: any) => ({
+        badgeText={p?.header?.badgeText || ''}
+        valueBoxes={p?.header?.valueBoxes?.map((box: any) => ({
           ...box,
           icon: iconMap[box.icon as keyof typeof iconMap] || Award
-        }))}
+        })) || []}
+        tinaFields={{
+          title: tinaField(p?.header, 'title'),
+          italicWord: tinaField(p?.header, 'italicWord'),
+          subtitle: tinaField(p?.header, 'subtitle'),
+          badgeText: tinaField(p?.header, 'badgeText'),
+        }}
       />
 
       {/* Intro Section */}
@@ -97,16 +103,16 @@ export default function AboutPage(props: { data: any, query: string, variables: 
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <BlurFade delay={0.1}>
-              <div data-tina-field={tinaField(p.intro, 'badge')} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/5 border border-[#0284c7]/10 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
-                {p.intro.badge}
+              <div data-tina-field={tinaField(p?.intro, 'badge')} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/5 border border-[#0284c7]/10 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+                {p?.intro?.badge || ''}
               </div>
               <h2 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.9] mb-10">
-                <span data-tina-field={tinaField(p.intro, 'titleLine1')}>{p.intro.titleLine1}</span> <br />
-                <span data-tina-field={tinaField(p.intro, 'titleItalic')} className="text-[#0284c7] italic font-medium">{p.intro.titleItalic}</span>
+                <span data-tina-field={tinaField(p?.intro, 'titleLine1')}>{p?.intro?.titleLine1 || ''}</span> <br />
+                <span data-tina-field={tinaField(p?.intro, 'titleItalic')} className="text-[#0284c7] italic font-medium">{p?.intro?.titleItalic || ''}</span>
               </h2>
               <div className="space-y-6 text-xl text-slate-500 leading-relaxed font-light">
-                {p.intro.paragraphs.map((para: string, i: number) => (
-                  <p key={i} data-tina-field={tinaField(p.intro, `paragraphs[${i}]`)}>{para}</p>
+                {p?.intro?.paragraphs?.map((para: string, i: number) => (
+                  <p key={i} data-tina-field={tinaField(p?.intro, `paragraphs[${i}]`)}>{para}</p>
                 ))}
               </div>
             </BlurFade>
@@ -115,12 +121,12 @@ export default function AboutPage(props: { data: any, query: string, variables: 
                <div className="bg-[#0f172a] rounded-[3rem] p-12 md:p-16 text-white relative overflow-hidden shadow-2xl">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-[#0284c7]/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                   <Quote className="text-[#38bdf8]/20 w-24 h-24 mb-8" />
-                  <blockquote data-tina-field={tinaField(p.intro, 'quote')} className="text-2xl md:text-3xl font-serif italic font-medium leading-relaxed mb-10 relative z-10">
-                    "{p.intro.quote}"
+                  <blockquote data-tina-field={tinaField(p?.intro, 'quote')} className="text-2xl md:text-3xl font-serif italic font-medium leading-relaxed mb-10 relative z-10">
+                    "{p?.intro?.quote || ''}"
                   </blockquote>
                   <div className="flex items-center gap-4">
                      <div className="w-12 h-px bg-[#38bdf8]/40" />
-                     <cite data-tina-field={tinaField(p.intro, 'quoteAuthor')} className="text-[#38bdf8] font-black uppercase tracking-[0.2em] text-xs not-italic">{p.intro.quoteAuthor}</cite>
+                     <cite data-tina-field={tinaField(p?.intro, 'quoteAuthor')} className="text-[#38bdf8] font-black uppercase tracking-[0.2em] text-xs not-italic">{p?.intro?.quoteAuthor || ''}</cite>
                   </div>
                </div>
             </BlurFade>
@@ -132,12 +138,12 @@ export default function AboutPage(props: { data: any, query: string, variables: 
       <section className="py-12 bg-slate-50 border-y border-slate-100">
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap justify-center md:justify-between items-center gap-8 md:gap-4">
-            {p.trust.map((item: any, i: number) => {
-              const Icon = iconMap[item.icon as keyof typeof iconMap] || Award;
+            {p?.trust?.map((item: any, i: number) => {
+              const Icon = iconMap[item?.icon as keyof typeof iconMap] || Award;
               return (
                 <div key={i} className="flex items-center gap-3 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
                   <Icon size={20} className="text-[#0284c7]" />
-                  <span className="text-[#0f172a] font-black uppercase tracking-[0.2em] text-[10px]">{item.text}</span>
+                  <span className="text-[#0f172a] font-black uppercase tracking-[0.2em] text-[10px]">{item?.text || ''}</span>
                 </div>
               );
             })}
@@ -151,25 +157,25 @@ export default function AboutPage(props: { data: any, query: string, variables: 
           <div className="grid lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-5">
               <BlurFade delay={0.1}>
-                <div data-tina-field={tinaField(p.journey, 'badge')} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/5 border border-[#0284c7]/10 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
-                  {p.journey.badge}
+                <div data-tina-field={tinaField(p?.journey, 'badge')} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/5 border border-[#0284c7]/10 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+                  {p?.journey?.badge || ''}
                 </div>
                 <h2 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.9] mb-8">
-                  <span data-tina-field={tinaField(p.journey, 'titleLine1')}>{p.journey.titleLine1}</span> <br />
-                  <span data-tina-field={tinaField(p.journey, 'titleItalic')} className="text-[#0284c7] italic font-medium">{p.journey.titleItalic}</span>
+                  <span data-tina-field={tinaField(p?.journey, 'titleLine1')}>{p?.journey?.titleLine1 || ''}</span> <br />
+                  <span data-tina-field={tinaField(p?.journey, 'titleItalic')} className="text-[#0284c7] italic font-medium">{p?.journey?.titleItalic || ''}</span>
                 </h2>
-                <p data-tina-field={tinaField(p.journey, 'subtitle')} className="text-xl text-slate-500 font-light leading-relaxed">
-                  {p.journey.subtitle}
+                <p data-tina-field={tinaField(p?.journey, 'subtitle')} className="text-xl text-slate-500 font-light leading-relaxed">
+                  {p?.journey?.subtitle || ''}
                 </p>
               </BlurFade>
             </div>
             <div className="lg:col-span-7">
                <div className="grid sm:grid-cols-3 gap-6 md:gap-8">
-                  {p.journey.items.map((stat: any, i: number) => (
+                  {p?.journey?.items?.map((stat: any, i: number) => (
                     <BlurFade key={i} delay={0.2 + i * 0.1}>
                        <div data-tina-field={tinaField(stat)} className="bg-slate-50 rounded-[2.5rem] p-10 border border-slate-100 hover:bg-white hover:border-[#0284c7]/20 hover:shadow-2xl transition-all duration-700 text-center">
-                          <div className="text-5xl md:text-6xl font-serif font-black text-[#0284c7] mb-4">{stat.title}</div>
-                          <div className="text-[10px] font-black text-[#0f172a] uppercase tracking-[0.2em] leading-relaxed">{stat.text}</div>
+                          <div className="text-5xl md:text-6xl font-serif font-black text-[#0284c7] mb-4">{stat?.title || ''}</div>
+                          <div className="text-[10px] font-black text-[#0f172a] uppercase tracking-[0.2em] leading-relaxed">{stat?.text || ''}</div>
                        </div>
                     </BlurFade>
                   ))}
@@ -187,17 +193,17 @@ export default function AboutPage(props: { data: any, query: string, variables: 
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
-            {p.pillars.map((pillar: any, i: number) => {
-              const Icon = iconMap[pillar.icon as keyof typeof iconMap] || Award;
+            {p?.pillars?.map((pillar: any, i: number) => {
+              const Icon = iconMap[pillar?.icon as keyof typeof iconMap] || Award;
               return (
                 <BlurFade key={i} delay={0.1 * i} className="h-full">
                   <div data-tina-field={tinaField(pillar)} className="h-full bg-white/5 border border-white/10 rounded-[3rem] p-12 md:p-14 hover:bg-white/10 hover:border-white/20 transition-all duration-700 group">
                     <div className="w-16 h-16 rounded-2xl bg-[#0284c7] flex items-center justify-center mb-10 shadow-2xl shadow-blue-500/20 group-hover:scale-110 transition-transform">
                       <Icon size={30} strokeWidth={1.5} />
                     </div>
-                    <h3 className="text-3xl font-serif font-black mb-6 tracking-tighter">{pillar.title}</h3>
+                    <h3 className="text-3xl font-serif font-black mb-6 tracking-tighter">{pillar?.title || ''}</h3>
                     <p className="text-white/40 text-lg font-light leading-relaxed">
-                      {pillar.text}
+                      {pillar?.text || ''}
                     </p>
                   </div>
                 </BlurFade>
@@ -211,11 +217,11 @@ export default function AboutPage(props: { data: any, query: string, variables: 
       <section className="py-24 md:py-48 bg-slate-50 border-y border-slate-100 relative overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 relative z-10">
            <BlurFade className="text-center mb-24 md:mb-32">
-            <div data-tina-field={tinaField(p.national, 'badge')} className="flex justify-center mb-8">
-              <AnimatedGradientText>{p.national.badge}</AnimatedGradientText>
+            <div data-tina-field={tinaField(p?.national, 'badge')} className="flex justify-center mb-8">
+              <AnimatedGradientText>{p?.national?.badge || ''}</AnimatedGradientText>
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif font-black text-[#0f172a] tracking-tighter leading-[1] sm:leading-[0.85]">
-              <span data-tina-field={tinaField(p.national, 'titleLine1')}>{p.national.titleLine1}</span> <span data-tina-field={tinaField(p.national, 'titleItalic')} className="text-[#0284c7] italic font-medium">{p.national.titleItalic}</span>
+              <span data-tina-field={tinaField(p?.national, 'titleLine1')}>{p?.national?.titleLine1 || ''}</span> <span data-tina-field={tinaField(p?.national, 'titleItalic')} className="text-[#0284c7] italic font-medium">{p?.national?.titleItalic || ''}</span>
             </h2>
           </BlurFade>
 
@@ -241,19 +247,19 @@ export default function AboutPage(props: { data: any, query: string, variables: 
                   <div className="w-full lg:w-7/12">
                     <div data-tina-field={tinaField(leader)}>
                       <div className="mb-8">
-                         <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight">{leader.name}</h3>
-                         <div className="text-[#0284c7] text-xs font-black uppercase tracking-[0.4em] mt-2">{leader.title}</div>
+                         <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight">{leader?.name || ''}</h3>
+                         <div className="text-[#0284c7] text-xs font-black uppercase tracking-[0.4em] mt-2">{leader?.title || ''}</div>
                       </div>
                       
                       <div className="relative mb-12">
                          <Quote className="absolute -top-4 -left-6 text-[#0284c7]/5 w-16 h-16" />
                          <p className="relative z-10 text-xl font-serif text-[#0f172a] italic leading-relaxed font-bold border-l-4 border-[#0284c7] pl-8">
-                            "{leader.quote}"
+                            "{leader?.quote || ''}"
                          </p>
                       </div>
 
                       <div className="space-y-6 text-base lg:text-lg text-slate-500 leading-relaxed font-light">
-                        {leader.bio.map((para: string, j: number) => (
+                        {leader?.bio?.map((para: string, j: number) => (
                           <p key={j}>{para}</p>
                         ))}
                       </div>
@@ -273,23 +279,23 @@ export default function AboutPage(props: { data: any, query: string, variables: 
             <BlurFade delay={0.2} duration={0.8}>
                <Building2 size={56} strokeWidth={1} className="mx-auto text-[#0284c7] mb-12" />
                <h3 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 sm:mb-10 leading-[1] sm:leading-[0.9] tracking-tighter">
-                 <span data-tina-field={tinaField(p.philosophy, 'titleLine1')}>{p.philosophy.titleLine1}</span><br/>
-                 <span data-tina-field={tinaField(p.philosophy, 'titleItalic')} className="text-[#0284c7] italic font-medium">{p.philosophy.titleItalic}</span>
+                 <span data-tina-field={tinaField(p?.philosophy, 'titleLine1')}>{p?.philosophy?.titleLine1 || ''}</span><br/>
+                 <span data-tina-field={tinaField(p?.philosophy, 'titleItalic')} className="text-[#0284c7] italic font-medium">{p?.philosophy?.titleItalic || ''}</span>
                </h3>
-              <p data-tina-field={tinaField(p.philosophy, 'description')} className="text-slate-500 text-xl md:text-2xl font-light leading-relaxed max-w-3xl mx-auto mb-20">
-                 {p.philosophy.description}
+              <p data-tina-field={tinaField(p?.philosophy, 'description')} className="text-slate-500 text-xl md:text-2xl font-light leading-relaxed max-w-3xl mx-auto mb-20">
+                 {p?.philosophy?.description || ''}
               </p>
                <div className="grid sm:grid-cols-3 gap-8">
-                 {p.philosophy.items.map((item: any, idx: number) => (
+                 {p?.philosophy?.items?.map((item: any, idx: number) => (
                    <div key={idx} className="p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-2xl transition-all duration-700">
                      <div className="w-16 h-16 bg-white flex items-center justify-center rounded-2xl shadow-sm text-[#0f172a] mb-8 border border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white transition-colors">
                        {(() => {
-                         const Icon = iconMap[item.icon as keyof typeof iconMap] || Shield;
+                         const Icon = iconMap[item?.icon as keyof typeof iconMap] || Shield;
                          return <Icon size={28}/>;
                        })()}
                      </div>
-                     <div className="font-black font-serif text-2xl text-[#0f172a] mb-4">{item.title}</div>
-                     <div className="text-sm text-slate-500 leading-relaxed font-light">{item.desc}</div>
+                     <div className="font-black font-serif text-2xl text-[#0f172a] mb-4">{item?.title || ''}</div>
+                     <div className="text-sm text-slate-500 leading-relaxed font-light">{item?.desc || ''}</div>
                    </div>
                  ))}
                </div>
@@ -303,16 +309,16 @@ export default function AboutPage(props: { data: any, query: string, variables: 
         <div className="container mx-auto px-6 relative z-10 text-center">
           <BlurFade delay={0.1}>
              <div className="flex flex-col items-center mb-16">
-              <div data-tina-field={tinaField(p.national, 'badge')} className="mb-8">
-                <AnimatedGradientText>{p.national.badge}</AnimatedGradientText>
+              <div data-tina-field={tinaField(p?.national, 'badge')} className="mb-8">
+                <AnimatedGradientText>{p?.national?.badge || ''}</AnimatedGradientText>
               </div>
                <h3 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[1] sm:leading-[0.85] tracking-tighter uppercase">
-                 <span data-tina-field={tinaField(p.national, 'titleLine1')}>{p.national.titleLine1}</span> <br />
-                 <span data-tina-field={tinaField(p.national, 'titleItalic')} className="text-[#0284c7] italic font-medium lowercase">{p.national.titleItalic}</span>
+                 <span data-tina-field={tinaField(p?.national, 'titleLine1')}>{p?.national?.titleLine1 || ''}</span> <br />
+                 <span data-tina-field={tinaField(p?.national, 'titleItalic')} className="text-[#0284c7] italic font-medium lowercase">{p?.national?.titleItalic || ''}</span>
                </h3>
             </div>
-            <p data-tina-field={tinaField(p.national, 'quote')} className="text-slate-400 text-xl md:text-2xl font-light mb-20 leading-relaxed max-w-4xl mx-auto italic">
-               "{p.national.quote}"
+            <p data-tina-field={tinaField(p?.national, 'quote')} className="text-slate-400 text-xl md:text-2xl font-light mb-20 leading-relaxed max-w-4xl mx-auto italic">
+               "{p?.national?.quote || ''}"
             </p>
           </BlurFade>
         </div>
@@ -325,13 +331,13 @@ export default function AboutPage(props: { data: any, query: string, variables: 
                  </div>
                  
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 relative z-20">
-                    {p.national.legend.map((item: any, idx: number) => (
+                    {p?.national?.legend?.map((item: any, idx: number) => (
                       <div key={idx} className="flex items-center gap-4 p-5 rounded-2xl bg-white shadow-sm border border-slate-100">
                         {(() => {
-                          const Icon = iconMap[item.icon as keyof typeof iconMap] || Shield;
+                          const Icon = iconMap[item?.icon as keyof typeof iconMap] || Shield;
                           return <Icon className="text-[#0284c7]" size={20} />;
                         })()}
-                        <span className="text-[#0f172a] font-black uppercase text-[9px] tracking-widest">{item.text}</span>
+                        <span className="text-[#0f172a] font-black uppercase text-[9px] tracking-widest">{item?.text || ''}</span>
                       </div>
                     ))}
                   </div>
@@ -344,16 +350,16 @@ export default function AboutPage(props: { data: any, query: string, variables: 
       <section className="py-32 md:py-64 bg-white text-center relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <BlurFade delay={0.2}>
-            <h2 data-tina-field={tinaField(p.cta, 'title')} className="text-5xl sm:text-6xl md:text-9xl font-serif font-black text-[#0f172a] tracking-tighter leading-none mb-10 sm:mb-16">
-              {p.cta.title.split(' ')[0]} <br />
-              <span className="text-[#0284c7] italic">{p.cta.title.split(' ').slice(1).join(' ')}</span>
+            <h2 data-tina-field={tinaField(p?.cta, 'title')} className="text-5xl sm:text-6xl md:text-9xl font-serif font-black text-[#0f172a] tracking-tighter leading-none mb-10 sm:mb-16">
+              {p?.cta?.title?.split(' ')[0] || ''} <br />
+              <span className="text-[#0284c7] italic">{p?.cta?.title?.split(' ')?.slice(1)?.join(' ') || ''}</span>
             </h2>
-            <p data-tina-field={tinaField(p.cta, 'subtitle')} className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed mb-20">
-              {p.cta.subtitle}
+            <p data-tina-field={tinaField(p?.cta, 'subtitle')} className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed mb-20">
+              {p?.cta?.subtitle || ''}
             </p>
             <Link href="/contact">
               <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-16 py-8 shadow-2xl">
-                <span data-tina-field={tinaField(p.cta, 'button')} className="font-black uppercase tracking-[0.4em] text-[13px] text-white">{p.cta.button}</span>
+                <span data-tina-field={tinaField(p?.cta, 'button')} className="font-black uppercase tracking-[0.4em] text-[13px] text-white">{p?.cta?.button || 'Contact'}</span>
               </ShimmerButton>
             </Link>
           </BlurFade>

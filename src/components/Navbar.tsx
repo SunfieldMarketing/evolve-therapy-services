@@ -16,9 +16,9 @@ export default function Navbar() {
     data: { settings: settingsData },
   });
 
-  const s = data.settings;
+  const s = data?.settings;
   type NavLink = { name: string; href: string; dropdown?: { name: string; href: string; desc?: string }[] };
-  const links = (s.navbar.links ?? []) as NavLink[];
+  const links = (s?.navbar?.links ?? []) as NavLink[];
 
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -80,9 +80,9 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-1" role="menubar">
-              {links.map((link) => (
+              {links.map((link, idx) => (
                 <div
-                  key={link.name}
+                  key={link?.name || idx}
                   className="relative flex items-center"
                   onMouseEnter={() => link.dropdown && setDropdownOpen(true)}
                   onMouseLeave={() => link.dropdown && setDropdownOpen(false)}
@@ -146,7 +146,7 @@ export default function Navbar() {
                     : 'bg-white text-[#0f172a] hover:bg-slate-100 shadow-xl'
                 )}
               >
-                {s.navbar.ctaText}
+                {s?.navbar?.ctaText || 'Contact'}
                 <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
               </Link>
             </div>
@@ -196,8 +196,8 @@ export default function Navbar() {
               <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 min-h-[80px]" />
 
               <nav className="flex flex-col px-4 py-6 gap-1 flex-1">
-                {links.map((link) => (
-                  <div key={link.name} className="flex flex-col">
+                {links.map((link, idx) => (
+                  <div key={link?.name || idx} className="flex flex-col">
                     <div className="flex items-center justify-between">
                       <Link
                         href={link.href}
@@ -245,13 +245,13 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#0284c7] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#0369a1] transition-colors"
                 >
-                  {s.navbar.ctaText} <ArrowUpRight size={14} />
+                  {s?.navbar?.ctaText || 'Contact'} <ArrowUpRight size={14} />
                 </Link>
                 <a
-                  href={`tel:${s.phone.replace(/[^0-9]/g, '')}`}
+                  href={`tel:${s?.phone?.replace(/[^0-9]/g, '') || ''}`}
                   className="flex items-center justify-center gap-2 w-full py-3.5 border border-white/15 text-white/70 rounded-xl font-medium text-sm"
                 >
-                  <Phone size={14} /> {s.phone}
+                  <Phone size={14} /> {s?.phone || ''}
                 </a>
               </div>
             </motion.div>

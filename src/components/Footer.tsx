@@ -23,9 +23,9 @@ export default function Footer() {
     data: { settings: settingsData },
   });
 
-  const s = data.settings;
-  const navLinks = s.footer.links;
-  const serviceLinks = s.footer.serviceLinks;
+  const s = data?.settings;
+  const navLinks = s?.footer?.links || [];
+  const serviceLinks = s?.footer?.serviceLinks || [];
   const year = new Date().getFullYear();
 
   return (
@@ -46,8 +46,8 @@ export default function Footer() {
                Ready to Evolve?
             </div>
             <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[0.9] text-white mb-8">
-              {s.preFooterCta.title.split('with')[0]} <br className="hidden md:block" />
-              with <span className="text-[#38bdf8] italic font-medium">{s.preFooterCta.title.split('with')[1] || "Evolve"}</span>
+              {s?.preFooterCta?.title?.split('with')[0] || 'Start Your Evolution'} <br className="hidden md:block" />
+              with <span className="text-[#38bdf8] italic font-medium">{s?.preFooterCta?.title?.split('with')[1] || "Evolve"}</span>
             </h3>
             <p className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed">
               {s.preFooterCta.subtitle}
@@ -57,13 +57,13 @@ export default function Footer() {
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-white hover:text-[#0f172a] text-white px-8 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_40px_rgba(2,132,199,0.4)]"
               >
-                {s.preFooterCta.primaryCta} <ArrowRight size={16} aria-hidden="true" className="ml-2" />
+                {s?.preFooterCta?.primaryCta || 'Contact'} <ArrowRight size={16} aria-hidden="true" className="ml-2" />
               </Link>
               <a
-                href={`tel:${s.phone.replace(/[^0-9]/g, '')}`}
+                href={`tel:${s?.phone?.replace(/[^0-9]/g, '') || ''}`}
                 className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/40 px-8 py-5 rounded-full font-bold text-xs uppercase transition-all duration-300"
               >
-                <Phone size={15} aria-hidden="true" /> {s.phone}
+                <Phone size={15} aria-hidden="true" /> {s?.phone || ''}
               </a>
             </div>
           </motion.div>
@@ -96,12 +96,12 @@ export default function Footer() {
               </div>
               <div className="flex items-start gap-3 text-white/40 text-sm">
                 <Mail size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
-                <a href={`mailto:${s.email}`} className="hover:text-white transition-colors duration-200">{s.email}</a>
+                <a href={`mailto:${s?.email || ''}`} className="hover:text-white transition-colors duration-200">{s?.email || ''}</a>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-              {s.linkedin && (
+              {s?.linkedin && (
                 <a
                   href={s.linkedin}
                   target="_blank"
@@ -187,7 +187,7 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-white/25 text-xs">
-            {s.footer.copyright.replace('2026', `${year}`)}
+            {s?.footer?.copyright?.replace('2026', `${year}`) || `© ${year} Evolve Therapy Services. All rights reserved.`}
           </p>
           <div className="flex items-center gap-6">
             {[

@@ -9,7 +9,7 @@ import { MapPin, Phone, Mail, ArrowRight, TrendingUp, GraduationCap } from 'luci
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { useTina, tinaField } from '@/lib/tina';
 import locationsData from '../../../content/pages/locations.json';
 
 const iconMap = {

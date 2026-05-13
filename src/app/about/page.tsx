@@ -30,7 +30,7 @@ import { AnimatedGradientText } from '@/components/magicui/animated-gradient-tex
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import USAMap from '@/components/USAMap';
 import { cn } from '@/lib/utils';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { useTina, tinaField } from '@/lib/tina';
 import aboutData from '../../../content/pages/about.json';
 
 const iconMap = {

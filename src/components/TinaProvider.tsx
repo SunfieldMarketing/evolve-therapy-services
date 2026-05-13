@@ -8,7 +8,7 @@ import { useMemo, useEffect, useState } from 'react';
  * 
  * Provides the TinaCMS context to the entire application.
  * This version is designed to be 100% stable:
- * 1. Always provides context to avoid useTina crashes.
+ * 1. Always provides a valid CMS context to prevent hook crashes.
  * 2. Mocks missing methods to prevent "fetchCollections" runtime errors.
  */
 export default function TinaProviderWrapper({ children }: { children: React.ReactNode }) {
@@ -24,21 +24,27 @@ export default function TinaProviderWrapper({ children }: { children: React.Reac
       branch: process.env.NEXT_PUBLIC_TINA_BRANCH || 'main',
     } as any);
 
-    // CRITICAL: Inject missing methods to prevent internal Tina hooks from crashing the JS thread.
-    // This is the primary fix for the "unresponsive site" issue.
+    // CRITICAL MOCKING:
+    // We explicitly mock the internal API structure that Tina's React hooks expect.
+    // This prevents the "Cannot read properties of undefined (reading 'fetchCollections')" error.
     if (!(tina as any).api) (tina as any).api = {};
-    if (!(tina as any).api.fetchCollections) (tina as any).api.fetchCollections = async () => ({ collections: [] });
-    if (!(tina as any).api.request) (tina as any).api.request = async () => ({});
+    (tina as any).api.fetchCollections = async () => ({ collections: [] });
+    (tina as any).api.request = async () => ({});
     
+    // Also mock the client just in case
+    if (!(tina as any).client) (tina as any).client = (tina as any).api;
+
     return tina;
   }, []);
 
   useEffect(() => {
-    // Check if we are in an admin-related route
+    // Detect if we should enable editor features
     const isEditMode = 
-      window.location.pathname.startsWith('/admin') || 
-      window.location.pathname.startsWith('/portal') ||
-      window.location.search.includes('tina-edit');
+      typeof window !== 'undefined' && (
+        window.location.pathname.startsWith('/admin') || 
+        window.location.pathname.startsWith('/portal') ||
+        window.location.search.includes('tina-edit')
+      );
 
     if (isEditMode) {
       setIsAdmin(true);

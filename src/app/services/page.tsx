@@ -31,7 +31,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { useTina, tinaField } from '@/lib/tina';
 import servicesData from '../../../content/pages/services.json';
 
 const iconMap = {

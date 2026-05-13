@@ -23,7 +23,7 @@ import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BorderBeam } from '@/components/magicui/border-beam';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { useTina, tinaField } from '@/lib/tina';
 import homeData from '../../content/pages/home.json';
 
 const iconMap = {

@@ -1,3 +1,4 @@
+// TinaCMS Config - Audit Version 1.0.5 - Regenerate Schema
 import { defineConfig } from "tinacms";
 
 const branch = "main";

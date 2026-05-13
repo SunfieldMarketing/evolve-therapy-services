@@ -12,8 +12,8 @@ export default function AdminGate() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // The password requested by the user
-  const MASTER_PASSWORD = "Admin#2026!";
+  // Use environment variable for the master password
+  const MASTER_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
 
   useEffect(() => {
     // Check if already authenticated in this session

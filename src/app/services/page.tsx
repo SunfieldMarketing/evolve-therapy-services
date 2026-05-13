@@ -31,7 +31,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import servicesData from '../../../content/pages/services.json';
 
 const iconMap = {
@@ -119,16 +119,16 @@ export default function ServicesPage(props: { data: any, query: string, variable
             <BlurFade delay={0.2}>
                <div className="flex items-center gap-6 mb-12">
                   <div className="w-12 h-[1px] bg-[#0284c7]" />
-                  <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]">{p.hero.badge}</span>
+                  <span data-tina-field={tinaField(p.hero, 'badge')} className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]">{p.hero.badge}</span>
                </div>
                
                <h1 className="text-5xl md:text-[5vw] lg:text-[4.5vw] font-serif font-black text-white leading-[1] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] break-words">
-                  <span className="uppercase tracking-tighter block md:inline">{p.hero.titleLine1}</span>
-                  <span className="text-[#0284c7] italic md:ml-[0.15em] uppercase tracking-tighter block md:inline">{p.hero.titleItalic}</span>
+                  <span data-tina-field={tinaField(p.hero, 'titleLine1')} className="uppercase tracking-tighter block md:inline">{p.hero.titleLine1}</span>
+                  <span data-tina-field={tinaField(p.hero, 'titleItalic')} className="text-[#0284c7] italic md:ml-[0.15em] uppercase tracking-tighter block md:inline">{p.hero.titleItalic}</span>
                </h1>
 
                <div className="mb-20 w-full">
-                  <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic max-w-5xl">
+                  <p data-tina-field={tinaField(p.hero, 'description')} className="text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic max-w-5xl">
                      {p.hero.description}
                   </p>
                </div>
@@ -187,11 +187,11 @@ export default function ServicesPage(props: { data: any, query: string, variable
             <BlurFade delay={0.1}>
               <div className="flex items-center gap-4 mb-8">
                  <div className="w-8 h-[2px] bg-[#0284c7]" />
-                 <span className="text-[#0284c7] font-black uppercase text-[10px] tracking-[0.4em]">{p.showcase.badge}</span>
+                 <span data-tina-field={tinaField(p.showcase, 'badge')} className="text-[#0284c7] font-black uppercase text-[10px] tracking-[0.4em]">{p.showcase.badge}</span>
               </div>
               <h2 className="text-5xl md:text-8xl font-serif text-[#0f172a] font-black tracking-tighter mb-8 leading-[0.85]">
-                {p.showcase.titleLine1} <br />
-                <span className="text-[#0284c7] italic">{p.showcase.titleItalic}</span>
+                <span data-tina-field={tinaField(p.showcase, 'titleLine1')}>{p.showcase.titleLine1}</span> <br />
+                <span data-tina-field={tinaField(p.showcase, 'titleItalic')} className="text-[#0284c7] italic">{p.showcase.titleItalic}</span>
               </h2>
             </BlurFade>
           </div>
@@ -223,21 +223,23 @@ export default function ServicesPage(props: { data: any, query: string, variable
                        })()}
                        CORE SOLUTION {i + 1}
                     </div>
-                    <h3 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 leading-[0.9] tracking-tighter group-hover:text-[#0284c7] transition-colors duration-500">
-                      {service.title}
-                    </h3>
-                    <p className="text-xl text-slate-500 font-light leading-relaxed mb-12">
-                      {service.desc}
-                    </p>
-                    <div className="grid sm:grid-cols-2 gap-6 mb-12">
-                      {service.details.map((detail: string, idx: number) => (
-                        <div key={idx} className="flex items-center gap-4">
-                           <div className="w-6 h-6 rounded-lg bg-[#0284c7]/5 text-[#0284c7] flex items-center justify-center shrink-0">
-                              <Check size={14} strokeWidth={3} />
-                           </div>
-                           <span className="text-sm font-semibold text-[#0f172a]/70">{detail}</span>
-                        </div>
-                      ))}
+                    <div data-tina-field={tinaField(service)}>
+                      <h3 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 leading-[0.9] tracking-tighter group-hover:text-[#0284c7] transition-colors duration-500">
+                        {service.title}
+                      </h3>
+                      <p className="text-xl text-slate-500 font-light leading-relaxed mb-12">
+                        {service.desc}
+                      </p>
+                      <div className="grid sm:grid-cols-2 gap-6 mb-12">
+                        {service.details.map((detail: string, idx: number) => (
+                          <div key={idx} className="flex items-center gap-4">
+                             <div className="w-6 h-6 rounded-lg bg-[#0284c7]/5 text-[#0284c7] flex items-center justify-center shrink-0">
+                                <Check size={14} strokeWidth={3} />
+                             </div>
+                             <span className="text-sm font-semibold text-[#0f172a]/70">{detail}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                     <Link href={`/services/${service.slug}`}>
                        <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn px-10 py-5">

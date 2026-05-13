@@ -6,7 +6,7 @@ import PageHeader from '@/components/PageHeader';
 import { Mail, Phone, Clock, MapPin, ArrowRight, ShieldCheck, Globe, Lock } from 'lucide-react';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import contactData from '../../../content/pages/contact.json';
 
 const iconMap = {
@@ -61,10 +61,10 @@ export default function ContactPage(props: { data: any, query: string, variables
 
                   <div className="relative z-10">
                     <h2 className="text-4xl md:text-5xl font-serif font-black text-white mb-6 tracking-tighter leading-tight">
-                      {p.sidebar.title} <br />
-                      <span className="text-[#38bdf8] italic font-medium">{p.sidebar.titleItalic}</span>
+                      <span data-tina-field={tinaField(p.sidebar, 'title')}>{p.sidebar.title}</span> <br />
+                      <span data-tina-field={tinaField(p.sidebar, 'titleItalic')} className="text-[#38bdf8] italic font-medium">{p.sidebar.titleItalic}</span>
                     </h2>
-                    <p className="text-white/50 text-lg font-light leading-relaxed mb-12">
+                    <p data-tina-field={tinaField(p.sidebar, 'description')} className="text-white/50 text-lg font-light leading-relaxed mb-12">
                       {p.sidebar.description}
                     </p>
 
@@ -72,7 +72,7 @@ export default function ContactPage(props: { data: any, query: string, variables
                       {p.sidebar.items.map((item: any, i: number) => {
                         const Icon = iconMap[item.icon as keyof typeof iconMap] || Phone;
                         return (
-                          <div key={i} className="flex items-start gap-6 group">
+                          <div key={i} data-tina-field={tinaField(item)} className="flex items-start gap-6 group">
                             <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8] group-hover:bg-[#38bdf8] group-hover:text-[#0f172a] shadow-xl transition-all duration-500">
                               <Icon size={22} />
                             </div>
@@ -93,7 +93,7 @@ export default function ContactPage(props: { data: any, query: string, variables
                 const Icon = iconMap[badge.icon as keyof typeof iconMap] || Clock;
                 return (
                   <BlurFade delay={0.2 + i * 0.05} key={i}>
-                     <div className="bg-white rounded-[2rem] p-8 border border-slate-200 flex items-start gap-5 shadow-sm">
+                     <div data-tina-field={tinaField(badge)} className="bg-white rounded-[2rem] p-8 border border-slate-200 flex items-start gap-5 shadow-sm">
                         <Icon className="text-[#0284c7] shrink-0" size={32} />
                         <div>
                            <h4 className="font-black font-serif text-[#0f172a] text-xl mb-2">{badge.title}</h4>
@@ -110,13 +110,13 @@ export default function ContactPage(props: { data: any, query: string, variables
                   <div className="mb-10">
                     <div className="inline-flex items-center gap-3 mb-6">
                        <div className="w-8 h-px bg-[#0284c7]" />
-                       <span className="text-[#0284c7] font-black uppercase tracking-[0.3em] text-[10px]">{p.form.badge}</span>
+                       <span data-tina-field={tinaField(p.form, 'badge')} className="text-[#0284c7] font-black uppercase tracking-[0.3em] text-[10px]">{p.form.badge}</span>
                     </div>
                     <h3 className="text-4xl md:text-5xl font-serif font-black text-[#0f172a] mb-4 tracking-tighter leading-tight">
-                      {p.form.title} <br />
-                      <span className="text-[#0284c7] italic font-medium">{p.form.titleItalic}</span>
+                      <span data-tina-field={tinaField(p.form, 'title')}>{p.form.title}</span> <br />
+                      <span data-tina-field={tinaField(p.form, 'titleItalic')} className="text-[#0284c7] italic font-medium">{p.form.titleItalic}</span>
                     </h3>
-                    <p className="text-slate-500 text-lg font-light leading-relaxed max-w-lg">
+                    <p data-tina-field={tinaField(p.form, 'description')} className="text-slate-500 text-lg font-light leading-relaxed max-w-lg">
                       {p.form.description}
                     </p>
                   </div>

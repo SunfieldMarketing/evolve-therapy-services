@@ -10,8 +10,15 @@ import FAQ from "./FAQ";
 import Pricing from "./Pricing";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import FullHomepage from "./FullHomepage";
 
 // Register all major page sections as Code Components
+PLASMIC.registerComponent(FullHomepage, {
+  name: "FullHomepage",
+  displayName: "🌟 COMPLETE HOMEPAGE 🌟",
+  props: {},
+  defaultStyles: { width: "100%", maxWidth: "100%" }
+});
 PLASMIC.registerComponent(Navbar, {
   name: "NavbarSection",
   displayName: "Navigation Bar",

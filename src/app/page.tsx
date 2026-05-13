@@ -226,7 +226,7 @@ export default function Home(props: { data: any, query: string, variables: any }
                 {p?.bottomCta?.checklist?.map((item: string, i: number) => (
                   <BlurFade delay={0.4 + i * 0.05} key={item} className="flex items-center gap-4 text-white/50 text-base font-light border-b border-white/5 pb-4">
                     <CheckCircle2 size={18} className="text-[#0284c7] shrink-0" />
-                    <span data-tina-field={tinaField(p?.bottomCta, `checklist[${i}]`)}>{item}</span>
+                    <span data-tina-field={tinaField(p?.bottomCta, `checklist[${i}]` as any)}>{item}</span>
                   </BlurFade>
                 ))}
               </div>

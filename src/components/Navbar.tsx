@@ -91,7 +91,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    data-tina-field={tinaField(s?.navbar, `links[${idx}]`)}
+                    data-tina-field={tinaField(link, 'name')}
                     className={cn(
                       'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none',
                       scrolled

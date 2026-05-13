@@ -110,7 +110,7 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
                 </h3>
                 <ul className="space-y-6">
                   {service?.benefits?.map((benefit: string, i: number) => (
-                    <li key={i} data-tina-field={tinaField(service, `benefits[${i}]`)} className="flex items-start gap-4 group">
+                    <li key={i} data-tina-field={tinaField(service, `benefits[${i}]` as any)} className="flex items-start gap-4 group">
                       <div className="w-8 h-8 rounded-full bg-[#0284c7]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#0284c7] transition-colors">
                         <CheckCircle2 size={16} className="text-[#0284c7] group-hover:text-white" />
                       </div>
@@ -184,7 +184,7 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
                   </h3>
                   <div className="grid md:grid-cols-2 gap-6 not-prose">
                     {service?.features?.map((feature: string, i: number) => (
-                      <div key={i} data-tina-field={tinaField(service, `features[${i}]`)} className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-[#0284c7]/20 hover:bg-white hover:shadow-xl transition-all duration-500">
+                      <div key={i} data-tina-field={tinaField(service, `features[${i}]` as any)} className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-[#0284c7]/20 hover:bg-white hover:shadow-xl transition-all duration-500">
                         <div className="w-3 h-3 rounded-full bg-[#0284c7] shadow-lg shadow-[#0284c7]/20 shrink-0" />
                         <span className="text-[#0f172a] font-black text-sm uppercase tracking-[0.1em] leading-snug">{feature}</span>
                       </div>

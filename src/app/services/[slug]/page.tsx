@@ -57,18 +57,7 @@ export default function ServiceDetailPage(props: { data: any, query: string, var
     data: props.data || {},
   });
 
-  // Try to find local fallback if Tina data is missing
-  let service = data?.service;
-  
-  if (!service) {
-    try {
-      // In a real build, these would be pre-loaded or fetched
-      // For this implementation, we'll try to use the props.data if available
-      service = props.data?.service;
-    } catch (e) {
-      console.error("Local fallback failed", e);
-    }
-  }
+  const service = data.service;
 
   if (!service) {
     // If we're in the editor, we might not have data yet for a new slug

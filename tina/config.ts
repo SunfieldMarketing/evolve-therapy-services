@@ -1,11 +1,11 @@
 import { defineConfig } from "tinacms";
 
-const branch = process.env.VERCEL_GIT_COMMIT_REF || "main";
+const branch = "main";
 
 export default defineConfig({
   branch,
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "00000000-0000-0000-0000-000000000000", // Fallback for build
-  token: process.env.TINA_TOKEN || "0000000000000000000000000000000000000000", // Fallback for build
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
+  token: process.env.TINA_TOKEN || "",
 
   build: {
     outputFolder: "admin",
@@ -106,14 +106,6 @@ export default defineConfig({
                   { type: "string", name: "a", label: "Answer", ui: { component: "textarea" } },
                 ],
               },
-            ],
-          },
-          {
-            type: "object", name: "mapLegend", label: "Map Legend Boxes", list: true,
-            fields: [
-              { type: "string", name: "icon", label: "Icon Name" },
-              { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
             ],
           },
           {
@@ -223,30 +215,6 @@ export default defineConfig({
                 ],
               },
             ],
-          },
-          {
-            type: "object", name: "socialProof", label: "Social Proof Section",
-            fields: [
-              {
-                type: "object", name: "stats", label: "Stats Bar", list: true,
-                fields: [
-                  { type: "string", name: "value", label: "Value" },
-                  { type: "string", name: "label", label: "Label" },
-                  { type: "string", name: "desc", label: "Description" },
-                ],
-              },
-            ],
-          },
-          {
-             type: "object", name: "featuredDiscovery", label: "Featured Discovery Section",
-             fields: [
-               { type: "string", name: "badge", label: "Badge" },
-               { type: "string", name: "title", label: "Title" },
-               { type: "string", name: "titleItalic", label: "Title Italic" },
-               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
-               { type: "image", name: "image", label: "Featured Image" },
-               { type: "string", name: "cta", label: "CTA Button Text" },
-             ],
           },
           {
             type: "object", name: "bottomCta", label: "Bottom CTA Section",

@@ -6,7 +6,7 @@ import PageHeader from '@/components/PageHeader';
 import { Mail, Phone, Clock, MapPin, ArrowRight, ShieldCheck, Globe, Lock } from 'lucide-react';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { useTina } from 'tinacms/dist/react';
 import contactData from '../../../content/pages/contact.json';
 
 const iconMap = {
@@ -26,9 +26,7 @@ export default function ContactPage(props: { data: any, query: string, variables
     data: props.data || { contact: contactData },
   });
 
-  const p = data?.contact || contactData;
-  
-  if (!p) return null;
+  const p = data.contact;
 
   return (
     <main className="min-h-screen bg-white">
@@ -63,25 +61,25 @@ export default function ContactPage(props: { data: any, query: string, variables
 
                   <div className="relative z-10">
                     <h2 className="text-4xl md:text-5xl font-serif font-black text-white mb-6 tracking-tighter leading-tight">
-                      <span data-tina-field={tinaField(p.sidebar, 'title')}>{p.sidebar.title}</span> <br />
-                      <span data-tina-field={tinaField(p.sidebar, 'titleItalic')} className="text-[#38bdf8] italic font-medium">{p.sidebar.titleItalic}</span>
+                      {p.sidebar.title} <br />
+                      <span className="text-[#38bdf8] italic font-medium">{p.sidebar.titleItalic}</span>
                     </h2>
-                    <p data-tina-field={tinaField(p.sidebar, 'description')} className="text-white/50 text-lg font-light leading-relaxed mb-12">
+                    <p className="text-white/50 text-lg font-light leading-relaxed mb-12">
                       {p.sidebar.description}
                     </p>
 
                     <div className="space-y-10">
-                      {(p?.sidebar?.items || contactData.sidebar.items).map((item: any, i: number) => {
+                      {p.sidebar.items.map((item: any, i: number) => {
                         const Icon = iconMap[item.icon as keyof typeof iconMap] || Phone;
                         return (
                           <div key={i} className="flex items-start gap-6 group">
                             <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8] group-hover:bg-[#38bdf8] group-hover:text-[#0f172a] shadow-xl transition-all duration-500">
-                               <Icon size={22} />
+                              <Icon size={22} />
                             </div>
                             <div>
-                               <div data-tina-field={tinaField(item, 'label')} className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-1">{item.label}</div>
-                               <div data-tina-field={tinaField(item, 'value')} className="text-xl font-serif font-bold text-white group-hover:text-[#38bdf8] transition-colors">{item.value}</div>
-                               <div data-tina-field={tinaField(item, 'sub')} className="text-xs text-white/40 mt-1">{item.sub}</div>
+                              <div className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-1">{item.label}</div>
+                              <div className="text-xl font-serif font-bold text-white group-hover:text-[#38bdf8] transition-colors">{item.value}</div>
+                              <div className="text-xs text-white/40 mt-1">{item.sub}</div>
                             </div>
                           </div>
                         );
@@ -91,7 +89,7 @@ export default function ContactPage(props: { data: any, query: string, variables
                 </div>
               </BlurFade>
 
-              {(p?.trustBadges || contactData.trustBadges).map((badge: any, i: number) => {
+              {p.trustBadges?.map((badge: any, i: number) => {
                 const Icon = iconMap[badge.icon as keyof typeof iconMap] || Clock;
                 return (
                   <BlurFade delay={0.2 + i * 0.05} key={i}>
@@ -112,14 +110,14 @@ export default function ContactPage(props: { data: any, query: string, variables
                   <div className="mb-10">
                     <div className="inline-flex items-center gap-3 mb-6">
                        <div className="w-8 h-px bg-[#0284c7]" />
-                       <span className="text-[#0284c7] font-black uppercase tracking-[0.3em] text-[10px]">{p?.form?.badge || contactData.form.badge}</span>
+                       <span className="text-[#0284c7] font-black uppercase tracking-[0.3em] text-[10px]">{p.form.badge}</span>
                     </div>
                     <h3 className="text-4xl md:text-5xl font-serif font-black text-[#0f172a] mb-4 tracking-tighter leading-tight">
-                      {p?.form?.title || contactData.form.title} <br />
-                      <span className="text-[#0284c7] italic font-medium">{p?.form?.titleItalic || contactData.form.titleItalic}</span>
+                      {p.form.title} <br />
+                      <span className="text-[#0284c7] italic font-medium">{p.form.titleItalic}</span>
                     </h3>
                     <p className="text-slate-500 text-lg font-light leading-relaxed max-w-lg">
-                      {p?.form?.description || contactData.form.description}
+                      {p.form.description}
                     </p>
                   </div>
 
@@ -147,7 +145,7 @@ export default function ContactPage(props: { data: any, query: string, variables
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Primary Inquiry Goal</label>
                       <select className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium appearance-none cursor-pointer">
-                        {(p?.form?.inquiryGoals || contactData.form.inquiryGoals).map((goal: string) => (
+                        {p.form.inquiryGoals?.map((goal: string) => (
                           <option key={goal}>{goal}</option>
                         ))}
                       </select>

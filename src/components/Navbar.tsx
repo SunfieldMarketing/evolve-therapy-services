@@ -16,25 +16,9 @@ export default function Navbar() {
     data: { settings: settingsData },
   });
 
-  interface NavLink {
-    name: string;
-    href: string;
-    dropdown?: {
-      name: string;
-      href: string;
-      desc: string;
-    }[];
-  }
-
-  const s = data?.settings || settingsData;
-  
-  // Robust fallback for links to prevent "undefined" errors
-  const links = (s?.navbar?.links || settingsData?.navbar?.links || [
-    { name: "Services", href: "/services" },
-    { name: "About", "href": "/about" },
-    { name: "Locations", "href": "/locations" },
-    { name: "Contact", "href": "/contact" }
-  ]) as NavLink[];
+  const s = data.settings;
+  type NavLink = { name: string; href: string; dropdown?: { name: string; href: string; desc?: string }[] };
+  const links = (s.navbar.links ?? []) as NavLink[];
 
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -96,7 +80,7 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-1" role="menubar">
-              {links.filter(link => link && link.name).map((link) => (
+              {links.map((link) => (
                 <div
                   key={link.name}
                   className="relative flex items-center"
@@ -106,7 +90,7 @@ export default function Navbar() {
                   role="none"
                 >
                   <Link
-                    href={link.href || '#'}
+                    href={link.href}
                     className={cn(
                       'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none',
                       scrolled
@@ -134,7 +118,7 @@ export default function Navbar() {
                             {link.dropdown.map((item) => (
                               <Link
                                 key={item.name}
-                                href={item.href || '#'}
+                                href={item.href}
                                 onClick={() => setDropdownOpen(false)}
                                 className="flex flex-col px-4 py-3 rounded-xl hover:bg-[#0284c7]/8 group/item transition-all duration-150"
                                 role="menuitem"
@@ -162,7 +146,7 @@ export default function Navbar() {
                     : 'bg-white text-[#0f172a] hover:bg-slate-100 shadow-xl'
                 )}
               >
-                {s?.navbar?.ctaText || "Start Your Evolution"}
+                {s.navbar.ctaText}
                 <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
               </Link>
             </div>

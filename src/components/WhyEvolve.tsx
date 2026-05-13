@@ -27,9 +27,7 @@ export default function WhyEvolve() {
     data: { home: homeData },
   });
 
-  const w = data?.home?.whyEvolve || homeData.whyEvolve;
-  
-  if (!w) return null;
+  const w = data.home.whyEvolve;
   const features = w.features;
 
   const containerRef = useRef<HTMLDivElement>(null);

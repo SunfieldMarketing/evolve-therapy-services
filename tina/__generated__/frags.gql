@@ -61,12 +61,6 @@ fragment SettingsParts on Settings {
       a
     }
   }
-  mapLegend {
-    __typename
-    icon
-    title
-    desc
-  }
   activeStates
 }
 
@@ -143,24 +137,6 @@ fragment HomeParts on Home {
       authorTitle
       authorPhoto
     }
-  }
-  socialProof {
-    __typename
-    stats {
-      __typename
-      value
-      label
-      desc
-    }
-  }
-  featuredDiscovery {
-    __typename
-    badge
-    title
-    titleItalic
-    description
-    image
-    cta
   }
   bottomCta {
     __typename

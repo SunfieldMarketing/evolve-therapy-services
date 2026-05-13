@@ -344,13 +344,6 @@ export type SettingsFaq = {
   list?: Maybe<Array<Maybe<SettingsFaqList>>>;
 };
 
-export type SettingsMapLegend = {
-  __typename?: 'SettingsMapLegend';
-  icon?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  desc?: Maybe<Scalars['String']['output']>;
-};
-
 export type Settings = Node & Document & {
   __typename?: 'Settings';
   siteName?: Maybe<Scalars['String']['output']>;
@@ -363,7 +356,6 @@ export type Settings = Node & Document & {
   preFooterCta?: Maybe<SettingsPreFooterCta>;
   testimonials?: Maybe<SettingsTestimonials>;
   faq?: Maybe<SettingsFaq>;
-  mapLegend?: Maybe<Array<Maybe<SettingsMapLegend>>>;
   activeStates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -448,12 +440,6 @@ export type SettingsFaqFilter = {
   list?: InputMaybe<SettingsFaqListFilter>;
 };
 
-export type SettingsMapLegendFilter = {
-  icon?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
-  desc?: InputMaybe<StringFilter>;
-};
-
 export type SettingsFilter = {
   siteName?: InputMaybe<StringFilter>;
   phone?: InputMaybe<StringFilter>;
@@ -465,7 +451,6 @@ export type SettingsFilter = {
   preFooterCta?: InputMaybe<SettingsPreFooterCtaFilter>;
   testimonials?: InputMaybe<SettingsTestimonialsFilter>;
   faq?: InputMaybe<SettingsFaqFilter>;
-  mapLegend?: InputMaybe<SettingsMapLegendFilter>;
   activeStates?: InputMaybe<StringFilter>;
 };
 
@@ -570,28 +555,6 @@ export type HomeWhyEvolve = {
   quoteStrip?: Maybe<HomeWhyEvolveQuoteStrip>;
 };
 
-export type HomeSocialProofStats = {
-  __typename?: 'HomeSocialProofStats';
-  value?: Maybe<Scalars['String']['output']>;
-  label?: Maybe<Scalars['String']['output']>;
-  desc?: Maybe<Scalars['String']['output']>;
-};
-
-export type HomeSocialProof = {
-  __typename?: 'HomeSocialProof';
-  stats?: Maybe<Array<Maybe<HomeSocialProofStats>>>;
-};
-
-export type HomeFeaturedDiscovery = {
-  __typename?: 'HomeFeaturedDiscovery';
-  badge?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  titleItalic?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  image?: Maybe<Scalars['String']['output']>;
-  cta?: Maybe<Scalars['String']['output']>;
-};
-
 export type HomeBottomCta = {
   __typename?: 'HomeBottomCta';
   quote?: Maybe<Scalars['String']['output']>;
@@ -606,8 +569,6 @@ export type Home = Node & Document & {
   clinicalExcellence?: Maybe<HomeClinicalExcellence>;
   process?: Maybe<HomeProcess>;
   whyEvolve?: Maybe<HomeWhyEvolve>;
-  socialProof?: Maybe<HomeSocialProof>;
-  featuredDiscovery?: Maybe<HomeFeaturedDiscovery>;
   bottomCta?: Maybe<HomeBottomCta>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -699,25 +660,6 @@ export type HomeWhyEvolveFilter = {
   quoteStrip?: InputMaybe<HomeWhyEvolveQuoteStripFilter>;
 };
 
-export type HomeSocialProofStatsFilter = {
-  value?: InputMaybe<StringFilter>;
-  label?: InputMaybe<StringFilter>;
-  desc?: InputMaybe<StringFilter>;
-};
-
-export type HomeSocialProofFilter = {
-  stats?: InputMaybe<HomeSocialProofStatsFilter>;
-};
-
-export type HomeFeaturedDiscoveryFilter = {
-  badge?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
-  titleItalic?: InputMaybe<StringFilter>;
-  description?: InputMaybe<StringFilter>;
-  image?: InputMaybe<ImageFilter>;
-  cta?: InputMaybe<StringFilter>;
-};
-
 export type HomeBottomCtaFilter = {
   quote?: InputMaybe<StringFilter>;
   checklist?: InputMaybe<StringFilter>;
@@ -730,8 +672,6 @@ export type HomeFilter = {
   clinicalExcellence?: InputMaybe<HomeClinicalExcellenceFilter>;
   process?: InputMaybe<HomeProcessFilter>;
   whyEvolve?: InputMaybe<HomeWhyEvolveFilter>;
-  socialProof?: InputMaybe<HomeSocialProofFilter>;
-  featuredDiscovery?: InputMaybe<HomeFeaturedDiscoveryFilter>;
   bottomCta?: InputMaybe<HomeBottomCtaFilter>;
 };
 
@@ -1705,12 +1645,6 @@ export type SettingsFaqMutation = {
   list?: InputMaybe<Array<InputMaybe<SettingsFaqListMutation>>>;
 };
 
-export type SettingsMapLegendMutation = {
-  icon?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  desc?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type SettingsMutation = {
   siteName?: InputMaybe<Scalars['String']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
@@ -1722,7 +1656,6 @@ export type SettingsMutation = {
   preFooterCta?: InputMaybe<SettingsPreFooterCtaMutation>;
   testimonials?: InputMaybe<SettingsTestimonialsMutation>;
   faq?: InputMaybe<SettingsFaqMutation>;
-  mapLegend?: InputMaybe<Array<InputMaybe<SettingsMapLegendMutation>>>;
   activeStates?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -1804,25 +1737,6 @@ export type HomeWhyEvolveMutation = {
   quoteStrip?: InputMaybe<HomeWhyEvolveQuoteStripMutation>;
 };
 
-export type HomeSocialProofStatsMutation = {
-  value?: InputMaybe<Scalars['String']['input']>;
-  label?: InputMaybe<Scalars['String']['input']>;
-  desc?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type HomeSocialProofMutation = {
-  stats?: InputMaybe<Array<InputMaybe<HomeSocialProofStatsMutation>>>;
-};
-
-export type HomeFeaturedDiscoveryMutation = {
-  badge?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  titleItalic?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  image?: InputMaybe<Scalars['String']['input']>;
-  cta?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type HomeBottomCtaMutation = {
   quote?: InputMaybe<Scalars['String']['input']>;
   checklist?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1835,8 +1749,6 @@ export type HomeMutation = {
   clinicalExcellence?: InputMaybe<HomeClinicalExcellenceMutation>;
   process?: InputMaybe<HomeProcessMutation>;
   whyEvolve?: InputMaybe<HomeWhyEvolveMutation>;
-  socialProof?: InputMaybe<HomeSocialProofMutation>;
-  featuredDiscovery?: InputMaybe<HomeFeaturedDiscoveryMutation>;
   bottomCta?: InputMaybe<HomeBottomCtaMutation>;
 };
 
@@ -2144,9 +2056,9 @@ export type ServiceMutation = {
   videoUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SettingsPartsFragment = { __typename: 'Settings', siteName?: string | null, phone?: string | null, email?: string | null, address?: string | null, linkedin?: string | null, activeStates?: Array<string | null> | null, navbar?: { __typename: 'SettingsNavbar', ctaText?: string | null, links?: Array<{ __typename: 'SettingsNavbarLinks', name?: string | null, href?: string | null } | null> | null } | null, footer?: { __typename: 'SettingsFooter', tagline?: string | null, copyright?: string | null, links?: Array<{ __typename: 'SettingsFooterLinks', name?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'SettingsFooterServiceLinks', name?: string | null, href?: string | null } | null> | null } | null, preFooterCta?: { __typename: 'SettingsPreFooterCta', title?: string | null, subtitle?: string | null, primaryCta?: string | null } | null, testimonials?: { __typename: 'SettingsTestimonials', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsTestimonialsList', name?: string | null, role?: string | null, facility?: string | null, content?: string | null, stars?: number | null, initials?: string | null } | null> | null } | null, faq?: { __typename: 'SettingsFaq', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsFaqList', q?: string | null, a?: string | null } | null> | null } | null, mapLegend?: Array<{ __typename: 'SettingsMapLegend', icon?: string | null, title?: string | null, desc?: string | null } | null> | null };
+export type SettingsPartsFragment = { __typename: 'Settings', siteName?: string | null, phone?: string | null, email?: string | null, address?: string | null, linkedin?: string | null, activeStates?: Array<string | null> | null, navbar?: { __typename: 'SettingsNavbar', ctaText?: string | null, links?: Array<{ __typename: 'SettingsNavbarLinks', name?: string | null, href?: string | null } | null> | null } | null, footer?: { __typename: 'SettingsFooter', tagline?: string | null, copyright?: string | null, links?: Array<{ __typename: 'SettingsFooterLinks', name?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'SettingsFooterServiceLinks', name?: string | null, href?: string | null } | null> | null } | null, preFooterCta?: { __typename: 'SettingsPreFooterCta', title?: string | null, subtitle?: string | null, primaryCta?: string | null } | null, testimonials?: { __typename: 'SettingsTestimonials', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsTestimonialsList', name?: string | null, role?: string | null, facility?: string | null, content?: string | null, stars?: number | null, initials?: string | null } | null> | null } | null, faq?: { __typename: 'SettingsFaq', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsFaqList', q?: string | null, a?: string | null } | null> | null } | null };
 
-export type HomePartsFragment = { __typename: 'Home', hero?: { __typename: 'HomeHero', eyebrow?: string | null, titleLine1?: string | null, titleItalic?: string | null, titleLine2?: string | null, subtext?: string | null, primaryCta?: string | null, secondaryCta?: string | null, stats?: Array<{ __typename: 'HomeHeroStats', value?: string | null, label?: string | null } | null> | null } | null, clinicalExcellence?: { __typename: 'HomeClinicalExcellence', badge?: string | null, titleLine1?: string | null, titleItalic?: string | null, description?: string | null, stats?: Array<{ __typename: 'HomeClinicalExcellenceStats', value?: number | null, suffix?: string | null, label?: string | null, desc?: string | null } | null> | null, services?: Array<{ __typename: 'HomeClinicalExcellenceServices', title?: string | null, desc?: string | null, tag?: string | null, icon?: string | null } | null> | null } | null, process?: { __typename: 'HomeProcess', badge?: string | null, title?: string | null, titleItalic?: string | null, description?: string | null, steps?: Array<{ __typename: 'HomeProcessSteps', num?: string | null, title?: string | null, desc?: string | null, icon?: string | null } | null> | null } | null, whyEvolve?: { __typename: 'HomeWhyEvolve', title?: string | null, subtitle?: string | null, introText?: string | null, features?: Array<{ __typename: 'HomeWhyEvolveFeatures', title?: string | null, subtitle?: string | null, desc?: string | null, icon?: string | null, color?: string | null, href?: string | null } | null> | null, quoteStrip?: { __typename: 'HomeWhyEvolveQuoteStrip', text?: string | null, author?: string | null, authorTitle?: string | null, authorPhoto?: string | null } | null } | null, socialProof?: { __typename: 'HomeSocialProof', stats?: Array<{ __typename: 'HomeSocialProofStats', value?: string | null, label?: string | null, desc?: string | null } | null> | null } | null, featuredDiscovery?: { __typename: 'HomeFeaturedDiscovery', badge?: string | null, title?: string | null, titleItalic?: string | null, description?: string | null, image?: string | null, cta?: string | null } | null, bottomCta?: { __typename: 'HomeBottomCta', quote?: string | null, checklist?: Array<string | null> | null, primaryCta?: string | null, phone?: string | null } | null };
+export type HomePartsFragment = { __typename: 'Home', hero?: { __typename: 'HomeHero', eyebrow?: string | null, titleLine1?: string | null, titleItalic?: string | null, titleLine2?: string | null, subtext?: string | null, primaryCta?: string | null, secondaryCta?: string | null, stats?: Array<{ __typename: 'HomeHeroStats', value?: string | null, label?: string | null } | null> | null } | null, clinicalExcellence?: { __typename: 'HomeClinicalExcellence', badge?: string | null, titleLine1?: string | null, titleItalic?: string | null, description?: string | null, stats?: Array<{ __typename: 'HomeClinicalExcellenceStats', value?: number | null, suffix?: string | null, label?: string | null, desc?: string | null } | null> | null, services?: Array<{ __typename: 'HomeClinicalExcellenceServices', title?: string | null, desc?: string | null, tag?: string | null, icon?: string | null } | null> | null } | null, process?: { __typename: 'HomeProcess', badge?: string | null, title?: string | null, titleItalic?: string | null, description?: string | null, steps?: Array<{ __typename: 'HomeProcessSteps', num?: string | null, title?: string | null, desc?: string | null, icon?: string | null } | null> | null } | null, whyEvolve?: { __typename: 'HomeWhyEvolve', title?: string | null, subtitle?: string | null, introText?: string | null, features?: Array<{ __typename: 'HomeWhyEvolveFeatures', title?: string | null, subtitle?: string | null, desc?: string | null, icon?: string | null, color?: string | null, href?: string | null } | null> | null, quoteStrip?: { __typename: 'HomeWhyEvolveQuoteStrip', text?: string | null, author?: string | null, authorTitle?: string | null, authorPhoto?: string | null } | null } | null, bottomCta?: { __typename: 'HomeBottomCta', quote?: string | null, checklist?: Array<string | null> | null, primaryCta?: string | null, phone?: string | null } | null };
 
 export type AboutPartsFragment = { __typename: 'About', header?: { __typename: 'AboutHeader', title?: string | null, italicWord?: string | null, subtitle?: string | null, badgeText?: string | null, valueBoxes?: Array<{ __typename: 'AboutHeaderValueBoxes', label?: string | null, sublabel?: string | null, icon?: string | null } | null> | null } | null, intro?: { __typename: 'AboutIntro', badge?: string | null, titleLine1?: string | null, titleItalic?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, quoteAuthor?: string | null } | null, pillars?: Array<{ __typename: 'AboutPillars', icon?: string | null, title?: string | null, text?: string | null } | null> | null, leaders?: Array<{ __typename: 'AboutLeaders', name?: string | null, title?: string | null, photo?: string | null, quote?: string | null, bio?: Array<string | null> | null } | null> | null, philosophy?: { __typename: 'AboutPhilosophy', titleLine1?: string | null, titleItalic?: string | null, description?: string | null, items?: Array<{ __typename: 'AboutPhilosophyItems', title?: string | null, icon?: string | null, desc?: string | null } | null> | null } | null, journey?: { __typename: 'AboutJourney', badge?: string | null, titleLine1?: string | null, titleItalic?: string | null, subtitle?: string | null, items?: Array<{ __typename: 'AboutJourneyItems', title?: string | null, text?: string | null } | null> | null } | null, national?: { __typename: 'AboutNational', badge?: string | null, titleLine1?: string | null, titleItalic?: string | null, quote?: string | null, legend?: Array<{ __typename: 'AboutNationalLegend', icon?: string | null, text?: string | null } | null> | null } | null, trust?: Array<{ __typename: 'AboutTrust', icon?: string | null, text?: string | null } | null> | null, cta?: { __typename: 'AboutCta', title?: string | null, subtitle?: string | null, button?: string | null } | null };
 
@@ -2163,7 +2075,7 @@ export type SettingsQueryVariables = Exact<{
 }>;
 
 
-export type SettingsQuery = { __typename?: 'Query', settings: { __typename: 'Settings', id: string, siteName?: string | null, phone?: string | null, email?: string | null, address?: string | null, linkedin?: string | null, activeStates?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, navbar?: { __typename: 'SettingsNavbar', ctaText?: string | null, links?: Array<{ __typename: 'SettingsNavbarLinks', name?: string | null, href?: string | null } | null> | null } | null, footer?: { __typename: 'SettingsFooter', tagline?: string | null, copyright?: string | null, links?: Array<{ __typename: 'SettingsFooterLinks', name?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'SettingsFooterServiceLinks', name?: string | null, href?: string | null } | null> | null } | null, preFooterCta?: { __typename: 'SettingsPreFooterCta', title?: string | null, subtitle?: string | null, primaryCta?: string | null } | null, testimonials?: { __typename: 'SettingsTestimonials', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsTestimonialsList', name?: string | null, role?: string | null, facility?: string | null, content?: string | null, stars?: number | null, initials?: string | null } | null> | null } | null, faq?: { __typename: 'SettingsFaq', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsFaqList', q?: string | null, a?: string | null } | null> | null } | null, mapLegend?: Array<{ __typename: 'SettingsMapLegend', icon?: string | null, title?: string | null, desc?: string | null } | null> | null } };
+export type SettingsQuery = { __typename?: 'Query', settings: { __typename: 'Settings', id: string, siteName?: string | null, phone?: string | null, email?: string | null, address?: string | null, linkedin?: string | null, activeStates?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, navbar?: { __typename: 'SettingsNavbar', ctaText?: string | null, links?: Array<{ __typename: 'SettingsNavbarLinks', name?: string | null, href?: string | null } | null> | null } | null, footer?: { __typename: 'SettingsFooter', tagline?: string | null, copyright?: string | null, links?: Array<{ __typename: 'SettingsFooterLinks', name?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'SettingsFooterServiceLinks', name?: string | null, href?: string | null } | null> | null } | null, preFooterCta?: { __typename: 'SettingsPreFooterCta', title?: string | null, subtitle?: string | null, primaryCta?: string | null } | null, testimonials?: { __typename: 'SettingsTestimonials', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsTestimonialsList', name?: string | null, role?: string | null, facility?: string | null, content?: string | null, stars?: number | null, initials?: string | null } | null> | null } | null, faq?: { __typename: 'SettingsFaq', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsFaqList', q?: string | null, a?: string | null } | null> | null } | null } };
 
 export type SettingsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2175,14 +2087,14 @@ export type SettingsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection: { __typename?: 'SettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SettingsConnectionEdges', cursor: string, node?: { __typename: 'Settings', id: string, siteName?: string | null, phone?: string | null, email?: string | null, address?: string | null, linkedin?: string | null, activeStates?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, navbar?: { __typename: 'SettingsNavbar', ctaText?: string | null, links?: Array<{ __typename: 'SettingsNavbarLinks', name?: string | null, href?: string | null } | null> | null } | null, footer?: { __typename: 'SettingsFooter', tagline?: string | null, copyright?: string | null, links?: Array<{ __typename: 'SettingsFooterLinks', name?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'SettingsFooterServiceLinks', name?: string | null, href?: string | null } | null> | null } | null, preFooterCta?: { __typename: 'SettingsPreFooterCta', title?: string | null, subtitle?: string | null, primaryCta?: string | null } | null, testimonials?: { __typename: 'SettingsTestimonials', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsTestimonialsList', name?: string | null, role?: string | null, facility?: string | null, content?: string | null, stars?: number | null, initials?: string | null } | null> | null } | null, faq?: { __typename: 'SettingsFaq', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsFaqList', q?: string | null, a?: string | null } | null> | null } | null, mapLegend?: Array<{ __typename: 'SettingsMapLegend', icon?: string | null, title?: string | null, desc?: string | null } | null> | null } | null } | null> | null } };
+export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection: { __typename?: 'SettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SettingsConnectionEdges', cursor: string, node?: { __typename: 'Settings', id: string, siteName?: string | null, phone?: string | null, email?: string | null, address?: string | null, linkedin?: string | null, activeStates?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, navbar?: { __typename: 'SettingsNavbar', ctaText?: string | null, links?: Array<{ __typename: 'SettingsNavbarLinks', name?: string | null, href?: string | null } | null> | null } | null, footer?: { __typename: 'SettingsFooter', tagline?: string | null, copyright?: string | null, links?: Array<{ __typename: 'SettingsFooterLinks', name?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'SettingsFooterServiceLinks', name?: string | null, href?: string | null } | null> | null } | null, preFooterCta?: { __typename: 'SettingsPreFooterCta', title?: string | null, subtitle?: string | null, primaryCta?: string | null } | null, testimonials?: { __typename: 'SettingsTestimonials', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsTestimonialsList', name?: string | null, role?: string | null, facility?: string | null, content?: string | null, stars?: number | null, initials?: string | null } | null> | null } | null, faq?: { __typename: 'SettingsFaq', title?: string | null, titleItalic?: string | null, description?: string | null, list?: Array<{ __typename: 'SettingsFaqList', q?: string | null, a?: string | null } | null> | null } | null } | null } | null> | null } };
 
 export type HomeQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomeHero', eyebrow?: string | null, titleLine1?: string | null, titleItalic?: string | null, titleLine2?: string | null, subtext?: string | null, primaryCta?: string | null, secondaryCta?: string | null, stats?: Array<{ __typename: 'HomeHeroStats', value?: string | null, label?: string | null } | null> | null } | null, clinicalExcellence?: { __typename: 'HomeClinicalExcellence', badge?: string | null, titleLine1?: string | null, titleItalic?: string | null, description?: string | null, stats?: Array<{ __typename: 'HomeClinicalExcellenceStats', value?: number | null, suffix?: string | null, label?: string | null, desc?: string | null } | null> | null, services?: Array<{ __typename: 'HomeClinicalExcellenceServices', title?: string | null, desc?: string | null, tag?: string | null, icon?: string | null } | null> | null } | null, process?: { __typename: 'HomeProcess', badge?: string | null, title?: string | null, titleItalic?: string | null, description?: string | null, steps?: Array<{ __typename: 'HomeProcessSteps', num?: string | null, title?: string | null, desc?: string | null, icon?: string | null } | null> | null } | null, whyEvolve?: { __typename: 'HomeWhyEvolve', title?: string | null, subtitle?: string | null, introText?: string | null, features?: Array<{ __typename: 'HomeWhyEvolveFeatures', title?: string | null, subtitle?: string | null, desc?: string | null, icon?: string | null, color?: string | null, href?: string | null } | null> | null, quoteStrip?: { __typename: 'HomeWhyEvolveQuoteStrip', text?: string | null, author?: string | null, authorTitle?: string | null, authorPhoto?: string | null } | null } | null, socialProof?: { __typename: 'HomeSocialProof', stats?: Array<{ __typename: 'HomeSocialProofStats', value?: string | null, label?: string | null, desc?: string | null } | null> | null } | null, featuredDiscovery?: { __typename: 'HomeFeaturedDiscovery', badge?: string | null, title?: string | null, titleItalic?: string | null, description?: string | null, image?: string | null, cta?: string | null } | null, bottomCta?: { __typename: 'HomeBottomCta', quote?: string | null, checklist?: Array<string | null> | null, primaryCta?: string | null, phone?: string | null } | null } };
+export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomeHero', eyebrow?: string | null, titleLine1?: string | null, titleItalic?: string | null, titleLine2?: string | null, subtext?: string | null, primaryCta?: string | null, secondaryCta?: string | null, stats?: Array<{ __typename: 'HomeHeroStats', value?: string | null, label?: string | null } | null> | null } | null, clinicalExcellence?: { __typename: 'HomeClinicalExcellence', badge?: string | null, titleLine1?: string | null, titleItalic?: string | null, description?: string | null, stats?: Array<{ __typename: 'HomeClinicalExcellenceStats', value?: number | null, suffix?: string | null, label?: string | null, desc?: string | null } | null> | null, services?: Array<{ __typename: 'HomeClinicalExcellenceServices', title?: string | null, desc?: string | null, tag?: string | null, icon?: string | null } | null> | null } | null, process?: { __typename: 'HomeProcess', badge?: string | null, title?: string | null, titleItalic?: string | null, description?: string | null, steps?: Array<{ __typename: 'HomeProcessSteps', num?: string | null, title?: string | null, desc?: string | null, icon?: string | null } | null> | null } | null, whyEvolve?: { __typename: 'HomeWhyEvolve', title?: string | null, subtitle?: string | null, introText?: string | null, features?: Array<{ __typename: 'HomeWhyEvolveFeatures', title?: string | null, subtitle?: string | null, desc?: string | null, icon?: string | null, color?: string | null, href?: string | null } | null> | null, quoteStrip?: { __typename: 'HomeWhyEvolveQuoteStrip', text?: string | null, author?: string | null, authorTitle?: string | null, authorPhoto?: string | null } | null } | null, bottomCta?: { __typename: 'HomeBottomCta', quote?: string | null, checklist?: Array<string | null> | null, primaryCta?: string | null, phone?: string | null } | null } };
 
 export type HomeConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2194,7 +2106,7 @@ export type HomeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomeHero', eyebrow?: string | null, titleLine1?: string | null, titleItalic?: string | null, titleLine2?: string | null, subtext?: string | null, primaryCta?: string | null, secondaryCta?: string | null, stats?: Array<{ __typename: 'HomeHeroStats', value?: string | null, label?: string | null } | null> | null } | null, clinicalExcellence?: { __typename: 'HomeClinicalExcellence', badge?: string | null, titleLine1?: string | null, titleItalic?: string | null, description?: string | null, stats?: Array<{ __typename: 'HomeClinicalExcellenceStats', value?: number | null, suffix?: string | null, label?: string | null, desc?: string | null } | null> | null, services?: Array<{ __typename: 'HomeClinicalExcellenceServices', title?: string | null, desc?: string | null, tag?: string | null, icon?: string | null } | null> | null } | null, process?: { __typename: 'HomeProcess', badge?: string | null, title?: string | null, titleItalic?: string | null, description?: string | null, steps?: Array<{ __typename: 'HomeProcessSteps', num?: string | null, title?: string | null, desc?: string | null, icon?: string | null } | null> | null } | null, whyEvolve?: { __typename: 'HomeWhyEvolve', title?: string | null, subtitle?: string | null, introText?: string | null, features?: Array<{ __typename: 'HomeWhyEvolveFeatures', title?: string | null, subtitle?: string | null, desc?: string | null, icon?: string | null, color?: string | null, href?: string | null } | null> | null, quoteStrip?: { __typename: 'HomeWhyEvolveQuoteStrip', text?: string | null, author?: string | null, authorTitle?: string | null, authorPhoto?: string | null } | null } | null, socialProof?: { __typename: 'HomeSocialProof', stats?: Array<{ __typename: 'HomeSocialProofStats', value?: string | null, label?: string | null, desc?: string | null } | null> | null } | null, featuredDiscovery?: { __typename: 'HomeFeaturedDiscovery', badge?: string | null, title?: string | null, titleItalic?: string | null, description?: string | null, image?: string | null, cta?: string | null } | null, bottomCta?: { __typename: 'HomeBottomCta', quote?: string | null, checklist?: Array<string | null> | null, primaryCta?: string | null, phone?: string | null } | null } | null } | null> | null } };
+export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomeHero', eyebrow?: string | null, titleLine1?: string | null, titleItalic?: string | null, titleLine2?: string | null, subtext?: string | null, primaryCta?: string | null, secondaryCta?: string | null, stats?: Array<{ __typename: 'HomeHeroStats', value?: string | null, label?: string | null } | null> | null } | null, clinicalExcellence?: { __typename: 'HomeClinicalExcellence', badge?: string | null, titleLine1?: string | null, titleItalic?: string | null, description?: string | null, stats?: Array<{ __typename: 'HomeClinicalExcellenceStats', value?: number | null, suffix?: string | null, label?: string | null, desc?: string | null } | null> | null, services?: Array<{ __typename: 'HomeClinicalExcellenceServices', title?: string | null, desc?: string | null, tag?: string | null, icon?: string | null } | null> | null } | null, process?: { __typename: 'HomeProcess', badge?: string | null, title?: string | null, titleItalic?: string | null, description?: string | null, steps?: Array<{ __typename: 'HomeProcessSteps', num?: string | null, title?: string | null, desc?: string | null, icon?: string | null } | null> | null } | null, whyEvolve?: { __typename: 'HomeWhyEvolve', title?: string | null, subtitle?: string | null, introText?: string | null, features?: Array<{ __typename: 'HomeWhyEvolveFeatures', title?: string | null, subtitle?: string | null, desc?: string | null, icon?: string | null, color?: string | null, href?: string | null } | null> | null, quoteStrip?: { __typename: 'HomeWhyEvolveQuoteStrip', text?: string | null, author?: string | null, authorTitle?: string | null, authorPhoto?: string | null } | null } | null, bottomCta?: { __typename: 'HomeBottomCta', quote?: string | null, checklist?: Array<string | null> | null, primaryCta?: string | null, phone?: string | null } | null } | null } | null> | null } };
 
 export type AboutQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2355,12 +2267,6 @@ export const SettingsPartsFragmentDoc = gql`
       a
     }
   }
-  mapLegend {
-    __typename
-    icon
-    title
-    desc
-  }
   activeStates
 }
     `;
@@ -2438,24 +2344,6 @@ export const HomePartsFragmentDoc = gql`
       authorTitle
       authorPhoto
     }
-  }
-  socialProof {
-    __typename
-    stats {
-      __typename
-      value
-      label
-      desc
-    }
-  }
-  featuredDiscovery {
-    __typename
-    badge
-    title
-    titleItalic
-    description
-    image
-    cta
   }
   bottomCta {
     __typename
@@ -3234,7 +3122,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.4/content/00000000-0000-0000-0000-000000000000/github/main",
+        url: "https://content.tinajs.io/2.4/content/50c8892e-7fda-4f20-86e1-91f546d2d97a/github/main",
         queries,
       })
     )

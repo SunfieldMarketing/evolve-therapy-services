@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { useTina } from 'tinacms/dist/react';
 import settingsData from '../../content/global/settings.json';
 
 function LinkedInIcon({ size = 16 }: { size?: number }) {
@@ -23,9 +23,7 @@ export default function Footer() {
     data: { settings: settingsData },
   });
 
-  const s = data?.settings || settingsData;
-  
-  if (!s) return null;
+  const s = data.settings;
   const navLinks = s.footer.links;
   const serviceLinks = s.footer.serviceLinks;
   const year = new Date().getFullYear();
@@ -44,14 +42,14 @@ export default function Footer() {
             viewport={{ once: true }}
             className="max-w-6xl mx-auto"
           >
-            <div data-tina-field={tinaField(s.preFooterCta, 'title')} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
                Ready to Evolve?
             </div>
-            <h3 data-tina-field={tinaField(s.preFooterCta, 'title')} className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[0.9] text-white mb-8">
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[0.9] text-white mb-8">
               {s.preFooterCta.title.split('with')[0]} <br className="hidden md:block" />
               with <span className="text-[#38bdf8] italic font-medium">{s.preFooterCta.title.split('with')[1] || "Evolve"}</span>
             </h3>
-            <p data-tina-field={tinaField(s.preFooterCta, 'subtitle')} className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed">
+            <p className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed">
               {s.preFooterCta.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
@@ -59,13 +57,13 @@ export default function Footer() {
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-white hover:text-[#0f172a] text-white px-8 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_40px_rgba(2,132,199,0.4)]"
               >
-                <span data-tina-field={tinaField(s.preFooterCta, 'primaryCta')}>{s.preFooterCta.primaryCta}</span> <ArrowRight size={16} aria-hidden="true" className="ml-2" />
+                {s.preFooterCta.primaryCta} <ArrowRight size={16} aria-hidden="true" className="ml-2" />
               </Link>
               <a
                 href={`tel:${s.phone.replace(/[^0-9]/g, '')}`}
                 className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/40 px-8 py-5 rounded-full font-bold text-xs uppercase transition-all duration-300"
               >
-                <Phone size={15} aria-hidden="true" /> <span data-tina-field={tinaField(s, 'phone')}>{s.phone}</span>
+                <Phone size={15} aria-hidden="true" /> {s.phone}
               </a>
             </div>
           </motion.div>
@@ -83,22 +81,22 @@ export default function Footer() {
                 className="h-14 brightness-0 invert" 
               />
             </Link>
-            <p data-tina-field={tinaField(s.footer, 'tagline')} className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs">
+            <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs">
               {s.footer.tagline}
             </p>
 
             <div className="space-y-3 mb-8">
               <div className="flex items-start gap-3 text-white/40 text-sm">
                 <MapPin size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
-                <span data-tina-field={tinaField(s, 'address')}>{s.address}</span>
+                <span>{s.address}</span>
               </div>
               <div className="flex items-start gap-3 text-white/40 text-sm">
                 <Phone size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
-                <a data-tina-field={tinaField(s, 'phone')} href={`tel:${s.phone.replace(/[^0-9]/g, '')}`} className="hover:text-white transition-colors duration-200">{s.phone}</a>
+                <a href={`tel:${s.phone.replace(/[^0-9]/g, '')}`} className="hover:text-white transition-colors duration-200">{s.phone}</a>
               </div>
               <div className="flex items-start gap-3 text-white/40 text-sm">
                 <Mail size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
-                <a data-tina-field={tinaField(s, 'email')} href={`mailto:${s.email}`} className="hover:text-white transition-colors duration-200">{s.email}</a>
+                <a href={`mailto:${s.email}`} className="hover:text-white transition-colors duration-200">{s.email}</a>
               </div>
             </div>
 

@@ -15,9 +15,7 @@ export default function FAQ() {
   });
 
   const [active, setActive] = useState<number | null>(0);
-  const f = data?.settings?.faq || settingsData.faq;
-  
-  if (!f) return null;
+  const f = data.settings.faq;
 
   return (
     <section className="py-20 md:py-32 bg-slate-50 border-t border-slate-100 relative" id="faq">

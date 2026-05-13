@@ -13,6 +13,7 @@ import Footer from '@/components/Footer';
 import MobileCTA from '@/components/MobileCTA';
 import SocialProof from '@/components/SocialProof';
 import Link from 'next/link';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { 
   ArrowRight, Phone, Microscope, HeartPulse, ShieldCheck, 
@@ -47,7 +48,7 @@ const iconMap = {
 
 export default function Home(props: { data: any, query: string, variables: any }) {
   const { data } = useTina({
-    query: props.query || `query { home(relativePath: "home.json") { hero { eyebrow titleLine1 titleItalic titleLine2 subtext primaryCta secondaryCta stats { value label } } clinicalExcellence { badge titleLine1 titleItalic description stats { value suffix label desc } services { title desc tag icon } } process { badge title titleItalic description steps { num title desc icon } } whyEvolve { title subtitle introText features { title subtitle desc icon color href } quoteStrip { text author authorTitle authorPhoto } } bottomCta { quote checklist primaryCta phone } } }`,
+    query: props.query || `query { home(relativePath: "home.json") { hero { eyebrow titleLine1 titleItalic titleLine2 subtext primaryCta secondaryCta stats { value label } } clinicalExcellence { badge titleLine1 titleItalic description stats { value suffix label desc } services { title desc tag icon } } process { badge title titleItalic description steps { num title desc icon } } whyEvolve { title subtitle introText features { title subtitle desc icon color href } quoteStrip { text author authorTitle authorPhoto } } socialProof { stats { value label desc } } featuredDiscovery { badge title titleItalic description image cta } bottomCta { quote checklist primaryCta phone } } }`,
     variables: props.variables || {},
     data: props.data || { home: homeData },
   });
@@ -245,6 +246,43 @@ export default function Home(props: { data: any, query: string, variables: any }
                 </a>
               </div>
             </BlurFade>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Discovery Section */}
+      <section className="py-24 md:py-40 bg-white">
+        <div className="container mx-auto px-5 sm:px-6 md:px-12">
+          <div className="bg-[#0f172a] rounded-[3.5rem] overflow-hidden relative border border-white/5 shadow-2xl">
+            <div className="grid lg:grid-cols-2">
+              <div className="p-10 md:p-20 flex flex-col justify-center relative z-10">
+                <div className="mb-8">
+                  <AnimatedGradientTextDark className="justify-start">{p?.featuredDiscovery?.badge || "Clinical Innovation"}</AnimatedGradientTextDark>
+                </div>
+                <h3 className="text-4xl md:text-6xl font-serif font-black text-white leading-[0.9] tracking-tighter mb-8">
+                  {p?.featuredDiscovery?.title || "Clinical Cost &"} <br />
+                  <span className="text-[#0284c7] italic">{p?.featuredDiscovery?.titleItalic || "Success Analysis"}</span>
+                </h3>
+                <p className="text-white/40 text-lg md:text-xl font-light leading-relaxed mb-12 max-w-lg">
+                  {p?.featuredDiscovery?.description || "Unlock hidden potential in your therapy department with our comprehensive data-driven discovery process."}
+                </p>
+                <Link href="/contact" className="w-fit">
+                   <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-10 py-5">
+                      <span className="font-black uppercase tracking-[0.2em] text-[11px] text-white">{p?.featuredDiscovery?.cta || "Request Free Discovery"}</span>
+                   </ShimmerButton>
+                </Link>
+              </div>
+              <div className="relative h-[400px] lg:h-auto min-h-[500px]">
+                <Image 
+                  src={p?.featuredDiscovery?.image || "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80"} 
+                  alt="Clinical Discovery" 
+                  fill 
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-transparent to-transparent hidden lg:block" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent lg:hidden" />
+              </div>
+            </div>
           </div>
         </div>
       </section>

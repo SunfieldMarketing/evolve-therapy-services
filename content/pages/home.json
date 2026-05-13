@@ -161,5 +161,21 @@
     ],
     "primaryCta": "Start Your Evolution",
     "phone": "(888) 386-5820"
+  },
+  "socialProof": {
+    "stats": [
+      { "value": "20+", "label": "Years of Leadership", "desc": "Clinical & operational expertise" },
+      { "value": "100%", "label": "Revenue Retained", "desc": "By your facility, always" },
+      { "value": "15+", "label": "States Served", "desc": "Nationwide LTC footprint" },
+      { "value": "24/7", "label": "Clinical Support", "desc": "Always available for your team" }
+    ]
+  },
+  "featuredDiscovery": {
+    "badge": "Clinical Innovation",
+    "title": "Clinical Cost &",
+    "titleItalic": "Success Analysis",
+    "description": "Unlock hidden potential in your therapy department with our comprehensive data-driven discovery process.",
+    "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80",
+    "cta": "Request Free Discovery"
   }
 }

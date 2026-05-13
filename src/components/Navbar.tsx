@@ -16,6 +16,11 @@ export default function Navbar() {
     data: { settings: settingsData },
   });
 
+  interface NavLink {
+    name: string;
+    href: string;
+  }
+
   const s = data?.settings || settingsData;
   
   // Robust fallback for links to prevent "undefined" errors

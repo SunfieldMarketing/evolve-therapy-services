@@ -109,6 +109,14 @@ export default defineConfig({
             ],
           },
           {
+            type: "object", name: "mapLegend", label: "Map Legend Boxes", list: true,
+            fields: [
+              { type: "string", name: "icon", label: "Icon Name" },
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
+            ],
+          },
+          {
             type: "string",
             name: "activeStates",
             label: "Active States (for USA Map)",
@@ -215,6 +223,30 @@ export default defineConfig({
                 ],
               },
             ],
+          },
+          {
+            type: "object", name: "socialProof", label: "Social Proof Section",
+            fields: [
+              {
+                type: "object", name: "stats", label: "Stats Bar", list: true,
+                fields: [
+                  { type: "string", name: "value", label: "Value" },
+                  { type: "string", name: "label", label: "Label" },
+                  { type: "string", name: "desc", label: "Description" },
+                ],
+              },
+            ],
+          },
+          {
+             type: "object", name: "featuredDiscovery", label: "Featured Discovery Section",
+             fields: [
+               { type: "string", name: "badge", label: "Badge" },
+               { type: "string", name: "title", label: "Title" },
+               { type: "string", name: "titleItalic", label: "Title Italic" },
+               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+               { type: "image", name: "image", label: "Featured Image" },
+               { type: "string", name: "cta", label: "CTA Button Text" },
+             ],
           },
           {
             type: "object", name: "bottomCta", label: "Bottom CTA Section",

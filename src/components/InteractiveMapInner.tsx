@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, MapPin, Phone, Users, GraduationCap, ShieldCheck } from 'lucide-react';
 import { useTina } from 'tinacms/dist/react';
 import settingsData from '../../content/global/settings.json';
 
@@ -74,6 +74,8 @@ export default function InteractiveMapInner() {
   const activeList = useMemo(() => [...activeStatesSet].sort(), [activeStatesSet]);
   const selectedActive = selected ? activeStatesSet.has(selected) : false;
 
+  const mapLegend = s.mapLegend || settingsData.mapLegend;
+
   return (
     <section className="py-16 md:py-28 bg-slate-50 border-t border-slate-100">
       <div className="container mx-auto px-4 md:px-8">
@@ -98,12 +100,37 @@ export default function InteractiveMapInner() {
         </motion.div>
 
         <div className="grid xl:grid-cols-4 gap-6">
+          {/* Legend Boxes Side (Original Design Feature) */}
+          <div className="order-2 xl:order-1 flex flex-col gap-4">
+            {mapLegend.map((item: any, i: number) => {
+              const Icon = STATE_ABBR[item.icon] ? MapPin : (item.icon === 'Users' ? Users : (item.icon === 'GraduationCap' ? GraduationCap : ShieldCheck));
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow group"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#0284c7]/10 text-[#0284c7] flex items-center justify-center mb-4 group-hover:bg-[#0284c7] group-hover:text-white transition-colors">
+                    {item.icon === 'Users' && <Users size={20} />}
+                    {item.icon === 'GraduationCap' && <GraduationCap size={20} />}
+                    {item.icon === 'ShieldCheck' && <ShieldCheck size={20} />}
+                  </div>
+                  <h4 className="font-black text-[#0f172a] text-sm uppercase tracking-wider mb-2">{item.title}</h4>
+                  <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+
           {/* Map */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="xl:col-span-3 bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden relative"
+            className="xl:col-span-3 order-1 xl:order-2 bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden relative"
           >
             {/* Legend */}
             <div className="flex items-center gap-6 px-6 py-4 border-b border-slate-100">

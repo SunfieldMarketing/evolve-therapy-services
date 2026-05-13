@@ -17,7 +17,8 @@ export default function Navbar() {
   });
 
   const s = data.settings;
-  const links = s.navbar.links;
+  type NavLink = { name: string; href: string; dropdown?: { name: string; href: string; desc?: string }[] };
+  const links = (s.navbar.links ?? []) as NavLink[];
 
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);

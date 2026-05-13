@@ -1,38 +1,41 @@
 'use client';
 
 import { TinaProvider, TinaCMS } from 'tinacms';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export default function TinaProviderWrapper({ children }: { children: React.ReactNode }) {
   const [isClient, setIsClient] = useState(false);
-  const [cms, setCms] = useState<TinaCMS | null>(null);
+  
+  // Create a minimal CMS instance synchronously. 
+  // This ensures useTina works immediately without crashing or re-mounting the whole app.
+  const cms = useMemo(() => {
+    return new TinaCMS({
+      enabled: false,
+      sidebar: false,
+    });
+  }, []);
 
   useEffect(() => {
     setIsClient(true);
-
+    
     const isAdmin = 
       window.location.pathname.startsWith('/admin') || 
       window.location.pathname.startsWith('/portal') ||
       window.location.search.includes('tina-edit');
-    
-    if (isAdmin) {
-      // Lazy load TinaCMS only when needed
-      const initTina = async () => {
-        const { TinaCMS } = await import('tinacms');
-        const tinaCms = new TinaCMS({
-          enabled: true,
-          sidebar: true,
-          clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-          branch: process.env.NEXT_PUBLIC_TINA_BRANCH || 'main',
-        } as any);
-        setCms(tinaCms);
-      };
-      initTina();
-    }
-  }, []);
 
-  // During SSR and for normal users (not in admin mode), just render children
-  if (!isClient || !cms) {
+    if (isAdmin) {
+      // If we are in admin mode, enable the CMS features
+      cms.enable();
+      cms.sidebar.enable();
+      
+      // Inject the config (branch/clientId)
+      (cms as any).config.clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
+      (cms as any).config.branch = process.env.NEXT_PUBLIC_TINA_BRANCH || 'main';
+    }
+  }, [cms]);
+
+  // For SSR, return children directly (no provider needed on server for useTina)
+  if (!isClient) {
     return <>{children}</>;
   }
 

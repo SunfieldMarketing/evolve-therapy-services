@@ -17,13 +17,7 @@ function LinkedInIcon({ size = 16 }: { size?: number }) {
 }
 
 export default function Footer() {
-  const { data } = useTina({
-    query: `query { settings(relativePath: "settings.json") { siteName phone email address linkedin navbar { links { name href } ctaText } footer { tagline copyright links { name href } serviceLinks { name href } } preFooterCta { title subtitle primaryCta } } }`,
-    variables: {},
-    data: { settings: settingsData },
-  });
-
-  const s = data?.settings;
+  const s = settingsData;
   const navLinks = s?.footer?.links || [];
   const serviceLinks = s?.footer?.serviceLinks || [];
   const year = new Date().getFullYear();

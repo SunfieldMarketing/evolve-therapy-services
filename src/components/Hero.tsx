@@ -74,7 +74,7 @@ export default function Hero({ data }: HeroProps) {
           style={{ filter: 'brightness(0.35) saturate(0.7)' }}
         />
         
-        <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
+        <div className="absolute inset-0 z-10 bg-transparent pointer-events-none cursor-default" />
 
         <div
           className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[1500ms] ease-in-out ${videoStarted ? 'opacity-0' : 'opacity-100'}`}

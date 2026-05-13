@@ -10,13 +10,7 @@ import { useTina, tinaField } from 'tinacms/dist/react';
 import settingsData from '../../content/global/settings.json';
 
 export default function Navbar() {
-  const { data } = useTina({
-    query: `query { settings(relativePath: "settings.json") { siteName phone email navbar { links { name href } ctaText } footer { tagline copyright links { name href } } } }`,
-    variables: {},
-    data: { settings: settingsData },
-  });
-
-  const s = data?.settings;
+  const s = settingsData;
   type NavLink = { name: string; href: string; dropdown?: { name: string; href: string; desc?: string }[] };
   const links = (s?.navbar?.links ?? []) as NavLink[];
 

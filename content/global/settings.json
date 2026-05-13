@@ -15,7 +15,8 @@
           { "name": "Medicaid & QMs", "href": "/services/medicaid-case-mix-analysis", "desc": "Specialized CMI and Quality Measure analysis for LTC." },
           { "name": "Reimbursement Optimization", "href": "/services/reimbursement-optimization", "desc": "Data-driven strategies to secure your clinical revenue." },
           { "name": "Cost Reduction", "href": "/services/therapy-cost-reduction", "desc": "Maximizing efficiency in your therapy department staffing." },
-          { "name": "In-House Transition", "href": "/services/in-house-transition", "desc": "Complete roadmap from contract to in-house therapy." }
+          { "name": "In-House Transition", "href": "/services/in-house-transition", "desc": "Complete roadmap from contract to in-house therapy." },
+          { "name": "In-House Resource Hub", "href": "/services/in-house-resource-hub", "desc": "The ultimate clinical and operational elite resource for your team." }
         ]
       },
       { "name": "About", "href": "/about" },

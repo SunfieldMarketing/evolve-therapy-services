@@ -154,7 +154,7 @@ export default function AboutPage(props: { data: any, query: string, variables: 
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/5 border border-[#0284c7]/10 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
                   {p.journey.badge}
                 </div>
-                <h2 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.9] mb-8">
+                <h2 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 sm:mb-12 leading-[1] sm:leading-[1] sm:leading-[0.85] tracking-tighter">
                   {p.journey.titleLine1} <br />
                   <span className="text-[#0284c7] italic font-medium">{p.journey.titleItalic}</span>
                 </h2>
@@ -214,12 +214,12 @@ export default function AboutPage(props: { data: any, query: string, variables: 
             <div className="flex justify-center mb-8">
               <AnimatedGradientText>{p.national.badge}</AnimatedGradientText>
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif font-black text-[#0f172a] tracking-tighter leading-[1] sm:leading-[0.85]">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif font-black text-[#0f172a] tracking-tighter leading-[1] sm:leading-[1] sm:leading-[0.85]">
               {p.national.titleLine1} <span className="text-[#0284c7] italic font-medium">{p.national.titleItalic}</span>
             </h2>
           </BlurFade>
 
-          <div className="space-y-16 sm:space-y-24 md:space-y-40 max-w-6xl mx-auto">
+          <div className="space-y-16 sm:space-y-16 sm:space-y-24 md:space-y-40 max-w-6xl mx-auto">
             {leaders.map((leader: any, i: number) => (
               <BlurFade key={i} delay={0.2} className="group">
                 <div className={cn(
@@ -240,7 +240,7 @@ export default function AboutPage(props: { data: any, query: string, variables: 
 
                   <div className="w-full lg:w-7/12">
                     <div className="mb-8">
-                       <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight">{leader.name}</h3>
+                       <h3 className="text-2xl sm:text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight">{leader.name}</h3>
                        <div className="text-[#0284c7] text-xs font-black uppercase tracking-[0.4em] mt-2">{leader.title}</div>
                     </div>
                     
@@ -304,7 +304,7 @@ export default function AboutPage(props: { data: any, query: string, variables: 
               <div className="mb-8">
                 <AnimatedGradientText>{p.national.badge}</AnimatedGradientText>
               </div>
-               <h3 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[1] sm:leading-[0.85] tracking-tighter uppercase">
+               <h3 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[1] sm:leading-[1] sm:leading-[0.85] tracking-tighter uppercase">
                  {p.national.titleLine1} <br />
                  <span className="text-[#0284c7] italic font-medium lowercase">{p.national.titleItalic}</span>
                </h3>

@@ -1,24 +1,13 @@
 {
   "header": {
-    "title": "About Evolve",
-    "italicWord": "Therapy Services",
-    "subtitle": "Providing creative therapy management models through compassionate leadership, clinical passion, and evidence-based experience for the long-term care industry.",
-    "badgeText": "Our Vision",
+    "title": "Our",
+    "italicWord": "Leadership",
+    "subtitle": "Our leadership team bridges the gap between clinical excellence and sustainable operational growth, empowering facility owners to reclaim their therapy departments through proven in-house transition models.",
+    "badgeText": "Executive Hub",
     "valueBoxes": [
-      { "label": "Revenue Retention", "sublabel": "100% Retained", "icon": "Award" },
-      { "label": "Clinical Impact", "sublabel": "Direct Oversight", "icon": "Zap" }
+      { "label": "Clinical Integrity", "sublabel": "Uncompromised Care", "icon": "Award" },
+      { "label": "Strategic Vision", "sublabel": "Growth Logic", "icon": "Zap" }
     ]
-  },
-  "intro": {
-    "badge": "Our Mission",
-    "titleLine1": "Clinical Oversight.",
-    "titleItalic": "Evolved.",
-    "paragraphs": [
-      "Evolve Therapy Services is an expert clinical resource providing recruitment, denial management, therapy education, and real-time data analysis for in-house therapy teams. Our goal is to provide creative therapy management models through compassionate leadership and evidence-based experience.",
-      "We believe that the best clinical outcomes come from a partnership based on trust, integrity, and a shared passion for patient care. By empowering facility operators to manage their own therapy departments, we help create sustainable, high-performance environments that benefit both patients and providers."
-    ],
-    "quote": "Our mission is to evolve the way therapy is managed in long-term care by putting leadership and integrity first.",
-    "quoteAuthor": "Lisa Bebie, President & Founder"
   },
   "trust": [
     { "icon": "ShieldCheck", "text": "100% Revenue Retention" },
@@ -26,23 +15,80 @@
     { "icon": "UserCheck", "text": "Leadership Excellence" },
     { "icon": "Activity", "text": "Operational Stability" }
   ],
+  "intro": {
+    "badge": "Who We Are",
+    "titleLine1": "Bridging the Gap in",
+    "titleItalic": "LTC Therapy",
+    "paragraphs": [
+      "Evolve Therapy Services is a therapy management company dedicated to helping LTC organizations excite and empower their therapy teams through an in-house employment model with opportunities for career advancement through mentorship.",
+      "Our model facilitates a cohesive company culture that generates exceptional outcomes, all while allowing facilities to retain 100% of their therapy revenue."
+    ],
+    "quote": "We bridge the gap between clinical quality and financial performance, enabling operators to truly evolve to the next level.",
+    "quoteAuthor": "Lisa Bebie, PTA · President & Founder"
+  },
   "pillars": [
     {
       "icon": "Eye",
-      "title": "Strategic Vision",
-      "text": "We see the big picture of LTC therapy, from regulatory shifts to clinical innovation, helping you stay ahead of the curve."
+      "title": "Our Vision",
+      "text": "To provide the most rewarding and creative therapy consulting management model through leadership, passion, and experience to allow success and internal growth for our customers."
     },
     {
       "icon": "Target",
-      "title": "Precision Focus",
-      "text": "Our audits and oversight are surgical, identifying exactly where opportunity lies for clinical and financial growth."
+      "title": "Our Mission",
+      "text": "To provide the highest quality customer-centric, outcome-based therapy management services enabling our customers the ability to focus on their core strengths through a dynamic culture."
     },
     {
       "icon": "Shield",
-      "title": "Integrity First",
-      "text": "We operate with total transparency. Our model is built on your success, not shared revenue."
+      "title": "Our Commitment",
+      "text": "We are committed to clinical integrity, operational transparency, and building genuine partnerships where your facility's success is our success."
     }
   ],
+  "leaders": [
+    {
+      "name": "Lisa Bebie, PTA",
+      "title": "President & Founder",
+      "photo": "https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png",
+      "quote": "As a clinician, I know how difficult it was to meet the goals of my employer as well as try to meet the goals of my customer. We know that a model that brings your therapy teams in-house allows great employee engagement, which then in turn, allows exceptional therapy outcomes to the residents we all serve.",
+      "bio": [
+        "Over 20 years of long-term therapy leadership with a passionate commitment to evolve the functionality of therapy services for the aging population.",
+        "Operational and clinical expertise in leadership and marketing models created by exceptional clinical programming—setting customers apart through a holistic philosophy.",
+        "It is her vision to bridge the gap for operators who want to take their therapy teams in-house, and to assist in-house programs with clinically proven education, operational analysis, and compliance oversight."
+      ]
+    },
+    {
+      "name": "Isaiah Rupp, MBA-HCA, PTA",
+      "title": "VP of Operations & Co-Founder",
+      "photo": "https://res.cloudinary.com/dai2pg27n/image/upload/v1777331091/07de3a3b-7cf1-4a15-9ec4-28fdf603ac74.png",
+      "quote": "As Director of Operations my passion is in building the best clinical outcomes and operations success in the most fiscally responsible manner. My vision is to promote/build a place of stability where clinicians can thrive in doing what they have a passion to do.",
+      "bio": [
+        "With an MBA in Healthcare Administration from South University and as a licensed Physical Therapist Assistant, Isaiah serves as Evolve's Director of Operations.",
+        "He oversees all therapy operations, working to build strong clinical, operational, and business strategies—progressing quickly due to his ability to teach, train, and build up those around him.",
+        "His leadership ensures compliance metrics are met while prioritizing holistic patient outcomes, cementing Evolve as a premier clinical partner across the therapeutic landscape."
+      ]
+    }
+  ],
+  "philosophy": {
+    "titleLine1": "Redefining the standard of care",
+    "titleItalic": "facility by facility.",
+    "description": "We believe that providing your resident population with high-end, clinically proven therapy should not mean sacrificing your facility's bottom line.",
+    "items": [
+      { "title": "Patient Triage", "icon": "HeartPulse", "desc": "Prioritizing the residents who need immediate therapeutic intervention." },
+      { "title": "Financial Growth", "icon": "TrendingUp", "desc": "Retaining your hard earned revenue via targeted resource utilization." },
+      { "title": "Audit Defense", "icon": "Shield", "desc": "Preparing and defending against arbitrary regulatory audits proactively." }
+    ]
+  },
+  "national": {
+    "badge": "National Presence",
+    "titleLine1": "A National Network",
+    "titleItalic": "Primed for Growth.",
+    "quote": "Our regional directors are strategically deployed across the United States to ensure that every facility under our oversight carries the same Evolve Standard.",
+    "legend": [
+      { "icon": "Shield", "text": "Expert Regulatory Alignment" },
+      { "icon": "Eye", "text": "Real-Time Clinical Dashboards" },
+      { "icon": "Target", "text": "Tailored Financial Strategies" },
+      { "icon": "Users", "text": "Leadership Development" }
+    ]
+  },
   "journey": {
     "badge": "Our Growth",
     "titleLine1": "The Path to",
@@ -50,47 +96,13 @@
     "subtitle": "From a single facility audit to a national clinical management firm, our journey has been defined by a commitment to clinical truth and operational excellence.",
     "items": [
       { "title": "20+", "text": "Years of LTC expertise in clinical leadership and management." },
-      { "title": "15+", "text": "States served with active clinical oversight and recruitment support." },
+      { "title": "26", "text": "States served with active clinical oversight and recruitment support." },
       { "title": "100%", "text": "Revenue retention for every facility we've successfully transitioned." }
     ]
   },
-  "leaders": [
-    {
-      "name": "Lisa Bebie",
-      "title": "President & Founder",
-      "photo": "https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png",
-      "quote": "Evolve was founded on the principle that therapy departments should be centers of excellence and financial strength.",
-      "bio": [
-        "Lisa Bebie, President and Founder of Evolve Therapy Services, has been a therapist and clinical leader in the long-term care industry for over 20 years.",
-        "Throughout her career, Lisa has recognized a growing need for a management model that prioritizes clinical integrity and facility autonomy. She founded Evolve to provide operators with the tools and oversight they need to successfully manage their own therapy teams while retaining all therapy revenue."
-      ]
-    }
-  ],
-  "philosophy": {
-    "titleLine1": "The Evolve",
-    "titleItalic": "Philosophy",
-    "description": "We believe that by grooming internal talent and providing constant clinical education, we create stable, long-term leadership for your facility.",
-    "items": [
-      { "title": "Compassion", "icon": "HeartPulse", "desc": "Leadership that cares for the caregivers." },
-      { "title": "Excellence", "icon": "Award", "desc": "Striving for the highest clinical standards." },
-      { "title": "Evolution", "icon": "TrendingUp", "desc": "Always adapting to the changing LTC landscape." }
-    ]
-  },
-  "national": {
-    "badge": "National Footprint",
-    "titleLine1": "Strategic Presence",
-    "titleItalic": "Across America.",
-    "quote": "Providing expert clinical oversight to facilities in over 15 states and growing.",
-    "legend": [
-      { "icon": "Shield", "text": "Active Management" },
-      { "icon": "Target", "text": "Strategic Growth" },
-      { "icon": "Users", "text": "Regional Support" },
-      { "icon": "Award", "text": "Award Winning Care" }
-    ]
-  },
   "cta": {
-    "title": "Join The Evolution",
-    "subtitle": "Ready to take control of your therapy department's future? Let's discuss a customized management roadmap.",
-    "button": "Contact Our Team"
+    "title": "The Evolve",
+    "subtitle": "Connect with our leadership team today to learn how our clinical oversight model can secure your facility's future.",
+    "button": "Start Your Evolution"
   }
 }

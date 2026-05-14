@@ -3,100 +3,192 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageHeader from '@/components/PageHeader';
-import { 
-  HeartPulse, 
-  Shield, 
-  Handshake, 
-  Building2, 
-  Quote, 
-  CheckCircle2 
-} from 'lucide-react';
+import USAMap from '@/components/USAMap';
+import { BlurFade } from '@/components/magicui/blur-fade';
+import { ShimmerButton } from '@/components/magicui/shimmer-button';
+import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import Image from 'next/image';
 import Link from 'next/link';
-import { BlurFade } from '@/components/magicui/blur-fade';
-import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
-import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import USAMap from '@/components/USAMap';
-import MobileCTA from '@/components/MobileCTA';
+import {
+  Shield,
+  Target,
+  Eye,
+  HeartPulse,
+  Building2,
+  TrendingUp,
+  Users,
+  Quote,
+  ShieldCheck,
+  Star,
+  UserCheck,
+  Activity,
+  Award,
+  Zap,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTina, tinaField } from '@/lib/tina';
+import aboutData from '../../../content/pages/about.json';
 
-export default function AboutPage() {
+const iconMap: Record<string, React.ComponentType<any>> = {
+  Award, Zap, Shield, Users, TrendingUp, Eye, Target, HeartPulse,
+  Building2, ShieldCheck, Star, UserCheck, Activity,
+};
+
+export default function AboutPage(props: { data: any; query: string; variables: any }) {
+  const { data } = useTina({
+    query: props.query || `query {
+      about(relativePath: "about.json") {
+        header { title italicWord subtitle badgeText valueBoxes { label sublabel icon } }
+        trust { icon text }
+        intro { badge titleLine1 titleItalic paragraphs quote quoteAuthor }
+        pillars { icon title text }
+        leaders { name title photo quote bio }
+        philosophy { titleLine1 titleItalic description items { title icon desc } }
+        national { badge titleLine1 titleItalic quote legend { icon text } }
+        cta { title subtitle button }
+      }
+    }`,
+    variables: props.variables || {},
+    data: props.data || { about: aboutData },
+  });
+
+  const p = data.about;
+
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      
-      {/* 1. Hero Section */}
-      <PageHeader 
-        title="OUR" 
-        italicWord="LEADERSHIP" 
-        subtitle="At Evolve Therapy Services, our founders aren't just executives—they are clinicians. We know exactly what your therapists need to succeed on the floor because we've been there."
-        videoKey="about"
-        useVideo={true}
-        badgeText="ABOUT EVOLVE"
-        ctaText="OUR CLINICAL MODEL"
-        ctaLink="/services"
-        valueBoxes={[
-          { icon: CheckCircle2, label: "Revenue", sublabel: "100% Retained" },
-          { icon: CheckCircle2, label: "Experience", sublabel: "20+ Years" },
-          { icon: CheckCircle2, label: "Support", sublabel: "24/7 Clinical" },
-          { icon: CheckCircle2, label: "Scale", sublabel: "15+ States" }
-        ]}
+
+      {/* ── 1. Hero / PageHeader ── */}
+      <PageHeader
+        title={p.header.title}
+        italicWord={p.header.italicWord}
+        subtitle={p.header.subtitle}
+        bgImage="https://res.cloudinary.com/dai2pg27n/image/upload/v1778105493/9888c51b-097f-46b4-907c-1280f458806b.png"
+        useVideo={false}
+        badgeText={p.header.badgeText}
+        valueBoxes={p.header.valueBoxes.map((box: any) => ({
+          icon: iconMap[box.icon as keyof typeof iconMap] || Award,
+          label: box.label,
+          sublabel: box.sublabel,
+        }))}
       />
 
-      {/* 2. Bridging the Gap in LTC Therapy */}
-      <section className="py-24 md:py-40 bg-white overflow-hidden border-b border-slate-100">
+      {/* ── 2. Trust Banner ── */}
+      <section className="relative z-50 pt-16 pb-16 bg-[#0f172a] border-b border-white/[0.05]">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <BlurFade delay={0.1}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/5 border border-[#0284c7]/10 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
-                ABOUT Evolve
-              </div>
-              <h2 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 sm:mb-12 leading-[1] sm:leading-[0.85] tracking-tighter">
-                Bridging the Gap in<br />
-                <span className="text-[#0284c7] italic font-medium">LTC Therapy</span>
-              </h2>
-              <div className="space-y-6 text-xl text-slate-500 leading-relaxed font-light mb-12">
-                <p>Our founders recognized a systemic failure in the LTC therapy industry: the disconnect between facility administration and third-party therapy providers. Operators were forced to choose between clinical quality and financial viability.</p>
-                <p>At Evolve, we eliminate this compromise. By integrating directly as your clinical partner, we treat your therapy operations as our own.</p>
-              </div>
-
-              <div className="bg-[#0f172a] rounded-[2rem] p-8 md:p-10 text-white relative shadow-xl">
-                 <Quote className="text-[#38bdf8]/20 w-16 h-16 mb-6" />
-                 <blockquote className="text-xl md:text-2xl font-serif italic font-medium leading-relaxed mb-6 relative z-10">
-                   "The therapy department should be the heartbeat of the facility—a center of excellence that drives both clinical and financial success."
-                 </blockquote>
-                 <div className="flex items-center gap-4">
-                    <div className="w-8 h-px bg-[#38bdf8]/40" />
-                    <cite className="text-[#38bdf8] font-black uppercase tracking-[0.2em] text-[10px] not-italic">Lisa Bebie & Dustin Rego, Founders</cite>
-                 </div>
-              </div>
-            </BlurFade>
-
-            <BlurFade delay={0.3} className="space-y-6 lg:pl-10">
-              {[
-                { title: 'Core Values', icon: HeartPulse, desc: 'We prioritize the well-being of the residents above all else, ensuring that financial strategies strictly support clinical imperatives.' },
-                { title: 'Compliance', icon: Shield, desc: 'Proactive audit defense and rigorous regulatory oversight protects your facility from arbitrary takeaways.' },
-                { title: 'Local Partnerships', icon: Handshake, desc: 'Our regional directors operate as an extension of your own leadership team, providing on-the-ground support.' }
-              ].map((card, idx) => (
-                <div key={idx} className="bg-white rounded-3xl p-8 border border-slate-100 flex flex-col sm:flex-row items-start gap-6 shadow-sm hover:shadow-xl hover:border-[#0284c7]/20 transition-all duration-300">
-                  <div className="w-14 h-14 bg-[#0284c7]/5 flex-shrink-0 flex items-center justify-center rounded-2xl text-[#0284c7] border border-[#0284c7]/10">
-                    <card.icon size={24} strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-3 tracking-tight">{card.title}</h4>
-                    <p className="text-slate-500 font-light leading-relaxed text-sm sm:text-base">{card.desc}</p>
-                  </div>
+          <div className="flex flex-wrap items-center justify-center md:justify-between gap-8 md:gap-4 opacity-60 hover:opacity-100 transition-all duration-700">
+            {p.trust.map((item: any, i: number) => {
+              const Icon = iconMap[item.icon as keyof typeof iconMap] || ShieldCheck;
+              return (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 group cursor-default"
+                  data-tina-field={tinaField(p, 'trust')}
+                >
+                  <Icon className="text-[#0284c7] group-hover:scale-110 transition-transform" size={20} />
+                  <span
+                    className="text-white/70 font-black uppercase text-[10px] tracking-[0.4em]"
+                    data-tina-field={tinaField(item, 'text')}
+                  >
+                    {item.text}
+                  </span>
                 </div>
-              ))}
-            </BlurFade>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* 3. Visionary Leadership */}
-      <section className="py-24 md:py-40 bg-slate-50 border-b border-slate-100 relative overflow-hidden">
+      {/* ── 3. Intro / Bridging the Gap ── */}
+      <section className="py-24 md:py-48 overflow-hidden relative bg-white">
+        <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-[#0284c7]/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-           <BlurFade className="text-center mb-24 md:mb-32">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
+            {/* Left: Text */}
+            <div>
+              <BlurFade delay={0.1}>
+                <div className="mb-8">
+                  <AnimatedGradientText data-tina-field={tinaField(p.intro, 'badge')}>
+                    {p.intro.badge}
+                  </AnimatedGradientText>
+                </div>
+                <h2
+                  className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 sm:mb-12 leading-[1] sm:leading-[0.85] tracking-tighter"
+                  data-tina-field={tinaField(p.intro, 'titleLine1')}
+                >
+                  {p.intro.titleLine1}<br />
+                  <span
+                    className="text-[#0284c7] italic font-medium"
+                    data-tina-field={tinaField(p.intro, 'titleItalic')}
+                  >
+                    {p.intro.titleItalic}
+                  </span>
+                </h2>
+              </BlurFade>
+
+              <BlurFade delay={0.2} className="space-y-8 text-lg md:text-xl text-slate-500 leading-relaxed font-light mb-16">
+                {p.intro.paragraphs.map((para: string, i: number) => (
+                  <p key={i} data-tina-field={tinaField(p.intro, 'paragraphs')}>{para}</p>
+                ))}
+              </BlurFade>
+
+              <BlurFade delay={0.3}>
+                <blockquote className="bg-[#0f172a] p-10 rounded-3xl border-l-8 border-[#0284c7] shadow-2xl">
+                  <p
+                    className="font-serif font-medium text-white/90 italic text-xl lg:text-2xl leading-relaxed"
+                    data-tina-field={tinaField(p.intro, 'quote')}
+                  >
+                    &ldquo;{p.intro.quote}&rdquo;
+                  </p>
+                  <footer
+                    className="mt-6 text-[#38bdf8] text-xs font-black uppercase tracking-[0.3em]"
+                    data-tina-field={tinaField(p.intro, 'quoteAuthor')}
+                  >
+                    - {p.intro.quoteAuthor}
+                  </footer>
+                </blockquote>
+              </BlurFade>
+            </div>
+
+            {/* Right: Pillars */}
+            <div className="grid grid-cols-1 gap-6">
+              {p.pillars.map((item: any, i: number) => {
+                const Icon = iconMap[item.icon as keyof typeof iconMap] || Shield;
+                return (
+                  <BlurFade
+                    key={i}
+                    delay={0.2 + i * 0.15}
+                    className="flex gap-8 p-10 rounded-[2.5rem] bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.03)] hover:border-[#0284c7]/30 hover:shadow-2xl transition-all duration-700 group"
+                  >
+                    <div className="w-16 h-16 bg-[#0284c7]/5 rounded-2xl flex items-center justify-center text-[#0284c7] shrink-0 group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
+                      <Icon size={28} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <h3
+                        className="font-black text-[#0f172a] font-serif text-2xl mb-4"
+                        data-tina-field={tinaField(item, 'title')}
+                      >
+                        {item.title}
+                      </h3>
+                      <p
+                        className="text-slate-500 text-base leading-relaxed font-light"
+                        data-tina-field={tinaField(item, 'text')}
+                      >
+                        {item.text}
+                      </p>
+                    </div>
+                  </BlurFade>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Leadership Bios (Founders) ── */}
+      <section className="py-24 md:py-48 bg-slate-50 border-y border-slate-100 relative overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <BlurFade className="text-center mb-24 md:mb-32">
             <div className="flex justify-center mb-8">
               <AnimatedGradientText>The Founders</AnimatedGradientText>
             </div>
@@ -106,199 +198,223 @@ export default function AboutPage() {
           </BlurFade>
 
           <div className="space-y-16 sm:space-y-24 md:space-y-40 max-w-6xl mx-auto">
-            {/* Lisa Bebie */}
-            <BlurFade delay={0.2} className="group">
-              <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-                <div className="w-full lg:w-5/12 flex justify-center shrink-0">
-                   <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl group-hover:scale-105 transition-transform duration-700">
+            {p.leaders.map((leader: any, i: number) => (
+              <BlurFade key={i} delay={0.2} className="group">
+                <div className={cn(
+                  'flex flex-col lg:flex-row gap-12 lg:gap-20 items-center',
+                  i % 2 === 1 && 'lg:flex-row-reverse'
+                )}>
+                  {/* Photo */}
+                  <div className="w-full lg:w-5/12 flex justify-center shrink-0">
+                    <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl group-hover:scale-105 transition-transform duration-700">
                       <Image
-                        src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png"
-                        alt="Lisa Bebie"
+                        src={leader.photo}
+                        alt={leader.name}
                         fill
                         className="object-cover object-top"
+                        data-tina-field={tinaField(leader, 'photo')}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/20 via-transparent to-transparent" />
-                   </div>
-                </div>
-
-                <div className="w-full lg:w-7/12">
-                  <div className="mb-8">
-                     <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight">Lisa Bebie, PTA</h3>
-                     <div className="text-[#0284c7] text-xs font-black uppercase tracking-[0.4em] mt-2">President & Founder</div>
-                  </div>
-                  
-                  <div className="relative mb-12">
-                     <Quote className="absolute -top-4 -left-6 text-[#0284c7]/5 w-16 h-16" />
-                     <p className="relative z-10 text-xl font-serif text-[#0f172a] italic leading-relaxed font-bold border-l-4 border-[#0284c7] pl-8">
-                        "I founded Evolve because the industry demanded a partner who understood that clinical excellence and financial sustainability are not mutually exclusive."
-                     </p>
+                    </div>
                   </div>
 
-                  <div className="space-y-6 text-base lg:text-lg text-slate-500 leading-relaxed font-light">
-                    <p>Lisa Bebie has been a driving force in long-term care therapy for over two decades. Her extensive background as a clinician provides her with an unparalleled understanding of facility-level dynamics.</p>
-                    <p>Recognizing that generic, third-party management models consistently fail to adapt to individual facility needs, Lisa established Evolve Therapy Services.</p>
-                  </div>
-                </div>
-              </div>
-            </BlurFade>
+                  {/* Content */}
+                  <div className="w-full lg:w-7/12">
+                    <div className="mb-8">
+                      <h3
+                        className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight"
+                        data-tina-field={tinaField(leader, 'name')}
+                      >
+                        {leader.name}
+                      </h3>
+                      <div
+                        className="text-[#0284c7] text-xs font-black uppercase tracking-[0.4em] mt-2"
+                        data-tina-field={tinaField(leader, 'title')}
+                      >
+                        {leader.title}
+                      </div>
+                    </div>
 
-            {/* Dustin Rego */}
-            <BlurFade delay={0.2} className="group">
-              <div className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-20 items-center">
-                <div className="w-full lg:w-5/12 flex justify-center shrink-0">
-                   <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl group-hover:scale-105 transition-transform duration-700">
-                      <Image
-                        src="https://res.cloudinary.com/dai2pg27n/image/upload/v1738706319/Evolve/p2v3bxtow5l8xof89689.png"
-                        alt="Dustin Rego"
-                        fill
-                        className="object-cover object-top"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/20 via-transparent to-transparent" />
-                   </div>
-                </div>
+                    <div className="relative mb-12">
+                      <Quote className="absolute -top-4 -left-6 text-[#0284c7]/5 w-16 h-16" />
+                      <p
+                        className="relative z-10 text-xl font-serif text-[#0f172a] italic leading-relaxed font-bold border-l-4 border-[#0284c7] pl-8"
+                        data-tina-field={tinaField(leader, 'quote')}
+                      >
+                        &ldquo;{leader.quote}&rdquo;
+                      </p>
+                    </div>
 
-                <div className="w-full lg:w-7/12">
-                  <div className="mb-8">
-                     <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight">Dustin Rego, DPT, PTA, MBA</h3>
-                     <div className="text-[#0284c7] text-xs font-black uppercase tracking-[0.4em] mt-2">Chief Operating Officer</div>
-                  </div>
-                  
-                  <div className="relative mb-12">
-                     <Quote className="absolute -top-4 -left-6 text-[#0284c7]/5 w-16 h-16" />
-                     <p className="relative z-10 text-xl font-serif text-[#0f172a] italic leading-relaxed font-bold border-l-4 border-[#0284c7] pl-8">
-                        "Leadership in LTC therapy requires more than just management; it demands boots-on-the-ground clinical strategy and relentless operational execution."
-                     </p>
-                  </div>
-
-                  <div className="space-y-6 text-base lg:text-lg text-slate-500 leading-relaxed font-light">
-                    <p>With an extensive background combining deep clinical practice as a DPT and robust financial acumen via his MBA, Dustin ensures that Evolve’s partners operate at peak efficiency.</p>
-                    <p>His operational strategies consistently shield facilities from regulatory audits while maximizing legitimate revenue capture through precise PDPM management.</p>
+                    <div className="space-y-6 text-base lg:text-lg text-slate-500 leading-relaxed font-light">
+                      {leader.bio.map((para: string, j: number) => (
+                        <p key={j} data-tina-field={tinaField(leader, 'bio')}>{para}</p>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </BlurFade>
+              </BlurFade>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. Redefining the standard of care */}
-      <section className="py-24 md:py-40 bg-white relative overflow-hidden">
+      {/* ── 5. Philosophy / Redefining Standard ── */}
+      <section className="py-24 md:py-48 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             <BlurFade delay={0.2} duration={0.8}>
-               <Building2 size={56} strokeWidth={1} className="mx-auto text-[#0284c7] mb-12" />
-               <h3 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 sm:mb-10 leading-[1] sm:leading-[0.9] tracking-tighter">
-                 Redefining the standard of care<br/>
-                 <span className="text-[#0284c7] italic font-medium">facility by facility.</span>
-               </h3>
-              <p className="text-slate-500 text-xl md:text-2xl font-light leading-relaxed max-w-3xl mx-auto mb-20">
-                 We believe that providing your resident population with high-end, clinically proven therapy should not mean sacrificing your facility’s bottom line.
+              <Building2 size={56} strokeWidth={1} className="mx-auto text-[#0284c7] mb-12" />
+              <h3
+                className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] mb-8 sm:mb-10 leading-[1] sm:leading-[0.9] tracking-tighter"
+                data-tina-field={tinaField(p.philosophy, 'titleLine1')}
+              >
+                {p.philosophy.titleLine1}<br />
+                <span
+                  className="text-[#0284c7] italic font-medium"
+                  data-tina-field={tinaField(p.philosophy, 'titleItalic')}
+                >
+                  {p.philosophy.titleItalic}
+                </span>
+              </h3>
+              <p
+                className="text-slate-500 text-xl md:text-2xl font-light leading-relaxed max-w-3xl mx-auto mb-20"
+                data-tina-field={tinaField(p.philosophy, 'description')}
+              >
+                {p.philosophy.description}
               </p>
-               <div className="grid sm:grid-cols-3 gap-8">
-                 {[
-                   { title: 'Clinical Health', icon: HeartPulse, desc: 'Prioritizing the residents who need immediate therapeutic intervention.' },
-                   { title: 'Financial Strength', icon: Building2, desc: 'Retaining your hard earned revenue via targeted resource utilization.' },
-                   { title: 'Market Growth', icon: Handshake, desc: 'Positioning your facility as the premier choice in your regional market.' }
-                 ].map((item, idx) => (
-                   <div key={idx} className="p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-2xl transition-all duration-700">
-                     <div className="w-16 h-16 bg-white flex items-center justify-center rounded-2xl shadow-sm text-[#0f172a] mb-8 border border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white transition-colors"><item.icon size={28}/></div>
-                     <div className="font-black font-serif text-2xl text-[#0f172a] mb-4">{item.title}</div>
-                     <div className="text-sm text-slate-500 leading-relaxed font-light">{item.desc}</div>
-                   </div>
-                 ))}
-               </div>
+
+              <div className="grid sm:grid-cols-3 gap-8">
+                {p.philosophy.items.map((item: any, idx: number) => {
+                  const Icon = iconMap[item.icon as keyof typeof iconMap] || Shield;
+                  return (
+                    <div
+                      key={idx}
+                      className="p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-2xl transition-all duration-700"
+                    >
+                      <div className="w-16 h-16 bg-white flex items-center justify-center rounded-2xl shadow-sm text-[#0f172a] mb-8 border border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white transition-colors">
+                        <Icon size={28} />
+                      </div>
+                      <div
+                        className="font-black font-serif text-2xl text-[#0f172a] mb-4"
+                        data-tina-field={tinaField(item, 'title')}
+                      >
+                        {item.title}
+                      </div>
+                      <div
+                        className="text-sm text-slate-500 leading-relaxed font-light"
+                        data-tina-field={tinaField(item, 'desc')}
+                      >
+                        {item.desc}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </BlurFade>
           </div>
         </div>
       </section>
 
-      {/* 5. A National Network primed for growth */}
-      <section className="py-24 md:py-48 bg-slate-50 relative overflow-hidden flex flex-col items-center">
+      {/* ── 6. National Network / USA Map ── */}
+      <section className="py-24 md:py-48 bg-white relative overflow-hidden flex flex-col items-center">
         <div className="container mx-auto px-6 relative z-10 text-center">
           <BlurFade delay={0.1}>
             <div className="flex flex-col items-center mb-16">
               <div className="mb-8">
-                <AnimatedGradientText>National Presence</AnimatedGradientText>
+                <AnimatedGradientText data-tina-field={tinaField(p.national, 'badge')}>
+                  {p.national.badge}
+                </AnimatedGradientText>
               </div>
-               <h3 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[1] sm:leading-[0.85] tracking-tighter uppercase">
-                 A NATIONAL NETWORK <br />
-                 <span className="text-[#0284c7] italic font-medium lowercase">primed for growth.</span>
-               </h3>
+              <h3
+                className="text-4xl sm:text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[1] sm:leading-[0.85] tracking-tighter uppercase"
+                data-tina-field={tinaField(p.national, 'titleLine1')}
+              >
+                {p.national.titleLine1} <br />
+                <span
+                  className="text-[#0284c7] italic font-medium lowercase"
+                  data-tina-field={tinaField(p.national, 'titleItalic')}
+                >
+                  {p.national.titleItalic}
+                </span>
+              </h3>
             </div>
-            <p className="text-slate-400 text-xl md:text-2xl font-light mb-20 leading-relaxed max-w-4xl mx-auto italic">
-               "Our regional directors are strategically deployed across the United States to ensure that every facility under our oversight carries the same Evolve Standard."
+            <p
+              className="text-slate-400 text-xl md:text-2xl font-light mb-20 leading-relaxed max-w-4xl mx-auto italic"
+              data-tina-field={tinaField(p.national, 'quote')}
+            >
+              &ldquo;{p.national.quote}&rdquo;
             </p>
           </BlurFade>
         </div>
 
-        <div className="w-full max-w-6xl mx-auto px-6">
-           <BlurFade delay={0.3}>
-              <div className="rounded-[3rem] overflow-hidden bg-white border border-slate-100 p-8 md:p-12 shadow-2xl relative">
-                 <div className="grid lg:grid-cols-12 gap-12 items-center">
-                   <div className="lg:col-span-8 relative min-h-[400px]">
-                      <div className="absolute top-0 left-0">
-                        <span className="text-[#0284c7] font-black uppercase text-[10px] tracking-widest">Where We</span>
-                        <span className="text-[#0f172a] font-black uppercase text-[10px] tracking-widest ml-1">Operate</span>
-                      </div>
-                      <div className="pt-8">
-                        <USAMap />
-                      </div>
-                   </div>
-                   <div className="lg:col-span-4 flex flex-col gap-6">
-                      <div className="bg-[#0f172a] text-white p-8 rounded-3xl">
-                        <div className="text-[#38bdf8] font-black text-4xl mb-2">15+ Active States</div>
-                        <p className="text-white/60 font-light text-sm leading-relaxed mb-6">Coast-to-coast clinical coverage. Local impact. National scale.</p>
-                      </div>
-                      <div className="grid grid-cols-3 gap-3">
-                         {['OH', 'MI', 'IN', 'PA', 'TX', 'FL'].map(state => (
-                           <div key={state} className="bg-slate-50 border border-slate-100 rounded-xl p-4 flex items-center justify-center text-[#0284c7] font-black text-xl">
-                             {state}
-                           </div>
-                         ))}
-                      </div>
-                   </div>
-                 </div>
-                 
-                 <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mt-12 relative z-20 pt-8 border-t border-slate-100">
-                    {[
-                      { text: 'EXPERT REGULATORY ALIGNMENT' },
-                      { text: 'REAL-TIME CLINICAL DASHBOARDS' },
-                      { text: 'TAILORED FINANCIAL STRATEGIES' },
-                      { text: 'LEADERSHIP DEVELOPMENT' }
-                    ].map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#0284c7]" />
-                        <span className="text-[#0f172a] font-black uppercase text-[9px] md:text-[10px] tracking-widest">{item.text}</span>
-                      </div>
-                    ))}
-                  </div>
+        {/* USA Map card */}
+        <div className="w-full max-w-7xl mx-auto px-6">
+          <BlurFade delay={0.3}>
+            <div className="rounded-[3rem] overflow-hidden bg-slate-50 border border-slate-100 p-8 md:p-16 shadow-2xl relative">
+              <div className="relative z-10 min-h-[400px] md:min-h-[600px]">
+                <USAMap />
               </div>
-           </BlurFade>
+
+              {/* Legend */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 relative z-20">
+                {p.national.legend.map((item: any, idx: number) => {
+                  const Icon = iconMap[item.icon as keyof typeof iconMap] || Shield;
+                  return (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-4 p-5 rounded-2xl bg-white shadow-sm border border-slate-100"
+                    >
+                      <Icon className="text-[#0284c7] shrink-0" size={20} />
+                      <span
+                        className="text-[#0f172a] font-black uppercase text-[9px] tracking-widest"
+                        data-tina-field={tinaField(item, 'text')}
+                      >
+                        {item.text}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </BlurFade>
         </div>
       </section>
 
-      {/* 6. The Evolve Advantage */}
-      <section className="py-32 md:py-48 bg-white text-center relative overflow-hidden">
+      {/* ── 7. The Evolve Advantage CTA ── */}
+      <section className="py-32 md:py-64 bg-white text-center relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <BlurFade delay={0.2}>
-            <h2 className="text-5xl sm:text-6xl md:text-9xl font-serif font-black text-[#0f172a] tracking-tighter leading-none mb-10 sm:mb-16">
-              The Evolve <br />
+            <h2
+              className="text-5xl sm:text-6xl md:text-9xl font-serif font-black text-[#0f172a] tracking-tighter leading-none mb-10 sm:mb-16"
+              data-tina-field={tinaField(p.cta, 'title')}
+            >
+              {p.cta.title} <br />
               <span className="text-[#0284c7] italic">Advantage.</span>
             </h2>
-            <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed mb-16">
-              Connect with our leadership team today to learn how our clinical oversight model can secure your facility’s future.
+            <p
+              className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed mb-20"
+              data-tina-field={tinaField(p.cta, 'subtitle')}
+            >
+              {p.cta.subtitle}
             </p>
             <Link href="/contact">
-              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-16 py-8 shadow-2xl mx-auto">
-                <span className="font-black uppercase tracking-[0.4em] text-[13px] text-white">INITIALIZE PARTNERSHIP</span>
+              <ShimmerButton
+                background="#0284c7"
+                shimmerColor="rgba(255,255,255,0.4)"
+                borderRadius="9999px"
+                className="px-16 py-8 shadow-2xl mx-auto"
+              >
+                <span
+                  className="font-black uppercase tracking-[0.4em] text-[13px] text-white"
+                  data-tina-field={tinaField(p.cta, 'button')}
+                >
+                  {p.cta.button}
+                </span>
               </ShimmerButton>
             </Link>
           </BlurFade>
         </div>
       </section>
-
-      {/* 7. Mobile CTA */}
-      <MobileCTA />
 
       <Footer />
     </main>

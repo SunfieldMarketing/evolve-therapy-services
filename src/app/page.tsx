@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
@@ -12,111 +12,249 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import MobileCTA from '@/components/MobileCTA';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
 import { 
   ArrowRight, Phone, Microscope, HeartPulse, ShieldCheck, 
-  TrendingUp, Users, Clock, CheckCircle2, BarChart3, Award,
-  Search, Map, Zap, Stethoscope
+  TrendingUp, Users, Clock, CheckCircle2, BarChart3, Award
 } from 'lucide-react';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BorderBeam } from '@/components/magicui/border-beam';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
-import { useTina, tinaField } from '@/lib/tina';
 import homeData from '../../content/pages/home.json';
 
-const iconMap = {
-  Microscope,
-  HeartPulse,
-  ShieldCheck,
-  BarChart3,
-  Users,
-  TrendingUp,
-  Award,
-  Clock,
-  Search,
-  Map,
-  Zap,
-  Stethoscope
-};
+const clinicalStats = [
+  { value: 100, suffix: '%', label: 'Revenue Retained', icon: TrendingUp, desc: 'Your facility keeps every dollar of therapy revenue - zero shared with us.' },
+  { value: 20, suffix: '+', label: 'Years Experience', icon: Award, desc: 'Two decades of LTC clinical and operational leadership expertise.' },
+  { value: 24, suffix: '/7', label: 'Clinical Support', icon: Clock, desc: 'Round-the-clock access to your dedicated regional director.' },
+  { value: 15, suffix: '+', label: 'States Served', icon: Users, desc: 'Active management across major U.S. markets and growing.' },
+];
 
-export default function Home(props: { data: any, query: string, variables: any }) {
-  const { data } = useTina({
-    query: props.query || '',
-    variables: props.variables || {},
-    data: props.data || { home: homeData },
-  });
+const clinicalServices = [
+  {
+    icon: Microscope,
+    title: 'Evidence-Based Practice',
+    desc: 'Real-time PDPM case mix analysis, MDS accuracy reviews, and data-driven business intelligence customized to your specific market.',
+    tag: 'Analytics',
+  },
+  {
+    icon: HeartPulse,
+    title: 'Holistic Patient Outcomes',
+    desc: 'Patient-centric, outcome-based programming that drives five-star ratings and measurable improvements in functional independence.',
+    tag: 'Clinical',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Compliance Management',
+    desc: 'Full denial management, regulatory audit support, and proactive SNF compliance oversight - so you focus on care, not paperwork.',
+    tag: 'Regulatory',
+  },
+  {
+    icon: BarChart3,
+    title: 'Medicaid Case Mix',
+    desc: 'Detailed quality measure analysis, case mix efficiency reviews, and Medicaid reimbursement optimization for your payer mix.',
+    tag: 'Reimbursement',
+  },
+  {
+    icon: Users,
+    title: 'In-House Transition',
+    desc: 'Seamless migration from contract therapy to an in-house model with staff retention, culture building, and zero disruption to care.',
+    tag: 'Transition',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Operational Growth',
+    desc: 'Tiered pricing reductions as your business scales, grooming internal staff for regional leadership roles within your own organization.',
+    tag: 'Growth',
+  },
+];
 
-  const p = (data as any).home || homeData;
+const processSteps = [
+  { num: '01', title: 'Free Analysis', desc: 'We perform a complimentary cost savings analysis and identify clinical and financial opportunity.' },
+  { num: '02', title: 'Custom Strategy', desc: 'A tailored therapy management plan is developed for your census size, payer mix, and staffing model.' },
+  { num: '03', title: 'Seamless Launch', desc: 'Your regional director is embedded with your team - minimal disruption, maximum momentum.' },
+  { num: '04', title: 'Continuous Evolution', desc: 'Ongoing audits, education, and operational refinement keep you ahead of regulatory and clinical changes.' },
+];
 
+export default function Home() {
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
   }, []);
 
+  const p = homeData;
+
   return (
-    <main className="min-h-screen bg-[#0f172a] selection:bg-[#0284c7]/30 selection:text-white">
+    <main className="min-h-screen bg-white selection:bg-[#0284c7]/30 selection:text-white">
       <Navbar />
-      
-      <div className="relative">
-        <Hero data={p.hero} />
+      <Hero />
+
+      {/* ── Clinical Excellence ── */}
+      <section className="py-24 md:py-40 bg-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#0284c7]/3 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
         
-        <Services />
-        <WhyEvolve />
-        <Testimonials />
-        <USAMap />
-        <FAQ />
-
-
-        {/* Philosophy / CTA Dark Section */}
-        <section className="py-32 md:py-56 bg-[#0f172a] relative overflow-hidden">
-           {/* Decorative Background */}
-           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#38bdf8 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#0284c7]/10 rounded-full blur-[150px] pointer-events-none" />
-           
-           <div className="container mx-auto px-6 lg:px-12 relative z-10">
-              <div className="max-w-6xl mx-auto">
-                 <div className="grid lg:grid-cols-2 gap-20 items-center">
-                    <BlurFade delay={0.1}>
-                       <h2 className="text-5xl md:text-8xl font-serif text-white font-black tracking-tighter leading-[0.85] mb-12">
-                          {p.bottomCta.quote.split('excellence')[0]}excellence <br />
-                          <span className="text-[#0284c7] italic">{p.bottomCta.quote.split('excellence')[1]}</span>
-                       </h2>
-                       <Link href="/contact">
-                          <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="1rem" className="px-12 py-7 shadow-[0_20px_50px_rgba(2,132,199,0.3)] group/btn">
-                             <span className="font-black uppercase tracking-[0.4em] text-[14px] text-white">{p.bottomCta.primaryCta}</span>
-                             <ArrowRight size={20} className="ml-5 group-hover/btn:translate-x-3 transition-transform" />
-                          </ShimmerButton>
-                       </Link>
-                    </BlurFade>
-                    
-                    <BlurFade delay={0.3} className="bg-white/5 backdrop-blur-xl border border-white/10 p-12 md:p-20 rounded-[4rem]">
-                       <h3 className="text-3xl font-serif font-black text-white mb-10 tracking-tight">The Evolve Promise</h3>
-                       <div className="space-y-8">
-                          {p.bottomCta.checklist.map((item: string, i: number) => (
-                             <div key={i} className="flex items-center gap-6 group">
-                                <div className="w-10 h-10 rounded-full bg-[#0284c7]/20 border border-[#0284c7]/40 flex items-center justify-center text-[#38bdf8] shrink-0 group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-300">
-                                   <CheckCircle2 size={20} />
-                                </div>
-                                <span className="text-xl text-white/70 font-light group-hover:text-white transition-colors">{item}</span>
-                             </div>
-                          ))}
-                       </div>
-                       
-                       <div className="mt-16 pt-16 border-t border-white/10">
-                          <div className="text-white/30 text-[10px] font-black uppercase tracking-[0.4em] mb-4">Direct Support Access</div>
-                          <a href={`tel:${p.bottomCta.phone.replace(/[^0-9]/g, '')}`} className="text-3xl md:text-4xl font-serif font-black text-white hover:text-[#38bdf8] transition-colors">{p.bottomCta.phone}</a>
-                       </div>
-                    </BlurFade>
-                 </div>
+        <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
+          {/* Section header */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 mb-20 md:mb-28">
+            <BlurFade delay={0.1}>
+              <div className="mb-6">
+                <AnimatedGradientText>Clinical Excellence</AnimatedGradientText>
               </div>
-           </div>
-        </section>
+              <h2 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[0.9] tracking-tighter">
+                Bridging the Gap<br />
+                <span className="text-[#0284c7] italic font-medium">in LTC Therapy.</span>
+              </h2>
+            </BlurFade>
+            <BlurFade delay={0.2} className="text-xl text-slate-500 max-w-lg leading-relaxed font-light shrink-0">
+              We eliminate the conflict between clinical quality and financial performance — delivering both through our proprietary in-house management model.
+            </BlurFade>
+          </div>
 
-        <Footer />
-        <MobileCTA />
-      </div>
+          {/* Stats row */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-24">
+            {clinicalStats.map((stat, i) => (
+              <BlurFade
+                key={stat.label}
+                delay={0.1 + i * 0.08}
+                className="group relative p-5 md:p-6 rounded-2xl md:rounded-3xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col justify-between min-h-[140px] md:min-h-[160px] overflow-hidden"
+              >
+                <stat.icon size={20} className="relative z-10 text-[#0284c7] mb-3 group-hover:-translate-y-1 transition-transform duration-300" />
+                <div className="relative z-10">
+                  <div className="text-3xl md:text-4xl font-serif font-black text-[#0f172a] mb-1">
+                    <NumberTicker value={stat.value} suffix={stat.suffix} delay={0.5 + i * 0.1} />
+                  </div>
+                  <div className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest">{stat.label}</div>
+                </div>
+              </BlurFade>
+            ))}
+          </div>
+
+          {/* Service Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-24 md:mb-32">
+            {clinicalServices.map((item, i) => (
+              <BlurFade
+                delay={0.1 + i * 0.08}
+                key={i}
+                className="relative overflow-hidden group p-8 md:p-10 rounded-[2.5rem] bg-white border border-slate-100 hover:border-[#0284c7]/30 hover:shadow-[0_40px_80px_-20px_rgba(2,132,199,0.12)] transition-all duration-500"
+              >
+                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity" duration={6} colorFrom="#38bdf8" colorTo="#0284c7" />
+                
+                <div className="flex items-center justify-between mb-8 relative z-10">
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-slate-50 text-[#0284c7] border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white">
+                    <item.icon size={28} strokeWidth={1.5} />
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full text-[#0284c7] bg-[#0284c7]/5">
+                    {item.tag}
+                  </span>
+                </div>
+                
+                <h4 className="font-black font-serif text-2xl lg:text-3xl tracking-tight mb-4 relative z-10 text-[#0f172a]">
+                  {item.title}
+                </h4>
+                
+                <p className="text-[15px] md:text-base leading-relaxed font-light relative z-10 max-w-sm text-slate-500">
+                  {item.desc}
+                </p>
+              </BlurFade>
+            ))}
+          </div>
+
+          {/* Process Timeline */}
+          <BlurFade delay={0.2} className="bg-[#0f172a] rounded-3xl md:rounded-[2.5rem] p-8 md:p-14 overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-72 h-72 bg-[#0284c7]/5 rounded-full blur-[80px] translate-x-1/3 -translate-y-1/3" />
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-10 md:mb-14">
+                <div className="w-px h-8 bg-[#0284c7]" />
+                <h3 className="text-2xl md:text-3xl font-serif font-black text-white tracking-tighter">How We Work</h3>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                {processSteps.map((step, i) => (
+                  <BlurFade delay={0.3 + i * 0.12} key={i} className="relative group">
+                    <div className="text-5xl md:text-6xl font-serif font-black text-[#0284c7]/20 group-hover:text-[#0284c7]/40 mb-4 leading-none transition-colors duration-300">{step.num}</div>
+                    <h4 className="font-black text-white text-base md:text-lg mb-2">{step.title}</h4>
+                    <p className="text-white/40 text-sm leading-relaxed">{step.desc}</p>
+                  </BlurFade>
+                ))}
+              </div>
+            </div>
+          </BlurFade>
+
+          {/* CTAs */}
+          <BlurFade delay={0.4} className="flex flex-col sm:flex-row gap-3 mt-12 md:mt-16 items-center lg:items-start lg:justify-center">
+            <Link href="/services">
+              <ShimmerButton as="div" background="#0f172a" borderRadius="9999px" className="group">
+                <span className="text-xs font-bold uppercase tracking-widest text-white group-hover:text-[#38bdf8] transition-colors">Explore All Services</span>
+                <ArrowRight size={15} className="ml-1" />
+              </ShimmerButton>
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 border border-slate-200 text-[#0f172a] px-7 py-[0.875rem] rounded-full font-bold text-xs uppercase tracking-widest hover:bg-slate-50 transition-all focus-visible:ring-2 focus-visible:ring-[#0284c7] focus-visible:outline-none"
+            >
+              Free Cost Analysis
+            </Link>
+          </BlurFade>
+        </div>
+      </section>
+
+      <WhyEvolve />
+      <Services />
+      <Testimonials />
+      <USAMap />
+      <FAQ />
+
+      {/* Philosophy / CTA Dark Section */}
+      <section className="py-20 md:py-36 bg-[#0f172a] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />
+        <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <BlurFade delay={0.2} duration={0.8}>
+              <div className="text-6xl sm:text-7xl text-[#0284c7]/20 font-serif mb-0 leading-none">"</div>
+              <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-6 md:mb-8 leading-[0.95] tracking-tighter -mt-4">
+                Empower your therapy team with
+                <span className="text-[#0284c7] italic"> in-house leadership</span>
+                <br />and clinical advancement.
+              </h3>
+
+              {/* Checklist */}
+              <div className="grid sm:grid-cols-2 gap-3 mb-10 md:mb-14 text-left max-w-2xl mx-auto">
+                {[
+                  'Retain 100% of therapy revenue',
+                  'Customized CEU education for staff',
+                  'Regional director embedded on-site',
+                  'Tiered pricing - costs drop as you scale',
+                  'Denial management & audit support',
+                  'In-house to contracted, or reverse',
+                ].map((item, i) => (
+                  <BlurFade delay={0.4 + i * 0.05} key={item} className="flex items-center gap-3 text-white/70 text-sm font-medium">
+                    <CheckCircle2 size={16} className="text-[#0284c7] shrink-0" />
+                    {item}
+                  </BlurFade>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link href="/contact">
+                  <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.6)" borderRadius="9999px" className="group">
+                    <span className="text-xs font-bold uppercase tracking-widest text-white">Start Your Evolution</span>
+                    <ArrowRight size={15} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                  </ShimmerButton>
+                </Link>
+                <a
+                  href="tel:8883865820"
+                  className="inline-flex items-center justify-center gap-2 border border-white/20 text-white px-8 py-[0.875rem] rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                >
+                  <Phone size={14} /> (888) 386-5820
+                </a>
+              </div>
+            </BlurFade>
+          </div>
+        </div>
+      </section>
+
+      <Contact />
+      <Footer />
+      <MobileCTA />
     </main>
   );
 }

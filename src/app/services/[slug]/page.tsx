@@ -1,15 +1,16 @@
-import { client } from "../../../../tina/__generated__/client";
-import ServiceDetailClient from "./ServiceDetailClient";
-import { notFound } from "next/navigation";
+import { services } from '@/data/services';
+import ServiceDetailClient from './ServiceDetailClient';
+import { notFound } from 'next/navigation';
 
-export default async function ServicePage({ params }: { params: { slug: string } }) {
+export function generateStaticParams() {
+  return Object.keys(services).map((slug) => ({ slug }));
+}
+
+export default function ServicePage({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  
-  try {
-    const data = await client.queries.service({ relativePath: `${slug}.json` });
-    return <ServiceDetailClient {...data} />;
-  } catch (e) {
-    console.error("Error fetching service data:", e);
-    return notFound();
-  }
+  const service = services[slug as keyof typeof services];
+
+  if (!service) return notFound();
+
+  return <ServiceDetailClient service={service} slug={slug} />;
 }

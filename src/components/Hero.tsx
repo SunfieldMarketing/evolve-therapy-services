@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Spotlight } from '@/components/aceternity/spotlight';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
-import { tinaField } from 'tinacms/dist/react';
+import { tinaField } from '@/lib/tina';
 
 interface HeroProps {
   data: {

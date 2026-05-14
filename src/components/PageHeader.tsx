@@ -160,7 +160,7 @@ export default function PageHeader({
 
              <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-6 sm:gap-8 lg:gap-24">
                 <Link href={ctaLink} className="inline-flex group shrink-0 w-full sm:w-auto">
-                   <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="w-full sm:w-auto px-8 sm:px-16 py-5 sm:py-7 shadow-[0_30px_60px_rgba(2,132,199,0.3)]">
+                   <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="w-full sm:w-auto px-8 sm:px-16 py-5 sm:py-7 shadow-[0_30px_60px_rgba(2,132,199,0.3)]">
                       <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[12px] sm:text-[14px] text-white">{ctaText}</span>
                       <ArrowRight size={18} className="ml-3 sm:ml-5 group-hover:translate-x-3 transition-transform" />
                    </ShimmerButton>

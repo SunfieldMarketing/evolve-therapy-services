@@ -9,6 +9,7 @@ interface ShimmerButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   background?: string;
   className?: string;
   children?: React.ReactNode;
+  as?: any;
 }
 
 /**
@@ -23,10 +24,11 @@ export function ShimmerButton({
   background = 'rgba(2, 132, 199, 1)',
   className,
   children,
+  as: Component = 'button',
   ...props
 }: ShimmerButtonProps) {
   return (
-    <button
+    <Component
       style={
         {
           '--spread': '90deg',
@@ -58,7 +60,7 @@ export function ShimmerButton({
       />
       {/* Content */}
       <span className="relative z-10 flex items-center gap-2">{children}</span>
-    </button>
+    </Component>
   );
 }
 

@@ -5,7 +5,7 @@ import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simp
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Phone } from 'lucide-react';
-import { useTina } from 'tinacms/dist/react';
+import { useTina } from '@/lib/tina';
 import settingsData from '../../content/global/settings.json';
 
 // Public TopoJSON for US states (AlbersUSA projection)
@@ -34,13 +34,7 @@ interface TooltipState {
 }
 
 export default function InteractiveMapInner() {
-  const { data } = useTina({
-    query: `query { settings(relativePath: "settings.json") { activeStates phone address } }`,
-    variables: {},
-    data: { settings: settingsData },
-  });
-
-  const s = data.settings;
+  const s = settingsData;
   const activeStatesSet = useMemo(() => new Set(s.activeStates || []), [s.activeStates]);
 
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);

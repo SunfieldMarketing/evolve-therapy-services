@@ -12,14 +12,8 @@ interface FAQProps {
 }
 
 export default function FAQ({ items: propItems }: FAQProps) {
-  const { data } = useTina({
-    query: `query { settings(relativePath: "settings.json") { faq { title titleItalic description list { q a } } } }`,
-    variables: {},
-    data: { settings: settingsData },
-  });
-
   const [active, setActive] = useState<number | null>(0);
-  const f = data.settings.faq;
+  const f = settingsData.faq;
 
   // Use props if provided, otherwise use data from settings
   const displayItems = propItems || f.list.map((item: any) => ({ question: item.q, answer: item.a }));

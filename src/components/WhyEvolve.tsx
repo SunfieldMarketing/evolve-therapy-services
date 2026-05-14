@@ -8,7 +8,7 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { useTina, tinaField } from '@/lib/tina';
 import homeData from '../../content/pages/home.json';
 
 const iconMap = {
@@ -21,13 +21,7 @@ const iconMap = {
 };
 
 export default function WhyEvolve() {
-  const { data } = useTina({
-    query: `query { home(relativePath: "home.json") { whyEvolve { title subtitle introText features { title subtitle desc icon color href } quoteStrip { text author authorTitle authorPhoto } } } }`,
-    variables: {},
-    data: { home: homeData },
-  });
-
-  const w = data?.home?.whyEvolve;
+  const w = homeData.whyEvolve;
   const features = w?.features || [];
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -145,7 +139,7 @@ export default function WhyEvolve() {
                             Ready to <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
                           </h3>
                           <Link href="/contact" className="focus-visible:outline-none w-fit">
-                            <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-8 sm:px-10 py-3 sm:py-4">
+                            <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-8 sm:px-10 py-3 sm:py-4">
                               <span className="text-white font-black text-[10px] uppercase tracking-[0.2em]">Start a Consultation</span>
                               <ArrowRight size={16} className="ml-3 text-white" />
                             </ShimmerButton>

@@ -4,17 +4,11 @@ import { Check, ArrowRight, Zap, TrendingDown, Users } from 'lucide-react';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
-import { useTina } from 'tinacms/dist/react';
+import { useTina } from '@/lib/tina';
 import servicesData from '../../content/pages/services.json';
 
 export default function Pricing() {
-  const { data } = useTina({
-    query: `query { services(relativePath: "services.json") { pricing { badge title titleItalic description tiers { level title desc features featured } bottomBanner { title desc cta } } } }`,
-    variables: {},
-    data: { services: servicesData },
-  });
-
-  const p = data.services.pricing;
+  const p = servicesData.pricing;
 
   return (
     <section className="py-24 md:py-40 bg-white relative overflow-hidden">
@@ -80,7 +74,7 @@ export default function Pricing() {
                 <div className={`pt-8 border-t ${tier.featured ? 'border-white/10' : 'border-slate-200'}`}>
                    {tier.featured ? (
                      <Link href="/contact">
-                       <ShimmerButton background="#38bdf8" shimmerColor="rgba(255,255,255,0.5)" borderRadius="1rem" className="w-full py-4">
+                       <ShimmerButton as="div" background="#38bdf8" shimmerColor="rgba(255,255,255,0.5)" borderRadius="1rem" className="w-full py-4">
                           <span className="text-white font-black text-[10px] uppercase tracking-[0.2em]">Contact for Proposal</span>
                        </ShimmerButton>
                      </Link>

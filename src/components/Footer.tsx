@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { tinaField } from '@/lib/tina';
 import settingsData from '../../content/global/settings.json';
 
 function LinkedInIcon({ size = 16 }: { size?: number }) {

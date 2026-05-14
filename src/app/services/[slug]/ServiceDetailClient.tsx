@@ -43,8 +43,7 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
   if (!service) return null;
 
   return (
-    <TinaProviderWrapper>
-      <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white">
         <Navbar />
         
         <PageHeader 
@@ -168,6 +167,5 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
 
         <Footer />
       </main>
-    </TinaProviderWrapper>
   );
 }

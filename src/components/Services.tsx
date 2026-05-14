@@ -147,7 +147,7 @@ export default function Services() {
               </p>
               <div>
                 <Link href="/contact" className="focus-visible:outline-none">
-                  <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn inline-flex text-white hover:bg-[#0284c7] transition-colors duration-500">
+                  <ShimmerButton as="div" background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn inline-flex text-white hover:bg-[#0284c7] transition-colors duration-500">
                     <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white">Request Free Analysis</span>
                     <ArrowUpRight className="ml-2 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                   </ShimmerButton>

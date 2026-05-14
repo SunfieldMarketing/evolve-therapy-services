@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useTina, tinaField } from '@/lib/tina';
+import { tinaField } from '@/lib/tina';
 import settingsData from '../../content/global/settings.json';
 
 export default function Navbar() {
@@ -43,10 +43,10 @@ export default function Navbar() {
   }, [isOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[9999] pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-[9999]">
       <nav
         className={cn(
-          'transition-all duration-300 ease-out pointer-events-auto',
+          'transition-all duration-300 ease-out',
           scrolled
             ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_24px_rgba(0,0,0,0.06)] py-2 sm:py-3'
             : 'bg-transparent py-3 sm:py-5'

@@ -6,7 +6,7 @@ import { Marquee } from '@/components/magicui/marquee';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { useTina, tinaField } from '@/lib/tina';
 import settingsData from '../../content/global/settings.json';
 
 function StarRow({ count }: { count: number }) {
@@ -51,13 +51,7 @@ function TestimonialCard({ t }: { t: any }) {
 
 
 export default function Testimonials() {
-  const { data } = useTina({
-    query: `query { settings(relativePath: "settings.json") { testimonials { title titleItalic description list { name role facility content stars initials } } } }`,
-    variables: {},
-    data: { settings: settingsData },
-  });
-
-  const t = data?.settings?.testimonials;
+  const t = settingsData.testimonials;
 
   return (
     <section className="relative py-24 md:py-40 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
@@ -99,7 +93,7 @@ export default function Testimonials() {
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <BlurFade className="text-center mt-8" delay={0.2}>
           <Link href="/contact">
-            <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
+            <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
               <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Partner With Evolve</span>
             </ShimmerButton>
           </Link>

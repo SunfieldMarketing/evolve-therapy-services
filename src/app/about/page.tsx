@@ -411,20 +411,11 @@ export default function AboutPage(props: { data: any; query: string; variables: 
             >
               {p.cta.subtitle}
             </p>
-            <Link href={p.cta.buttonLink || "/contact"} className="pointer-events-auto relative z-50">
-              <ShimmerButton
-                background="#0284c7"
-                shimmerColor="rgba(255,255,255,0.4)"
-                borderRadius="9999px"
-                className="px-16 py-8 shadow-2xl mx-auto pointer-events-auto"
-              >
-                <span
-                  className="font-black uppercase tracking-[0.4em] text-[13px] text-white"
-                  data-tina-field={tinaField(p.cta, 'button')}
-                >
-                  {p.cta.button}
-                </span>
-              </ShimmerButton>
+            <Link 
+              href={p.cta.buttonLink || "/contact"} 
+              className="inline-flex items-center justify-center gap-2 px-16 py-8 bg-[#0284c7] text-white rounded-full font-black uppercase tracking-[0.4em] text-[13px] shadow-2xl mx-auto hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto"
+            >
+              <span data-tina-field={tinaField(p.cta, 'button')}>{p.cta.button}</span>
             </Link>
           </BlurFade>
         </div>

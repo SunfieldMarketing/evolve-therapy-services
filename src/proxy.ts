@@ -7,7 +7,7 @@ import type { NextRequest } from 'next/server';
  * Protects the administrative routes (/admin and /tina-build) 
  * with a simple password-based cookie check.
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 1. Check if the user is trying to access admin or tina-build

@@ -176,10 +176,13 @@ export default function ContactPage(props: { data: any, query: string, variables
                       <textarea rows={3} className="w-full bg-slate-50 border border-slate-100 rounded-[2rem] p-5 lg:p-6 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium resize-none" placeholder="Tell us about your current therapy status..." />
                     </div>
                     
-                    <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="w-full py-5 lg:py-6 group shadow-xl mt-6">
-                      <span className="font-black uppercase tracking-[0.3em] text-[11px] text-white" data-tina-field={tinaField(p.form, 'buttonText')}>{p.form.buttonText}</span>
-                      <ArrowRight size={18} className="ml-3 group-hover:translate-x-1 transition-transform" />
-                    </ShimmerButton>
+                    <button 
+                      type="button"
+                      className="w-full flex items-center justify-center gap-2 py-5 lg:py-6 bg-[#0284c7] text-white rounded-full font-black uppercase tracking-[0.3em] text-[11px] shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group mt-6 pointer-events-auto"
+                    >
+                      <span data-tina-field={tinaField(p.form, 'buttonText')}>{p.form.buttonText}</span>
+                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
                     
                     <p className="text-center text-slate-400 text-xs font-light mt-4">
                        By submitting, you agree to our <span className="underline decoration-slate-200 underline-offset-4 cursor-pointer hover:text-slate-600 transition-colors">privacy policy</span> and clinical data terms.

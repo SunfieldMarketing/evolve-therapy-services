@@ -159,11 +159,12 @@ export default function ServicesPage(props: { data: any, query: string, variable
                </div>
                
                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-24">
-                  <Link href="/contact" className="inline-flex group shrink-0 pointer-events-auto relative z-50">
-                     <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="0.75rem" className="px-16 py-7 shadow-[0_30px_60px_rgba(2,132,199,0.3)] pointer-events-auto">
-                        <span className="font-black uppercase tracking-[0.4em] text-[14px] text-white">Start Your Evolution</span>
-                        <ArrowRight size={20} className="ml-5 group-hover:translate-x-3 transition-transform" />
-                     </ShimmerButton>
+                  <Link 
+                    href="/contact" 
+                    className="inline-flex items-center justify-center gap-3 sm:gap-5 px-8 sm:px-16 py-5 sm:py-7 bg-[#0284c7] text-white rounded-xl shadow-[0_30px_60px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group shrink-0 w-full sm:w-auto pointer-events-auto"
+                  >
+                    <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[12px] sm:text-[14px]">Start Your Evolution</span>
+                    <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
                   </Link>
 
                   <div className="flex flex-col sm:flex-row gap-12">
@@ -264,11 +265,12 @@ export default function ServicesPage(props: { data: any, query: string, variable
                         </div>
                       ))}
                     </div>
-                    <Link href={`/services/${service.slug}`} className="pointer-events-auto relative z-50">
-                       <ShimmerButton as="div" background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn px-10 py-5 pointer-events-auto">
-                          <span className="font-black uppercase tracking-[0.2em] text-[11px] text-white">Full Service Specs</span>
-                          <ArrowRight size={14} className="ml-3 group-hover/btn:translate-x-2 transition-transform" />
-                       </ShimmerButton>
+                    <Link 
+                      href={`/services/${service.slug}`} 
+                      className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#0f172a] text-white rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] shadow-xl hover:bg-[#0284c7] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto"
+                    >
+                      <span>Full Service Specs</span>
+                      <ArrowRight size={16} className="transition-transform" />
                     </Link>
                   </div>
                 </div>

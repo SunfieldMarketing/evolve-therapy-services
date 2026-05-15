@@ -40,8 +40,24 @@ export default function Home(props: { data: any; query: string; variables: any }
         hero { eyebrow titleLine1 titleItalic titleLine2 subtext primaryCta secondaryCta stats { value label } }
         clinicalExcellence { badge titleLine1 titleItalic description stats { value suffix label desc } services { title desc tag icon } }
         process { badge title titleItalic description steps { num title desc icon } }
-        whyEvolve { title subtitle introText features { title subtitle desc icon color href } quoteStrip { text author authorTitle authorPhoto } }
+        whyEvolve { 
+          title subtitle introText 
+          features { title subtitle desc icon color href } 
+          quoteStrip { text author authorTitle authorPhoto } 
+        }
+        ourServices {
+          title theme showSection
+          items { title desc icon }
+        }
         bottomCta { quote checklist primaryCta phone }
+      }
+      settings(relativePath: "settings.json") {
+        siteName phone email address linkedin
+        navbar { links { name href } ctaText }
+        footer { tagline copyright links { name href } serviceLinks { name href } }
+        testimonials { title titleItalic description list { name role facility content stars initials } }
+        faq { title titleItalic description list { q a } }
+        activeStates
       }
     }`,
     variables: props.variables || {},
@@ -49,10 +65,11 @@ export default function Home(props: { data: any; query: string; variables: any }
   });
 
   const p = data.home;
+  const s = data.settings;
 
   return (
     <main className="min-h-screen bg-white selection:bg-[#0284c7]/30 selection:text-white">
-      <Navbar />
+      <Navbar data={s.navbar} />
       <Hero data={p.hero} parentField="hero" />
 
       {/* ── Clinical Excellence ── */}
@@ -66,8 +83,8 @@ export default function Home(props: { data: any; query: string; variables: any }
               <div className="mb-6">
                 <AnimatedGradientText data-tina-field={tinaField(p.clinicalExcellence, 'badge')}>{p.clinicalExcellence.badge}</AnimatedGradientText>
               </div>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-[#0f172a] leading-[0.95] tracking-tighter" data-tina-field={tinaField(p.clinicalExcellence, 'titleLine1')}>
-                {p.clinicalExcellence.titleLine1}<br />
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-[#0f172a] leading-[0.95] tracking-tighter">
+                <span data-tina-field={tinaField(p.clinicalExcellence, 'titleLine1')}>{p.clinicalExcellence.titleLine1}</span><br />
                 <span className="text-[#0284c7] italic font-medium" data-tina-field={tinaField(p.clinicalExcellence, 'titleItalic')}>{p.clinicalExcellence.titleItalic}</span>
               </h2>
             </BlurFade>
@@ -89,7 +106,7 @@ export default function Home(props: { data: any; query: string; variables: any }
                   <NumberTicker value={stat.value} suffix={stat.suffix} />
                 </div>
                 <div className="text-xs font-bold text-[#0284c7] uppercase tracking-[0.2em] mb-4">{stat.label}</div>
-                <p className="text-sm text-slate-400 font-light leading-relaxed">{stat.desc}</p>
+                <p className="text-sm text-slate-400 font-light leading-relaxed" data-tina-field={tinaField(stat, 'desc')}>{stat.desc}</p>
               </BlurFade>
             ))}
           </div>
@@ -117,7 +134,7 @@ export default function Home(props: { data: any; query: string; variables: any }
                   <h4 className="font-black font-serif text-2xl lg:text-3xl tracking-tight mb-4 relative z-10 text-[#0f172a]">
                     {item.title}
                   </h4>
-                  <p className="text-[15px] md:text-base leading-relaxed font-light relative z-10 text-slate-500">
+                  <p className="text-[15px] md:text-base leading-relaxed font-light relative z-10 text-slate-500" data-tina-field={tinaField(item, 'desc')}>
                     {item.desc}
                   </p>
                 </BlurFade>
@@ -135,8 +152,8 @@ export default function Home(props: { data: any; query: string; variables: any }
                     <div className="w-px h-8 bg-[#0284c7]" />
                     <span className="text-[#0284c7] text-xs font-black uppercase tracking-[0.4em]" data-tina-field={tinaField(p.process, 'badge')}>{p.process.badge}</span>
                   </div>
-                  <h3 className="text-4xl md:text-6xl font-serif font-black text-white tracking-tighter" data-tina-field={tinaField(p.process, 'title')}>
-                    {p.process.title} <span className="text-[#0284c7] italic font-medium" data-tina-field={tinaField(p.process, 'titleItalic')}>{p.process.titleItalic}</span>
+                  <h3 className="text-4xl md:text-6xl font-serif font-black text-white tracking-tighter">
+                    <span data-tina-field={tinaField(p.process, 'title')}>{p.process.title}</span> <span className="text-[#0284c7] italic font-medium" data-tina-field={tinaField(p.process, 'titleItalic')}>{p.process.titleItalic}</span>
                   </h3>
                 </div>
                 <p className="text-white/40 text-lg md:text-xl font-light max-w-xs" data-tina-field={tinaField(p.process, 'description')}>
@@ -153,7 +170,7 @@ export default function Home(props: { data: any; query: string; variables: any }
                         <StepIcon size={24} className="text-[#0284c7] opacity-40 group-hover:opacity-100 transition-all duration-500" />
                       </div>
                       <h4 className="font-black text-white text-lg md:text-xl mb-4 tracking-tight">{step.title}</h4>
-                      <p className="text-white/30 text-sm leading-relaxed font-light">{step.desc}</p>
+                      <p className="text-white/30 text-sm leading-relaxed font-light" data-tina-field={tinaField(step, 'desc')}>{step.desc}</p>
                     </BlurFade>
                   );
                 })}
@@ -171,11 +188,11 @@ export default function Home(props: { data: any; query: string; variables: any }
         </div>
       </section>
 
-      <WhyEvolve />
-      <Services />
-      <Testimonials />
-      <USAMap />
-      <FAQ />
+      <WhyEvolve data={p.whyEvolve} parentField="whyEvolve" />
+      <Services data={p.ourServices} parentField="ourServices" />
+      <Testimonials data={s.testimonials} parentField="testimonials" />
+      <USAMap activeStates={s.activeStates} />
+      <FAQ data={s.faq} parentField="faq" />
 
       {/* ── Philosophy / CTA ── */}
       <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden">
@@ -194,7 +211,7 @@ export default function Home(props: { data: any; query: string; variables: any }
                     <div className="w-5 h-5 rounded-full bg-[#0284c7]/10 flex items-center justify-center shrink-0">
                       <div className="w-1.5 h-1.5 rounded-full bg-[#0284c7]" />
                     </div>
-                    {item}
+                    <span data-tina-field={tinaField(p.bottomCta, `checklist.${i}`)}>{item}</span>
                   </BlurFade>
                 ))}
               </div>
@@ -220,7 +237,7 @@ export default function Home(props: { data: any; query: string; variables: any }
       </section>
 
       <Contact />
-      <Footer />
+      <Footer data={s} preFooterData={data.home?.preFooterCta} />
       <MobileCTA />
     </main>
   );

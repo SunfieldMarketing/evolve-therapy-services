@@ -22,16 +22,32 @@ const iconMap = {
 
 export default function LocationsPage(props: { data: any, query: string, variables: any }) {
   const { data } = useTina({
-    query: props.query || `query { locations(relativePath: "locations.json") { hero { title titleItalic description } hq { badge title address phone email } strategy { title description subtext } partner { badge title description } reach { title titleItalic description items { title desc icon } } commitment { quote } } }`,
+    query: props.query || `query { 
+      locations(relativePath: "locations.json") { 
+        hero { title titleItalic description } 
+        hq { badge title address phone email } 
+        strategy { title description subtext } 
+        partner { badge title description } 
+        reach { title titleItalic description items { title desc icon } } 
+        commitment { quote } 
+      }
+      settings(relativePath: "settings.json") {
+        siteName phone email address linkedin
+        navbar { links { name href } ctaText }
+        footer { tagline copyright links { name href } serviceLinks { name href } }
+        preFooterCta { title subtitle primaryCta }
+      }
+    }`,
     variables: props.variables || {},
     data: props.data || { locations: locationsData },
   });
 
   const p = data.locations;
+  const s = data.settings;
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar data={s.navbar} />
       <PageHeader 
         title={p.hero.title} 
         italicWord={p.hero.titleItalic} 
@@ -171,7 +187,7 @@ export default function LocationsPage(props: { data: any, query: string, variabl
         </div>
       </section>
 
-      <Footer />
+      <Footer data={s} preFooterData={s.preFooterCta} />
     </main>
   );
 }

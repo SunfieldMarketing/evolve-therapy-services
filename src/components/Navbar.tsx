@@ -25,13 +25,25 @@ const links = [
   { name: 'Locations', href: '/locations' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ data }: { data?: any }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const d = data || {
+    links: [
+      { name: 'Home', href: '/' },
+      { name: 'About', href: '/about' },
+      { name: 'Services', href: '/services' },
+      { name: 'Locations', href: '/locations' },
+    ],
+    ctaText: 'Contact Us'
+  };
+
+  const navLinks = d.links || [];
 
   // Scroll to top on logo click when already on homepage
   const handleLogoClick = (e: React.MouseEvent) => {
@@ -50,8 +62,14 @@ export default function Navbar() {
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+    return () => { 
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+      }
+    };
   }, [isOpen]);
 
   return (
@@ -86,13 +104,10 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-1" role="menubar">
-              {links.map((link) => (
+              {navLinks.map((link: any, i: number) => (
                 <div
-                  key={link.name}
+                  key={i}
                   className="relative flex items-center"
-                  onMouseEnter={() => link.dropdown && setDropdownOpen(true)}
-                  onMouseLeave={() => link.dropdown && setDropdownOpen(false)}
-                  ref={link.dropdown ? dropdownRef : undefined}
                   role="none"
                 >
                   <Link
@@ -106,39 +121,7 @@ export default function Navbar() {
                     role="menuitem"
                   >
                     {link.name}
-                    {link.dropdown && <ChevronDown size={14} className={cn("transition-transform duration-200", dropdownOpen && "rotate-180")} />}
                   </Link>
-
-                  {/* Dropdown */}
-                  {link.dropdown && (
-                    <AnimatePresence>
-                      {dropdownOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 8, scale: 0.97 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 4, scale: 0.97 }}
-                            transition={{ duration: 0.18, ease: 'easeOut' }}
-                            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-slate-200/60 p-2 overflow-hidden flex flex-col gap-1"
-                            role="menu"
-                          >
-                            {link.dropdown.map((item) => (
-                              <Link
-                                key={item.name}
-                                href={item.href}
-                                onClick={() => setDropdownOpen(false)}
-                                className="flex flex-col px-4 py-3 rounded-xl hover:bg-[#0284c7]/8 group/item transition-all duration-150"
-                                role="menuitem"
-                              >
-                                <span className="text-sm font-bold text-[#0f172a] group-hover/item:text-[#0284c7] transition-colors duration-150 whitespace-normal leading-tight">
-                                  {item.name}
-                                </span>
-                                <span className="text-[11px] text-slate-500 mt-1 whitespace-normal leading-relaxed">{item.desc}</span>
-                              </Link>
-                            ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  )}
                 </div>
               ))}
 
@@ -152,7 +135,7 @@ export default function Navbar() {
                     : 'bg-white/15 backdrop-blur-sm text-white border border-white/25 hover:bg-white/25'
                 )}
               >
-                Contact Us <ArrowUpRight size={14} aria-hidden="true" />
+                {d.ctaText} <ArrowUpRight size={14} aria-hidden="true" />
               </Link>
             </div>
 
@@ -201,8 +184,8 @@ export default function Navbar() {
               <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 min-h-[80px]" />
 
               <nav className="flex flex-col px-4 py-6 gap-1 flex-1">
-                {links.map((link) => (
-                  <div key={link.name} className="flex flex-col">
+                {navLinks.map((link: any, i: number) => (
+                  <div key={i} className="flex flex-col">
                     <div className="flex items-center justify-between">
                       <Link
                         href={link.href}
@@ -211,35 +194,7 @@ export default function Navbar() {
                       >
                         {link.name}
                       </Link>
-                      {link.dropdown && (
-                        <button 
-                          onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-                          className="p-4 text-white/40 hover:text-white"
-                        >
-                          <ChevronDown size={20} className={cn("transition-transform", mobileDropdownOpen && "rotate-180")} />
-                        </button>
-                      )}
                     </div>
-
-                    {link.dropdown && mobileDropdownOpen && (
-                      <motion.div 
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        className="flex flex-col pl-4 gap-2 mb-4"
-                      >
-                        {link.dropdown.map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            onClick={() => setIsOpen(false)}
-                            className="px-4 py-2 flex flex-col group/mob"
-                          >
-                            <span className="text-sm font-semibold text-white group-hover/mob:text-[#38bdf8] transition-colors">{item.name}</span>
-                            <span className="text-[11px] text-white/40 mt-0.5">{item.desc}</span>
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
                   </div>
                 ))}
               </nav>
@@ -250,7 +205,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#0284c7] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#0369a1] transition-colors"
                 >
-                  Contact Us <ArrowUpRight size={14} />
+                  {d.ctaText} <ArrowUpRight size={14} />
                 </Link>
                 <a
                   href="tel:8883865820"
@@ -266,3 +221,4 @@ export default function Navbar() {
     </header>
   );
 }
+

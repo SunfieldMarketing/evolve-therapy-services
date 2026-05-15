@@ -55,12 +55,27 @@ const iconMap = {
 
 export default function ServicesPage(props: { data: any, query: string, variables: any }) {
   const { data } = useTina({
-    query: props.query || `query { services(relativePath: "services.json") { hero { badge titleLine1 titleItalic description heroValues { icon title subtitle } } trust { icon text } showcase { badge titleLine1 titleItalic services { title desc details icon image slug alignment } } methodology { badge titleLine1 titleItalic items { title icon desc } sidebarTitle sidebarItalic sidebarQuote sidebarIcon } advantage { badge titleLine1 titleItalic items { title icon desc } } } }`,
+    query: props.query || `query { 
+      services(relativePath: "services.json") { 
+        hero { badge titleLine1 titleItalic description heroValues { icon title subtitle } } 
+        trust { icon text } 
+        showcase { badge titleLine1 titleItalic services { title desc details icon image slug alignment } } 
+        methodology { badge titleLine1 titleItalic items { title icon desc } sidebarTitle sidebarItalic sidebarQuote sidebarIcon } 
+        advantage { badge titleLine1 titleItalic items { title icon desc } } 
+      }
+      settings(relativePath: "settings.json") {
+        siteName phone email address linkedin
+        navbar { links { name href } ctaText }
+        footer { tagline copyright links { name href } serviceLinks { name href } }
+        preFooterCta { title subtitle primaryCta }
+      }
+    }`,
     variables: props.variables || {},
     data: props.data || { services: servicesData },
   });
 
   const p = data.services;
+  const s = data.settings;
   const detailedServices = p.showcase.services;
 
   const [videoStarted, setVideoStarted] = useState(false);
@@ -82,7 +97,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar data={s.navbar} />
       
       {/* ── Editorial Hero ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
@@ -315,7 +330,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
          </div>
       </section>
 
-      <Pricing />
+      <Pricing data={p.pricing} parentField="pricing" />
 
       <section className="py-32 md:py-56 bg-white overflow-hidden relative">
          <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -350,7 +365,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
          </div>
       </section>
 
-      <Footer />
+      <Footer data={s} preFooterData={s.preFooterCta} />
     </main>
   );
 }

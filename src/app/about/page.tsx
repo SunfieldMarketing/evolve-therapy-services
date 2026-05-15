@@ -47,16 +47,23 @@ export default function AboutPage(props: { data: any; query: string; variables: 
         national { badge titleLine1 titleItalic quote legend { icon text } }
         cta { title subtitle button }
       }
+      settings(relativePath: "settings.json") {
+        siteName phone email address linkedin
+        navbar { links { name href } ctaText }
+        footer { tagline copyright links { name href } serviceLinks { name href } }
+        preFooterCta { title subtitle primaryCta }
+      }
     }`,
     variables: props.variables || {},
     data: props.data || { about: aboutData },
   });
 
   const p = data.about;
+  const s = data.settings;
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar data={s.navbar} />
 
       {/* ── 1. Hero / PageHeader ── */}
       <PageHeader
@@ -416,7 +423,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
         </div>
       </section>
 
-      <Footer />
+      <Footer data={s} preFooterData={s.preFooterCta} />
     </main>
   );
 }

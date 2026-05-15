@@ -1,5 +1,3 @@
-'use client';
-
 import { 
   BarChart3, 
   GraduationCap, 
@@ -8,7 +6,8 @@ import {
   ClipboardCheck, 
   LineChart,
   ArrowUpRight,
-  Target
+  Target,
+  Microscope, HeartPulse, ShieldCheck, TrendingUp, Users, Clock, Search, Map, Zap, Award
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,59 +15,22 @@ import { BlurFade } from '@/components/magicui/blur-fade';
 import { BorderBeamAlways } from '@/components/magicui/border-beam';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
+import { tinaField } from '@/lib/tina';
 
-const services = [
-  {
-    title: 'Optimal Therapy Outcomes',
-    desc: 'Clinical Analysis for PDPM case mix efficiency-opportunity and customized business intelligence for your market.',
-    icon: Stethoscope,
-    color: 'text-blue-600',
-    bg: 'bg-blue-50',
-    href: '/services/optimal-therapy-outcomes'
-  },
-  {
-    title: 'Case Mix & Quality Measures',
-    desc: 'Education and analysis of your site’s QMs, case mix efficiency, and training for SNF staff and administration.',
-    icon: ClipboardCheck,
-    color: 'text-indigo-600',
-    bg: 'bg-indigo-50',
-    href: '/services/medicaid-case-mix-analysis'
-  },
-  {
-    title: 'Reimbursement Optimization',
-    desc: 'Progressive programs focused on MPPR effects and optimizing therapy service reimbursement across LTC and Outpatient.',
-    icon: Target,
-    color: '#0284c7',
-    bg: 'bg-[#0284c7]/10',
-    href: '/services/reimbursement-optimization'
-  },
-  {
-    title: 'Therapy Cost Reduction',
-    desc: 'Optimizing staffing models and clinical discharge planning processes for long-term operational success.',
-    icon: LineChart,
-    color: 'text-emerald-600',
-    bg: 'bg-emerald-50',
-    href: '/services/therapy-cost-reduction'
-  },
-  {
-    title: 'In-House Transition',
-    desc: 'Easily transition your third-party contract therapy team to an efficient in-house model while retaining revenue.',
-    icon: Users2,
-    color: 'text-slate-600',
-    bg: 'bg-slate-100',
-    href: '/services/in-house-transition'
-  },
-  {
-    title: 'In-House Resource Hub',
-    desc: 'Expert support for existing in-house programs: recruitment, denial management, CEUs, and data analysis.',
-    icon: GraduationCap,
-    color: 'text-[#38bdf8]',
-    bg: 'bg-[#38bdf8]/10',
-    href: '/services/in-house-resource-hub'
-  }
-];
+const iconMap: any = {
+  BarChart3, GraduationCap, Stethoscope, Users2, ClipboardCheck, LineChart, Target, Microscope, HeartPulse, ShieldCheck, TrendingUp, Users, Clock, Search, Map, Zap, Award
+};
 
-export default function Services() {
+export default function Services({ data, parentField }: { data?: any, parentField?: string }) {
+  const d = data || {
+    title: 'Bridging the Gap Between Clinical & Operational Success',
+    theme: 'light',
+    showSection: true,
+    items: []
+  };
+
+  if (!d.showSection) return null;
+
   return (
     <section id="services" className="py-20 md:py-32 bg-white relative overflow-hidden">
       {/* Decorative Background Elements */}
@@ -82,9 +44,8 @@ export default function Services() {
                <AnimatedGradientText>Our Services</AnimatedGradientText>
             </BlurFade>
             <BlurFade delay={0.2}>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-[#0f172a] leading-[0.95] tracking-tighter">
-                Bridging the Gap Between <br />
-                <span className="text-[#0284c7] font-serif font-medium italic">Clinical & Operational Success</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-[#0f172a] leading-[0.95] tracking-tighter" data-tina-field={parentField ? tinaField(d, 'title') : undefined}>
+                {d.title}
               </h2>
             </BlurFade>
           </div>
@@ -94,26 +55,27 @@ export default function Services() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 lg:gap-8">
-          {services.map((service, i) => (
+          {(d.items || []).map((service: any, i: number) => (
             <BlurFade
               key={i}
               delay={0.1 + i * 0.1}
               className="bg-slate-50 p-6 sm:p-8 md:p-10 rounded-3xl md:rounded-[2.5rem] border border-slate-100 hover:bg-white hover:border-[#0284c7]/20 hover:scale-[1.02] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-500 group relative flex flex-col justify-between overflow-hidden"
+              data-tina-field={parentField ? tinaField(service, 'title') : undefined}
             >
-              <Link href={service.href} className="absolute inset-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] focus-visible:ring-offset-2 rounded-3xl md:rounded-[2.5rem]" aria-label={`Learn more about ${service.title}`} />
+              <Link href={`/services/${service.title.toLowerCase().replace(/ /g, '-')}`} className="absolute inset-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] focus-visible:ring-offset-2 rounded-3xl md:rounded-[2.5rem]" aria-label={`Learn more about ${service.title}`} />
               
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#0284c7]/5 rounded-full blur-2xl group-hover:bg-[#0284c7]/10 transition-colors duration-700" />
 
               <div>
-                <div className={`w-14 h-14 ${service.bg} rounded-2xl flex items-center justify-center mb-8 border border-white shadow-xl shadow-black/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 relative z-10`}>
+                <div className={`w-14 h-14 bg-[#0284c7]/10 rounded-2xl flex items-center justify-center mb-8 border border-white shadow-xl shadow-black/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 relative z-10`}>
                   {(() => {
-                    const Icon = service.icon;
-                    return <Icon size={24} strokeWidth={1.5} className={typeof service.color === 'string' && service.color.startsWith('text-') ? service.color : ''} style={!service.color.startsWith('text-') ? { color: service.color } : {}} />;
+                    const Icon = iconMap[service.icon] || Stethoscope;
+                    return <Icon size={24} strokeWidth={1.5} className="text-[#0284c7]" />;
                   })()}
                 </div>
                 
                 <h3 className="relative z-10 text-xl font-serif font-black text-[#0f172a] mb-4 leading-tight group-hover:text-[#0284c7] transition-colors duration-500">{service.title}</h3>
-                <p className="relative z-10 text-slate-500 leading-relaxed mb-10 text-sm font-medium">
+                <p className="relative z-10 text-slate-500 leading-relaxed mb-10 text-sm font-medium" data-tina-field={parentField ? tinaField(service, 'desc') : undefined}>
                   {service.desc}
                 </p>
               </div>
@@ -174,3 +136,4 @@ export default function Services() {
     </section>
   );
 }
+

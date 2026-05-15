@@ -16,9 +16,10 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Stethoscope, ClipboardCheck, GraduationCap, LineChart, ShieldAlert, Users2, Target, Activity, Heart, Sparkles, Award, Star
 };
 
-export default function ServiceDetailClient(props: { data: any, query: string, variables: any }) {
+export default function ServiceDetailClient(props: { data: any, query: string, variables: any, settingsData?: any }) {
   const { data } = useTina(props);
   const service = data.service;
+  const s = props.settingsData;
 
   if (!service) return null;
 
@@ -30,7 +31,7 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar data={s?.navbar} />
 
       <PageHeader
         title={titleParts[0]}
@@ -160,7 +161,8 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
         </div>
       </section>
 
-      <Footer />
+      <Footer data={s} preFooterData={s?.preFooterCta} />
     </main>
   );
 }
+

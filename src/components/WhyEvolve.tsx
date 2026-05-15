@@ -1,58 +1,36 @@
-'use client';
-
-import { Award, Briefcase, Zap, Heart, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
+import { 
+  Award, Briefcase, Zap, Heart, ShieldCheck, ArrowRight, Sparkles, 
+  Microscope, HeartPulse, TrendingUp, Users, Clock, BarChart3, Search, Map, GraduationCap
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
+import { tinaField } from '@/lib/tina';
 
-const features = [
-  {
-    title: 'Optimal Therapy',
-    subtitle: 'Outcomes',
-    desc: 'Clinical Analysis for PDPM case mix efficiency-opportunity and customized business intelligence for your market.',
-    icon: ShieldCheck,
-    color: '#f59e0b',
-    href: '/services/optimal-therapy-outcomes'
-  },
-  {
-    title: 'Three-Tiered',
-    subtitle: 'Pricing Approach',
-    desc: 'Our unique approach customizes to your size of business and Evolves as you do, with reduction as you grow.',
-    icon: Zap,
-    color: '#38bdf8',
-    href: '/services/therapy-cost-reduction'
-  },
-  {
-    title: '100% Revenue',
-    subtitle: 'Retention',
-    desc: 'Maximize clinical and financial goals while you retain all therapy revenue under our management model.',
-    icon: Award,
-    color: '#10b981',
-    href: '/services/in-house-transition'
-  },
-  {
-    title: 'In-House',
-    subtitle: 'Transition',
-    desc: 'Easily transition your third-party contract therapy team to an efficient in-house model with our expert guidance.',
-    icon: Briefcase,
-    color: '#8b5cf6',
-    href: '/services/in-house-transition'
-  },
-  {
-    title: 'Clinical Case Mix',
-    subtitle: 'Analysis',
-    desc: 'Expert education and analysis of your site\u2019s Quality Measures and case mix efficiency for next-level evolution.',
-    icon: Heart,
-    color: '#f43f5e',
-    href: '/services/medicaid-case-mix-analysis'
-  },
-];
+const iconMap: any = {
+  Award, Briefcase, Zap, Heart, ShieldCheck, Microscope, HeartPulse, TrendingUp, Users, Clock, BarChart3, Search, Map, GraduationCap, Sparkles
+};
 
-export default function WhyEvolve() {
+export default function WhyEvolve({ data, parentField }: { data?: any, parentField?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
+
+  const d = data || {
+    title: 'Why Choose',
+    subtitle: 'Evolve?',
+    introText: 'Scroll through to discover our clinical advantages one by one.',
+    features: [],
+    quoteStrip: {
+      text: 'Evolve was founded on the principle that therapy departments should be centers of excellence and financial strength.',
+      author: 'Lisa Bebie',
+      authorTitle: 'President & Founder',
+      authorPhoto: 'https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png'
+    }
+  };
+
+  const features = d.features || [];
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -66,14 +44,14 @@ export default function WhyEvolve() {
       if (v < 0.15) {
         setActiveIndex(-1);
       } else if (v >= 0.15 && v < 0.85) {
-        const step = 0.70 / features.length;
-        const index = Math.floor((v - 0.15) / step);
+        const step = 0.70 / (features.length || 1);
+        const index = Math.floor((v - 0.15) / (step || 1));
         setActiveIndex(Math.min(index, features.length - 1));
       } else {
         setActiveIndex(features.length);
       }
     });
-  }, [scrollYProgress]);
+  }, [scrollYProgress, features.length]);
 
   return (
     <section id="about" ref={containerRef} className="bg-[#0f172a] relative">
@@ -88,14 +66,6 @@ export default function WhyEvolve() {
           {/* ── Main Content ── */}
           <div className="flex-1 flex items-center">
             <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
-              {/*
-                Mobile layout  : flex-col
-                  — text panel  ORDER-1 (top)
-                  — circle      ORDER-2 (bottom)
-                Desktop layout : flex-row
-                  — circle      ORDER-1 (left)
-                  — text panel  ORDER-2 (right)
-              */}
               <div className="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-5 lg:gap-24">
 
                 {/* ── TEXT PANEL — top on mobile, right on desktop ── */}
@@ -117,11 +87,11 @@ export default function WhyEvolve() {
                             The Evolve Advantage
                           </div>
                           <h3 className="text-3xl sm:text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-[1.05] sm:leading-none mb-3 sm:mb-8">
-                            Why Choose <br />
-                            <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
+                            <span data-tina-field={parentField ? tinaField(d, 'title') : undefined}>{d.title}</span> <br />
+                            <span className="text-[#38bdf8] italic font-medium" data-tina-field={parentField ? tinaField(d, 'subtitle') : undefined}>{d.subtitle}</span>
                           </h3>
-                          <p className="text-sm sm:text-xl md:text-2xl text-white/30 font-light max-w-lg">
-                            Scroll through to discover our clinical advantages one by one.
+                          <p className="text-sm sm:text-xl md:text-2xl text-white/30 font-light max-w-lg" data-tina-field={parentField ? tinaField(d, 'introText') : undefined}>
+                            {d.introText}
                           </p>
                         </motion.div>
                       )}
@@ -140,14 +110,14 @@ export default function WhyEvolve() {
                             <div className="w-8 h-px bg-[#38bdf8]/30 hidden lg:block" />
                             Clinical Advantage
                           </div>
-                          <h3 className="text-2xl sm:text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-[1.1] sm:leading-none mb-2 sm:mb-6">
+                          <h3 className="text-2xl sm:text-5xl md:text-7xl font-serif font-black text-white tracking-tighter leading-[1.1] sm:leading-none mb-2 sm:mb-6" data-tina-field={parentField ? tinaField(features[activeIndex], 'title') : undefined}>
                             {features[activeIndex].title} <br />
-                            <span className="text-[#38bdf8] italic font-medium">{features[activeIndex].subtitle}</span>
+                            <span className="text-[#38bdf8] italic font-medium" data-tina-field={parentField ? tinaField(features[activeIndex], 'subtitle') : undefined}>{features[activeIndex].subtitle}</span>
                           </h3>
-                          <p className="text-xs sm:text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-3 sm:mb-8">
+                          <p className="text-xs sm:text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-3 sm:mb-8" data-tina-field={parentField ? tinaField(features[activeIndex], 'desc') : undefined}>
                             {features[activeIndex].desc}
                           </p>
-                          <Link href={features[activeIndex].href} className="group inline-flex items-center justify-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
+                          <Link href={features[activeIndex].href || '#'} className="group inline-flex items-center justify-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
                             Learn More About This Service
                             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                           </Link>
@@ -180,7 +150,6 @@ export default function WhyEvolve() {
 
                 {/* ── ANIMATED CIRCLE — bottom on mobile, left on desktop ── */}
                 <div className="flex-shrink-0 flex justify-center lg:justify-start order-2 lg:order-1">
-                  {/* 140px mobile → 180px tablet → 450px desktop */}
                   <div className="relative w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] lg:w-[450px] lg:h-[450px] flex items-center justify-center">
 
                     <AnimatePresence mode="wait">
@@ -195,18 +164,17 @@ export default function WhyEvolve() {
                         >
                           <div
                             className="w-[110px] h-[110px] sm:w-[144px] sm:h-[144px] lg:w-[350px] lg:h-[350px] rounded-full border border-white/10 flex items-center justify-center shadow-2xl overflow-hidden"
-                            style={{ background: `radial-gradient(circle at center, ${features[activeIndex].color}33, transparent 70%)` }}
+                            style={{ background: `radial-gradient(circle at center, ${features[activeIndex].color || '#38bdf8'}33, transparent 70%)` }}
                           >
                             <motion.div initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15 }}>
-                              {/* Mobile icon */}
                               {(() => {
-                                const Icon = features[activeIndex].icon;
-                                return <Icon size={40} strokeWidth={1.5} className="text-white lg:hidden" />;
-                              })()}
-                              {/* Desktop icon */}
-                              {(() => {
-                                const Icon = features[activeIndex].icon;
-                                return <Icon size={100} strokeWidth={1} className="text-white hidden lg:block" />;
+                                const Icon = iconMap[features[activeIndex].icon] || ShieldCheck;
+                                return (
+                                  <>
+                                    <Icon size={40} strokeWidth={1.5} className="text-white lg:hidden" />
+                                    <Icon size={100} strokeWidth={1} className="text-white hidden lg:block" />
+                                  </>
+                                );
                               })()}
                             </motion.div>
                           </div>
@@ -234,20 +202,21 @@ export default function WhyEvolve() {
           <div className="py-5 sm:py-10 border-t border-white/5 bg-[#0f172a]/80 backdrop-blur-md">
             <div className="container mx-auto px-5 sm:px-6">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12">
-                <p className="text-xs sm:text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center sm:text-left">
-                  &ldquo;Evolve was founded on the principle that therapy departments should be <span className="text-[#38bdf8] font-bold not-italic">centers of excellence</span>&nbsp;and financial strength.&rdquo;
+                <p className="text-xs sm:text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center sm:text-left" data-tina-field={parentField ? tinaField(d.quoteStrip, 'text') : undefined}>
+                  &ldquo;{d.quoteStrip.text}&rdquo;
                 </p>
                 <div className="flex items-center gap-4 sm:border-l sm:border-white/10 sm:pl-6 shrink-0">
                   <Image
-                    src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777331058/557b678a-ef77-49a0-9782-0b1cd12512bc.png"
+                    src={d.quoteStrip.authorPhoto}
                     width={40}
                     height={40}
                     className="rounded-full object-cover"
-                    alt="Lisa Bebie"
+                    alt={d.quoteStrip.author}
+                    data-tina-field={parentField ? tinaField(d.quoteStrip, 'authorPhoto') : undefined}
                   />
                   <div className="text-left">
-                    <div className="font-black text-white text-[12px] tracking-tight leading-none mb-1">Lisa Bebie</div>
-                    <div className="text-[#38bdf8] text-[8px] font-black uppercase tracking-[0.3em]">President &amp; Founder</div>
+                    <div className="font-black text-white text-[12px] tracking-tight leading-none mb-1" data-tina-field={parentField ? tinaField(d.quoteStrip, 'author') : undefined}>{d.quoteStrip.author}</div>
+                    <div className="text-[#38bdf8] text-[8px] font-black uppercase tracking-[0.3em]" data-tina-field={parentField ? tinaField(d.quoteStrip, 'authorTitle') : undefined}>{d.quoteStrip.authorTitle}</div>
                   </div>
                 </div>
               </div>
@@ -259,3 +228,4 @@ export default function WhyEvolve() {
     </section>
   );
 }
+

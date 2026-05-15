@@ -21,16 +21,30 @@ const iconMap = {
 
 export default function ContactPage(props: { data: any, query: string, variables: any }) {
   const { data } = useTina({
-    query: props.query || `query { contact(relativePath: "contact.json") { hero { badge titleLine1 titleItalic description } sidebar { title titleItalic description items { icon label value sub } } form { badge title titleItalic description buttonText inquiryGoals } trustBadges { icon title desc } } }`,
+    query: props.query || `query { 
+      contact(relativePath: "contact.json") { 
+        hero { badge titleLine1 titleItalic description } 
+        sidebar { title titleItalic description items { icon label value sub } } 
+        form { badge title titleItalic description buttonText inquiryGoals } 
+        trustBadges { icon title desc } 
+      }
+      settings(relativePath: "settings.json") {
+        siteName phone email address linkedin
+        navbar { links { name href } ctaText }
+        footer { tagline copyright links { name href } serviceLinks { name href } }
+        preFooterCta { title subtitle primaryCta }
+      }
+    }`,
     variables: props.variables || {},
     data: props.data || { contact: contactData },
   });
 
   const p = data.contact;
+  const s = data.settings;
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar data={s.navbar} />
       
       <PageHeader 
         title={p.hero.titleLine1} 
@@ -170,7 +184,7 @@ export default function ContactPage(props: { data: any, query: string, variables
         </div>
       </section>
 
-      <Footer />
+      <Footer data={s} preFooterData={s.preFooterCta} />
     </main>
   );
 }

@@ -4,37 +4,25 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
+import { tinaField } from '@/lib/tina';
 
-const faqs = [
-  {
-    q: 'How does the pricing model work?',
-    a: 'We use a unique three-tiered approach that customizes to your business size. As your volume grows internally, our management pricing structure reduces, allowing you to scale profitably while rewarding your growth.',
-  },
-  {
-    q: 'Do I retain 100% of my therapy revenue?',
-    a: 'Yes. Unlike traditional contract therapy companies that take a portion of your reimbursement, our management model allows the operator to retain 100% of all therapy revenue. We are paid for our management expertise, not a cut of your earnings.',
-  },
-  {
-    q: 'Can you help transition a third-party contract team to in-house?',
-    a: 'Absolutely. We specialize in providing all aspects of transitioning contract therapy teams to an in-house model for LTC providers — handling everything from recruitment and employee engagement to regulatory compliance and operational setup.',
-  },
-  {
-    q: 'What if my program is already in-house?',
-    a: 'Evolve acts as your expert elite resource. We provide specialized help with recruitment, denial management, clinical education, and real-time data analysis so you can focus on broader facility goals while we optimize the therapy department.',
-  },
-  {
-    q: 'What clinical support do you provide?',
-    a: 'We provide comprehensive clinical analysis for PDPM case mix efficiency, education on Quality Measures, customized business intelligence, and discharge planning optimization to ensure peak facility performance.',
-  },
-];
-
-export default function FAQ() {
+export default function FAQ({ data, parentField }: { data?: any, parentField?: string }) {
   const [active, setActive] = useState<number | null>(0);
+
+  const d = data || {
+    title: 'Common Questions,',
+    titleItalic: 'Straight Answers.',
+    description: 'Find answers to the most frequent inquiries about our therapy management model.',
+    list: []
+  };
+
+  const faqs = d.list || [];
 
   return (
     <section className="py-20 md:py-32 bg-slate-50 border-t border-slate-100 relative" id="faq">
       <div className="container mx-auto px-5 sm:px-6 md:px-12 max-w-4xl">
-        {/* Centered layout */}
+        
+        {/* Section Header */}
         <div className="text-center mb-16 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -45,17 +33,17 @@ export default function FAQ() {
               FAQ
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter leading-[0.95] mb-6">
-              Common <span className="text-[#0284c7] italic font-medium">Inquiries</span>
+              <span data-tina-field={parentField ? tinaField(d, 'title') : undefined}>{d.title}</span> <span className="text-[#0284c7] italic font-medium" data-tina-field={parentField ? tinaField(d, 'titleItalic') : undefined}>{d.titleItalic}</span>
             </h2>
-            <p className="text-slate-500 text-lg leading-relaxed font-light max-w-2xl mx-auto">
-              Everything you need to know about the Evolve therapy management model.
+            <p className="text-slate-500 text-lg leading-relaxed font-light max-w-2xl mx-auto" data-tina-field={parentField ? tinaField(d, 'description') : undefined}>
+              {d.description}
             </p>
           </motion.div>
         </div>
 
-        {/* Centered accordion list */}
+        {/* Accordion list */}
         <div className="space-y-4">
-          {faqs.map((faq, i) => {
+          {faqs.map((faq: any, i: number) => {
             const isOpen = active === i;
             return (
               <motion.div
@@ -64,6 +52,7 @@ export default function FAQ() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
+                data-tina-field={parentField ? tinaField(faq, 'q') : undefined}
               >
                 <div
                   className={`rounded-3xl border transition-all duration-300 overflow-hidden ${
@@ -105,7 +94,7 @@ export default function FAQ() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                       >
-                        <div className="px-8 pb-8 text-slate-600 text-[17px] leading-relaxed font-light border-t border-slate-50 pt-6">
+                        <div className="px-8 pb-8 text-slate-600 text-[17px] leading-relaxed font-light border-t border-slate-50 pt-6" data-tina-field={parentField ? tinaField(faq, 'a') : undefined}>
                           {faq.a}
                         </div>
                       </motion.div>

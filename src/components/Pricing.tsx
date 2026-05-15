@@ -28,7 +28,42 @@ const tiers = [
   },
 ];
 
-export default function Pricing() {
+export default function Pricing({ data, parentField }: { data?: any, parentField?: string }) {
+  const d = data || {
+    badge: 'Dynamic Pricing Model',
+    title: 'A Model That',
+    titleItalic: 'Evolves With You.',
+    description: 'Our unique three-tiered approach customizes to your size of business.',
+    tiers: [
+      {
+        level: 'Tier 01',
+        title: 'Foundational',
+        desc: 'Perfect for single-facility operators starting their in-house journey.',
+        features: ['PDPM Clinical Analysis', 'Medicaid Case Mix Audit', 'Basic Denial Management'],
+      },
+      {
+        level: 'Tier 02',
+        title: 'Growth',
+        desc: 'Optimized for mid-size operators with multiple locations.',
+        features: ['Advanced Data Analysis', 'Staff Recruitment Support', 'Customized CEU Education'],
+        featured: true,
+      },
+      {
+        level: 'Tier 03',
+        title: 'Enterprise',
+        desc: 'Full-scale management for large regional LTC organizations.',
+        features: ['Strategic Growth Planning', 'Full Operational Oversight', 'Lowest Management Fee'],
+      },
+    ],
+    bottomBanner: {
+      title: 'Scaling Benefits',
+      desc: 'Management fees reduce automatically as your internal staff grows.',
+      cta: 'Growth Incentivized Model'
+    }
+  };
+
+  const tiers = d.tiers || [];
+
   return (
     <section className="py-24 md:py-40 bg-white relative overflow-hidden">
       {/* Background decoration */}
@@ -39,27 +74,26 @@ export default function Pricing() {
       <div className="container mx-auto px-5 sm:px-8 md:px-12 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-20 md:mb-32">
           <BlurFade delay={0.1}>
-             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/5 border border-[#0284c7]/10 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284c7]/5 border border-[#0284c7]/10 text-[#0284c7] text-[10px] font-black uppercase tracking-[0.3em] mb-8" data-tina-field={parentField ? tinaField(d, 'badge') : undefined}>
                <Zap size={14} />
-               Dynamic Pricing Model
+               {d.badge}
              </div>
           </BlurFade>
           <BlurFade delay={0.2}>
             <h2 className="text-5xl md:text-7xl font-serif font-black text-[#0f172a] leading-[0.9] tracking-tighter mb-8">
-              A Model That <br />
-              <span className="text-[#0284c7] italic font-medium">Evolves With You.</span>
+              <span data-tina-field={parentField ? tinaField(d, 'title') : undefined}>{d.title}</span> <br />
+              <span className="text-[#0284c7] italic font-medium" data-tina-field={parentField ? tinaField(d, 'titleItalic') : undefined}>{d.titleItalic}</span>
             </h2>
           </BlurFade>
           <BlurFade delay={0.3}>
-            <p className="text-xl text-slate-500 font-light leading-relaxed">
-              Our unique three-tiered approach customizes to your size of business. 
-              <span className="text-[#0f172a] font-bold"> Our pricing allows for management fee reduction as your business grows.</span>
+            <p className="text-xl text-slate-500 font-light leading-relaxed" data-tina-field={parentField ? tinaField(d, 'description') : undefined}>
+              {d.description}
             </p>
           </BlurFade>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {tiers.map((tier, i) => (
+          {tiers.map((tier: any, i: number) => (
             <BlurFade key={i} delay={0.4 + i * 0.1}>
               <div className={`h-full p-10 rounded-[3rem] border transition-all duration-500 flex flex-col justify-between group ${
                 tier.featured 
@@ -67,21 +101,21 @@ export default function Pricing() {
                 : 'bg-slate-50 border-slate-100 text-[#0f172a] hover:bg-white hover:border-[#0284c7]/20'
               }`}>
                 <div>
-                  <div className={`text-[10px] font-black uppercase tracking-[0.4em] mb-6 ${tier.featured ? 'text-[#38bdf8]' : 'text-[#0284c7]'}`}>
+                  <div className={`text-[10px] font-black uppercase tracking-[0.4em] mb-6 ${tier.featured ? 'text-[#38bdf8]' : 'text-[#0284c7]'}`} data-tina-field={parentField ? tinaField(tier, 'level') : undefined}>
                     {tier.level}
                   </div>
-                  <h3 className="text-3xl font-serif font-black mb-4 tracking-tighter">{tier.title}</h3>
-                  <p className={`text-sm mb-10 leading-relaxed ${tier.featured ? 'text-white/60' : 'text-slate-500'}`}>
+                  <h3 className="text-3xl font-serif font-black mb-4 tracking-tighter" data-tina-field={parentField ? tinaField(tier, 'title') : undefined}>{tier.title}</h3>
+                  <p className={`text-sm mb-10 leading-relaxed ${tier.featured ? 'text-white/60' : 'text-slate-500'}`} data-tina-field={parentField ? tinaField(tier, 'desc') : undefined}>
                     {tier.desc}
                   </p>
                   
                   <div className="space-y-4 mb-12">
-                    {tier.features.map((feature, idx) => (
+                    {(tier.features || []).map((feature: string, idx: number) => (
                       <div key={idx} className="flex items-center gap-3">
                         <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${tier.featured ? 'bg-[#38bdf8]/20 text-[#38bdf8]' : 'bg-[#0284c7]/10 text-[#0284c7]'}`}>
                           <Check size={12} strokeWidth={3} />
                         </div>
-                        <span className={`text-sm font-semibold ${tier.featured ? 'text-white/80' : 'text-slate-700'}`}>{feature}</span>
+                        <span className={`text-sm font-semibold ${tier.featured ? 'text-white/80' : 'text-slate-700'}`} data-tina-field={parentField ? tinaField(tier, `features.${idx}`) : undefined}>{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -114,13 +148,13 @@ export default function Pricing() {
                       <TrendingDown size={40} />
                    </div>
                    <div className="text-center md:text-left">
-                      <h4 className="text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tighter mb-2">Scaling Benefits</h4>
-                      <p className="text-slate-500 text-lg font-medium">Management fees reduce automatically as your internal staff grows.</p>
+                      <h4 className="text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tighter mb-2" data-tina-field={parentField ? tinaField(d.bottomBanner, 'title') : undefined}>{d.bottomBanner.title}</h4>
+                      <p className="text-slate-500 text-lg font-medium" data-tina-field={parentField ? tinaField(d.bottomBanner, 'desc') : undefined}>{d.bottomBanner.desc}</p>
                    </div>
                 </div>
                 <div className="flex items-center gap-4 text-[#0284c7] font-black text-xs uppercase tracking-[0.3em] group-hover/scaling:gap-8 transition-all duration-500 bg-white px-8 py-4 rounded-2xl border border-slate-100 group-hover/scaling:border-[#0284c7]/30">
                    <Users size={18} />
-                   Growth Incentivized Model
+                   <span data-tina-field={parentField ? tinaField(d.bottomBanner, 'cta') : undefined}>{d.bottomBanner.cta}</span>
                    <ArrowRight size={18} className="group-hover/scaling:translate-x-2 transition-transform" />
                 </div>
              </div>
@@ -130,3 +164,4 @@ export default function Pricing() {
     </section>
   );
 }
+

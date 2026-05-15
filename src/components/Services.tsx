@@ -16,6 +16,7 @@ import { BorderBeamAlways } from '@/components/magicui/border-beam';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { tinaField } from '@/lib/tina';
+import { cn } from '@/lib/utils';
 
 const iconMap: any = {
   BarChart3, GraduationCap, Stethoscope, Users2, ClipboardCheck, LineChart, Target, Microscope, HeartPulse, ShieldCheck, TrendingUp, Users, Clock, Search, Map, Zap, Award

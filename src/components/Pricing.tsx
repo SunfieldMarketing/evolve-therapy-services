@@ -124,10 +124,11 @@ export default function Pricing({ data, parentField }: { data?: any, parentField
 
                 <div className={`pt-8 border-t ${tier.featured ? 'border-white/10' : 'border-slate-200'}`}>
                    {tier.featured ? (
-                     <Link href="/contact">
-                       <ShimmerButton background="#38bdf8" shimmerColor="rgba(255,255,255,0.5)" borderRadius="1rem" className="w-full py-4">
-                          <span className="text-white font-black text-[10px] uppercase tracking-[0.2em]">Contact for Proposal</span>
-                       </ShimmerButton>
+                     <Link 
+                       href="/contact"
+                       className="w-full inline-flex items-center justify-center py-4 rounded-2xl bg-[#38bdf8] text-white font-black text-[10px] uppercase tracking-[0.2em] shadow-xl hover:bg-[#0284c7] transition-all hover:-translate-y-1 active:translate-y-0"
+                     >
+                       Contact for Proposal
                      </Link>
                    ) : (
                      <Link href="/contact" className="w-full inline-flex items-center justify-center py-4 rounded-2xl border border-[#0f172a]/10 font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#0f172a] hover:text-white transition-all">

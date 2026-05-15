@@ -55,7 +55,7 @@ export default function Home(props: { data: any; query: string; variables: any }
         bottomCta { quote checklist primaryCta primaryCtaLink phone }
         coverage { title legend { text icon } }
         faq { title items { question answer } }
-        partner { title desc button buttonLink }
+        partner { title desc button link }
       }
       contact(relativePath: "contact.json") {
         hero { badge titleLine1 titleItalic description }
@@ -237,11 +237,12 @@ export default function Home(props: { data: any; query: string; variables: any }
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <Link href={p.bottomCta.primaryCtaLink || "/contact"} className="relative z-[101] pointer-events-auto">
-                  <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.6)" borderRadius="9999px" className="group px-10 py-5">
-                    <span className="text-xs font-bold uppercase tracking-widest text-white" data-tina-field={tinaField(p.bottomCta, 'primaryCta')}>{p.bottomCta.primaryCta}</span>
-                    <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                  </ShimmerButton>
+                <Link 
+                  href={p.bottomCta.primaryCtaLink || "/contact"} 
+                  className="relative z-[101] flex items-center justify-center gap-2 px-10 py-5 bg-[#0284c7] text-white rounded-full font-black text-[12px] uppercase tracking-widest shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto"
+                >
+                  <span data-tina-field={tinaField(p.bottomCta, 'primaryCta')}>{p.bottomCta.primaryCta}</span>
+                  <ArrowRight size={16} className="transition-transform" />
                 </Link>
                 <a
                   href={`tel:${p.bottomCta.phone.replace(/\D/g, '')}`}

@@ -110,11 +110,12 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
                 </p>
                 <div>
                  <div className="relative z-50 pointer-events-auto">
-                   <Link href={d.featuredCard.buttonLink || "/contact"} className="focus-visible:outline-none pointer-events-auto">
-                     <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn inline-flex text-white hover:bg-[#0284c7] transition-colors duration-500">
-                       <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white" data-tina-field={parentField ? tinaField(d.featuredCard, 'buttonText') : undefined}>{d.featuredCard.buttonText}</span>
-                       <ArrowUpRight className="ml-2 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-                     </ShimmerButton>
+                   <Link 
+                     href={d.featuredCard.buttonLink || "/contact"} 
+                     className="focus-visible:outline-none pointer-events-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0f172a] text-white rounded-2xl hover:bg-[#0284c7] transition-all duration-500 shadow-xl group/btn"
+                   >
+                     <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white" data-tina-field={parentField ? tinaField(d.featuredCard, 'buttonText') : undefined}>{d.featuredCard.buttonText}</span>
+                     <ArrowUpRight className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                    </Link>
                  </div>
                 </div>

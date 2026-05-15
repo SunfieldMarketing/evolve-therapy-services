@@ -310,7 +310,7 @@ export default defineConfig({
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
               { type: "string", name: "button", label: "Button Text" },
-              { type: "string", name: "buttonLink", label: "Button Link" },
+              { type: "string", name: "link", label: "Button Link" },
             ],
           },
           {

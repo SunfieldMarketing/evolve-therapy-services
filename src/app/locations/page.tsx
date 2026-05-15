@@ -47,7 +47,7 @@ export default function LocationsPage(props: { data: any, query: string, variabl
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar data={s.navbar} />
+      <Navbar data={s?.navbar} />
       <PageHeader 
         title={p.hero.title} 
         italicWord={p.hero.titleItalic} 
@@ -187,7 +187,7 @@ export default function LocationsPage(props: { data: any, query: string, variabl
         </div>
       </section>
 
-      <Footer data={s} preFooterData={s.preFooterCta} />
+      <Footer data={s} preFooterData={s?.preFooterCta} />
     </main>
   );
 }

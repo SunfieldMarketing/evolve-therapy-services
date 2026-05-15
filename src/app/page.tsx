@@ -69,7 +69,7 @@ export default function Home(props: { data: any; query: string; variables: any }
 
   return (
     <main className="min-h-screen bg-white selection:bg-[#0284c7]/30 selection:text-white">
-      <Navbar data={s.navbar} />
+      <Navbar data={s?.navbar} />
       <Hero data={p.hero} parentField="hero" />
 
       {/* ── Clinical Excellence ── */}
@@ -190,9 +190,9 @@ export default function Home(props: { data: any; query: string; variables: any }
 
       <WhyEvolve data={p.whyEvolve} parentField="whyEvolve" />
       <Services data={p.ourServices} parentField="ourServices" />
-      <Testimonials data={s.testimonials} parentField="testimonials" />
-      <USAMap activeStates={s.activeStates} />
-      <FAQ data={s.faq} parentField="faq" />
+      <Testimonials data={s?.testimonials} parentField="testimonials" />
+      <USAMap activeStates={s?.activeStates} />
+      <FAQ data={s?.faq} parentField="faq" />
 
       {/* ── Philosophy / CTA ── */}
       <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden">

@@ -97,7 +97,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar data={s.navbar} />
+      <Navbar data={s?.navbar} />
       
       {/* ── Editorial Hero ── */}
       <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
@@ -365,7 +365,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
          </div>
       </section>
 
-      <Footer data={s} preFooterData={s.preFooterCta} />
+      <Footer data={s} preFooterData={s?.preFooterCta} />
     </main>
   );
 }

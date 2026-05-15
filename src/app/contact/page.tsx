@@ -44,7 +44,7 @@ export default function ContactPage(props: { data: any, query: string, variables
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar data={s.navbar} />
+      <Navbar data={s?.navbar} />
       
       <PageHeader 
         title={p.hero.titleLine1} 
@@ -184,7 +184,7 @@ export default function ContactPage(props: { data: any, query: string, variables
         </div>
       </section>
 
-      <Footer data={s} preFooterData={s.preFooterCta} />
+      <Footer data={s} preFooterData={s?.preFooterCta} />
     </main>
   );
 }

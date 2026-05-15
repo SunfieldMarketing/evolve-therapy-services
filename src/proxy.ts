@@ -1,24 +1,36 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+/**
+ * Proxy gate (Middleware) for the TinaCMS admin area.
+ * 
+ * Ensures that any request to /admin or the underlying /tina-build assets
+ * is only permitted if the 'portal_auth' cookie is present and valid.
+ */
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Protect /admin routes
-  if (pathname.startsWith('/admin')) {
-    // Check for our custom auth cookie or just redirect to portal if not authenticated
-    // Note: sessionStorage is not accessible in middleware.
-    // We'll check for a cookie instead.
-    const authCookie = request.cookies.get('evolve_admin_auth');
-    
-    if (authCookie?.value !== 'true') {
-      return NextResponse.redirect(new URL('/portal', request.url));
+  // We protect /admin and /tina-build (the static CMS assets)
+  const isProtectedPath = pathname.startsWith('/admin') || pathname.startsWith('/tina-build');
+
+  if (isProtectedPath) {
+    const portalAuth = request.cookies.get('portal_auth');
+
+    // If not authenticated, redirect to the portal
+    if (portalAuth?.value !== 'true') {
+      const url = request.nextUrl.clone();
+      url.pathname = '/portal';
+      return NextResponse.redirect(url);
     }
   }
 
   return NextResponse.next();
 }
 
+// Optimization: only run proxy on relevant paths
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: [
+    '/admin/:path*',
+    '/tina-build/:path*',
+  ],
 };

@@ -19,7 +19,7 @@ export default function FAQ({ data, parentField }: { data?: any, parentField?: s
   const faqs = (d.list || d.items || []).map((item: any) => ({
     q: item.q || item.question || '',
     a: item.a || item.answer || ''
-  })).filter(item => item.q && item.a);
+  })).filter((item: any) => item.q && item.a);
 
   return (
     <section className="py-20 md:py-32 bg-slate-50 border-t border-slate-100 relative" id="faq">

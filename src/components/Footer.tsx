@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowRight, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { tinaField } from '@/lib/tina';
 
 const navLinks = [
   { label: 'Home', href: '/' },

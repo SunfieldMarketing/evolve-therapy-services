@@ -5,6 +5,7 @@ import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { tinaField } from '@/lib/tina';
 
 const tiers = [
   {

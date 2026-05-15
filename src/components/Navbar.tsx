@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
+import { tinaField } from '@/lib/tina';
 
 const links = [
   { name: 'Home', href: '/' },
@@ -119,6 +120,7 @@ export default function Navbar({ data }: { data?: any }) {
                         : 'text-white/80 hover:text-white hover:bg-white/10'
                     )}
                     role="menuitem"
+                    data-tina-field={tinaField(link, 'name')}
                   >
                     {link.name}
                   </Link>
@@ -134,6 +136,7 @@ export default function Navbar({ data }: { data?: any }) {
                     ? 'bg-[#0284c7] text-white hover:bg-[#0369a1] shadow-[0_2px_12px_rgba(2,132,199,0.3)]'
                     : 'bg-white/15 backdrop-blur-sm text-white border border-white/25 hover:bg-white/25'
                 )}
+                data-tina-field={tinaField(d, 'ctaText')}
               >
                 {d.ctaText} <ArrowUpRight size={14} aria-hidden="true" />
               </Link>

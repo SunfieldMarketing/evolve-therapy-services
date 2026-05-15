@@ -236,7 +236,7 @@ export default function Home(props: { data: any; query: string; variables: any }
         </div>
       </section>
 
-      <Contact />
+      <Contact data={p.contact} parentField="contact" />
       <Footer data={s} preFooterData={data.home?.preFooterCta} />
       <MobileCTA />
     </main>

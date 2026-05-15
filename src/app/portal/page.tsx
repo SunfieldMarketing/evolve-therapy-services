@@ -23,7 +23,7 @@ export default function PortalPage() {
 
       if (res.ok) {
         // Correct — redirect to TinaCMS admin
-        window.location.href = '/admin/index.html';
+        window.location.href = '/admin';
       } else {
         // Wrong password
         setError(true);

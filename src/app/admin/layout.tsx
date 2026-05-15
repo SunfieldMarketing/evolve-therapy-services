@@ -1,24 +1,11 @@
-'use client';
+import { ReactNode } from 'react';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const [authorized, setAuthorized] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    const auth = sessionStorage.getItem('evolve_admin_auth');
-    if (auth !== 'true') {
-      router.push('/portal');
-    } else {
-      setAuthorized(true);
-    }
-  }, [router]);
-
-  if (!authorized) {
-    return null; // Or a loading spinner
-  }
-
+/**
+ * AdminLayout
+ * 
+ * Note: The authentication gate is now handled server-side 
+ * in the [[...tina]]/page.tsx file for better security and performance.
+ */
+export default function AdminLayout({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }

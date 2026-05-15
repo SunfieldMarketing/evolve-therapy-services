@@ -9,7 +9,7 @@ export default defineConfig({
   token: process.env.TINA_TOKEN || "",
 
   build: {
-    outputFolder: "admin",
+    outputFolder: "tina-build",
     publicFolder: "public",
   },
   media: {

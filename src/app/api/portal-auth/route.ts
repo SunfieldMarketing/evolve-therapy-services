@@ -16,7 +16,18 @@ export async function POST(req: NextRequest) {
   }
 
   if (password.trim() === correctPassword) {
-    return NextResponse.json({ ok: true });
+    const response = NextResponse.json({ ok: true });
+    
+    // Set a secure cookie for the portal authentication
+    response.cookies.set('portal_auth', 'true', {
+      httpOnly: true, // Secure: only accessible on server
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24, // 24 hours
+      path: '/',
+    });
+    
+    return response;
   }
 
   // Artificial delay to slow brute-force attempts

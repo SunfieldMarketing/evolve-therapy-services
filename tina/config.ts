@@ -249,7 +249,6 @@ export default defineConfig({
             type: "object", name: "ourServices", label: "Our Services Section",
             fields: [
               { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
               { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "boolean", name: "showSection", label: "Show Section" },
               { type: "object", name: "items", label: "Service Items", list: true,
@@ -293,13 +292,13 @@ export default defineConfig({
             type: "object", name: "faq", label: "FAQ Section",
             fields: [
               { type: "string", name: "title", label: "Title" },
-              { type: "object", name: "list", label: "Questions", list: true,
+              { type: "object", name: "items", label: "Questions", list: true,
                 ui: {
-                  itemProps: (item) => ({ label: item.q }),
+                  itemProps: (item) => ({ label: item.question }),
                 },
                 fields: [
-                  { type: "string", name: "q", label: "Question" },
-                  { type: "string", name: "a", label: "Answer", ui: { component: "textarea" } },
+                  { type: "string", name: "question", label: "Question" },
+                  { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
                 ],
               },
             ],

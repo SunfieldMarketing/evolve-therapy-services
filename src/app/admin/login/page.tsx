@@ -1,18 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Lock, ArrowRight, ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
+import { Lock, ArrowRight, ShieldCheck, Zap, Star, Loader2 } from 'lucide-react';
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [shake, setShake] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError('');
+    setLoading(true);
 
     try {
       const res = await fetch('/api/admin/login', {
@@ -22,79 +22,155 @@ export default function AdminLogin() {
       });
 
       if (res.ok) {
+        // Correct — redirect to TinaCMS admin
         window.location.href = '/admin';
       } else {
-        setError('Invalid admin password. Access denied.');
+        // Wrong password
+        setError(true);
+        setShake(true);
+        setPassword('');
+        setTimeout(() => {
+          setError(false);
+          setShake(false);
+        }, 600);
       }
-    } catch (err) {
-      setError('An error occurred. Please try again.');
+    } catch {
+      setError(true);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#0f172a] flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0f172a] flex items-center justify-center p-6 relative overflow-hidden font-sans">
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#0284c7]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div
+        className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #0284c7 0%, transparent 70%)' }}
+      />
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-10 md:p-12 relative z-10 shadow-2xl"
-      >
-        <div className="flex justify-center mb-8">
-          <div className="w-16 h-16 bg-[#0284c7] rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20">
-            <Lock className="text-white" size={28} />
+      {/* Grid lines */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage:
+            'linear-gradient(#0284c7 1px, transparent 1px), linear-gradient(90deg, #0284c7 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-md">
+        <div
+          className={`bg-white/5 backdrop-blur-2xl p-10 md:p-14 rounded-[3rem] border shadow-2xl transition-all duration-300 ${
+            shake ? 'border-red-500/60' : 'border-white/10'
+          }`}
+          style={shake ? { animation: 'shake 0.5s ease-in-out' } : {}}
+        >
+          {/* Logo */}
+          <div className="flex flex-col items-center text-center mb-10">
+            <Link href="/" className="mb-12 group transition-opacity hover:opacity-70">
+              <img
+                src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png"
+                alt="Evolve Therapy Services"
+                className="h-8 w-auto brightness-0 invert"
+              />
+            </Link>
+
+            <div className="w-20 h-20 bg-[#0284c7] rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-[#0284c7]/20">
+              <Lock className="text-white" size={32} />
+            </div>
+
+            <h1 className="text-4xl font-serif font-black text-white mb-4 tracking-tighter">
+              Admin <span className="text-[#0284c7] italic">Portal</span>
+            </h1>
+            <p className="text-white/40 text-[13px] font-light leading-relaxed px-4">
+              Enter your security credentials to access the Evolve Clinical visual editing suite.
+            </p>
           </div>
-        </div>
 
-        <div className="text-center mb-10">
-          <h1 className="text-2xl md:text-3xl font-serif font-black text-white mb-3">Admin Access</h1>
-          <p className="text-white/40 text-sm font-medium uppercase tracking-[0.2em]">Evolve Therapy Services</p>
-        </div>
+          {/* Form */}
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className="relative">
+              <input
+                id="portal-password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••••"
+                disabled={loading}
+                className={`w-full bg-white/5 border ${
+                  error ? 'border-red-500' : 'border-white/10 focus:border-[#0284c7]'
+                } text-white px-8 py-5 rounded-2xl outline-none transition-all duration-300 placeholder:text-white/20 font-black tracking-[0.5em] text-center text-xl disabled:opacity-50`}
+                autoFocus
+                autoComplete="current-password"
+              />
+              {error && (
+                <p className="text-red-400 text-[10px] font-black uppercase tracking-[0.2em] mt-3 text-center">
+                  Access Denied — Incorrect Credentials
+                </p>
+              )}
+            </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <label className="text-[10px] font-black text-[#38bdf8] uppercase tracking-[0.3em] ml-1">
-              Secret Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••••••"
-              className="w-full bg-white/5 border border-white/10 text-white rounded-2xl px-6 py-4 focus:outline-none focus:border-[#0284c7] focus:bg-white/10 transition-all text-center tracking-[0.5em] placeholder:tracking-normal placeholder:text-white/20"
-              required
-              autoFocus
-            />
-          </div>
-
-          {error && (
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-rose-400 text-xs font-bold text-center"
+            <button
+              type="submit"
+              disabled={loading || !password}
+              className="group w-full py-6 flex items-center justify-center gap-3 bg-[#0284c7] text-white rounded-2xl font-black uppercase tracking-[0.4em] text-[12px] hover:bg-[#0369a1] transition-all shadow-xl shadow-[#0284c7]/20 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {error}
-            </motion.p>
-          )}
+              {loading ? (
+                <>
+                  <Loader2 size={18} className="animate-spin" />
+                  <span>Verifying&hellip;</span>
+                </>
+              ) : (
+                <>
+                  <span>Initialize Suite</span>
+                  <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                </>
+              )}
+            </button>
+          </form>
 
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-[#0284c7] hover:bg-[#0369a1] text-white py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-xs transition-all flex items-center justify-center gap-3 group disabled:opacity-50"
-          >
-            {isLoading ? 'Verifying...' : 'Unlock Editor'}
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </button>
-        </form>
-
-        <div className="mt-12 flex items-center justify-center gap-2 text-white/20">
-          <ShieldCheck size={14} />
-          <span className="text-[10px] font-black uppercase tracking-widest">Secure Admin Portal</span>
+          {/* Trust badges */}
+          <div className="grid grid-cols-3 gap-4 mt-14 pt-10 border-t border-white/5">
+            <div className="flex flex-col items-center gap-2 opacity-30">
+              <ShieldCheck className="text-[#0284c7]" size={16} />
+              <span className="text-[8px] font-black text-white uppercase tracking-widest">Encrypted</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 opacity-30">
+              <Zap className="text-[#0284c7]" size={16} />
+              <span className="text-[8px] font-black text-white uppercase tracking-widest">Real-time</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 opacity-30">
+              <Star className="text-[#0284c7]" size={16} />
+              <span className="text-[8px] font-black text-white uppercase tracking-widest">Verified</span>
+            </div>
+          </div>
         </div>
-      </motion.div>
+
+        <div className="flex flex-col items-center gap-6 mt-10">
+          <Link
+            href="/"
+            className="text-white/40 hover:text-[#0284c7] text-[10px] font-black uppercase tracking-[0.4em] transition-colors flex items-center gap-2 group"
+          >
+            <span className="group-hover:-translate-x-1 transition-transform">←</span> Back to Public Site
+          </Link>
+          <p className="text-white/10 text-[9px] font-bold uppercase tracking-[0.4em]">
+            Evolve Therapy Services v3.1.0
+          </p>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          15%       { transform: translateX(-8px); }
+          30%       { transform: translateX(8px); }
+          45%       { transform: translateX(-6px); }
+          60%       { transform: translateX(6px); }
+          75%       { transform: translateX(-4px); }
+          90%       { transform: translateX(4px); }
+        }
+      `}</style>
     </div>
   );
 }

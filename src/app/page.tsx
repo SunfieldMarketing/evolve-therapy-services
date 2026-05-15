@@ -207,15 +207,23 @@ export default function Home(props: { data: any; query: string; variables: any }
       <FAQ data={s?.faq || p?.faq} parentField={s?.faq ? "faq" : "faq"} />
 
       {/* ── Philosophy / CTA ── */}
-      <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />
-        <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <BlurFade delay={0.2} duration={0.8}>
-              <div className="text-6xl md:text-8xl text-[#0284c7]/20 font-serif mb-0 leading-none">"</div>
-              <h3 className="text-3xl sm:text-4xl md:text-6xl font-serif text-white mb-10 md:mb-16 leading-[1] tracking-tighter -mt-4" data-tina-field={tinaField(p.bottomCta, 'quote')}>
-                {p.bottomCta.quote}
-              </h3>
+      <section className="py-24 md:py-40 bg-white relative overflow-hidden">
+          <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
+          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
+            <h2 className="text-4xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter mb-6 leading-none">
+              Start your <span className="text-[#0284c7] italic font-medium">clinical evolution</span> with Evolve Therapy Services
+            </h2>
+            <p className="text-lg md:text-xl text-slate-500 font-light leading-relaxed">
+              Ready to take control of your therapy department's future? <br className="hidden md:block" />
+              Let's discuss a customized management roadmap.
+            </p>
+          </div>
+
+          <div className="bg-[#0f172a] p-10 md:p-14 rounded-[3rem] shadow-2xl relative overflow-hidden group hover:border-[#0284c7]/30 transition-all duration-500">
+              <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />
+              <p className="text-2xl md:text-5xl font-serif font-black text-[#38bdf8] italic mb-10 leading-[1.1] relative z-10 tracking-tighter" data-tina-field={tinaField(p.bottomCta, 'quote')}>
+                "{p.bottomCta.quote}"
+              </p>
 
               <div className="grid sm:grid-cols-2 gap-4 mb-16 md:mb-24 text-left max-w-2xl mx-auto">
                 {p.bottomCta.checklist.map((item: string, i: number) => (
@@ -229,7 +237,7 @@ export default function Home(props: { data: any; query: string; variables: any }
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <Link href={p.bottomCta.primaryCtaLink || "/contact"}>
+                <Link href={p.bottomCta.primaryCtaLink || "/contact"} className="relative z-[101] pointer-events-auto">
                   <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.6)" borderRadius="9999px" className="group px-10 py-5">
                     <span className="text-xs font-bold uppercase tracking-widest text-white" data-tina-field={tinaField(p.bottomCta, 'primaryCta')}>{p.bottomCta.primaryCta}</span>
                     <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -237,13 +245,12 @@ export default function Home(props: { data: any; query: string; variables: any }
                 </Link>
                 <a
                   href={`tel:${p.bottomCta.phone.replace(/\D/g, '')}`}
-                  className="text-white hover:text-[#0284c7] transition-colors flex flex-col items-center sm:items-start"
+                  className="text-white hover:text-[#0284c7] transition-colors flex flex-col items-center sm:items-start relative z-[101] pointer-events-auto"
                 >
                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-1">Direct Line</span>
                   <span className="text-lg md:text-xl font-serif font-bold tracking-tight" data-tina-field={tinaField(p.bottomCta, 'phone')}>{p.bottomCta.phone}</span>
                 </a>
               </div>
-            </BlurFade>
           </div>
         </div>
       </section>

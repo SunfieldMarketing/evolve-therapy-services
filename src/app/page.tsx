@@ -237,13 +237,13 @@ export default function Home(props: { data: any; query: string; variables: any }
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <Link 
+                <a 
                   href={p.bottomCta.primaryCtaLink || "/contact"} 
                   className="relative z-[101] flex items-center justify-center gap-2 px-10 py-5 bg-[#0284c7] text-white rounded-full font-black text-[12px] uppercase tracking-widest shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto"
                 >
                   <span data-tina-field={tinaField(p.bottomCta, 'primaryCta')}>{p.bottomCta.primaryCta}</span>
                   <ArrowRight size={16} className="transition-transform" />
-                </Link>
+                </a>
                 <a
                   href={`tel:${p.bottomCta.phone.replace(/\D/g, '')}`}
                   className="text-white hover:text-[#0284c7] transition-colors flex flex-col items-center sm:items-start relative z-[101] pointer-events-auto"

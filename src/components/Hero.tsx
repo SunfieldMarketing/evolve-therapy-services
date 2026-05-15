@@ -146,20 +146,20 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
             transition={{ duration: 0.7, delay: 0.45 }}
             className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-10 md:mb-24 justify-center w-full relative z-[101] pointer-events-auto"
           >
-            <Link
+            <a
               href={d.primaryCtaLink || "/contact"}
               className="relative z-[101] flex items-center justify-center gap-2 px-10 py-5 bg-[#0284c7] text-white rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto w-full sm:w-auto"
             >
               <span data-tina-field={parentField ? tinaField(d, 'primaryCta') : undefined}>{d.primaryCta}</span>
               <ArrowRight size={18} className="transition-transform" />
-            </Link>
+            </a>
 
-            <Link
+            <a
               href={d.secondaryCtaLink || "/services"}
               className="group relative z-[101] flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto pointer-events-auto"
             >
               <span data-tina-field={parentField ? tinaField(d, 'secondaryCta') : undefined}>{d.secondaryCta}</span>
-            </Link>
+            </a>
           </motion.div>
 
           <motion.div

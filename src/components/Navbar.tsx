@@ -205,7 +205,7 @@ export default function Navbar({ data }: { data?: any }) {
               })}
 
               {/* CTA button */}
-              <Link
+              <a
                 href="/contact"
                 className={cn(
                   'ml-3 relative z-[101] flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all duration-200 flex-shrink-0 pointer-events-auto',
@@ -216,7 +216,7 @@ export default function Navbar({ data }: { data?: any }) {
                 data-tina-field={tinaField(d, 'ctaText')}
               >
                 {d.ctaText} <ArrowUpRight size={14} aria-hidden="true" />
-              </Link>
+              </a>
             </div>
 
             {/* Mobile Hamburger */}

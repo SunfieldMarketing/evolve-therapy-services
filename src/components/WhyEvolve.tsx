@@ -138,13 +138,13 @@ export default function WhyEvolve({ data, parentField }: { data?: any, parentFie
                             <span data-tina-field={parentField ? tinaField(d, 'endTitle') : undefined}>{d.endTitle}</span> <span className="text-[#38bdf8] italic font-medium" data-tina-field={parentField ? tinaField(d, 'endSubtitle') : undefined}>{d.endSubtitle}</span>
                           </h3>
                           <div className="relative z-[101] pointer-events-auto">
-                            <Link 
+                            <a 
                               href="/contact" 
                               className="relative z-[101] inline-flex items-center justify-center gap-2 px-10 py-4 bg-[#0284c7] text-white rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto w-fit"
                             >
                               <span>Start a Consultation</span>
                               <ArrowRight size={16} />
-                            </Link>
+                            </a>
                           </div>
                         </motion.div>
                       )}

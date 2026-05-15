@@ -158,13 +158,13 @@ export default function PageHeader({
              )}
 
              <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-6 sm:gap-8 lg:gap-24">
-                <Link 
+                <a 
                   href={ctaLink} 
                   className="inline-flex items-center justify-center gap-3 sm:gap-5 px-8 sm:px-16 py-5 sm:py-7 bg-[#0284c7] text-white rounded-xl shadow-[0_30px_60px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group shrink-0 w-full sm:w-auto pointer-events-auto"
                 >
                   <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[12px] sm:text-[14px]">{ctaText}</span>
                   <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
-                </Link>
+                </a>
 
                 {/* Values Integration */}
                 <div className="flex flex-row flex-wrap gap-6 sm:gap-12 mt-2 sm:mt-0">

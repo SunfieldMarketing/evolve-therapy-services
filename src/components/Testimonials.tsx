@@ -97,12 +97,12 @@ export default function Testimonials({ data, parentField }: { data?: any, parent
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <BlurFade className="text-center mt-8" delay={0.2}>
           <div className="relative z-50 pointer-events-auto">
-            <Link 
+            <a 
               href="/contact"
               className="inline-flex items-center justify-center px-12 py-6 bg-[#0284c7] text-white rounded-full font-black uppercase tracking-[0.25em] text-[11px] shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto"
             >
               Partner With Evolve
-            </Link>
+            </a>
           </div>
         </BlurFade>
       </div>

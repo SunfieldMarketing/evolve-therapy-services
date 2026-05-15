@@ -159,13 +159,13 @@ export default function ServicesPage(props: { data: any, query: string, variable
                </div>
                
                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-24">
-                  <Link 
+                  <a 
                     href="/contact" 
                     className="inline-flex items-center justify-center gap-3 sm:gap-5 px-8 sm:px-16 py-5 sm:py-7 bg-[#0284c7] text-white rounded-xl shadow-[0_30px_60px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group shrink-0 w-full sm:w-auto pointer-events-auto"
                   >
                     <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[12px] sm:text-[14px]">Start Your Evolution</span>
                     <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
-                  </Link>
+                  </a>
 
                   <div className="flex flex-col sm:flex-row gap-12">
                      {p.hero.heroValues?.map((val: any, idx: number) => {
@@ -265,13 +265,13 @@ export default function ServicesPage(props: { data: any, query: string, variable
                         </div>
                       ))}
                     </div>
-                    <Link 
+                    <a 
                       href={`/services/${service.slug}`} 
                       className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#0f172a] text-white rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] shadow-xl hover:bg-[#0284c7] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto"
                     >
                       <span>Full Service Specs</span>
                       <ArrowRight size={16} className="transition-transform" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </BlurFade>

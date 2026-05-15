@@ -2,14 +2,31 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Spotlight } from '@/components/aceternity/spotlight';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
+import { tinaField } from '@/lib/tina';
 
-export default function Hero() {
+export default function Hero({ data, parentField }: { data?: any, parentField?: string }) {
   const [videoStarted, setVideoStarted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const d = data || {
+    eyebrow: "LTC Therapy Management & Consulting",
+    titleLine1: "Changing How",
+    titleItalic: "Therapy Functions",
+    titleLine2: "for LTC Operators.",
+    subtext: "Our unique model lets your facility retain 100% of therapy revenue while Evolve drives clinical outcomes, compliance, and operational excellence.",
+    primaryCta: "Schedule a Free Consultation",
+    secondaryCta: "Explore Our Services",
+    stats: [
+      { value: '100%', label: 'Revenue Retained' },
+      { value: '24/7', label: 'Clinical Support' },
+      { value: '20+', label: 'Years of Expertise' },
+      { value: '15+', label: 'States Served' },
+    ]
+  };
 
   useEffect(() => {
     // When the component mounts, ensure the video starts playing and set our state
@@ -18,12 +35,9 @@ export default function Hero() {
         setVideoStarted(true);
       }).catch((e) => {
         console.error("Autoplay failed:", e);
-        // Fallback: If autoplay fails, we still want to show the video 
-        // (even if paused or if it requires user interaction later)
         setVideoStarted(true);
       });
 
-      // Crop the last 5 seconds to skip the unwanted ending
       const handleTimeUpdate = () => {
         if (videoRef.current && videoRef.current.duration) {
           if (videoRef.current.currentTime >= videoRef.current.duration - 5) {
@@ -40,7 +54,6 @@ export default function Hero() {
         }
       };
     } else {
-      // Fallback timeout
       const timer = setTimeout(() => setVideoStarted(true), 800);
       return () => clearTimeout(timer);
     }
@@ -82,18 +95,17 @@ export default function Hero() {
 
       {/* ── Content ── */}
       <div className="relative z-10 w-full px-5 sm:px-6 md:px-10 lg:px-12 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-32 flex flex-col items-center text-center">
-        {/* Stretches completely across the available viewport */}
         <div className="w-full flex flex-col items-center">
-          {/* Eyebrow — Magic UI AnimatedGradientText (dark variant) */}
+          {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            <AnimatedGradientTextDark className="justify-center">
+            <AnimatedGradientTextDark className="justify-center" data-tina-field={parentField ? tinaField(d, 'eyebrow') : undefined}>
               <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse inline-block mr-2" aria-hidden="true" />
-              LTC Therapy Management & Consulting
+              {d.eyebrow}
             </AnimatedGradientTextDark>
           </motion.div>
 
@@ -104,9 +116,9 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: 0.15 }}
             className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-8 w-full text-center"
           >
-            Changing How{' '}
-            <span className="text-[#0284c7] italic">Therapy Functions</span><br className="hidden lg:block" />
-            <span className="text-white/80 font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl align-top block sm:inline mt-2 sm:mt-0">for LTC Operators.</span>
+            <span data-tina-field={parentField ? tinaField(d, 'titleLine1') : undefined}>{d.titleLine1}</span>{' '}
+            <span className="text-[#0284c7] italic" data-tina-field={parentField ? tinaField(d, 'titleItalic') : undefined}>{d.titleItalic}</span><br className="hidden lg:block" />
+            <span className="text-white/80 font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl align-top block sm:inline mt-2 sm:mt-0" data-tina-field={parentField ? tinaField(d, 'titleLine2') : undefined}>{d.titleLine2}</span>
           </motion.h1>
 
           {/* Subtext */}
@@ -115,10 +127,16 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-lg md:text-2xl lg:text-3xl text-white/65 w-full leading-relaxed mb-10 md:mb-14 font-light text-center max-w-5xl mx-auto px-4 sm:px-0"
+            data-tina-field={parentField ? tinaField(d, 'subtext') : undefined}
           >
-            Our unique model lets your facility retain{' '}
-            <span className="text-white font-semibold">100% of therapy revenue</span>{' '}
-            while Evolve drives clinical outcomes, compliance, and operational excellence.
+            {/* Logic to highlight 100% of therapy revenue if it exists in subtext */}
+            {d.subtext.includes('100% of therapy revenue') ? (
+              <>
+                {d.subtext.split('100% of therapy revenue')[0]}
+                <span className="text-white font-black">100% of therapy revenue</span>
+                {d.subtext.split('100% of therapy revenue')[1]}
+              </>
+            ) : d.subtext}
           </motion.p>
 
           <motion.div
@@ -132,7 +150,7 @@ export default function Hero() {
               className="group relative flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(2,132,199,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto"
             >
               <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" aria-hidden="true" />
-              <span className="relative">Schedule a Free Consultation</span>
+              <span className="relative" data-tina-field={parentField ? tinaField(d, 'primaryCta') : undefined}>{d.primaryCta}</span>
               <ArrowRight size={18} className="relative group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
             </Link>
 
@@ -140,7 +158,7 @@ export default function Hero() {
               href="/services"
               className="group flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto"
             >
-              Explore Our Services
+              <span data-tina-field={parentField ? tinaField(d, 'secondaryCta') : undefined}>{d.secondaryCta}</span>
             </Link>
           </motion.div>
 
@@ -150,17 +168,12 @@ export default function Hero() {
             transition={{ delay: 0.7, duration: 0.7 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-4 w-full justify-center max-w-6xl mx-auto px-1 py-6 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-white/5 backdrop-blur-sm border border-white/10"
           >
-            {[
-              { value: '100%', label: 'Revenue Retained' },
-              { value: '24/7', label: 'Clinical Support' },
-              { value: '20+', label: 'Years of Expertise' },
-              { value: '15+', label: 'States Served' },
-            ].map((stat) => (
-              <div key={stat.label} className="group text-center">
-                <div className="text-2xl sm:text-3xl md:text-5xl font-serif font-black text-white mb-1 sm:mb-2 group-hover:text-[#38bdf8] group-hover:scale-110 transition-all duration-300">
+            {d.stats.map((stat: any, i: number) => (
+              <div key={i} className="group text-center" data-tina-field={parentField ? tinaField(d, 'stats') : undefined}>
+                <div className="text-2xl sm:text-3xl md:text-5xl font-serif font-black text-white mb-1 sm:mb-2 group-hover:text-[#38bdf8] group-hover:scale-110 transition-all duration-300" data-tina-field={parentField ? tinaField(stat, 'value') : undefined}>
                   {stat.value}
                 </div>
-                <div className="text-[9px] sm:text-[10px] md:text-xs text-white/40 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] font-sans">{stat.label}</div>
+                <div className="text-[9px] sm:text-[10px] md:text-xs text-white/40 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] font-sans" data-tina-field={parentField ? tinaField(stat, 'label') : undefined}>{stat.label}</div>
               </div>
             ))}
           </motion.div>

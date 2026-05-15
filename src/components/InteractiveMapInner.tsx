@@ -9,16 +9,6 @@ import { ArrowRight, MapPin, Phone } from 'lucide-react';
 // Public TopoJSON for US states (AlbersUSA projection)
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
-// Active service states from the coverage map image
-const ACTIVE_STATES = new Set([
-  'Minnesota', 'Wisconsin', 'Nebraska', 'Kansas', 'Oklahoma',
-  'Louisiana', 'Mississippi', 'Tennessee', 'Kentucky', 'Ohio',
-  'Indiana', 'West Virginia', 'Virginia', 'Pennsylvania', 'New York',
-  'New Jersey', 'Delaware', 'Maryland', 'Maine', 'Vermont',
-  'New Hampshire', 'Massachusetts', 'Rhode Island', 'Connecticut',
-  'Florida', 'District of Columbia',
-]);
-
 const STATE_ABBR: Record<string, string> = {
   Alabama: 'AL', Alaska: 'AK', Arizona: 'AZ', Arkansas: 'AR', California: 'CA',
   Colorado: 'CO', Connecticut: 'CT', Delaware: 'DE', Florida: 'FL', Georgia: 'GA',
@@ -41,19 +31,28 @@ interface TooltipState {
   y: number;
 }
 
-export default function InteractiveMapInner() {
+export default function InteractiveMapInner({ activeStates }: { activeStates?: string[] }) {
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
+
+  const activeSet = new Set(activeStates || [
+    'Minnesota', 'Wisconsin', 'Nebraska', 'Kansas', 'Oklahoma',
+    'Louisiana', 'Mississippi', 'Tennessee', 'Kentucky', 'Ohio',
+    'Indiana', 'West Virginia', 'Virginia', 'Pennsylvania', 'New York',
+    'New Jersey', 'Delaware', 'Maryland', 'Maine', 'Vermont',
+    'New Hampshire', 'Massachusetts', 'Rhode Island', 'Connecticut',
+    'Florida', 'District of Columbia',
+  ]);
 
   const handleMouseEnter = useCallback((geo: any, evt: React.MouseEvent) => {
     const name = geo.properties.name as string;
     setTooltip({
       name,
-      active: ACTIVE_STATES.has(name),
+      active: activeSet.has(name),
       x: evt.clientX,
       y: evt.clientY,
     });
-  }, []);
+  }, [activeSet]);
 
   const handleMouseMove = useCallback((evt: React.MouseEvent) => {
     setTooltip(prev => prev ? { ...prev, x: evt.clientX, y: evt.clientY } : null);
@@ -68,8 +67,8 @@ export default function InteractiveMapInner() {
     setSelected(prev => prev === name ? null : name);
   }, []);
 
-  const activeList = [...ACTIVE_STATES].sort();
-  const selectedActive = selected ? ACTIVE_STATES.has(selected) : false;
+  const activeList = [...activeSet].sort();
+  const selectedActive = selected ? activeSet.has(selected) : false;
 
   return (
     <section className="py-16 md:py-28 bg-slate-50 border-t border-slate-100">
@@ -89,7 +88,7 @@ export default function InteractiveMapInner() {
           </h2>
           <p className="text-base md:text-lg text-slate-500 max-w-2xl mx-auto font-light">
             Actively managing LTC facilities across{' '}
-            <strong className="text-[#0f172a]">{ACTIVE_STATES.size} states</strong>.
+            <strong className="text-[#0f172a]">{activeSet.size} states</strong>.
             Click any state to learn more.
           </p>
         </motion.div>
@@ -106,7 +105,7 @@ export default function InteractiveMapInner() {
             <div className="flex items-center gap-6 px-6 py-4 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-[#0284c7]" />
-                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">Active ({ACTIVE_STATES.size})</span>
+                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">Active ({activeSet.size})</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-slate-200" />
@@ -134,7 +133,7 @@ export default function InteractiveMapInner() {
                     {({ geographies }: { geographies: any[] }) =>
                       geographies.map((geo) => {
                         const name = geo.properties.name as string;
-                        const isActive = ACTIVE_STATES.has(name);
+                        const isActive = activeSet.has(name);
                         const isSelected = selected === name;
 
                         return (
@@ -268,7 +267,7 @@ export default function InteractiveMapInner() {
             {/* Active states compact list */}
             <div className="p-6 rounded-2xl bg-white border border-slate-200 flex-1">
               <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">
-                Active States ({ACTIVE_STATES.size})
+                Active States ({activeSet.size})
               </div>
               <div className="flex flex-wrap gap-1.5 max-h-52 overflow-y-auto">
                 {activeList.map((name) => (

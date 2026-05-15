@@ -1,4 +1,4 @@
-''use client';
+'use client';
 
 import { ReactNode } from 'react';
 
@@ -16,4 +16,3 @@ export default function TinaProviderWrapper({ children }: { children: ReactNode 
   // TinaCMS visual editing is bootstrapped by /admin/[[...route]]/page.tsx only.
   return <>{children}</>;
 }
-'

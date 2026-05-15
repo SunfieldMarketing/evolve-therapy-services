@@ -28,6 +28,7 @@ import {
 import MobileCTA from '@/components/MobileCTA';
 import { cn } from '@/lib/utils';
 import { useTina, tinaField } from '@/lib/tina';
+import DesignSystemInjector from '@/components/DesignSystemInjector';
 import aboutData from '../../../content/pages/about.json';
 
 const iconMap: Record<string, React.ComponentType<any>> = {
@@ -50,6 +51,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
       }
       settings(relativePath: "settings.json") {
         siteName phone email address linkedin
+        designSystem { primaryColor secondaryColor headingFont bodyFont customCss }
         navbar { logo links { name href } ctaText }
         footer { logo tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
@@ -65,6 +67,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
 
   return (
     <main className="min-h-screen bg-white">
+      <DesignSystemInjector data={s?.designSystem} />
       <Navbar data={s?.navbar} />
 
       {/* ── 1. Hero / PageHeader ── */}

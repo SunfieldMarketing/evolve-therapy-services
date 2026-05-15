@@ -21,6 +21,7 @@ import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BorderBeam } from '@/components/magicui/border-beam';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
+import DesignSystemInjector from '@/components/DesignSystemInjector';
 import { useTina, tinaField } from '@/lib/tina';
 import homeData from '../../content/pages/home.json';
 import settingsData from '../../content/global/settings.json';
@@ -65,6 +66,7 @@ export default function Home(props: { data: any; query: string; variables: any }
       }
       settings(relativePath: "settings.json") {
         siteName phone email address linkedin
+        designSystem { primaryColor secondaryColor headingFont bodyFont customCss }
         navbar { logo links { name href } ctaText }
         footer { logo tagline copyright links { name href } serviceLinks { name href } }
         testimonials { title titleItalic description list { name role facility content stars initials } }
@@ -82,6 +84,7 @@ export default function Home(props: { data: any; query: string; variables: any }
 
   return (
     <main className="min-h-screen bg-white selection:bg-[#0284c7]/30 selection:text-white">
+      <DesignSystemInjector data={s?.designSystem} />
       <Navbar data={s?.navbar} />
       <Hero data={p.hero} parentField="hero" />
 

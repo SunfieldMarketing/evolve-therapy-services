@@ -81,6 +81,16 @@ export default defineConfig({
             ],
           },
           {
+            type: "object", name: "designSystem", label: "🎨 Global Design System",
+            fields: [
+              { type: "string", name: "primaryColor", label: "Primary Brand Color (Hex) (e.g. #0284c7)", ui: { component: "color" } },
+              { type: "string", name: "secondaryColor", label: "Secondary Brand Color (Hex) (e.g. #38bdf8)", ui: { component: "color" } },
+              { type: "string", name: "headingFont", label: "Heading Font (e.g. Outfit, Lora, serif, system-ui)" },
+              { type: "string", name: "bodyFont", label: "Body Font (e.g. Inter, sans-serif, Roboto)" },
+              { type: "string", name: "customCss", label: "Custom CSS Overrides (Add custom bold, italic, sizing rules here)", ui: { component: "textarea" } },
+            ],
+          },
+          {
             type: "object", name: "testimonials", label: "Global Testimonials",
             fields: [
               { type: "string", name: "title", label: "Title" },

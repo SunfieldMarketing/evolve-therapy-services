@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { useTina, tinaField } from '@/lib/tina';
+import DesignSystemInjector from '@/components/DesignSystemInjector';
 import locationsData from '../../../content/pages/locations.json';
 import MobileCTA from '@/components/MobileCTA';
 
@@ -34,8 +35,9 @@ export default function LocationsPage(props: { data: any, query: string, variabl
       }
       settings(relativePath: "settings.json") {
         siteName phone email address linkedin
-        navbar { links { name href } ctaText }
-        footer { tagline copyright links { name href } serviceLinks { name href } }
+        designSystem { primaryColor secondaryColor headingFont bodyFont customCss }
+        navbar { logo links { name href } ctaText }
+        footer { logo tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
         mobileCta { text href }
         activeStates
@@ -49,7 +51,8 @@ export default function LocationsPage(props: { data: any, query: string, variabl
   const s = data.settings;
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-slate-50 selection:bg-[#0284c7]/30 selection:text-[#0f172a]">
+      <DesignSystemInjector data={s?.designSystem} />
       <Navbar data={s?.navbar} />
       <PageHeader 
         title={p.hero.title} 

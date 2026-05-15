@@ -7,6 +7,7 @@ import Pricing from '@/components/Pricing';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
+import DesignSystemInjector from '@/components/DesignSystemInjector';
 import { cn } from '@/lib/utils';
 import { 
   Stethoscope, 
@@ -71,6 +72,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
       }
       settings(relativePath: "settings.json") {
         siteName phone email address linkedin
+        designSystem { primaryColor secondaryColor headingFont bodyFont customCss }
         navbar { logo links { name href } ctaText }
         footer { logo tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
@@ -103,7 +105,8 @@ export default function ServicesPage(props: { data: any, query: string, variable
   }, []);
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white selection:bg-[#0284c7]/30 selection:text-[#0f172a]">
+      <DesignSystemInjector data={s?.designSystem} />
       <Navbar data={s?.navbar} />
       
       {/* ── Editorial Hero ── */}

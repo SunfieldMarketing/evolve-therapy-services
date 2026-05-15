@@ -118,7 +118,7 @@ export default function WhyEvolve({ data, parentField }: { data?: any, parentFie
                             {features[activeIndex].desc}
                           </p>
                           <div className="relative z-50 pointer-events-auto">
-                            <Link href={features[activeIndex].href || '#'} className="group inline-flex items-center justify-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
+                            <Link href={features[activeIndex].href || '#'} className="group inline-flex items-center justify-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all pointer-events-auto">
                               Learn More About This Service
                               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                             </Link>
@@ -138,8 +138,8 @@ export default function WhyEvolve({ data, parentField }: { data?: any, parentFie
                             Ready to <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
                           </h3>
                           <div className="relative z-50 pointer-events-auto">
-                            <Link href="/contact" className="focus-visible:outline-none w-fit">
-                              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-8 sm:px-10 py-3 sm:py-4">
+                            <Link href="/contact" className="focus-visible:outline-none w-fit pointer-events-auto">
+                              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-8 sm:px-10 py-3 sm:py-4 pointer-events-auto">
                                 <span className="text-white font-black text-[10px] uppercase tracking-[0.2em]">Start a Consultation</span>
                                 <ArrowRight size={16} className="ml-3 text-white" />
                               </ShimmerButton>

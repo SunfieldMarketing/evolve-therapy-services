@@ -24,7 +24,7 @@ export default function ContactPage(props: { data: any, query: string, variables
   const { data } = useTina({
     query: props.query || `query { 
       contact(relativePath: "contact.json") { 
-        hero { isVisible badge titleLine1 titleItalic description } 
+        hero { badge titleLine1 titleItalic description } 
         sidebar { title titleItalic description items { icon label value sub } } 
         form { badge title titleItalic description buttonText inquiryGoals } 
         trustBadges { icon title desc } 
@@ -48,25 +48,24 @@ export default function ContactPage(props: { data: any, query: string, variables
     <main className="min-h-screen bg-white">
       <Navbar data={s?.navbar} />
       
-      {p.hero.isVisible !== false && (
-        <PageHeader 
-          title={p.hero.titleLine1} 
-          italicWord={p.hero.titleItalic} 
-          subtitle={p.hero.description}
-          bgImage="https://res.cloudinary.com/dai2pg27n/image/upload/v1778105493/9888c51b-097f-46b4-907c-1280f458806b.png"
-          useVideo={false}
-          badgeText={p.hero.badge}
-          tinaFields={{
-            title: tinaField(p.hero, 'titleLine1'),
-            subtitle: tinaField(p.hero, 'description'),
-            badgeText: tinaField(p.hero, 'badge'),
-          }}
-          valueBoxes={[
-            { icon: ShieldCheck, label: 'Risk-Free Audit', sublabel: 'Initial Analysis' },
-            { icon: Globe, label: 'National Scale', sublabel: 'Local Impact' }
-          ]}
-        />
-      )}
+      <PageHeader 
+        title={p.hero.titleLine1} 
+        italicWord={p.hero.titleItalic} 
+        subtitle={p.hero.description}
+        videoKey="contact"
+        bgImage="none"
+        useVideo={false}
+        badgeText={p.hero.badge}
+        tinaFields={{
+          title: tinaField(p.hero, 'titleLine1'),
+          subtitle: tinaField(p.hero, 'description'),
+          badgeText: tinaField(p.hero, 'badge'),
+        }}
+        valueBoxes={[
+          { icon: ShieldCheck, label: 'Risk-Free Audit', sublabel: 'Initial Analysis' },
+          { icon: Globe, label: 'National Scale', sublabel: 'Local Impact' }
+        ]}
+      />
 
       <section className="py-24 md:py-32 px-6 bg-slate-50 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#0284c7]/5 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />

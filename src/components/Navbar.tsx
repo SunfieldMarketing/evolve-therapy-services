@@ -166,7 +166,7 @@ export default function Navbar({ data }: { data?: any }) {
                                 <Link
                                   key={j}
                                   href={sub.href}
-                                  className="flex flex-col px-5 py-3 hover:bg-slate-50 group/sub transition-colors"
+                                  className="flex flex-col px-5 py-3 hover:bg-slate-50 group/sub transition-colors pointer-events-auto"
                                   onClick={() => setDropdownOpen(false)}
                                 >
                                   <span className="text-sm font-bold text-slate-800 group-hover/sub:text-[#0284c7] transition-colors flex items-center justify-between">
@@ -189,7 +189,7 @@ export default function Navbar({ data }: { data?: any }) {
                       <Link
                         href={link.href}
                         className={cn(
-                          'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none',
+                          'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none pointer-events-auto',
                           scrolled
                             ? 'text-slate-600 hover:text-[#0f172a] hover:bg-slate-100'
                             : 'text-white/80 hover:text-white hover:bg-white/10'
@@ -208,7 +208,7 @@ export default function Navbar({ data }: { data?: any }) {
               <Link
                 href="/contact"
                 className={cn(
-                  'ml-3 flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all duration-200 flex-shrink-0',
+                  'ml-3 flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all duration-200 flex-shrink-0 pointer-events-auto',
                   scrolled
                     ? 'bg-[#0284c7] text-white hover:bg-[#0369a1] shadow-[0_2px_12px_rgba(2,132,199,0.3)]'
                     : 'bg-white/15 backdrop-blur-sm text-white border border-white/25 hover:bg-white/25'
@@ -319,7 +319,7 @@ export default function Navbar({ data }: { data?: any }) {
                 <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#0284c7] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#0369a1] transition-colors"
+                  className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#0284c7] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#0369a1] transition-colors pointer-events-auto"
                 >
                   {d.ctaText} <ArrowUpRight size={14} />
                 </Link>

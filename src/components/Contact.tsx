@@ -125,7 +125,7 @@ export default function Contact({ data, parentField }: { data?: any, parentField
 
                 <button 
                   type="button"
-                  className="w-full bg-primary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-secondary transition-colors shadow-md shadow-primary/20 text-[15px]"
+                  className="w-full bg-primary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-secondary transition-colors shadow-md shadow-primary/20 text-[15px] pointer-events-auto"
                 >
                   <span data-tina-field={parentField ? tinaField(d.form, 'buttonText') : undefined}>{d.form.buttonText}</span> <ArrowRight size={18} />
                 </button>

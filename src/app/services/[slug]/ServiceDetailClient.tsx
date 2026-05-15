@@ -42,10 +42,11 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
         bgImage="none"
         badgeText="Service Detail"
         data-tina-field={tinaField(service, 'title')}
-        valueBoxes={service.valueBoxes?.map((box: any) => ({
+        valueBoxes={service.valueBoxes?.map((box: any, idx: number) => ({
           icon: iconMap[box.icon] || CheckCircle2,
           label: box.label,
-          sublabel: box.sublabel
+          sublabel: box.sublabel,
+          'data-tina-field': tinaField(service, `valueBoxes.${idx}`)
         })) || [
           { icon: CheckCircle2, label: 'Evidence-Based', sublabel: 'Clinical Program' },
           { icon: BarChart4, label: 'Data-Driven', sublabel: 'Outcomes' },
@@ -95,7 +96,7 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-3 bg-white text-[#0f172a] px-10 py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#0284c7] hover:text-white transition-all relative z-10 shadow-xl shadow-black/20"
+                  className="inline-flex items-center gap-3 bg-white text-[#0f172a] px-10 py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#0284c7] hover:text-white transition-all relative z-10 shadow-xl shadow-black/20 pointer-events-auto"
                 >
                   Request Analysis <ArrowRight size={18} />
                 </Link>
@@ -156,7 +157,7 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex items-center justify-between mb-16">
             <h2 className="text-4xl font-serif font-black text-[#0f172a] tracking-tighter">Explore Other <span className="text-[#0284c7] italic">Solutions</span></h2>
-            <Link href="/services" className="text-[#0284c7] font-bold text-sm uppercase tracking-widest hover:underline flex items-center gap-2">
+            <Link href="/services" className="text-[#0284c7] font-bold text-sm uppercase tracking-widest hover:underline flex items-center gap-2 pointer-events-auto relative z-50">
               All Services <ArrowRight size={14} />
             </Link>
           </div>

@@ -11,7 +11,6 @@ import Link from 'next/link';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { useTina, tinaField } from '@/lib/tina';
 import locationsData from '../../../content/pages/locations.json';
-import settingsData from '../../../content/global/settings.json';
 import MobileCTA from '@/components/MobileCTA';
 
 const iconMap = {
@@ -39,10 +38,11 @@ export default function LocationsPage(props: { data: any, query: string, variabl
         footer { tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
         mobileCta { text href }
+        activeStates
       }
     }`,
     variables: props.variables || {},
-    data: props.data || { locations: locationsData, settings: settingsData },
+    data: props.data || { locations: locationsData, settings: undefined },
   });
 
   const p = data.locations;

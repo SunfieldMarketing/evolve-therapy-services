@@ -95,13 +95,13 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-white hover:text-[#0f172a] text-white px-8 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_40px_rgba(2,132,199,0.4)]"
+                className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-white hover:text-[#0f172a] text-white px-8 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_40px_rgba(2,132,199,0.4)] pointer-events-auto"
               >
                 <span data-tina-field={tinaField(p, 'primaryCta')}>{p.primaryCta}</span> <ArrowRight size={16} aria-hidden="true" className="ml-2" />
               </Link>
               <a
                 href={`tel:${d.phone?.replace(/\D/g, '')}`}
-                className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/40 px-8 py-5 rounded-full font-bold text-xs uppercase transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/40 px-8 py-5 rounded-full font-bold text-xs uppercase transition-all duration-300 pointer-events-auto"
               >
                 <Phone size={15} aria-hidden="true" /> <span data-tina-field={tinaField(d, 'phone')}>{d.phone}</span>
               </a>
@@ -174,7 +174,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                 <li key={i} data-tina-field={tinaField(link, 'name')}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium"
+                    className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium pointer-events-auto"
                   >
                     {link.name}
                   </Link>
@@ -191,7 +191,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                 <li key={i} data-tina-field={tinaField(link, 'name')}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block"
+                    className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block pointer-events-auto"
                   >
                     {link.name}
                   </Link>

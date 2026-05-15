@@ -16,7 +16,6 @@ import { BorderBeamAlways } from '@/components/magicui/border-beam';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { tinaField } from '@/lib/tina';
-import { cn } from '@/lib/utils';
 
 const iconMap: any = {
   BarChart3, GraduationCap, Stethoscope, Users2, ClipboardCheck, LineChart, Target, Microscope, HeartPulse, ShieldCheck, TrendingUp, Users, Clock, Search, Map, Zap, Award
@@ -30,16 +29,10 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
     items: []
   };
 
-  if (d.isVisible === false) return null;
+  if (!d.showSection) return null;
 
   return (
-    <section 
-      id="services" 
-      className={cn(
-        "py-20 md:py-32 relative overflow-hidden",
-        d.theme === 'dark' ? "bg-[#0f172a] text-white" : d.theme === 'slate' ? "bg-slate-900 text-white" : "bg-white text-[#0f172a]"
-      )}
-    >
+    <section id="services" className="py-20 md:py-32 bg-white relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-slate-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 -z-10" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#0284c7]/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3 -z-10" />
@@ -117,7 +110,7 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
                 </p>
                 <div>
                  <div className="relative z-50 pointer-events-auto">
-                   <Link href="/contact" className="focus-visible:outline-none">
+                   <Link href={d.featuredCard.buttonLink || "/contact"} className="focus-visible:outline-none pointer-events-auto">
                      <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn inline-flex text-white hover:bg-[#0284c7] transition-colors duration-500">
                        <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white" data-tina-field={parentField ? tinaField(d.featuredCard, 'buttonText') : undefined}>{d.featuredCard.buttonText}</span>
                        <ArrowUpRight className="ml-2 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />

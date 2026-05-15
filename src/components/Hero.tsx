@@ -59,8 +59,6 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
     }
   }, []);
 
-  if (d.isVisible === false) return null;
-
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center">
       {/* ── Aceternity Spotlight overlay ── */}
@@ -148,8 +146,8 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
             className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-10 md:mb-24 justify-center w-full relative z-50 pointer-events-auto"
           >
             <Link
-              href="/contact"
-              className="group relative flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(2,132,199,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto"
+              href={d.primaryCtaLink || "/contact"}
+              className="group relative flex items-center justify-center gap-3 overflow-hidden bg-[#0284c7] text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(2,132,199,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto pointer-events-auto"
             >
               <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" aria-hidden="true" />
               <span className="relative" data-tina-field={parentField ? tinaField(d, 'primaryCta') : undefined}>{d.primaryCta}</span>
@@ -157,8 +155,8 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
             </Link>
 
             <Link
-              href="/services"
-              className="group flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto"
+              href={d.secondaryCtaLink || "/services"}
+              className="group flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto pointer-events-auto"
             >
               <span data-tina-field={parentField ? tinaField(d, 'secondaryCta') : undefined}>{d.secondaryCta}</span>
             </Link>

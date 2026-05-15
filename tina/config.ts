@@ -141,14 +141,15 @@ export default defineConfig({
           {
             type: "object", name: "hero", label: "Hero Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "eyebrow", label: "Eyebrow Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               { type: "string", name: "titleLine2", label: "Title Line 2" },
               { type: "string", name: "subtext", label: "Subtext", ui: { component: "textarea" } },
-              { type: "string", name: "primaryCta", label: "Primary CTA" },
-              { type: "string", name: "secondaryCta", label: "Secondary CTA" },
+              { type: "string", name: "primaryCta", label: "Primary CTA Text" },
+              { type: "string", name: "primaryCtaLink", label: "Primary CTA Link" },
+              { type: "string", name: "secondaryCta", label: "Secondary CTA Text" },
+              { type: "string", name: "secondaryCtaLink", label: "Secondary CTA Link" },
               {
                 type: "object", name: "stats", label: "Hero Stats", list: true,
                 fields: [
@@ -161,8 +162,6 @@ export default defineConfig({
           {
             type: "object", name: "clinicalExcellence", label: "Clinical Excellence Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -178,12 +177,15 @@ export default defineConfig({
               },
               {
                 type: "object", name: "services", label: "Services Cards", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
                   { type: "string", name: "tag", label: "Tag" },
                   { type: "string", name: "icon", label: "Icon Name (Lucide)" },
-                  { type: "string", name: "slug", label: "Slug" },
+                  { type: "string", name: "slug", label: "Link/Slug" },
                 ],
               },
             ],
@@ -191,14 +193,15 @@ export default defineConfig({
           {
             type: "object", name: "process", label: "Process Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
               {
                 type: "object", name: "steps", label: "Steps", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "num", label: "Step Number" },
                   { type: "string", name: "title", label: "Step Title" },
@@ -211,12 +214,14 @@ export default defineConfig({
           {
             type: "object", name: "whyEvolve", label: "Why Evolve Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "subtitle", label: "Subtitle" },
-              { type: "string", name: "introText", label: "Intro Text", ui: { component: "textarea" } },
+              { type: "string", name: "introText", label: "Intro Text" },
               {
                 type: "object", name: "features", label: "Features", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "subtitle", label: "Subtitle" },
@@ -240,16 +245,19 @@ export default defineConfig({
           {
             type: "object", name: "ourServices", label: "Our Services Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
+              { type: "boolean", name: "showSection", label: "Show Section" },
               { type: "object", name: "items", label: "Service Items", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
                   { type: "string", name: "icon", label: "Icon Name" },
-                  { type: "string", name: "slug", label: "Slug" },
+                  { type: "string", name: "slug", label: "Slug/Link" },
                 ],
               },
               {
@@ -260,6 +268,7 @@ export default defineConfig({
                   { type: "string", name: "titleItalic", label: "Title Italic" },
                   { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
                   { type: "string", name: "buttonText", label: "Button Text" },
+                  { type: "string", name: "buttonLink", label: "Button Link" },
                   { type: "image", name: "image", label: "Image" },
                 ],
               },
@@ -268,7 +277,6 @@ export default defineConfig({
           {
             type: "object", name: "coverage", label: "Service Coverage Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "title", label: "Title" },
               { type: "object", name: "legend", label: "Map Legend", list: true,
                 fields: [
@@ -281,10 +289,11 @@ export default defineConfig({
           {
             type: "object", name: "faq", label: "FAQ Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "title", label: "Title" },
               { type: "object", name: "items", label: "Questions", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.question }),
+                },
                 fields: [
                   { type: "string", name: "question", label: "Question" },
                   { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
@@ -295,20 +304,19 @@ export default defineConfig({
           {
             type: "object", name: "partner", label: "Partner With Us Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
               { type: "string", name: "button", label: "Button Text" },
+              { type: "string", name: "buttonLink", label: "Button Link" },
             ],
           },
           {
             type: "object", name: "bottomCta", label: "Bottom CTA Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
               { type: "string", name: "checklist", label: "Checklist Items", list: true },
               { type: "string", name: "primaryCta", label: "Button Text" },
+              { type: "string", name: "primaryCtaLink", label: "Button Link" },
               { type: "string", name: "phone", label: "Phone Number" },
             ],
           },
@@ -328,15 +336,16 @@ export default defineConfig({
           {
             type: "object", name: "header", label: "Header Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "boolean", name: "useVideo", label: "Use Video Background" },
-              { type: "image", name: "bgImage", label: "Custom Background Image" },
-              { type: "string", name: "badgeText", label: "Badge Text" },
               { type: "string", name: "title", label: "Title Prefix" },
               { type: "string", name: "italicWord", label: "Italic Word" },
               { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "badgeText", label: "Badge Text" },
+              { type: "image", name: "bgImage", label: "Background Image" },
               {
                 type: "object", name: "valueBoxes", label: "Value Boxes", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.label }),
+                },
                 fields: [
                   { type: "string", name: "label", label: "Label" },
                   { type: "string", name: "sublabel", label: "Sublabel" },
@@ -346,10 +355,18 @@ export default defineConfig({
             ],
           },
           {
+            type: "object", name: "trust", label: "Trust Section", list: true,
+            ui: {
+              itemProps: (item) => ({ label: item.text }),
+            },
+            fields: [
+              { type: "string", name: "icon", label: "Icon Name" },
+              { type: "string", name: "text", label: "Label" },
+            ],
+          },
+          {
             type: "object", name: "intro", label: "Intro Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -359,46 +376,40 @@ export default defineConfig({
             ],
           },
           {
-            type: "object", name: "pillars", label: "Pillars Section",
+            type: "object", name: "pillars", label: "Pillars", list: true,
+            ui: {
+              itemProps: (item) => ({ label: item.title }),
+            },
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
-              {
-                type: "object", name: "list", label: "Pillars", list: true,
-                fields: [
-                  { type: "string", name: "icon", label: "Icon Name" },
-                  { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "text", label: "Description", ui: { component: "textarea" } },
-                ],
-              }
+              { type: "string", name: "icon", label: "Icon Name" },
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "text", label: "Description", ui: { component: "textarea" } },
             ],
           },
           {
-            type: "object", name: "leaders", label: "Leadership Section",
+            type: "object", name: "leaders", label: "Leadership Bios", list: true,
+            ui: {
+              itemProps: (item) => ({ label: item.name }),
+            },
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              {
-                type: "object", name: "list", label: "Bios", list: true,
-                fields: [
-                  { type: "string", name: "name", label: "Name" },
-                  { type: "string", name: "title", label: "Job Title" },
-                  { type: "image", name: "photo", label: "Photo URL" },
-                  { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
-                  { type: "string", name: "bio", label: "Bio Paragraphs", list: true, ui: { component: "textarea" } },
-                ],
-              }
+              { type: "string", name: "name", label: "Name" },
+              { type: "string", name: "title", label: "Job Title" },
+              { type: "image", name: "photo", label: "Photo URL" },
+              { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
+              { type: "string", name: "bio", label: "Bio Paragraphs", list: true, ui: { component: "textarea" } },
             ],
           },
           {
             type: "object", name: "philosophy", label: "Philosophy Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
               {
                 type: "object", name: "items", label: "Items", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "icon", label: "Icon Name" },
@@ -408,32 +419,17 @@ export default defineConfig({
             ],
           },
           {
-            type: "object", name: "journey", label: "Journey Section",
-            fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "badge", label: "Badge Text" },
-              { type: "string", name: "titleLine1", label: "Title Line 1" },
-              { type: "string", name: "titleItalic", label: "Title Italic Word" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
-              {
-                type: "object", name: "items", label: "Items", list: true,
-                fields: [
-                  { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "text", label: "Description", ui: { component: "textarea" } },
-                ],
-              },
-            ],
-          },
-          {
             type: "object", name: "national", label: "National Presence Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
               {
                 type: "object", name: "legend", label: "Legend Items", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.text }),
+                },
                 fields: [
                   { type: "string", name: "icon", label: "Icon Name" },
                   { type: "string", name: "text", label: "Label" },
@@ -444,10 +440,10 @@ export default defineConfig({
           {
             type: "object", name: "cta", label: "CTA Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
               { type: "string", name: "button", label: "Button Text" },
+              { type: "string", name: "buttonLink", label: "Button Link" },
             ],
           },
         ],
@@ -466,15 +462,15 @@ export default defineConfig({
           {
             type: "object", name: "hero", label: "Hero Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "boolean", name: "useVideo", label: "Use Video Background" },
-              { type: "image", name: "bgImage", label: "Custom Background Image" },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
               {
                 type: "object", name: "heroValues", label: "Hero Value Badges", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "icon", label: "Icon Name" },
                   { type: "string", name: "title", label: "Title" },
@@ -484,14 +480,26 @@ export default defineConfig({
             ],
           },
           {
+            type: "object", name: "trust", label: "Trust Section", list: true,
+            ui: {
+              itemProps: (item) => ({ label: item.text }),
+            },
+            fields: [
+              { type: "string", name: "icon", label: "Icon Name" },
+              { type: "string", name: "text", label: "Label" },
+            ],
+          },
+          {
             type: "object", name: "showcase", label: "Services Showcase",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               {
                 type: "object", name: "services", label: "Detailed Services", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
@@ -515,13 +523,14 @@ export default defineConfig({
           {
             type: "object", name: "methodology", label: "Methodology Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               {
                 type: "object", name: "items", label: "Items", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "icon", label: "Icon Name" },
@@ -537,13 +546,14 @@ export default defineConfig({
           {
             type: "object", name: "advantage", label: "Advantage Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               {
                 type: "object", name: "items", label: "Items", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "icon", label: "Icon Name" },
@@ -555,20 +565,29 @@ export default defineConfig({
           {
             type: "object", name: "pricing", label: "Pricing Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "titleItalic", label: "Title Italic" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
               {
                 type: "object", name: "tiers", label: "Tiers", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.title }),
+                },
                 fields: [
                   { type: "string", name: "level", label: "Level (e.g. Tier 01)" },
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
                   { type: "string", name: "features", label: "Features", list: true },
                   { type: "boolean", name: "featured", label: "Featured/Highlight" },
+                ],
+              },
+              {
+                type: "object", name: "bottomBanner", label: "Bottom Scaling Banner",
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "desc", label: "Description" },
+                  { type: "string", name: "cta", label: "CTA Label" },
                 ],
               },
             ],
@@ -591,9 +610,6 @@ export default defineConfig({
           {
             type: "object", name: "hero", label: "Hero Section",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
-              { type: "boolean", name: "useVideo", label: "Use Video Background" },
-              { type: "image", name: "bgImage", label: "Custom Background Image" },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic" },
@@ -603,12 +619,14 @@ export default defineConfig({
           {
             type: "object", name: "sidebar", label: "Sidebar Content",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "titleItalic", label: "Title Italic" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
               {
                 type: "object", name: "items", label: "Contact Items", list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item.label }),
+                },
                 fields: [
                   { type: "string", name: "icon", label: "Icon Name" },
                   { type: "string", name: "label", label: "Label" },
@@ -621,7 +639,6 @@ export default defineConfig({
           {
             type: "object", name: "form", label: "Form Content",
             fields: [
-              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "badge", label: "Badge" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "titleItalic", label: "Title Italic" },
@@ -632,6 +649,9 @@ export default defineConfig({
           },
           {
             type: "object", name: "trustBadges", label: "Trust Badges", list: true,
+            ui: {
+              itemProps: (item) => ({ label: item.title }),
+            },
             fields: [
               { type: "string", name: "icon", label: "Icon Name" },
               { type: "string", name: "title", label: "Title" },

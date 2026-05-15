@@ -6,7 +6,9 @@
     "titleLine2": "for LTC Operators.",
     "subtext": "Our unique model lets your facility retain 100% of therapy revenue while Evolve drives clinical outcomes, compliance, and operational excellence.",
     "primaryCta": "Schedule a Free Consultation",
+    "primaryCtaLink": "/contact",
     "secondaryCta": "Explore Our Services",
+    "secondaryCtaLink": "/services",
     "stats": [
       { "value": "100%", "label": "Revenue Retained" },
       { "value": "24/7", "label": "Clinical Support" },
@@ -148,6 +150,8 @@
         "href": "/services/medicaid-case-mix-analysis"
       }
     ],
+    "endTitle": "Ready to",
+    "endSubtitle": "Evolve?",
     "quoteStrip": {
       "text": "Evolve was founded on the principle that therapy departments should be centers of excellence and financial strength.",
       "author": "Lisa Bebie",
@@ -166,6 +170,7 @@
       "In-house to contracted, or reverse"
     ],
     "primaryCta": "Start Your Evolution",
+    "primaryCtaLink": "/contact",
     "phone": "(888) 386-5820"
   },
   "ourServices": {
@@ -203,6 +208,12 @@
         "desc": "All the tools your team needs to provide the highest level of care independently.",
         "icon": "Briefcase",
         "slug": "in-house-resource-hub"
+      },
+      {
+        "title": "Regulatory & Compliance",
+        "desc": "Proactive audit defense and regulatory oversight to protect your facility's integrity.",
+        "icon": "ShieldCheck",
+        "slug": "denial-management"
       }
     ],
     "featuredCard": {
@@ -211,6 +222,7 @@
       "titleItalic": "Success Analysis",
       "description": "Receive a comprehensive, data-driven overview of your facility's current therapy health. Strategic insights with no legacy strings attached.",
       "buttonText": "Request Free Analysis",
+      "buttonLink": "/contact",
       "image": "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80"
     }
   },
@@ -237,6 +249,7 @@
   "partner": {
     "title": "Join The Clinical Evolution",
     "desc": "Ready to take control of your facility's therapy future? Let's discuss a customized roadmap.",
-    "button": "Partner With Evolve"
+    "button": "Partner With Evolve",
+    "buttonLink": "/contact"
   }
 }

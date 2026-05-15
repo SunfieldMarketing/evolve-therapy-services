@@ -135,11 +135,11 @@ export default function WhyEvolve({ data, parentField }: { data?: any, parentFie
                           className="absolute inset-0 flex flex-col justify-center items-center lg:items-start"
                         >
                           <h3 className="text-2xl sm:text-4xl md:text-6xl font-serif font-black text-white tracking-tighter mb-4 sm:mb-8">
-                            Ready to <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
+                            <span data-tina-field={parentField ? tinaField(d, 'endTitle') : undefined}>{d.endTitle}</span> <span className="text-[#38bdf8] italic font-medium" data-tina-field={parentField ? tinaField(d, 'endSubtitle') : undefined}>{d.endSubtitle}</span>
                           </h3>
                           <div className="relative z-50 pointer-events-auto">
                             <Link href="/contact" className="focus-visible:outline-none w-fit pointer-events-auto">
-                              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-8 sm:px-10 py-3 sm:py-4 pointer-events-auto">
+                              <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-8 sm:px-10 py-3 sm:py-4 pointer-events-auto">
                                 <span className="text-white font-black text-[10px] uppercase tracking-[0.2em]">Start a Consultation</span>
                                 <ArrowRight size={16} className="ml-3 text-white" />
                               </ShimmerButton>

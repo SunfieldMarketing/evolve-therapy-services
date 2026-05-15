@@ -157,6 +157,7 @@ export default defineConfig({
                   { type: "string", name: "label", label: "Label" },
                 ],
               },
+              { type: "string", name: "badge", label: "Badge Text" },
             ],
           },
           {
@@ -231,6 +232,8 @@ export default defineConfig({
                   { type: "string", name: "href", label: "Link" },
                 ],
               },
+              { type: "string", name: "endTitle", label: "Final State Title" },
+              { type: "string", name: "endSubtitle", label: "Final State Subtitle" },
               {
                 type: "object", name: "quoteStrip", label: "Quote Strip",
                 fields: [

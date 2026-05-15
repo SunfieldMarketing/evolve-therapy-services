@@ -103,6 +103,7 @@
   "cta": {
     "title": "The Evolve",
     "subtitle": "Connect with our leadership team today to learn how our clinical oversight model can secure your facility's future.",
-    "button": "Start Your Evolution"
+    "button": "Start Your Evolution",
+    "buttonLink": "/contact"
   }
 }

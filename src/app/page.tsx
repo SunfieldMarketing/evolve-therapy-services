@@ -229,8 +229,8 @@ export default function Home(props: { data: any; query: string; variables: any }
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <Link href="/contact">
-                  <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.6)" borderRadius="9999px" className="group px-10 py-5">
+                <Link href={p.bottomCta.primaryCtaLink || "/contact"}>
+                  <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.6)" borderRadius="9999px" className="group px-10 py-5">
                     <span className="text-xs font-bold uppercase tracking-widest text-white" data-tina-field={tinaField(p.bottomCta, 'primaryCta')}>{p.bottomCta.primaryCta}</span>
                     <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </ShimmerButton>

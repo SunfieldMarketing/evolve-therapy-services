@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Spotlight } from '@/components/aceternity/spotlight';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
+import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { tinaField } from '@/lib/tina';
 
 export default function Hero({ data, parentField }: { data?: any, parentField?: string }) {

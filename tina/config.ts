@@ -47,11 +47,13 @@ export default defineConfig({
                 ],
               },
               { type: "string", name: "ctaText", label: "CTA Button Text" },
+              { type: "image", name: "logo", label: "Navbar Logo Image" },
             ],
           },
           {
             type: "object", name: "footer", label: "Footer",
             fields: [
+              { type: "image", name: "logo", label: "Footer Logo Image" },
               { type: "string", name: "tagline", label: "Tagline", ui: { component: "textarea" } },
               { type: "string", name: "copyright", label: "Copyright Text" },
               {
@@ -145,6 +147,7 @@ export default defineConfig({
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               { type: "string", name: "titleLine2", label: "Title Line 2" },
+              { type: "image", name: "bgVideo", label: "Background Video (MP4)" },
               { type: "string", name: "subtext", label: "Subtext", ui: { component: "textarea" } },
               { type: "string", name: "primaryCta", label: "Primary CTA Text" },
               { type: "string", name: "primaryCtaLink", label: "Primary CTA Link" },
@@ -344,6 +347,7 @@ export default defineConfig({
               { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
               { type: "string", name: "badgeText", label: "Badge Text" },
               { type: "image", name: "bgImage", label: "Background Image" },
+              { type: "image", name: "bgVideo", label: "Background Video (MP4)" },
               {
                 type: "object", name: "valueBoxes", label: "Value Boxes", list: true,
                 ui: {
@@ -485,6 +489,7 @@ export default defineConfig({
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              { type: "image", name: "bgVideo", label: "Background Video (MP4)" },
               {
                 type: "object", name: "heroValues", label: "Hero Value Badges", list: true,
                 ui: {

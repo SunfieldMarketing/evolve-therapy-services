@@ -72,7 +72,7 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
       <div className="absolute inset-0 z-0 bg-[#0f172a] overflow-hidden">
         <video
           ref={videoRef}
-          src="/videos/hero.mp4"
+          src={d.bgVideo || "/videos/hero.mp4"}
           autoPlay
           loop
           muted

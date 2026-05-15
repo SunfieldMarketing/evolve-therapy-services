@@ -58,7 +58,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
   const { data } = useTina({
     query: props.query || `query { 
       services(relativePath: "services.json") { 
-        hero { badge titleLine1 titleItalic description heroValues { icon title subtitle } } 
+        hero { badge titleLine1 titleItalic description bgVideo heroValues { icon title subtitle } } 
         trust { icon text } 
         showcase { badge titleLine1 titleItalic services { title desc details icon image slug alignment } } 
         methodology { badge titleLine1 titleItalic items { title icon desc } sidebarTitle sidebarItalic sidebarQuote sidebarIcon } 
@@ -71,8 +71,8 @@ export default function ServicesPage(props: { data: any, query: string, variable
       }
       settings(relativePath: "settings.json") {
         siteName phone email address linkedin
-        navbar { links { name href } ctaText }
-        footer { tagline copyright links { name href } serviceLinks { name href } }
+        navbar { logo links { name href } ctaText }
+        footer { logo tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
         mobileCta { text href }
       }
@@ -117,7 +117,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
              <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
                 <video
                   ref={videoRef}
-                  src="/videos/services.mp4"
+                  src={p.hero.bgVideo || "/videos/services.mp4"}
                   autoPlay
                   loop
                   muted

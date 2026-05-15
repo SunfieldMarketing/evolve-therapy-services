@@ -39,7 +39,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
   const { data } = useTina({
     query: props.query || `query {
       about(relativePath: "about.json") {
-        header { title italicWord subtitle badgeText valueBoxes { label sublabel icon } }
+        header { title italicWord subtitle badgeText bgVideo bgImage valueBoxes { label sublabel icon } }
         trust { icon text }
         intro { badge titleLine1 titleItalic paragraphs quote quoteAuthor }
         pillars { icon title text }
@@ -50,8 +50,8 @@ export default function AboutPage(props: { data: any; query: string; variables: 
       }
       settings(relativePath: "settings.json") {
         siteName phone email address linkedin
-        navbar { links { name href } ctaText }
-        footer { tagline copyright links { name href } serviceLinks { name href } }
+        navbar { logo links { name href } ctaText }
+        footer { logo tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
         mobileCta { text href }
       }
@@ -72,8 +72,9 @@ export default function AboutPage(props: { data: any; query: string; variables: 
         title={p.header.title}
         italicWord={p.header.italicWord}
         subtitle={p.header.subtitle}
-        bgImage="https://res.cloudinary.com/dai2pg27n/image/upload/v1778105493/9888c51b-097f-46b4-907c-1280f458806b.png"
-        useVideo={false}
+        bgImage={p.header.bgImage || "https://res.cloudinary.com/dai2pg27n/image/upload/v1778105493/9888c51b-097f-46b4-907c-1280f458806b.png"}
+        videoUrl={p.header.bgVideo}
+        useVideo={!!p.header.bgVideo}
         badgeText={p.header.badgeText}
         tinaFields={{
           title: tinaField(p.header, 'title'),

@@ -39,7 +39,7 @@ export default function Home(props: { data: any; query: string; variables: any }
   const { data } = useTina({
     query: props.query || `query {
       home(relativePath: "home.json") {
-        hero { eyebrow titleLine1 titleItalic titleLine2 subtext primaryCta primaryCtaLink secondaryCta secondaryCtaLink stats { value label } }
+        hero { eyebrow titleLine1 titleItalic titleLine2 bgVideo subtext primaryCta primaryCtaLink secondaryCta secondaryCtaLink stats { value label } }
         clinicalExcellence { badge titleLine1 titleItalic description stats { value suffix label desc } services { title desc tag icon slug } }
         process { badge title titleItalic description steps { num title desc icon } }
         whyEvolve { 
@@ -65,8 +65,8 @@ export default function Home(props: { data: any; query: string; variables: any }
       }
       settings(relativePath: "settings.json") {
         siteName phone email address linkedin
-        navbar { links { name href } ctaText }
-        footer { tagline copyright links { name href } serviceLinks { name href } }
+        navbar { logo links { name href } ctaText }
+        footer { logo tagline copyright links { name href } serviceLinks { name href } }
         testimonials { title titleItalic description list { name role facility content stars initials } }
         faq { title titleItalic description list { q a } }
         activeStates

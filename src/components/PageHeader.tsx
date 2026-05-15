@@ -35,6 +35,7 @@ interface PageHeaderProps {
   italicWord?: string;
   videoKey?: keyof typeof imageMap;
   bgImage?: string;
+  videoUrl?: string;
   ctaText?: string;
   ctaLink?: string;
   badgeText?: string;
@@ -53,6 +54,7 @@ export default function PageHeader({
   italicWord,
   videoKey = 'default',
   bgImage,
+  videoUrl,
   ctaText = 'Start Your Evolution',
   ctaLink = '/contact',
   badgeText = 'Professional Integrity',
@@ -65,14 +67,14 @@ export default function PageHeader({
   ...props
 }: PageHeaderProps & React.HTMLAttributes<HTMLElement>) {
   const imageUrl = bgImage || imageMap[videoKey] || imageMap.default;
-  const videoUrl = videoMap[videoKey as string];
-  const finalUseVideo = useVideo && !!videoUrl;
+  const finalVideoUrl = videoUrl || videoMap[videoKey as string];
+  const finalUseVideo = useVideo && !!finalVideoUrl;
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (!finalUseVideo || !videoUrl) return;
+    if (!finalUseVideo || !finalVideoUrl) return;
 
     if (videoRef.current) {
       videoRef.current.play().then(() => {
@@ -85,7 +87,7 @@ export default function PageHeader({
       const timer = setTimeout(() => setIsVideoPlaying(true), 800);
       return () => clearTimeout(timer);
     }
-  }, [finalUseVideo, videoUrl]);
+  }, [finalUseVideo, finalVideoUrl]);
 
   return (
     <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden" {...props}>
@@ -99,7 +101,7 @@ export default function PageHeader({
             )}>
               <video
                 ref={videoRef}
-                src={videoUrl}
+                src={finalVideoUrl}
                 autoPlay
                 loop
                 muted

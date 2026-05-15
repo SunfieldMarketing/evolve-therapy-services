@@ -116,13 +116,14 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
 
           {/* Brand column */}
           <div className="lg:col-span-4">
-            <Link href="/" className="flex items-center gap-2 mb-6 w-fit" aria-label="Evolve Therapy Services Home">
+            <a href="/" className="flex items-center gap-2 mb-6 w-fit" aria-label="Evolve Therapy Services Home">
               <img 
-                src="https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png" 
+                src={d.footer?.logo || "https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png"} 
                 alt="Evolve Therapy Services"
                 className="h-14 brightness-0 invert" 
+                data-tina-field={d.footer ? tinaField(d.footer, 'logo') : undefined}
               />
-            </Link>
+            </a>
             <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs" data-tina-field={d.footer ? tinaField(d.footer, 'tagline') : undefined}>
               {d.footer?.tagline}
             </p>

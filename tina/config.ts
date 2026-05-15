@@ -27,8 +27,7 @@ export default defineConfig({
         path: "content/global",
         format: "json",
         ui: { 
-          allowedActions: { create: false, delete: false },
-          router: () => "/" 
+          allowedActions: { create: false, delete: false }
         },
         fields: [
           { type: "string", name: "siteName", label: "Site Name" },

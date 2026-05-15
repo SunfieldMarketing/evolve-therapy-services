@@ -94,14 +94,14 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 w-full px-5 sm:px-6 md:px-10 lg:px-12 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-32 flex flex-col items-center text-center">
-        <div className="w-full flex flex-col items-center">
+      <div className="relative z-40 w-full px-5 sm:px-6 md:px-10 lg:px-12 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-32 flex flex-col items-center text-center pointer-events-none">
+        <div className="w-full flex flex-col items-center pointer-events-none">
           {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8"
+            className="mb-8 pointer-events-auto"
           >
             <AnimatedGradientTextDark className="justify-center" data-tina-field={parentField ? tinaField(d, 'eyebrow') : undefined}>
               <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse inline-block mr-2" aria-hidden="true" />
@@ -114,7 +114,7 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-8 w-full text-center"
+            className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-8 w-full text-center pointer-events-auto"
           >
             <span data-tina-field={parentField ? tinaField(d, 'titleLine1') : undefined}>{d.titleLine1}</span>{' '}
             <span className="text-[#0284c7] italic" data-tina-field={parentField ? tinaField(d, 'titleItalic') : undefined}>{d.titleItalic}</span><br className="hidden lg:block" />
@@ -126,7 +126,7 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg md:text-2xl lg:text-3xl text-white/65 w-full leading-relaxed mb-10 md:mb-14 font-light text-center max-w-5xl mx-auto px-4 sm:px-0"
+            className="text-lg md:text-2xl lg:text-3xl text-white/65 w-full leading-relaxed mb-10 md:mb-14 font-light text-center max-w-5xl mx-auto px-4 sm:px-0 pointer-events-auto"
             data-tina-field={parentField ? tinaField(d, 'subtext') : undefined}
           >
             {/* Logic to highlight 100% of therapy revenue if it exists in subtext */}
@@ -143,7 +143,7 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-10 md:mb-24 justify-center w-full"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-10 md:mb-24 justify-center w-full relative z-50 pointer-events-auto"
           >
             <Link
               href="/contact"

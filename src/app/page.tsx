@@ -23,6 +23,8 @@ import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
 import { useTina, tinaField } from '@/lib/tina';
 import homeData from '../../content/pages/home.json';
+import settingsData from '../../content/global/settings.json';
+import contactData from '../../content/pages/contact.json';
 
 const iconMap: any = {
   Microscope, HeartPulse, ShieldCheck, BarChart3, Users, TrendingUp, Search, Map, Zap, GraduationCap, Award, Clock
@@ -38,7 +40,7 @@ export default function Home(props: { data: any; query: string; variables: any }
     query: props.query || `query {
       home(relativePath: "home.json") {
         hero { eyebrow titleLine1 titleItalic titleLine2 subtext primaryCta secondaryCta stats { value label } }
-        clinicalExcellence { badge titleLine1 titleItalic description stats { value suffix label desc } services { title desc tag icon } }
+        clinicalExcellence { badge titleLine1 titleItalic description stats { value suffix label desc } services { title desc tag icon slug } }
         process { badge title titleItalic description steps { num title desc icon } }
         whyEvolve { 
           title subtitle introText 
@@ -47,7 +49,7 @@ export default function Home(props: { data: any; query: string; variables: any }
         }
         ourServices {
           title theme showSection
-          items { title desc icon }
+          items { title desc icon slug }
           featuredCard { badge title titleItalic description buttonText image }
         }
         bottomCta { quote checklist primaryCta phone }
@@ -72,7 +74,7 @@ export default function Home(props: { data: any; query: string; variables: any }
       }
     }`,
     variables: props.variables || {},
-    data: props.data || { home: homeData, contact: undefined, settings: undefined },
+    data: props.data || { home: homeData, contact: contactData, settings: settingsData },
   });
 
   const p = data.home;
@@ -133,6 +135,7 @@ export default function Home(props: { data: any; query: string; variables: any }
                   className="relative overflow-hidden group p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:bg-white hover:border-[#0284c7]/30 hover:shadow-[0_40px_80px_-20px_rgba(2,132,199,0.12)] transition-all duration-500"
                   data-tina-field={tinaField(item, 'title')}
                 >
+                  <Link href={item.slug ? `/services/${item.slug}` : `/services/${item.title?.toLowerCase().replace(/ /g, '-')}`} className="absolute inset-0 z-30 pointer-events-auto" aria-label={`View details for ${item.title}`} />
                   <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity" duration={6} colorFrom="#38bdf8" colorTo="#0284c7" />
                   <div className="flex items-center justify-between mb-8 relative z-10">
                     <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white text-[#0f172a] border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white shadow-sm">
@@ -145,7 +148,7 @@ export default function Home(props: { data: any; query: string; variables: any }
                   <h4 className="font-black font-serif text-2xl lg:text-3xl tracking-tight mb-4 relative z-10 text-[#0f172a]">
                     {item.title}
                   </h4>
-                  <p className="text-[15px] md:text-base leading-relaxed font-light relative z-10 text-slate-500" data-tina-field={tinaField(item, 'desc')}>
+                  <p className="text-[15px] md:text-base leading-relaxed font-light relative z-10 text-slate-500" data-tina-field={item.slug ? undefined : tinaField(item, 'desc')}>
                     {item.desc}
                   </p>
                 </BlurFade>
@@ -203,7 +206,7 @@ export default function Home(props: { data: any; query: string; variables: any }
       <Services data={p.ourServices} parentField="ourServices" />
       <Testimonials data={s?.testimonials} parentField="testimonials" />
       <USAMap activeStates={s?.activeStates} />
-      <FAQ data={s?.faq} parentField="faq" />
+      <FAQ data={s?.faq || p?.faq} parentField={s?.faq ? "faq" : "faq"} />
 
       {/* ── Philosophy / CTA ── */}
       <section className="py-24 md:py-48 bg-[#0f172a] relative overflow-hidden">

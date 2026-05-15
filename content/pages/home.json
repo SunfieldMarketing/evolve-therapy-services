@@ -30,37 +30,43 @@
         "title": "Evidence-Based Practice",
         "desc": "Real-time PDPM case mix analysis, MDS accuracy reviews, and data-driven business intelligence customized to your specific market.",
         "tag": "Analytics",
-        "icon": "Microscope"
+        "icon": "Microscope",
+        "slug": "optimal-therapy-outcomes"
       },
       {
         "title": "Holistic Patient Outcomes",
         "desc": "Patient-centric, outcome-based programming that drives five-star ratings and measurable improvements in functional independence.",
         "tag": "Clinical",
-        "icon": "HeartPulse"
+        "icon": "HeartPulse",
+        "slug": "optimal-therapy-outcomes"
       },
       {
         "title": "Compliance Management",
         "desc": "Full denial management, regulatory audit support, and proactive SNF compliance oversight - so you focus on care, not paperwork.",
         "tag": "Regulatory",
-        "icon": "ShieldCheck"
+        "icon": "ShieldCheck",
+        "slug": "denial-management"
       },
       {
         "title": "Medicaid Case Mix",
         "desc": "Detailed quality measure analysis, case mix efficiency reviews, and Medicaid reimbursement optimization for your payer mix.",
         "tag": "Reimbursement",
-        "icon": "BarChart3"
+        "icon": "BarChart3",
+        "slug": "medicaid-case-mix-analysis"
       },
       {
         "title": "In-House Transition",
         "desc": "Seamless migration from contract therapy to an in-house model with staff retention, culture building, and zero disruption to care.",
         "tag": "Transition",
-        "icon": "Users"
+        "icon": "Users",
+        "slug": "in-house-transition"
       },
       {
         "title": "Operational Growth",
         "desc": "Tiered pricing reductions as your business scales, grooming internal staff for regional leadership roles within your own organization.",
         "tag": "Growth",
-        "icon": "TrendingUp"
+        "icon": "TrendingUp",
+        "slug": "therapy-cost-reduction"
       }
     ]
   },

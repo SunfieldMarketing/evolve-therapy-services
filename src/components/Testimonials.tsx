@@ -4,7 +4,6 @@ import { Marquee } from '@/components/magicui/marquee';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import { cn } from '@/lib/utils';
 import { tinaField } from '@/lib/tina';
 
 function StarRow({ count }: { count: number }) {
@@ -19,14 +18,14 @@ function StarRow({ count }: { count: number }) {
 
 function TestimonialCard({ t, parentField }: { t: any, parentField?: string }) {
   return (
-    <div className="w-[380px] md:w-[440px] shrink-0" data-tina-field={parentField ? tinaField(t, 'name') : undefined}>
+    <div className="w-[380px] md:w-[440px] shrink-0">
       <div className="h-full rounded-[2.5rem] border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-9 md:p-11 flex flex-col justify-between transition-all duration-500 hover:bg-white/[0.06] hover:border-white/[0.12] hover:-translate-y-1 group">
         <div className="mb-8">
           <div className="flex justify-between items-start mb-6">
             <StarRow count={t.stars || 5} />
             <Quote size={28} className="text-[#0284c7]/15 group-hover:text-[#0284c7]/30 transition-colors duration-500" />
           </div>
-          <blockquote className="text-lg md:text-xl text-white/75 font-serif italic font-medium leading-relaxed group-hover:text-white/90 transition-colors duration-500" data-tina-field={parentField ? tinaField(t, 'content') : undefined}>
+          <blockquote className="text-lg md:text-xl text-white/75 font-serif italic font-medium leading-relaxed group-hover:text-white/90 transition-colors duration-500">
             &ldquo;{t.content}&rdquo;
           </blockquote>
         </div>
@@ -38,7 +37,7 @@ function TestimonialCard({ t, parentField }: { t: any, parentField?: string }) {
           <div>
             <div className="text-base font-black text-white tracking-tight">{t.name}</div>
             <div className="text-[#38bdf8] text-[10px] font-bold uppercase tracking-[0.15em] mt-0.5">
-              <span data-tina-field={parentField ? tinaField(t, 'role') : undefined}>{t.role}</span> · <span data-tina-field={parentField ? tinaField(t, 'facility') : undefined}>{t.facility}</span>
+              <span>{t.role}</span> · <span>{t.facility}</span>
             </div>
           </div>
         </div>
@@ -55,6 +54,8 @@ export default function Testimonials({ data, parentField }: { data?: any, parent
     description: 'Hear from LTC professionals who have transformed their therapy programs with Evolve.',
     list: []
   };
+
+  const testimonials = (d.list || d.items || d.reviews || []).filter((t: any) => t.content && t.name);
 
   return (
     <section className="relative py-24 md:py-40 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
@@ -86,7 +87,7 @@ export default function Testimonials({ data, parentField }: { data?: any, parent
           pauseOnHover
           className="[--duration:60s] [--gap:2rem]"
         >
-          {(d.list || []).map((t: any, i: number) => (
+          {testimonials.map((t: any, i: number) => (
             <TestimonialCard key={i} t={t} parentField={parentField} />
           ))}
         </Marquee>
@@ -95,14 +96,15 @@ export default function Testimonials({ data, parentField }: { data?: any, parent
       {/* CTA */}
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <BlurFade className="text-center mt-8" delay={0.2}>
-          <Link href="/contact">
-            <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
-              <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Partner With Evolve</span>
-            </ShimmerButton>
-          </Link>
+          <div className="relative z-50 pointer-events-auto">
+            <Link href="/contact">
+              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-12 py-6">
+                <span className="font-black uppercase tracking-[0.25em] text-[11px] text-white">Partner With Evolve</span>
+              </ShimmerButton>
+            </Link>
+          </div>
         </BlurFade>
       </div>
     </section>
   );
 }
-

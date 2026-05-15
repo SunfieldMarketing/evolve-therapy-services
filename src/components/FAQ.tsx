@@ -16,7 +16,10 @@ export default function FAQ({ data, parentField }: { data?: any, parentField?: s
     list: []
   };
 
-  const faqs = d.list || [];
+  const faqs = (d.list || d.items || []).map((item: any) => ({
+    q: item.q || item.question || '',
+    a: item.a || item.answer || ''
+  })).filter(item => item.q && item.a);
 
   return (
     <section className="py-20 md:py-32 bg-slate-50 border-t border-slate-100 relative" id="faq">
@@ -47,12 +50,11 @@ export default function FAQ({ data, parentField }: { data?: any, parentField?: s
             const isOpen = active === i;
             return (
               <motion.div
-                key={i}
+                key={`${faq.q}-${i}`}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                data-tina-field={parentField ? tinaField(faq, 'q') : undefined}
               >
                 <div
                   className={`rounded-3xl border transition-all duration-300 overflow-hidden ${
@@ -62,7 +64,7 @@ export default function FAQ({ data, parentField }: { data?: any, parentField?: s
                   }`}
                 >
                   <button
-                    className="w-full flex items-center justify-between px-8 py-7 text-left gap-4 cursor-pointer"
+                    className="w-full flex items-center justify-between px-8 py-7 text-left gap-4 cursor-pointer relative z-30 pointer-events-auto"
                     onClick={() => setActive(isOpen ? null : i)}
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${i}`}
@@ -94,7 +96,7 @@ export default function FAQ({ data, parentField }: { data?: any, parentField?: s
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                       >
-                        <div className="px-8 pb-8 text-slate-600 text-[17px] leading-relaxed font-light border-t border-slate-50 pt-6" data-tina-field={parentField ? tinaField(faq, 'a') : undefined}>
+                        <div className="px-8 pb-8 text-slate-600 text-[17px] leading-relaxed font-light border-t border-slate-50 pt-6">
                           {faq.a}
                         </div>
                       </motion.div>

@@ -117,10 +117,12 @@ export default function WhyEvolve({ data, parentField }: { data?: any, parentFie
                           <p className="text-xs sm:text-xl md:text-2xl text-white/50 leading-relaxed font-light max-w-lg mb-3 sm:mb-8" data-tina-field={parentField ? tinaField(features[activeIndex], 'desc') : undefined}>
                             {features[activeIndex].desc}
                           </p>
-                          <Link href={features[activeIndex].href || '#'} className="group inline-flex items-center justify-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
-                            Learn More About This Service
-                            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                          </Link>
+                          <div className="relative z-50 pointer-events-auto">
+                            <Link href={features[activeIndex].href || '#'} className="group inline-flex items-center justify-center gap-3 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] hover:gap-5 transition-all">
+                              Learn More About This Service
+                              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                          </div>
                         </motion.div>
                       )}
 
@@ -135,12 +137,14 @@ export default function WhyEvolve({ data, parentField }: { data?: any, parentFie
                           <h3 className="text-2xl sm:text-4xl md:text-6xl font-serif font-black text-white tracking-tighter mb-4 sm:mb-8">
                             Ready to <span className="text-[#38bdf8] italic font-medium">Evolve?</span>
                           </h3>
-                          <Link href="/contact" className="focus-visible:outline-none w-fit">
-                            <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-8 sm:px-10 py-3 sm:py-4">
-                              <span className="text-white font-black text-[10px] uppercase tracking-[0.2em]">Start a Consultation</span>
-                              <ArrowRight size={16} className="ml-3 text-white" />
-                            </ShimmerButton>
-                          </Link>
+                          <div className="relative z-50 pointer-events-auto">
+                            <Link href="/contact" className="focus-visible:outline-none w-fit">
+                              <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.5)" borderRadius="9999px" className="group px-8 sm:px-10 py-3 sm:py-4">
+                                <span className="text-white font-black text-[10px] uppercase tracking-[0.2em]">Start a Consultation</span>
+                                <ArrowRight size={16} className="ml-3 text-white" />
+                              </ShimmerButton>
+                            </Link>
+                          </div>
                         </motion.div>
                       )}
 

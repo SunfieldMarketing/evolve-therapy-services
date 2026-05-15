@@ -163,7 +163,7 @@ export default function Navbar({ data }: { data?: any }) {
                               className="absolute top-full left-0 mt-1 w-80 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden py-3 z-[10000]"
                             >
                               {link.dropdown.map((sub: any, j: number) => (
-                                <Link
+                                <a
                                   key={j}
                                   href={sub.href}
                                   className="relative z-[101] flex flex-col px-5 py-3 hover:bg-slate-50 group/sub transition-colors pointer-events-auto"
@@ -174,19 +174,19 @@ export default function Navbar({ data }: { data?: any }) {
                                     <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-all" />
                                   </span>
                                   <span className="text-[11px] text-slate-400 font-medium leading-tight mt-1">{sub.desc}</span>
-                                </Link>
+                                </a>
                               ))}
                               <div className="mt-2 pt-2 border-t border-slate-100 px-5">
-                                <Link href="/services" className="text-[10px] font-black uppercase tracking-widest text-[#0284c7] hover:text-[#0369a1]" onClick={() => setDropdownOpen(false)}>
+                                <a href="/services" className="text-[10px] font-black uppercase tracking-widest text-[#0284c7] hover:text-[#0369a1]" onClick={() => setDropdownOpen(false)}>
                                   View All Services →
-                                </Link>
+                                </a>
                               </div>
                             </motion.div>
                           )}
                         </AnimatePresence>
                       </div>
                     ) : (
-                      <Link
+                      <a
                         href={link.href}
                         className={cn(
                           'relative z-[101] flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none pointer-events-auto',
@@ -198,7 +198,7 @@ export default function Navbar({ data }: { data?: any }) {
                         data-tina-field={tinaField(link, 'name')}
                       >
                         {link.name}
-                      </Link>
+                      </a>
                     )}
                   </div>
                 );

@@ -198,24 +198,7 @@ body {
   outline: none;
 }
 
-/* ── Mobile tap targets ≥ 44×44px — ui-ux-pro-max-skill ── */
-button, a, [role="button"], [role="tab"] {
-  cursor: pointer;
-  min-height: 44px;
-  min-width: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
 
-/* Restore natural display for non-button links in text flow */
-p a, li a, footer a, nav a {
-  display: inline;
-  min-height: unset;
-  min-width: unset;
-  align-items: unset;
-  justify-content: unset;
-}
 
 /* ── Smooth transition baseline ── */
 a, button, [role="button"] {

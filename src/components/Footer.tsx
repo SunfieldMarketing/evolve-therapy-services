@@ -93,12 +93,12 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
               Our unique business model allows long-term care operators to retain <span className="text-white font-bold">100% of therapy revenue</span>. We bridge the gap between clinical excellence and financial sustainability, empowering your clinicians while protecting your bottom line.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
-              <Link
+              <a
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-white hover:text-[#0f172a] text-white px-8 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_40px_rgba(2,132,199,0.4)] pointer-events-auto"
               >
                 <span data-tina-field={tinaField(p, 'primaryCta')}>{p.primaryCta}</span> <ArrowRight size={16} aria-hidden="true" className="ml-2" />
-              </Link>
+              </a>
               <a
                 href={`tel:${d.phone?.replace(/\D/g, '')}`}
                 className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/40 px-8 py-5 rounded-full font-bold text-xs uppercase transition-all duration-300 pointer-events-auto"

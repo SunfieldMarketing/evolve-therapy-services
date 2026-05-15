@@ -133,7 +133,7 @@ export default function Home(props: { data: any; query: string; variables: any }
                   key={i}
                   className="relative overflow-hidden group p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:bg-white hover:border-[#0284c7]/30 hover:shadow-[0_40px_80px_-20px_rgba(2,132,199,0.12)] transition-all duration-500"
                 >
-                  <Link href={item.slug ? `/services/${item.slug}` : `/services/${item.title?.toLowerCase().replace(/ /g, '-')}`} className="absolute inset-0 z-30 pointer-events-auto" aria-label={`View details for ${item.title}`} />
+                  <a href={item.slug ? `/services/${item.slug}` : `/services/${item.title?.toLowerCase().replace(/ /g, '-')}`} className="absolute inset-0 z-30 pointer-events-auto" aria-label={`View details for ${item.title}`} />
                   <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity" duration={6} colorFrom="#38bdf8" colorTo="#0284c7" />
                   <div className="flex items-center justify-between mb-8 relative z-10">
                     <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 border bg-white text-[#0f172a] border-slate-100 group-hover:bg-[#0284c7] group-hover:text-white shadow-sm" data-tina-field={tinaField(item, 'icon')}>
@@ -192,10 +192,10 @@ export default function Home(props: { data: any; query: string; variables: any }
 
           {/* Bottom Link */}
           <div className="mt-16 text-center">
-            <Link href="/services" className="group inline-flex items-center gap-3 text-slate-400 hover:text-[#0284c7] transition-colors">
+            <a href="/services" className="group inline-flex items-center gap-3 text-slate-400 hover:text-[#0284c7] transition-colors">
               <span className="text-xs font-black uppercase tracking-[0.3em]">View Full Clinical Portfolio</span>
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>

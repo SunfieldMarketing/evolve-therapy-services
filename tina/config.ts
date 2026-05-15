@@ -180,6 +180,7 @@ export default defineConfig({
                   { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
                   { type: "string", name: "tag", label: "Tag" },
                   { type: "string", name: "icon", label: "Icon Name (Lucide)" },
+                  { type: "string", name: "slug", label: "Slug" },
                 ],
               },
             ],

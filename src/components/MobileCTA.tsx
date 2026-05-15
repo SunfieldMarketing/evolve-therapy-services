@@ -37,7 +37,7 @@ export default function MobileCTA({ data }: { data?: any }) {
           <div className="flex gap-3 p-2 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-slate-200">
             <Link 
               href={d.href}
-              className="flex-1 bg-[#0284c7] text-white py-4 rounded-xl flex items-center justify-center gap-2 font-bold text-[13px] uppercase tracking-[0.15em] shadow-lg hover:bg-[#0284c7]/90 transition-colors"
+              className="flex-1 bg-[#0284c7] text-white py-4 rounded-xl flex items-center justify-center gap-2 font-bold text-[13px] uppercase tracking-[0.15em] shadow-lg hover:bg-[#0284c7]/90 transition-colors pointer-events-auto"
             >
               <span data-tina-field={tinaField(d, 'text')}>{d.text}</span> <ArrowRight size={16} />
             </Link>

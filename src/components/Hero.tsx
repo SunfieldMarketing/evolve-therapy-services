@@ -94,8 +94,8 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-40 w-full px-5 sm:px-6 md:px-10 lg:px-12 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-32 flex flex-col items-center text-center pointer-events-none">
-        <div className="w-full flex flex-col items-center pointer-events-none">
+      <div className="relative z-40 w-full px-5 sm:px-6 md:px-10 lg:px-12 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-32 flex flex-col items-center text-center">
+        <div className="w-full flex flex-col items-center">
           {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}

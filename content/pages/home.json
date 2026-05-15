@@ -38,7 +38,7 @@
         "desc": "Patient-centric, outcome-based programming that drives five-star ratings and measurable improvements in functional independence.",
         "tag": "Clinical",
         "icon": "HeartPulse",
-        "slug": "optimal-therapy-outcomes"
+        "slug": "snf-staff-education"
       },
       {
         "title": "Compliance Management",
@@ -191,6 +191,18 @@
         "desc": "Building your therapy team with top-tier talent that stays for the long term.",
         "icon": "Users",
         "slug": "in-house-transition"
+      },
+      {
+        "title": "Reimbursement Strategy",
+        "desc": "Detailed QM analysis and Medicaid case mix efficiency reviews for optimized billing.",
+        "icon": "TrendingUp",
+        "slug": "reimbursement-optimization"
+      },
+      {
+        "title": "In-House Resource Hub",
+        "desc": "All the tools your team needs to provide the highest level of care independently.",
+        "icon": "Briefcase",
+        "slug": "in-house-resource-hub"
       }
     ],
     "featuredCard": {

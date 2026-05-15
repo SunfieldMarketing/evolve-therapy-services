@@ -282,7 +282,7 @@ export default function Navbar({ data }: { data?: any }) {
                           <Link
                             href={link.href}
                             onClick={() => setIsOpen(false)}
-                            className="px-4 py-3.5 flex-1 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150"
+                            className="px-4 py-3.5 flex-1 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150 pointer-events-auto"
                           >
                             {link.name}
                           </Link>

@@ -127,8 +127,8 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
                 />}
-                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent lg:w-[80%]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent lg:hidden" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent lg:w-[80%] pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent lg:hidden pointer-events-none" />
                 
                 {/* Decorative data points overlay strictly for aesthetics */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/5 rounded-full animate-ping opacity-20 pointer-events-none" />

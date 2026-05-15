@@ -249,6 +249,7 @@ export default defineConfig({
             type: "object", name: "ourServices", label: "Our Services Section",
             fields: [
               { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
               { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "boolean", name: "showSection", label: "Show Section" },
               { type: "object", name: "items", label: "Service Items", list: true,

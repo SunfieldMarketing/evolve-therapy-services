@@ -118,10 +118,10 @@ export default function PageHeader({
             <img
               src={imageUrl}
               alt={`${title} background cover`}
-              className="absolute inset-0 w-full h-full object-cover opacity-60 contrast-[1.1] saturate-[1.2]"
+              className="absolute inset-0 w-full h-full object-cover opacity-60 contrast-[1.1] saturate-[1.2] pointer-events-none"
             />
             {/* Additional image-specific overlay for better text contrast */}
-            <div className="absolute inset-0 bg-[#0f172a]/40 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-[#0f172a]/40 mix-blend-multiply pointer-events-none" />
           </div>
         )}
         

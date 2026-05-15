@@ -2,28 +2,42 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Lock, ArrowRight, ShieldCheck, Zap, Star } from 'lucide-react';
-
-const MASTER_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'EvolveAdmin2026!';
+import { Lock, ArrowRight, ShieldCheck, Zap, Star, Loader2 } from 'lucide-react';
 
 export default function PortalPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [shake, setShake] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === MASTER_PASSWORD) {
-      // One-way redirect only — no sessionStorage to prevent loop
-      window.location.href = '/admin/index.html';
-    } else {
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/portal-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+
+      if (res.ok) {
+        // Correct — redirect to TinaCMS admin
+        window.location.href = '/admin/index.html';
+      } else {
+        // Wrong password
+        setError(true);
+        setShake(true);
+        setPassword('');
+        setTimeout(() => {
+          setError(false);
+          setShake(false);
+        }, 600);
+      }
+    } catch {
       setError(true);
-      setShake(true);
-      setPassword('');
-      setTimeout(() => {
-        setError(false);
-        setShake(false);
-      }, 600);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,11 +49,12 @@ export default function PortalPage() {
         style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #0284c7 0%, transparent 70%)' }}
       />
 
-      {/* Animated grid lines */}
+      {/* Grid lines */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(#0284c7 1px, transparent 1px), linear-gradient(90deg, #0284c7 1px, transparent 1px)',
+          backgroundImage:
+            'linear-gradient(#0284c7 1px, transparent 1px), linear-gradient(90deg, #0284c7 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
@@ -47,8 +62,8 @@ export default function PortalPage() {
       <div className="relative z-10 w-full max-w-md">
         <div
           className={`bg-white/5 backdrop-blur-2xl p-10 md:p-14 rounded-[3rem] border shadow-2xl transition-all duration-300 ${
-            shake ? 'border-red-500/60 shadow-red-500/10' : 'border-white/10'
-          } ${shake ? 'animate-pulse' : ''}`}
+            shake ? 'border-red-500/60' : 'border-white/10'
+          }`}
           style={shake ? { animation: 'shake 0.5s ease-in-out' } : {}}
         >
           {/* Logo */}
@@ -82,14 +97,15 @@ export default function PortalPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••"
+                disabled={loading}
                 className={`w-full bg-white/5 border ${
                   error ? 'border-red-500' : 'border-white/10 focus:border-[#0284c7]'
-                } text-white px-8 py-5 rounded-2xl outline-none transition-all duration-300 placeholder:text-white/20 font-black tracking-[0.5em] text-center text-xl`}
+                } text-white px-8 py-5 rounded-2xl outline-none transition-all duration-300 placeholder:text-white/20 font-black tracking-[0.5em] text-center text-xl disabled:opacity-50`}
                 autoFocus
                 autoComplete="current-password"
               />
               {error && (
-                <p className="text-red-400 text-[10px] font-black uppercase tracking-[0.2em] mt-3 text-center animate-pulse">
+                <p className="text-red-400 text-[10px] font-black uppercase tracking-[0.2em] mt-3 text-center">
                   Access Denied — Incorrect Credentials
                 </p>
               )}
@@ -97,10 +113,20 @@ export default function PortalPage() {
 
             <button
               type="submit"
-              className="group w-full py-6 flex items-center justify-center gap-3 bg-[#0284c7] text-white rounded-2xl font-black uppercase tracking-[0.4em] text-[12px] hover:bg-[#0369a1] transition-all shadow-xl shadow-[#0284c7]/20 active:scale-[0.98]"
+              disabled={loading || !password}
+              className="group w-full py-6 flex items-center justify-center gap-3 bg-[#0284c7] text-white rounded-2xl font-black uppercase tracking-[0.4em] text-[12px] hover:bg-[#0369a1] transition-all shadow-xl shadow-[#0284c7]/20 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              <span>Initialize Suite</span>
-              <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+              {loading ? (
+                <>
+                  <Loader2 size={18} className="animate-spin" />
+                  <span>Verifying&hellip;</span>
+                </>
+              ) : (
+                <>
+                  <span>Initialize Suite</span>
+                  <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                </>
+              )}
             </button>
           </form>
 
@@ -134,7 +160,6 @@ export default function PortalPage() {
         </div>
       </div>
 
-      {/* Shake keyframe */}
       <style>{`
         @keyframes shake {
           0%, 100% { transform: translateX(0); }

@@ -20,7 +20,7 @@
           { "name": "In-House Transition", "href": "/services/in-house-transition", "desc": "Complete roadmap from contract to in-house therapy." }
         ]
       },
-      { "name": "Location", "href": "/locations" }
+      { "name": "Locations", "href": "/locations" }
     ],
     "ctaText": "Contact Us"
   },

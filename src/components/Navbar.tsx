@@ -38,7 +38,18 @@ export default function Navbar({ data }: { data?: any }) {
     links: [
       { name: 'Home', href: '/' },
       { name: 'About', href: '/about' },
-      { name: 'Services', href: '/services' },
+      { 
+        name: 'Services', 
+        href: '/services',
+        dropdown: [
+          { name: 'Therapy Outcomes & PDPM', href: '/services/optimal-therapy-outcomes', desc: 'PDPM case mix optimization' },
+          { name: 'Medicaid Case Mix', href: '/services/medicaid-case-mix-analysis', desc: 'Quality measure analysis' },
+          { name: 'Reimbursement Optimization', href: '/services/reimbursement-optimization', desc: 'MPPR & financial success' },
+          { name: 'Therapy Cost Reduction', href: '/services/therapy-cost-reduction', desc: 'Tiered cost savings' },
+          { name: 'In-House Transition', href: '/services/in-house-transition', desc: 'Seamless model migration' },
+          { name: 'In-House Resource Hub', href: '/services/in-house-resource-hub', desc: 'Support for existing programs' },
+        ],
+      },
       { name: 'Locations', href: '/locations' },
     ],
     ctaText: 'Contact Us'
@@ -59,6 +70,17 @@ export default function Navbar({ data }: { data?: any }) {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   // Prevent body scroll when mobile menu is open
@@ -105,27 +127,82 @@ export default function Navbar({ data }: { data?: any }) {
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-1" role="menubar">
-              {navLinks.map((link: any, i: number) => (
-                <div
-                  key={i}
-                  className="relative flex items-center"
-                  role="none"
-                >
-                  <Link
-                    href={link.href}
-                    className={cn(
-                      'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none',
-                      scrolled
-                        ? 'text-slate-600 hover:text-[#0f172a] hover:bg-slate-100'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
-                    )}
-                    role="menuitem"
-                    data-tina-field={tinaField(link, 'name')}
+              {navLinks.map((link: any, i: number) => {
+                const hasDropdown = link.dropdown && link.dropdown.length > 0;
+                
+                return (
+                  <div
+                    key={i}
+                    className="relative flex items-center"
+                    role="none"
+                    onMouseEnter={() => hasDropdown && setDropdownOpen(true)}
+                    onMouseLeave={() => hasDropdown && setDropdownOpen(false)}
                   >
-                    {link.name}
-                  </Link>
-                </div>
-              ))}
+                    {hasDropdown ? (
+                      <div className="relative" ref={link.name === 'Services' ? dropdownRef : null}>
+                        <button
+                          className={cn(
+                            'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none outline-none focus:bg-slate-100',
+                            scrolled
+                              ? 'text-slate-600 hover:text-[#0f172a] hover:bg-slate-100'
+                              : 'text-white/80 hover:text-white hover:bg-white/10'
+                          )}
+                          onClick={() => setDropdownOpen(!dropdownOpen)}
+                          data-tina-field={tinaField(link, 'name')}
+                        >
+                          {link.name}
+                          <ChevronDown className={cn("transition-transform duration-200", dropdownOpen ? "rotate-180" : "")} size={14} />
+                        </button>
+                        
+                        <AnimatePresence>
+                          {dropdownOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 10 }}
+                              className="absolute top-full left-0 mt-1 w-80 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden py-3 z-[10000]"
+                            >
+                              {link.dropdown.map((sub: any, j: number) => (
+                                <Link
+                                  key={j}
+                                  href={sub.href}
+                                  className="flex flex-col px-5 py-3 hover:bg-slate-50 group/sub transition-colors"
+                                  onClick={() => setDropdownOpen(false)}
+                                >
+                                  <span className="text-sm font-bold text-slate-800 group-hover/sub:text-[#0284c7] transition-colors flex items-center justify-between">
+                                    {sub.name}
+                                    <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-all" />
+                                  </span>
+                                  <span className="text-[11px] text-slate-400 font-medium leading-tight mt-1">{sub.desc}</span>
+                                </Link>
+                              ))}
+                              <div className="mt-2 pt-2 border-t border-slate-100 px-5">
+                                <Link href="/services" className="text-[10px] font-black uppercase tracking-widest text-[#0284c7] hover:text-[#0369a1]" onClick={() => setDropdownOpen(false)}>
+                                  View All Services →
+                                </Link>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          'flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none',
+                          scrolled
+                            ? 'text-slate-600 hover:text-[#0f172a] hover:bg-slate-100'
+                            : 'text-white/80 hover:text-white hover:bg-white/10'
+                        )}
+                        role="menuitem"
+                        data-tina-field={tinaField(link, 'name')}
+                      >
+                        {link.name}
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
 
               {/* CTA button */}
               <Link
@@ -187,19 +264,55 @@ export default function Navbar({ data }: { data?: any }) {
               <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 min-h-[80px]" />
 
               <nav className="flex flex-col px-4 py-6 gap-1 flex-1">
-                {navLinks.map((link: any, i: number) => (
-                  <div key={i} className="flex flex-col">
-                    <div className="flex items-center justify-between">
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className="px-4 py-3.5 flex-1 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150"
-                      >
-                        {link.name}
-                      </Link>
+                {navLinks.map((link: any, i: number) => {
+                  const hasDropdown = link.dropdown && link.dropdown.length > 0;
+                  
+                  return (
+                    <div key={i} className="flex flex-col">
+                      <div className="flex items-center justify-between">
+                        {hasDropdown ? (
+                          <button
+                            onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                            className="px-4 py-3.5 flex-1 flex items-center justify-between rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150"
+                          >
+                            {link.name}
+                            <ChevronDown className={cn("transition-transform", mobileDropdownOpen ? "rotate-180" : "")} size={18} />
+                          </button>
+                        ) : (
+                          <Link
+                            href={link.href}
+                            onClick={() => setIsOpen(false)}
+                            className="px-4 py-3.5 flex-1 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150"
+                          >
+                            {link.name}
+                          </Link>
+                        )}
+                      </div>
+                      
+                      {hasDropdown && mobileDropdownOpen && (
+                        <div className="ml-4 flex flex-col border-l border-white/10 pl-2 mt-1">
+                          {link.dropdown.map((sub: any, j: number) => (
+                            <Link
+                              key={j}
+                              href={sub.href}
+                              onClick={() => setIsOpen(false)}
+                              className="px-4 py-3 text-sm text-white/50 hover:text-white transition-colors"
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                          <Link
+                            href="/services"
+                            onClick={() => setIsOpen(false)}
+                            className="px-4 py-3 text-sm text-[#0284c7] font-bold"
+                          >
+                            View All Services →
+                          </Link>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </nav>
 
               <div className="px-6 py-6 border-t border-white/10 space-y-3">

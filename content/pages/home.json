@@ -171,17 +171,20 @@
       {
         "title": "PDPM Case Mix Analysis",
         "desc": "Real-time analysis of your clinical data to optimize reimbursement and outcomes.",
-        "icon": "BarChart3"
+        "icon": "BarChart3",
+        "slug": "medicaid-case-mix-analysis"
       },
       {
         "title": "Staff Education & CEUs",
         "desc": "In-house training for your therapists to keep them ahead of regulatory changes.",
-        "icon": "GraduationCap"
+        "icon": "GraduationCap",
+        "slug": "snf-staff-education"
       },
       {
         "title": "Recruitment & Retention",
         "desc": "Building your therapy team with top-tier talent that stays for the long term.",
-        "icon": "Users"
+        "icon": "Users",
+        "slug": "in-house-transition"
       }
     ],
     "featuredCard": {

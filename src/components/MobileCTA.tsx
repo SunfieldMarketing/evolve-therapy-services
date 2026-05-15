@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import { Phone, MessageSquare, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function MobileCTA() {
+import { tinaField } from '@/lib/tina';
+
+export default function MobileCTA({ data }: { data?: any }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -14,6 +16,11 @@ export default function MobileCTA() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const d = data || {
+    text: "Get Free Analysis",
+    href: "/contact"
+  };
 
   return (
     <AnimatePresence>
@@ -27,10 +34,10 @@ export default function MobileCTA() {
         >
           <div className="flex gap-3 p-2 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-slate-200">
             <a 
-              href="/contact"
+              href={d.href}
               className="flex-1 bg-primary text-white py-4 rounded-xl flex items-center justify-center gap-2 font-bold text-[13px] uppercase tracking-[0.15em] shadow-lg hover:bg-primary/90 transition-colors"
             >
-              Get Free Analysis <ArrowRight size={16} />
+              <span data-tina-field={tinaField(data, 'text')}>{d.text}</span> <ArrowRight size={16} />
             </a>
           </div>
         </motion.div>

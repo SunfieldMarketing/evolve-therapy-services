@@ -118,6 +118,13 @@ export default defineConfig({
             label: "Active States (for USA Map)",
             list: true,
           },
+          {
+            type: "object", name: "mobileCta", label: "Mobile CTA",
+            fields: [
+              { type: "string", name: "text", label: "Button Text" },
+              { type: "string", name: "href", label: "Button Link" },
+            ],
+          },
         ],
       },
       {
@@ -235,6 +242,7 @@ export default defineConfig({
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
                   { type: "string", name: "icon", label: "Icon Name" },
+                  { type: "string", name: "slug", label: "Slug" },
                 ],
               },
               {
@@ -694,6 +702,14 @@ export default defineConfig({
           { type: "image", name: "image", label: "Hero Image" },
           { type: "string", name: "iconName", label: "Icon Name" },
           { type: "string", name: "videoUrl", label: "Video URL" },
+          {
+            type: "object", name: "valueBoxes", label: "Value Boxes", list: true,
+            fields: [
+              { type: "string", name: "icon", label: "Icon Name" },
+              { type: "string", name: "label", label: "Label" },
+              { type: "string", name: "sublabel", label: "Sublabel" },
+            ],
+          },
           {
             type: "object", name: "cta", label: "CTA Section",
             fields: [

@@ -33,6 +33,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTina, tinaField } from '@/lib/tina';
 import servicesData from '../../../content/pages/services.json';
+import MobileCTA from '@/components/MobileCTA';
 
 const iconMap = {
   Stethoscope,
@@ -68,10 +69,11 @@ export default function ServicesPage(props: { data: any, query: string, variable
         navbar { links { name href } ctaText }
         footer { tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
+        mobileCta { text href }
       }
     }`,
     variables: props.variables || {},
-    data: props.data || { services: servicesData },
+    data: props.data || { services: servicesData, settings: undefined },
   });
 
   const p = data.services;
@@ -369,6 +371,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
       </section>
 
       <Footer data={s} preFooterData={s?.preFooterCta} />
+      <MobileCTA data={s?.mobileCta} />
     </main>
   );
 }

@@ -11,6 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import { useTina, tinaField } from '@/lib/tina';
+import MobileCTA from '@/components/MobileCTA';
 
 const iconMap: Record<string, React.ComponentType<any>> = {
   Stethoscope, ClipboardCheck, GraduationCap, LineChart, ShieldAlert, Users2, Target, Activity, Heart, Sparkles, Award, Star
@@ -41,7 +42,11 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
         bgImage="none"
         badgeText="Service Detail"
         data-tina-field={tinaField(service, 'title')}
-        valueBoxes={[
+        valueBoxes={service.valueBoxes?.map((box: any) => ({
+          icon: iconMap[box.icon] || CheckCircle2,
+          label: box.label,
+          sublabel: box.sublabel
+        })) || [
           { icon: CheckCircle2, label: 'Evidence-Based', sublabel: 'Clinical Program' },
           { icon: BarChart4, label: 'Data-Driven', sublabel: 'Outcomes' },
         ]}
@@ -163,6 +168,7 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
       </section>
 
       <Footer data={s} preFooterData={s?.preFooterCta} />
+      <MobileCTA data={s?.mobileCta} />
     </main>
   );
 }

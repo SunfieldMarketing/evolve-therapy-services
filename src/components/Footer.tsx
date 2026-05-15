@@ -100,7 +100,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                 <span data-tina-field={tinaField(p, 'primaryCta')}>{p.primaryCta}</span> <ArrowRight size={16} aria-hidden="true" className="ml-2" />
               </Link>
               <a
-                href={`tel:${d.phone.replace(/\D/g, '')}`}
+                href={`tel:${d.phone?.replace(/\D/g, '')}`}
                 className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/40 px-8 py-5 rounded-full font-bold text-xs uppercase transition-all duration-300"
               >
                 <Phone size={15} aria-hidden="true" /> <span data-tina-field={tinaField(d, 'phone')}>{d.phone}</span>
@@ -123,15 +123,15 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                 className="h-14 brightness-0 invert" 
               />
             </Link>
-            <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs" data-tina-field={tinaField(d.footer, 'tagline')}>
-              {d.footer.tagline}
+            <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs" data-tina-field={d.footer ? tinaField(d.footer, 'tagline') : undefined}>
+              {d.footer?.tagline}
             </p>
 
             {/* Contact details */}
             <div className="space-y-3 mb-8">
               {[
                 { Icon: MapPin, text: d.address, href: undefined, field: 'address' },
-                { Icon: Phone, text: d.phone, href: `tel:${d.phone.replace(/\D/g, '')}`, field: 'phone' },
+                { Icon: Phone, text: d.phone, href: `tel:${d.phone?.replace(/\D/g, '')}`, field: 'phone' },
                 { Icon: Mail, text: d.email, href: `mailto:${d.email}`, field: 'email' },
               ].map(({ Icon, text, href, field }) => (
                 <div key={text} className="flex items-start gap-3 text-white/40 text-sm">
@@ -169,9 +169,9 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
           {/* Nav column */}
           <div className="lg:col-span-2">
             <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Navigation</h4>
-            <ul className="space-y-3" role="list">
-              {(d.footer.links || []).map((link: any, i: number) => (
-                <li key={i}>
+            <ul className="space-y-4" role="list">
+              {(d.footer?.links || []).map((link: any, i: number) => (
+                <li key={i} data-tina-field={tinaField(link, 'name')}>
                   <Link
                     href={link.href}
                     className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium"
@@ -186,9 +186,9 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
           {/* Services column */}
           <div className="lg:col-span-3">
             <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Services</h4>
-            <ul className="space-y-3" role="list">
-              {(d.footer.serviceLinks || []).map((link: any, i: number) => (
-                <li key={i}>
+            <ul className="space-y-4" role="list">
+              {(d.footer?.serviceLinks || []).map((link: any, i: number) => (
+                <li key={i} data-tina-field={tinaField(link, 'name')}>
                   <Link
                     href={link.href}
                     className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block"
@@ -237,9 +237,9 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
 
         {/* ── Bottom bar ── */}
         <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-white/25 text-xs" data-tina-field={tinaField(d.footer, 'copyright')}>
-            © {year} {d.footer.copyright}
-          </p>
+          <div className="text-white/40 text-sm font-medium" data-tina-field={d.footer ? tinaField(d.footer, 'copyright') : undefined}>
+            &copy; {new Date().getFullYear()} {d.footer?.copyright || 'Evolve Therapy Services'}
+          </div>
           <div className="flex items-center gap-6">
             {[
               { label: 'Privacy Policy', href: '#' },

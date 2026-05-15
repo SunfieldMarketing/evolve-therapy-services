@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { useTina, tinaField } from '@/lib/tina';
 import locationsData from '../../../content/pages/locations.json';
+import MobileCTA from '@/components/MobileCTA';
 
 const iconMap = {
   MapPin,
@@ -36,10 +37,11 @@ export default function LocationsPage(props: { data: any, query: string, variabl
         navbar { links { name href } ctaText }
         footer { tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
+        mobileCta { text href }
       }
     }`,
     variables: props.variables || {},
-    data: props.data || { locations: locationsData },
+    data: props.data || { locations: locationsData, settings: undefined },
   });
 
   const p = data.locations;
@@ -53,11 +55,14 @@ export default function LocationsPage(props: { data: any, query: string, variabl
         italicWord={p.hero.titleItalic} 
         subtitle={p.hero.description}
         videoKey="locations"
-        data-tina-field={tinaField(p.hero, 'title')}
+        tinaFields={{
+          title: tinaField(p.hero, 'title'),
+          subtitle: tinaField(p.hero, 'description'),
+        }}
       />
 
       {/* Interactive USA Coverage Map - Moved to top focus */}
-      <USAMap />
+      <USAMap activeStates={s?.activeStates} />
 
       <section className="py-20 md:py-32 relative overflow-hidden bg-slate-50 border-t border-slate-100">
         {/* Background Decorative Blob */}
@@ -189,6 +194,7 @@ export default function LocationsPage(props: { data: any, query: string, variabl
       </section>
 
       <Footer data={s} preFooterData={s?.preFooterCta} />
+      <MobileCTA data={s?.mobileCta} />
     </main>
   );
 }

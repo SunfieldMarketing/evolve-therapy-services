@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Lora } from "next/font/google";
 import "./globals.css";
-import TinaProviderWrapper from "@/components/TinaProvider";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -56,9 +55,7 @@ export default function RootLayout({
         <meta name="tina-audit-build-id" content="1.0.6-bulletproof-interactivity" />
       </head>
       <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col`}>
-        <TinaProviderWrapper>
-          {children}
-        </TinaProviderWrapper>
+        {children}
       </body>
     </html>
   );

@@ -48,8 +48,18 @@ export default function Home(props: { data: any; query: string; variables: any }
         ourServices {
           title theme showSection
           items { title desc icon }
+          featuredCard { badge title titleItalic description buttonText image }
         }
         bottomCta { quote checklist primaryCta phone }
+        coverage { title legend { text icon } }
+        faq { title items { question answer } }
+        partner { title desc button }
+      }
+      contact(relativePath: "contact.json") {
+        hero { badge titleLine1 titleItalic description }
+        sidebar { title titleItalic description items { icon label value sub } }
+        form { badge title titleItalic description buttonText inquiryGoals }
+        trustBadges { icon title desc }
       }
       settings(relativePath: "settings.json") {
         siteName phone email address linkedin
@@ -58,10 +68,11 @@ export default function Home(props: { data: any; query: string; variables: any }
         testimonials { title titleItalic description list { name role facility content stars initials } }
         faq { title titleItalic description list { q a } }
         activeStates
+        mobileCta { text href }
       }
     }`,
     variables: props.variables || {},
-    data: props.data || { home: homeData },
+    data: props.data || { home: homeData, contact: undefined, settings: undefined },
   });
 
   const p = data.home;
@@ -236,9 +247,9 @@ export default function Home(props: { data: any; query: string; variables: any }
         </div>
       </section>
 
-      <Contact data={p.contact} parentField="contact" />
-      <Footer data={s} preFooterData={data.home?.preFooterCta} />
-      <MobileCTA />
+      <Contact data={data.contact} parentField="contact" />
+      <Footer data={s} preFooterData={s?.preFooterCta} />
+      <MobileCTA data={s?.mobileCta} />
     </main>
   );
 }

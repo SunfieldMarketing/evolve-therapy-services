@@ -8,6 +8,7 @@ import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { useTina, tinaField } from '@/lib/tina';
 import contactData from '../../../content/pages/contact.json';
+import MobileCTA from '@/components/MobileCTA';
 
 const iconMap = {
   Mail,
@@ -33,10 +34,11 @@ export default function ContactPage(props: { data: any, query: string, variables
         navbar { links { name href } ctaText }
         footer { tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
+        mobileCta { text href }
       }
     }`,
     variables: props.variables || {},
-    data: props.data || { contact: contactData },
+    data: props.data || { contact: contactData, settings: undefined },
   });
 
   const p = data.contact;
@@ -54,7 +56,11 @@ export default function ContactPage(props: { data: any, query: string, variables
         bgImage="none"
         useVideo={false}
         badgeText={p.hero.badge}
-        data-tina-field={tinaField(p.hero, 'titleLine1')}
+        tinaFields={{
+          title: tinaField(p.hero, 'titleLine1'),
+          subtitle: tinaField(p.hero, 'description'),
+          badgeText: tinaField(p.hero, 'badge'),
+        }}
         valueBoxes={[
           { icon: ShieldCheck, label: 'Risk-Free Audit', sublabel: 'Initial Analysis' },
           { icon: Globe, label: 'National Scale', sublabel: 'Local Impact' }
@@ -186,6 +192,7 @@ export default function ContactPage(props: { data: any, query: string, variables
       </section>
 
       <Footer data={s} preFooterData={s?.preFooterCta} />
+      <MobileCTA data={s?.mobileCta} />
     </main>
   );
 }

@@ -1,22 +1,20 @@
 'use client';
 
+import { useTina as useTinaReal } from 'tinacms/dist/react';
+
 /**
- * useTina — Static passthrough for public visitors.
+ * useTina — Hook for TinaCMS visual editing.
  *
- * On the public site we always use the static JSON data already imported
- * at build-time. The real useTina (from tinacms/dist/react) is only needed
- * inside /admin where the visual editor runs.
- *
- * This eliminates ALL infinite render loops caused by TinaCMS context
- * being unavailable / unstable on public pages.
+ * In production/public mode, it returns the static data.
+ * In edit mode (inside /admin), it connects to the TinaCMS context
+ * to enable live previews and hover-to-edit.
  */
 export function useTina<T extends object>(props: {
   query: string;
   variables: any;
   data: T;
 }): { data: T } {
-  // Always return the static data — no CMS context needed on public pages.
-  return { data: props.data };
+  return useTinaReal(props);
 }
 
 export { tinaField } from 'tinacms/dist/react';

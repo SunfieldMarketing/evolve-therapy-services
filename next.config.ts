@@ -8,18 +8,6 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'evolvetherapyservices.com' },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/admin',
-        destination: '/tina-build/index.html',
-      },
-      {
-        source: '/admin/:path*',
-        destination: '/tina-build/index.html',
-      },
-    ];
-  },
 };
 
 export default nextConfig;

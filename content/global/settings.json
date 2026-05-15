@@ -125,5 +125,9 @@
     { "icon": "Users", "title": "Recruitment Hubs", "desc": "Active state-wide recruitment and retention strategies for your facility." },
     { "icon": "GraduationCap", "title": "Clinical Training", "desc": "Continuous education for in-house teams on PDPM and MDS accuracy." },
     { "icon": "ShieldCheck", "title": "Operational Oversight", "desc": "Regional directors providing daily clinical and financial management." }
-  ]
+  ],
+  "mobileCta": {
+    "text": "Get Free Analysis",
+    "href": "/contact"
+  }
 }

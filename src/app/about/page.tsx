@@ -25,6 +25,7 @@ import {
   Award,
   Zap,
 } from 'lucide-react';
+import MobileCTA from '@/components/MobileCTA';
 import { cn } from '@/lib/utils';
 import { useTina, tinaField } from '@/lib/tina';
 import aboutData from '../../../content/pages/about.json';
@@ -52,10 +53,11 @@ export default function AboutPage(props: { data: any; query: string; variables: 
         navbar { links { name href } ctaText }
         footer { tagline copyright links { name href } serviceLinks { name href } }
         preFooterCta { title subtitle primaryCta }
+        mobileCta { text href }
       }
     }`,
     variables: props.variables || {},
-    data: props.data || { about: aboutData },
+    data: props.data || { about: aboutData, settings: undefined },
   });
 
   const p = data.about;
@@ -73,6 +75,11 @@ export default function AboutPage(props: { data: any; query: string; variables: 
         bgImage="https://res.cloudinary.com/dai2pg27n/image/upload/v1778105493/9888c51b-097f-46b4-907c-1280f458806b.png"
         useVideo={false}
         badgeText={p.header.badgeText}
+        tinaFields={{
+          title: tinaField(p.header, 'title'),
+          subtitle: tinaField(p.header, 'subtitle'),
+          badgeText: tinaField(p.header, 'badgeText'),
+        }}
         valueBoxes={p.header.valueBoxes.map((box: any) => ({
           icon: iconMap[box.icon as keyof typeof iconMap] || Award,
           label: box.label,
@@ -359,7 +366,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
           <BlurFade delay={0.3}>
             <div className="rounded-[3rem] overflow-hidden bg-slate-50 border border-slate-100 p-8 md:p-16 shadow-2xl relative">
               <div className="relative z-10 min-h-[400px] md:min-h-[600px]">
-                <USAMap />
+                <USAMap activeStates={s?.activeStates} />
               </div>
 
               {/* Legend */}
@@ -424,6 +431,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
       </section>
 
       <Footer data={s} preFooterData={s?.preFooterCta} />
+      <MobileCTA data={s?.mobileCta} />
     </main>
   );
 }

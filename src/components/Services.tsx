@@ -62,7 +62,7 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
               className="bg-slate-50 p-6 sm:p-8 md:p-10 rounded-3xl md:rounded-[2.5rem] border border-slate-100 hover:bg-white hover:border-[#0284c7]/20 hover:scale-[1.02] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-500 group relative flex flex-col justify-between overflow-hidden"
               data-tina-field={parentField ? tinaField(service, 'title') : undefined}
             >
-              <Link href={`/services/${service.title.toLowerCase().replace(/ /g, '-')}`} className="absolute inset-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] focus-visible:ring-offset-2 rounded-3xl md:rounded-[2.5rem]" aria-label={`Learn more about ${service.title}`} />
+              <Link href={service.slug ? `/services/${service.slug}` : `/services/${service.title?.toLowerCase().replace(/ /g, '-')}`} className="absolute inset-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] focus-visible:ring-offset-2 rounded-3xl md:rounded-[2.5rem]" aria-label={`Learn more about ${service.title}`} />
               
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#0284c7]/5 rounded-full blur-2xl group-hover:bg-[#0284c7]/10 transition-colors duration-700" />
 

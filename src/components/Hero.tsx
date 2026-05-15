@@ -80,8 +80,8 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
           style={{ filter: 'brightness(0.35) saturate(0.7)' }}
         />
         
-        {/* Interaction Blocker */}
-        <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
+        {/* Interaction Blocker — only blocks interaction with the video itself */}
+        <div className="absolute inset-0 z-10 bg-transparent pointer-events-none" />
 
         {/* Quick Fade Cover */}
         <div

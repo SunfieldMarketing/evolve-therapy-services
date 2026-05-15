@@ -1,14 +1,12 @@
-'use client';
-
-import { TinaAdmin } from 'tinacms';
+import { redirect } from 'next/navigation';
 
 /**
- * TinaAdmin Page (Next.js App Router Catch-all)
- * 
- * This page serves the TinaCMS visual editor.
- * It is protected by the 'proxy.ts' security gate.
+ * TinaAdmin Redirect Page
+ *
+ * TinaCMS v3.x serves the admin as a static SPA at /tina-build.
+ * This page redirects authenticated users there.
+ * Auth is enforced by proxy.ts before this page is ever reached.
  */
 export default function AdminPage() {
-  // @ts-ignore
-  return <TinaAdmin />;
+  redirect('/tina-build');
 }

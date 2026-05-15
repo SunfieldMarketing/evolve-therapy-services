@@ -1,18 +1,31 @@
 'use client';
 
 import { ReactNode } from 'react';
+import { TinaProvider, TinaCMS } from 'tinacms/dist/client';
+import { usePathname } from 'next/navigation';
 
 /**
  * TinaProviderWrapper
- *
- * PUBLIC visitors: renders children directly — zero CMS overhead.
- * ADMIN users navigating to /admin: TinaCMS handles its own setup.
- *
- * This eliminates the "Maximum update depth exceeded" error caused
- * by mounting TinaCMS globally for every page visitor.
+ * 
+ * Provides the TinaCMS context to the application.
+ * When viewed normally, this is a lightweight wrapper.
+ * When viewed inside the Tina Admin (/admin), it enables the visual editing sidebar and on-page highlights.
  */
 export default function TinaProviderWrapper({ children }: { children: ReactNode }) {
-  // Just pass through children for all public routes.
-  // TinaCMS visual editing is bootstrapped by /admin/[[...route]]/page.tsx only.
-  return <>{children}</>;
+  const pathname = usePathname();
+  const isEditing = pathname?.startsWith('/admin');
+
+  return (
+    <TinaProvider
+      cms={
+        new TinaCMS({
+          clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+          branch: 'main',
+          isEditMode: isEditing, // Only enable editing features on /admin routes
+        })
+      }
+    >
+      {children}
+    </TinaProvider>
+  );
 }

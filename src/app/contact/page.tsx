@@ -54,6 +54,7 @@ export default function ContactPage(props: { data: any, query: string, variables
         bgImage="none"
         useVideo={false}
         badgeText={p.hero.badge}
+        data-tina-field={tinaField(p.hero, 'titleLine1')}
         valueBoxes={[
           { icon: ShieldCheck, label: 'Risk-Free Audit', sublabel: 'Initial Analysis' },
           { icon: Globe, label: 'National Scale', sublabel: 'Local Impact' }
@@ -75,10 +76,10 @@ export default function ContactPage(props: { data: any, query: string, variables
 
                   <div className="relative z-10">
                     <h2 className="text-4xl md:text-5xl font-serif font-black text-white mb-6 tracking-tighter leading-tight">
-                      {p.sidebar.title} <br />
-                      <span className="text-[#38bdf8] italic font-medium">{p.sidebar.titleItalic}</span>
+                      <span data-tina-field={tinaField(p.sidebar, 'title')}>{p.sidebar.title}</span> <br />
+                      <span className="text-[#38bdf8] italic font-medium" data-tina-field={tinaField(p.sidebar, 'titleItalic')}>{p.sidebar.titleItalic}</span>
                     </h2>
-                    <p className="text-white/50 text-lg font-light leading-relaxed mb-12">
+                    <p className="text-white/50 text-lg font-light leading-relaxed mb-12" data-tina-field={tinaField(p.sidebar, 'description')}>
                       {p.sidebar.description}
                     </p>
 
@@ -86,14 +87,14 @@ export default function ContactPage(props: { data: any, query: string, variables
                       {p.sidebar.items.map((item: any, i: number) => {
                         const Icon = iconMap[item.icon as keyof typeof iconMap] || Phone;
                         return (
-                          <div key={i} className="flex items-start gap-6 group">
+                          <div key={i} className="flex items-start gap-6 group" data-tina-field={tinaField(item, 'value')}>
                             <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8] group-hover:bg-[#38bdf8] group-hover:text-[#0f172a] shadow-xl transition-all duration-500">
                               <Icon size={22} />
                             </div>
                             <div>
                               <div className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-1">{item.label}</div>
                               <div className="text-xl font-serif font-bold text-white group-hover:text-[#38bdf8] transition-colors">{item.value}</div>
-                              <div className="text-xs text-white/40 mt-1">{item.sub}</div>
+                              <div className="text-xs text-white/40 mt-1" data-tina-field={tinaField(item, 'sub')}>{item.sub}</div>
                             </div>
                           </div>
                         );
@@ -107,11 +108,11 @@ export default function ContactPage(props: { data: any, query: string, variables
                 const Icon = iconMap[badge.icon as keyof typeof iconMap] || Clock;
                 return (
                   <BlurFade delay={0.2 + i * 0.05} key={i}>
-                     <div className="bg-white rounded-[2rem] p-8 border border-slate-200 flex items-start gap-5 shadow-sm">
+                     <div className="bg-white rounded-[2rem] p-8 border border-slate-200 flex items-start gap-5 shadow-sm" data-tina-field={tinaField(badge, 'title')}>
                         <Icon className="text-[#0284c7] shrink-0" size={32} />
                         <div>
                            <h4 className="font-black font-serif text-[#0f172a] text-xl mb-2">{badge.title}</h4>
-                           <p className="text-slate-500 text-sm leading-relaxed font-light">{badge.desc}</p>
+                           <p className="text-slate-500 text-sm leading-relaxed font-light" data-tina-field={tinaField(badge, 'desc')}>{badge.desc}</p>
                         </div>
                      </div>
                   </BlurFade>
@@ -124,13 +125,13 @@ export default function ContactPage(props: { data: any, query: string, variables
                   <div className="mb-10">
                     <div className="inline-flex items-center gap-3 mb-6">
                        <div className="w-8 h-px bg-[#0284c7]" />
-                       <span className="text-[#0284c7] font-black uppercase tracking-[0.3em] text-[10px]">{p.form.badge}</span>
+                       <span className="text-[#0284c7] font-black uppercase tracking-[0.3em] text-[10px]" data-tina-field={tinaField(p.form, 'badge')}>{p.form.badge}</span>
                     </div>
                     <h3 className="text-4xl md:text-5xl font-serif font-black text-[#0f172a] mb-4 tracking-tighter leading-tight">
-                      {p.form.title} <br />
-                      <span className="text-[#0284c7] italic font-medium">{p.form.titleItalic}</span>
+                      <span data-tina-field={tinaField(p.form, 'title')}>{p.form.title}</span> <br />
+                      <span className="text-[#0284c7] italic font-medium" data-tina-field={tinaField(p.form, 'titleItalic')}>{p.form.titleItalic}</span>
                     </h3>
-                    <p className="text-slate-500 text-lg font-light leading-relaxed max-w-lg">
+                    <p className="text-slate-500 text-lg font-light leading-relaxed max-w-lg" data-tina-field={tinaField(p.form, 'description')}>
                       {p.form.description}
                     </p>
                   </div>
@@ -170,7 +171,7 @@ export default function ContactPage(props: { data: any, query: string, variables
                     </div>
                     
                     <ShimmerButton background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="w-full py-5 lg:py-6 group shadow-xl mt-6">
-                      <span className="font-black uppercase tracking-[0.3em] text-[11px] text-white">{p.form.buttonText}</span>
+                      <span className="font-black uppercase tracking-[0.3em] text-[11px] text-white" data-tina-field={tinaField(p.form, 'buttonText')}>{p.form.buttonText}</span>
                       <ArrowRight size={18} className="ml-3 group-hover:translate-x-1 transition-transform" />
                     </ShimmerButton>
                     

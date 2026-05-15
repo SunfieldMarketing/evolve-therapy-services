@@ -164,6 +164,7 @@
   },
   "ourServices": {
     "title": "Clinical Program Excellence",
+    "description": "At Evolve, we provide all the services you require to provide your patients with the highest possible level of care while you truly EVOLVE to the next level.",
     "theme": "light",
     "showSection": true,
     "items": [
@@ -182,7 +183,15 @@
         "desc": "Building your therapy team with top-tier talent that stays for the long term.",
         "icon": "Users"
       }
-    ]
+    ],
+    "featuredCard": {
+      "badge": "Featured Discovery",
+      "title": "Clinical Cost &",
+      "titleItalic": "Success Analysis",
+      "description": "Receive a comprehensive, data-driven overview of your facility's current therapy health. Strategic insights with no legacy strings attached.",
+      "buttonText": "Request Free Analysis",
+      "image": "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80"
+    }
   },
   "coverage": {
     "title": "Strategic Presence Across America",

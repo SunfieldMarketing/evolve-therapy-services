@@ -227,6 +227,7 @@ export default defineConfig({
             type: "object", name: "ourServices", label: "Our Services Section",
             fields: [
               { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
               { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "boolean", name: "showSection", label: "Show Section" },
               { type: "object", name: "items", label: "Service Items", list: true,
@@ -234,6 +235,17 @@ export default defineConfig({
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
                   { type: "string", name: "icon", label: "Icon Name" },
+                ],
+              },
+              {
+                type: "object", name: "featuredCard", label: "Featured Card",
+                fields: [
+                  { type: "string", name: "badge", label: "Badge" },
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "titleItalic", label: "Title Italic" },
+                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  { type: "string", name: "buttonText", label: "Button Text" },
+                  { type: "image", name: "image", label: "Image" },
                 ],
               },
             ],

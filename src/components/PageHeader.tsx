@@ -56,7 +56,8 @@ export default function PageHeader({
     { icon: Heart, label: 'Compassion', sublabel: 'Results Driven' }
   ],
   useVideo = true,
-}: PageHeaderProps) {
+  ...props
+}: PageHeaderProps & React.HTMLAttributes<HTMLElement>) {
   const imageUrl = bgImage || imageMap[videoKey] || imageMap.default;
   const videoUrl = videoMap[videoKey as string];
   const finalUseVideo = useVideo && !!videoUrl;
@@ -81,7 +82,7 @@ export default function PageHeader({
   }, [finalUseVideo, videoUrl]);
 
   return (
-    <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
+    <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden" {...props}>
       {/* ── Background Layer ── */}
       <div className="absolute inset-0 z-0">
         {finalUseVideo ? (

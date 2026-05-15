@@ -49,8 +49,8 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
               </h2>
             </BlurFade>
           </div>
-          <BlurFade delay={0.3} className="text-lg text-slate-500 max-w-md leading-relaxed pb-2 font-light">
-            At Evolve, we provide all the services you require to provide your patients with the highest possible level of care while you truly EVOLVE to the next level.
+          <BlurFade delay={0.3} className="text-lg text-slate-500 max-w-md leading-relaxed pb-2 font-light" data-tina-field={parentField ? tinaField(d, 'description') : undefined}>
+            {d.description}
           </BlurFade>
         </div>
 
@@ -88,50 +88,52 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
         </div>
 
         {/* Featured Card */}
-        <BlurFade 
-          delay={0.4}
-          className="mt-16 md:mt-24 bg-white rounded-3xl md:rounded-[3rem] overflow-hidden shadow-2xl relative border border-slate-200 group"
-        >
-          <BorderBeamAlways colorFrom="#38bdf8" colorTo="#0284c7" borderWidth={2} />
-          
-          <div className="grid lg:grid-cols-2 relative z-10">
-            <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10 bg-white/90 lg:bg-transparent">
-              <BlurFade delay={0.5} className="mb-8">
-                <AnimatedGradientText>Featured Discovery</AnimatedGradientText>
-              </BlurFade>
+        {d.featuredCard && (
+          <BlurFade 
+            delay={0.4}
+            className="mt-16 md:mt-24 bg-white rounded-3xl md:rounded-[3rem] overflow-hidden shadow-2xl relative border border-slate-200 group"
+          >
+            <BorderBeamAlways colorFrom="#38bdf8" colorTo="#0284c7" borderWidth={2} />
+            
+            <div className="grid lg:grid-cols-2 relative z-10">
+              <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10 bg-white/90 lg:bg-transparent">
+                <BlurFade delay={0.5} className="mb-8">
+                  <AnimatedGradientText data-tina-field={parentField ? tinaField(d.featuredCard, 'badge') : undefined}>{d.featuredCard.badge}</AnimatedGradientText>
+                </BlurFade>
+                
+                <h3 className="text-3xl lg:text-5xl font-serif font-black text-[#0f172a] mb-6 leading-[0.9] tracking-tighter">
+                  <span data-tina-field={parentField ? tinaField(d.featuredCard, 'title') : undefined}>{d.featuredCard.title}</span> <br />
+                  <span className="text-[#0284c7] italic font-medium" data-tina-field={parentField ? tinaField(d.featuredCard, 'titleItalic') : undefined}>{d.featuredCard.titleItalic}</span>
+                </h3>
+                <p className="text-slate-800 mb-10 text-sm md:text-base leading-relaxed font-semibold" data-tina-field={parentField ? tinaField(d.featuredCard, 'description') : undefined}>
+                  {d.featuredCard.description}
+                </p>
+                <div>
+                  <Link href="/contact" className="focus-visible:outline-none">
+                    <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn inline-flex text-white hover:bg-[#0284c7] transition-colors duration-500">
+                      <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white" data-tina-field={parentField ? tinaField(d.featuredCard, 'buttonText') : undefined}>{d.featuredCard.buttonText}</span>
+                      <ArrowUpRight className="ml-2 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                    </ShimmerButton>
+                  </Link>
+                </div>
+              </div>
               
-              <h3 className="text-3xl lg:text-5xl font-serif font-black text-[#0f172a] mb-6 leading-[0.9] tracking-tighter">
-                Clinical Cost & <br />
-                <span className="text-[#0284c7] italic font-medium">Success Analysis</span>
-              </h3>
-              <p className="text-slate-800 mb-10 text-sm md:text-base leading-relaxed font-semibold">
-                Receive a comprehensive, data-driven overview of your facility's current therapy health. Strategic insights with no legacy strings attached.
-              </p>
-              <div>
-                <Link href="/contact" className="focus-visible:outline-none">
-                  <ShimmerButton background="#0f172a" shimmerColor="rgba(255,255,255,0.1)" borderRadius="1rem" className="group/btn inline-flex text-white hover:bg-[#0284c7] transition-colors duration-500">
-                    <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white">Request Free Analysis</span>
-                    <ArrowUpRight className="ml-2 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-                  </ShimmerButton>
-                </Link>
+              <div className="relative min-h-[400px] overflow-hidden lg:h-auto z-0 mix-blend-multiply opacity-90 group-hover:mix-blend-normal transition-all duration-700" data-tina-field={parentField ? tinaField(d.featuredCard, 'image') : undefined}>
+                 {d.featuredCard.image && <Image 
+                  src={d.featuredCard.image} 
+                  alt={d.featuredCard.title} 
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
+                />}
+                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent lg:w-[80%]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent lg:hidden" />
+                
+                {/* Decorative data points overlay strictly for aesthetics */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/5 rounded-full animate-ping opacity-20 pointer-events-none" />
               </div>
             </div>
-            
-            <div className="relative min-h-[400px] overflow-hidden lg:h-auto z-0 mix-blend-multiply opacity-90 group-hover:mix-blend-normal transition-all duration-700">
-               <Image 
-                src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80" 
-                alt="Clinical Success Data Review" 
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent lg:w-[80%]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent lg:hidden" />
-              
-              {/* Decorative data points overlay strictly for aesthetics */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/5 rounded-full animate-ping opacity-20 pointer-events-none" />
-            </div>
-          </div>
-        </BlurFade>
+          </BlurFade>
+        )}
       </div>
     </section>
   );

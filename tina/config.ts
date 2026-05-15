@@ -141,6 +141,7 @@ export default defineConfig({
           {
             type: "object", name: "hero", label: "Hero Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "eyebrow", label: "Eyebrow Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -160,6 +161,8 @@ export default defineConfig({
           {
             type: "object", name: "clinicalExcellence", label: "Clinical Excellence Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -188,6 +191,8 @@ export default defineConfig({
           {
             type: "object", name: "process", label: "Process Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -206,9 +211,10 @@ export default defineConfig({
           {
             type: "object", name: "whyEvolve", label: "Why Evolve Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "subtitle", label: "Subtitle" },
-              { type: "string", name: "introText", label: "Intro Text" },
+              { type: "string", name: "introText", label: "Intro Text", ui: { component: "textarea" } },
               {
                 type: "object", name: "features", label: "Features", list: true,
                 fields: [
@@ -234,10 +240,10 @@ export default defineConfig({
           {
             type: "object", name: "ourServices", label: "Our Services Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
-              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
-              { type: "boolean", name: "showSection", label: "Show Section" },
               { type: "object", name: "items", label: "Service Items", list: true,
                 fields: [
                   { type: "string", name: "title", label: "Title" },
@@ -262,6 +268,7 @@ export default defineConfig({
           {
             type: "object", name: "coverage", label: "Service Coverage Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "title", label: "Title" },
               { type: "object", name: "legend", label: "Map Legend", list: true,
                 fields: [
@@ -274,6 +281,8 @@ export default defineConfig({
           {
             type: "object", name: "faq", label: "FAQ Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "title", label: "Title" },
               { type: "object", name: "items", label: "Questions", list: true,
                 fields: [
@@ -286,6 +295,8 @@ export default defineConfig({
           {
             type: "object", name: "partner", label: "Partner With Us Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
               { type: "string", name: "button", label: "Button Text" },
@@ -294,6 +305,7 @@ export default defineConfig({
           {
             type: "object", name: "bottomCta", label: "Bottom CTA Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
               { type: "string", name: "checklist", label: "Checklist Items", list: true },
               { type: "string", name: "primaryCta", label: "Button Text" },
@@ -316,10 +328,13 @@ export default defineConfig({
           {
             type: "object", name: "header", label: "Header Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "boolean", name: "useVideo", label: "Use Video Background" },
+              { type: "image", name: "bgImage", label: "Custom Background Image" },
+              { type: "string", name: "badgeText", label: "Badge Text" },
               { type: "string", name: "title", label: "Title Prefix" },
               { type: "string", name: "italicWord", label: "Italic Word" },
               { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
-              { type: "string", name: "badgeText", label: "Badge Text" },
               {
                 type: "object", name: "valueBoxes", label: "Value Boxes", list: true,
                 fields: [
@@ -333,6 +348,8 @@ export default defineConfig({
           {
             type: "object", name: "intro", label: "Intro Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -342,26 +359,41 @@ export default defineConfig({
             ],
           },
           {
-            type: "object", name: "pillars", label: "Pillars", list: true,
+            type: "object", name: "pillars", label: "Pillars Section",
             fields: [
-              { type: "string", name: "icon", label: "Icon Name" },
-              { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "text", label: "Description", ui: { component: "textarea" } },
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
+              {
+                type: "object", name: "list", label: "Pillars", list: true,
+                fields: [
+                  { type: "string", name: "icon", label: "Icon Name" },
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "text", label: "Description", ui: { component: "textarea" } },
+                ],
+              }
             ],
           },
           {
-            type: "object", name: "leaders", label: "Leadership Bios", list: true,
+            type: "object", name: "leaders", label: "Leadership Section",
             fields: [
-              { type: "string", name: "name", label: "Name" },
-              { type: "string", name: "title", label: "Job Title" },
-              { type: "image", name: "photo", label: "Photo URL" },
-              { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
-              { type: "string", name: "bio", label: "Bio Paragraphs", list: true, ui: { component: "textarea" } },
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              {
+                type: "object", name: "list", label: "Bios", list: true,
+                fields: [
+                  { type: "string", name: "name", label: "Name" },
+                  { type: "string", name: "title", label: "Job Title" },
+                  { type: "image", name: "photo", label: "Photo URL" },
+                  { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
+                  { type: "string", name: "bio", label: "Bio Paragraphs", list: true, ui: { component: "textarea" } },
+                ],
+              }
             ],
           },
           {
             type: "object", name: "philosophy", label: "Philosophy Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
@@ -378,6 +410,7 @@ export default defineConfig({
           {
             type: "object", name: "journey", label: "Journey Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -394,6 +427,7 @@ export default defineConfig({
           {
             type: "object", name: "national", label: "National Presence Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -408,15 +442,9 @@ export default defineConfig({
             ],
           },
           {
-            type: "object", name: "trust", label: "Trust Section", list: true,
-            fields: [
-              { type: "string", name: "icon", label: "Icon Name" },
-              { type: "string", name: "text", label: "Label" },
-            ],
-          },
-          {
             type: "object", name: "cta", label: "CTA Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
               { type: "string", name: "button", label: "Button Text" },
@@ -438,6 +466,9 @@ export default defineConfig({
           {
             type: "object", name: "hero", label: "Hero Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "boolean", name: "useVideo", label: "Use Video Background" },
+              { type: "image", name: "bgImage", label: "Custom Background Image" },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -453,15 +484,9 @@ export default defineConfig({
             ],
           },
           {
-            type: "object", name: "trust", label: "Trust Section", list: true,
-            fields: [
-              { type: "string", name: "icon", label: "Icon Name" },
-              { type: "string", name: "text", label: "Label" },
-            ],
-          },
-          {
             type: "object", name: "showcase", label: "Services Showcase",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -490,6 +515,8 @@ export default defineConfig({
           {
             type: "object", name: "methodology", label: "Methodology Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -510,6 +537,8 @@ export default defineConfig({
           {
             type: "object", name: "advantage", label: "Advantage Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic Word" },
@@ -526,6 +555,8 @@ export default defineConfig({
           {
             type: "object", name: "pricing", label: "Pricing Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "string", name: "theme", label: "Theme", options: ["light", "dark", "slate"] },
               { type: "string", name: "badge", label: "Badge" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "titleItalic", label: "Title Italic" },
@@ -538,14 +569,6 @@ export default defineConfig({
                   { type: "string", name: "desc", label: "Description", ui: { component: "textarea" } },
                   { type: "string", name: "features", label: "Features", list: true },
                   { type: "boolean", name: "featured", label: "Featured/Highlight" },
-                ],
-              },
-              {
-                type: "object", name: "bottomBanner", label: "Bottom Scaling Banner",
-                fields: [
-                  { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "desc", label: "Description" },
-                  { type: "string", name: "cta", label: "CTA Label" },
                 ],
               },
             ],
@@ -568,6 +591,9 @@ export default defineConfig({
           {
             type: "object", name: "hero", label: "Hero Section",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
+              { type: "boolean", name: "useVideo", label: "Use Video Background" },
+              { type: "image", name: "bgImage", label: "Custom Background Image" },
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "titleLine1", label: "Title Line 1" },
               { type: "string", name: "titleItalic", label: "Title Italic" },
@@ -577,6 +603,7 @@ export default defineConfig({
           {
             type: "object", name: "sidebar", label: "Sidebar Content",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "titleItalic", label: "Title Italic" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
@@ -594,6 +621,7 @@ export default defineConfig({
           {
             type: "object", name: "form", label: "Form Content",
             fields: [
+              { type: "boolean", name: "isVisible", label: "Show Section" },
               { type: "string", name: "badge", label: "Badge" },
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "titleItalic", label: "Title Italic" },

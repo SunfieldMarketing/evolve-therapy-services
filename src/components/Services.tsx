@@ -29,10 +29,16 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
     items: []
   };
 
-  if (!d.showSection) return null;
+  if (d.isVisible === false) return null;
 
   return (
-    <section id="services" className="py-20 md:py-32 bg-white relative overflow-hidden">
+    <section 
+      id="services" 
+      className={cn(
+        "py-20 md:py-32 relative overflow-hidden",
+        d.theme === 'dark' ? "bg-[#0f172a] text-white" : d.theme === 'slate' ? "bg-slate-900 text-white" : "bg-white text-[#0f172a]"
+      )}
+    >
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-slate-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 -z-10" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#0284c7]/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3 -z-10" />

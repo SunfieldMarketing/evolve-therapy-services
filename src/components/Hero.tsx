@@ -59,6 +59,8 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
     }
   }, []);
 
+  if (d.isVisible === false) return null;
+
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center">
       {/* ── Aceternity Spotlight overlay ── */}

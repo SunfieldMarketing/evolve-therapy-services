@@ -36,7 +36,7 @@ export function ShimmerButton({
         } as React.CSSProperties
       }
       className={cn(
-        'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-white',
+        'group relative z-[101] flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-white pointer-events-auto',
         '[border-radius:var(--radius)] [background:var(--bg)]',
         'transform-gpu transition-transform duration-300 ease-in-out active:translate-y-px hover:-translate-y-px',
         className,
@@ -46,7 +46,7 @@ export function ShimmerButton({
       {/* Shimmer sweep layer */}
       <div
         className={cn(
-          'absolute inset-0 overflow-hidden [border-radius:var(--radius)]',
+          'absolute inset-0 overflow-hidden [border-radius:var(--radius)] pointer-events-none',
           'before:absolute before:top-1/2 before:-left-full before:h-[var(--cut)] before:w-full',
           'before:animate-shimmer-slide before:[--direction:linear]',
           'before:[background:linear-gradient(to_right,transparent,var(--shimmer-color),transparent)]',
@@ -55,7 +55,7 @@ export function ShimmerButton({
         aria-hidden="true"
       />
       {/* Content */}
-      <span className="relative z-10 flex items-center gap-2">{children}</span>
+      <span className="relative z-10 flex items-center gap-2 pointer-events-none">{children}</span>
     </Component>
   );
 }

@@ -144,11 +144,11 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-10 md:mb-24 justify-center w-full relative z-50 pointer-events-auto"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-10 md:mb-24 justify-center w-full relative z-[101] pointer-events-auto"
           >
             <Link
               href={d.primaryCtaLink || "/contact"}
-              className="group relative flex items-center justify-center overflow-hidden w-full sm:w-auto pointer-events-auto"
+              className="group relative z-[101] flex items-center justify-center overflow-hidden w-full sm:w-auto pointer-events-auto"
             >
               <ShimmerButton as="div" background="#0284c7" shimmerColor="rgba(255,255,255,0.4)" borderRadius="9999px" className="px-8 sm:px-10 py-4 sm:py-5 w-full">
                 <span className="font-black text-[10px] uppercase tracking-[0.2em] text-white" data-tina-field={parentField ? tinaField(d, 'primaryCta') : undefined}>{d.primaryCta}</span>
@@ -158,7 +158,7 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
 
             <Link
               href={d.secondaryCtaLink || "/services"}
-              className="group flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto pointer-events-auto"
+              className="group relative z-[101] flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto pointer-events-auto"
             >
               <span data-tina-field={parentField ? tinaField(d, 'secondaryCta') : undefined}>{d.secondaryCta}</span>
             </Link>

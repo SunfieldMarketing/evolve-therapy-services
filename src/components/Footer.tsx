@@ -172,12 +172,12 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             <ul className="space-y-4" role="list">
               {(d.footer?.links || []).map((link: any, i: number) => (
                 <li key={i} data-tina-field={tinaField(link, 'name')}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium pointer-events-auto"
-                  >
-                    {link.name}
-                  </Link>
+                    <Link
+                      href={link.href}
+                      className="relative z-[101] text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium pointer-events-auto"
+                    >
+                      {link.name}
+                    </Link>
                 </li>
               ))}
             </ul>
@@ -189,12 +189,12 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             <ul className="space-y-4" role="list">
               {(d.footer?.serviceLinks || []).map((link: any, i: number) => (
                 <li key={i} data-tina-field={tinaField(link, 'name')}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block pointer-events-auto"
-                  >
-                    {link.name}
-                  </Link>
+                    <Link
+                      href={link.href}
+                      className="relative z-[101] text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block pointer-events-auto"
+                    >
+                      {link.name}
+                    </Link>
                 </li>
               ))}
             </ul>

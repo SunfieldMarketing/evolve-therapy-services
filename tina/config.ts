@@ -293,13 +293,13 @@ export default defineConfig({
             type: "object", name: "faq", label: "FAQ Section",
             fields: [
               { type: "string", name: "title", label: "Title" },
-              { type: "object", name: "items", label: "Questions", list: true,
+              { type: "object", name: "list", label: "Questions", list: true,
                 ui: {
-                  itemProps: (item) => ({ label: item.question }),
+                  itemProps: (item) => ({ label: item.q }),
                 },
                 fields: [
-                  { type: "string", name: "question", label: "Question" },
-                  { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+                  { type: "string", name: "q", label: "Question" },
+                  { type: "string", name: "a", label: "Answer", ui: { component: "textarea" } },
                 ],
               },
             ],
@@ -435,6 +435,22 @@ export default defineConfig({
                 },
                 fields: [
                   { type: "string", name: "icon", label: "Icon Name" },
+                  { type: "string", name: "text", label: "Label" },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object", name: "journey", label: "Journey Section",
+            fields: [
+              { type: "string", name: "badge", label: "Badge" },
+              { type: "string", name: "titleLine1", label: "Title Line 1" },
+              { type: "string", name: "titleItalic", label: "Title Italic" },
+              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "object", name: "items", label: "Stats/Items", list: true,
+                fields: [
+                  { type: "string", name: "title", label: "Value" },
                   { type: "string", name: "text", label: "Label" },
                 ],
               },

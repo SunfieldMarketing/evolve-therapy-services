@@ -108,8 +108,7 @@ export default function PageHeader({
                 style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
               />
             </div>
-            {/* Interaction Blocker */}
-            <div className="absolute inset-0 z-10 bg-transparent pointer-events-auto cursor-default" />
+            {/* Background elements — no blocker here */}
             <div className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[1500ms] ease-in-out ${isVideoPlaying ? 'opacity-0' : 'opacity-100'}`} />
           </div>
         ) : bgImage === 'none' ? (
@@ -128,8 +127,8 @@ export default function PageHeader({
         
         {/* Multi-layer gradient overlay (Matched to Services Hero) */}
         <div className="absolute inset-0 z-20 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80" />
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80 pointer-events-none" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
       </div>
 

@@ -90,11 +90,11 @@ export default function PageHeader({
   }, [finalUseVideo, finalVideoUrl]);
 
   return (
-    <section className="relative w-full min-h-[100svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-52 sm:pt-48" {...props}>
+    <section className="relative w-full h-[100svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-44 sm:pt-48" {...props}>
       {/* ── Background Layer ── */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 h-full w-full">
         {finalUseVideo ? (
-          <div className="absolute inset-0 pointer-events-none select-none">
+          <div className="absolute inset-0 pointer-events-none select-none h-full w-full">
             <div className={cn(
               "absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-[1500ms] ease-in-out overflow-hidden",
               isVideoPlaying ? "opacity-100" : "opacity-0"
@@ -114,24 +114,24 @@ export default function PageHeader({
             <div className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[1500ms] ease-in-out ${isVideoPlaying ? 'opacity-0' : 'opacity-100'}`} />
           </div>
         ) : bgImage === 'none' ? (
-          <div className="absolute inset-0 bg-[#0f172a]" />
+          <div className="absolute inset-0 bg-[#0f172a] h-full w-full" />
         ) : (
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 h-full w-full">
             <img
               src={imageUrl}
               alt={`${title} background cover`}
               className="absolute inset-0 w-full h-full object-cover opacity-60 contrast-[1.1] saturate-[1.2] pointer-events-none"
             />
             {/* Additional image-specific overlay for better text contrast */}
-            <div className="absolute inset-0 bg-[#0f172a]/40 mix-blend-multiply pointer-events-none" />
+            <div className="absolute inset-0 bg-[#0f172a]/40 mix-blend-multiply pointer-events-none h-full w-full" />
           </div>
         )}
         
         {/* Multi-layer gradient overlay (Matched to Services Hero) */}
-        <div className="absolute inset-0 z-20 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80 pointer-events-none" />
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
+        <div className="absolute inset-0 z-20 opacity-40 pointer-events-none h-full w-full" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80 pointer-events-none h-full w-full" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent pointer-events-none h-full w-full" />
+        <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay h-full w-full" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
       </div>
 
       {/* ── Content ── */}
@@ -144,7 +144,7 @@ export default function PageHeader({
                 <span className="text-[#38bdf8] font-black uppercase text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em]" data-tina-field={tinaFields?.badgeText}>{badgeText}</span>
              </div>
              
-             <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[100px] font-serif font-black text-white leading-[1.2] sm:leading-[0.9] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-5xl" data-tina-field={tinaFields?.title}>
+             <h1 className="text-2xl sm:text-5xl md:text-7xl lg:text-[100px] font-serif font-black text-white leading-[1.2] sm:leading-[0.9] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-5xl" data-tina-field={tinaFields?.title}>
                 {title}
                 {italicWord && (
                   <span className="text-[#0284c7] italic ml-[0.1em] sm:ml-[0.15em] uppercase tracking-tighter block sm:inline mt-1 sm:mt-0">{italicWord}</span>

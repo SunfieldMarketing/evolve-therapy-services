@@ -98,12 +98,12 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
                 <p className="text-white/40 mb-10 leading-relaxed relative z-10 font-light">
                   Get a comprehensive data-driven analysis of your clinical and financial health.
                 </p>
-                <Link
+                <a
                   href="/contact"
-                  className="inline-flex items-center gap-3 bg-white text-[#0f172a] px-10 py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#0284c7] hover:text-white transition-all relative z-10 shadow-xl shadow-black/20 pointer-events-auto"
+                  className="inline-flex items-center gap-3 bg-white text-[#0f172a] px-10 py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#0284c7] hover:text-white transition-all relative z-10 shadow-xl shadow-black/20 pointer-events-auto w-full justify-center"
                 >
                   Request Analysis <ArrowRight size={18} />
-                </Link>
+                </a>
               </motion.div>
             </div>
 
@@ -163,15 +163,15 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
         <div className="container mx-auto px-5 md:px-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-8 mb-16 text-center sm:text-left">
             <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#0f172a] tracking-tighter uppercase">Explore Other <span className="text-[#0284c7] italic">Solutions</span></h2>
-            <Link href="/services" className="text-[#0284c7] font-bold text-xs uppercase tracking-widest hover:underline flex items-center gap-2 pointer-events-auto relative z-50">
+            <a href="/services" className="text-[#0284c7] font-bold text-xs uppercase tracking-widest hover:underline flex items-center gap-2 pointer-events-auto relative z-50">
               All Services <ArrowRight size={14} />
-            </Link>
+            </a>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {otherServices.map((srv: any, i: number) => {
               const SrvIcon = iconMap[srv.icon] || Target;
               return (
-                <Link key={i} href={`/services/${srv.slug}`} className="group block bg-white rounded-3xl p-8 border border-slate-100 shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:border-[#0284c7]/30 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden pointer-events-auto">
+                <a key={i} href={`/services/${srv.slug}`} className="group block bg-white rounded-3xl p-8 border border-slate-100 shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:border-[#0284c7]/30 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden pointer-events-auto">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#0284c7]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-[#0284c7]/10 transition-colors duration-500" />
                   <div className="w-12 h-12 rounded-2xl bg-[#0284c7]/10 flex items-center justify-center text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-colors duration-300 mb-6 relative z-10">
                     <SrvIcon size={24} />
@@ -181,7 +181,7 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
                   <div className="flex items-center gap-2 text-[#0284c7] font-black text-[10px] uppercase tracking-widest relative z-10">
                     Explore <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </div>
-                </Link>
+                </a>
               );
             })}
           </div>

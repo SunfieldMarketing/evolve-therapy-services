@@ -144,22 +144,25 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-10 md:mb-24 justify-center w-full relative z-[101] pointer-events-auto"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-12 mb-10 md:mb-24 w-full relative z-[101] pointer-events-auto"
           >
-            <a
-              href={d.primaryCtaLink || "/contact"}
-              className="relative z-[101] flex items-center justify-center gap-3 px-10 py-5 bg-[#0284c7] text-white rounded-full font-bold text-sm uppercase tracking-[0.15em] shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto w-full sm:w-auto"
-            >
-              <span data-tina-field={parentField ? tinaField(d, 'primaryCta') : undefined}>{d.primaryCta}</span>
-              <ArrowRight size={18} className="transition-transform" />
-            </a>
-
-            <a
-              href={d.secondaryCtaLink || "/services"}
-              className="group relative z-[101] flex items-center justify-center gap-3 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 w-full sm:w-auto pointer-events-auto"
-            >
-              <span data-tina-field={parentField ? tinaField(d, 'secondaryCta') : undefined}>{d.secondaryCta}</span>
-            </a>
+             <a 
+               href="/contact" 
+               className="inline-flex items-center justify-center gap-3 sm:gap-5 px-8 sm:px-16 py-5 sm:py-7 bg-[#0284c7] text-white rounded-xl shadow-[0_30px_60px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group shrink-0 w-full sm:w-auto pointer-events-auto"
+             >
+               <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[12px] sm:text-[14px]">Start Your Evolution</span>
+               <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
+             </a>
+             
+             <div className="flex items-center gap-4 sm:gap-6 group">
+                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
+                   <Target size={20} />
+                </div>
+                <div className="flex flex-col text-left">
+                   <span className="text-white font-black uppercase text-[10px] sm:text-[11px] tracking-widest mb-1">Visionary Hub</span>
+                   <span className="text-white/20 text-[11px] sm:text-[13px] font-light italic">"Creative Consulting"</span>
+                </div>
+             </div>
           </motion.div>
 
           <motion.div

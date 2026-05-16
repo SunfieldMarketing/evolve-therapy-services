@@ -13,7 +13,7 @@
       { "value": "100%", "label": "Revenue Retained" },
       { "value": "24/7", "label": "Clinical Support" },
       { "value": "20+", "label": "Years of Expertise" },
-      { "value": "15+", "label": "States Served" }
+      { "value": "17", "label": "States Served" }
     ]
   },
   "clinicalExcellence": {
@@ -25,7 +25,7 @@
       { "value": 100, "suffix": "%", "label": "Revenue Retained", "desc": "Your facility keeps every dollar of therapy revenue - zero shared with us." },
       { "value": 20, "suffix": "+", "label": "Years Experience", "desc": "Two decades of LTC clinical and operational leadership expertise." },
       { "value": 24, "suffix": "/7", "label": "Clinical Support", "desc": "Round-the-clock access to your dedicated regional director." },
-      { "value": 15, "suffix": "+", "label": "States Served", "desc": "Active management across major U.S. markets and growing." }
+      { "value": 17, "suffix": "", "label": "States Served", "desc": "Active clinical management and oversight across 17 major U.S. states." }
     ],
     "services": [
       {

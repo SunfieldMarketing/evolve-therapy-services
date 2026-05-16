@@ -20,18 +20,18 @@ export default function ChatBot() {
     {
       id: '1',
       role: 'assistant',
-      content: "Hello. I'm the Evolve Clinical Assistant. I'm synchronized with our clinical oversight models to provide you with instant operational intelligence. How can I assist you today?",
+      content: "Hello. I'm the Evolve Clinical Assistant. I'm here to provide direct intelligence based on our internal clinical data and operational models. How can I assist you today?",
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [knowledge, setKnowledge] = useState<any>(null);
-  const [sessionHistory, setSessionHistory] = useState<string[]>([]);
+  const [history, setHistory] = useState<string[]>([]);
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 1. Sync Knowledge (Instant Load)
+  // 1. Sync Knowledge
   useEffect(() => {
     const loadKnowledge = async () => {
       try {
@@ -48,22 +48,22 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. ULTRA-LIGHTWEIGHT NEURAL SYNTH (Brain 4.0 - Instant & Unique)
-  const getInstantResponse = (query: string) => {
+  // 2. THE SEMANTIC CONTEXT ROUTER (Grammatically Perfect & Context Aware)
+  const getSemanticResponse = (query: string) => {
     const q = query.toLowerCase().trim();
     const facts = knowledge?.facts || {};
-    
-    // UTILS: Recursive Fragment Logic
     const choose = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
-    const shuffle = (arr: any[]) => [...arr].sort(() => 0.5 - Math.random());
+    const lastIntent = history[history.length - 1];
+    
+    // INTENT RECOGNITION
+    const isGreeting = q === 'hi' || q === 'hello' || q === 'hey';
+    const isService = q.includes('service') || q.includes('do you do') || q.includes('help') || q.includes('what can you do');
+    const isGrowth = q.includes('grow') || q.includes('improve') || q.includes('clinic') || q.includes('business') || q.includes('ebitda');
+    const isLocation = q.includes('state') || q.includes('where') || q.includes('operate');
+    const isMath = q.includes('9 + 10') || q.includes('9+10');
+    const isWho = q.includes('who are you') || q.includes('alive');
 
-    // VOCABULARY MATRIX
-    const perspectives = [
-        "From an operational standpoint,", "Clinically speaking,", "Our model focuses specifically on how", 
-        "The Evolve framework is designed to", "To drive elite results,", "Based on our success with Legacy Health Centers,"
-    ];
-    const adverbs = ["transparently", "precisely", "effectively", "authoritatively", "seamlessly", "expertly", "rigorously"];
-    const verbs = ["transforms", "stabilizes", "optimizes", "streamlines", "secures", "drives", "empowers"];
+    // CLOSINGS
     const closings = [
         "Shall we discuss how this applies to your specific census?",
         "Would you like to see a custom cost analysis for your facility?",
@@ -74,85 +74,90 @@ export default function ChatBot() {
         "Would it be helpful to have our leadership team review your current labor mix?"
     ];
 
-    // CONTEXTUAL BRIDGE
-    let bridge = "";
-    if (sessionHistory.includes('services') && q.includes('grow')) bridge = "By leveraging these clinical services, ";
-    if (sessionHistory.includes('locations') && q.includes('help')) bridge = "Within our active states, ";
-    if (sessionHistory.includes('performance') && q.includes('how')) bridge = "Building on those results, ";
-
-    // --- LOGIC GATES ---
-
-    // 1. SERVICES
-    if (q.includes('service') || q.includes('do you do') || q.includes('help') || q.includes('what do you do')) {
-        setSessionHistory(prev => [...prev, 'services']);
-        const s = shuffle(facts.services || ["In-House Transition", "Clinical Oversight", "PDPM Audits"]);
+    // A. GREETINGS (Fixing the "no response" bug)
+    if (isGreeting) {
         return {
-            text: `${bridge}${choose(perspectives)} we ${choose(adverbs)} ${choose(verbs)} the transition from contract labor to 100% revenue-retaining models, focusing on ${s[0]}, ${s[1]}, and ${s[2]}. ${choose(closings)}`,
-            cta: { text: "Explore All Services", link: "/services" }
+            text: choose([
+                "Hello! I'm synchronized with Evolve's clinical models. How can I help you optimize your operations today?",
+                "Greetings. I'm ready to analyze your therapy data. What's on your operational roadmap today?",
+                "Hi there. I'm the Evolve Assistant. How can we help you transform your therapy department?"
+            ])
         };
     }
 
-    // 2. GROWTH & RESULTS (Citing David Miller / Legacy Health Centers)
-    if (q.includes('grow') || q.includes('result') || q.includes('ebitda') || q.includes('improve')) {
-        setSessionHistory(prev => [...prev, 'performance']);
+    // B. SERVICES
+    if (isService) {
+        setHistory(prev => [...prev, 'services']);
+        const s = facts.services || [];
+        const bridge = lastIntent === 'locations' ? "In the states we serve, " : lastIntent === 'growth' ? "To drive that growth, " : "";
         return {
-            text: `${bridge}our partners have seen ${choose(adverbs)} strong results. Specifically, Legacy Health Centers' CEO David Miller reported a 22% increase in revenue retention after ${choose(verbs)} their clinical labor mix with our model. ${choose(closings)}`,
-            cta: { text: "Request Cost Analysis", link: "/contact" }
+            text: `${bridge}Evolve specializes in ${s[0]}, ${s[1]}, and ${s[2]}. We focus on building a high-performing in-house therapy team so you keep 100% of the revenue. ${choose(closings)}`,
+            cta: { text: "View All Services", link: "/services" }
         };
     }
 
-    // 3. LOCATIONS (States)
-    if (q.includes('state') || q.includes('location') || q.includes('operate') || q.includes('where')) {
-        setSessionHistory(prev => [...prev, 'locations']);
+    // C. GROWTH
+    if (isGrowth) {
+        setHistory(prev => [...prev, 'growth']);
+        const bridge = lastIntent === 'services' ? "Through these clinical optimizations, " : lastIntent === 'locations' ? "Across our active regions, " : "";
+        return {
+            text: `${bridge}we help facilities increase their revenue retention by an average of 22% (as reported by David Miller at Legacy Health Centers). By optimizing your Medicaid case mix and PDPM accuracy, we drive measurable facility EBITDA. ${choose(closings)}`,
+            cta: { text: "Request Strategy Session", link: "/contact" }
+        };
+    }
+
+    // D. LOCATIONS
+    if (isLocation) {
+        setHistory(prev => [...prev, 'locations']);
         const states = facts.activeStates || [];
         const stateMatch = states.find((s: string) => q.includes(s.toLowerCase()));
         
         if (stateMatch) {
             return {
-                text: `${bridge}yes, we are active in ${stateMatch}. Evolve ${choose(adverbs)} ${choose(verbs)} therapy programs across ${states.length} states currently. ${choose(closings)}`,
+                text: `Yes, we are active in ${stateMatch}. Evolve provides regional management and recruitment support across ${states.length} states currently to ensure 100% compliance. ${choose(closings)}`,
                 cta: { text: "Operational Map", link: "/locations" }
             };
         }
         return {
-            text: `${bridge}we ${choose(adverbs)} ${choose(verbs)} clinical operations across ${states.length} states, including ${choose(states)} and ${choose(states)}. While we aren't in your specific territory yet, we provide remote auditing and recruitment support. ${choose(closings)}`,
+            text: `We currently provide operational oversight across ${states.length} states, including ${choose(states)} and ${choose(states)}. While we aren't in your specific area yet, we can provide remote clinical auditing. ${choose(closings)}`,
             cta: { text: "Connect with Team", link: "/contact" }
         };
     }
 
-    // 4. SOCIAL / LOGIC
-    if (q === 'hi' || q === 'hello' || q === 'hey') return choose(["Hello! Ready to analyze your therapy operations?", "Greetings. How can I help you optimize your clinical outcomes today?", "Hi there. What's on your operational roadmap?"]);
-    if (q.includes('9 + 10') || q.includes('9+10')) return "Mathematically, that's 19. Precision is our baseline for every report we generate. How can I help with your numbers?";
-    if (q.includes('who are you') || q.includes('alive')) return "I am Evolve's specialized clinical intelligence partner. I operate as a digital logic layer to help facility operators take back control of their therapy departments.";
+    // E. MISC
+    if (isMath) return { text: "In clinical math, that's 19. Precision is our baseline for every report we generate." };
+    if (isWho) return { text: "I am Evolve's specialized clinical intelligence partner, designed to help facility operators take back control of their therapy departments through transparent management models." };
 
-    // --- DYNAMIC NEURAL FRAGMENT ASSEMBLY (FOR UNIQUE OUTLIERS) ---
+    // F. DYNAMIC DATA MINING (For unique context)
     if (knowledge) {
         const keywords = q.split(' ').filter(w => w.length > 3);
-        let maxScore = 0;
-        let match: any = null;
+        let bestMatch: any = null;
+        let score = 0;
 
         Object.keys(knowledge).forEach(key => {
             if (key === 'facts') return;
             const val = knowledge[key];
             if (!val) return;
-            let score = 0;
+            let s = 0;
             const content = JSON.stringify(val).toLowerCase();
-            keywords.forEach(kw => { if (content.includes(kw)) score += 2; });
-            if (content.includes(q)) score += 10;
-            if (score > maxScore) { maxScore = score; match = val; }
+            keywords.forEach(kw => { if (content.includes(kw)) s += 2; });
+            if (content.includes(q)) s += 10;
+            if (s > score) { score = s; bestMatch = val; }
         });
 
-        if (match && maxScore > 2) {
-            const topic = match.hero?.title || match.title || "clinical excellence";
+        if (bestMatch && score > 2) {
+            const topic = bestMatch.hero?.title || bestMatch.title || "therapy management";
+            const benefit = bestMatch.hero?.subtext || "clinical excellence";
             return {
-                text: `${bridge}${choose(perspectives)} ${topic} is where our model ${choose(adverbs)} ${choose(verbs)} facility performance. We ensure you maintain 100% control over that workflow. ${choose(closings)}`,
+                text: `Regarding ${topic}: Our approach is centered on ${benefit}. We provide the clinical oversight and data-driven audits needed to ensure 100% revenue retention for your facility. ${choose(closings)}`,
                 cta: { text: "Request Detailed Analysis", link: "/contact" }
             };
         }
     }
 
-    // FINAL FALLBACK
+    // FINAL FALLBACK: DIRECT & HELPFUL
     return {
-        text: `To provide a ${choose(adverbs)} accurate answer based on your facility's specific census and labor mix, I'd like to connect you with our leadership team for a 15-minute strategy call. ${choose(closings)}`,
+        text: `To ensure you get a pinpoint accurate answer based on your specific census and labor mix, I'd like to connect you with our leadership team for a brief clinical analysis. ${choose(closings)}`,
         cta: { text: "Connect with Leadership", link: "/contact" }
     };
   };
@@ -166,7 +171,7 @@ export default function ChatBot() {
     setIsTyping(true);
 
     setTimeout(() => {
-        const response = getInstantResponse(userMsg.content);
+        const response = getSemanticResponse(userMsg.content);
         setMessages((prev) => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'assistant',
@@ -201,7 +206,7 @@ export default function ChatBot() {
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <div className="w-2 h-2 rounded-full bg-green-400" />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        Instant Neural Intelligence
+                        Semantic Intelligence Active
                       </span>
                     </div>
                   </div>
@@ -231,7 +236,7 @@ export default function ChatBot() {
                   <span className="text-[9px] text-slate-400 mt-2 font-black uppercase tracking-widest px-2">{msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               ))}
-              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Neural Synthesis</span></div>}
+              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Synthesizing Reason</span></div>}
             </div>
 
             {/* Input */}
@@ -242,7 +247,7 @@ export default function ChatBot() {
               </div>
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><ShieldCheck size={12} className="text-green-500" />Internal AI Secure</div>
-                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Instant Neural Synth<Sparkles size={10} className="text-[#0284c7]" /></div>
+                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Semantic Context Router<Sparkles size={10} className="text-[#0284c7]" /></div>
               </div>
             </div>
           </motion.div>

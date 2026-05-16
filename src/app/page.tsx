@@ -210,11 +210,11 @@ export default function Home(props: { data: any; query: string; variables: any }
       <FAQ data={s?.faq || p?.faq} parentField={s?.faq ? "faq" : "faq"} />
 
       {/* ── Philosophy / CTA ── */}
-      <section className="py-24 md:py-40 bg-white relative overflow-hidden">
+      <section className="py-24 md:py-40 bg-[#0f172a] relative overflow-hidden">
           <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
 
 
-          <div className="bg-[#0f172a] p-10 md:p-14 lg:p-20 shadow-2xl relative overflow-hidden group hover:border-[#0284c7]/30 transition-all duration-500 rounded-none w-screen relative left-1/2 -translate-x-1/2">
+          <div className="bg-[#0f172a] p-10 md:p-14 lg:p-20 relative overflow-hidden group transition-all duration-500 rounded-none">
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />
               
               <div className="max-w-4xl mx-auto text-center mb-10 relative z-10">

@@ -85,7 +85,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-xl">
                Ready to Evolve?
             </div>
-            <h3 className="text-4xl md:text-5xl lg:text-8xl font-serif font-black tracking-tighter leading-[1.05] text-white mb-10">
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[1.05] text-white mb-10">
               Transform your facility's <br />
               therapy operations <br />
               <span className="text-[#38bdf8] italic font-medium">with zero legacy strings attached.</span>

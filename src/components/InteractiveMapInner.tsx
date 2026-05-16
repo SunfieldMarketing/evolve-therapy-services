@@ -38,7 +38,7 @@ export default function InteractiveMapInner({ activeStates }: { activeStates?: s
   const activeSet = new Set(activeStates || [
     'Minnesota', 'Wisconsin', 'Nebraska', 'Kansas', 'Oklahoma',
     'Louisiana', 'Florida', 'Tennessee', 'Kentucky', 'Ohio',
-    'Pennsylvania', 'New York', 'Maryland', 'New Jersey', 'Delaware', 'Massachusetts'
+    'Pennsylvania', 'New York', 'Maryland', 'New Jersey', 'Delaware', 'Massachusetts', 'Maine'
   ]);
 
   const handleMouseEnter = useCallback((geo: any, evt: React.MouseEvent) => {

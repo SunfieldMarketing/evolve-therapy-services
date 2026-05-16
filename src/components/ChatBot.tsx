@@ -17,6 +17,7 @@ interface Message {
 interface KnowledgeChunk {
   content: string;
   source: string;
+  embedding?: number[];
 }
 
 export default function ChatBot() {
@@ -25,20 +26,23 @@ export default function ChatBot() {
     {
       id: '1',
       role: 'assistant',
-      content: "Hello. I'm the Evolve Clinical Assistant. I'm here to help you navigate our therapy operations and financial models. How can I assist you today?",
+      content: "Hello. I'm the Evolve Clinical Assistant. Our ultra-lightweight neural engine is active and synchronized with our business data. How can I help you today?",
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isAiReady, setIsAiReady] = useState(false);
   const [chunks, setChunks] = useState<KnowledgeChunk[]>([]);
+  const [embedder, setEmbedder] = useState<any>(null);
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 1. Background Knowledge Sync
+  // 1. Ultra-Lightweight Neural Stack Initialization
   useEffect(() => {
-    const loadKnowledge = async () => {
+    const initAi = async () => {
       try {
+        // A. Load Knowledge Base
         const res = await fetch('/knowledge.json');
         if (!res.ok) return;
         const data = await res.json();
@@ -51,12 +55,27 @@ export default function ChatBot() {
             if (val.faq?.list) val.faq.list.forEach((f: any) => rawChunks.push({ source: 'FAQ', content: `${f.q}. ${f.a.replace(/^Answer:\s*/i, '')}` }));
             if (val.title && val.description) rawChunks.push({ source: val.title, content: `${val.description} ${val.mainContent || ''}` });
         });
-        setChunks(rawChunks);
+
+        // B. Load Tiny Embedding Model (Only 14MB)
+        const { pipeline } = await import('@xenova/transformers');
+        const model = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+        
+        // C. Pre-embed chunks for instant neural search
+        // We limit to 50 chunks for "ultra-lightweight" performance
+        const activeChunks = rawChunks.slice(0, 50);
+        const embeddedChunks = await Promise.all(activeChunks.map(async (c) => {
+            const output = await model(c.content, { pooling: 'mean', normalize: true });
+            return { ...c, embedding: Array.from(output.data) as number[] };
+        }));
+
+        setChunks(embeddedChunks);
+        setEmbedder(() => model);
+        setIsAiReady(true);
       } catch (err) {
-        console.error('Bot Init Error:', err);
+        console.error('AI Stack Error:', err);
       }
     };
-    loadKnowledge();
+    initAi();
   }, []);
 
   useEffect(() => {
@@ -65,67 +84,53 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. High-Intelligence Decision Engine (Social + Business + Reason)
-  const getDynamicResponse = (query: string) => {
+  // 2. Vector Similarity Engine (Cosine Similarity)
+  const cosineSimilarity = (a: number[], b: number[]) => {
+    return a.reduce((sum, val, i) => sum + val * b[i], 0);
+  };
+
+  const getNeuralResponse = async (query: string) => {
     const q = query.toLowerCase().trim();
     
-    // A. IDENTITY & SOCIAL INTELLIGENCE (Dynamic & Human)
+    // A. Social & Identity Hard-Coding (For immediate personality)
     if (q === 'are you real' || q.includes('are you a bot') || q.includes('is this a person')) {
         return {
-            text: "I am Evolve's Clinical AI. While I'm not a human, I've been built specifically to handle every nuance of therapy operations and clinical excellence using our internal data. If you'd prefer to speak with one of our human experts, I'd be happy to set that up for you right now."
-        };
-    }
-
-    if (q.includes('who are you') || q.includes('what are you')) {
-        return {
-            text: "I am the Evolve Clinical Assistant. I'm a specialized intelligence engine designed to help facility operators explore a more profitable, transparent way to run therapy departments—where you keep 100% of the revenue."
+            text: "I am Evolve's Clinical AI Assistant. I'm a real neural intelligence unit running entirely in your browser, built to help you optimize therapy operations. If you'd like to speak with our human leadership, I can set that up instantly."
         };
     }
 
     if (q.includes('hello') || q.includes('hi ') || q.includes('hey')) {
-        return {
-            text: "Hello! I'm ready to help. Whether you have questions about our Medicaid models, recruitment strategies, or our 100% revenue retention model, I'm at your service."
-        };
+        return { text: "Hello! Our clinical oversight and 100% revenue retention models are ready for your review. What can I clarify for you today?" };
     }
 
-    if (q.includes('how are you')) {
-        return {
-            text: "I'm operating at peak clinical efficiency. Thank you for asking. How is your therapy department performing this quarter? We'd love to help you optimize it."
-        };
+    // B. Neural Vector Search
+    if (isAiReady && embedder) {
+        const queryOutput = await embedder(query, { pooling: 'mean', normalize: true });
+        const queryEmbedding = Array.from(queryOutput.data) as number[];
+
+        const matches = chunks
+            .map(chunk => ({
+                chunk,
+                similarity: chunk.embedding ? cosineSimilarity(queryEmbedding, chunk.embedding) : 0
+            }))
+            .sort((a, b) => b.similarity - a.similarity);
+
+        const topMatch = matches[0];
+
+        // If we have high semantic confidence (> 0.4 for this tiny model)
+        if (topMatch && topMatch.similarity > 0.45) {
+            const cleanContent = topMatch.chunk.content.replace(/Answer:\s*/i, '').replace(/Regarding that:\s*/i, '').trim();
+            return {
+                text: `Based on our clinical dataset: ${cleanContent}`,
+                cta: { text: "Learn More", link: "/contact" }
+            };
+        }
     }
 
-    // B. BUSINESS INTELLIGENCE (Strict Relevance)
-    const keywords = q.split(' ').filter(w => w.length > 3);
-    const scored = chunks.map(chunk => {
-        let score = 0;
-        const content = chunk.content.toLowerCase();
-        keywords.forEach(kw => { if (content.includes(kw)) score += 2; });
-        if (content.includes(q)) score += 10;
-        return { chunk, score };
-    }).sort((a, b) => b.score - a.score);
-
-    const top = scored[0];
-    // Only respond with business data if we have high confidence
-    if (top && top.score >= 4) {
-        // Synthesis: Remove template wrappers for a more "Direct" answer
-        const directAnswer = top.chunk.content.replace(/Answer:\s*/i, '').replace(/Regarding that:\s*/i, '').trim();
-        return {
-            text: `Based on our clinical data: ${directAnswer}`,
-            cta: { text: "Discuss with Our Team", link: "/contact" }
-        };
-    }
-
-    // C. GENERAL REASONING (Fallback that doesn't sound robotic)
-    if (keywords.length > 0) {
-        return {
-            text: "That's an interesting point. While I specialize in the operational and clinical side of LTC therapy, I want to make sure you get a precise answer. Would you like me to connect you with our leadership team for a detailed discussion on that topic?",
-            cta: { text: "Connect with Leadership", link: "/contact" }
-        };
-    }
-
+    // C. Fallback (Conversational & Professional)
     return {
-      text: "I'm here to support your facility's evolution. Is there anything specific about our management models, states of operation, or financial transitions you'd like to explore?",
-      cta: { text: "Schedule a Consultation", link: "/contact" }
+      text: "That's a specific inquiry about LTC therapy operations. To ensure you get a pinpoint clinical and financial roadmap, I'd like to connect you with our team for a 15-minute analysis. Shall we proceed?",
+      cta: { text: "Connect with Team", link: "/contact" }
     };
   };
 
@@ -137,18 +142,16 @@ export default function ChatBot() {
     setInput('');
     setIsTyping(true);
 
-    // Dynamic processing delay for "Thinking" feel
-    setTimeout(() => {
-      const response = getDynamicResponse(userMsg.content);
-      setMessages((prev) => [...prev, {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: response.text,
-        timestamp: new Date(),
-        cta: response.cta,
-      }]);
-      setIsTyping(false);
-    }, 900);
+    const response = await getNeuralResponse(userMsg.content);
+    
+    setMessages((prev) => [...prev, {
+      id: (Date.now() + 1).toString(),
+      role: 'assistant',
+      content: response.text,
+      timestamp: new Date(),
+      cta: response.cta,
+    }]);
+    setIsTyping(false);
   };
 
   return (
@@ -172,9 +175,9 @@ export default function ChatBot() {
                   <div>
                     <h4 className="font-black text-xl leading-tight tracking-tight">Evolve Assistant</h4>
                     <div className="flex items-center gap-1.5 mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-green-400" />
+                      <div className={cn("w-2 h-2 rounded-full", isAiReady ? "bg-green-400" : "bg-amber-400 animate-pulse")} />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        Neural Intelligence Active
+                        {isAiReady ? 'Neural Stack Active' : 'Initializing AI...'}
                       </span>
                     </div>
                   </div>
@@ -215,11 +218,7 @@ export default function ChatBot() {
               ))}
               {isTyping && (
                 <div className="flex items-center gap-3 text-[#0284c7]">
-                  <div className="flex gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:0.2s]" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:0.4s]" />
-                  </div>
+                  <Loader2 size={16} className="animate-spin" />
                   <span className="text-[10px] uppercase font-black tracking-widest opacity-40">Reasoning</span>
                 </div>
               )}
@@ -247,11 +246,11 @@ export default function ChatBot() {
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest">
                   <ShieldCheck size={12} className="text-green-500" />
-                  Clinical Data Secure
+                  Local AI Inference
                 </div>
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest">
                   <Zap size={10} className="text-[#0284c7]" />
-                  Real-Time AI
+                  Ultra-Lightweight
                   <Sparkles size={10} className="text-[#0284c7]" />
                 </div>
               </div>

@@ -1,35 +1,51 @@
 const fs = require('fs');
 const path = require('path');
 
-const content = {};
+const contentDir = './content';
+const outputFilePath = './public/knowledge.json';
 
-const readDir = (dir) => {
-    if (!fs.existsSync(dir)) return;
-    const files = fs.readdirSync(dir);
-    
-    files.forEach(file => {
-        const fullPath = path.join(dir, file);
-        if (fs.statSync(fullPath).isDirectory()) {
-            readDir(fullPath);
-        } else if (file.endsWith('.json')) {
-            try {
-                const data = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
-                // Use the relative path as key for better mapping
-                const relativePath = path.relative('./content', fullPath);
-                content[relativePath] = data;
-            } catch (e) {
-                console.error(`Error parsing ${fullPath}:`, e);
-            }
-        }
-    });
+const readJsonFiles = (dir, allContent = {}) => {
+  const files = fs.readdirSync(dir);
+
+  files.forEach((file) => {
+    const filePath = path.join(dir, file);
+    const stats = fs.statSync(filePath);
+
+    if (stats.isDirectory()) {
+      readJsonFiles(filePath, allContent);
+    } else if (file.endsWith('.json')) {
+      const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      const key = path.basename(file, '.json');
+      allContent[key] = content;
+    }
+  });
+
+  return allContent;
 };
 
-console.log('Generating Evolve Knowledge Base...');
-readDir('./content');
+try {
+  console.log('Generating Knowledge Base...');
+  const rawContent = readJsonFiles(contentDir);
+  
+  // Create a structured knowledge object for high-accuracy retrieval
+  const knowledge = {
+    ...rawContent,
+    // Explicit Facts for the AI Brain
+    facts: {
+        activeStates: rawContent.settings?.activeStates || [],
+        contact: {
+            phone: rawContent.settings?.phone,
+            email: rawContent.settings?.email,
+            address: rawContent.settings?.address
+        },
+        services: rawContent.settings?.navbar?.links?.find(l => l.name === 'Services')?.dropdown?.map(s => s.name) || [],
+        testimonials: rawContent.settings?.testimonials?.list?.map(t => ({ name: t.name, facility: t.facility, quote: t.content })),
+        faqs: rawContent.settings?.faq?.list || []
+    }
+  };
 
-if (!fs.existsSync('./public')) {
-    fs.mkdirSync('./public');
+  fs.writeFileSync(outputFilePath, JSON.stringify(knowledge, null, 2));
+  console.log('Knowledge Base Generated Successfully with Structured Facts.');
+} catch (error) {
+  console.error('Error generating knowledge base:', error);
 }
-
-fs.writeFileSync('./public/knowledge.json', JSON.stringify(content, null, 2));
-console.log('Knowledge Base generated at public/knowledge.json');

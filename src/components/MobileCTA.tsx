@@ -35,12 +35,12 @@ export default function MobileCTA({ data }: { data?: any }) {
           className="md:hidden fixed bottom-6 left-6 right-6 z-[1000]"
         >
           <div className="flex items-center gap-3 p-2 bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/20">
-            <Link 
+            <a 
               href={d.href}
               className="flex-1 bg-[#0284c7] text-white h-14 rounded-full flex items-center justify-center gap-2 font-black text-[10px] uppercase tracking-[0.1em] shadow-lg shadow-[#0284c7]/20 hover:bg-[#0284c7]/90 transition-all active:scale-95"
             >
               <span data-tina-field={tinaField(d, 'text')}>{d.text}</span> <ArrowRight size={14} />
-            </Link>
+            </a>
             <button 
               onClick={() => window.dispatchEvent(new CustomEvent('open-chatbot'))}
               className="w-14 h-14 shrink-0 bg-[#0f172a] text-white rounded-full flex items-center justify-center relative shadow-lg shadow-black/10 hover:bg-[#1e293b] transition-all active:scale-95 group"

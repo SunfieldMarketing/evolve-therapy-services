@@ -52,12 +52,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth h-full`} suppressHydrationWarning>
+    <html lang="en" className={`scroll-smooth h-full overflow-x-hidden`} suppressHydrationWarning>
       <head>
         <meta name="tina-audit-build-id" content="1.0.6-bulletproof-interactivity" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
-      <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col`}>
-        {children}
+      <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col overflow-x-hidden w-full items-center`}>
+        <div className="w-full flex flex-col items-center">
+          {children}
+        </div>
         <ChatBot />
       </body>
     </html>

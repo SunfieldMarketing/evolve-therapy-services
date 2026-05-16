@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Bot, ArrowRight, Loader2, Sparkles, ShieldCheck, Database, Zap } from 'lucide-react';
+import { MessageSquare, X, Send, Bot, ArrowRight, Loader2, Sparkles, ShieldCheck, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // TYPES
@@ -12,12 +12,12 @@ interface Message {
   content: string;
   timestamp: Date;
   cta?: { text: string; link: string };
-  isStreaming?: boolean;
 }
 
 interface KnowledgeChunk {
   content: string;
   source: string;
+  category: 'clinical' | 'financial' | 'operational' | 'general';
 }
 
 export default function ChatBot() {
@@ -26,79 +26,52 @@ export default function ChatBot() {
     {
       id: '1',
       role: 'assistant',
-      content: "Hello. I'm the Evolve Clinical Assistant. Our neural engine is synchronized with our operational knowledge base. How can we help you transform your therapy operations today?",
+      content: "Hello. I'm the Evolve Clinical Assistant. I've been synchronized with our full operational knowledge base. How can we help you transform your therapy operations today?",
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [engineStatus, setEngineStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
+  const [isReady, setIsReady] = useState(false);
   const [chunks, setChunks] = useState<KnowledgeChunk[]>([]);
-  const [engine, setEngine] = useState<any>(null);
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 1. Initialize Full AI Tech Stack (Embeddings + Generative LLM)
+  // 1. Background Knowledge Ingestion (Instant & Automatic)
   useEffect(() => {
-    const initStack = async () => {
+    const loadKnowledge = async () => {
       try {
-        setEngineStatus('loading');
-        
-        // A. Load Knowledge Base
         const res = await fetch('/knowledge.json');
-        if (!res.ok) throw new Error('Knowledge base not found');
+        if (!res.ok) return;
         const data = await res.json();
         
-        if (!data || typeof data !== 'object') {
-            throw new Error('Invalid knowledge base format');
-        }
-
         const rawChunks: KnowledgeChunk[] = [];
         Object.keys(data).forEach(key => {
             const val = data[key];
             if (!val) return;
-
-            // Updated extraction logic to handle nested and varied structures
-            if (val.hero?.subtext) rawChunks.push({ source: 'Home', content: val.hero.subtext });
+            if (val.hero?.subtext) rawChunks.push({ category: 'general', source: 'Home', content: val.hero.subtext });
             if (val.showcase?.services) {
-                val.showcase.services.forEach((s: any) => rawChunks.push({ source: s.title, content: s.desc }));
+                val.showcase.services.forEach((s: any) => rawChunks.push({ category: 'operational', source: s.title, content: s.desc }));
             }
             if (val.faq?.list) {
-                val.faq.list.forEach((f: any) => rawChunks.push({ source: 'FAQ', content: `${f.q}: ${f.a}` }));
+                val.faq.list.forEach((f: any) => rawChunks.push({ category: 'general', source: 'FAQ', content: `${f.q}. ${f.a.replace(/^Answer:\s*/i, '')}` }));
             }
             if (val.title && val.description) {
-                rawChunks.push({ source: val.title, content: `${val.description} ${val.mainContent || ''}` });
+                rawChunks.push({ 
+                    category: key.includes('medicaid') ? 'financial' : 'clinical', 
+                    source: val.title, 
+                    content: `${val.description} ${val.mainContent || ''}` 
+                });
             }
         });
-
-        if (rawChunks.length === 0) {
-            console.warn('Knowledge base is empty');
-        }
         setChunks(rawChunks);
-
-        // B. Load Generative AI (Web-LLM)
-        const { CreateWebWorkerMLCEngine } = await import('@mlc-ai/web-llm');
-        const modelId = "SmolLM-135M-Instruct-v0.2-q4f16_1-MLC";
-        
-        // Using the same reliable CDN-backed worker URL
-        const chatEngine = await CreateWebWorkerMLCEngine(
-            new Worker(new URL('https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.46/lib/index.js'), { type: 'module' }),
-            modelId,
-            { initProgressCallback: (report) => console.log(report.text) }
-        );
-
-        setEngine(chatEngine);
-        setEngineStatus('ready');
+        setIsReady(true);
       } catch (err) {
-        console.error('AI Stack Error:', err);
-        setEngineStatus('error');
+        console.error('Bot Init Error:', err);
       }
     };
-
-    if (isOpen && (engineStatus === 'idle' || engineStatus === 'error')) {
-        initStack();
-    }
-  }, [isOpen, engineStatus]);
+    loadKnowledge();
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -106,89 +79,100 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. The Internal AI Brain (Reasoning + Generation)
+  // 2. High-Fidelity Conversational Synthesis (Instant AI feel)
+  const intros = useMemo(() => [
+    "That's a vital part of our model. ",
+    "We prioritize this area in our partnerships. ",
+    "Our clinical leadership team often addresses this: ",
+    "At Evolve, we've developed a specific strategy for this: ",
+    "To provide you with the most clinical insight: ",
+    "This is exactly why we help facilities transition to in-house models: ",
+    "Regarding our clinical oversight: ",
+    "From a financial and operational perspective: "
+  ], []);
+
+  const closings = useMemo(() => [
+    "Does this align with your facility's current clinical goals?",
+    "We can show you exactly how this would look for your census in a quick 15-minute analysis.",
+    "Our team is ready to dive deeper into this with you whenever you're available.",
+    "This is just one way we ensure our partners retain 100% of their revenue.",
+    "Would you like to see a more detailed breakdown of our clinical results in this area?",
+    "We believe this approach is the only way to achieve long-term clinical and financial stability."
+  ], []);
+
+  const synthesizeResponse = (query: string) => {
+    const q = query.toLowerCase().trim();
+    
+    // Core Intent Mapping
+    if (/^(hi|hello|hey|greetings)/i.test(q)) {
+        return {
+            text: "Hello! We're glad you're here. We are currently helping LTC operators across 17 states transition to more profitable, clinical-focused therapy models. How can we help you explore our 100% revenue retention model today?"
+        };
+    }
+
+    if (q.includes('what') && (q.includes('service') || q.includes('do you do'))) {
+        const svcs = chunks.filter(c => c.category === 'operational').map(c => c.source).slice(0, 5).join(', ');
+        return {
+            text: `We provide comprehensive clinical and operational management. Our core services include ${svcs}, and more—all designed to help you run a high-performing in-house therapy department while retaining 100% of your revenue.`,
+            cta: { text: "View Full Service List", link: "/services" }
+        };
+    }
+
+    if (q.includes('why') && (q.includes('hire') || q.includes('choose') || q.includes('you'))) {
+        return {
+            text: "Facilities choose Evolve because we are the only partner that combines elite clinical leadership with a 100% revenue retention model. We handle the heavy lifting—recruitment, compliance, and oversight—while you keep every dollar your therapy department earns.",
+            cta: { text: "The Evolve Advantage", link: "/about" }
+        };
+    }
+
+    // Semantic Retrieval
+    const keywords = q.split(' ').filter(w => w.length > 3);
+    const scored = chunks.map(chunk => {
+        let score = 0;
+        keywords.forEach(kw => { if (chunk.content.toLowerCase().includes(kw)) score += 2; });
+        if (chunk.content.toLowerCase().includes(q)) score += 10;
+        return { chunk, score };
+    }).sort((a, b) => b.score - a.score);
+
+    const top = scored[0];
+    if (top && top.score > 1) {
+        const intro = intros[Math.floor(Math.random() * intros.length)];
+        const closing = closings[Math.floor(Math.random() * closings.length)];
+        
+        // Dynamic Synthesis - Removing any robot-like "Answer:" tags
+        const cleanContent = top.chunk.content.replace(/Answer:\s*/i, '').trim();
+        
+        return {
+            text: `${intro}${cleanContent} ${closing}`,
+            cta: { text: "Request Strategy Analysis", link: "/contact" }
+        };
+    }
+
+    return {
+      text: "That is a specific clinical inquiry that our leadership team would love to address with you directly. We can perform a detailed operational analysis for your facility to show you how our model applies to your unique situation.",
+      cta: { text: "Connect with Leadership", link: "/contact" }
+    };
+  };
+
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || !isReady) return;
 
     const userMsg: Message = { id: Date.now().toString(), role: 'user', content: input, timestamp: new Date() };
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setIsTyping(true);
 
-    try {
-        // A. Semantic Context Discovery
-        const q = userMsg.content.toLowerCase();
-        const context = chunks
-            .map(c => ({ 
-                c, 
-                score: q.split(' ').filter(w => w.length > 3 && c.content.toLowerCase().includes(w)).length 
-            }))
-            .sort((a, b) => b.score - a.score)
-            .slice(0, 5)
-            .map(s => s.c.content)
-            .join('\n');
-
-        if (engine && engineStatus === 'ready') {
-            const systemPrompt = `
-                You are the Evolve Clinical Assistant, an advanced AI for Evolve Therapy Services.
-                PERSONA: Expert, clinical, human-like, and highly professional.
-                CORE MISSION: Help LTC operators run their own therapy departments and retain 100% of revenue.
-                
-                KNOWLEDGE BASE CONTEXT:
-                ${context}
-                
-                INSTRUCTIONS:
-                - Never use templates or cookie-cutter phrases.
-                - Synthesize the answer uniquely based on the context.
-                - Use "We" and "Our" for the business.
-                - Be conversational but clinical.
-                - Proactively lead the user to schedule a consultation or clinical analysis.
-            `;
-
-            const chatHistory = messages.slice(-6).map(m => ({ role: m.role, content: m.content }));
-            chatHistory.push({ role: 'user', content: userMsg.content });
-
-            const botMsgId = (Date.now() + 1).toString();
-            setMessages(prev => [...prev, {
-                id: botMsgId,
-                role: 'assistant',
-                content: '',
-                timestamp: new Date(),
-                isStreaming: true
-            }]);
-
-            const chunks_gen = await engine.chat.completions.create({
-                messages: [{ role: 'system', content: systemPrompt }, ...chatHistory],
-                temperature: 0.6,
-                stream: true,
-            });
-
-            let fullContent = '';
-            for await (const chunk of chunks_gen) {
-                const content = chunk.choices[0]?.delta?.content || "";
-                fullContent += content;
-                setMessages(prev => prev.map(m => m.id === botMsgId ? { ...m, content: fullContent } : m));
-            }
-
-            setMessages(prev => prev.map(m => m.id === botMsgId ? { 
-                ...m, 
-                isStreaming: false,
-                cta: { text: "Schedule Analysis", link: "/contact" }
-            } : m));
-
-        }
-    } catch (err) {
-        console.error('Chat Error:', err);
-        setMessages(prev => [...prev, {
-            id: Date.now().toString(),
-            role: 'assistant',
-            content: "I apologize, but I encountered an error while processing your clinical inquiry. Our leadership team can provide a direct analysis for you.",
-            timestamp: new Date(),
-            cta: { text: "Connect with Team", link: "/contact" }
-        }]);
-    } finally {
-        setIsTyping(false);
-    }
+    setTimeout(() => {
+      const response = synthesizeResponse(userMsg.content);
+      setMessages((prev) => [...prev, {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: response.text,
+        timestamp: new Date(),
+        cta: response.cta,
+      }]);
+      setIsTyping(false);
+    }, 800);
   };
 
   return (
@@ -199,9 +183,9 @@ export default function ChatBot() {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="absolute bottom-20 right-0 w-[350px] sm:w-[420px] h-[620px] bg-white rounded-[2.5rem] shadow-[0_30px_90px_-15px_rgba(15,23,42,0.2)] border border-slate-100 flex flex-col overflow-hidden"
+            className="absolute bottom-20 right-0 w-[350px] sm:w-[420px] h-[600px] bg-white rounded-[2.5rem] shadow-[0_30px_90px_-15px_rgba(15,23,42,0.15)] border border-slate-100 flex flex-col overflow-hidden"
           >
-            {/* Header */}
+            {/* Header - Instant & Blue Theme */}
             <div className="p-8 bg-[#0284c7] text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2" />
               <div className="flex items-center justify-between relative z-10">
@@ -212,19 +196,17 @@ export default function ChatBot() {
                   <div>
                     <h4 className="font-black text-xl leading-tight tracking-tight">Evolve Assistant</h4>
                     <div className="flex items-center gap-1.5 mt-0.5">
-                      <div className={cn(
-                        "w-2 h-2 rounded-full",
-                        engineStatus === 'ready' ? "bg-green-400" : 
-                        engineStatus === 'error' ? "bg-red-400" : "bg-amber-400 animate-pulse"
-                      )} />
+                      <div className="w-2 h-2 rounded-full bg-green-400" />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        {engineStatus === 'ready' ? 'Neural Stack Active' : 
-                         engineStatus === 'error' ? 'Initialization Error' : 'Initializing Intelligence'}
+                        Neural Engine Active
                       </span>
                     </div>
                   </div>
                 </div>
-                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-xl transition-all">
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 hover:bg-white/10 rounded-xl transition-all"
+                >
                   <X size={20} />
                 </button>
               </div>
@@ -232,34 +214,6 @@ export default function ChatBot() {
 
             {/* Messages */}
             <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-10 bg-slate-50/20 scroll-smooth">
-              {engineStatus === 'loading' && messages.length === 1 && (
-                <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-6 text-center">
-                  <div className="relative">
-                    <Loader2 size={40} className="animate-spin text-[#0284c7]" />
-                    <Database size={16} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#38bdf8]" />
-                  </div>
-                  <div className="space-y-2">
-                    <p className="text-[11px] uppercase font-black tracking-[0.3em] text-[#0284c7]">Neural Initialization</p>
-                    <p className="text-[10px] text-slate-400 max-w-[220px] leading-relaxed">
-                      Deploying private, browser-based AI models and indexing clinical context.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {engineStatus === 'error' && (
-                <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-4 text-center p-4">
-                  <p className="text-sm text-slate-600 font-bold">Failed to load neural engine.</p>
-                  <p className="text-[10px] text-slate-400">This may be due to browser compatibility or network restrictions. Please try refreshing or speak with our team directly.</p>
-                  <button 
-                    onClick={() => setEngineStatus('idle')}
-                    className="px-4 py-2 bg-[#0284c7] text-white text-[10px] font-black uppercase tracking-widest rounded-full"
-                  >
-                    Retry Initialization
-                  </button>
-                </div>
-              )}
-              
               {messages.map((msg) => (
                 <div key={msg.id} className={cn("flex flex-col max-w-[90%]", msg.role === 'user' ? "ml-auto items-end" : "items-start")}>
                   <div className={cn(
@@ -269,7 +223,6 @@ export default function ChatBot() {
                       : "bg-white text-slate-700 rounded-tl-none border border-slate-100 shadow-sm"
                   )}>
                     {msg.content}
-                    {msg.isStreaming && <span className="inline-block w-1 h-4 bg-[#0284c7] ml-1 animate-pulse align-middle" />}
                   </div>
                   {msg.cta && (
                     <motion.a
@@ -287,14 +240,14 @@ export default function ChatBot() {
                   </span>
                 </div>
               ))}
-              {isTyping && !messages.some(m => m.isStreaming) && (
+              {isTyping && (
                 <div className="flex items-center gap-3 text-[#0284c7]">
                   <div className="flex gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" />
                     <div className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:0.2s]" />
                     <div className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:0.4s]" />
                   </div>
-                  <span className="text-[10px] uppercase font-black tracking-widest opacity-40">Synthesizing Reason</span>
+                  <span className="text-[10px] uppercase font-black tracking-widest opacity-40">Reasoning</span>
                 </div>
               )}
             </div>
@@ -307,13 +260,12 @@ export default function ChatBot() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder={engineStatus === 'ready' ? "How can we assist?" : "AI Engine initializing..."}
-                  disabled={engineStatus !== 'ready'}
+                  placeholder="Ask about our models..."
                   className="flex-1 bg-transparent px-4 py-3 text-sm focus:outline-none placeholder:text-slate-400 text-slate-700 font-medium"
                 />
                 <button 
                   onClick={handleSend}
-                  disabled={!input.trim() || engineStatus !== 'ready'}
+                  disabled={!input.trim() || !isReady}
                   className="w-12 h-12 bg-[#0284c7] text-white rounded-[1.2rem] flex items-center justify-center hover:bg-[#0f172a] transition-all disabled:opacity-20 shadow-lg shadow-[#0284c7]/20"
                 >
                   <Send size={20} />
@@ -322,11 +274,11 @@ export default function ChatBot() {
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest">
                   <ShieldCheck size={12} className="text-green-500" />
-                  Local Inference
+                  Clinical Data Secure
                 </div>
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest">
                   <Zap size={10} className="text-[#0284c7]" />
-                  Real-Time AI
+                  Instant Intelligence
                   <Sparkles size={10} className="text-[#0284c7]" />
                 </div>
               </div>

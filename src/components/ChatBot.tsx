@@ -46,7 +46,6 @@ export default function ChatBot() {
     window.addEventListener('open-chatbot', handleOpen);
 
     return () => {
-      worker?.terminate();
       window.removeEventListener('open-chatbot', handleOpen);
     };
   }, []);

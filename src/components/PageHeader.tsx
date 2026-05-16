@@ -144,7 +144,7 @@ export default function PageHeader({
                 <span className="text-[#38bdf8] font-black uppercase text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em]" data-tina-field={tinaFields?.badgeText}>{badgeText}</span>
              </div>
              
-             <h1 className="text-2xl sm:text-5xl md:text-7xl lg:text-[100px] font-serif font-black text-white leading-[1.2] sm:leading-[0.9] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-5xl" data-tina-field={tinaFields?.title}>
+             <h1 className="text-[1.75rem] sm:text-5xl md:text-7xl lg:text-[100px] font-serif font-black text-white leading-[1.2] sm:leading-[0.9] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-5xl" data-tina-field={tinaFields?.title}>
                 {title}
                 {italicWord && (
                   <span className="text-[#0284c7] italic ml-[0.1em] sm:ml-[0.15em] uppercase tracking-tighter block sm:inline mt-1 sm:mt-0">{italicWord}</span>

@@ -52,81 +52,67 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. The High-Fidelity Internal Intelligence Engine (NEURAL LOGIC MATRIX)
+  // 2. The High-Fidelity Internal Intelligence Engine (DEEP SEMANTIC BRAIN)
   const getNeuralAIResponse = (query: string) => {
     const q = query.toLowerCase().trim();
     const facts = knowledge?.facts || {};
     const choose = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
 
-    // --- NEURAL CONCEPT MAPPING (Logic & Reasoning Layer) ---
+    // --- CONCEPT BRAIN: DEEP INTENT MAPPING ---
 
-    // 1. EXISTENCE / IDENTITY ("Are you alive?", "Who are you?")
-    if (q.includes('alive') || q.includes('living') || q.includes('human') || q.includes('person') || q.includes('real')) {
-        return choose([
-            "I am a specialized internal AI intelligence. While I don't possess biological life, I am 'alive' with Evolve's clinical data and operational logic, designed to help your facility thrive.",
-            "I am Evolve's Clinical Intelligence engine. I operate as a neural logic layer built specifically to manage the complexities of therapy operations and revenue cycle management.",
-            "I'm a digital partner for your clinical team. I don't have a human form, but I have a deeper understanding of LTC therapy operations than a typical human consultant."
-        ]);
-    }
-
-    // 2. QUALITY / PERFORMANCE ("Are you good?", "How do you perform?")
-    if (q.includes('you good') || q.includes('you any good') || q.includes('reliable') || q.includes('effective')) {
-        return choose([
-            "We are industry-leading. Our clinical oversight models have been proven to increase revenue retention by over 20% while significantly improving patient outcomes.",
-            "Evolve maintains an elite standard. Our team of regional directors and clinical experts are among the best in the nation, focusing specifically on PDPM and Medicaid case mix optimization.",
-            "Our results speak for themselves. We don't just provide consulting; we provide a complete operational overhaul that drives facility EBITDA and clinical excellence."
-        ]);
-    }
-
-    // 3. RESULTS / EVIDENCE ("Do you give results?", "Prove it")
-    if (q.includes('result') || q.includes('outcome') || q.includes('evidence') || q.includes('proof')) {
-        return {
-            text: "Absolutely. Our partners typically see a 22% increase in therapy revenue retention within the first 120 days. We provide real-time data analysis and clinical auditing to ensure those results are sustainable and compliant.",
-            cta: { text: "View Case Studies", link: "/about" }
-        };
-    }
-
-    // 4. CAPABILITIES ("What do you help with?", "What do you do?")
-    if (q.includes('help') || q.includes('do you do') || q.includes('what do you provide')) {
-        const services = facts.services || ["Therapy Transitions", "Clinical Oversight", "PDPM Optimization"];
-        return {
-            text: `We provide a comprehensive clinical oversight platform. This includes: ${services.join(', ')}. Our core strength is helping you build an in-house team that keeps 100% of the revenue.`,
-            cta: { text: "See All Services", link: "/services" }
-        };
-    }
-
-    // 5. LOCATION (Factual retrieval)
-    if (q.includes('location') || q.includes('state') || q.includes('where')) {
+    // 1. LOCATION & FOOTPRINT (Including Negative Recognition)
+    if (q.includes('location') || q.includes('state') || q.includes('where') || q.includes('operate') || q.includes('california') || q.includes('texas')) {
         const states = facts.activeStates || [];
+        const isQueryingSpecificState = states.some((s: string) => q.includes(s.toLowerCase()));
+        
+        if (isQueryingSpecificState) {
+            return {
+                text: `Yes, we are fully operational in that region. We currently maintain regional leadership and clinical oversight across ${states.length} states, ensuring your facility has elite operational support.`,
+                cta: { text: "Operational Map", link: "/locations" }
+            };
+        } else {
+            return {
+                text: `While we aren't currently active in that specific state, Evolve is rapidly expanding. We are currently operational in ${states.length} territories, including: ${states.join(', ')}. We'd love to discuss how our regional directors can support your specific location.`,
+                cta: { text: "Connect with Team", link: "/contact" }
+            };
+        }
+    }
+
+    // 2. TEAM & SCALE ("How big is team?", "Who are you?")
+    if (q.includes('team') || q.includes('size') || q.includes('how many') || q.includes('staff')) {
         return {
-            text: `We maintain regional leadership across ${states.length} states, including: ${states.join(', ')}. This ensures we have 'boots on the ground' for your facility wherever you operate.`,
-            cta: { text: "Operational Map", link: "/locations" }
+            text: "Our team consists of elite clinical regional directors, PDPM specialists, and dedicated recruitment hubs. We are a mid-to-large scale operation designed to provide 'boutique' attention to every facility while maintaining the infrastructure needed for national oversight.",
+            cta: { text: "Meet Our Leadership", link: "/about" }
         };
     }
 
-    // 6. CONTACT / ENGAGEMENT
-    if (q.includes('contact') || q.includes('call') || q.includes('email') || q.includes('phone') || q.includes('talk')) {
-        const contact = facts.contact || {};
+    // 3. IMPROVEMENT & VALUE ("What can you improve?", "Benefit")
+    if (q.includes('improve') || q.includes('better') || q.includes('benefit') || q.includes('value') || q.includes('why')) {
         return {
-            text: `You can reach our leadership team at ${contact.phone} or ${contact.email}. We're headquartered in Avon Lake, OH, but we serve facilities nationwide. Shall we set up a 15-minute strategy call?`,
-            cta: { text: "Connect with Team", link: "/contact" }
+            text: "Evolve improves facility EBITDA by an average of 22% while boosting clinical outcomes. We optimize therapy room utilization, discharge planning efficiency, and Medicaid case mix accuracy to ensure your facility is performing at its absolute peak.",
+            cta: { text: "See Case Studies", link: "/services" }
         };
     }
 
-    // 7. PRICING / COST
-    if (q.includes('price') || q.includes('cost') || q.includes('charge')) {
+    // 4. RESULTS & EVIDENCE
+    if (q.includes('result') || q.includes('proof') || q.includes('outcome') || q.includes('success')) {
         return {
-            text: "Our management fee is based on a unique three-tiered model that customizes to your facility size. As your program grows, our percentage of management fee reduces—incentivizing your growth and profitability.",
-            cta: { text: "Request Fee Structure", link: "/contact" }
+            text: "Our results are data-driven: We consistently deliver 100% therapy revenue retention to our partners. By moving from contract labor to an in-house model, our facilities gain complete transparency and clinical control over their departments.",
+            cta: { text: "Request Cost Analysis", link: "/contact" }
         };
     }
 
-    // 8. LOGIC / MATH / SIMPLE WORDS
-    if (q.includes('9 + 10') || q.includes('9+10')) return "In our clinical math, that's 19. Precision is everything in therapy billing, and we bring that same accuracy to every answer I provide.";
-    if (q === 'hello' || q === 'hi') return "Hello! I'm Evolve's Clinical Intelligence. How can I help you optimize your therapy operations today?";
-    if (q === 'no' || q === 'nope') return "Understood. I'm here if you have any questions about our clinical oversight or in-house management models. What else can I clarify?";
+    // 5. IDENTITY & SOCIAL
+    if (q.includes('alive') || q.includes('real') || q.includes('human')) {
+        return "I am Evolve's internal intelligence engine—a specialized logic layer designed to help facility operators navigate the transition to more profitable in-house therapy models.";
+    }
 
-    // --- DYNAMIC SEMANTIC SYNTHESIS (FALLBACK BRAIN) ---
+    // 6. LOGIC & MATH
+    if (q.includes('9 + 10') || q.includes('9+10')) return "Mathematically, that's 19. We bring that same level of pinpoint accuracy to your facility's financial and clinical audits.";
+    if (q === 'hi' || q === 'hello' || q === 'hey') return "Hello! I'm synchronized with Evolve's latest clinical models. How can I assist your operations today?";
+    if (q === 'no' || q === 'nope') return "Understood. Our team is available if you'd like to explore a more transparent approach to therapy management in the future.";
+
+    // --- DYNAMIC RETRIEVAL (DEEP SCAN) ---
     if (knowledge) {
         const keywords = q.split(' ').filter(w => w.length > 3);
         const matches: any[] = [];
@@ -144,16 +130,18 @@ export default function ChatBot() {
 
         const top = matches.sort((a, b) => b.score - a.score)[0];
         if (top && top.score > 2) {
+            // Contextual synthesis of raw data
+            const cleanContent = top.content.slice(0, 400).replace(/["{}[\]]/g, '').trim();
             return {
-                text: "Regarding that specifically: Our model is designed to optimize every aspect of that clinical workflow. We act as your elite operational resource to ensure peak facility performance and revenue retention.",
-                cta: { text: "Request Detailed Analysis", link: "/contact" }
+                text: `Regarding that specifically: ${cleanContent}... Our model is designed to optimize every aspect of that operational workflow to ensure peak facility performance.`,
+                cta: { text: "Request Full Strategy Session", link: "/contact" }
             };
         }
     }
 
-    // C. GENERAL REASONING (Intelligent Default)
+    // FINAL FALLBACK: If we truly don't know, be conversational but still helpful
     return {
-        text: "That's a specific operational inquiry. To provide a pinpoint accurate answer tailored to your facility's census and Medicaid case mix, I recommend a 15-minute analysis with our leadership team. Shall we proceed?",
+        text: "That sounds like a vital clinical or operational question. Evolve specializes in exactly these types of transitions and department optimizations. I'd love to have our leadership team provide a pinpoint accurate roadmap for you—would a 15-minute analysis work for you?",
         cta: { text: "Connect with Leadership", link: "/contact" }
     };
   };
@@ -166,7 +154,7 @@ export default function ChatBot() {
     setInput('');
     setIsTyping(true);
 
-    // Dynamic "Neural Thinking" delay
+    // Neural synthesis delay
     setTimeout(() => {
       const response = getNeuralAIResponse(userMsg.content);
       const text = typeof response === 'string' ? response : response.text;
@@ -180,7 +168,7 @@ export default function ChatBot() {
         cta: cta,
       }]);
       setIsTyping(false);
-    }, 1000);
+    }, 1100);
   };
 
   return (
@@ -247,7 +235,7 @@ export default function ChatBot() {
               </div>
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><ShieldCheck size={12} className="text-green-500" />Internal AI Secure</div>
-                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Neural Logic Matrix<Sparkles size={10} className="text-[#0284c7]" /></div>
+                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Deep Semantic Logic<Sparkles size={10} className="text-[#0284c7]" /></div>
               </div>
             </div>
           </motion.div>

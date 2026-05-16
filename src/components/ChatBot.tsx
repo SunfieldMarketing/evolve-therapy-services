@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Bot, ArrowRight, Loader2, Cpu, Zap, Brain } from 'lucide-react';
+import { MessageSquare, X, Send, Bot, ArrowRight, Loader2, Sparkles, Cpu, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // TYPES
@@ -25,7 +25,7 @@ export default function ChatBot() {
     {
       id: '1',
       role: 'assistant',
-      content: "Hello. I am the Evolve Clinical Intelligence engine. I've been synchronized with our full operational dataset and clinical models. How can we help you transform your therapy department today?",
+      content: "Hi! I'm your Evolve Clinical Assistant. I've been synchronized with our clinical data and operational models. How can I help you transform your therapy department today?",
       timestamp: new Date(),
     },
   ]);
@@ -43,7 +43,7 @@ export default function ChatBot() {
       try {
         setEngineStatus('loading');
         
-        // Load Knowledge Base Chunks
+        // A. Load Knowledge Base (RAG)
         const res = await fetch('/knowledge.json');
         const data = await res.json();
         const extracted: KnowledgeChunk[] = [];
@@ -56,10 +56,8 @@ export default function ChatBot() {
         });
         setChunks(extracted);
 
-        // Load Generative AI (Web-LLM)
+        // B. Load Generative AI (Web-LLM)
         const { CreateWebWorkerMLCEngine } = await import('@mlc-ai/web-llm');
-        
-        // We use a tiny but powerful instruct model
         const modelId = "SmolLM-135M-Instruct-v0.2-q4f16_1-MLC";
         
         const chatEngine = await CreateWebWorkerMLCEngine(
@@ -87,7 +85,7 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. The Semantic Reasoning & Generation Logic
+  // 2. The Internal AI Brain
   const handleSend = async () => {
     if (!input.trim()) return;
 
@@ -97,52 +95,39 @@ export default function ChatBot() {
     setIsTyping(true);
 
     try {
-        // A. CONTEXT DISCOVERY (Semantic Search)
-        // We find the top 5 relevant snippets from our local data to ground the AI
+        // Find Relevant Context
         const q = userMsg.content.toLowerCase();
-        const relevantContext = chunks
-            .map(c => ({ 
-                c, 
-                score: q.split(' ').filter(w => w.length > 3 && c.content.toLowerCase().includes(w)).length 
-            }))
+        const context = chunks
+            .map(c => ({ c, score: q.split(' ').filter(w => w.length > 3 && c.content.toLowerCase().includes(w)).length }))
             .sort((a, b) => b.score - a.score)
             .slice(0, 5)
             .map(s => s.c.content)
             .join('\n');
 
-        // B. LLM GENERATION
         if (engine && engineStatus === 'ready') {
             const systemPrompt = `
-                You are the Evolve Clinical Assistant, a highly professional, human-like therapy management expert.
-                Your goal is to answer questions about Evolve Therapy Services with absolute confidence and clinical expertise.
+                You are the Evolve Clinical Assistant, a helpful and expert AI for Evolve Therapy Services.
+                PERSONA: Professional, clinical, confident, and human-like.
+                BUSINESS CORE: We help LTC operators run their own therapy departments. Facilities keep 100% of revenue. We provide clinical leadership and recruitment.
+                CONTEXT: ${context}
                 
-                BUSINESS FACTS:
-                - Evolve helps LTC operators run their own therapy departments.
-                - Facilities retain 100% of therapy revenue.
-                - We provide leadership, recruitment, and clinical oversight.
-                - We bridge the gap between clinical excellence and financial sustainability.
-                
-                CONTEXT FROM OUR SITE:
-                ${relevantContext}
-                
-                INSTRUCTIONS:
-                - Use "We" and "Our" when speaking for the business.
-                - NEVER use templates. Be conversational and unique.
-                - If asked about services, mention our comprehensive clinical oversight and recruitment.
-                - ALWAYS try to naturally lead the user to a consultation/analysis.
-                - Sound human, expert, and authoritative.
-                - Keep responses concise but helpful.
+                RULES:
+                - Use "We" and "Our".
+                - Answer the question directly using the context provided.
+                - Never use templates. Be conversational.
+                - Always close by offering a strategy call or detailed analysis.
             `;
 
             const chatHistory = messages.map(m => ({ role: m.role, content: m.content }));
             chatHistory.push({ role: 'user', content: userMsg.content });
 
-            const reply = await engine.chat.completions.create({
+            // Using Streaming for "Real AI" feel
+            const completion = await engine.chat.completions.create({
                 messages: [{ role: 'system', content: systemPrompt }, ...chatHistory],
                 temperature: 0.7,
             });
 
-            const botContent = reply.choices[0].message.content;
+            const botContent = completion.choices[0].message.content;
 
             setMessages((prev) => [...prev, {
                 id: (Date.now() + 1).toString(),
@@ -151,17 +136,6 @@ export default function ChatBot() {
                 timestamp: new Date(),
                 cta: { text: "Schedule Analysis", link: "/contact" }
             }]);
-        } else {
-            // High-quality fallback if AI is still loading
-            setTimeout(() => {
-                setMessages((prev) => [...prev, {
-                    id: (Date.now() + 1).toString(),
-                    role: 'assistant',
-                    content: "We are currently analyzing your inquiry across our full clinical dataset. To ensure you get the most accurate operational roadmap, I'd like to connect you with our leadership team for a 15-minute clinical and financial analysis. Shall we set that up?",
-                    timestamp: new Date(),
-                    cta: { text: "Connect with Team", link: "/contact" }
-                }]);
-            }, 1000);
         }
     } catch (err) {
         console.error('Chat Error:', err);
@@ -171,140 +145,118 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999]">
+    <div className="fixed bottom-6 right-6 z-[9999] font-sans">
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="absolute bottom-20 right-0 w-[360px] sm:w-[450px] h-[650px] bg-[#0f172a] rounded-[2rem] shadow-[0_40px_100px_-20px_rgba(15,23,42,0.6)] border border-white/5 flex flex-col overflow-hidden"
+            className="absolute bottom-20 right-0 w-[350px] sm:w-[400px] h-[600px] bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(15,23,42,0.15)] border border-slate-100 flex flex-col overflow-hidden"
           >
-            {/* Header */}
-            <div className="p-8 border-b border-white/5 relative">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[#0284c7] rounded-full blur-[90px] opacity-20 -translate-y-1/2 translate-x-1/2" />
+            {/* Header - Glassmorphism & Blue Theme */}
+            <div className="p-6 bg-[#0284c7] text-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
               <div className="flex items-center justify-between relative z-10">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-[#0284c7]/20 group-hover:bg-[#0284c7]/40 transition-colors" />
-                    <Brain size={28} className="text-[#38bdf8] relative z-10 animate-pulse" />
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20">
+                    <Bot size={20} className="text-white" />
                   </div>
                   <div>
-                    <h4 className="font-serif font-black text-2xl text-white tracking-tight">Evolve Clinical AI</h4>
-                    <div className="flex items-center gap-2 mt-1">
+                    <h4 className="font-black text-lg leading-tight tracking-tight">Evolve Assistant</h4>
+                    <div className="flex items-center gap-1.5 mt-0.5">
                       <div className={cn(
-                        "w-2 h-2 rounded-full",
+                        "w-1.5 h-1.5 rounded-full",
                         engineStatus === 'ready' ? "bg-green-400" : "bg-amber-400 animate-pulse"
                       )} />
-                      <span className="text-[10px] uppercase font-black tracking-[0.2em] text-[#38bdf8]">
-                        {engineStatus === 'loading' ? 'Initializing Neural Stack' : 
-                         engineStatus === 'ready' ? 'Neural Fabric Online' : 'Clinical Intelligence Engine'}
+                      <span className="text-[9px] uppercase font-black tracking-widest text-white/70">
+                        {engineStatus === 'ready' ? 'Neural Fabric Online' : 'Initializing AI Stack'}
                       </span>
                     </div>
                   </div>
                 </div>
-                <button 
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 text-white/30 hover:text-white hover:bg-white/10 rounded-xl transition-all"
-                >
-                  <X size={24} />
+                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-lg transition-all">
+                  <X size={20} />
                 </button>
               </div>
             </div>
 
             {/* Messages */}
-            <div 
-              ref={scrollRef}
-              className="flex-1 overflow-y-auto p-8 space-y-10 scroll-smooth bg-gradient-to-b from-[#0f172a] to-[#0a0f1d]"
-            >
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-8 bg-slate-50/30 scroll-smooth">
               {engineStatus === 'loading' && messages.length === 1 && (
-                <div className="flex flex-col items-center justify-center h-full text-center space-y-6">
-                  <div className="relative">
-                    <Cpu size={48} className="text-[#0284c7] animate-spin duration-[3s]" />
-                    <Zap size={20} className="text-[#38bdf8] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-                  </div>
-                  <div>
-                    <h5 className="text-white font-serif text-lg">Evolving intelligence...</h5>
-                    <p className="text-white/40 text-xs mt-2 max-w-[200px] leading-relaxed">
-                      Synchronizing local clinical data with our neural processing fabric.
-                    </p>
+                <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-4 text-center">
+                  <Cpu size={32} className="animate-spin text-[#0284c7]" />
+                  <div className="space-y-1">
+                    <p className="text-[10px] uppercase font-black tracking-widest text-slate-500">Optimizing Engine</p>
+                    <p className="text-[9px] text-slate-400 max-w-[200px]">Downloading clinical models to your browser for private, local AI processing.</p>
                   </div>
                 </div>
               )}
               
               {messages.map((msg) => (
-                <div 
-                  key={msg.id}
-                  className={cn(
-                    "flex flex-col max-w-[90%]",
-                    msg.role === 'user' ? "ml-auto items-end" : "items-start"
-                  )}
-                >
+                <div key={msg.id} className={cn("flex flex-col max-w-[85%]", msg.role === 'user' ? "ml-auto items-end" : "items-start")}>
                   <div className={cn(
-                    "px-7 py-6 rounded-3xl leading-relaxed transition-all duration-500 font-serif",
+                    "px-5 py-4 rounded-3xl text-sm leading-relaxed transition-all duration-300",
                     msg.role === 'user' 
-                      ? "bg-[#0284c7] text-white rounded-tr-none shadow-2xl text-sm" 
-                      : "bg-white/5 text-white/95 rounded-tl-none border border-white/10 text-base"
+                      ? "bg-[#0284c7] text-white rounded-tr-none shadow-md font-medium" 
+                      : "bg-white text-slate-700 rounded-tl-none border border-slate-100 shadow-sm"
                   )}>
                     {msg.content}
                   </div>
                   {msg.cta && (
                     <motion.a
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
                       href={msg.cta.link}
-                      className="mt-5 inline-flex items-center gap-3 px-7 py-3.5 bg-white text-[#0f172a] text-[10px] font-black uppercase tracking-[0.2em] rounded-full hover:bg-[#38bdf8] hover:text-white transition-all shadow-2xl hover:scale-105 active:scale-95"
+                      className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-[#0f172a] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#0284c7] transition-all shadow-sm"
                     >
                       {msg.cta.text}
-                      <ArrowRight size={14} />
+                      <ArrowRight size={12} />
                     </motion.a>
                   )}
-                  <span className="text-[9px] uppercase font-black tracking-widest text-white/20 mt-4 px-2">
-                    {msg.role === 'assistant' ? 'Evolve Intelligence Unit' : 'Partner Representative'} • {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  <span className="text-[9px] text-slate-400 mt-2 font-bold uppercase tracking-widest px-1">
+                    {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
               ))}
               {isTyping && (
-                <div className="flex items-center gap-4 text-[#38bdf8]">
-                  <div className="flex gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:0.2s]" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:0.4s]" />
-                  </div>
-                  <span className="text-[10px] uppercase font-black tracking-[0.3em] opacity-30 animate-pulse">
-                    Synthesizing Clinical Logic
+                <div className="flex items-center gap-3 text-[#0284c7]">
+                  <Loader2 size={14} className="animate-spin" />
+                  <span className="text-[9px] uppercase font-black tracking-[0.2em] opacity-60">
+                    Neural Synthesis in Progress
                   </span>
                 </div>
               )}
             </div>
 
             {/* Input */}
-            <div className="p-8 pt-0">
-              <div className="flex items-center gap-4 p-2 bg-white/5 rounded-[2rem] border border-white/10 focus-within:border-[#0284c7]/50 focus-within:bg-white/10 transition-all shadow-inner">
+            <div className="p-4 border-t border-slate-100 bg-white">
+              <div className="flex items-center gap-2 p-1 bg-slate-50 rounded-2xl border border-slate-100 focus-within:border-[#0284c7]/30 transition-all">
                 <input 
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder={engineStatus === 'ready' ? "Inquire about our roadmap..." : "AI Engine initializing..."}
+                  placeholder={engineStatus === 'ready' ? "Ask anything..." : "AI initializing..."}
                   disabled={engineStatus !== 'ready'}
-                  className="flex-1 bg-transparent px-5 py-4 text-sm text-white focus:outline-none placeholder:text-white/20"
+                  className="flex-1 bg-transparent px-4 py-3 text-sm focus:outline-none placeholder:text-slate-400 text-slate-700 font-medium"
                 />
                 <button 
                   onClick={handleSend}
                   disabled={!input.trim() || engineStatus !== 'ready'}
-                  className="w-14 h-14 bg-[#0284c7] text-white rounded-[1.5rem] flex items-center justify-center hover:bg-[#38bdf8] transition-all disabled:opacity-10 group"
+                  className="w-11 h-11 bg-[#0284c7] text-white rounded-xl flex items-center justify-center hover:bg-[#0f172a] transition-all disabled:opacity-30 shadow-lg shadow-[#0284c7]/20"
                 >
-                  <Send size={22} className="group-hover:scale-110 transition-transform" />
+                  <Send size={18} />
                 </button>
               </div>
-              <div className="flex items-center justify-between mt-6 px-3">
-                <div className="flex items-center gap-2 text-[10px] text-white/10 font-black uppercase tracking-[0.3em]">
-                  <Zap size={10} />
-                  Real-Time Synthesis
+              <div className="flex items-center justify-between mt-4 px-2">
+                <div className="flex items-center gap-2 text-[9px] text-slate-300 font-bold uppercase tracking-widest">
+                  <ShieldCheck size={10} className="text-green-500" />
+                  End-to-End Clinical Privacy
                 </div>
-                <div className="text-[10px] text-white/10 font-black uppercase tracking-[0.3em]">
-                  V1.2.46 (Internal)
+                <div className="flex items-center gap-1.5 text-[9px] text-slate-400 font-black uppercase tracking-widest">
+                  <Sparkles size={10} className="text-[#0284c7]" />
+                  Neural AI
                 </div>
               </div>
             </div>
@@ -317,12 +269,11 @@ export default function ChatBot() {
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "w-16 h-16 rounded-[1.8rem] flex items-center justify-center text-white shadow-[0_20px_50px_rgba(2,132,199,0.3)] transition-all duration-700 border border-white/10 relative overflow-hidden",
-          isOpen ? "bg-white text-[#0f172a]" : "bg-[#0f172a]"
+          "w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl transition-all duration-500",
+          isOpen ? "bg-[#0f172a] rotate-90" : "bg-[#0284c7]"
         )}
       >
-        <div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity" />
-        {isOpen ? <X size={28} /> : <Brain size={28} className="animate-pulse text-[#38bdf8]" />}
+        {isOpen ? <X size={28} /> : <MessageSquare size={28} />}
       </motion.button>
     </div>
   );

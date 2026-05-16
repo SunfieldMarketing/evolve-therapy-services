@@ -17,10 +17,14 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Stethoscope, ClipboardCheck, GraduationCap, LineChart, ShieldAlert, Users2, Target, Activity, Heart, Sparkles, Award, Star
 };
 
-export default function ServiceDetailClient(props: { data: any, query: string, variables: any, settingsData?: any }) {
+export default function ServiceDetailClient(props: { data: any, query: string, variables: any, settingsData?: any, servicesData?: any }) {
   const { data } = useTina(props);
   const service = data.service;
   const s = props.settingsData;
+
+  const currentSlug = props.variables?.relativePath?.replace('.json', '') || '';
+  const allServices = props.servicesData?.showcase?.services || [];
+  const otherServices = allServices.filter((srv: any) => srv.slug !== currentSlug).slice(0, 3);
 
   if (!service) return null;
 
@@ -162,8 +166,22 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {/* Logic for related services would normally come from a separate query or static list */}
-            {/* For now we'll just show the prompt to view all services above */}
+            {otherServices.map((srv: any, i: number) => {
+              const SrvIcon = iconMap[srv.icon] || Target;
+              return (
+                <Link key={i} href={`/services/${srv.slug}`} className="group block bg-white rounded-3xl p-8 border border-slate-100 shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:border-[#0284c7]/30 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden pointer-events-auto">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#0284c7]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-[#0284c7]/10 transition-colors duration-500" />
+                  <div className="w-12 h-12 rounded-2xl bg-[#0284c7]/10 flex items-center justify-center text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-colors duration-300 mb-6 relative z-10">
+                    <SrvIcon size={24} />
+                  </div>
+                  <h3 className="text-xl font-serif font-black text-[#0f172a] mb-3 relative z-10">{srv.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6 relative z-10 line-clamp-3">{srv.desc}</p>
+                  <div className="flex items-center gap-2 text-[#0284c7] font-black text-[10px] uppercase tracking-widest relative z-10">
+                    Explore <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

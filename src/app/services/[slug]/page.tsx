@@ -20,6 +20,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   try {
     const res = await client.queries.service({ relativePath: `${slug}.json` });
     const settingsRes = await client.queries.settings({ relativePath: "settings.json" });
+    const servicesRes = await client.queries.services({ relativePath: "services.json" });
     
     return (
       <ServiceDetailClient 
@@ -27,6 +28,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         query={res.query} 
         variables={res.variables} 
         settingsData={JSON.parse(JSON.stringify(settingsRes.data.settings))}
+        servicesData={JSON.parse(JSON.stringify(servicesRes.data.services))}
       />
     );
   } catch (e) {

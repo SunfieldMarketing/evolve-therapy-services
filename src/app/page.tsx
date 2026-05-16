@@ -212,15 +212,7 @@ export default function Home(props: { data: any; query: string; variables: any }
       {/* ── Philosophy / CTA ── */}
       <section className="py-24 md:py-40 bg-white relative overflow-hidden">
           <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
-            <h2 className="text-4xl md:text-6xl font-serif font-black text-[#0f172a] tracking-tighter mb-6 leading-none">
-              Start your <span className="text-[#0284c7] italic font-medium">clinical evolution</span> with Evolve Therapy Services
-            </h2>
-            <p className="text-lg md:text-xl text-slate-500 font-light leading-relaxed">
-              Ready to take control of your therapy department's future? <br className="hidden md:block" />
-              Let's discuss a customized management roadmap.
-            </p>
-          </div>
+
 
           <div className="bg-[#0f172a] p-10 md:p-14 lg:p-20 shadow-2xl relative overflow-hidden group hover:border-[#0284c7]/30 transition-all duration-500 rounded-none w-screen relative left-1/2 -translate-x-1/2">
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />

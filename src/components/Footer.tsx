@@ -85,9 +85,10 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
                Ready to Evolve?
             </div>
-            <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[0.9] text-white mb-8">
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[1.05] text-white mb-8">
               <span data-tina-field={tinaField(p, 'title')}>{p.title}</span> <br />
-              <span className="text-[#38bdf8] italic font-medium" data-tina-field={tinaField(p, 'subtitle')}>{p.subtitle}</span>
+              <span className="text-[#38bdf8] italic font-medium" data-tina-field={tinaField(p, 'subtitle')}>{p.subtitle?.split('with zero')[0]}</span> <br className="hidden md:block" />
+              <span className="text-3xl md:text-4xl lg:text-5xl text-white/80 tracking-tight font-medium block mt-2">with zero legacy strings attached.</span>
             </h3>
             <p className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed">
               Our unique business model allows long-term care operators to retain <span className="text-white font-bold">100% of therapy revenue</span>. We bridge the gap between clinical excellence and financial sustainability, empowering your clinicians while protecting your bottom line.
@@ -215,7 +216,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             >
               <input type="hidden" name="_subject" value="New Newsletter Signup!" />
               <input type="hidden" name="_captcha" value="false" />
-              <div className="relative">
+              <div className="relative flex w-full">
                 <input
                   id="footer-email"
                   type="email"
@@ -224,12 +225,12 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                   autoComplete="email"
                   placeholder="your@email.com"
                   aria-label="Email address for newsletter"
-                  className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/25 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0284c7]/50 focus:bg-white/8 transition-all duration-200 pr-12 pointer-events-auto relative z-[101]"
+                  className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/25 rounded-l-xl rounded-r-none px-4 py-3 text-sm focus:outline-none focus:border-[#0284c7]/50 focus:bg-white/8 transition-all duration-200 pointer-events-auto relative z-[101]"
                 />
                 <button
                   type="submit"
                   aria-label="Subscribe to newsletter"
-                  className="absolute right-2 top-2 bottom-2 w-9 bg-[#0284c7] rounded-lg flex items-center justify-center text-white hover:bg-[#0369a1] transition-colors duration-200 pointer-events-auto relative z-[101]"
+                  className="bg-[#0284c7] rounded-r-xl px-4 flex items-center justify-center text-white hover:bg-[#0369a1] transition-colors duration-200 pointer-events-auto relative z-[101]"
                 >
                   <ArrowRight size={14} aria-hidden="true" />
                 </button>

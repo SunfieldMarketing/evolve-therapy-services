@@ -147,7 +147,7 @@ export default function PageHeader({
              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-black text-white leading-[1.05] sm:leading-[1] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words" data-tina-field={tinaFields?.title}>
                 {title}
                 {italicWord && (
-                  <span className="text-[#0284c7] italic ml-[0.1em] sm:ml-[0.15em] uppercase tracking-tighter block sm:inline mt-1 sm:mt-0">{italicWord}.</span>
+                  <span className="text-[#0284c7] italic ml-[0.1em] sm:ml-[0.15em] uppercase tracking-tighter block sm:inline mt-1 sm:mt-0">{italicWord}</span>
                 )}
              </h1>
 

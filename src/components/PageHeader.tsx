@@ -90,7 +90,7 @@ export default function PageHeader({
   }, [finalUseVideo, finalVideoUrl]);
 
   return (
-    <section className="relative w-full min-h-[90svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-32 sm:pt-40 md:pt-48" {...props}>
+    <section className="relative w-full min-h-[100svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-28 sm:pt-32" {...props}>
       {/* ── Background Layer ── */}
       <div className="absolute inset-0 z-0">
         {finalUseVideo ? (
@@ -135,7 +135,7 @@ export default function PageHeader({
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-50 container mx-auto px-5 sm:px-6 lg:px-12 py-12 sm:py-20">
+      <div className="relative z-50 container mx-auto px-5 sm:px-6 lg:px-12 py-12 sm:py-20 flex-1 flex flex-col justify-center">
         <div className="w-full flex flex-col items-center text-center lg:items-start lg:text-left">
           <BlurFade delay={0.2}>
              {/* Subtitle Badge */}
@@ -144,7 +144,7 @@ export default function PageHeader({
                 <span className="text-[#38bdf8] font-black uppercase text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em]" data-tina-field={tinaFields?.badgeText}>{badgeText}</span>
              </div>
              
-             <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-black text-white leading-[1.1] sm:leading-[1] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-4xl" data-tina-field={tinaFields?.title}>
+             <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[100px] font-serif font-black text-white leading-[1.1] sm:leading-[0.9] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-5xl" data-tina-field={tinaFields?.title}>
                 {title}
                 {italicWord && (
                   <span className="text-[#0284c7] italic ml-[0.1em] sm:ml-[0.15em] uppercase tracking-tighter block sm:inline mt-1 sm:mt-0">{italicWord}</span>

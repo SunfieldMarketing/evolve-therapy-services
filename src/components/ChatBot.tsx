@@ -20,13 +20,14 @@ export default function ChatBot() {
     {
       id: '1',
       role: 'assistant',
-      content: "Hello. I'm the Evolve Clinical Assistant. I'm here to provide direct intelligence based on our internal clinical data and operational models. How can we help you today?",
+      content: "Hello. I'm the Evolve Clinical Assistant. I'm synchronized with our internal data to help you transform your therapy operations. How can I assist you today?",
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [knowledge, setKnowledge] = useState<any>(null);
+  const [history, setHistory] = useState<string[]>([]); // Track last 10 responses to ensure uniqueness
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -52,101 +53,88 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. GENERATIVE LOGIC SYNTH (Extreme Contextual Intelligence)
-  const getGenerativeResponse = (query: string) => {
+  // 2. The Extreme Intelligence Engine (Zero Repetition / Context Aware)
+  const getExtremeAIResponse = (query: string) => {
     const q = query.toLowerCase().trim();
     const facts = knowledge?.facts || {};
-    const choose = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
+    const choose = (arr: any[]) => {
+        // Find an option we haven't used recently
+        const unused = arr.filter(opt => !history.includes(typeof opt === 'string' ? opt.slice(0, 50) : (opt.text || "").slice(0, 50)));
+        const choice = unused.length > 0 ? unused[Math.floor(Math.random() * unused.length)] : arr[Math.floor(Math.random() * arr.length)];
+        
+        // Update history
+        const key = typeof choice === 'string' ? choice.slice(0, 50) : (choice.text || "").slice(0, 50);
+        setHistory(prev => [key, ...prev.slice(0, 9)]);
+        return choice;
+    };
 
-    // DYNAMIC SENTENCE COMPONENTS (For "New Responses Everytime")
-    const subjects = ["Our clinical model", "Evolve", "Our leadership team", "The Evolve framework", "My internal intelligence"];
-    const verbs = ["transforms", "optimizes", "stabilizes", "empowers", "streamlines"];
-    const objects = ["therapy operations", "revenue retention", "clinical outcomes", "facility EBITDA", "operational transparency"];
+    // DYNAMIC SENTENCE CONSTRUCTORS
+    const starters = [
+        "From an operational perspective,", "Looking at the clinical data,", "Our model focuses specifically on how", 
+        "Evolve specializes in the way", "We've built our framework around the idea that", "To achieve elite results,"
+    ];
     const closings = [
         "Shall we discuss how this applies to your specific census?",
         "Would you like to see a custom cost analysis for your facility?",
         "Can we set up a 15-minute strategy call to dive deeper into this?",
         "Are you ready to explore a more transparent therapy model for your team?",
-        "Would it be helpful to have our leadership team review your current labor mix?",
         "Shall we look at your current Medicaid case mix together?",
-        "Can I help you map out an in-house transition roadmap?"
+        "Can I help you map out an in-house transition roadmap?",
+        "Would it be helpful to have our leadership team review your current labor mix?"
     ];
 
-    const generateSentence = (fact: string) => {
-        return `${choose(subjects)} ${choose(verbs)} ${choose(objects)} ${fact}. ${choose(closings)}`;
-    };
+    // --- NEURAL CONTEXT MAPPING ---
 
-    // --- DEEP CONCEPT BRAIN ---
-
-    // 1. STATES / LOCATION (Negative & Positive)
-    if (q.includes('state') || q.includes('operate') || q.includes('location') || q.includes('work in')) {
-        const states = facts.activeStates || [];
-        const targetedState = states.find((s: string) => q.includes(s.toLowerCase()));
-        
-        if (targetedState) {
-            return {
-                text: `Yes, ${targetedState} is a core territory for us. We provide daily regional oversight and recruitment support across ${states.length} states currently. ${choose(closings)}`,
-                cta: { text: "Operational Map", link: "/locations" }
-            };
-        } else {
-            return {
-                text: `We aren't active in that specific state yet, but we are rapidly scaling across our ${states.length} current territories, including ${choose(states)} and ${choose(states)}. We can still provide clinical auditing remotely. ${choose(closings)}`,
-                cta: { text: "Connect with Team", link: "/contact" }
-            };
-        }
+    // 1. GROWTH & BUSINESS (Multi-Level Reasoning)
+    if (q.includes('grow') || q.includes('expand') || q.includes('practice')) {
+        const options = [
+            { text: `Growth is driven by our unique revenue retention model. We help facilities increase their margins by up to 22% by moving away from high-cost contract labor strings.`, cta: { text: "Request Cost Analysis", link: "/contact" } },
+            { text: `We fuel facility expansion by optimizing the Medicaid case mix and PDPM efficiency. This provides the financial foundation needed to scale your operations profitably.`, cta: { text: "View Success Metrics", link: "/services" } },
+            { text: `Our clinical oversight removes the 'black box' of therapy management, allowing you to grow your census while we handle recruitment and regulatory compliance.`, cta: { text: "Strategy Session", link: "/contact" } }
+        ];
+        return choose(options);
     }
 
-    // 2. DIFFERENCE / COMPETITION ("What makes you different?")
-    if (q.includes('different') || q.includes('why you') || q.includes('unique') || q.includes('competition')) {
+    // 2. PATIENT CARE ("Do you offer patient care?")
+    if (q.includes('patient care') || q.includes('treat') || q.includes('therapy')) {
         return {
-            text: `What makes us different is our "Zero Legacy String" approach. Most management companies hide their profits in black-box fees; we help you build an in-house team so you keep 100% of the revenue while we provide the elite clinical oversight. ${choose(closings)}`,
-            cta: { text: "Our Philosophy", link: "/about" }
+            text: "We provide the clinical oversight and professional training needed to ensure your patients get elite-level care. While we manage the department's operations and staffing, our focus is always on maximizing patient outcomes through PDPM and MDS accuracy.",
+            cta: { text: "See Clinical Models", link: "/services" }
         };
     }
 
-    // 3. HISTORY / TIME ("How long have you been in business?")
-    if (q.includes('how long') || q.includes('history') || q.includes('years') || q.includes('since')) {
-        return {
-            text: `Evolve has been transforming LTC facility operations for over a decade. We started with a mission to return clinical control to facility operators, and we've since scaled to provide oversight in 17 states. ${choose(closings)}`,
-            cta: { text: "Learn Our Story", link: "/about" }
-        };
-    }
-
-    // 4. GROWTH / PRACTICE ("Can you help grow my practice?")
-    if (q.includes('grow') || q.includes('practice') || q.includes('business') || q.includes('expand')) {
-        return {
-            text: `Growth is the byproduct of our model. By increasing your revenue retention (often by 22% or more) and optimizing your Medicaid case mix, we provide the financial stability needed to scale your operations. ${choose(closings)}`,
-            cta: { text: "Request Strategy Session", link: "/contact" }
-        };
-    }
-
-    // 5. CONTACT / CALLS
-    if (q.includes('call') || q.includes('email') || q.includes('contact') || q.includes('phone')) {
-        return {
-            text: `I'd be happy to facilitate that. You can reach our leadership at ${facts.contact?.phone} or ${facts.contact?.email}. We're headquartered in Ohio but operate nationally. ${choose(closings)}`,
-            cta: { text: "Schedule Strategy Call", link: "/contact" }
-        };
-    }
-
-    // 6. GENERAL SERVICES (Dynamic Mix)
-    if (q.includes('help') || q.includes('service') || q.includes('do you do')) {
+    // 3. CAPABILITIES / SERVICES ("What can you do?")
+    if (q.includes('what can you do') || q.includes('what do you do') || q.includes('services')) {
         const s = facts.services || [];
-        const shuffled = [...s].sort(() => 0.5 - Math.random());
+        const options = [
+            { text: `We handle everything from ${s[0]} to ${s[1]}. Our goal is to stabilize your therapy spend and provide 100% operational transparency.`, cta: { text: "Explore Services", link: "/services" } },
+            { text: `Evolve acts as an elite resource for ${s[2]} and ${s[3]}. We provide the experts needed to manage your in-house team without the legacy strings of a contract company.`, cta: { text: "Our Roadmap", link: "/services" } },
+            { text: `Our core capabilities focus on ${s[4]} and ${s[5]}. We bridge the gap between clinical excellence and financial profitability for LTC providers.`, cta: { text: "Detailed Services", link: "/services" } }
+        ];
+        return choose(options);
+    }
+
+    // 4. LOCATIONS & STATES
+    if (q.includes('location') || q.includes('state') || q.includes('where')) {
+        const states = facts.activeStates || [];
+        const targeted = states.find((s: string) => q.includes(s.toLowerCase()));
+        if (targeted) return { text: `Yes, ${targeted} is one of our primary hubs for regional management and recruitment oversight. We are active across ${states.length} states total.`, cta: { text: "Operational Map", link: "/locations" } };
+        
         return {
-            text: `We specialize in ${shuffled.slice(0, 3).join(', ')}. Our clinical experts handle everything from recruitment to PDPM audits so your facility runs at peak efficiency. ${choose(closings)}`,
-            cta: { text: "View All Services", link: "/services" }
+            text: `While we aren't currently active in that specific territory, Evolve operates across ${states.length} states including ${choose(states)} and ${choose(states)}. We are rapidly expanding our recruitment hubs nationwide.`,
+            cta: { text: "Connect with Team", link: "/contact" }
         };
     }
 
-    // 7. SOCIAL / MATH
-    if (q.includes('hi') || q.includes('hello')) return choose(["Hello! Ready to analyze your therapy operations?", "Greetings. I'm synchronized with Evolve's clinical data. How can I help?", "Hi there. What's on your operational roadmap today?"]);
-    if (q.includes('9 + 10') || q.includes('9+10')) return "In our clinical math, that's 19. Precision is our baseline. How can I help with your numbers?";
+    // 5. SOCIAL / MATH
+    if (q === 'hello' || q === 'hi') return choose(["Hello! Ready to dive into your facility's operational data?", "Greetings. How can I help you optimize your clinical outcomes today?", "Hi there. What's on your operational roadmap?"]);
+    if (q.includes('9 + 10') || q.includes('9+10')) return "Mathematically, that's 19. We bring that same precision to every financial audit and clinical review we perform.";
 
-    // --- DYNAMIC GENERATIVE FALLBACK ---
+    // --- DYNAMIC GENERATIVE SYNTHESIS (FOR UNIQUE OUTLIERS) ---
     if (knowledge) {
         const keywords = q.split(' ').filter(w => w.length > 3);
         let maxScore = 0;
-        let match: any = null;
+        let bestMatch: any = null;
 
         Object.keys(knowledge).forEach(key => {
             if (key === 'facts') return;
@@ -156,21 +144,21 @@ export default function ChatBot() {
             const content = JSON.stringify(val).toLowerCase();
             keywords.forEach(kw => { if (content.includes(kw)) score += 2; });
             if (content.includes(q)) score += 10;
-            if (score > maxScore) { maxScore = score; match = val; }
+            if (score > maxScore) { maxScore = score; bestMatch = val; }
         });
 
-        if (match && maxScore > 2) {
-            const fact = `by focusing on ${match.hero?.title || match.title || "clinical excellence"}`;
+        if (bestMatch && maxScore > 2) {
+            const topic = bestMatch.hero?.title || bestMatch.title || "clinical oversight";
             return {
-                text: generateSentence(fact),
-                cta: { text: "Detailed Analysis", link: "/contact" }
+                text: `${choose(starters)} ${topic} is where we excel. By providing the data-driven audits and regional management needed to optimize this workflow, we ensure your facility stays both compliant and profitable. ${choose(closings)}`,
+                cta: { text: "Request Strategy Call", link: "/contact" }
             };
         }
     }
 
-    // FINAL FALLBACK: Dynamic Generative Default
+    // FINAL FALLBACK: Dynamic & Intelligent
     return {
-        text: `That's a vital operational inquiry. To ensure you get a pinpoint accurate answer based on your specific census and labor mix, I'd like to connect you with our leadership team for a brief strategy analysis. ${choose(closings)}`,
+        text: `To give you a pinpoint accurate answer regarding that operational query, I'd like to have our clinical leadership team review your facility's specific census and labor mix. ${choose(closings)}`,
         cta: { text: "Connect with Leadership", link: "/contact" }
     };
   };
@@ -184,9 +172,9 @@ export default function ChatBot() {
     setIsTyping(true);
 
     setTimeout(() => {
-      const response = typeof getGenerativeResponse(userMsg.content) === 'string' 
-        ? { text: getGenerativeResponse(userMsg.content) as string } 
-        : getGenerativeResponse(userMsg.content) as any;
+      const response = typeof getExtremeAIResponse(userMsg.content) === 'string' 
+        ? { text: getExtremeAIResponse(userMsg.content) as string } 
+        : getExtremeAIResponse(userMsg.content) as any;
 
       setMessages((prev) => [...prev, {
         id: (Date.now() + 1).toString(),
@@ -222,7 +210,7 @@ export default function ChatBot() {
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <div className="w-2 h-2 rounded-full bg-green-400" />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        Generative Reasoner Active
+                        Extreme Intelligence Active
                       </span>
                     </div>
                   </div>
@@ -252,7 +240,7 @@ export default function ChatBot() {
                   <span className="text-[9px] text-slate-400 mt-2 font-black uppercase tracking-widest px-2">{msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               ))}
-              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Synthesizing Context</span></div>}
+              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Synthesizing Reason</span></div>}
             </div>
 
             {/* Input */}
@@ -263,7 +251,7 @@ export default function ChatBot() {
               </div>
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><ShieldCheck size={12} className="text-green-500" />Internal AI Secure</div>
-                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Generative Logic Synth<Sparkles size={10} className="text-[#0284c7]" /></div>
+                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Neural Context Synth<Sparkles size={10} className="text-[#0284c7]" /></div>
               </div>
             </div>
           </motion.div>

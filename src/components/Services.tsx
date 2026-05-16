@@ -38,8 +38,8 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#0284c7]/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3 -z-10" />
 
       <div className="container mx-auto px-5 sm:px-8 md:px-12 relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 md:gap-12 mb-12 md:mb-16">
-          <div className="max-w-3xl">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 md:gap-12 mb-12 md:mb-16 text-center lg:text-left items-center lg:items-end">
+          <div className="max-w-3xl flex flex-col items-center lg:items-start">
             <BlurFade delay={0.1} className="mb-6">
                <AnimatedGradientText>Our Services</AnimatedGradientText>
             </BlurFade>
@@ -49,7 +49,7 @@ export default function Services({ data, parentField }: { data?: any, parentFiel
               </h2>
             </BlurFade>
           </div>
-          <BlurFade delay={0.3} className="text-lg text-slate-500 max-w-md leading-relaxed pb-2 font-light" data-tina-field={parentField ? tinaField(d, 'description') : undefined}>
+          <BlurFade delay={0.3} className="text-lg text-slate-500 max-w-md leading-relaxed pb-2 font-light text-center lg:text-left" data-tina-field={parentField ? tinaField(d, 'description') : undefined}>
             {d.description}
           </BlurFade>
         </div>

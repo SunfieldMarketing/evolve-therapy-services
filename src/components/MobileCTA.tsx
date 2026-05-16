@@ -46,7 +46,7 @@ export default function MobileCTA({ data }: { data?: any }) {
               className="w-14 h-14 shrink-0 bg-[#0f172a] text-white rounded-full flex items-center justify-center relative shadow-lg shadow-black/10 hover:bg-[#1e293b] transition-all active:scale-95 group"
               aria-label="Chat with AI"
             >
-              <Bot size={20} className="text-[#0284c7]" />
+              <MessageSquare size={20} className="text-[#0284c7]" />
               <Sparkles size={10} className="text-[#0284c7] absolute top-3 right-3 animate-pulse" />
             </button>
           </div>

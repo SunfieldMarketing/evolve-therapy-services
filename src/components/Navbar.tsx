@@ -141,19 +141,21 @@ export default function Navbar({ data }: { data?: any }) {
                   >
                     {hasDropdown ? (
                       <div className="relative" ref={link.name === 'Services' ? dropdownRef : null}>
-                        <button
+                        <Link
+                          href={link.href}
                           className={cn(
                             'relative z-[101] flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none outline-none focus:bg-slate-100 pointer-events-auto',
                             scrolled
                               ? 'text-slate-600 hover:text-[#0f172a] hover:bg-slate-100'
                               : 'text-white/80 hover:text-white hover:bg-white/10'
                           )}
-                          onClick={() => setDropdownOpen(!dropdownOpen)}
+                          onMouseEnter={() => setDropdownOpen(true)}
+                          onClick={() => setDropdownOpen(false)}
                           data-tina-field={tinaField(link, 'name')}
                         >
                           {link.name}
                           <ChevronDown className={cn("transition-transform duration-200", dropdownOpen ? "rotate-180" : "")} size={14} />
-                        </button>
+                        </Link>
                         
                         <AnimatePresence>
                           {dropdownOpen && (
@@ -273,8 +275,20 @@ export default function Navbar({ data }: { data?: any }) {
                       <div className="flex items-center justify-between">
                         {hasDropdown ? (
                           <div className="flex flex-col w-full">
-                            <div className="px-4 py-3.5 flex items-center justify-between text-white/40 text-[10px] font-black uppercase tracking-[0.2em] border-b border-white/5 mb-2">
-                              {link.name}
+                            <div className="px-4 py-3.5 flex items-center justify-between border-b border-white/5 mb-2">
+                              <Link 
+                                href={link.href}
+                                onClick={() => setIsOpen(false)}
+                                className="text-white text-[12px] font-black uppercase tracking-[0.2em] hover:text-[#0284c7] transition-colors"
+                              >
+                                {link.name}
+                              </Link>
+                              <button
+                                onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                                className="text-white/40 p-2"
+                              >
+                                <ChevronDown className={cn("transition-transform", mobileDropdownOpen ? "rotate-180" : "")} size={18} />
+                              </button>
                             </div>
                             <div className="flex flex-col gap-1">
                               {link.dropdown.map((sub: any, j: number) => (

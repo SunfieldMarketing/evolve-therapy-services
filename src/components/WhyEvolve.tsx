@@ -204,7 +204,7 @@ export default function WhyEvolve({ data, parentField }: { data?: any, parentFie
           </div>
 
           {/* ── Founder Quote Strip ── */}
-          <div className="py-5 sm:py-10 border-t border-white/5 bg-[#0f172a]/80 backdrop-blur-md">
+          <div className="pb-28 pt-10 sm:py-10 border-t border-white/5 bg-[#0f172a]/80 backdrop-blur-md relative z-10">
             <div className="container mx-auto px-5 sm:px-6">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12">
                 <p className="text-xs sm:text-base md:text-lg font-serif italic text-white/40 leading-relaxed max-w-2xl text-center sm:text-left" data-tina-field={parentField ? tinaField(d.quoteStrip, 'text') : undefined}>

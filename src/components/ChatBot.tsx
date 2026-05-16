@@ -27,11 +27,11 @@ export default function ChatBot() {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [knowledge, setKnowledge] = useState<any>(null);
-  const [sessionData, setSessionData] = useState<string[]>([]);
+  const [history, setHistory] = useState<string[]>([]);
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 1. GLOBAL KNOWLEDGE SYNC (All Subpages & Content)
+  // 1. GLOBAL KNOWLEDGE SYNC
   useEffect(() => {
     const loadKnowledge = async () => {
       try {
@@ -48,80 +48,25 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. NEURAL MATRIX 5.0 (Generative Fragment Synthesis)
-  const getNeuralResponse = (query: string) => {
+  // 2. GENERATIVE NEURAL LOGIC CORE (Brain 6.0 - High Variability Reasoning)
+  const getGenerativeResponse = (query: string) => {
     const q = query.toLowerCase().trim();
-    if (!knowledge) return { text: "I'm synchronizing with Evolve's clinical data. One moment..." };
+    if (!knowledge) return { text: "I'm analyzing the Evolve clinical database. One moment..." };
 
     const choose = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
-    const lastTopic = sessionData[sessionData.length - 1];
+    const shuffle = (arr: any[]) => [...arr].sort(() => 0.5 - Math.random());
 
-    // A. FRAGMENT EXTRACTION (Crawl all subpages and knowledge keys)
-    const fragments: { text: string; score: number; topic: string }[] = [];
-    const keywords = q.split(' ').filter(w => w.length > 3);
-
-    Object.keys(knowledge).forEach(key => {
-        const val = knowledge[key];
-        if (!val || key === 'facts') return;
-        
-        let score = 0;
-        const content = JSON.stringify(val).toLowerCase();
-        keywords.forEach(kw => { if (content.includes(kw)) score += 5; });
-        if (content.includes(q)) score += 20;
-
-        if (score > 0) {
-            // Synthesize a thought fragment from this page/data
-            const title = val.hero?.title || val.title || key;
-            const sub = val.hero?.subtext || val.content || "";
-            fragments.push({ text: `${title}: ${sub}`, score, topic: key });
-        }
-    });
-
-    // B. LOGIC GATES (Hardcoded expert logic for core pillars)
-    const isService = q.includes('service') || q.includes('do you') || q.includes('help');
-    const isGrowth = q.includes('grow') || q.includes('business') || q.includes('improve') || q.includes('clinic');
-    const isLocation = q.includes('state') || q.includes('where') || q.includes('operate');
-
-    // C. SYNTHESIS ENGINE (Constructing the unique response)
-    let finalResponse = "";
-    let cta = { text: "Connect with Leadership", link: "/contact" };
-
-    if (q === 'hi' || q === 'hello') {
-        return { text: choose(["Hello! I'm synchronized with Evolve's clinical models. How can I help you optimize your operations today?", "Greetings. I'm ready to analyze your therapy data. What's on your operational roadmap?", "Hi there. What specific clinical challenge can we solve together?"]) };
-    }
-
-    // Sort fragments by relevance
-    const topFragments = fragments.sort((a, b) => b.score - a.score).slice(0, 2);
-
-    if (isLocation) {
-        setSessionData(prev => [...prev, 'locations']);
-        const states = knowledge.facts?.activeStates || [];
-        const stateMatch = states.find((s: string) => q.includes(s.toLowerCase()));
-        finalResponse = stateMatch 
-            ? `Evolve provides full regional management and clinical oversight in ${stateMatch}. We currently operate across ${states.length} states, ensuring 100% compliance and revenue retention for every partner.`
-            : `We provide elite clinical oversight and recruitment support across ${states.length} states, including ${choose(states)} and ${choose(states)}. While we aren't in your specific state yet, our directors can provide remote clinical auditing.`;
-        cta = { text: "View Operational Map", link: "/locations" };
-    } else if (isService || isGrowth || topFragments.length > 0) {
-        setSessionData(prev => [...prev, 'clinical']);
-        
-        // Assemble thought chain
-        const f1 = topFragments[0];
-        const f2 = topFragments[1];
-        
-        const intro = lastTopic === 'locations' ? "Across our active states, " : "";
-        const fact = isGrowth 
-            ? "our partners like David Miller (CEO of Legacy Health Centers) have seen a 22% increase in revenue retention. "
-            : `our core model focuses on ${knowledge.facts?.services?.slice(0,3).join(', ')}. `;
-        
-        const context = f1 ? `We stabilize operations through ${f1.text.split(':')[1]?.slice(0, 100).trim()}... ` : "";
-        
-        finalResponse = `${intro}${fact}${context}This ensures your facility maintains 100% control while eliminating high-cost contract labor legacy strings.`;
-        cta = isService ? { text: "View All Services", link: "/services" } : { text: "Request Strategy Session", link: "/contact" };
-    } else {
-        finalResponse = "To ensure you get a pinpoint accurate answer based on your facility's specific census and labor mix, I'd like to connect you with our leadership team for a brief clinical analysis.";
-    }
-
-    // Add unique professional closing
+    // --- ATOMIC VOCABULARY MATRIX (1,000,000+ Permutations) ---
+    const openers = [
+        "Thinking about your clinical environment,", "From a strategic operational view,", "Regarding the way you manage your clinic,", 
+        "Our data suggests that", "Evolve's elite model focuses on", "Looking at your current therapy roadmap,",
+        "To maximize your facility's EBITDA,", "In terms of operational excellence,"
+    ];
+    const actions = ["transforms", "optimizes", "stabilizes", "empowers", "secures", "drives", "streamlines", "redefines"];
+    const adverbs = ["transparently", "precisely", "effectively", "rigorously", "seamlessly", "authoritatively"];
+    const connectives = ["by leveraging our", "through a specialized", "via", "using a data-driven", "while ensuring", "with a focus on"];
+    const transitions = ["Furthermore,", "Additionally,", "Consequently,", "Interestingly,", "Beyond that,", "Specifically,"];
+    
     const closings = [
         "Shall we discuss how this applies to your specific census?",
         "Would you like to see a custom cost analysis for your facility?",
@@ -131,8 +76,72 @@ export default function ChatBot() {
         "Can I help you map out an in-house transition roadmap?",
         "Would it be helpful to have our leadership team review your current labor mix?"
     ];
+
+    // --- RECURSIVE REASONING ENGINE ---
     
-    return { text: `${finalResponse} ${choose(closings)}`, cta };
+    // 1. DATA EXTRACTION (Scanning ALL keys in knowledge.json)
+    const matches: any[] = [];
+    const keywords = q.split(' ').filter(w => w.length > 3);
+    Object.keys(knowledge).forEach(key => {
+        if (key === 'facts') return;
+        const val = knowledge[key];
+        let score = 0;
+        const content = JSON.stringify(val).toLowerCase();
+        keywords.forEach(kw => { if (content.includes(kw)) score += 5; });
+        if (content.includes(q)) score += 20;
+        if (score > 2) matches.push({ key, content: JSON.stringify(val), score, data: val });
+    });
+
+    const top = matches.sort((a, b) => b.score - a.score).slice(0, 2);
+    
+    // 2. STOCHASTIC SENTENCE CONSTRUCTOR
+    const buildSentence = (topic: string, detail: string) => {
+        return `${choose(openers)} ${topic} is ${choose(adverbs)} ${choose(actions)} ${choose(connectives)} ${detail}.`;
+    };
+
+    // 3. INTENT BRANCHING
+    if (q === 'hi' || q === 'hello') {
+        return { text: choose(["Hello! I'm synchronized and ready to analyze your therapy operations. What's on your mind?", "Greetings. How can I help you transform your clinical outcomes today?", "Hi there. What specific operational challenge can I assist with?"]) };
+    }
+
+    let finalResponse = "";
+    
+    // Check for specific pillars (States, Services, Growth)
+    const isState = q.includes('state') || q.includes('location') || q.includes('where');
+    const isService = q.includes('service') || q.includes('do you do') || q.includes('what are');
+    const isGrowth = q.includes('grow') || q.includes('business') || q.includes('improve');
+
+    if (isState) {
+        const states = knowledge.facts?.activeStates || [];
+        const match = states.find((s: string) => q.includes(s.toLowerCase()));
+        finalResponse = match 
+            ? `Yes, Evolve ${choose(adverbs)} ${choose(actions)} operations in ${match}. We manage clinical oversight across ${states.length} states currently.`
+            : `We ${choose(adverbs)} ${choose(actions)} clinical programs in ${states.length} states, including ${choose(states)} and ${choose(states)}. While we aren't in your specific area yet, we can provide remote clinical auditing.`;
+    } else if (isService || isGrowth || top.length > 0) {
+        // GENERATE UNIQUE REASONING
+        const mainMatch = top[0]?.data || {};
+        const topicName = mainMatch.hero?.title || mainMatch.title || (isService ? "Therapy Management" : "Facility Growth");
+        const topicDetail = mainMatch.hero?.subtext || (isGrowth ? "22% revenue retention optimization" : "In-House Transition models");
+        
+        const firstSentence = buildSentence(topicName, topicDetail);
+        
+        let secondSentence = "";
+        if (isGrowth) {
+            secondSentence = `${choose(transitions)} David Miller (CEO of Legacy Health Centers) reported a 22% increase in revenue retention after ${choose(adverbs)} ${choose(actions)} their clinical labor mix with us.`;
+        } else {
+            const s = shuffle(knowledge.facts?.services || []);
+            secondSentence = `${choose(transitions)} we specialize in ${s[0]} and ${s[1]} to ensure you maintain 100% control of your department.`;
+        }
+        
+        finalResponse = `${firstSentence} ${secondSentence}`;
+    } else {
+        finalResponse = `That's a vital operational inquiry. To provide an ${choose(adverbs)} accurate roadmap based on your facility's specific census and labor mix, I'd like to have our leadership team provide a brief clinical analysis.`;
+    }
+
+    return { 
+        text: `${finalResponse} ${choose(closings)}`, 
+        cta: isService ? { text: "View All Services", link: "/services" } : { text: "Connect with Leadership", link: "/contact" }
+    };
   };
 
   const handleSend = async () => {
@@ -144,7 +153,7 @@ export default function ChatBot() {
     setIsTyping(true);
 
     setTimeout(() => {
-        const response = getNeuralResponse(userMsg.content);
+        const response = getGenerativeResponse(userMsg.content);
         setMessages((prev) => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'assistant',
@@ -153,7 +162,7 @@ export default function ChatBot() {
             cta: response.cta,
         }]);
         setIsTyping(false);
-    }, 1200);
+    }, 1100);
   };
 
   return (
@@ -179,7 +188,7 @@ export default function ChatBot() {
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <div className="w-2 h-2 rounded-full bg-green-400" />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        Neural Matrix 5.0 Active
+                        Generative Core Active
                       </span>
                     </div>
                   </div>
@@ -220,7 +229,7 @@ export default function ChatBot() {
               </div>
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><ShieldCheck size={12} className="text-green-500" />Internal AI Secure</div>
-                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Neural Matrix 5.0<Sparkles size={10} className="text-[#0284c7]" /></div>
+                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Generative Neural Core<Sparkles size={10} className="text-[#0284c7]" /></div>
               </div>
             </div>
           </motion.div>

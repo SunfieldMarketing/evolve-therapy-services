@@ -272,49 +272,63 @@ export default function Navbar({ data }: { data?: any }) {
                   
                   return (
                     <div key={i} className="flex flex-col">
-                      <div className="flex items-center justify-between">
-                        {hasDropdown ? (
-                          <div className="flex flex-col w-full">
-                            <div className="px-4 py-3.5 flex items-center justify-between border-b border-white/5 mb-2">
-                              <Link 
-                                href={link.href}
-                                onClick={() => setIsOpen(false)}
-                                className="text-white text-[12px] font-black uppercase tracking-[0.2em] hover:text-[#0284c7] transition-colors"
-                              >
-                                {link.name}
-                              </Link>
-                              <button
-                                onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-                                className="text-white/40 p-2"
-                              >
-                                <ChevronDown className={cn("transition-transform", mobileDropdownOpen ? "rotate-180" : "")} size={18} />
-                              </button>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                              {link.dropdown.map((sub: any, j: number) => (
-                                <Link
-                                  key={j}
-                                  href={sub.href}
-                                  onClick={() => setIsOpen(false)}
-                                  className="px-4 py-3 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-sm font-semibold transition-all duration-150 flex items-center justify-between group"
-                                >
-                                  {sub.name}
-                                  <ArrowUpRight size={14} className="opacity-20 group-hover:opacity-100 transition-opacity" />
-                                </Link>
-                              ))}
-                            </div>
+                      {hasDropdown ? (
+                        <div className="flex flex-col w-full">
+                          <div className="px-4 py-3.5 flex items-center justify-between border-b border-white/5 mb-2">
+                            <a 
+                              href={link.href}
+                              onClick={() => setIsOpen(false)}
+                              className="text-white text-[12px] font-black uppercase tracking-[0.2em] hover:text-[#0284c7] transition-colors flex-1"
+                            >
+                              {link.name}
+                            </a>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setMobileDropdownOpen(!mobileDropdownOpen);
+                              }}
+                              className="text-white/40 p-2 ml-2 bg-white/5 rounded-lg active:bg-white/10"
+                              aria-label="Toggle Sub-menu"
+                            >
+                              <ChevronDown className={cn("transition-transform duration-300", mobileDropdownOpen ? "rotate-180" : "")} size={20} />
+                            </button>
                           </div>
-                        ) : (
-                          <Link
-                            href={link.href}
-                            onClick={() => setIsOpen(false)}
-                            className="px-4 py-4 w-full rounded-xl text-white hover:bg-white/5 text-lg font-bold transition-all duration-150 flex items-center justify-between group"
-                          >
-                            {link.name}
-                            <ArrowUpRight size={18} className="opacity-20 group-hover:opacity-100 transition-opacity" />
-                          </Link>
-                        )}
-                      </div>
+                          
+                          <AnimatePresence>
+                            {mobileDropdownOpen && (
+                              <motion.div 
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="flex flex-col gap-1 mt-1 mb-4">
+                                  {link.dropdown.map((sub: any, j: number) => (
+                                    <a
+                                      key={j}
+                                      href={sub.href}
+                                      onClick={() => setIsOpen(false)}
+                                      className="px-4 py-3 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-sm font-semibold transition-all duration-150 flex items-center justify-between group"
+                                    >
+                                      {sub.name}
+                                      <ArrowUpRight size={14} className="opacity-20 group-hover:opacity-100 transition-opacity" />
+                                    </a>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      ) : (
+                        <a
+                          href={link.href}
+                          onClick={() => setIsOpen(false)}
+                          className="px-4 py-4 w-full rounded-xl text-white hover:bg-white/5 text-lg font-bold transition-all duration-150 flex items-center justify-between group"
+                        >
+                          {link.name}
+                          <ArrowUpRight size={18} className="opacity-20 group-hover:opacity-100 transition-opacity" />
+                        </a>
+                      )}
                     </div>
                   );
                 })}

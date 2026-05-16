@@ -56,7 +56,7 @@ export default function WhyEvolve({ data, parentField }: { data?: any, parentFie
   return (
     <section id="about" ref={containerRef} className="bg-[#0f172a] relative">
       <div className="h-[500vh] relative">
-        <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
+        <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden pt-24 lg:pt-0">
 
           {/* Watermark */}
           <div className="absolute inset-0 flex items-center justify-center opacity-[0.01] pointer-events-none">

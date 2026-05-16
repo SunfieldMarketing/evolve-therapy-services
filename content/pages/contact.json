@@ -1,14 +1,14 @@
 {
   "hero": {
-    "badge": "Clinical Connectivity",
-    "titleLine1": "Start Your",
-    "titleItalic": "Evolution.",
-    "description": "Connect with our clinical leadership team to begin your strategic therapy audit and management roadmap."
+    "badge": "Partnership Hub",
+    "titleLine1": "Connect With",
+    "titleItalic": "Leadership.",
+    "description": "Our regional directors are ready to provide a complimentary clinical and financial analysis of your therapy department. Connect with our executive team today to discover how Evolve can optimize your operations, ensure regulatory compliance, and drive sustainable revenue retention."
   },
   "sidebar": {
-    "title": "Corporate",
-    "titleItalic": "HQ",
-    "description": "Our central hub for operational oversight and clinical management support.",
+    "title": "Direct Access to",
+    "titleItalic": "Leadership",
+    "description": "At Evolve, you aren't just another facility on a list. You have a direct line to the clinical directors managing your regional operations.",
     "items": [
       { "icon": "Phone", "label": "Direct Line", "value": "(888) 386-5820", "sub": "Mon-Fri, 9am-6pm EST" },
       { "icon": "Mail", "label": "Email", "value": "info@evolvetherapy.com", "sub": "Average 4hr Response" },
@@ -16,10 +16,10 @@
     ]
   },
   "form": {
-    "badge": "Analysis Request",
-    "title": "Clinical Audit",
-    "titleItalic": "Application",
-    "description": "Provide your facility details below to schedule a complimentary PDPM and revenue retention analysis.",
+    "badge": "Secure Your Analysis",
+    "title": "Establish Your",
+    "titleItalic": "Strategic Roadmap",
+    "description": "Submit your details below to initiate a complimentary cost savings and clinical compliance analysis.",
     "buttonText": "Request Clinical Audit",
     "inquiryGoals": [
       "In-House Transition Analysis",

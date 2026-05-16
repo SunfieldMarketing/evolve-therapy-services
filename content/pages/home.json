@@ -73,33 +73,33 @@
     ]
   },
   "process": {
-    "badge": "Operational Blueprint",
+    "badge": "How We Work",
     "title": "The Evolve",
     "titleItalic": "Implementation",
     "description": "Our systematic approach ensures a seamless transition and sustained operational excellence for your therapy department.",
     "steps": [
       {
         "num": "01",
-        "title": "Clinical Audit",
-        "desc": "We perform a deep-dive analysis of your current clinical metrics and PDPM case mix efficiency.",
+        "title": "Free Analysis",
+        "desc": "We perform a complimentary cost savings analysis and identify clinical and financial opportunity.",
         "icon": "Search"
       },
       {
         "num": "02",
-        "title": "Strategic Roadmap",
-        "desc": "Our directors develop a customized transition plan tailored to your facility's specific goals.",
+        "title": "Custom Strategy",
+        "desc": "A tailored therapy management plan is developed for your census size, payer mix, and staffing model.",
         "icon": "Map"
       },
       {
         "num": "03",
-        "title": "Active Management",
-        "desc": "Daily oversight and mentorship to ensure peak clinical and financial performance.",
+        "title": "Seamless Launch",
+        "desc": "Your regional director is embedded with your team - minimal disruption, maximum momentum.",
         "icon": "Zap"
       },
       {
         "num": "04",
-        "title": "Ongoing Growth",
-        "desc": "Ongoing audits, education, and operational refinement keep you ahead of regulatory changes.",
+        "title": "Continuous Evolution",
+        "desc": "Ongoing audits, education, and operational refinement keep you ahead of regulatory and clinical changes.",
         "icon": "TrendingUp"
       }
     ]

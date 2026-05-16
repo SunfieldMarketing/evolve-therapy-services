@@ -90,7 +90,7 @@ export default function PageHeader({
   }, [finalUseVideo, finalVideoUrl]);
 
   return (
-    <section className="relative w-full min-h-[100svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-20" {...props}>
+    <section className="relative w-full min-h-[90svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-32 sm:pt-40 md:pt-48" {...props}>
       {/* ── Background Layer ── */}
       <div className="absolute inset-0 z-0">
         {finalUseVideo ? (
@@ -135,16 +135,16 @@ export default function PageHeader({
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-50 container mx-auto px-5 sm:px-6 lg:px-12 py-16 sm:py-20">
+      <div className="relative z-50 container mx-auto px-5 sm:px-6 lg:px-12 py-12 sm:py-20">
         <div className="w-full flex flex-col items-center text-center lg:items-start lg:text-left">
           <BlurFade delay={0.2}>
              {/* Subtitle Badge */}
-             <div className="flex items-center justify-center lg:justify-start gap-4 mb-6 sm:mb-12">
+             <div className="flex items-center justify-center lg:justify-start gap-4 mb-6 sm:mb-10">
                 <div className="w-8 sm:w-12 h-[1px] bg-[#0284c7]" />
                 <span className="text-[#38bdf8] font-black uppercase text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em]" data-tina-field={tinaFields?.badgeText}>{badgeText}</span>
              </div>
              
-             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-black text-white leading-[1.05] sm:leading-[1] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words" data-tina-field={tinaFields?.title}>
+             <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-black text-white leading-[1.1] sm:leading-[1] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-4xl" data-tina-field={tinaFields?.title}>
                 {title}
                 {italicWord && (
                   <span className="text-[#0284c7] italic ml-[0.1em] sm:ml-[0.15em] uppercase tracking-tighter block sm:inline mt-1 sm:mt-0">{italicWord}</span>
@@ -153,25 +153,25 @@ export default function PageHeader({
 
              {subtitle && (
                 <div className="mb-10 sm:mb-20 w-full" data-tina-field={tinaFields?.subtitle}>
-                   <p className="text-base sm:text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 lg:border-l-4 border-[#0284c7] pl-6 sm:pl-10 italic max-w-5xl text-center lg:text-left border-l-0 lg:border-l-4">
+                   <p className="text-[15px] sm:text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-0 lg:border-l-4 border-[#0284c7] lg:pl-10 italic max-w-5xl text-center lg:text-left">
                       {subtitle}
                    </p>
                 </div>
              )}
 
-             <div className="flex flex-col lg:flex-row items-center lg:items-center gap-10 lg:gap-24">
+             <div className="flex flex-col lg:flex-row items-center lg:items-center gap-10 lg:gap-24 w-full lg:w-auto">
                 <a 
                   href={ctaLink} 
                   className="inline-flex items-center justify-center gap-3 sm:gap-5 px-8 sm:px-16 py-5 sm:py-7 bg-[#0284c7] text-white rounded-xl shadow-[0_30px_60px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group shrink-0 w-full sm:w-auto pointer-events-auto"
                 >
-                  <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[12px] sm:text-[14px]">{ctaText}</span>
+                  <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[11px] sm:text-[14px]">{ctaText}</span>
                   <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
                 </a>
 
                 {/* Values Integration */}
-                <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-8 sm:gap-12">
+                <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-8 sm:gap-12 w-full sm:w-auto">
                    {valueBoxes.map((box, i) => (
-                      <div key={i} className="flex items-center gap-4 sm:gap-6 group">
+                      <div key={i} className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 group">
                          <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
                             <box.icon size={20} />
                          </div>

@@ -44,8 +44,18 @@ export default function ChatBot() {
       try {
         // A. Load Knowledge Base
         const res = await fetch('/knowledge.json');
-        if (!res.ok) return;
+        if (!res.ok) {
+            console.warn('Knowledge base not found');
+            setIsAiReady(true);
+            return;
+        }
         const data = await res.json();
+        if (!data || typeof data !== 'object') {
+            console.warn('Knowledge base is invalid or empty');
+            setIsAiReady(true);
+            return;
+        }
+
         const rawChunks: KnowledgeChunk[] = [];
         Object.keys(data).forEach(key => {
             const val = data[key];

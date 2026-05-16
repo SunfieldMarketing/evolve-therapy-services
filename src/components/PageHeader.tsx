@@ -90,7 +90,7 @@ export default function PageHeader({
   }, [finalUseVideo, finalVideoUrl]);
 
   return (
-    <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden" {...props}>
+    <section className="relative w-full min-h-[100svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-20" {...props}>
       {/* ── Background Layer ── */}
       <div className="absolute inset-0 z-0">
         {finalUseVideo ? (
@@ -135,11 +135,11 @@ export default function PageHeader({
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-50 container mx-auto px-5 sm:px-6 lg:px-12 -mt-6 sm:-mt-12">
-        <div className="w-full">
+      <div className="relative z-50 container mx-auto px-5 sm:px-6 lg:px-12 py-16 sm:py-20">
+        <div className="w-full flex flex-col items-center text-center lg:items-start lg:text-left">
           <BlurFade delay={0.2}>
              {/* Subtitle Badge */}
-             <div className="flex items-center gap-4 mb-6 sm:mb-12">
+             <div className="flex items-center justify-center lg:justify-start gap-4 mb-6 sm:mb-12">
                 <div className="w-8 sm:w-12 h-[1px] bg-[#0284c7]" />
                 <span className="text-[#38bdf8] font-black uppercase text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em]" data-tina-field={tinaFields?.badgeText}>{badgeText}</span>
              </div>
@@ -153,13 +153,13 @@ export default function PageHeader({
 
              {subtitle && (
                 <div className="mb-10 sm:mb-20 w-full" data-tina-field={tinaFields?.subtitle}>
-                   <p className="text-base sm:text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-6 sm:pl-10 italic max-w-5xl">
+                   <p className="text-base sm:text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 lg:border-l-4 border-[#0284c7] pl-6 sm:pl-10 italic max-w-5xl text-center lg:text-left border-l-0 lg:border-l-4">
                       {subtitle}
                    </p>
                 </div>
              )}
 
-             <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-6 sm:gap-8 lg:gap-24">
+             <div className="flex flex-col lg:flex-row items-center lg:items-center gap-10 lg:gap-24">
                 <a 
                   href={ctaLink} 
                   className="inline-flex items-center justify-center gap-3 sm:gap-5 px-8 sm:px-16 py-5 sm:py-7 bg-[#0284c7] text-white rounded-xl shadow-[0_30px_60px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group shrink-0 w-full sm:w-auto pointer-events-auto"
@@ -169,13 +169,13 @@ export default function PageHeader({
                 </a>
 
                 {/* Values Integration */}
-                <div className="flex flex-row flex-wrap gap-6 sm:gap-12 mt-2 sm:mt-0">
+                <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-8 sm:gap-12">
                    {valueBoxes.map((box, i) => (
                       <div key={i} className="flex items-center gap-4 sm:gap-6 group">
                          <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
                             <box.icon size={20} />
                          </div>
-                         <div className="flex flex-col">
+                         <div className="flex flex-col text-left">
                             <span className="text-white font-black uppercase text-[10px] sm:text-[11px] tracking-widest mb-1">{box.label}</span>
                             <span className="text-white/20 text-[11px] sm:text-[13px] font-light italic">"{box.sublabel}"</span>
                          </div>

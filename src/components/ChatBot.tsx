@@ -37,21 +37,35 @@ export default function ChatBot() {
   useEffect(() => {
     const initEngine = async () => {
       try {
-        // A. Load Knowledge context for the AI
+        // A. Load Knowledge context with extreme robustness
         const res = await fetch('/knowledge.json');
         if (res.ok) {
             const data = await res.json();
-            let context = "";
-            Object.keys(data).forEach(key => {
-                const val = data[key];
-                if (val.hero) context += val.hero.subtext + " ";
-                if (val.showcase) val.showcase.services.forEach((s: any) => context += `${s.title}: ${s.desc}. `);
-                if (val.faq) val.faq.list.forEach((f: any) => context += `${f.q}: ${f.a}. `);
-            });
-            setKnowledge(context);
+            if (data && typeof data === 'object') {
+                let context = "";
+                Object.keys(data).forEach(key => {
+                    const val = data[key];
+                    if (!val) return;
+                    if (val.hero?.subtext) context += val.hero.subtext + " ";
+                    if (val.showcase?.services && Array.isArray(val.showcase.services)) {
+                        val.showcase.services.forEach((s: any) => {
+                            if (s.title && s.desc) context += `${s.title}: ${s.desc}. `;
+                        });
+                    }
+                    if (val.faq?.list && Array.isArray(val.faq.list)) {
+                        val.faq.list.forEach((f: any) => {
+                            if (f.q && f.a) context += `${f.q}: ${f.a}. `;
+                        });
+                    }
+                    if (val.title && val.description) {
+                        context += `${val.title}: ${val.description}. `;
+                    }
+                });
+                setKnowledge(context);
+            }
         }
 
-        // B. Load Generative AI (Web-LLM) - SmolLM is ultra-lightweight
+        // B. Load Generative AI (Web-LLM)
         const { CreateWebWorkerMLCEngine } = await import('@mlc-ai/web-llm');
         const modelId = "SmolLM-135M-Instruct-v0.2-q4f16_1-MLC";
         
@@ -90,7 +104,7 @@ export default function ChatBot() {
     try {
         const q = userMsg.content.toLowerCase().trim();
 
-        // A. Instant Response Logic (Math/Social) - Works even during loading
+        // A. Instant Response Logic (Math/Social)
         if (q === '9+10' || q === '9 + 10') {
             respondInstantly("In the clinical world, that's 19. In the meme world, it's 21. Either way, we're here to help you optimize your facility's numbers.");
             return;
@@ -114,7 +128,7 @@ export default function ChatBot() {
             const systemPrompt = `
                 You are the Evolve Clinical Assistant, an advanced Internal AI.
                 You must answer ALL questions (business and general) with unique, human-like intelligence.
-                BUSINESS CONTEXT: ${knowledge.slice(0, 2000)}
+                BUSINESS CONTEXT: ${knowledge.slice(0, 3000)}
                 RULES:
                 - Use "We" and "Our".
                 - Answer the question directly and conversationally.
@@ -172,7 +186,6 @@ export default function ChatBot() {
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className="absolute bottom-20 right-0 w-[350px] sm:w-[420px] h-[620px] bg-white rounded-[2.5rem] shadow-[0_30px_90px_-15px_rgba(15,23,42,0.15)] border border-slate-100 flex flex-col overflow-hidden"
           >
-            {/* Header - White & Blue Theme */}
             <div className="p-8 bg-[#0284c7] text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2" />
               <div className="flex items-center justify-between relative z-10">
@@ -194,7 +207,6 @@ export default function ChatBot() {
               </div>
             </div>
 
-            {/* Messages */}
             <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-10 bg-slate-50/20 scroll-smooth">
               {messages.map((msg) => (
                 <div key={msg.id} className={cn("flex flex-col max-w-[90%]", msg.role === 'user' ? "ml-auto items-end" : "items-start")}>
@@ -209,7 +221,6 @@ export default function ChatBot() {
               {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Synthesizing Reason</span></div>}
             </div>
 
-            {/* Input */}
             <div className="p-6 border-t border-slate-100 bg-white">
               <div className="flex items-center gap-3 p-1.5 bg-slate-100/50 rounded-2xl border border-slate-200 focus-within:border-[#0284c7]/30 transition-all">
                 <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyPress={(e) => e.key === 'Enter' && handleSend()} placeholder="Ask anything..." className="flex-1 bg-transparent px-4 py-3 text-sm focus:outline-none placeholder:text-slate-400 text-slate-700 font-medium" />

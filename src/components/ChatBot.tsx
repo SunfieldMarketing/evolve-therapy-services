@@ -49,69 +49,84 @@ export default function ChatBot() {
 
     const q = query.toLowerCase();
     
-    // 1. Check for basic intents
-    if (q.includes('hello') || q.includes('hi ') || q.includes('hey')) return { text: "Hello! How can I help you evolve your therapy operations today?" };
-    if (q.includes('price') || q.includes('cost') || q.includes('fee')) {
-      return { 
-        text: "We use a unique three-tiered pricing approach that customizes to your business size. As you grow, our management pricing structure actually reduces. This rewards your operational success.",
-        cta: { text: "See Pricing Details", link: "/services/therapy-cost-reduction" }
+    // 1. Core Business Identity (Who are we / What do we do)
+    if (q.includes('what do you do') || q.includes('simple terms') || q.includes('who are you') || q.includes('what is evolve') || q.includes('summary')) {
+      return {
+        text: "In simple terms: We help long-term care operators run their own therapy departments. Instead of hiring an outside contractor who takes a cut of your revenue, we provide the leadership and expertise so you can keep 100% of the revenue while we ensure clinical excellence and compliance.",
+        cta: { text: "How Our Model Works", link: "/about" }
       };
     }
-    if (q.includes('revenue') || q.includes('money') || q.includes('100%')) {
+
+    if (q.includes('hello') || q.includes('hi ') || q.includes('hey')) return { text: "Hello! I'm here to help you explore how to evolve your therapy operations. What's on your mind today?" };
+
+    // 2. Financial & Revenue
+    if (q.includes('price') || q.includes('cost') || q.includes('fee') || q.includes('billing')) {
       return { 
-        text: "Our unique business model allows long-term care operators to retain 100% of their therapy revenue. Unlike traditional contractors, we don't take a cut of your clinical billing.",
-        cta: { text: "Learn About Revenue Retention", link: "/services/optimal-therapy-outcomes" }
+        text: "We operate on a transparent management fee model rather than taking a percentage of your billing. Our unique three-tiered approach actually reduces your costs as you grow, aligning our success directly with yours.",
+        cta: { text: "Explore Cost Reduction", link: "/services/therapy-cost-reduction" }
       };
     }
-    if (q.includes('transition') || q.includes('in-house') || q.includes('inhouse')) {
+    if (q.includes('revenue') || q.includes('money') || q.includes('100%') || q.includes('profit')) {
       return { 
-        text: "We specialize in seamless transitions from third-party contracts to efficient in-house models. We handle recruitment, credentialing, and clinical oversight with zero disruption to care.",
-        cta: { text: "View Transition Roadmap", link: "/services/in-house-transition" }
+        text: "Our core philosophy is that the facility should retain 100% of therapy revenue. We bridge the gap between clinical quality and financial sustainability, empowering you to reinvest those funds back into your care team.",
+        cta: { text: "See Revenue Retention", link: "/services/optimal-therapy-outcomes" }
       };
     }
-    if (q.includes('state') || q.includes('where') || q.includes('location')) {
-        return { 
-          text: "Evolve currently provides clinical oversight and recruitment support across 17 states, including Ohio, Pennsylvania, Florida, and more. We are rapidly expanding our national footprint.",
-          cta: { text: "View Coverage Map", link: "/locations" }
+
+    // 3. Clinical & Operational Oversight
+    if (q.includes('transition') || q.includes('in-house') || q.includes('inhouse') || q.includes('switch')) {
+      return { 
+        text: "Switching from a contract model to an in-house model can feel daunting, but we've perfected the roadmap. We handle the heavy lifting—recruitment, credentialing, and culture-building—so you get a seamless launch with zero disruption.",
+        cta: { text: "View Transition Guide", link: "/services/in-house-transition" }
+      };
+    }
+
+    if (q.includes('staff') || q.includes('hiring') || q.includes('recruit') || q.includes('therapist')) {
+        return {
+          text: "Finding and keeping top-tier therapists is one of our specialties. We provide active state-wide recruitment support and specialized CEU education to ensure your team is the most advanced in your market.",
+          cta: { text: "Our Staffing Strategy", link: "/services/snf-staff-education" }
         };
-      }
-    if (q.includes('contact') || q.includes('call') || q.includes('email') || q.includes('talk') || q.includes('person') || q.includes('consult')) {
+    }
+
+    if (q.includes('state') || q.includes('where') || q.includes('location') || q.includes('map')) {
         return { 
-          text: "I'd be happy to set that up! Our leadership team can provide a free clinical and financial analysis for your facility.",
-          cta: { text: "Schedule Free Consultation", link: "/contact" }
+          text: "We currently have a strategic presence in 17 states (including OH, PA, FL, NJ, DE, and more). We provide both on-site regional leadership and remote clinical oversight depending on your facility's needs.",
+          cta: { text: "View Our Map", link: "/locations" }
         };
       }
 
-    // 2. Generic Search in Knowledge Base
-    let bestMatch = "";
-    let matchCta = undefined;
+    if (q.includes('compliance') || q.includes('audit') || q.includes('denial') || q.includes('regulatory')) {
+        return {
+            text: "Compliance is where we protect your bottom line. We provide real-time PDPM case mix analysis, MDS accuracy reviews, and proactive audit defense to ensure your facility stays five-star rated and audit-ready.",
+            cta: { text: "Clinical Excellence", link: "/services/denial-management" }
+        };
+    }
 
-    // Search Services
+    if (q.includes('contact') || q.includes('call') || q.includes('email') || q.includes('talk') || q.includes('person') || q.includes('consult') || q.includes('help')) {
+        return { 
+          text: "I'd love to get you in touch with our team. We can perform a complimentary clinical and financial analysis to show you exactly how much revenue you could be retaining.",
+          cta: { text: "Schedule Analysis", link: "/contact" }
+        };
+      }
+
+    // 4. Keyword-based Deep Search in Knowledge Base
     const services = knowledge['services.json']?.showcase?.services || [];
     for (const s of services) {
         if (q.includes(s.title.toLowerCase()) || q.includes(s.slug.toLowerCase())) {
-            bestMatch = s.desc;
-            matchCta = { text: `Explore ${s.title}`, link: `/services/${s.slug}` };
-            break;
+            return { text: s.desc, cta: { text: `Learn More`, link: `/services/${s.slug}` } };
         }
     }
 
-    if (!bestMatch) {
-        // Search FAQ
-        const faqs = knowledge['settings.json']?.faq?.list || [];
-        for (const f of faqs) {
-            if (q.includes(f.q.toLowerCase())) {
-                bestMatch = f.a;
-                break;
-            }
+    const faqs = knowledge['settings.json']?.faq?.list || [];
+    for (const f of faqs) {
+        if (q.includes(f.q.toLowerCase())) {
+            return { text: f.a };
         }
     }
-
-    if (bestMatch) return { text: bestMatch, cta: matchCta };
 
     return { 
-      text: "That's a great question. While I specialize in therapy operations and management, for that specific inquiry, I'd recommend speaking directly with our leadership team.",
-      cta: { text: "Connect with Evolve", link: "/contact" }
+      text: "That's an interesting point. While I'm focused on the operational and clinical side of LTC therapy, I want to make sure you get a precise answer. Would you like me to connect you with our leadership team for a detailed discussion?",
+      cta: { text: "Connect with Leadership", link: "/contact" }
     };
   };
 

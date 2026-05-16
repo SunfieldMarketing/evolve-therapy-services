@@ -27,7 +27,7 @@ export default function ChatBot() {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [knowledge, setKnowledge] = useState<any>(null);
-  const [lastSubject, setLastSubject] = useState<string | null>(null);
+  const [sessionContext, setSessionContext] = useState<string[]>([]);
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -48,78 +48,88 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. DIRECT SEMANTIC INTENT ENGINE (Brain 9.0 - Accuracy & Context)
-  const getDirectResponse = (query: string) => {
+  // 2. FULL HISTORY SEMANTIC WINDOW (History-Aware Logic)
+  const getThreadedResponse = (query: string) => {
     const q = query.toLowerCase().trim();
     if (!knowledge) return { text: "I'm analyzing the Evolve clinical database. One moment..." };
 
-    const choose = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
     const facts = knowledge.facts || {};
+    const chatLog = messages.map(m => m.content.toLowerCase()).join(' ');
+    const choose = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
 
-    // --- INTENT GATES (Direct Answers) ---
+    // TRACK SESSION TOPICS
+    const updateContext = (topic: string) => {
+        if (!sessionContext.includes(topic)) setSessionContext(prev => [...prev, topic]);
+    };
+
+    // --- CONTEXTUAL DETECTION ---
+    const wasDiscussingStates = chatLog.includes('state') || chatLog.includes('operate') || chatLog.includes('where');
+    const wasDiscussingServices = chatLog.includes('service') || chatLog.includes('do you do') || chatLog.includes('help');
+    const wasDiscussingPerformance = chatLog.includes('grow') || chatLog.includes('result') || chatLog.includes('ebitda');
+
+    // --- INTENT GATES (Direct Answers + Context) ---
 
     // 1. GREETINGS
     if (q === 'hi' || q === 'hello' || q === 'hey') {
-        return { text: "Hello! I'm synchronized and ready to analyze your therapy operations. What can I help you solve today?" };
+        return { text: "Hello! I'm synchronized and ready to dive deeper into your therapy operations. What specific clinical challenge can we address next?" };
     }
 
-    // 2. CONTACT / PHONE / REACH
-    if (q.includes('number') || q.includes('phone') || q.includes('call') || q.includes('contact') || q.includes('reach')) {
-        const phone = facts.contact?.phone || "800-XXX-XXXX";
-        const email = facts.contact?.email || "info@evolvetherapy.com";
+    // 2. CONTACT / PHONE (High Priority)
+    if (q.includes('number') || q.includes('phone') || q.includes('call') || q.includes('contact')) {
         return { 
-            text: `You can reach our leadership team directly at ${phone} or via email at ${email}. We are ready to provide a full clinical analysis of your facility's operations. Would you like to schedule a call?`,
+            text: `You can reach our leadership team directly at ${facts.contact?.phone || '800-XXX-XXXX'}. We can provide a detailed clinical analysis of your specific facility. Would you like to schedule a strategy call?`,
             cta: { text: "Connect Now", link: "/contact" }
         };
     }
 
-    // 3. LOCATIONS (States)
-    if (q.includes('state') || q.includes('location') || q.includes('operate') || q.includes('where')) {
-        setLastSubject('locations');
+    // 3. LOCATIONS & STATES
+    if (q.includes('state') || q.includes('location') || q.includes('where') || q.includes('operate') || (q.includes('which') && wasDiscussingStates)) {
+        updateContext('locations');
         const states = facts.activeStates || [];
         const stateMatch = states.find((s: string) => q.includes(s.toLowerCase()));
-        
+
         if (stateMatch) {
             return {
-                text: `Yes, we are fully active in ${stateMatch}. Evolve provides regional management and operational oversight across ${states.length} states to ensure 100% compliance. Would you like to see our full operational map?`,
+                text: `Yes, we maintain full operational oversight in ${stateMatch}. Across our entire 17-state footprint, we ensure 100% clinical compliance and revenue retention. Would you like to see our regional directors' coverage map?`,
                 cta: { text: "View Operational Map", link: "/locations" }
             };
         }
+
+        const bridge = wasDiscussingServices ? "Building on our services, " : "";
         return {
-            text: `Evolve currently operates in ${states.length} states, including ${states.slice(0, 5).join(', ')}, and others. We provide the regional directors and clinical oversight needed to stabilize your department. Shall I list all the states we serve?`,
-            cta: { text: "View All States", link: "/locations" }
+            text: `${bridge}Evolve currently provides regional management in these ${states.length} states: ${states.join(', ')}. In every region we serve, we focus on transitioning facilities to high-performing in-house models. Shall we discuss how we support your specific region?`,
+            cta: { text: "View Coverage Map", link: "/locations" }
         };
     }
 
-    // 4. CONTEXTUAL FOLLOW-UP (e.g., "which ones", "list them")
-    if ((q.includes('which') || q.includes('list') || q.includes('what are they')) && lastSubject === 'locations') {
-        const states = facts.activeStates || [];
+    // 4. GROWTH & PERFORMANCE
+    if (q.includes('grow') || q.includes('result') || q.includes('ebitda') || q.includes('improve') || (q.includes('help') && wasDiscussingPerformance)) {
+        updateContext('performance');
+        const bridge = wasDiscussingStates ? "Within those active states, " : wasDiscussingServices ? "Through those clinical optimizations, " : "";
+        
+        // Anti-Redundancy: Use different facts if already mentioned
+        const fact = chatLog.includes('david miller') 
+            ? "we drive facility growth by stabilizing your clinical labor mix and improving PDPM accuracy to eliminate high-cost contract labor."
+            : "our clinical partners, such as David Miller (CEO of Legacy Health Centers), have reported an average 22% increase in revenue retention after implementing our model.";
+
         return {
-            text: `Our current footprint covers these ${states.length} states: ${states.join(', ')}. In these regions, we provide daily operational support to build high-performing in-house therapy teams. Would you like to see how we apply this to your specific region?`,
+            text: `${bridge}${fact} This ensures your facility keeps 100% of the therapy revenue. Shall we look at your current Medicaid case mix together?`,
             cta: { text: "Request Strategy Session", link: "/contact" }
         };
     }
 
-    // 5. SERVICES
-    if (q.includes('service') || q.includes('do you do') || q.includes('help')) {
-        setLastSubject('services');
+    // 5. SERVICES & CAPABILITIES
+    if (q.includes('service') || q.includes('do you do') || q.includes('what can you') || (q.includes('help') && !wasDiscussingPerformance)) {
+        updateContext('services');
         const s = facts.services || [];
+        const bridge = wasDiscussingStates ? "In each of our regions, " : wasDiscussingPerformance ? "To drive those results, " : "";
         return {
-            text: `We specialize in ${s.join(', ')}. Our core strength is the In-House Transition—we handle the recruitment and clinical education so you keep 100% of the revenue. Shall we discuss which of these would most impact your facility today?`,
+            text: `${bridge}we specialize in ${s.join(', ')}. Our core strength is the In-House Transition, where we handle the recruitment and clinical education so you maintain absolute control. Shall we discuss which of these would most impact your operations today?`,
             cta: { text: "Explore All Services", link: "/services" }
         };
     }
 
-    // 6. GROWTH / RESULTS
-    if (q.includes('grow') || q.includes('result') || q.includes('ebitda') || q.includes('improve')) {
-        return {
-            text: `We drive facility growth by optimizing your revenue retention—our partners, such as David Miller (CEO of Legacy Health Centers), have reported an average 22% increase. This is achieved by stabilizing your clinical labor mix and improving PDPM accuracy. Shall we look at your current Medicaid case mix together?`,
-            cta: { text: "Request Strategy Session", link: "/contact" }
-        };
-    }
-
-    // 7. MISC / SITE-WIDE SEARCH
-    const keywords = q.split(' ').filter(w => w.length > 3);
+    // 6. SITE-WIDE INTELLIGENCE (Semantic Search)
     let bestMatch: any = null;
     Object.keys(knowledge).forEach(key => {
         if (key === 'facts') return;
@@ -129,16 +139,16 @@ export default function ChatBot() {
 
     if (bestMatch) {
         const title = bestMatch.hero?.title || bestMatch.title || "Clinical Oversight";
-        const detail = bestMatch.hero?.subtext || "operational excellence";
+        const bridge = sessionContext.length > 0 ? `Following up on our discussion about ${sessionContext[sessionContext.length-1]}, ` : "";
         return {
-            text: `Regarding ${title}: Our model focuses on ${detail}. This ensures your department maintains 100% control and zero hidden management fees. Would it be helpful to have our leadership team review your current model?`,
-            cta: { text: "Request Detailed Analysis", link: "/contact" }
+            text: `${bridge}regarding ${title}: Our model focuses on ${bestMatch.hero?.subtext || 'operational excellence'}. This ensures you eliminate hidden management fees while maintaining 100% control of your department. Would you like a detailed analysis of this workflow?`,
+            cta: { text: "Request Analysis", link: "/contact" }
         };
     }
 
     // FINAL FALLBACK
     return {
-        text: "That's a vital operational inquiry. To provide a pinpoint accurate answer based on your specific census and labor mix, I'd like to connect you with our leadership team for a brief strategy analysis. Would that be helpful?",
+        text: "That's a vital operational inquiry. Based on our conversation so far, I'd like to connect you with our leadership team for a brief strategy analysis to provide a pinpoint accurate answer for your specific census. Would that be helpful?",
         cta: { text: "Connect with Leadership", link: "/contact" }
     };
   };
@@ -152,7 +162,7 @@ export default function ChatBot() {
     setIsTyping(true);
 
     setTimeout(() => {
-        const response = getDirectResponse(userMsg.content);
+        const response = getThreadedResponse(userMsg.content);
         setMessages((prev) => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'assistant',
@@ -187,7 +197,7 @@ export default function ChatBot() {
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <div className="w-2 h-2 rounded-full bg-green-400" />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        Direct Intent Active
+                        Contextual Intelligence Active
                       </span>
                     </div>
                   </div>
@@ -217,7 +227,7 @@ export default function ChatBot() {
                   <span className="text-[9px] text-slate-400 mt-2 font-black uppercase tracking-widest px-2">{msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               ))}
-              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Direct Logic Mapping</span></div>}
+              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Reasoning History</span></div>}
             </div>
 
             {/* Input */}
@@ -228,7 +238,7 @@ export default function ChatBot() {
               </div>
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><ShieldCheck size={12} className="text-green-500" />Internal AI Secure</div>
-                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Direct Intent Engine<Sparkles size={10} className="text-[#0284c7]" /></div>
+                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Threaded Semantic History<Sparkles size={10} className="text-[#0284c7]" /></div>
               </div>
             </div>
           </motion.div>

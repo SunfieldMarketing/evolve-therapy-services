@@ -110,7 +110,7 @@ export default function PageHeader({
                 style={{ filter: 'contrast(1.2) saturate(0.6) grayscale(0.1)' }}
               />
             </div>
-            <div className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[1500ms] ease-in-out ${isVideoPlaying ? 'opacity-0' : 'opacity-100'}`} />
+            <div className={`absolute inset-0 bg-[#0f172a] pointer-events-none z-30 transition-opacity duration-[1500ms] ease-in-out ${isVideoPlaying ? 'opacity-0' : 'opacity-100'} h-full w-full`} />
           </div>
         ) : bgImage === 'none' ? (
           <div className="absolute inset-0 bg-[#0f172a] h-full w-full" />

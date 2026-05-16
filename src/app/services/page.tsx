@@ -110,9 +110,9 @@ export default function ServicesPage(props: { data: any, query: string, variable
       <Navbar data={s?.navbar} />
       
       {/* ── Editorial Hero ── */}
-      <section className="relative w-full h-screen flex flex-col justify-center bg-[#0f172a] overflow-hidden">
+      <section className="relative w-full h-[100svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-44 sm:pt-48">
         
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 h-full w-full">
            <div className={cn(
              "absolute inset-0 transition-opacity duration-[2s] ease-in-out bg-[#0f172a]",
              videoStarted ? "opacity-100" : "opacity-0"
@@ -136,51 +136,51 @@ export default function ServicesPage(props: { data: any, query: string, variable
              )} />
            </div>
 
-           <div className="absolute inset-0 z-20 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
-           <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80" />
-           <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent" />
+           <div className="absolute inset-0 z-20 opacity-40 pointer-events-none h-full w-full" style={{ backgroundImage: 'radial-gradient(circle at 15% 50%, #0284c7 0%, transparent 65%)' }} />
+           <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/80 h-full w-full" />
+           <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0f172a]/95 via-transparent to-transparent h-full w-full" />
            <div className="absolute inset-0 z-25 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} />
         </div>
 
-        <div className="relative z-50 container mx-auto px-6 lg:px-12 -mt-12">
-          <div className="w-full">
+        <div className="relative z-50 container mx-auto px-5 sm:px-6 lg:px-12 py-12 sm:py-20 flex-1 flex flex-col justify-center">
+          <div className="w-full flex flex-col items-center text-center lg:items-start lg:text-left">
             <BlurFade delay={0.2}>
-               <div className="flex items-center gap-6 mb-12">
-                  <div className="w-12 h-[1px] bg-[#0284c7]" />
-                  <span className="text-[#38bdf8] font-black uppercase text-[10px] tracking-[0.6em]" data-tina-field={tinaField(p.hero, 'badge')}>{p.hero.badge}</span>
+               <div className="flex items-center justify-center lg:justify-start gap-4 mb-8 sm:mb-10">
+                  <div className="w-8 sm:w-12 h-[1px] bg-[#0284c7]" />
+                  <span className="text-[#38bdf8] font-black uppercase text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em]" data-tina-field={tinaField(p.hero, 'badge')}>{p.hero.badge}</span>
                </div>
                
-               <h1 className="text-5xl md:text-[5vw] lg:text-[4.5vw] font-serif font-black text-white leading-[1] tracking-tighter mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] break-words">
-                  <span className="uppercase tracking-tighter block md:inline" data-tina-field={tinaField(p.hero, 'titleLine1')}>{p.hero.titleLine1}</span>
-                  <span className="text-[#0284c7] italic md:ml-[0.15em] uppercase tracking-tighter block md:inline" data-tina-field={tinaField(p.hero, 'titleItalic')}>{p.hero.titleItalic}</span>
+               <h1 className="text-[1.5rem] sm:text-5xl md:text-7xl lg:text-[100px] font-serif font-black text-white leading-[1.2] sm:leading-[0.9] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-5xl">
+                  <span className="block" data-tina-field={tinaField(p.hero, 'titleLine1')}>{p.hero.titleLine1}</span>
+                  <span className="text-[#0284c7] italic block mt-1 sm:mt-0" data-tina-field={tinaField(p.hero, 'titleItalic')}>{p.hero.titleItalic}</span>
                </h1>
 
-               <div className="mb-20 w-full">
-                  <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-4 border-[#0284c7] pl-10 italic max-w-5xl" data-tina-field={tinaField(p.hero, 'description')}>
+               <div className="mb-10 sm:mb-20 w-full">
+                  <p className="text-[14px] sm:text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-0 lg:border-l-4 border-[#0284c7] lg:pl-10 italic max-w-5xl text-center lg:text-left" data-tina-field={tinaField(p.hero, 'description')}>
                      {p.hero.description}
                   </p>
                </div>
                
-               <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-24">
+               <div className="flex flex-col lg:flex-row items-center lg:items-center gap-10 lg:gap-24 w-full lg:w-auto">
                   <a 
                     href="/contact" 
                     className="inline-flex items-center justify-center gap-3 sm:gap-5 px-8 sm:px-16 py-5 sm:py-7 bg-[#0284c7] text-white rounded-xl shadow-[0_30px_60px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group shrink-0 w-full sm:w-auto pointer-events-auto"
                   >
-                    <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[12px] sm:text-[14px]">Start Your Evolution</span>
+                    <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[11px] sm:text-[14px]">Start Your Evolution</span>
                     <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
                   </a>
 
-                  <div className="flex flex-col sm:flex-row gap-12">
+                  <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-10 sm:gap-12 w-full sm:w-auto">
                      {p.hero.heroValues?.map((val: any, idx: number) => {
                         const Icon = iconMap[val.icon as keyof typeof iconMap] || Sparkles;
                         return (
-                          <div key={idx} className="flex items-center gap-6 group" data-tina-field={tinaField(val, 'title')}>
-                            <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
-                               <Icon size={24} />
+                          <div key={idx} className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 group" data-tina-field={tinaField(val, 'title')}>
+                            <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
+                               <Icon size={20} />
                             </div>
-                            <div className="flex flex-col">
-                               <span className="text-white font-black uppercase text-[11px] tracking-widest mb-1">{val.title}</span>
-                               <span className="text-white/20 text-[13px] font-light italic" data-tina-field={tinaField(val, 'subtitle')}>"{val.subtitle}"</span>
+                            <div className="flex flex-col text-left">
+                               <span className="text-white font-black uppercase text-[10px] sm:text-[11px] tracking-widest mb-1">{val.title}</span>
+                               <span className="text-white/20 text-[11px] sm:text-[13px] font-light italic" data-tina-field={tinaField(val, 'subtitle')}>"{val.subtitle}"</span>
                             </div>
                           </div>
                         );

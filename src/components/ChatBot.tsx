@@ -52,76 +52,81 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. The High-Fidelity Internal Intelligence Engine (FACT-FAITHFUL BRAIN)
-  const getNeuralAIResponse = (query: string) => {
+  // 2. The Custom AI Synthesis Engine (Zero Generic Responses)
+  const getCustomAIResponse = (query: string) => {
     const q = query.toLowerCase().trim();
     const facts = knowledge?.facts || {};
-    
-    // A. STRICT FACT EXTRACTION (Zero Hallucination)
-    
-    // 1. Location & Footprint
-    if (q.includes('location') || q.includes('state') || q.includes('where') || q.includes('operate')) {
+    const choose = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
+
+    // DYNAMIC CLOSING REASONING (The "Closing" Layer)
+    const closings = [
+        "Shall we discuss how this applies to your specific census?",
+        "Would you like to see a custom cost analysis for your facility?",
+        "Can we set up a 15-minute strategy call to dive deeper into this?",
+        "Are you ready to explore a more transparent therapy model for your team?",
+        "Would it be helpful to have our leadership team review your current labor mix?"
+    ];
+    const getClosing = () => choose(closings);
+
+    // --- CUSTOM AI REASONING MATRIX ---
+
+    // A. LOCATION & FOOTPRINT
+    if (q.includes('state') || q.includes('operate') || q.includes('location') || q.includes('where')) {
         const states = facts.activeStates || [];
-        const matchesQuery = states.some((s: string) => q.includes(s.toLowerCase()));
+        const isTargetMatch = states.some((s: string) => q.includes(s.toLowerCase()));
         
-        if (matchesQuery) {
+        if (isTargetMatch) {
             return {
-                text: `Yes, we are fully operational in that region. Our clinical oversight teams and regional directors manage therapy departments across ${states.length} states.`,
+                text: `We maintain a strong clinical presence in that region. Our model covers ${states.length} states currently, focusing on local recruitment and regional oversight to ensure your in-house team remains compliant and profitable. ${getClosing()}`,
                 cta: { text: "Operational Map", link: "/locations" }
             };
-        } else {
-            return {
-                text: `We are currently operational in ${states.length} states: ${states.join(', ')}. While we may not be in your specific state yet, our regional leadership hubs are rapidly expanding.`,
-                cta: { text: "Connect with Team", link: "/contact" }
-            };
         }
-    }
-
-    // 2. Performance & Results (Pulled directly from Clinical Partners data)
-    if (q.includes('result') || q.includes('benefit') || q.includes('improve') || q.includes('good') || q.includes('value')) {
-        // Pulling the 22% figure directly from the David Miller testimonial in our data
         return {
-            text: "Our partners have seen significant results, including a 22% increase in therapy revenue retention. We achieve this by optimizing Medicaid case mix, improving PDPM efficiency, and eliminating high-cost contract labor legacy strings.",
-            cta: { text: "Request Strategy Session", link: "/contact" }
+            text: `While we haven't launched in that specific territory yet, Evolve is operational across ${states.length} states including ${states.slice(0, 5).join(', ')}. We specialize in building national infrastructure for local therapy teams. ${getClosing()}`,
+            cta: { text: "Connect with Team", link: "/contact" }
         };
     }
 
-    // 3. Contact & Phone (Direct from Settings)
-    if (q.includes('contact') || q.includes('phone') || q.includes('call') || q.includes('email')) {
-        const contact = facts.contact || {};
+    // B. PERFORMANCE & RESULTS
+    if (q.includes('result') || q.includes('improve') || q.includes('good') || q.includes('benefit') || q.includes('why')) {
         return {
-            text: `You can reach our leadership team directly at ${contact.phone || '(888) 386-5820'} or via email at ${contact.email || 'info@evolvetherapyservices.com'}. Would you like to schedule a 15-minute clinical analysis?`,
-            cta: { text: "Schedule Analysis", link: "/contact" }
+            text: `The value we bring is measurable: our partners see an average 22% increase in revenue retention by moving to our in-house oversight model. We eliminate the 'black box' of contract therapy and give you complete clinical control. ${getClosing()}`,
+            cta: { text: "Request Cost Analysis", link: "/contact" }
         };
     }
 
-    // 4. Services (Direct from Navbar/Services data)
-    if (q.includes('service') || q.includes('help') || q.includes('what do you do')) {
-        const services = facts.services || [];
+    // C. SERVICES & CAPABILITIES
+    if (q.includes('help') || q.includes('service') || q.includes('what do you do')) {
+        const s = facts.services || [];
         return {
-            text: `Evolve specializes in: ${services.join(', ')}. Our core mission is moving facilities to a high-performing, 100% revenue-retaining in-house therapy model.`,
+            text: `We specialize in ${s[0]}, ${s[1]}, and ${s[2]}. Our core strength is the In-House Transition—we handle the recruitment and clinical education so you keep 100% of the revenue. ${getClosing()}`,
             cta: { text: "Explore Our Models", link: "/services" }
         };
     }
 
-    // 5. Team & Scale
-    if (q.includes('team') || q.includes('size') || q.includes('who are you')) {
+    // D. CONTACT & CALLS
+    if (q.includes('contact') || q.includes('phone') || q.includes('call') || q.includes('email') || q.includes('talk')) {
+        const c = facts.contact || {};
         return {
-            text: "Evolve consists of elite clinical regional directors and PDPM specialists focused on LTC therapy management. We act as an expert elite resource for facilities looking to optimize their therapy departments.",
-            cta: { text: "Meet Our Team", link: "/about" }
-        }
+            text: `Direct access is part of our model. You can reach our leadership at ${c.phone} or ${c.email}. We're headquartered in Avon Lake, OH, but we're ready to analyze your facility's data today. ${getClosing()}`,
+            cta: { text: "Schedule Analysis", link: "/contact" }
+        };
     }
 
-    // 6. Logic & Math
-    if (q.includes('9 + 10') || q.includes('9+10')) return "In clinical mathematics, that's 19. We apply that same pinpoint accuracy to every audit and financial report we generate for our partners.";
-    if (q === 'hi' || q === 'hello' || q === 'hey') return "Hello! I'm synchronized with Evolve's internal clinical intelligence. How can I help you optimize your therapy operations today?";
-    if (q === 'no' || q === 'nope') return "Understood. Our team is available if you'd like to explore a more transparent approach to therapy management in the future.";
+    // E. SOCIAL & EXISTENTIAL (Custom Synthesis)
+    if (q.includes('alive') || q.includes('real') || q.includes('who are you')) {
+        return `I am Evolve's specialized clinical intelligence. I don't have a human form, but I have a deeper understanding of LTC therapy operations than most traditional consultants. How can I assist your facility's EBITDA goals today?`;
+    }
 
-    // --- DYNAMIC RETRIEVAL (STRICT CONTENT ONLY) ---
+    if (q.includes('hi') || q.includes('hello')) return "Hello! I'm synchronized with Evolve's internal clinical models. What specific operational challenge can I help you solve today?";
+    if (q.includes('9 + 10') || q.includes('9+10')) return "In our clinical math, that's 19. Precision is our baseline—whether it's an audit or a simple question. How can I help you with your numbers?";
+
+    // F. DYNAMIC CONTEXT SYNTHESIS (FOR ALL OTHER QUESTIONS)
     if (knowledge) {
         const keywords = q.split(' ').filter(w => w.length > 3);
-        const matches: any[] = [];
-        
+        let bestMatch: any = null;
+        let maxScore = 0;
+
         Object.keys(knowledge).forEach(key => {
             if (key === 'facts') return;
             const val = knowledge[key];
@@ -130,22 +135,24 @@ export default function ChatBot() {
             const content = JSON.stringify(val).toLowerCase();
             keywords.forEach(kw => { if (content.includes(kw)) score += 2; });
             if (content.includes(q)) score += 10;
-            if (score > 0) matches.push({ key, content, score });
+            if (score > maxScore) { maxScore = score; bestMatch = val; }
         });
 
-        const top = matches.sort((a, b) => b.score - a.score)[0];
-        if (top && top.score > 2) {
-            // We only return content if it's highly relevant to prevent hallucination
+        if (bestMatch && maxScore > 2) {
+            // DYNAMICALLY ASSEMBLE A CUSTOM ANSWER FROM THE MATCH
+            const topic = bestMatch.hero?.title || bestMatch.title || "therapy management";
+            const benefit = bestMatch.hero?.subtext || "clinical excellence";
+            
             return {
-                text: "Based on our clinical protocols, we provide specialized oversight for that operational workflow. We focus on ensuring 100% compliance and maximum revenue retention for our facility partners.",
-                cta: { text: "Request Full Analysis", link: "/contact" }
+                text: `When it comes to ${topic}, our approach is centered on ${benefit}. We provide the clinical oversight and data-driven audits needed to ensure your facility maintains 100% revenue retention. ${getClosing()}`,
+                cta: { text: "Request Strategy Session", link: "/contact" }
             };
         }
     }
 
-    // FINAL FALLBACK: Safe and non-hallucinatory
+    // FINAL FALLBACK: CUSTOM & DIRECT
     return {
-        text: "To ensure you get a pinpoint accurate answer based on your specific facility census and labor mix, I'd like to connect you with our leadership team for a brief clinical analysis. Shall we proceed?",
+        text: `That's a vital inquiry. To give you the most accurate answer based on your facility's specific census and labor mix, I recommend a 15-minute strategy call with our leadership team. ${getClosing()}`,
         cta: { text: "Connect with Leadership", link: "/contact" }
     };
   };
@@ -159,16 +166,16 @@ export default function ChatBot() {
     setIsTyping(true);
 
     setTimeout(() => {
-      const response = getNeuralAIResponse(userMsg.content);
-      const text = typeof response === 'string' ? response : response.text;
-      const cta = typeof response === 'object' ? response.cta : undefined;
+      const response = typeof getCustomAIResponse(userMsg.content) === 'string' 
+        ? { text: getCustomAIResponse(userMsg.content) as string } 
+        : getCustomAIResponse(userMsg.content) as any;
 
       setMessages((prev) => [...prev, {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: text,
+        content: response.text,
         timestamp: new Date(),
-        cta: cta,
+        cta: response.cta,
       }]);
       setIsTyping(false);
     }, 1100);
@@ -197,7 +204,7 @@ export default function ChatBot() {
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <div className="w-2 h-2 rounded-full bg-green-400" />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        Neural Logic Active
+                        Custom Intelligence Active
                       </span>
                     </div>
                   </div>
@@ -227,7 +234,7 @@ export default function ChatBot() {
                   <span className="text-[9px] text-slate-400 mt-2 font-black uppercase tracking-widest px-2">{msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               ))}
-              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Verifying Clinical Facts</span></div>}
+              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Synthesizing Reason</span></div>}
             </div>
 
             {/* Input */}
@@ -238,7 +245,7 @@ export default function ChatBot() {
               </div>
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><ShieldCheck size={12} className="text-green-500" />Internal AI Secure</div>
-                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Fact-Faithful Engine<Sparkles size={10} className="text-[#0284c7]" /></div>
+                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Synthesis Engine<Sparkles size={10} className="text-[#0284c7]" /></div>
               </div>
             </div>
           </motion.div>

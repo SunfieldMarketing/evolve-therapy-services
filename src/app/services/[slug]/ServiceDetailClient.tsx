@@ -108,27 +108,28 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
             </div>
 
             {/* Main Detail */}
-            <div className="lg:col-span-8 order-1 lg:order-2">
+            <div className="lg:col-span-8 order-1 lg:order-2 flex flex-col items-center lg:items-start text-center lg:text-left">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="relative aspect-[16/9] rounded-[4rem] overflow-hidden mb-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-slate-100"
+                className="relative aspect-[16/9] w-full rounded-[2.5rem] sm:rounded-[4rem] overflow-hidden mb-12 sm:mb-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-slate-100"
                 data-tina-field={tinaField(service, 'image')}
               >
                 {service.image && <Image src={service.image} alt={service.title} fill className="object-cover" />}
               </motion.div>
 
-              <div className="prose prose-lg max-w-none">
+              <div className="prose prose-lg max-w-none w-full">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
+                  className="flex flex-col items-center lg:items-start"
                 >
-                  <h2 className="text-5xl font-serif text-[#0f172a] font-black mb-10 tracking-tighter">Service Overview</h2>
-                  <p className="text-2xl leading-relaxed font-light text-slate-400 mb-12" data-tina-field={tinaField(service, 'fullDesc')}>{service.fullDesc}</p>
-                  <div className="text-xl text-slate-500 leading-relaxed font-medium whitespace-pre-line mb-16 px-10 border-l-4 border-[#0284c7]/20" data-tina-field={tinaField(service, 'longContent')}>
+                  <h2 className="text-3xl sm:text-5xl font-serif text-[#0f172a] font-black mb-8 sm:mb-10 tracking-tighter uppercase">Service Overview</h2>
+                  <p className="text-lg sm:text-2xl leading-relaxed font-light text-slate-400 mb-10 sm:mb-12" data-tina-field={tinaField(service, 'fullDesc')}>{service.fullDesc}</p>
+                  <div className="text-base sm:text-xl text-slate-500 leading-relaxed font-medium whitespace-pre-line mb-16 px-6 sm:px-10 border-l-0 lg:border-l-4 border-[#0284c7]/20 text-center lg:text-left" data-tina-field={tinaField(service, 'longContent')}>
                     {service.longContent}
                   </div>
                 </motion.div>
@@ -137,15 +138,16 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
+                  className="flex flex-col items-center lg:items-start"
                 >
-                  <h3 className="text-3xl font-serif text-[#0f172a] font-black mb-12 flex items-center gap-4 tracking-tight">
-                    <Target size={32} className="text-[#0284c7]" /> Core Program Features
+                  <h3 className="text-2xl sm:text-3xl font-serif text-[#0f172a] font-black mb-10 sm:mb-12 flex items-center justify-center lg:justify-start gap-4 tracking-tight uppercase">
+                    <Target size={28} className="text-[#0284c7] hidden sm:block" /> Core Program Features
                   </h3>
-                  <div className="grid md:grid-cols-2 gap-6 not-prose">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 not-prose w-full">
                     {service.features?.map((feature: string, i: number) => (
-                      <div key={i} className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-[#0284c7]/20 hover:bg-white hover:shadow-xl transition-all duration-500" data-tina-field={tinaField(service, `features.${i}`)}>
-                        <div className="w-3 h-3 rounded-full bg-[#0284c7] shadow-lg shadow-[#0284c7]/20 shrink-0" />
-                        <span className="text-[#0f172a] font-black text-sm uppercase tracking-[0.1em] leading-snug">{feature}</span>
+                      <div key={i} className="flex items-center justify-center lg:justify-start gap-4 sm:gap-5 p-6 sm:p-8 rounded-2xl sm:rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-[#0284c7]/20 hover:bg-white hover:shadow-xl transition-all duration-500" data-tina-field={tinaField(service, `features.${i}`)}>
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#0284c7] shadow-lg shadow-[#0284c7]/20 shrink-0" />
+                        <span className="text-[#0f172a] font-black text-[10px] sm:text-sm uppercase tracking-[0.1em] leading-snug">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -157,11 +159,11 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
       </section>
 
       {/* Explore Other Solutions */}
-      <section className="py-24 bg-slate-50 border-t border-slate-100">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex items-center justify-between mb-16">
-            <h2 className="text-4xl font-serif font-black text-[#0f172a] tracking-tighter">Explore Other <span className="text-[#0284c7] italic">Solutions</span></h2>
-            <Link href="/services" className="text-[#0284c7] font-bold text-sm uppercase tracking-widest hover:underline flex items-center gap-2 pointer-events-auto relative z-50">
+      <section className="py-20 sm:py-24 bg-slate-50 border-t border-slate-100">
+        <div className="container mx-auto px-5 md:px-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-8 mb-16 text-center sm:text-left">
+            <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#0f172a] tracking-tighter uppercase">Explore Other <span className="text-[#0284c7] italic">Solutions</span></h2>
+            <Link href="/services" className="text-[#0284c7] font-bold text-xs uppercase tracking-widest hover:underline flex items-center gap-2 pointer-events-auto relative z-50">
               All Services <ArrowRight size={14} />
             </Link>
           </div>

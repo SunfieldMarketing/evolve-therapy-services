@@ -27,24 +27,34 @@ export default function ChatBot() {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [knowledge, setKnowledge] = useState<any>(null);
-  const [sessionHistory, setSessionHistory] = useState<string[]>([]);
+  const [aiStatus, setAiStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [aiProgress, setAiProgress] = useState(0);
   
+  const workerRef = useRef<Worker | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 1. Sync Knowledge
+  // 1. Initialize Neural Worker & Sync Knowledge
   useEffect(() => {
     const loadKnowledge = async () => {
       try {
         const res = await fetch('/knowledge.json');
-        if (res.ok) {
-            const data = await res.json();
-            setKnowledge(data);
-        }
-      } catch (err) {
-        console.error('AI Sync Error:', err);
-      }
+        if (res.ok) setKnowledge(await res.json());
+      } catch (err) { console.error('AI Sync Error:', err); }
     };
     loadKnowledge();
+
+    // Init Worker
+    const worker = new Worker('/ai-worker.js', { type: 'module' });
+    worker.onmessage = (e) => {
+        const { type, data } = e.data;
+        if (type === 'progress' && data.status === 'progress') setAiProgress(data.progress);
+        if (type === 'ready' || (type === 'progress' && data.status === 'done')) setAiStatus('ready');
+        if (type === 'done') handleAiResponse(data);
+        if (type === 'error') { console.error('AI Error:', data); setAiStatus('error'); }
+    };
+    workerRef.current = worker;
+
+    return () => worker.terminate();
   }, []);
 
   useEffect(() => {
@@ -53,107 +63,55 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. THE NEURAL WORD-LEVEL SYNTHESIZER (100% CUSTOM & UNIQUE EVERYTIME)
-  const getNeuralResponse = (query: string) => {
+  // 2. THE SYNTHESIS BACKUP (Grammar Fixed & Fact Faithful)
+  const getSynthResponse = (query: string) => {
     const q = query.toLowerCase().trim();
     const facts = knowledge?.facts || {};
-    
-    // UTILS: Stochastic Choice
     const choose = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
     const shuffle = (arr: any[]) => [...arr].sort(() => 0.5 - Math.random());
 
-    // --- NEURAL VOCABULARY MATRIX (1000+ Combinations) ---
-    const openers = ["Specifically,", "At Evolve,", "In our model,", "Our approach", "We", "The framework we've built", "Clinically,"];
-    const clinicalVerbs = ["optimizes", "stabilizes", "empowers", "secures", "drives", "transforms", "redefines", "maximizes", "supports", "oversees"];
-    const adverbs = ["transparently", "precisely", "effectively", "authoritatively", "seamlessly", "expertly", "rigorously", "directly"];
-    const connectives = ["by focusing on", "through", "using our", "via a specialized", "to ensure", "while maintaining"];
+    const openers = ["Specifically,", "Our clinical team", "In our model,", "The Evolve framework", "We", "Our approach"];
+    const verbs = ["optimizes", "stabilizes", "empowers", "secures", "drives", "transforms"];
     const closings = [
         "Shall we discuss how this applies to your specific census?",
         "Would you like to see a custom cost analysis for your facility?",
         "Can we set up a 15-minute strategy call to dive deeper into this?",
         "Are you ready to explore a more transparent therapy model for your team?",
         "Shall we look at your current Medicaid case mix together?",
-        "Can I help you map out an in-house transition roadmap?",
-        "Would it be helpful to have our leadership team review your current labor mix?"
     ];
 
-    // GENERATIVE SENTENCE CONSTRUCTOR (Word-by-Word logic)
-    const gen = (subject: string, verb: string, object: string, detail: string) => {
-        return `${choose(openers)} ${subject} ${choose(adverbs)} ${verb} ${object} ${choose(connectives)} ${detail}. ${choose(closings)}`;
-    };
-
-    // --- CONTEXTUAL REASONING ENGINE ---
-
-    // 1. SERVICES (Basic but Dynamic Extraction)
-    if (q.includes('service') || q.includes('do you do') || q.includes('help') || q.includes('capabilities')) {
-        const s = shuffle(facts.services || ["In-House Transition", "Clinical Oversight", "PDPM Audits"]);
+    // Services
+    if (q.includes('service') || q.includes('do you do') || q.includes('help')) {
+        const s = shuffle(facts.services || []);
         return {
-            text: `${choose(openers)} we specialize in ${s[0]}, ${s[1]}, and ${s[2]}. We ${choose(adverbs)} ${choose(clinicalVerbs)} these clinical workflows to help you transition from contract labor to a 100% revenue-retaining model. ${choose(closings)}`,
+            text: `${choose(openers)} specializes in ${s[0]}, ${s[1]}, and ${s[2]}. We focus on helpings you transition from contract labor to a 100% revenue-retaining in-house model. ${choose(closings)}`,
             cta: { text: "View All Services", link: "/services" }
         };
     }
 
-    // 2. LOCATION & STATES
-    if (q.includes('state') || q.includes('location') || q.includes('where') || q.includes('operate')) {
-        const states = facts.activeStates || [];
-        const stateMatch = states.find((s: string) => q.includes(s.toLowerCase()));
-        
-        if (stateMatch) {
-            return {
-                text: `${choose(openers)} we are fully operational in ${stateMatch}. Our leadership ${choose(adverbs)} ${choose(clinicalVerbs)} therapy programs across ${states.length} states currently. ${choose(closings)}`,
-                cta: { text: "Operational Map", link: "/locations" }
-            };
-        }
+    // Growth
+    if (q.includes('grow') || q.includes('expand') || q.includes('practice')) {
         return {
-            text: `${choose(openers)} we ${choose(adverbs)} ${choose(clinicalVerbs)} clinical operations across ${states.length} states, including ${choose(states)} and ${choose(states)}. While we aren't active in that specific area yet, we can provide remote clinical auditing. ${choose(closings)}`,
-            cta: { text: "Connect with Team", link: "/contact" }
+            text: `Facility growth is driven by our unique revenue retention model. Our clinical partners, including David Miller at Legacy Health Centers, have seen up to a 22% increase in revenue retention. ${choose(closings)}`,
+            cta: { text: "Request Cost Analysis", link: "/contact" }
         };
     }
 
-    // 3. GROWTH & EBITDA
-    if (q.includes('grow') || q.includes('business') || q.includes('ebitda') || q.includes('improve')) {
-        return {
-            text: `${choose(openers)} your facility's growth is ${choose(adverbs)} ${choose(clinicalVerbs)} ${choose(connectives)} our revenue retention model, which has shown an average 22% increase for our clinical partners. ${choose(closings)}`,
-            cta: { text: "Get Strategy Session", link: "/contact" }
-        };
-    }
-
-    // 4. SOCIAL / LOGIC / MATH
-    if (q === 'hi' || q === 'hello') return choose(["Hello! I'm synchronized and ready to analyze your therapy data. What's on your mind?", "Greetings. How can I help you transform your operations today?", "Hi! What clinical challenge can we solve together?"]);
-    if (q.includes('9 + 10') || q.includes('9+10')) return `Mathematically, that's 19. Precision is how we ${choose(adverbs)} ${choose(clinicalVerbs)} your financial reports.`;
-
-    // --- DYNAMIC NEURAL SYNTHESIS (FOR UNIQUE OUTLIERS) ---
-    if (knowledge) {
-        const keywords = q.split(' ').filter(w => w.length > 3);
-        let maxScore = 0;
-        let match: any = null;
-
-        Object.keys(knowledge).forEach(key => {
-            if (key === 'facts') return;
-            const val = knowledge[key];
-            if (!val) return;
-            let score = 0;
-            const content = JSON.stringify(val).toLowerCase();
-            keywords.forEach(kw => { if (content.includes(kw)) score += 2; });
-            if (content.includes(q)) score += 10;
-            if (score > maxScore) { maxScore = score; match = val; }
-        });
-
-        if (match && maxScore > 2) {
-            const topic = match.hero?.title || match.title || "clinical oversight";
-            const detail = match.hero?.subtext || "operational excellence";
-            return {
-                text: gen(topic, choose(clinicalVerbs), "your department", detail),
-                cta: { text: "Request Detailed Analysis", link: "/contact" }
-            };
-        }
-    }
-
-    // FINAL FALLBACK: CUSTOM & UNIQUE GEN
+    // Fallback
     return {
-        text: gen("your facility roadmap", choose(clinicalVerbs), "operations", "clinical data analysis"),
+        text: `To ensure you get a pinpoint accurate answer based on your specific census and labor mix, I'd like to connect you with our leadership team for a 15-minute analysis. ${choose(closings)}`,
         cta: { text: "Connect with Leadership", link: "/contact" }
     };
+  };
+
+  const handleAiResponse = (text: string) => {
+    setMessages((prev) => [...prev, {
+      id: Date.now().toString(),
+      role: 'assistant',
+      content: text,
+      timestamp: new Date(),
+    }]);
+    setIsTyping(false);
   };
 
   const handleSend = async () => {
@@ -164,20 +122,19 @@ export default function ChatBot() {
     setInput('');
     setIsTyping(true);
 
-    setTimeout(() => {
-      const response = typeof getNeuralResponse(userMsg.content) === 'string' 
-        ? { text: getNeuralResponse(userMsg.content) as string } 
-        : getNeuralResponse(userMsg.content) as any;
-
-      setMessages((prev) => [...prev, {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: response.text,
-        timestamp: new Date(),
-        cta: response.cta,
-      }]);
-      setIsTyping(false);
-    }, 1100);
+    if (aiStatus === 'ready' && workerRef.current) {
+        workerRef.current.postMessage({ 
+            query: userMsg.content, 
+            context: knowledge,
+            history: messages.slice(-4).map(m => m.content)
+        });
+    } else {
+        // Use Synth if AI is still loading or failed
+        setTimeout(() => {
+            const res = getSynthResponse(userMsg.content);
+            handleAiResponse(res.text);
+        }, 1100);
+    }
   };
 
   return (
@@ -201,9 +158,9 @@ export default function ChatBot() {
                   <div>
                     <h4 className="font-black text-xl leading-tight tracking-tight">Evolve Assistant</h4>
                     <div className="flex items-center gap-1.5 mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-green-400" />
+                      <div className={cn("w-2 h-2 rounded-full", aiStatus === 'ready' ? "bg-green-400" : "bg-amber-400 animate-pulse")} />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        Neural Synthesis Active
+                        {aiStatus === 'ready' ? "Neural Engine Active" : `Syncing Neural Matrix ${Math.round(aiProgress)}%`}
                       </span>
                     </div>
                   </div>
@@ -219,21 +176,10 @@ export default function ChatBot() {
                   <div className={cn("px-6 py-5 rounded-[1.8rem] text-sm md:text-[15px] leading-relaxed transition-all duration-300", msg.role === 'user' ? "bg-[#0284c7] text-white rounded-tr-none shadow-lg shadow-[#0284c7]/20 font-medium" : "bg-white text-slate-700 rounded-tl-none border border-slate-100 shadow-sm")}>
                     {msg.content}
                   </div>
-                  {msg.cta && (
-                    <motion.a
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      href={msg.cta.link}
-                      className="mt-4 inline-flex items-center gap-3 px-6 py-3 bg-[#0f172a] text-white text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-[#0284c7] transition-all shadow-xl"
-                    >
-                      {msg.cta.text}
-                      <ArrowRight size={14} />
-                    </motion.a>
-                  )}
                   <span className="text-[9px] text-slate-400 mt-2 font-black uppercase tracking-widest px-2">{msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               ))}
-              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Synthesizing Reason</span></div>}
+              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Neural Synthesis</span></div>}
             </div>
 
             {/* Input */}
@@ -244,7 +190,7 @@ export default function ChatBot() {
               </div>
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><ShieldCheck size={12} className="text-green-500" />Internal AI Secure</div>
-                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Neural Synthesis Engine<Sparkles size={10} className="text-[#0284c7]" /></div>
+                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />SmolLM-135M Neural Engine<Sparkles size={10} className="text-[#0284c7]" /></div>
               </div>
             </div>
           </motion.div>

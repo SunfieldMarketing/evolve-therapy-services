@@ -11,7 +11,9 @@
     "tina:build": "tinacms build"
   },
   "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.46",
     "@tinacms/cli": "^2.3.0",
+    "@xenova/transformers": "^2.17.2",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "leaflet": "^1.9.4",
@@ -22,9 +24,7 @@
     "react-leaflet": "^5.0.0",
     "react-simple-maps": "^3.0.0",
     "tailwind-merge": "^3.5.0",
-    "tinacms": "^3.8.0",
-    "@xenova/transformers": "^2.17.2",
-    "@mlc-ai/web-llm": "^0.2.46"
+    "tinacms": "^3.8.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

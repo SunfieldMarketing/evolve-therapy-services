@@ -232,7 +232,9 @@ export default function ChatBot() {
                       <ArrowRight size={14} />
                     </motion.a>
                   )}
-                  <span className="text-[9px] text-slate-400 mt-2 font-black uppercase tracking-widest px-2">{msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                  <span className="text-[9px] text-slate-400 mt-2 font-black uppercase tracking-widest px-2">
+                    {typeof window !== 'undefined' && msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </span>
                 </div>
               ))}
               {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Reasoning History</span></div>}

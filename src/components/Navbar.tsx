@@ -141,7 +141,7 @@ export default function Navbar({ data }: { data?: any }) {
                   >
                     {hasDropdown ? (
                       <div className="relative" ref={link.name === 'Services' ? dropdownRef : null}>
-                        <Link
+                        <a
                           href={link.href}
                           className={cn(
                             'relative z-[101] flex items-center gap-1 px-4 py-2 h-10 rounded-lg text-[13px] font-semibold tracking-wide transition-all duration-200 leading-none outline-none focus:bg-slate-100 pointer-events-auto',
@@ -155,7 +155,7 @@ export default function Navbar({ data }: { data?: any }) {
                         >
                           {link.name}
                           <ChevronDown className={cn("transition-transform duration-200", dropdownOpen ? "rotate-180" : "")} size={14} />
-                        </Link>
+                        </a>
                         
                         <AnimatePresence>
                           {dropdownOpen && (

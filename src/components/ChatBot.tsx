@@ -40,6 +40,15 @@ export default function ChatBot() {
       } catch (err) { console.error('AI Sync Error:', err); }
     };
     loadKnowledge();
+
+    // Listen for mobile trigger
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener('open-chatbot', handleOpen);
+
+    return () => {
+      worker?.terminate();
+      window.removeEventListener('open-chatbot', handleOpen);
+    };
   }, []);
 
   useEffect(() => {
@@ -245,7 +254,18 @@ export default function ChatBot() {
         )}
       </AnimatePresence>
 
-      <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsOpen(!isOpen)} className={cn("w-16 h-16 rounded-[1.8rem] flex items-center justify-center text-white shadow-2xl transition-all duration-500 border border-white/10", isOpen ? "bg-white text-[#0f172a]" : "bg-[#0284c7]")}>{isOpen ? <X size={28} /> : <MessageSquare size={28} />}</motion.button>
+      <motion.button 
+        whileHover={{ scale: 1.05 }} 
+        whileTap={{ scale: 0.95 }} 
+        onClick={() => setIsOpen(!isOpen)} 
+        className={cn(
+          "w-16 h-16 rounded-[1.8rem] items-center justify-center text-white shadow-2xl transition-all duration-500 border border-white/10",
+          isOpen ? "bg-white text-[#0f172a]" : "bg-[#0284c7]",
+          "hidden md:flex" // Hide on mobile, shown via MobileCTA
+        )}
+      >
+        {isOpen ? <X size={28} /> : <MessageSquare size={28} />}
+      </motion.button>
     </div>
   );
 }

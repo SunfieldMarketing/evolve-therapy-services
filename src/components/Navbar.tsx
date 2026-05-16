@@ -272,45 +272,35 @@ export default function Navbar({ data }: { data?: any }) {
                     <div key={i} className="flex flex-col">
                       <div className="flex items-center justify-between">
                         {hasDropdown ? (
-                          <button
-                            onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-                            className="px-4 py-3.5 flex-1 flex items-center justify-between rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150"
-                          >
-                            {link.name}
-                            <ChevronDown className={cn("transition-transform", mobileDropdownOpen ? "rotate-180" : "")} size={18} />
-                          </button>
+                          <div className="flex flex-col w-full">
+                            <div className="px-4 py-3.5 flex items-center justify-between text-white/40 text-[10px] font-black uppercase tracking-[0.2em] border-b border-white/5 mb-2">
+                              {link.name}
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              {link.dropdown.map((sub: any, j: number) => (
+                                <Link
+                                  key={j}
+                                  href={sub.href}
+                                  onClick={() => setIsOpen(false)}
+                                  className="px-4 py-3 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-sm font-semibold transition-all duration-150 flex items-center justify-between group"
+                                >
+                                  {sub.name}
+                                  <ArrowUpRight size={14} className="opacity-20 group-hover:opacity-100 transition-opacity" />
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
                         ) : (
                           <Link
                             href={link.href}
                             onClick={() => setIsOpen(false)}
-                            className="px-4 py-3.5 flex-1 rounded-xl text-white/80 hover:text-white hover:bg-white/8 text-base font-semibold transition-all duration-150 pointer-events-auto"
+                            className="px-4 py-4 w-full rounded-xl text-white hover:bg-white/5 text-lg font-bold transition-all duration-150 flex items-center justify-between group"
                           >
                             {link.name}
+                            <ArrowUpRight size={18} className="opacity-20 group-hover:opacity-100 transition-opacity" />
                           </Link>
                         )}
                       </div>
-                      
-                      {hasDropdown && mobileDropdownOpen && (
-                        <div className="ml-4 flex flex-col border-l border-white/10 pl-2 mt-1">
-                          {link.dropdown.map((sub: any, j: number) => (
-                            <Link
-                              key={j}
-                              href={sub.href}
-                              onClick={() => setIsOpen(false)}
-                              className="px-4 py-3 text-sm text-white/50 hover:text-white transition-colors"
-                            >
-                              {sub.name}
-                            </Link>
-                          ))}
-                          <Link
-                            href="/services"
-                            onClick={() => setIsOpen(false)}
-                            className="px-4 py-3 text-sm text-[#0284c7] font-bold"
-                          >
-                            View All Services →
-                          </Link>
-                        </div>
-                      )}
                     </div>
                   );
                 })}

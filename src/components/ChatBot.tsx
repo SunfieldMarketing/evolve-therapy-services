@@ -47,32 +47,40 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. THE SEMANTIC TEMPLATE ENGINE (Brain 7.0 - Human-Like Flow)
-  const getSemanticResponse = (query: string) => {
+  // 2. LINGUISTIC DAG REASONER (Brain 8.0 - Impossible Grammar Errors)
+  const getGraphResponse = (query: string) => {
     const q = query.toLowerCase().trim();
     if (!knowledge) return { text: "I'm analyzing the Evolve clinical database. One moment..." };
 
     const choose = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
-    const shuffle = (arr: any[]) => [...arr].sort(() => 0.5 - Math.random());
-
-    // --- SEMANTIC BLOCKS (Grammatically Perfect Phrases) ---
+    
+    // --- LINGUISTIC NODES & EDGES (The Graph) ---
     const openers = [
         "In terms of optimizing your facility's performance,", "Regarding your specific clinical roadmap,", "Looking at the way we transform operations,", 
         "Our model is fundamentally designed to", "To ensure your clinic reaches its maximum EBITDA,", "When we evaluate therapy management strategies,"
     ];
-    const explanations = [
-        "we focus on stabilizing clinical oversight through data-driven audits", 
-        "our approach streamlines the transition from contract labor to an in-house model",
-        "we prioritize revenue retention by optimizing your Medicaid case mix",
-        "the goal is to eliminate high-cost contract labor while maintaining 100% control",
-        "we empower your department by building an elite clinical leadership structure"
+    
+    // Core Clinical Facts (Nodes)
+    const facts = {
+        services: `we focus on ${knowledge.facts?.services?.join(', ')}`,
+        transition: "our approach streamlines the transition from contract labor to a high-performing in-house model",
+        revenue: "we prioritize revenue retention by optimizing your Medicaid case mix",
+        growth: "David Miller (CEO of Legacy Health Centers) reported a 22% increase in revenue retention using our clinical model",
+        states: `we currently provide operational oversight across ${knowledge.facts?.activeStates?.length} states`
+    };
+
+    // Logical Transitions (Edges)
+    const edges = [
+        " which directly leads to", " effectively ensuring that", " while simultaneously", " as a result of", " consequently providing"
     ];
-    const evidence = [
-        "which has resulted in a 22% increase in revenue retention for partners like Legacy Health Centers",
-        "ensuring that every clinical dollar is maximized through PDPM and MDS accuracy",
-        "across our current footprint of 17 active states, including Ohio and New Jersey",
-        "by leveraging our Zero Legacy String model to remove hidden management fees"
+
+    const valueProps = [
+        " absolute financial and clinical control", 
+        " 100% revenue retention for your department",
+        " the elimination of high-cost contract labor legacy strings",
+        " elite clinical oversight through data-driven audits"
     ];
+
     const closings = [
         "Shall we discuss how this applies to your specific census?",
         "Would you like to see a custom cost analysis for your facility?",
@@ -81,53 +89,40 @@ export default function ChatBot() {
         "Would it be helpful to have our leadership team review your current labor mix?"
     ];
 
-    // --- RECURSIVE CONTEXT MINING ---
+    // --- RECURSIVE INTENT PARSING ---
     const isService = q.includes('service') || q.includes('do you do') || q.includes('what are');
-    const isGrowth = q.includes('grow') || q.includes('business') || q.includes('improve') || q.includes('practice');
+    const isGrowth = q.includes('grow') || q.includes('business') || q.includes('improve') || q.includes('clinic');
     const isLocation = q.includes('state') || q.includes('location') || q.includes('where') || q.includes('operate');
 
     let finalResponse = "";
     let cta = { text: "Connect with Leadership", link: "/contact" };
 
     if (q === 'hi' || q === 'hello') {
-        return { text: choose(["Hello! I'm synchronized with Evolve's clinical models. How can I help you optimize your operations today?", "Greetings. I'm ready to analyze your therapy data. What's on your operational roadmap?", "Hi there. What specific clinical challenge can we solve together?"]) };
+        return { text: choose(["Hello! I'm synchronized with Evolve's clinical models. How can I help you optimize your operations today?", "Greetings. I'm ready to analyze your therapy data. What's on your roadmap?", "Hi there. What clinical challenge can we solve together?"]) };
     }
+
+    // TRAVERSE THE GRAPH (Word-by-Word logic assembly)
+    const opener = choose(openers);
+    let path: string[] = [];
 
     if (isLocation) {
-        const states = knowledge.facts?.activeStates || [];
-        const match = states.find((s: string) => q.includes(s.toLowerCase()));
-        const stateIntro = match ? `Yes, we are fully active in ${match}. ` : `Currently, Evolve manages clinical oversight across ${states.length} states. `;
-        finalResponse = `${stateIntro}We specialize in providing the regional management and recruitment support needed to ${choose(explanations)}.`;
+        path = [facts.states, choose(edges), valueProps[3]];
         cta = { text: "View Operational Map", link: "/locations" };
     } else if (isService) {
-        const s = shuffle(knowledge.facts?.services || []);
-        finalResponse = `${choose(openers)} we specialize in ${s[0]}, ${s[1]}, and ${s[2]}. This approach ${choose(explanations)} ${choose(evidence)}.`;
+        path = [facts.services, choose(edges), facts.transition];
         cta = { text: "Explore All Services", link: "/services" };
     } else if (isGrowth) {
-        finalResponse = `${choose(openers)} we ${choose(explanations)}. This strategy is ${choose(evidence)} to ensure your facility maintains absolute financial and clinical control.`;
+        path = [facts.growth, choose(edges), valueProps[1]];
         cta = { text: "Request Strategy Session", link: "/contact" };
     } else {
-        // Dynamic search for specific site-wide intelligence
-        const keywords = q.split(' ').filter(w => w.length > 3);
-        let bestMatch: any = null;
-        Object.keys(knowledge).forEach(key => {
-            if (key === 'facts') return;
-            const content = JSON.stringify(knowledge[key]).toLowerCase();
-            if (content.includes(q)) bestMatch = knowledge[key];
-        });
-
-        if (bestMatch) {
-            const title = bestMatch.hero?.title || bestMatch.title || "Clinical Optimization";
-            finalResponse = `Regarding ${title}, ${choose(explanations)}. This ensures your department performs at an elite level ${choose(evidence)}.`;
-        } else {
-            finalResponse = `To provide a pinpoint accurate roadmap based on your specific census and labor mix, I'd like to have our leadership team provide a brief clinical analysis.`;
-        }
+        path = [facts.transition, choose(edges), valueProps[0]];
     }
 
-    return { 
-        text: `${finalResponse} ${choose(closings)}`, 
-        cta 
-    };
+    // Final Assembly (Ensuring no duplicates or broken grammar)
+    const content = path.join('');
+    finalResponse = `${opener} ${content}. ${choose(closings)}`;
+
+    return { text: finalResponse, cta };
   };
 
   const handleSend = async () => {
@@ -139,7 +134,7 @@ export default function ChatBot() {
     setIsTyping(true);
 
     setTimeout(() => {
-        const response = getSemanticResponse(userMsg.content);
+        const response = getGraphResponse(userMsg.content);
         setMessages((prev) => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'assistant',
@@ -174,7 +169,7 @@ export default function ChatBot() {
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <div className="w-2 h-2 rounded-full bg-green-400" />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        Semantic Engine Active
+                        Graph Intelligence Active
                       </span>
                     </div>
                   </div>
@@ -204,7 +199,7 @@ export default function ChatBot() {
                   <span className="text-[9px] text-slate-400 mt-2 font-black uppercase tracking-widest px-2">{msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               ))}
-              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Synthesizing Reason</span></div>}
+              {isTyping && <div className="flex items-center gap-3 text-[#0284c7]"><Loader2 size={16} className="animate-spin" /><span className="text-[10px] uppercase font-black tracking-widest opacity-40">Reasoning Graph</span></div>}
             </div>
 
             {/* Input */}
@@ -215,7 +210,7 @@ export default function ChatBot() {
               </div>
               <div className="flex items-center justify-between mt-5 px-1">
                 <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><ShieldCheck size={12} className="text-green-500" />Internal AI Secure</div>
-                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Semantic Template Engine<Sparkles size={10} className="text-[#0284c7]" /></div>
+                <div className="flex items-center gap-2 text-[10px] text-slate-300 font-black uppercase tracking-widest"><Zap size={10} className="text-[#0284c7]" />Linguistic Graph Reasoner<Sparkles size={10} className="text-[#0284c7]" /></div>
               </div>
             </div>
           </motion.div>

@@ -210,47 +210,49 @@ export default function Home(props: { data: any; query: string; variables: any }
       <FAQ data={s?.faq || p?.faq} parentField={s?.faq ? "faq" : "faq"} />
 
       {/* ── Philosophy / CTA ── */}
-      <section className="py-24 md:py-40 bg-[#0f172a] relative overflow-hidden">
+      <section className="py-24 md:py-40 relative overflow-hidden bg-[#0f172a]">
+          {/* Enhanced Radial Gradient for that "glow" look */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#1e293b_0%,_#0f172a_100%)] opacity-80" />
+          
           <div className="container mx-auto px-5 sm:px-6 md:px-12 relative z-10">
+            {/* Blue Quote Icon */}
+            <div className="flex justify-center mb-8">
+              <span className="text-4xl md:text-5xl text-[#0284c7] font-serif opacity-40">“</span>
+            </div>
 
+            <div className="max-w-5xl mx-auto text-center mb-16 relative z-10">
+              <h3 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white tracking-tighter leading-[1.1]">
+                <span data-tina-field={tinaField(p.bottomCta, 'quoteLine1')}>{p.bottomCta.quoteLine1}</span> <br />
+                <span className="text-[#38bdf8] italic font-medium" data-tina-field={tinaField(p.bottomCta, 'quoteItalic')}>{p.bottomCta.quoteItalic}</span> <br />
+                <span data-tina-field={tinaField(p.bottomCta, 'quoteLine2')}>{p.bottomCta.quoteLine2}</span>
+              </h3>
+            </div>
 
-          <div className="bg-[#0f172a] p-10 md:p-14 lg:p-20 relative overflow-hidden group transition-all duration-500 rounded-none">
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />
-              
-              <div className="max-w-4xl mx-auto text-center mb-10 relative z-10">
-                <h3 className="text-3xl md:text-5xl lg:text-6xl font-serif text-white tracking-tighter leading-tight">
-                  <span data-tina-field={tinaField(p.bottomCta, 'quoteLine1')}>{p.bottomCta.quoteLine1}</span> <br className="hidden md:block"/>
-                  <span className="text-[#38bdf8] italic" data-tina-field={tinaField(p.bottomCta, 'quoteItalic')}>{p.bottomCta.quoteItalic}</span> <br className="hidden md:block"/>
-                  <span data-tina-field={tinaField(p.bottomCta, 'quoteLine2')}>{p.bottomCta.quoteLine2}</span>
-                </h3>
-              </div>
+            <div className="grid sm:grid-cols-2 gap-x-12 lg:gap-x-24 gap-y-6 mb-20 text-left max-w-4xl mx-auto">
+              {p.bottomCta.checklist.map((item: string, i: number) => (
+                <BlurFade delay={0.2 + i * 0.05} key={i} className="flex items-center gap-4 text-white/60 text-sm md:text-base font-medium">
+                  <div className="w-2 h-2 rounded-full border-2 border-[#0284c7] shrink-0" />
+                  <span data-tina-field={tinaField(p.bottomCta, `checklist.${i}`)}>{item}</span>
+                </BlurFade>
+              ))}
+            </div>
 
-              <div className="grid sm:grid-cols-2 gap-x-12 gap-y-4 mb-16 md:mb-20 text-left max-w-3xl mx-auto">
-                {p.bottomCta.checklist.map((item: string, i: number) => (
-                  <BlurFade delay={0.4 + i * 0.05} key={i} className="flex items-center gap-3 text-white/70 text-sm md:text-base font-medium">
-                    <CheckCircle2 size={18} className="text-[#0284c7] shrink-0" />
-                    <span data-tina-field={tinaField(p.bottomCta, `checklist.${i}`)}>{item}</span>
-                  </BlurFade>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-[101]">
-                <a 
-                  href={p.bottomCta.primaryCtaLink || "/contact"} 
-                  className="flex items-center justify-center gap-2 px-8 py-4 bg-[#0284c7] text-white rounded-full font-bold text-xs uppercase tracking-widest shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto"
-                >
-                  <span data-tina-field={tinaField(p.bottomCta, 'primaryCta')}>{p.bottomCta.primaryCta}</span>
-                  <ArrowRight size={14} className="transition-transform" />
-                </a>
-                <a
-                  href={`tel:${p.bottomCta.phone.replace(/\D/g, '')}`}
-                  className="flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-white/20 text-white rounded-full hover:bg-white/5 transition-colors w-full sm:w-auto"
-                >
-                  <Phone size={14} className="text-white/60" />
-                  <span className="text-sm font-bold tracking-widest" data-tina-field={tinaField(p.bottomCta, 'phone')}>{p.bottomCta.phone}</span>
-                </a>
-              </div>
-          </div>
+            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center relative z-[101]">
+              <a 
+                href={p.bottomCta.primaryCtaLink || "/contact"} 
+                className="flex items-center justify-center gap-3 px-10 py-5 bg-[#0284c7] text-white rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-2xl shadow-[#0284c7]/20 hover:bg-[#0369a1] transition-all hover:-translate-y-1 w-full sm:w-auto"
+              >
+                <span data-tina-field={tinaField(p.bottomCta, 'primaryCta')}>{p.bottomCta.primaryCta}</span>
+                <ArrowRight size={14} />
+              </a>
+              <a
+                href={`tel:${p.bottomCta.phone.replace(/\D/g, '')}`}
+                className="flex items-center justify-center gap-4 px-10 py-5 bg-white/5 border border-white/10 text-white/70 rounded-full hover:bg-white/10 transition-all hover:-translate-y-1 w-full sm:w-auto"
+              >
+                <Phone size={14} className="opacity-50" />
+                <span className="text-sm font-bold tracking-widest" data-tina-field={tinaField(p.bottomCta, 'phone')}>{p.bottomCta.phone}</span>
+              </a>
+            </div>
         </div>
       </section>
 

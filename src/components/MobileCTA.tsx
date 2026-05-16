@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Phone, MessageSquare, ArrowRight } from 'lucide-react';
+import { Phone, MessageSquare, ArrowRight, Bot, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { tinaField } from '@/lib/tina';

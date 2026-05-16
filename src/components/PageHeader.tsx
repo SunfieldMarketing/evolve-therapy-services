@@ -90,7 +90,7 @@ export default function PageHeader({
   }, [finalUseVideo, finalVideoUrl]);
 
   return (
-    <section className="relative w-full min-h-[100svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-28 sm:pt-32" {...props}>
+    <section className="relative w-full min-h-[100svh] flex flex-col justify-center bg-[#0f172a] overflow-hidden pt-44 sm:pt-48" {...props}>
       {/* ── Background Layer ── */}
       <div className="absolute inset-0 z-0">
         {finalUseVideo ? (
@@ -139,12 +139,12 @@ export default function PageHeader({
         <div className="w-full flex flex-col items-center text-center lg:items-start lg:text-left">
           <BlurFade delay={0.2}>
              {/* Subtitle Badge */}
-             <div className="flex items-center justify-center lg:justify-start gap-4 mb-6 sm:mb-10">
+             <div className="flex items-center justify-center lg:justify-start gap-4 mb-8 sm:mb-10">
                 <div className="w-8 sm:w-12 h-[1px] bg-[#0284c7]" />
                 <span className="text-[#38bdf8] font-black uppercase text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em]" data-tina-field={tinaFields?.badgeText}>{badgeText}</span>
              </div>
              
-             <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[100px] font-serif font-black text-white leading-[1.1] sm:leading-[0.9] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-5xl" data-tina-field={tinaFields?.title}>
+             <h1 className="text-2xl sm:text-5xl md:text-7xl lg:text-[100px] font-serif font-black text-white leading-[1.2] sm:leading-[0.9] tracking-tighter mb-8 sm:mb-16 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] uppercase break-words max-w-5xl" data-tina-field={tinaFields?.title}>
                 {title}
                 {italicWord && (
                   <span className="text-[#0284c7] italic ml-[0.1em] sm:ml-[0.15em] uppercase tracking-tighter block sm:inline mt-1 sm:mt-0">{italicWord}</span>
@@ -153,7 +153,7 @@ export default function PageHeader({
 
              {subtitle && (
                 <div className="mb-10 sm:mb-20 w-full" data-tina-field={tinaFields?.subtitle}>
-                   <p className="text-[15px] sm:text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-0 lg:border-l-4 border-[#0284c7] lg:pl-10 italic max-w-5xl text-center lg:text-left">
+                   <p className="text-[14px] sm:text-xl md:text-2xl text-white/40 font-light leading-relaxed border-l-0 lg:border-l-4 border-[#0284c7] lg:pl-10 italic max-w-5xl text-center lg:text-left">
                       {subtitle}
                    </p>
                 </div>
@@ -169,7 +169,7 @@ export default function PageHeader({
                 </a>
 
                 {/* Values Integration */}
-                <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-8 sm:gap-12 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-10 sm:gap-12 w-full sm:w-auto">
                    {valueBoxes.map((box, i) => (
                       <div key={i} className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 group">
                          <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">

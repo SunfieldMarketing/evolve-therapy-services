@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tinacms dev -c \"next dev\"",
-    "build": "tinacms build --skip-cloud-checks && next build",
+    "build": "node -e \"const fs=require('fs'); const path=require('path'); const content={}; const readDir=(dir)=>{if(!fs.existsSync(dir)) return; const files=fs.readdirSync(dir); files.forEach(file=>{const fullPath=path.join(dir, file); if(fs.statSync(fullPath).isDirectory()){readDir(fullPath)}else if(file.endsWith('.json')){content[file]=JSON.parse(fs.readFileSync(fullPath, 'utf8'))}} )}; readDir('./content'); if(!fs.existsSync('./public')) fs.mkdirSync('./public'); fs.writeFileSync('./public/knowledge.json', JSON.stringify(content, null, 2))\" && tinacms build --skip-cloud-checks && next build",
     "start": "next start",
     "lint": "eslint",
     "tina:dev": "tinacms dev",

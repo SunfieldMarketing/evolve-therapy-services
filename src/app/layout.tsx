@@ -44,6 +44,8 @@ export const metadata: Metadata = {
   },
 };
 
+import ChatBot from "@/components/ChatBot";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,6 +58,7 @@ export default function RootLayout({
       </head>
       <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col`}>
         {children}
+        <ChatBot />
       </body>
     </html>
   );

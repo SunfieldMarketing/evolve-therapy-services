@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Target } from 'lucide-react';
 import Link from 'next/link';
 import { Spotlight } from '@/components/aceternity/spotlight';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';

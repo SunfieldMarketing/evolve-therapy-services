@@ -33,7 +33,7 @@ export default function ChatBot() {
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 1. Silent Background AI Initialization (With Security Fix)
+  // 1. Silent Background AI Initialization (With Worker Fix)
   useEffect(() => {
     const initEngine = async () => {
       try {
@@ -58,18 +58,17 @@ export default function ChatBot() {
             }
         }
 
-        // B. Load Generative AI (Web-LLM) with Cross-Origin Security Fix
+        // B. Load Generative AI (Web-LLM) with Worker Scope Fix
         const { CreateWebWorkerMLCEngine } = await import('@mlc-ai/web-llm');
         const modelId = "SmolLM-135M-Instruct-v0.2-q4f16_1-MLC";
         
-        // SECURITY FIX: Create a local blob worker that imports the remote script
-        // This bypasses the 'Failed to construct Worker' cross-origin error
+        // WORKER FIX: Using 'classic' worker (no type: module) to allow importScripts
         const workerScript = `importScripts('https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.46/lib/index.js');`;
         const blob = new Blob([workerScript], { type: 'application/javascript' });
         const workerUrl = URL.createObjectURL(blob);
         
         const chatEngine = await CreateWebWorkerMLCEngine(
-            new Worker(workerUrl, { type: 'module' }),
+            new Worker(workerUrl), // Classic worker allows importScripts()
             modelId,
             { initProgressCallback: (report) => console.log(report.text) }
         );
@@ -105,7 +104,7 @@ export default function ChatBot() {
 
         // A. Instant Response Logic (Math/Social)
         if (q === '9+10' || q === '9 + 10') {
-            respondInstantly("In the clinical mathematics world, that's 19. In the meme world, it's 21. Either way, we're here to help you optimize your facility's results.");
+            respondInstantly("In the clinical world, that's 19. In the meme world, it's 21. Either way, we're here to help you optimize your facility's results.");
             return;
         }
 

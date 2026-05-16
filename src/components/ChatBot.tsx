@@ -49,63 +49,70 @@ export default function ChatBot() {
 
     const q = query.toLowerCase();
     
-    // 1. Core Business Identity (Who are we / What do we do)
-    if (q.includes('what do you do') || q.includes('simple terms') || q.includes('who are you') || q.includes('what is evolve') || q.includes('summary')) {
+    // 1. Value Proposition & Confidence (Why us / Why choose us)
+    if (q.includes('why use you') || q.includes('why choose') || q.includes('why us') || q.includes('better') || q.includes('benefits') || q.includes('advantage')) {
       return {
-        text: "In simple terms: We help long-term care operators run their own therapy departments. Instead of hiring an outside contractor who takes a cut of your revenue, we provide the leadership and expertise so you can keep 100% of the revenue while we ensure clinical excellence and compliance.",
-        cta: { text: "How Our Model Works", link: "/about" }
+        text: "You should choose Evolve because we are the only partner that combines 20+ years of clinical expertise with a model that lets you keep 100% of your therapy revenue. We don't just manage; we transform your facility into a center of financial strength and clinical excellence without the legacy strings of traditional contractors.",
+        cta: { text: "Our Unique Advantage", link: "/about" }
       };
     }
 
-    if (q.includes('hello') || q.includes('hi ') || q.includes('hey')) return { text: "Hello! I'm here to help you explore how to evolve your therapy operations. What's on your mind today?" };
+    if (q.includes('what do you do') || q.includes('simple terms') || q.includes('who are you') || q.includes('what is evolve') || q.includes('summary')) {
+      return {
+        text: "We specialize in empowering LTC operators to take control of their own therapy departments. We provide the leadership, recruitment, and clinical oversight required for you to transition from high-cost contractors to a high-performing in-house model where you retain all the revenue.",
+        cta: { text: "Learn How We Evolve", link: "/about" }
+      };
+    }
+
+    if (q.includes('hello') || q.includes('hi ') || q.includes('hey')) return { text: "Hello! We're excited to show you how Evolve can transform your facility's clinical and financial future. What can we help you explore today?" };
 
     // 2. Financial & Revenue
     if (q.includes('price') || q.includes('cost') || q.includes('fee') || q.includes('billing')) {
       return { 
-        text: "We operate on a transparent management fee model rather than taking a percentage of your billing. Our unique three-tiered approach actually reduces your costs as you grow, aligning our success directly with yours.",
-        cta: { text: "Explore Cost Reduction", link: "/services/therapy-cost-reduction" }
+        text: "We provide a transparent, tiered management fee that actually decreases as your volume grows. Unlike others, we don't take a percentage of your billing—we're here to help you scale efficiently while protecting your margins.",
+        cta: { text: "Explore Our Pricing", link: "/services/therapy-cost-reduction" }
       };
     }
     if (q.includes('revenue') || q.includes('money') || q.includes('100%') || q.includes('profit')) {
       return { 
-        text: "Our core philosophy is that the facility should retain 100% of therapy revenue. We bridge the gap between clinical quality and financial sustainability, empowering you to reinvest those funds back into your care team.",
-        cta: { text: "See Revenue Retention", link: "/services/optimal-therapy-outcomes" }
+        text: "We believe your facility deserves to keep 100% of its therapy revenue. We bridge the gap between clinical quality and financial sustainability, giving you the tools to reinvest in your patient care and your bottom line.",
+        cta: { text: "Revenue Retention Model", link: "/services/optimal-therapy-outcomes" }
       };
     }
 
     // 3. Clinical & Operational Oversight
     if (q.includes('transition') || q.includes('in-house') || q.includes('inhouse') || q.includes('switch')) {
       return { 
-        text: "Switching from a contract model to an in-house model can feel daunting, but we've perfected the roadmap. We handle the heavy lifting—recruitment, credentialing, and culture-building—so you get a seamless launch with zero disruption.",
-        cta: { text: "View Transition Guide", link: "/services/in-house-transition" }
+        text: "We make the transition to in-house therapy seamless and risk-free. We handle everything from staff recruitment to clinical credentialing, ensuring your facility experiences zero disruption while gaining complete operational control.",
+        cta: { text: "View Our Roadmap", link: "/services/in-house-transition" }
       };
     }
 
     if (q.includes('staff') || q.includes('hiring') || q.includes('recruit') || q.includes('therapist')) {
         return {
-          text: "Finding and keeping top-tier therapists is one of our specialties. We provide active state-wide recruitment support and specialized CEU education to ensure your team is the most advanced in your market.",
-          cta: { text: "Our Staffing Strategy", link: "/services/snf-staff-education" }
+          text: "We are experts at building elite clinical teams. We provide active, state-wide recruitment support and specialized in-house education so your therapists are always at the top of their field and focused on your facility's success.",
+          cta: { text: "Building Your Team", link: "/services/snf-staff-education" }
         };
     }
 
     if (q.includes('state') || q.includes('where') || q.includes('location') || q.includes('map')) {
         return { 
-          text: "We currently have a strategic presence in 17 states (including OH, PA, FL, NJ, DE, and more). We provide both on-site regional leadership and remote clinical oversight depending on your facility's needs.",
-          cta: { text: "View Our Map", link: "/locations" }
+          text: "We currently provide clinical leadership and recruitment across 17 states, including Ohio, Pennsylvania, Florida, New Jersey, and Delaware. We have a strategic national presence and we're ready to scale wherever you are.",
+          cta: { text: "See Our Footprint", link: "/locations" }
         };
       }
 
     if (q.includes('compliance') || q.includes('audit') || q.includes('denial') || q.includes('regulatory')) {
         return {
-            text: "Compliance is where we protect your bottom line. We provide real-time PDPM case mix analysis, MDS accuracy reviews, and proactive audit defense to ensure your facility stays five-star rated and audit-ready.",
-            cta: { text: "Clinical Excellence", link: "/services/denial-management" }
+            text: "We treat your compliance as our top priority. We use real-time PDPM analysis and MDS accuracy reviews to ensure your facility is protected from audits while maximizing clinical outcomes.",
+            cta: { text: "Our Clinical Standards", link: "/services/denial-management" }
         };
     }
 
     if (q.includes('contact') || q.includes('call') || q.includes('email') || q.includes('talk') || q.includes('person') || q.includes('consult') || q.includes('help')) {
         return { 
-          text: "I'd love to get you in touch with our team. We can perform a complimentary clinical and financial analysis to show you exactly how much revenue you could be retaining.",
-          cta: { text: "Schedule Analysis", link: "/contact" }
+          text: "We'd love to show you the data. We can provide a complimentary clinical and financial analysis for your facility to demonstrate exactly how we can increase your revenue retention.",
+          cta: { text: "Schedule a Consultation", link: "/contact" }
         };
       }
 
@@ -113,7 +120,7 @@ export default function ChatBot() {
     const services = knowledge['services.json']?.showcase?.services || [];
     for (const s of services) {
         if (q.includes(s.title.toLowerCase()) || q.includes(s.slug.toLowerCase())) {
-            return { text: s.desc, cta: { text: `Learn More`, link: `/services/${s.slug}` } };
+            return { text: `We provide specialized expertise in ${s.title}. ${s.desc}`, cta: { text: `Explore ${s.title}`, link: `/services/${s.slug}` } };
         }
     }
 
@@ -125,8 +132,8 @@ export default function ChatBot() {
     }
 
     return { 
-      text: "That's an interesting point. While I'm focused on the operational and clinical side of LTC therapy, I want to make sure you get a precise answer. Would you like me to connect you with our leadership team for a detailed discussion?",
-      cta: { text: "Connect with Leadership", link: "/contact" }
+      text: "That's a vital part of therapy operations. We have specific, data-driven strategies for that which our leadership team can walk you through in a quick 15-minute analysis. Shall we set that up?",
+      cta: { text: "Let's Connect", link: "/contact" }
     };
   };
 

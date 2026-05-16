@@ -5,9 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Bot, ArrowRight, Loader2, Sparkles, ShieldCheck, Database, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// We'll use these for the AI stack
-let pipeline: any = null;
-
+// TYPES
 interface Message {
   id: string;
   role: 'assistant' | 'user';
@@ -20,7 +18,6 @@ interface Message {
 interface KnowledgeChunk {
   content: string;
   source: string;
-  embedding?: number[];
 }
 
 export default function ChatBot() {
@@ -47,31 +44,43 @@ export default function ChatBot() {
       try {
         setEngineStatus('loading');
         
-        // A. Load Transformers for Semantic Search
-        const { pipeline: transformersPipeline } = await import('@xenova/transformers');
-        const embedder = await transformersPipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-
-        // B. Load Knowledge Base
+        // A. Load Knowledge Base
         const res = await fetch('/knowledge.json');
+        if (!res.ok) throw new Error('Knowledge base not found');
         const data = await res.json();
+        
+        if (!data || typeof data !== 'object') {
+            throw new Error('Invalid knowledge base format');
+        }
+
         const rawChunks: KnowledgeChunk[] = [];
         Object.keys(data).forEach(key => {
             const val = data[key];
-            if (val.hero) rawChunks.push({ source: 'Home', content: val.hero.subtext });
-            if (val.showcase) val.showcase.services.forEach((s: any) => rawChunks.push({ source: s.title, content: s.desc }));
-            if (val.faq) val.faq.list.forEach((f: any) => rawChunks.push({ source: 'FAQ', content: `${f.q}: ${f.a}` }));
-            if (val.title && val.description) rawChunks.push({ source: val.title, content: val.description + (val.mainContent || '') });
+            if (!val) return;
+
+            // Updated extraction logic to handle nested and varied structures
+            if (val.hero?.subtext) rawChunks.push({ source: 'Home', content: val.hero.subtext });
+            if (val.showcase?.services) {
+                val.showcase.services.forEach((s: any) => rawChunks.push({ source: s.title, content: s.desc }));
+            }
+            if (val.faq?.list) {
+                val.faq.list.forEach((f: any) => rawChunks.push({ source: 'FAQ', content: `${f.q}: ${f.a}` }));
+            }
+            if (val.title && val.description) {
+                rawChunks.push({ source: val.title, content: `${val.description} ${val.mainContent || ''}` });
+            }
         });
 
-        // Generate Embeddings for Chunks (in the background or once)
-        // For efficiency in this demo, we'll do semantic search on the fly or keep it simple
+        if (rawChunks.length === 0) {
+            console.warn('Knowledge base is empty');
+        }
         setChunks(rawChunks);
 
-        // C. Load Generative AI (Web-LLM)
+        // B. Load Generative AI (Web-LLM)
         const { CreateWebWorkerMLCEngine } = await import('@mlc-ai/web-llm');
         const modelId = "SmolLM-135M-Instruct-v0.2-q4f16_1-MLC";
         
-        // Use a more robust worker initialization
+        // Using the same reliable CDN-backed worker URL
         const chatEngine = await CreateWebWorkerMLCEngine(
             new Worker(new URL('https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.46/lib/index.js'), { type: 'module' }),
             modelId,
@@ -86,7 +95,7 @@ export default function ChatBot() {
       }
     };
 
-    if (isOpen && engineStatus === 'idle') {
+    if (isOpen && (engineStatus === 'idle' || engineStatus === 'error')) {
         initStack();
     }
   }, [isOpen, engineStatus]);
@@ -136,10 +145,9 @@ export default function ChatBot() {
                 - Proactively lead the user to schedule a consultation or clinical analysis.
             `;
 
-            const chatHistory = messages.map(m => ({ role: m.role, content: m.content }));
+            const chatHistory = messages.slice(-6).map(m => ({ role: m.role, content: m.content }));
             chatHistory.push({ role: 'user', content: userMsg.content });
 
-            // Create a placeholder message for streaming
             const botMsgId = (Date.now() + 1).toString();
             setMessages(prev => [...prev, {
                 id: botMsgId,
@@ -162,7 +170,6 @@ export default function ChatBot() {
                 setMessages(prev => prev.map(m => m.id === botMsgId ? { ...m, content: fullContent } : m));
             }
 
-            // Finalize message
             setMessages(prev => prev.map(m => m.id === botMsgId ? { 
                 ...m, 
                 isStreaming: false,
@@ -172,6 +179,13 @@ export default function ChatBot() {
         }
     } catch (err) {
         console.error('Chat Error:', err);
+        setMessages(prev => [...prev, {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: "I apologize, but I encountered an error while processing your clinical inquiry. Our leadership team can provide a direct analysis for you.",
+            timestamp: new Date(),
+            cta: { text: "Connect with Team", link: "/contact" }
+        }]);
     } finally {
         setIsTyping(false);
     }
@@ -187,7 +201,7 @@ export default function ChatBot() {
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className="absolute bottom-20 right-0 w-[350px] sm:w-[420px] h-[620px] bg-white rounded-[2.5rem] shadow-[0_30px_90px_-15px_rgba(15,23,42,0.2)] border border-slate-100 flex flex-col overflow-hidden"
           >
-            {/* Header - White & Blue Theme with Glassmorphism */}
+            {/* Header */}
             <div className="p-8 bg-[#0284c7] text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2" />
               <div className="flex items-center justify-between relative z-10">
@@ -200,18 +214,17 @@ export default function ChatBot() {
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <div className={cn(
                         "w-2 h-2 rounded-full",
-                        engineStatus === 'ready' ? "bg-green-400" : "bg-amber-400 animate-pulse"
+                        engineStatus === 'ready' ? "bg-green-400" : 
+                        engineStatus === 'error' ? "bg-red-400" : "bg-amber-400 animate-pulse"
                       )} />
                       <span className="text-[10px] uppercase font-black tracking-widest text-white/60">
-                        {engineStatus === 'ready' ? 'Neural Stack Active' : 'Initializing Intelligence'}
+                        {engineStatus === 'ready' ? 'Neural Stack Active' : 
+                         engineStatus === 'error' ? 'Initialization Error' : 'Initializing Intelligence'}
                       </span>
                     </div>
                   </div>
                 </div>
-                <button 
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 hover:bg-white/10 rounded-xl transition-all"
-                >
+                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-xl transition-all">
                   <X size={20} />
                 </button>
               </div>
@@ -231,6 +244,19 @@ export default function ChatBot() {
                       Deploying private, browser-based AI models and indexing clinical context.
                     </p>
                   </div>
+                </div>
+              )}
+
+              {engineStatus === 'error' && (
+                <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-4 text-center p-4">
+                  <p className="text-sm text-slate-600 font-bold">Failed to load neural engine.</p>
+                  <p className="text-[10px] text-slate-400">This may be due to browser compatibility or network restrictions. Please try refreshing or speak with our team directly.</p>
+                  <button 
+                    onClick={() => setEngineStatus('idle')}
+                    className="px-4 py-2 bg-[#0284c7] text-white text-[10px] font-black uppercase tracking-widest rounded-full"
+                  >
+                    Retry Initialization
+                  </button>
                 </div>
               )}
               

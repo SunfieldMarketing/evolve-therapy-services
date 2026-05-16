@@ -116,10 +116,14 @@ export default function PageHeader({
           <div className="absolute inset-0 bg-[#0f172a] h-full w-full" />
         ) : (
           <div className="absolute inset-0 h-full w-full">
-            <img
-              src={imageUrl}
-              alt={`${title} background cover`}
-              className="absolute inset-0 w-full h-full object-cover opacity-60 contrast-[1.1] saturate-[1.2]"
+            <div 
+              className="absolute inset-0 w-full h-full opacity-60 contrast-[1.1] saturate-[1.2]"
+              style={{ 
+                backgroundImage: `url(${imageUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
             />
             <div className="absolute inset-0 bg-[#0f172a]/40 mix-blend-multiply h-full w-full" />
           </div>

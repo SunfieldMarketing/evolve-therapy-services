@@ -102,6 +102,8 @@ export default function ServicesPage(props: { data: any, query: string, variable
       const timer = setTimeout(() => setVideoStarted(true), 800);
       return () => clearTimeout(timer);
     }
+  }, []);
+
   return (
     <main className="min-h-screen bg-white selection:bg-[#0284c7]/30 selection:text-[#0f172a]">
       <DesignSystemInjector data={s?.designSystem} />

@@ -328,7 +328,9 @@ export default defineConfig({
           {
             type: "object", name: "bottomCta", label: "Bottom CTA Section",
             fields: [
-              { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
+              { type: "string", name: "quoteLine1", label: "Quote Line 1" },
+              { type: "string", name: "quoteItalic", label: "Quote Italic Text" },
+              { type: "string", name: "quoteLine2", label: "Quote Line 2" },
               { type: "string", name: "checklist", label: "Checklist Items", list: true },
               { type: "string", name: "primaryCta", label: "Button Text" },
               { type: "string", name: "primaryCtaLink", label: "Button Link" },

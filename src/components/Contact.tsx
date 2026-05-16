@@ -89,11 +89,15 @@ export default function Contact({ data, parentField }: { data?: any, parentField
               </h3>
               <p className="text-slate-500 text-sm mb-8" data-tina-field={parentField ? tinaField(d.form, 'description') : undefined}>{d.form.description}</p>
               
-              <form className="space-y-6">
+              <form action="https://formsubmit.co/info@evolvetherapyservices.com" method="POST" className="space-y-6">
+                <input type="hidden" name="_subject" value="New Lead from Evolve Therapy Services!" />
+                <input type="hidden" name="_captcha" value="false" />
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <input 
                       type="text" 
+                      name="First Name"
+                      required
                       className="w-full bg-slate-50 px-6 py-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-secondary placeholder:text-slate-400 text-[15px]"
                       placeholder="First Name"
                     />
@@ -101,6 +105,8 @@ export default function Contact({ data, parentField }: { data?: any, parentField
                   <div className="space-y-2">
                     <input 
                       type="text" 
+                      name="Last Name"
+                      required
                       className="w-full bg-slate-50 px-6 py-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-secondary placeholder:text-slate-400 text-[15px]"
                       placeholder="Last Name"
                     />
@@ -110,6 +116,8 @@ export default function Contact({ data, parentField }: { data?: any, parentField
                 <div className="space-y-2">
                   <input 
                     type="email" 
+                    name="Email"
+                    required
                     className="w-full bg-slate-50 px-6 py-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-secondary placeholder:text-slate-400 text-[15px]"
                     placeholder="Corporate Email"
                   />
@@ -117,14 +125,16 @@ export default function Contact({ data, parentField }: { data?: any, parentField
 
                 <div className="space-y-2">
                   <textarea 
+                    name="Message"
                     rows={4}
+                    required
                     className="w-full bg-slate-50 px-6 py-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-secondary placeholder:text-slate-400 text-[15px] resize-none"
                     placeholder="Tell us about your facility goals..."
                   />
                 </div>
 
                 <button 
-                  type="button"
+                  type="submit"
                   className="w-full bg-primary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-secondary transition-colors shadow-md shadow-primary/20 text-[15px] pointer-events-auto"
                 >
                   <span data-tina-field={parentField ? tinaField(d.form, 'buttonText') : undefined}>{d.form.buttonText}</span> <ArrowRight size={18} />

@@ -208,23 +208,28 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
               Get the latest updates on LTC therapy management, regulatory changes, and Evolve news.
             </p>
             <form
-              onSubmit={(e) => e.preventDefault()}
+              action="https://formsubmit.co/info@evolvetherapyservices.com" 
+              method="POST"
               className="space-y-3"
               aria-label="Newsletter signup"
             >
+              <input type="hidden" name="_subject" value="New Newsletter Signup!" />
+              <input type="hidden" name="_captcha" value="false" />
               <div className="relative">
                 <input
                   id="footer-email"
                   type="email"
+                  name="Newsletter Email"
+                  required
                   autoComplete="email"
                   placeholder="your@email.com"
                   aria-label="Email address for newsletter"
-                  className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/25 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0284c7]/50 focus:bg-white/8 transition-all duration-200 pr-12"
+                  className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/25 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0284c7]/50 focus:bg-white/8 transition-all duration-200 pr-12 pointer-events-auto relative z-[101]"
                 />
                 <button
                   type="submit"
                   aria-label="Subscribe to newsletter"
-                  className="absolute right-2 top-2 bottom-2 w-9 bg-[#0284c7] rounded-lg flex items-center justify-center text-white hover:bg-[#0369a1] transition-colors duration-200"
+                  className="absolute right-2 top-2 bottom-2 w-9 bg-[#0284c7] rounded-lg flex items-center justify-center text-white hover:bg-[#0369a1] transition-colors duration-200 pointer-events-auto relative z-[101]"
                 >
                   <ArrowRight size={14} aria-hidden="true" />
                 </button>

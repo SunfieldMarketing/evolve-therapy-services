@@ -14,7 +14,7 @@ import MobileCTA from '@/components/MobileCTA';
 import Link from 'next/link';
 import { 
   ArrowRight, Microscope, HeartPulse, ShieldCheck, 
-  TrendingUp, Users, Clock, BarChart3, Award, Search, Map, Zap, GraduationCap
+  TrendingUp, Users, Clock, BarChart3, Award, Search, Map, Zap, GraduationCap, CheckCircle2, Phone
 } from 'lucide-react';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { NumberTicker } from '@/components/magicui/number-ticker';
@@ -53,7 +53,7 @@ export default function Home(props: { data: any; query: string; variables: any }
           items { title desc icon slug }
           featuredCard { badge title titleItalic description buttonText buttonLink image }
         }
-        bottomCta { quote checklist primaryCta primaryCtaLink phone }
+        bottomCta { quoteLine1 quoteItalic quoteLine2 checklist primaryCta primaryCtaLink phone }
         coverage { title legend { text icon } }
         faq { title items { question answer } }
         partner { title desc button link }
@@ -222,37 +222,40 @@ export default function Home(props: { data: any; query: string; variables: any }
             </p>
           </div>
 
-          <div className="bg-[#0f172a] p-10 md:p-14 rounded-[3rem] shadow-2xl relative overflow-hidden group hover:border-[#0284c7]/30 transition-all duration-500">
+          <div className="bg-[#0f172a] p-10 md:p-14 lg:p-20 shadow-2xl relative overflow-hidden group hover:border-[#0284c7]/30 transition-all duration-500 rounded-none w-screen relative left-1/2 -translate-x-1/2">
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #0284c7 0%, transparent 50%)' }} />
-              <p className="text-2xl md:text-5xl font-serif font-black text-[#38bdf8] italic mb-10 leading-[1.1] relative z-10 tracking-tighter" data-tina-field={tinaField(p.bottomCta, 'quote')}>
-                "{p.bottomCta.quote}"
-              </p>
+              
+              <div className="max-w-4xl mx-auto text-center mb-10 relative z-10">
+                <h3 className="text-3xl md:text-5xl lg:text-6xl font-serif text-white tracking-tighter leading-tight">
+                  <span data-tina-field={tinaField(p.bottomCta, 'quoteLine1')}>{p.bottomCta.quoteLine1}</span> <br className="hidden md:block"/>
+                  <span className="text-[#38bdf8] italic" data-tina-field={tinaField(p.bottomCta, 'quoteItalic')}>{p.bottomCta.quoteItalic}</span> <br className="hidden md:block"/>
+                  <span data-tina-field={tinaField(p.bottomCta, 'quoteLine2')}>{p.bottomCta.quoteLine2}</span>
+                </h3>
+              </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 mb-16 md:mb-24 text-left max-w-2xl mx-auto">
+              <div className="grid sm:grid-cols-2 gap-x-12 gap-y-4 mb-16 md:mb-20 text-left max-w-3xl mx-auto">
                 {p.bottomCta.checklist.map((item: string, i: number) => (
-                  <BlurFade delay={0.4 + i * 0.05} key={i} className="flex items-center gap-4 text-white/50 text-sm md:text-base font-light">
-                    <div className="w-5 h-5 rounded-full bg-[#0284c7]/10 flex items-center justify-center shrink-0">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#0284c7]" />
-                    </div>
+                  <BlurFade delay={0.4 + i * 0.05} key={i} className="flex items-center gap-3 text-white/70 text-sm md:text-base font-medium">
+                    <CheckCircle2 size={18} className="text-[#0284c7] shrink-0" />
                     <span data-tina-field={tinaField(p.bottomCta, `checklist.${i}`)}>{item}</span>
                   </BlurFade>
                 ))}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-[101]">
                 <a 
                   href={p.bottomCta.primaryCtaLink || "/contact"} 
-                  className="relative z-[101] flex items-center justify-center gap-2 px-10 py-5 bg-[#0284c7] text-white rounded-full font-black text-[12px] uppercase tracking-widest shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto"
+                  className="flex items-center justify-center gap-2 px-8 py-4 bg-[#0284c7] text-white rounded-full font-bold text-xs uppercase tracking-widest shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto"
                 >
                   <span data-tina-field={tinaField(p.bottomCta, 'primaryCta')}>{p.bottomCta.primaryCta}</span>
-                  <ArrowRight size={16} className="transition-transform" />
+                  <ArrowRight size={14} className="transition-transform" />
                 </a>
                 <a
                   href={`tel:${p.bottomCta.phone.replace(/\D/g, '')}`}
-                  className="text-white hover:text-[#0284c7] transition-colors flex flex-col items-center sm:items-start relative z-[101] pointer-events-auto"
+                  className="flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-white/20 text-white rounded-full hover:bg-white/5 transition-colors w-full sm:w-auto"
                 >
-                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-1">Direct Line</span>
-                  <span className="text-lg md:text-xl font-serif font-bold tracking-tight" data-tina-field={tinaField(p.bottomCta, 'phone')}>{p.bottomCta.phone}</span>
+                  <Phone size={14} className="text-white/60" />
+                  <span className="text-sm font-bold tracking-widest" data-tina-field={tinaField(p.bottomCta, 'phone')}>{p.bottomCta.phone}</span>
                 </a>
               </div>
           </div>

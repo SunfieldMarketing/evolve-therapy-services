@@ -142,30 +142,32 @@ export default function ContactPage(props: { data: any, query: string, variables
                     </p>
                   </div>
 
-                  <form className="space-y-5">
+                  <form action="https://formsubmit.co/info@evolvetherapyservices.com" method="POST" className="space-y-5">
+                    <input type="hidden" name="_subject" value="New Lead from Evolve Therapy Services!" />
+                    <input type="hidden" name="_captcha" value="false" />
                     <div className="grid md:grid-cols-2 gap-5">
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Full Name</label>
-                        <input className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium" placeholder="E.g. Sarah Mitchell" />
+                        <input type="text" name="Full Name" required className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium" placeholder="E.g. Sarah Mitchell" />
                       </div>
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Facility Name</label>
-                        <input className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium" placeholder="E.g. Evolve Care Center" />
+                        <input type="text" name="Facility Name" required className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium" placeholder="E.g. Evolve Care Center" />
                       </div>
                     </div>
                     <div className="grid md:grid-cols-2 gap-5">
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Work Email</label>
-                        <input type="email" className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium" placeholder="your@facility.com" />
+                        <input type="email" name="Work Email" required className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium" placeholder="your@facility.com" />
                       </div>
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Phone Number</label>
-                        <input type="tel" className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium" placeholder="(555) 123-4567" />
+                        <input type="tel" name="Phone Number" required className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium" placeholder="(555) 123-4567" />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Primary Inquiry Goal</label>
-                      <select className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium appearance-none cursor-pointer">
+                      <select name="Inquiry Goal" required className="w-full bg-slate-50 border border-slate-100 rounded-[1.5rem] p-4 lg:p-5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium appearance-none cursor-pointer">
                         {p.form.inquiryGoals?.map((goal: string) => (
                           <option key={goal}>{goal}</option>
                         ))}
@@ -173,11 +175,11 @@ export default function ContactPage(props: { data: any, query: string, variables
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Message / Specific Goals</label>
-                      <textarea rows={3} className="w-full bg-slate-50 border border-slate-100 rounded-[2rem] p-5 lg:p-6 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium resize-none" placeholder="Tell us about your current therapy status..." />
+                      <textarea name="Message" required rows={3} className="w-full bg-slate-50 border border-slate-100 rounded-[2rem] p-5 lg:p-6 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284c7]/20 focus:bg-white transition-all font-medium resize-none" placeholder="Tell us about your current therapy status..." />
                     </div>
                     
                     <button 
-                      type="button"
+                      type="submit"
                       className="w-full flex items-center justify-center gap-2 py-5 lg:py-6 bg-[#0284c7] text-white rounded-full font-black uppercase tracking-[0.3em] text-[11px] shadow-xl hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group mt-6 pointer-events-auto"
                     >
                       <span data-tina-field={tinaField(p.form, 'buttonText')}>{p.form.buttonText}</span>

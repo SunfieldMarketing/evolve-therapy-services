@@ -160,7 +160,9 @@
     }
   },
   "bottomCta": {
-    "quote": "Empower your therapy team with in-house leadership and clinical advancement.",
+    "quoteLine1": "Empower your therapy team with",
+    "quoteItalic": "in-house leadership",
+    "quoteLine2": "and clinical advancement.",
     "checklist": [
       "Retain 100% of therapy revenue",
       "Customized CEU education for staff",

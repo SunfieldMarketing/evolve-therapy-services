@@ -143,7 +143,7 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.45 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-12 mb-10 md:mb-24 w-full relative z-[101] pointer-events-auto"
           >
              <a 

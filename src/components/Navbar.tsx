@@ -335,13 +335,13 @@ export default function Navbar({ data }: { data?: any }) {
               </nav>
 
               <div className="px-6 py-6 border-t border-white/10 space-y-3">
-                <Link
+                <a
                   href="/contact"
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#0284c7] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#0369a1] transition-colors pointer-events-auto"
                 >
                   {d.ctaText} <ArrowUpRight size={14} />
-                </Link>
+                </a>
                 <a
                   href="tel:8883865820"
                   className="flex items-center justify-center gap-2 w-full py-3.5 border border-white/15 text-white/70 rounded-xl font-medium text-sm"

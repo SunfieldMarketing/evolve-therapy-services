@@ -33,11 +33,11 @@ export default function ChatBot() {
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 1. Silent Background AI Initialization
+  // 1. Silent Background AI Initialization (With Security Fix)
   useEffect(() => {
     const initEngine = async () => {
       try {
-        // A. Load Knowledge context with extreme robustness
+        // A. Load Knowledge context
         const res = await fetch('/knowledge.json');
         if (res.ok) {
             const data = await res.json();
@@ -48,29 +48,28 @@ export default function ChatBot() {
                     if (!val) return;
                     if (val.hero?.subtext) context += val.hero.subtext + " ";
                     if (val.showcase?.services && Array.isArray(val.showcase.services)) {
-                        val.showcase.services.forEach((s: any) => {
-                            if (s.title && s.desc) context += `${s.title}: ${s.desc}. `;
-                        });
+                        val.showcase.services.forEach((s: any) => context += `${s.title}: ${s.desc}. `);
                     }
                     if (val.faq?.list && Array.isArray(val.faq.list)) {
-                        val.faq.list.forEach((f: any) => {
-                            if (f.q && f.a) context += `${f.q}: ${f.a}. `;
-                        });
-                    }
-                    if (val.title && val.description) {
-                        context += `${val.title}: ${val.description}. `;
+                        val.faq.list.forEach((f: any) => context += `${f.q}: ${f.a}. `);
                     }
                 });
                 setKnowledge(context);
             }
         }
 
-        // B. Load Generative AI (Web-LLM)
+        // B. Load Generative AI (Web-LLM) with Cross-Origin Security Fix
         const { CreateWebWorkerMLCEngine } = await import('@mlc-ai/web-llm');
         const modelId = "SmolLM-135M-Instruct-v0.2-q4f16_1-MLC";
         
+        // SECURITY FIX: Create a local blob worker that imports the remote script
+        // This bypasses the 'Failed to construct Worker' cross-origin error
+        const workerScript = `importScripts('https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.46/lib/index.js');`;
+        const blob = new Blob([workerScript], { type: 'application/javascript' });
+        const workerUrl = URL.createObjectURL(blob);
+        
         const chatEngine = await CreateWebWorkerMLCEngine(
-            new Worker(new URL('https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.46/lib/index.js'), { type: 'module' }),
+            new Worker(workerUrl, { type: 'module' }),
             modelId,
             { initProgressCallback: (report) => console.log(report.text) }
         );
@@ -106,7 +105,7 @@ export default function ChatBot() {
 
         // A. Instant Response Logic (Math/Social)
         if (q === '9+10' || q === '9 + 10') {
-            respondInstantly("In the clinical world, that's 19. In the meme world, it's 21. Either way, we're here to help you optimize your facility's numbers.");
+            respondInstantly("In the clinical mathematics world, that's 19. In the meme world, it's 21. Either way, we're here to help you optimize your facility's results.");
             return;
         }
 

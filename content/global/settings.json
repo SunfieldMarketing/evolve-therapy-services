@@ -116,7 +116,7 @@
   "activeStates": [
     "Minnesota", "Wisconsin", "Nebraska", "Kansas", "Oklahoma",
     "Louisiana", "Florida", "Tennessee", "Kentucky", "Ohio",
-    "Pennsylvania", "New York", "Maryland", "New Jersey", "Delaware", "Massachusetts", "Maine"
+    "Pennsylvania", "New York", "Maryland", "New Jersey", "Delaware", "Massachusetts"
   ],
   "mapLegend": [
     { "icon": "Users", "title": "Recruitment Hubs", "desc": "Active state-wide recruitment and retention strategies for your facility." },

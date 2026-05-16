@@ -82,29 +82,31 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             viewport={{ once: true }}
             className="max-w-6xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-xl">
                Ready to Evolve?
             </div>
-            <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[1.05] text-white mb-8">
-              <span data-tina-field={tinaField(p, 'title')}>{p.title}</span> <br />
-              <span className="text-[#38bdf8] italic font-medium" data-tina-field={tinaField(p, 'subtitle')}>{p.subtitle?.split('with zero')[0]}</span> <br className="hidden md:block" />
-              <span className="text-3xl md:text-4xl lg:text-5xl text-white/80 tracking-tight font-medium block mt-2">with zero legacy strings attached.</span>
+            <h3 className="text-4xl md:text-5xl lg:text-8xl font-serif font-black tracking-tighter leading-[1.05] text-white mb-10">
+              Transform your facility's <br />
+              therapy operations <br />
+              <span className="text-[#38bdf8] italic font-medium">with zero legacy strings attached.</span>
             </h3>
-            <p className="text-xl md:text-2xl text-white/65 mb-14 font-light leading-relaxed">
+            <p className="text-lg md:text-xl text-white/50 mb-16 font-light leading-relaxed max-w-4xl mx-auto">
               Our unique business model allows long-term care operators to retain <span className="text-white font-bold">100% of therapy revenue</span>. We bridge the gap between clinical excellence and financial sustainability, empowering your clinicians while protecting your bottom line.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
+            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-[#0284c7] hover:bg-white hover:text-[#0f172a] text-white px-8 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_40px_rgba(2,132,199,0.4)] pointer-events-auto"
+                className="group relative flex flex-col items-center justify-center px-10 py-5 bg-[#0284c7] text-white rounded-[2rem] shadow-[0_15px_40px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all duration-300 hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto"
               >
-                <span data-tina-field={tinaField(p, 'primaryCta')}>{p.primaryCta}</span> <ArrowRight size={16} aria-hidden="true" className="ml-2" />
+                <span className="font-black uppercase tracking-widest text-[11px] mb-1">Request Free Analysis</span>
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform opacity-70" />
               </a>
               <a
                 href={`tel:${d.phone?.replace(/\D/g, '')}`}
-                className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 hover:text-white hover:border-white/40 px-8 py-5 rounded-full font-bold text-xs uppercase transition-all duration-300 pointer-events-auto"
+                className="flex items-center justify-center gap-3 border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:border-white/20 px-8 py-5 rounded-[2rem] transition-all duration-300 w-full sm:w-auto"
               >
-                <Phone size={15} aria-hidden="true" /> <span data-tina-field={tinaField(d, 'phone')}>{d.phone}</span>
+                <Phone size={14} className="opacity-50" />
+                <span className="text-sm font-bold tracking-tight">{d.phone}</span>
               </a>
             </div>
           </motion.div>

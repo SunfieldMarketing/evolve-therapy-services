@@ -8,7 +8,7 @@ import PageHeader from '@/components/PageHeader';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
-import Marquee from '@/components/magicui/marquee';
+import { Marquee } from '@/components/magicui/marquee';
 import DesignSystemInjector from '@/components/DesignSystemInjector';
 import { cn } from '@/lib/utils';
 import { 

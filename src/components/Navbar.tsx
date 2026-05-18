@@ -119,8 +119,8 @@ export default function Navbar({ data }: { data?: any }) {
                   src={d.logo || "https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png"} 
                   alt="Evolve Therapy Services"
                   className={cn(
-                    "w-auto max-w-[80px] sm:max-w-none transition-all duration-300 group-hover:opacity-70",
-                    scrolled ? "h-4 sm:h-8 brightness-0" : "h-4 sm:h-8 brightness-0 invert" 
+                    "w-auto !max-w-[65px] sm:!max-w-none transition-all duration-300 group-hover:opacity-70",
+                    scrolled ? "!h-3.5 sm:!h-8 brightness-0" : "!h-4 sm:!h-8 brightness-0 invert" 
                   )}
                   data-tina-field={tinaField(d, 'logo')}
                 />

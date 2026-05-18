@@ -76,6 +76,24 @@ export default function ChatBot() {
 
     // --- INTENT GATES (Direct Answers + Context) ---
 
+    // 0. NEGATIVE / POSITIVE BASIC INTENTS
+    const isNegative = q === 'no' || q === 'nope' || q === 'not sure' || q === 'nothing' || q === 'none' || q === "i don't know" || q === 'i dont know';
+    const isPositive = q === 'yes' || q === 'sure' || q === 'yeah' || q === 'ok' || q === 'okay' || q === 'please' || q === 'yep';
+
+    if (isNegative) {
+        return {
+            text: "I understand. If you are not sure where to start, our leadership team can provide a complimentary strategy analysis to pinpoint exactly what your facility needs. Would you like to schedule a quick call to explore your options?",
+            cta: { text: "Connect with Leadership", link: "/contact" }
+        };
+    }
+
+    if (isPositive) {
+        return {
+            text: "Excellent. Let's get you connected with our leadership team so we can dive into the specifics of your facility and begin developing your in-house transition strategy.",
+            cta: { text: "Schedule a Strategy Call", link: "/contact" }
+        };
+    }
+
     // 1. GREETINGS
     if (q === 'hi' || q === 'hello' || q === 'hey' || q === 'greetings') {
         return { text: "Hello! I am synchronized and ready to dive deeper into your therapy operations. What specific clinical challenge can we address for you today?" };
@@ -138,11 +156,13 @@ export default function ChatBot() {
 
     // 6. SITE-WIDE INTELLIGENCE (Semantic Search)
     let bestMatch: any = null;
-    Object.keys(knowledge).forEach(key => {
-        if (key === 'facts') return;
-        const content = JSON.stringify(knowledge[key]).toLowerCase();
-        if (content.includes(q)) bestMatch = knowledge[key];
-    });
+    if (q.length > 3) {
+        Object.keys(knowledge).forEach(key => {
+            if (key === 'facts') return;
+            const content = JSON.stringify(knowledge[key]).toLowerCase();
+            if (content.includes(q)) bestMatch = knowledge[key];
+        });
+    }
 
     if (bestMatch) {
         const title = bestMatch.hero?.title || bestMatch.title || "Clinical Oversight";

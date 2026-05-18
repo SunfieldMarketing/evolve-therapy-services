@@ -56,7 +56,7 @@ export default function RootLayout({
       <head>
         <meta name="tina-audit-build-id" content="1.0.6-bulletproof-interactivity" />
       </head>
-      <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col overflow-x-hidden w-full max-w-[100vw]`}>
+      <body className={`${outfit.variable} ${lora.variable} antialiased font-sans min-h-full flex flex-col overflow-x-hidden w-full max-w-full`}>
         {children}
         <ChatBot />
       </body>

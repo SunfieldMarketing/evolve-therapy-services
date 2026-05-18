@@ -8,6 +8,7 @@ import PageHeader from '@/components/PageHeader';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text';
+import Marquee from '@/components/magicui/marquee';
 import DesignSystemInjector from '@/components/DesignSystemInjector';
 import { cn } from '@/lib/utils';
 import { 
@@ -131,20 +132,18 @@ export default function ServicesPage(props: { data: any, query: string, variable
       />
 
       {/* ── Social Proof Trust Section ── */}
-      <section className="relative z-50 pt-16 pb-32 bg-[#0f172a] border-y border-white/[0.05]">
-        <div className="container mx-auto px-12">
-           <div className="flex flex-wrap items-center justify-between gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
-              {p.trust.map((item: any, idx: number) => (
-                <div key={idx} className="flex items-center gap-4 group cursor-default" data-tina-field={tinaField(item, 'text')}>
-                   {(() => {
-                     const Icon = iconMap[item.icon as keyof typeof iconMap] || ShieldCheck;
-                     return <Icon className={cn("group-hover:scale-110 transition-transform", item.icon === 'Star' ? "text-yellow-500" : item.icon === 'Activity' ? "text-emerald-500" : "text-[#0284c7]")} size={20} />;
-                   })()}
-                   <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em]">{item.text}</span>
-                </div>
-              ))}
-           </div>
-        </div>
+      <section className="relative z-50 py-16 bg-[#0f172a] border-y border-white/[0.05] overflow-hidden">
+        <Marquee className="[--duration:20s]" pauseOnHover>
+           {p.trust.map((item: any, idx: number) => (
+             <div key={idx} className="flex items-center gap-4 group cursor-default mx-8 lg:mx-16 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000" data-tina-field={tinaField(item, 'text')}>
+                {(() => {
+                  const Icon = iconMap[item.icon as keyof typeof iconMap] || ShieldCheck;
+                  return <Icon className={cn("group-hover:scale-110 transition-transform", item.icon === 'Star' ? "text-yellow-500" : item.icon === 'Activity' ? "text-emerald-500" : "text-[#0284c7]")} size={20} />;
+                })()}
+                <span className="text-white/50 font-black uppercase text-[10px] tracking-[0.4em] whitespace-nowrap">{item.text}</span>
+             </div>
+           ))}
+        </Marquee>
       </section>
 
       {/* ── Services Showcase ── */}
@@ -245,9 +244,9 @@ export default function ServicesPage(props: { data: any, query: string, variable
                                return <Icon size={28} strokeWidth={1.5} className="sm:w-8 sm:h-8" />;
                              })()}
                           </div>
-                          <div>
-                             <h4 className="text-2xl sm:text-3xl font-serif font-black text-[#0f172a] mb-3 sm:mb-4">{item.title}</h4>
-                             <p className="text-slate-500 font-light leading-relaxed text-base sm:text-lg" data-tina-field={tinaField(item, 'desc')}>{item.desc}</p>
+                          <div className="flex-1 w-full min-w-0">
+                             <h4 className="text-2xl sm:text-3xl font-serif font-black text-[#0f172a] mb-3 sm:mb-4 break-words">{item.title}</h4>
+                             <p className="text-slate-500 font-light leading-relaxed text-base sm:text-lg break-words" data-tina-field={tinaField(item, 'desc')}>{item.desc}</p>
                           </div>
                        </div>
                     </BlurFade>

@@ -238,16 +238,16 @@ export default function ServicesPage(props: { data: any, query: string, variable
                <div className="space-y-16 flex flex-col justify-center">
                   {p.methodology.items.map((item: any, i: number) => (
                     <BlurFade key={i} delay={0.2 + i * 0.1}>
-                       <div className="flex gap-10 group" data-tina-field={tinaField(item, 'title')}>
-                          <div className="w-20 h-20 shrink-0 rounded-3xl bg-white flex items-center justify-center text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-700 shadow-2xl border border-slate-100">
+                       <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 group" data-tina-field={tinaField(item, 'title')}>
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-[1.5rem] sm:rounded-3xl bg-white flex items-center justify-center text-[#0284c7] group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-700 shadow-2xl border border-slate-100">
                              {(() => {
                                const Icon = iconMap[item.icon as keyof typeof iconMap] || TrendingUp;
-                               return <Icon size={32} strokeWidth={1.5} />;
+                               return <Icon size={28} strokeWidth={1.5} className="sm:w-8 sm:h-8" />;
                              })()}
                           </div>
                           <div>
-                             <h4 className="text-3xl font-serif font-black text-[#0f172a] mb-4">{item.title}</h4>
-                             <p className="text-slate-500 font-light leading-relaxed text-lg" data-tina-field={tinaField(item, 'desc')}>{item.desc}</p>
+                             <h4 className="text-2xl sm:text-3xl font-serif font-black text-[#0f172a] mb-3 sm:mb-4">{item.title}</h4>
+                             <p className="text-slate-500 font-light leading-relaxed text-base sm:text-lg" data-tina-field={tinaField(item, 'desc')}>{item.desc}</p>
                           </div>
                        </div>
                     </BlurFade>

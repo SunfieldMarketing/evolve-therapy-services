@@ -145,7 +145,7 @@ export default function ServiceDetailClient(props: { data: any, query: string, v
                   </h3>
                   <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 not-prose w-full">
                     {service.features?.map((feature: string, i: number) => (
-                      <div key={i} className="flex items-center justify-center lg:justify-start gap-4 sm:gap-5 p-6 sm:p-8 rounded-2xl sm:rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-[#0284c7]/20 hover:bg-white hover:shadow-xl transition-all duration-500" data-tina-field={tinaField(service, `features.${i}`)}>
+                      <div key={i} className="flex items-center justify-start text-left gap-4 sm:gap-5 p-6 sm:p-8 rounded-2xl sm:rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:border-[#0284c7]/20 hover:bg-white hover:shadow-xl transition-all duration-500" data-tina-field={tinaField(service, `features.${i}`)}>
                         <div className="w-2.5 h-2.5 rounded-full bg-[#0284c7] shadow-lg shadow-[#0284c7]/20 shrink-0" />
                         <span className="text-[#0f172a] font-black text-[10px] sm:text-sm uppercase tracking-[0.1em] leading-snug">{feature}</span>
                       </div>

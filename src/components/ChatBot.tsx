@@ -26,21 +26,10 @@ export default function ChatBot() {
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [knowledge, setKnowledge] = useState<any>(null);
-  const [sessionContext, setSessionContext] = useState<string[]>([]);
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 1. GLOBAL KNOWLEDGE SYNC
   useEffect(() => {
-    const loadKnowledge = async () => {
-      try {
-        const res = await fetch('/knowledge.json');
-        if (res.ok) setKnowledge(await res.json());
-      } catch (err) { console.error('AI Sync Error:', err); }
-    };
-    loadKnowledge();
-
     // Listen for mobile trigger
     const handleOpen = () => setIsOpen(true);
     window.addEventListener('open-chatbot', handleOpen);
@@ -56,130 +45,48 @@ export default function ChatBot() {
     }
   }, [messages, isTyping]);
 
-  // 2. FULL HISTORY SEMANTIC WINDOW (History-Aware Logic)
-  const getThreadedResponse = (query: string) => {
-    const q = query.toLowerCase().trim();
-    if (!knowledge) return { text: "I'm analyzing the Evolve clinical database. One moment..." };
-
-    const facts = knowledge.facts || {};
-    const chatLog = messages.map(m => m.content.toLowerCase()).join(' ');
-    const choose = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
-
-    // TRACK SESSION TOPICS
-    const updateContext = (topic: string) => {
-        if (!sessionContext.includes(topic)) setSessionContext(prev => [...prev, topic]);
-    };
-
-    // --- CONTEXTUAL DETECTION ---
-    const wasDiscussingStates = chatLog.includes('state') || chatLog.includes('operate') || chatLog.includes('where');
-    const wasDiscussingServices = chatLog.includes('service') || chatLog.includes('do you do') || chatLog.includes('help');
-    const wasDiscussingPerformance = chatLog.includes('grow') || chatLog.includes('result') || chatLog.includes('ebitda');
-
-    // --- INTENT GATES (Direct Answers + Context) ---
-
-    // 1. GREETINGS
-    if (q === 'hi' || q === 'hello' || q === 'hey') {
-        return { text: "Hello! I'm synchronized and ready to dive deeper into your therapy operations. What specific clinical challenge can we address next?" };
-    }
-
-    // 2. CONTACT / PHONE (High Priority)
-    if (q.includes('number') || q.includes('phone') || q.includes('call') || q.includes('contact')) {
-        return { 
-            text: `You can reach our leadership team directly at ${facts.contact?.phone || '800-XXX-XXXX'}. We can provide a detailed clinical analysis of your specific facility. Would you like to schedule a strategy call?`,
-            cta: { text: "Connect Now", link: "/contact" }
-        };
-    }
-
-    // 3. LOCATIONS & STATES
-    if (q.includes('state') || q.includes('location') || q.includes('where') || q.includes('operate') || (q.includes('which') && wasDiscussingStates)) {
-        updateContext('locations');
-        const states = facts.activeStates || [];
-        const stateMatch = states.find((s: string) => q.includes(s.toLowerCase()));
-
-        if (stateMatch) {
-            return {
-                text: `Yes, we maintain full operational oversight in ${stateMatch}. Across our entire 17-state footprint, we ensure 100% clinical compliance and revenue retention. Would you like to see our regional directors' coverage map?`,
-                cta: { text: "View Operational Map", link: "/locations" }
-            };
-        }
-
-        const bridge = wasDiscussingServices ? "Building on our services, " : "";
-        return {
-            text: `${bridge}Evolve currently provides regional management in these ${states.length} states: ${states.join(', ')}. In every region we serve, we focus on transitioning facilities to high-performing in-house models. Shall we discuss how we support your specific region?`,
-            cta: { text: "View Coverage Map", link: "/locations" }
-        };
-    }
-
-    // 4. GROWTH & PERFORMANCE
-    if (q.includes('grow') || q.includes('result') || q.includes('ebitda') || q.includes('improve') || (q.includes('help') && wasDiscussingPerformance)) {
-        updateContext('performance');
-        const bridge = wasDiscussingStates ? "Within those active states, " : wasDiscussingServices ? "Through those clinical optimizations, " : "";
-        
-        // Anti-Redundancy: Use different facts if already mentioned
-        const fact = chatLog.includes('david miller') 
-            ? "we drive facility growth by stabilizing your clinical labor mix and improving PDPM accuracy to eliminate high-cost contract labor."
-            : "our clinical partners, such as David Miller (CEO of Legacy Health Centers), have reported an average 22% increase in revenue retention after implementing our model.";
-
-        return {
-            text: `${bridge}${fact} This ensures your facility keeps 100% of the therapy revenue. Shall we look at your current Medicaid case mix together?`,
-            cta: { text: "Request Strategy Session", link: "/contact" }
-        };
-    }
-
-    // 5. SERVICES & CAPABILITIES
-    if (q.includes('service') || q.includes('do you do') || q.includes('what can you') || (q.includes('help') && !wasDiscussingPerformance)) {
-        updateContext('services');
-        const s = facts.services || [];
-        const bridge = wasDiscussingStates ? "In each of our regions, " : wasDiscussingPerformance ? "To drive those results, " : "";
-        return {
-            text: `${bridge}we specialize in ${s.join(', ')}. Our core strength is the In-House Transition, where we handle the recruitment and clinical education so you maintain absolute control. Shall we discuss which of these would most impact your operations today?`,
-            cta: { text: "Explore All Services", link: "/services" }
-        };
-    }
-
-    // 6. SITE-WIDE INTELLIGENCE (Semantic Search)
-    let bestMatch: any = null;
-    Object.keys(knowledge).forEach(key => {
-        if (key === 'facts') return;
-        const content = JSON.stringify(knowledge[key]).toLowerCase();
-        if (content.includes(q)) bestMatch = knowledge[key];
-    });
-
-    if (bestMatch) {
-        const title = bestMatch.hero?.title || bestMatch.title || "Clinical Oversight";
-        const bridge = sessionContext.length > 0 ? `Following up on our discussion about ${sessionContext[sessionContext.length-1]}, ` : "";
-        return {
-            text: `${bridge}regarding ${title}: Our model focuses on ${bestMatch.hero?.subtext || 'operational excellence'}. This ensures you eliminate hidden management fees while maintaining 100% control of your department. Would you like a detailed analysis of this workflow?`,
-            cta: { text: "Request Analysis", link: "/contact" }
-        };
-    }
-
-    // FINAL FALLBACK
-    return {
-        text: "That's a vital operational inquiry. Based on our conversation so far, I'd like to connect you with our leadership team for a brief strategy analysis to provide a pinpoint accurate answer for your specific census. Would that be helpful?",
-        cta: { text: "Connect with Leadership", link: "/contact" }
-    };
-  };
-
   const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMsg: Message = { id: Date.now().toString(), role: 'user', content: input, timestamp: new Date() };
-    setMessages((prev) => [...prev, userMsg]);
+    const currentMessages = [...messages, userMsg];
+    setMessages(currentMessages);
     setInput('');
     setIsTyping(true);
 
-    setTimeout(() => {
-        const response = getThreadedResponse(userMsg.content);
-        setMessages((prev) => [...prev, {
-            id: (Date.now() + 1).toString(),
-            role: 'assistant',
-            content: response.text,
-            timestamp: new Date(),
-            cta: response.cta,
-        }]);
-        setIsTyping(false);
-    }, 1100);
+    try {
+      const apiMessages = currentMessages.map(m => ({
+        role: m.role,
+        content: m.content
+      }));
+
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: apiMessages })
+      });
+
+      if (!res.ok) throw new Error("API Route Failed");
+
+      const data = await res.json();
+      
+      setMessages((prev) => [...prev, {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: data.text || "I apologize, I could not process that request.",
+        timestamp: new Date(),
+      }]);
+    } catch (error) {
+      console.error('Chat Error:', error);
+      setMessages((prev) => [...prev, {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: "I'm currently unable to connect to the intelligence network. Please ensure the GROQ_API_KEY environment variable is set on Vercel.",
+        timestamp: new Date(),
+      }]);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   return (

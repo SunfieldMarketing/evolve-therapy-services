@@ -148,21 +148,18 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
           >
              <a 
                href="/contact" 
-               className="inline-flex items-center justify-center gap-3 sm:gap-5 px-8 sm:px-16 py-5 sm:py-7 bg-[#0284c7] text-white rounded-xl shadow-[0_30px_60px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group shrink-0 w-full sm:w-auto pointer-events-auto"
+               className="inline-flex items-center justify-center gap-3 sm:gap-5 px-8 sm:px-12 py-4 sm:py-5 bg-[#0284c7] text-white rounded-full shadow-[0_30px_60px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 group shrink-0 w-full sm:w-auto pointer-events-auto"
              >
-               <span className="font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[12px] sm:text-[14px]">Start Your Evolution</span>
-               <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
+               <span className="font-bold uppercase tracking-widest text-[11px] sm:text-[13px]" data-tina-field={parentField ? tinaField(d, 'primaryCta') : undefined}>{d.primaryCta}</span>
+               <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
              </a>
              
-             <div className="flex items-center gap-4 sm:gap-6 group">
-                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#0284c7] shadow-2xl backdrop-blur-xl group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
-                   <Target size={20} />
-                </div>
-                <div className="flex flex-col text-left">
-                   <span className="text-white font-black uppercase text-[10px] sm:text-[11px] tracking-widest mb-1">Visionary Hub</span>
-                   <span className="text-white/20 text-[11px] sm:text-[13px] font-light italic">"Creative Consulting"</span>
-                </div>
-             </div>
+             <a 
+               href="/services" 
+               className="inline-flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 bg-transparent border border-white/20 text-white rounded-full hover:bg-white/5 transition-all hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto pointer-events-auto"
+             >
+               <span className="font-bold uppercase tracking-widest text-[11px] sm:text-[13px]" data-tina-field={parentField ? tinaField(d, 'secondaryCta') : undefined}>{d.secondaryCta}</span>
+             </a>
           </motion.div>
 
           <motion.div

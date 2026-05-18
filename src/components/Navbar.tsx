@@ -101,8 +101,8 @@ export default function Navbar({ data }: { data?: any }) {
         className={cn(
           'transition-all duration-300 ease-out',
           scrolled
-            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_24px_rgba(0,0,0,0.06)] py-2 sm:py-3'
-            : 'bg-transparent py-3 sm:py-5'
+            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_24px_rgba(0,0,0,0.06)] pt-[calc(env(safe-area-inset-top,0px)+8px)] pb-2 sm:py-3'
+            : 'bg-transparent pt-[calc(env(safe-area-inset-top,0px)+12px)] pb-3 sm:py-5'
         )}
         aria-label="Main navigation"
       >
@@ -119,8 +119,8 @@ export default function Navbar({ data }: { data?: any }) {
                   src={d.logo || "https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png"} 
                   alt="Evolve Therapy Services"
                   className={cn(
-                    "w-auto max-w-[90px] sm:max-w-none transition-all duration-300 group-hover:opacity-70",
-                    scrolled ? "h-5 sm:h-8 brightness-0" : "h-5 sm:h-8 brightness-0 invert" 
+                    "w-auto max-w-[80px] sm:max-w-none transition-all duration-300 group-hover:opacity-70",
+                    scrolled ? "h-4 sm:h-8 brightness-0" : "h-4 sm:h-8 brightness-0 invert" 
                   )}
                   data-tina-field={tinaField(d, 'logo')}
                 />

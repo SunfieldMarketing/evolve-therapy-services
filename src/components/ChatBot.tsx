@@ -170,10 +170,13 @@ export default function ChatBot() {
 
     setTimeout(() => {
         const response = getThreadedResponse(userMsg.content);
+        // Ensure proper grammar by capitalizing the first letter of the final response
+        const formattedText = response.text.charAt(0).toUpperCase() + response.text.slice(1);
+        
         setMessages((prev) => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'assistant',
-            content: response.text,
+            content: formattedText,
             timestamp: new Date(),
             cta: response.cta,
         }]);
@@ -196,8 +199,8 @@ export default function ChatBot() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2" />
               <div className="flex items-center justify-between relative z-10">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
-                    <Bot size={24} className="text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=100&h=100" alt="Evolve Assistant" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <h4 className="font-black text-xl leading-tight tracking-tight">Evolve Assistant</h4>

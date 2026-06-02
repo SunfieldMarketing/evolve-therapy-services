@@ -224,7 +224,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
                 )}>
                   {/* Photo */}
                   <div className="w-full lg:w-5/12 flex justify-center shrink-0">
-                    <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl group-hover:scale-105 transition-transform duration-700">
+                    <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl group-hover:scale-105 transition-transform duration-700">
                       <Image
                         src={leader.photo}
                         alt={leader.name}
@@ -417,7 +417,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
             </p>
             <a 
               href={p.cta.buttonLink || "/contact"} 
-              className="inline-flex items-center justify-center gap-2 px-16 py-8 bg-[#0284c7] text-white rounded-full font-black uppercase tracking-[0.4em] text-[13px] shadow-2xl mx-auto hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto"
+              className="inline-flex items-center justify-center gap-2 px-8 sm:px-16 py-6 sm:py-8 w-full sm:w-auto bg-[#0284c7] text-white rounded-full font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[11px] sm:text-[13px] shadow-2xl mx-auto hover:bg-[#0369a1] transition-all hover:-translate-y-1 active:translate-y-0 pointer-events-auto text-center"
             >
               <span data-tina-field={tinaField(p.cta, 'button')}>{p.cta.button}</span>
             </a>

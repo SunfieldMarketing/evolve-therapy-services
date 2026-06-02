@@ -18,7 +18,7 @@ function StarRow({ count }: { count: number }) {
 
 function TestimonialCard({ t, parentField }: { t: any, parentField?: string }) {
   return (
-    <div className="w-[380px] md:w-[440px] shrink-0">
+    <div className="w-[85vw] max-w-[380px] md:max-w-none md:w-[440px] shrink-0">
       <div className="h-full rounded-[2.5rem] border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-9 md:p-11 flex flex-col justify-between transition-all duration-500 hover:bg-white/[0.06] hover:border-white/[0.12] hover:-translate-y-1 group">
         <div className="mb-8">
           <div className="flex justify-between items-start mb-6">

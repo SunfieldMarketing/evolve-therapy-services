@@ -115,7 +115,7 @@ export default function Hero({ data, parentField }: { data?: any, parentField?: 
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-8 w-full text-center pointer-events-auto"
+            className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] font-black text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-8 w-full text-center pointer-events-auto break-words"
           >
             <span data-tina-field={parentField ? tinaField(d, 'titleLine1') : undefined}>{d.titleLine1}</span>{' '}
             <span className="text-[#0284c7] italic" data-tina-field={parentField ? tinaField(d, 'titleItalic') : undefined}>{d.titleItalic}</span><br className="hidden lg:block" />

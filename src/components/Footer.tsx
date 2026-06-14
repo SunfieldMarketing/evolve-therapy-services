@@ -67,7 +67,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
   };
 
   return (
-    <footer className="bg-[#0f172a] text-white relative" role="contentinfo" style={{ isolation: 'auto' }}>
+    <footer className="bg-[#0f172a] text-white relative z-50" role="contentinfo" style={{ isolation: 'auto' }}>
       {/* Subtle background glow */}
       <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-[#0284c7]/5 rounded-full blur-[120px] pointer-events-none z-0" aria-hidden="true" />
 

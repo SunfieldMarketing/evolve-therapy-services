@@ -91,27 +91,27 @@ export default function LocationsPage(props: { data: any, query: string, variabl
                       <div className="w-12 h-12 bg-[#0284c7] text-white rounded-xl flex items-center justify-center shrink-0 shadow-xl group-hover:-translate-y-1 transition-transform">
                         <MapPin size={20} />
                       </div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <p className="font-black text-[#38bdf8] uppercase tracking-[0.2em] text-[9px] mb-2">Principal Office</p>
-                        <p className="text-xl font-serif font-medium text-white/90 whitespace-pre-line" data-tina-field={tinaField(p.hq, 'address')}>{p.hq.address}</p>
+                        <p className="text-xl font-serif font-medium text-white/90 whitespace-pre-line break-words" data-tina-field={tinaField(p.hq, 'address')}>{p.hq.address}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-6 group">
                       <div className="w-12 h-12 bg-[#0284c7] text-white rounded-xl flex items-center justify-center shrink-0 shadow-xl group-hover:-translate-y-1 transition-transform">
                         <Phone size={20} />
                       </div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <p className="font-black text-[#38bdf8] uppercase tracking-[0.2em] text-[9px] mb-2">Direct Support</p>
-                        <p className="text-xl font-serif font-medium text-white/90" data-tina-field={tinaField(p.hq, 'phone')}>{p.hq.phone}</p>
+                        <p className="text-xl font-serif font-medium text-white/90 break-words break-all sm:break-normal" data-tina-field={tinaField(p.hq, 'phone')}>{p.hq.phone}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-6 group">
                       <div className="w-12 h-12 bg-[#0284c7] text-white rounded-xl flex items-center justify-center shrink-0 shadow-xl group-hover:-translate-y-1 transition-transform">
                         <Mail size={20} />
                       </div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <p className="font-black text-[#38bdf8] uppercase tracking-[0.2em] text-[9px] mb-2">Digital Inquiries</p>
-                        <p className="text-xl font-serif font-medium text-white/90" data-tina-field={tinaField(p.hq, 'email')}>{p.hq.email}</p>
+                        <p className="text-xl font-serif font-medium text-white/90 break-words break-all sm:break-normal" data-tina-field={tinaField(p.hq, 'email')}>{p.hq.email}</p>
                       </div>
                     </div>
                   </div>

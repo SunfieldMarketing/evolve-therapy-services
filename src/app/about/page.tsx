@@ -401,7 +401,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
       {/* ── 7. The Evolve Advantage CTA ── */}
       <section className="py-32 md:py-64 bg-white text-center relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
-          <BlurFade delay={0.2}>
+          <BlurFade delay={0.2} inView={false}>
             <h2
               className="text-5xl sm:text-6xl md:text-9xl font-serif font-black text-[#0f172a] tracking-tighter leading-none mb-10 sm:mb-16"
               data-tina-field={tinaField(p.cta, 'title')}

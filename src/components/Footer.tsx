@@ -67,14 +67,15 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
   };
 
   return (
-    <footer className="bg-[#0f172a] text-white relative z-50" role="contentinfo" style={{ isolation: 'auto' }}>
-      {/* Subtle background glow */}
-      <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-[#0284c7]/5 rounded-full blur-[120px] pointer-events-none z-0" aria-hidden="true" />
-
+    <footer className="bg-[#0f172a] text-white" role="contentinfo">
       {/* ── Expanded Pre-footer CTA banner ── */}
-      <div className="relative border-b border-white/10 overflow-hidden bg-[#0f172a]">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0284c7]/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3 z-0" aria-hidden="true" />
+      <div className="relative border-b border-white/10">
+        {/* Isolated Decorative Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0284c7]/10 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
+        </div>
 
+        {/* Content Container (guaranteed clickable) */}
         <div className="container mx-auto px-5 sm:px-6 md:px-12 py-24 md:py-32 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -94,16 +95,16 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
               Our unique business model allows long-term care operators to retain <span className="text-white font-bold">100% of therapy revenue</span>. We bridge the gap between clinical excellence and financial sustainability, empowering your clinicians while protecting your bottom line.
             </p>
             <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-              <a
+              <Link
                 href="/contact"
-                className="group relative z-[101] flex flex-col items-center justify-center px-10 py-5 bg-[#0284c7] text-white rounded-[2rem] shadow-[0_15px_40px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all duration-300 hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto pointer-events-auto"
+                className="group flex flex-col items-center justify-center px-10 py-5 bg-[#0284c7] text-white rounded-[2rem] shadow-[0_15px_40px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all duration-300 hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto"
               >
                 <span className="font-black uppercase tracking-widest text-[11px] mb-1">Request Free Analysis</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform opacity-70" />
-              </a>
+              </Link>
               <a
                 href={`tel:${d.phone?.replace(/\D/g, '')}`}
-                className="flex items-center justify-center gap-3 border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:border-white/20 px-8 py-5 rounded-[2rem] transition-all duration-300 w-full sm:w-auto relative z-[101] pointer-events-auto"
+                className="flex items-center justify-center gap-3 border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:border-white/20 px-8 py-5 rounded-[2rem] transition-all duration-300 w-full sm:w-auto"
               >
                 <Phone size={14} className="opacity-50" />
                 <span className="text-sm font-bold tracking-tight">{d.phone}</span>
@@ -114,158 +115,167 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
       </div>
 
       {/* ── Main footer grid ── */}
-      <div className="container mx-auto px-5 sm:px-6 md:px-12 py-16 md:py-20 relative z-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12 mb-14 md:mb-16">
-
-          {/* Brand column */}
-          <div className="lg:col-span-4">
-            <a href="/" className="flex items-center gap-2 mb-6 w-fit relative z-[101] pointer-events-auto" aria-label="Evolve Therapy Services Home">
-              <img 
-                src={d.footer?.logo || "/images/evolve-logo.png"} 
-                alt="Evolve Therapy Services"
-                className="h-14" 
-                data-tina-field={d.footer ? tinaField(d.footer, 'logo') : undefined}
-              />
-            </a>
-            <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs" data-tina-field={d.footer ? tinaField(d.footer, 'tagline') : undefined}>
-              {d.footer?.tagline}
-            </p>
-
-            {/* Contact details */}
-            <div className="space-y-3 mb-8">
-              {[
-                { Icon: MapPin, text: d.address, href: undefined, field: 'address' },
-                { Icon: Phone, text: d.phone, href: `tel:${d.phone?.replace(/\D/g, '')}`, field: 'phone' },
-                { Icon: Mail, text: d.email, href: `mailto:${d.email}`, field: 'email' },
-              ].map(({ Icon, text, href, field }) => (
-                <div key={text} className="flex items-start gap-3 text-white/40 text-sm">
-                  <Icon size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
-                  {href ? (
-                    <a href={href} className="hover:text-white transition-colors duration-200 relative z-[101] pointer-events-auto" data-tina-field={tinaField(d, field as any)}>{text}</a>
-                  ) : (
-                    <span data-tina-field={tinaField(d, field as any)}>{text}</span>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Social icons */}
-            <div className="flex items-center gap-3">
-              <a
-                href={d.linkedin || "https://www.linkedin.com/company/evolvetherapyservices"}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Evolve Therapy Services on LinkedIn"
-                className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200 relative z-[101] pointer-events-auto"
-              >
-                <LinkedInIcon size={15} />
-              </a>
-              <a
-                href={`mailto:${d.email}`}
-                aria-label="Email Evolve Therapy Services"
-                className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200 relative z-[101] pointer-events-auto"
-              >
-                <Mail size={15} aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-
-          {/* Nav column */}
-          <div className="lg:col-span-2">
-            <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Navigation</h4>
-            <ul className="space-y-4" role="list">
-              {(d.footer?.links || []).map((link: any, i: number) => (
-                <li key={i} data-tina-field={tinaField(link, 'name')}>
-                    <Link
-                      href={link.href}
-                      className="relative z-[101] text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium pointer-events-auto"
-                    >
-                      {link.name}
-                    </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services column */}
-          <div className="lg:col-span-3">
-            <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Services</h4>
-            <ul className="space-y-4" role="list">
-              {(d.footer?.serviceLinks || []).map((link: any, i: number) => (
-                <li key={i} data-tina-field={tinaField(link, 'name')}>
-                    <Link
-                      href={link.href}
-                      className="relative z-[101] text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block pointer-events-auto"
-                    >
-                      {link.name}
-                    </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Newsletter column */}
-          <div className="lg:col-span-3 md:col-span-2">
-            <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Stay Informed</h4>
-            <p className="text-sm text-white/40 leading-relaxed mb-5">
-              Get the latest updates on LTC therapy management, regulatory changes, and Evolve news.
-            </p>
-            <form
-              action="https://formsubmit.co/info@evolvetherapyservices.com" 
-              method="POST"
-              className="space-y-3"
-              aria-label="Newsletter signup"
-            >
-              <input type="hidden" name="_subject" value="New Newsletter Signup!" />
-              <input type="hidden" name="_captcha" value="false" />
-              <div className="relative flex w-full">
-                <input
-                  id="footer-email"
-                  type="email"
-                  name="Newsletter Email"
-                  required
-                  autoComplete="email"
-                  placeholder="your@email.com"
-                  aria-label="Email address for newsletter"
-                  className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/25 rounded-l-xl rounded-r-none px-4 py-3 text-sm focus:outline-none focus:border-[#0284c7]/50 focus:bg-white/8 transition-all duration-200 pointer-events-auto relative z-[101]"
-                />
-                <button
-                  type="submit"
-                  aria-label="Subscribe to newsletter"
-                  className="bg-[#0284c7] rounded-r-xl px-4 flex items-center justify-center text-white hover:bg-[#0369a1] transition-colors duration-200 pointer-events-auto relative z-[101]"
-                >
-                  <ArrowRight size={14} aria-hidden="true" />
-                </button>
-              </div>
-              <p className="text-[11px] text-white/20 leading-relaxed">
-                No spam. Unsubscribe anytime. By subscribing you agree to our privacy policy.
-              </p>
-            </form>
-          </div>
+      <div className="relative">
+        {/* Isolated Decorative Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+          <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-[#0284c7]/5 rounded-full blur-[120px]" />
         </div>
 
-        {/* ── Bottom bar ── */}
-        <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="text-white/40 text-sm font-medium" data-tina-field={d.footer ? tinaField(d.footer, 'copyright') : undefined}>
-            &copy; {new Date().getFullYear()} {d.footer?.copyright || 'Evolve Therapy Services'}
-          </div>
-          <div className="flex items-center gap-6">
-            {[
-              { label: 'Privacy Policy', href: '/privacy-policy' },
-              { label: 'Terms of Service', href: '/terms' },
-            ].map(({ label, href }) => (
-              <Link
-                key={label}
-                href={href}
-                className="text-white/25 hover:text-white/60 text-xs transition-colors duration-150 relative z-[101] pointer-events-auto"
-              >
-                {label}
+        {/* Content Container (guaranteed clickable) */}
+        <div className="container mx-auto px-5 sm:px-6 md:px-12 py-16 md:py-20 relative z-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12 mb-14 md:mb-16">
+            
+            {/* Brand column */}
+            <div className="lg:col-span-4">
+              <Link href="/" className="flex items-center gap-2 mb-6 w-fit" aria-label="Evolve Therapy Services Home">
+                <img 
+                  src={d.footer?.logo || "/images/evolve-logo.png"} 
+                  alt="Evolve Therapy Services"
+                  className="h-14" 
+                  data-tina-field={d.footer ? tinaField(d.footer, 'logo') : undefined}
+                />
               </Link>
-            ))}
+              <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs" data-tina-field={d.footer ? tinaField(d.footer, 'tagline') : undefined}>
+                {d.footer?.tagline}
+              </p>
+
+              {/* Contact details */}
+              <div className="space-y-3 mb-8">
+                {[
+                  { Icon: MapPin, text: d.address, href: undefined, field: 'address' },
+                  { Icon: Phone, text: d.phone, href: `tel:${d.phone?.replace(/\D/g, '')}`, field: 'phone' },
+                  { Icon: Mail, text: d.email, href: `mailto:${d.email}`, field: 'email' },
+                ].map(({ Icon, text, href, field }) => (
+                  <div key={text} className="flex items-start gap-3 text-white/40 text-sm">
+                    <Icon size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
+                    {href ? (
+                      <a href={href} className="hover:text-white transition-colors duration-200" data-tina-field={tinaField(d, field as any)}>{text}</a>
+                    ) : (
+                      <span data-tina-field={tinaField(d, field as any)}>{text}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Social icons */}
+              <div className="flex items-center gap-3">
+                <a
+                  href={d.linkedin || "https://www.linkedin.com/company/evolvetherapyservices"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Evolve Therapy Services on LinkedIn"
+                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
+                >
+                  <LinkedInIcon size={15} />
+                </a>
+                <a
+                  href={`mailto:${d.email}`}
+                  aria-label="Email Evolve Therapy Services"
+                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
+                >
+                  <Mail size={15} aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+
+            {/* Nav column */}
+            <div className="lg:col-span-2">
+              <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Navigation</h4>
+              <ul className="space-y-4" role="list">
+                {(d.footer?.links || []).map((link: any, i: number) => (
+                  <li key={i} data-tina-field={tinaField(link, 'name')}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium"
+                      >
+                        {link.name}
+                      </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Services column */}
+            <div className="lg:col-span-3">
+              <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Services</h4>
+              <ul className="space-y-4" role="list">
+                {(d.footer?.serviceLinks || []).map((link: any, i: number) => (
+                  <li key={i} data-tina-field={tinaField(link, 'name')}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block"
+                      >
+                        {link.name}
+                      </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Newsletter column */}
+            <div className="lg:col-span-3 md:col-span-2">
+              <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Stay Informed</h4>
+              <p className="text-sm text-white/40 leading-relaxed mb-5">
+                Get the latest updates on LTC therapy management, regulatory changes, and Evolve news.
+              </p>
+              <form
+                action="https://formsubmit.co/info@evolvetherapyservices.com" 
+                method="POST"
+                className="space-y-3"
+                aria-label="Newsletter signup"
+              >
+                <input type="hidden" name="_subject" value="New Newsletter Signup!" />
+                <input type="hidden" name="_captcha" value="false" />
+                <div className="relative flex w-full">
+                  <input
+                    id="footer-email"
+                    type="email"
+                    name="Newsletter Email"
+                    required
+                    autoComplete="email"
+                    placeholder="your@email.com"
+                    aria-label="Email address for newsletter"
+                    className="w-full bg-white/5 border border-white/10 text-white placeholder:text-white/25 rounded-l-xl rounded-r-none px-4 py-3 text-sm focus:outline-none focus:border-[#0284c7]/50 focus:bg-white/8 transition-all duration-200"
+                  />
+                  <button
+                    type="submit"
+                    aria-label="Subscribe to newsletter"
+                    className="bg-[#0284c7] rounded-r-xl px-4 flex items-center justify-center text-white hover:bg-[#0369a1] transition-colors duration-200"
+                  >
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </button>
+                </div>
+                <p className="text-[11px] text-white/20 leading-relaxed">
+                  No spam. Unsubscribe anytime. By subscribing you agree to our privacy policy.
+                </p>
+              </form>
+            </div>
+          </div>
+
+          {/* ── Bottom bar ── */}
+          <div className="pt-8 pb-28 md:pb-0 border-t border-white/8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="text-white/40 text-sm font-medium" data-tina-field={d.footer ? tinaField(d.footer, 'copyright') : undefined}>
+              &copy; {new Date().getFullYear()} {d.footer?.copyright || 'Evolve Therapy Services'}
+            </div>
+            <div className="flex items-center gap-6">
+              {[
+                { label: 'Privacy Policy', href: '/privacy-policy' },
+                { label: 'Terms of Service', href: '/terms' },
+              ].map(({ label, href }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="text-white/25 hover:text-white/60 text-xs transition-colors duration-150"
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </footer>
   );
 }
+
 

@@ -121,7 +121,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
           <div className="lg:col-span-4">
             <a href="/" className="flex items-center gap-2 mb-6 w-fit" aria-label="Evolve Therapy Services Home">
               <img 
-                src={d.footer?.logo || "https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png"} 
+                src={d.footer?.logo || "/images/evolve-logo.png"} 
                 alt="Evolve Therapy Services"
                 className="h-14 brightness-0 invert" 
                 data-tina-field={d.footer ? tinaField(d.footer, 'logo') : undefined}

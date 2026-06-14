@@ -81,16 +81,27 @@ export default function Testimonials({ data, parentField }: { data?: any, parent
         </BlurFade>
       </div>
 
-      {/* Auto-scrolling carousel — Single row for cleaner focus */}
       <div className="mb-16">
-        <Marquee
-          pauseOnHover
-          className="[--duration:60s] [--gap:2rem]"
-        >
+        {/* Desktop: Marquee */}
+        <div className="hidden md:block">
+          <Marquee
+            pauseOnHover
+            className="[--duration:60s] [--gap:2rem]"
+          >
+            {testimonials.map((t: any, i: number) => (
+              <TestimonialCard key={i} t={t} parentField={parentField} />
+            ))}
+          </Marquee>
+        </div>
+        
+        {/* Mobile: Horizontal Scroll Snap */}
+        <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 px-6 pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {testimonials.map((t: any, i: number) => (
-            <TestimonialCard key={i} t={t} parentField={parentField} />
+            <div key={i} className="snap-center shrink-0">
+              <TestimonialCard t={t} parentField={parentField} />
+            </div>
           ))}
-        </Marquee>
+        </div>
       </div>
 
       {/* CTA */}

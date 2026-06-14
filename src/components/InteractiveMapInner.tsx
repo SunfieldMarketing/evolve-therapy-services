@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Phone } from 'lucide-react';
@@ -125,7 +125,6 @@ export default function InteractiveMapInner({ activeStates }: { activeStates?: s
                 style={{ width: '100%', height: 'auto' }}
                 projectionConfig={{ scale: 1000 }}
               >
-                <ZoomableGroup center={[0, 0]} zoom={1}>
                   <Geographies geography={GEO_URL}>
                     {({ geographies }: { geographies: any[] }) =>
                       geographies.map((geo) => {
@@ -172,7 +171,6 @@ export default function InteractiveMapInner({ activeStates }: { activeStates?: s
                       })
                     }
                   </Geographies>
-                </ZoomableGroup>
               </ComposableMap>
 
               {/* Tooltip */}

@@ -116,7 +116,7 @@ export default function Navbar({ data }: { data?: any }) {
                 aria-label="Evolve Therapy Services - Home"
               >
                 <img 
-                  src={d.logo || "https://res.cloudinary.com/dai2pg27n/image/upload/v1777350681/d123fe7f-e3af-443f-933d-550dd5206381.png"} 
+                  src={d.logo || "/images/evolve-logo.png"} 
                   alt="Evolve Therapy Services"
                   className={cn(
                     "w-auto !max-w-[220px] sm:!max-w-none transition-all duration-300 group-hover:opacity-70",

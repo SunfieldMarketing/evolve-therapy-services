@@ -67,23 +67,20 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
   };
 
   return (
-    <footer className="bg-[#0f172a] text-white" role="contentinfo">
+    <footer className="bg-[#0f172a] text-white" role="contentinfo" style={{ position: 'relative', zIndex: 50 }}>
       {/* ── Expanded Pre-footer CTA banner ── */}
-      <div className="relative border-b border-white/10">
-        {/* Isolated Decorative Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0284c7]/10 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
-        </div>
-
-        {/* Content Container (guaranteed clickable) */}
-        <div className="container mx-auto px-5 sm:px-6 md:px-12 py-24 md:py-32 relative z-10 text-center">
+      <div 
+        className="border-b border-white/10"
+        style={{ backgroundImage: 'radial-gradient(circle at 100% 0%, rgba(2,132,199,0.1) 0%, transparent 40%)' }}
+      >
+        <div className="container mx-auto px-5 sm:px-6 md:px-12 py-24 md:py-32 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="max-w-6xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-xl">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-xl pointer-events-none">
                Ready to Evolve?
             </div>
             <h3 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter leading-[1.05] text-white mb-10">
@@ -99,15 +96,15 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                 href="/contact"
                 className="group flex flex-col items-center justify-center px-10 py-5 bg-[#0284c7] text-white rounded-[2rem] shadow-[0_15px_40px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all duration-300 hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto"
               >
-                <span className="font-black uppercase tracking-widest text-[11px] mb-1">Request Free Analysis</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform opacity-70" />
+                <span className="font-black uppercase tracking-widest text-[11px] mb-1 pointer-events-none">Request Free Analysis</span>
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform opacity-70 pointer-events-none" />
               </Link>
               <a
                 href={`tel:${d.phone?.replace(/\D/g, '')}`}
                 className="flex items-center justify-center gap-3 border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:border-white/20 px-8 py-5 rounded-[2rem] transition-all duration-300 w-full sm:w-auto"
               >
-                <Phone size={14} className="opacity-50" />
-                <span className="text-sm font-bold tracking-tight">{d.phone}</span>
+                <Phone size={14} className="opacity-50 pointer-events-none" />
+                <span className="text-sm font-bold tracking-tight pointer-events-none">{d.phone}</span>
               </a>
             </div>
           </motion.div>
@@ -115,23 +112,19 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
       </div>
 
       {/* ── Main footer grid ── */}
-      <div className="relative">
-        {/* Isolated Decorative Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
-          <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-[#0284c7]/5 rounded-full blur-[120px]" />
-        </div>
-
-        {/* Content Container (guaranteed clickable) */}
-        <div className="container mx-auto px-5 sm:px-6 md:px-12 py-16 md:py-20 relative z-10">
+      <div 
+        style={{ backgroundImage: 'radial-gradient(circle at 0% 100%, rgba(2,132,199,0.05) 0%, transparent 40%)' }}
+      >
+        <div className="container mx-auto px-5 sm:px-6 md:px-12 py-16 md:py-20">
           <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12 mb-14 md:mb-16">
             
             {/* Brand column */}
             <div className="lg:col-span-4">
-              <Link href="/" className="flex items-center gap-2 mb-6 w-fit" aria-label="Evolve Therapy Services Home">
+              <Link href="/" className="flex items-center gap-2 mb-6 w-fit inline-block" aria-label="Evolve Therapy Services Home">
                 <img 
                   src={d.footer?.logo || "/images/evolve-logo.png"} 
                   alt="Evolve Therapy Services"
-                  className="h-14" 
+                  className="h-14 pointer-events-none" 
                   data-tina-field={d.footer ? tinaField(d.footer, 'logo') : undefined}
                 />
               </Link>
@@ -147,7 +140,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                   { Icon: Mail, text: d.email, href: `mailto:${d.email}`, field: 'email' },
                 ].map(({ Icon, text, href, field }) => (
                   <div key={text} className="flex items-start gap-3 text-white/40 text-sm">
-                    <Icon size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
+                    <Icon size={14} className="text-[#0284c7] shrink-0 mt-0.5 pointer-events-none" aria-hidden="true" />
                     {href ? (
                       <a href={href} className="hover:text-white transition-colors duration-200" data-tina-field={tinaField(d, field as any)}>{text}</a>
                     ) : (
@@ -164,14 +157,14 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Evolve Therapy Services on LinkedIn"
-                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
+                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200 block"
                 >
                   <LinkedInIcon size={15} />
                 </a>
                 <a
                   href={`mailto:${d.email}`}
                   aria-label="Email Evolve Therapy Services"
-                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
+                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200 block"
                 >
                   <Mail size={15} aria-hidden="true" />
                 </a>
@@ -186,7 +179,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                   <li key={i} data-tina-field={tinaField(link, 'name')}>
                       <Link
                         href={link.href}
-                        className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium"
+                        className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium inline-block w-full"
                       >
                         {link.name}
                       </Link>
@@ -203,7 +196,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                   <li key={i} data-tina-field={tinaField(link, 'name')}>
                       <Link
                         href={link.href}
-                        className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug block"
+                        className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug inline-block w-full"
                       >
                         {link.name}
                       </Link>
@@ -215,7 +208,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             {/* Newsletter column */}
             <div className="lg:col-span-3 md:col-span-2">
               <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-5">Stay Informed</h4>
-              <p className="text-sm text-white/40 leading-relaxed mb-5">
+              <p className="text-sm text-white/40 leading-relaxed mb-5 pointer-events-none">
                 Get the latest updates on LTC therapy management, regulatory changes, and Evolve news.
               </p>
               <form
@@ -226,7 +219,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
               >
                 <input type="hidden" name="_subject" value="New Newsletter Signup!" />
                 <input type="hidden" name="_captcha" value="false" />
-                <div className="relative flex w-full">
+                <div className="flex w-full">
                   <input
                     id="footer-email"
                     type="email"
@@ -242,10 +235,10 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                     aria-label="Subscribe to newsletter"
                     className="bg-[#0284c7] rounded-r-xl px-4 flex items-center justify-center text-white hover:bg-[#0369a1] transition-colors duration-200"
                   >
-                    <ArrowRight size={14} aria-hidden="true" />
+                    <ArrowRight size={14} aria-hidden="true" className="pointer-events-none" />
                   </button>
                 </div>
-                <p className="text-[11px] text-white/20 leading-relaxed">
+                <p className="text-[11px] text-white/20 leading-relaxed pointer-events-none">
                   No spam. Unsubscribe anytime. By subscribing you agree to our privacy policy.
                 </p>
               </form>
@@ -265,7 +258,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                 <Link
                   key={label}
                   href={href}
-                  className="text-white/25 hover:text-white/60 text-xs transition-colors duration-150"
+                  className="text-white/25 hover:text-white/60 text-xs transition-colors duration-150 inline-block"
                 >
                   {label}
                 </Link>

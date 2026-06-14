@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowRight, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { tinaField } from '@/lib/tina';
@@ -92,13 +91,13 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
               Our unique business model allows long-term care operators to retain <span className="text-white font-bold">100% of therapy revenue</span>. We bridge the gap between clinical excellence and financial sustainability, empowering your clinicians while protecting your bottom line.
             </p>
             <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-              <Link
+              <a
                 href="/contact"
                 className="group flex flex-col items-center justify-center px-10 py-5 bg-[#0284c7] text-white rounded-[2rem] shadow-[0_15px_40px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all duration-300 hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto"
               >
                 <span className="font-black uppercase tracking-widest text-[11px] mb-1 pointer-events-none">Request Free Analysis</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform opacity-70 pointer-events-none" />
-              </Link>
+              </a>
               <a
                 href={`tel:${d.phone?.replace(/\D/g, '')}`}
                 className="flex items-center justify-center gap-3 border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:border-white/20 px-8 py-5 rounded-[2rem] transition-all duration-300 w-full sm:w-auto"
@@ -120,14 +119,14 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             
             {/* Brand column */}
             <div className="lg:col-span-4">
-              <Link href="/" className="flex items-center gap-2 mb-6 w-fit inline-block" aria-label="Evolve Therapy Services Home">
+              <a href="/" className="flex items-center gap-2 mb-6 w-fit inline-block" aria-label="Evolve Therapy Services Home">
                 <img 
                   src={d.footer?.logo || "/images/evolve-logo.png"} 
                   alt="Evolve Therapy Services"
                   className="h-14 pointer-events-none" 
                   data-tina-field={d.footer ? tinaField(d.footer, 'logo') : undefined}
                 />
-              </Link>
+              </a>
               <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs" data-tina-field={d.footer ? tinaField(d.footer, 'tagline') : undefined}>
                 {d.footer?.tagline}
               </p>
@@ -177,12 +176,12 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
               <ul className="space-y-4" role="list">
                 {(d.footer?.links || []).map((link: any, i: number) => (
                   <li key={i} data-tina-field={tinaField(link, 'name')}>
-                      <Link
+                      <a
                         href={link.href}
                         className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium inline-block w-full"
                       >
                         {link.name}
-                      </Link>
+                      </a>
                   </li>
                 ))}
               </ul>
@@ -194,12 +193,12 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
               <ul className="space-y-4" role="list">
                 {(d.footer?.serviceLinks || []).map((link: any, i: number) => (
                   <li key={i} data-tina-field={tinaField(link, 'name')}>
-                      <Link
+                      <a
                         href={link.href}
                         className="text-sm text-white/50 hover:text-white transition-colors duration-150 font-medium leading-snug inline-block w-full"
                       >
                         {link.name}
-                      </Link>
+                      </a>
                   </li>
                 ))}
               </ul>
@@ -255,13 +254,13 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                 { label: 'Privacy Policy', href: '/privacy-policy' },
                 { label: 'Terms of Service', href: '/terms' },
               ].map(({ label, href }) => (
-                <Link
+                <a
                   key={label}
                   href={href}
                   className="text-white/25 hover:text-white/60 text-xs transition-colors duration-150 inline-block"
                 >
                   {label}
-                </Link>
+                </a>
               ))}
             </div>
           </div>

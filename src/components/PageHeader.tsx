@@ -7,6 +7,7 @@ import { Target, ArrowRight, Sparkles, Heart, LucideIcon } from 'lucide-react';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 // Map of page-specific background abstract/medical images  
 const imageMap: Record<string, string> = {
@@ -116,14 +117,12 @@ export default function PageHeader({
           <div className="absolute inset-0 bg-[#0f172a] h-full w-full" />
         ) : (
           <div className="absolute inset-0 h-full w-full">
-            <div 
-              className="absolute inset-0 w-full h-full opacity-60 contrast-[1.1] saturate-[1.2]"
-              style={{ 
-                backgroundImage: `url(${imageUrl})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
-              }}
+            <Image 
+              src={imageUrl}
+              alt="Hero Background"
+              fill
+              priority
+              className="object-cover opacity-60 contrast-[1.1] saturate-[1.2]"
             />
             <div className="absolute inset-0 bg-[#0f172a]/40 mix-blend-multiply h-full w-full" />
           </div>

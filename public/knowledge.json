@@ -1,49 +1,4 @@
 {
-  "facts": {
-    "contact": {
-      "phone": "(888) 386-5820",
-      "email": "info@evolvetherapyservices.com",
-      "address": "31641 Compass Cove, Avon Lake, OH 44012"
-    },
-    "activeStates": [
-      "Minnesota", "Wisconsin", "Nebraska", "Kansas", "Oklahoma", "Louisiana", 
-      "Florida", "Tennessee", "Kentucky", "Ohio", "Pennsylvania", "New York", 
-      "Maryland", "New Jersey", "Delaware", "Massachusetts", "Maine"
-    ],
-    "services": [
-      "Therapy Outcomes & PDPM Analysis",
-      "Medicaid Case Mix Efficiency",
-      "SNF Staff Education & Training",
-      "Therapy Cost Reduction Strategies",
-      "Denial Management & Audit Defense",
-      "In-House Transition Roadmaps"
-    ]
-  },
-  "bot_training_data": {
-    "core_identity": {
-      "who_we_are": "Evolve Therapy Services is a premier national therapy management and consulting company. We specialize in transforming long-term care (LTC) and skilled nursing facility (SNF) therapy departments by helping them transition from expensive third-party contract therapy to highly efficient, profitable, and clinically superior in-house therapy models.",
-      "what_we_do": "We provide regional clinical oversight, recruitment of therapists, comprehensive PDPM and Medicaid case mix training, audit defense, and operational consulting. We act as an elite expert resource, embedding our regional directors into your facility's operations to guarantee clinical compliance while allowing you to retain 100% of your therapy revenue.",
-      "where_we_operate": "We operate nationally across 17+ states, with a massive presence in the Midwest and East Coast. Our headquarters is located at 31641 Compass Cove, Avon Lake, OH 44012.",
-      "when_we_started": "Our leadership team brings over 20 years of dedicated experience in long-term care clinical management and therapy operations.",
-      "why_we_exist": "We believe that providing a resident population with high-end, clinically proven therapy should not mean sacrificing the facility's bottom line. We exist to bridge the gap between clinical quality and financial performance."
-    },
-    "key_principles": {
-      "revenue_retention": "Unlike contract therapy companies that take a large percentage of your therapy billing, Evolve's model ensures the facility retains 100% of all therapy revenue generated. We charge a flat, tiered management fee that actually reduces as your facility grows and scales.",
-      "clinical_integrity": "Patient outcomes are our absolute priority. We implement patient-centric, evidence-based programming that drives 5-star ratings and measurable improvements in functional independence.",
-      "staff_empowerment": "We focus heavily on employee engagement and culture. By bringing therapy teams in-house, therapists feel like true members of the facility's family, reducing turnover and eliminating the reliance on high-cost PRN or agency contract labor.",
-      "proactive_defense": "We don't wait for audits to happen. We proactively educate staff on MDS accuracy and exact clinical documentation to defend against arbitrary regulatory denials before they occur."
-    },
-    "leadership_profiles": {
-      "lisa_bebie": "Lisa Bebie, PTA, is the President and Founder. With over 20 years of LTC therapy leadership, her vision is to bridge the gap for operators who want to take their therapy teams in-house. She is passionate about creating clinical programming that generates exceptional outcomes and career advancement opportunities for therapists.",
-      "isaiah_rupp": "Isaiah Rupp, MBA-HCA, PTA, is the VP of Operations and Co-Founder. With a Master's in Healthcare Administration, his passion lies in building the best clinical outcomes in the most fiscally responsible manner. He oversees all therapy operations and ensures compliance metrics are strictly met."
-    },
-    "target_audience": {
-      "primary_clients": "Skilled Nursing Facility (SNF) Owners, LTC Operators, Directors of Nursing, and Healthcare Administrators who are tired of losing money to contract therapy companies and want to take back control of their clinical outcomes and revenue streams."
-    },
-    "competitive_advantage": {
-      "the_evolve_difference": "Most consultants simply give advice and leave. Evolve embeds a Regional Director into your facility to actively manage the daily operations, recruit therapists, train staff, and run the therapy department as if it were our own—but you keep all the revenue and maintain ultimate control. It's the perfect hybrid of management and consulting."
-    }
-  },
   "settings": {
     "siteName": "Evolve Therapy Services",
     "phone": "(888) 386-5820",
@@ -126,6 +81,14 @@
         {
           "name": "Contact",
           "href": "/contact"
+        },
+        {
+          "name": "Privacy Policy",
+          "href": "/privacy-policy"
+        },
+        {
+          "name": "Terms of Service",
+          "href": "/terms"
         }
       ],
       "serviceLinks": [
@@ -1213,7 +1176,7 @@
       "Regulatory & Compliance Update Series",
       "Marketing Synergy Education"
     ],
-    "image": "https://images.unsplash.com/photo-1576091160550-2173ff9e5ece?auto=format&fit=crop&q=80",
+    "image": "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80",
     "iconName": "GraduationCap",
     "videoUrl": "https://player.vimeo.com/external/441220473.sd.mp4?s=f007c0892f39edbb979873d6e556488d0859585e&profile_id=165&oauth2_token_id=57447761"
   },

@@ -1,5 +1,9 @@
+'use client';
+
 import { Star, Quote } from 'lucide-react';
 import Link from 'next/link';
+import { useRef, useState } from 'react';
+import { cn } from '@/lib/utils';
 import { Marquee } from '@/components/magicui/marquee';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { AnimatedGradientTextDark } from '@/components/magicui/animated-gradient-text';
@@ -57,6 +61,27 @@ export default function Testimonials({ data, parentField }: { data?: any, parent
 
   const testimonials = (d.list || d.items || d.reviews || []).filter((t: any) => t.content && t.name);
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
+  const onMouseLeave = () => setIsDragging(false);
+  const onMouseUp = () => setIsDragging(false);
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
   return (
     <section className="relative py-24 md:py-40 bg-[#0f172a] overflow-hidden" aria-label="Client testimonials">
       <div
@@ -95,9 +120,20 @@ export default function Testimonials({ data, parentField }: { data?: any, parent
         </div>
         
         {/* Mobile: Horizontal Scroll Snap */}
-        <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 px-6 pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div 
+          ref={scrollRef}
+          onMouseDown={onMouseDown}
+          onMouseLeave={onMouseLeave}
+          onMouseUp={onMouseUp}
+          onMouseMove={onMouseMove}
+          className={cn(
+            "md:hidden flex overflow-x-auto gap-4 px-6 pb-4",
+            !isDragging && "snap-x snap-mandatory"
+          )} 
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {testimonials.map((t: any, i: number) => (
-            <div key={i} className="snap-center shrink-0">
+            <div key={i} className={cn("shrink-0", !isDragging && "snap-center")}>
               <TestimonialCard t={t} parentField={parentField} />
             </div>
           ))}

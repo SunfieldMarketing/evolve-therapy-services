@@ -123,7 +123,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
               <img 
                 src={d.footer?.logo || "/images/evolve-logo.png"} 
                 alt="Evolve Therapy Services"
-                className="h-14 brightness-0 invert" 
+                className="h-14" 
                 data-tina-field={d.footer ? tinaField(d.footer, 'logo') : undefined}
               />
             </a>

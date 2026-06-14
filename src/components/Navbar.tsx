@@ -120,7 +120,7 @@ export default function Navbar({ data }: { data?: any }) {
                   alt="Evolve Therapy Services"
                   className={cn(
                     "w-auto !max-w-[220px] sm:!max-w-none transition-all duration-300 group-hover:opacity-70",
-                    scrolled ? "!h-10 sm:!h-16 brightness-0 !max-w-[180px]" : "!h-12 sm:!h-[72px] brightness-0 invert" 
+                    scrolled ? "!h-10 sm:!h-16 !max-w-[180px]" : "!h-12 sm:!h-[72px]" 
                   )}
                   data-tina-field={tinaField(d, 'logo')}
                 />

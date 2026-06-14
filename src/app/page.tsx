@@ -228,7 +228,7 @@ export default function Home(props: { data: any; query: string; variables: any }
               </h3>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-x-12 lg:gap-x-24 gap-y-6 mb-20 text-left max-w-4xl mx-auto">
+            <div className="grid sm:grid-cols-2 gap-x-12 lg:gap-x-24 gap-y-6 mb-20 text-left w-fit max-w-full mx-auto">
               {p.bottomCta.checklist.map((item: string, i: number) => (
                 <BlurFade delay={0.2 + i * 0.05} key={i} className="flex items-center gap-4 text-white/60 text-sm md:text-base font-medium">
                   <div className="w-2 h-2 rounded-full border-2 border-[#0284c7] shrink-0" />

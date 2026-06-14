@@ -201,7 +201,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
                            <div className="w-6 h-6 rounded-lg bg-[#0284c7]/5 text-[#0284c7] flex items-center justify-center shrink-0">
                               <Check size={14} strokeWidth={3} />
                            </div>
-                           <span className="text-sm font-semibold text-[#0f172a]/70">{detail}</span>
+                           <span className="text-sm font-semibold text-[#0f172a]/70 min-w-0 flex-1 break-words">{detail}</span>
                         </div>
                       ))}
                     </div>
@@ -307,7 +307,7 @@ export default function ServicesPage(props: { data: any, query: string, variable
                                return <Icon size={32} strokeWidth={1.5} />;
                              })()}
                           </div>
-                          <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-8 tracking-tight group-hover:text-[#0284c7] transition-colors">{item.title}</h4>
+                          <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-8 tracking-tight group-hover:text-[#0284c7] transition-colors break-words">{item.title}</h4>
                           <p className="text-slate-500 text-base leading-relaxed font-light" data-tina-field={tinaField(item, 'desc')}>{item.desc}</p>
                        </div>
                     </div>

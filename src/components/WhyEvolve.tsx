@@ -219,7 +219,7 @@ export default function WhyEvolve({ data, parentField }: { data?: any, parentFie
                     alt={d.quoteStrip.author}
                     data-tina-field={parentField ? tinaField(d.quoteStrip, 'authorPhoto') : undefined}
                   />
-                  <div className="text-left">
+                  <div className="text-left min-w-0 flex-1 break-words">
                     <div className="font-black text-white text-[12px] tracking-tight leading-none mb-1" data-tina-field={parentField ? tinaField(d.quoteStrip, 'author') : undefined}>{d.quoteStrip.author}</div>
                     <div className="text-[#38bdf8] text-[8px] font-black uppercase tracking-[0.3em]" data-tina-field={parentField ? tinaField(d.quoteStrip, 'authorTitle') : undefined}>{d.quoteStrip.authorTitle}</div>
                   </div>

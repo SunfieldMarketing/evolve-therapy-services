@@ -181,9 +181,9 @@ export default function AboutPage(props: { data: any; query: string; variables: 
                     <div className="w-16 h-16 bg-[#0284c7]/5 rounded-2xl flex items-center justify-center text-[#0284c7] shrink-0 group-hover:bg-[#0284c7] group-hover:text-white transition-all duration-500">
                       <Icon size={28} strokeWidth={1.5} />
                     </div>
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <h3
-                        className="font-black text-[#0f172a] font-serif text-2xl mb-4"
+                        className="font-black text-[#0f172a] font-serif text-2xl mb-4 break-words"
                         data-tina-field={tinaField(item, 'title')}
                       >
                         {item.title}
@@ -240,7 +240,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
                   <div className="w-full lg:w-7/12">
                     <div className="mb-8">
                       <h3
-                        className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight"
+                        className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-[#0f172a] tracking-tight break-words"
                         data-tina-field={tinaField(leader, 'name')}
                       >
                         {leader.name}
@@ -313,7 +313,7 @@ export default function AboutPage(props: { data: any; query: string; variables: 
                         <Icon size={28} />
                       </div>
                       <div
-                        className="font-black font-serif text-2xl text-[#0f172a] mb-4"
+                        className="font-black font-serif text-2xl text-[#0f172a] mb-4 break-words"
                         data-tina-field={tinaField(item, 'title')}
                       >
                         {item.title}

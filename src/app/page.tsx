@@ -232,7 +232,7 @@ export default function Home(props: { data: any; query: string; variables: any }
               {p.bottomCta.checklist.map((item: string, i: number) => (
                 <BlurFade delay={0.2 + i * 0.05} key={i} className="flex items-center gap-4 text-white/60 text-sm md:text-base font-medium">
                   <div className="w-2 h-2 rounded-full border-2 border-[#0284c7] shrink-0" />
-                  <span data-tina-field={tinaField(p.bottomCta, `checklist.${i}`)}>{item}</span>
+                  <span className="min-w-0 flex-1 break-words" data-tina-field={tinaField(p.bottomCta, `checklist.${i}`)}>{item}</span>
                 </BlurFade>
               ))}
             </div>

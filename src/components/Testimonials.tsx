@@ -34,7 +34,7 @@ function TestimonialCard({ t, parentField }: { t: any, parentField?: string }) {
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0284c7] to-[#0369a1] flex items-center justify-center text-white font-black text-sm shadow-lg shadow-blue-500/20 shrink-0 group-hover:scale-110 transition-transform duration-500">
             {t.initials || t.name?.[0]}
           </div>
-          <div>
+          <div className="min-w-0 flex-1 break-words">
             <div className="text-base font-black text-white tracking-tight">{t.name}</div>
             <div className="text-[#38bdf8] text-[10px] font-bold uppercase tracking-[0.15em] mt-0.5">
               <span>{t.role}</span> · <span>{t.facility}</span>

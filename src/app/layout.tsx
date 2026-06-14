@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   description: "Evolve Therapy Services provides holistic therapy management, operational oversight, and consulting for LTC providers. Maximize revenue and clinical outcomes.",
   keywords: "therapy management, LTC consulting, SNF therapy, therapy revenue retention, Evolve Therapy Services",
   icons: {
-    icon: 'https://res.cloudinary.com/dai2pg27n/image/upload/c_crop,g_west,w_256,h_256/v1781465218/logo_va1lcz.png',
-    apple: 'https://res.cloudinary.com/dai2pg27n/image/upload/c_crop,g_west,w_256,h_256/v1781465218/logo_va1lcz.png',
+    icon: '/icon.png',
+    apple: '/icon.png',
   },
   openGraph: {
     title: "Evolve Therapy Services | LTC Therapy Management",

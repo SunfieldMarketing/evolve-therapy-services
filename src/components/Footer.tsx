@@ -96,14 +96,14 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
             <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
               <a
                 href="/contact"
-                className="group relative flex flex-col items-center justify-center px-10 py-5 bg-[#0284c7] text-white rounded-[2rem] shadow-[0_15px_40px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all duration-300 hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto"
+                className="group relative z-[101] flex flex-col items-center justify-center px-10 py-5 bg-[#0284c7] text-white rounded-[2rem] shadow-[0_15px_40px_rgba(2,132,199,0.3)] hover:bg-[#0369a1] transition-all duration-300 hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto pointer-events-auto"
               >
                 <span className="font-black uppercase tracking-widest text-[11px] mb-1">Request Free Analysis</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform opacity-70" />
               </a>
               <a
                 href={`tel:${d.phone?.replace(/\D/g, '')}`}
-                className="flex items-center justify-center gap-3 border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:border-white/20 px-8 py-5 rounded-[2rem] transition-all duration-300 w-full sm:w-auto"
+                className="flex items-center justify-center gap-3 border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:border-white/20 px-8 py-5 rounded-[2rem] transition-all duration-300 w-full sm:w-auto relative z-[101] pointer-events-auto"
               >
                 <Phone size={14} className="opacity-50" />
                 <span className="text-sm font-bold tracking-tight">{d.phone}</span>
@@ -119,7 +119,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
 
           {/* Brand column */}
           <div className="lg:col-span-4">
-            <a href="/" className="flex items-center gap-2 mb-6 w-fit" aria-label="Evolve Therapy Services Home">
+            <a href="/" className="flex items-center gap-2 mb-6 w-fit relative z-[101] pointer-events-auto" aria-label="Evolve Therapy Services Home">
               <img 
                 src={d.footer?.logo || "/images/evolve-logo.png"} 
                 alt="Evolve Therapy Services"
@@ -141,7 +141,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                 <div key={text} className="flex items-start gap-3 text-white/40 text-sm">
                   <Icon size={14} className="text-[#0284c7] shrink-0 mt-0.5" aria-hidden="true" />
                   {href ? (
-                    <a href={href} className="hover:text-white transition-colors duration-200" data-tina-field={tinaField(d, field as any)}>{text}</a>
+                    <a href={href} className="hover:text-white transition-colors duration-200 relative z-[101] pointer-events-auto" data-tina-field={tinaField(d, field as any)}>{text}</a>
                   ) : (
                     <span data-tina-field={tinaField(d, field as any)}>{text}</span>
                   )}
@@ -156,14 +156,14 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Evolve Therapy Services on LinkedIn"
-                className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
+                className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200 relative z-[101] pointer-events-auto"
               >
                 <LinkedInIcon size={15} />
               </a>
               <a
                 href={`mailto:${d.email}`}
                 aria-label="Email Evolve Therapy Services"
-                className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200"
+                className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-[#0284c7] hover:border-[#0284c7]/40 transition-all duration-200 relative z-[101] pointer-events-auto"
               >
                 <Mail size={15} aria-hidden="true" />
               </a>
@@ -257,7 +257,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
               <Link
                 key={label}
                 href={href}
-                className="text-white/25 hover:text-white/60 text-xs transition-colors duration-150"
+                className="text-white/25 hover:text-white/60 text-xs transition-colors duration-150 relative z-[101] pointer-events-auto"
               >
                 {label}
               </Link>

@@ -114,7 +114,7 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
       </div>
 
       {/* ── Main footer grid ── */}
-      <div className="container mx-auto px-5 sm:px-6 md:px-12 py-16 md:py-20">
+      <div className="container mx-auto px-5 sm:px-6 md:px-12 py-16 md:py-20 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12 mb-14 md:mb-16">
 
           {/* Brand column */}
@@ -251,8 +251,8 @@ export default function Footer({ data, preFooterData }: { data?: any, preFooterD
           </div>
           <div className="flex items-center gap-6">
             {[
-              { label: 'Privacy Policy', href: '#' },
-              { label: 'Terms of Service', href: '#' },
+              { label: 'Privacy Policy', href: '/privacy-policy' },
+              { label: 'Terms of Service', href: '/terms' },
             ].map(({ label, href }) => (
               <Link
                 key={label}

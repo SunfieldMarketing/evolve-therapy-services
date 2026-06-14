@@ -11,7 +11,7 @@ export default function NotFound() {
     <main className="min-h-screen bg-slate-50 flex flex-col">
       <Navbar data={undefined} />
       
-      <div className="flex-1 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+      <div className="flex-1 min-h-[100svh] flex flex-col items-center justify-center p-6 text-center relative overflow-hidden mt-16 sm:mt-20">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#0284c7]/5 rounded-full blur-[120px] pointer-events-none" />
         
         <div className="relative z-10">

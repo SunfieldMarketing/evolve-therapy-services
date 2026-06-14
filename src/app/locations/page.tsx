@@ -82,10 +82,10 @@ export default function LocationsPage(props: { data: any, query: string, variabl
                   <div className="absolute top-0 right-0 p-8 text-white/5 pointer-events-none">
                      <MapPin size={240} />
                   </div>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/60 font-black text-[10px] uppercase tracking-[0.3em] mb-10 w-max" data-tina-field={tinaField(p.hq, 'badge')}>
+                  <div className="inline-flex flex-wrap items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/60 font-black text-[10px] uppercase tracking-[0.3em] mb-10 w-fit max-w-full text-center" data-tina-field={tinaField(p.hq, 'badge')}>
                     {p.hq.badge}
                   </div>
-                  <h3 className="text-4xl lg:text-5xl font-serif font-black mb-12 tracking-tighter leading-none" data-tina-field={tinaField(p.hq, 'title')}>{p.hq.title}</h3>
+                  <h3 className="text-4xl lg:text-5xl font-serif font-black mb-12 tracking-tighter leading-none break-words" data-tina-field={tinaField(p.hq, 'title')}>{p.hq.title}</h3>
                   <div className="space-y-10 relative z-10">
                     <div className="flex items-start gap-6 group">
                       <div className="w-12 h-12 bg-[#0284c7] text-white rounded-xl flex items-center justify-center shrink-0 shadow-xl group-hover:-translate-y-1 transition-transform">
@@ -123,7 +123,7 @@ export default function LocationsPage(props: { data: any, query: string, variabl
                    delay={0.2}
                    className="p-10 lg:p-16 rounded-[3rem] bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl transition-all duration-500 group"
                 >
-                   <h3 className="text-3xl lg:text-4xl font-serif font-black text-[#0f172a] mb-6 tracking-tighter leading-tight flex items-center gap-4 group-hover:text-[#0284c7] transition-colors" data-tina-field={tinaField(p.strategy, 'title')}>
+                   <h3 className="text-3xl lg:text-4xl font-serif font-black text-[#0f172a] mb-6 tracking-tighter leading-tight flex items-center gap-4 group-hover:text-[#0284c7] transition-colors break-words flex-wrap" data-tina-field={tinaField(p.strategy, 'title')}>
                      <TrendingUp className="text-[#0284c7]" size={36} />
                      {p.strategy.title}
                    </h3>
@@ -143,7 +143,7 @@ export default function LocationsPage(props: { data: any, query: string, variabl
                    
                    <div className="relative z-10">
                      <div className="inline-flex px-3 py-1 bg-[#0284c7]/10 text-[#0284c7] text-[10px] uppercase font-black tracking-widest rounded-full mb-6" data-tina-field={tinaField(p.partner, 'badge')}>{p.partner.badge}</div>
-                     <h4 className="text-2xl md:text-3xl font-serif font-black text-[#0f172a] mb-4 tracking-tight leading-tight group-hover:text-[#0f172a] transition-colors" data-tina-field={tinaField(p.partner, 'title')}>{p.partner.title}</h4>
+                     <h4 className="text-2xl md:text-3xl font-serif font-black text-[#0f172a] mb-4 tracking-tight leading-tight group-hover:text-[#0f172a] transition-colors break-words" data-tina-field={tinaField(p.partner, 'title')}>{p.partner.title}</h4>
                      <p className="text-slate-500 leading-relaxed text-base md:text-lg font-light" data-tina-field={tinaField(p.partner, 'description')}>
                        {p.partner.description}
                      </p>
@@ -158,7 +158,7 @@ export default function LocationsPage(props: { data: any, query: string, variabl
       <section className="py-24 md:py-40 bg-white">
         <div className="container mx-auto px-6 lg:px-12">
            <div className="text-center mb-20 text-[#0f172a]">
-              <h3 className="text-4xl md:text-6xl font-serif font-black tracking-tighter leading-[0.9] mb-8">
+              <h3 className="text-4xl md:text-6xl font-serif font-black tracking-tighter leading-[0.9] mb-8 break-words">
                 <span data-tina-field={tinaField(p.reach, 'title')}>{p.reach.title}</span> <br />
                 <span className="text-[#0284c7] italic font-medium" data-tina-field={tinaField(p.reach, 'titleItalic')}>{p.reach.titleItalic}</span>
               </h3>
@@ -173,7 +173,7 @@ export default function LocationsPage(props: { data: any, query: string, variabl
                     <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-[#0284c7] shadow-lg mb-10 border border-slate-100">
                       <Icon size={26} />
                     </div>
-                    <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-6 tracking-tight">{item.title}</h4>
+                    <h4 className="text-2xl font-serif font-black text-[#0f172a] mb-6 tracking-tight break-words">{item.title}</h4>
                     <p className="text-slate-500 text-sm font-light leading-relaxed" data-tina-field={tinaField(item, 'desc')}>{item.desc}</p>
                   </div>
                 );

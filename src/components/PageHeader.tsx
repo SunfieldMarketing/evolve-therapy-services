@@ -12,9 +12,9 @@ import { useState, useEffect, useRef } from 'react';
 const imageMap: Record<string, string> = {
   default:   'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80',
   services:  'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80',
-  about:     'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80',
+  about:     '/images/about-bg.jpg',
   contact:   'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80',
-  locations: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80',
+  locations: '/images/locations-bg.jpg',
 };
 
 // Map of page-specific background videos (Local MP4 paths)
